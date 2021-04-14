@@ -1,0 +1,8 @@
+arithmetic_calculator/InputCharacterStreamTest.java
+ arithmetic_calculator.InputCharacterStreamTest
+arithmetic_calculator/DigitStateTest.java
+ arithmetic_calculator.DigitStateTest
+arithmetic_calculator/SingleCharacterStateTest.java
+ arithmetic_calculator.SingleCharacterStateTest
+arithmetic_calculator/NumberFiniteStateMachineTest.java
+ arithmetic_calculator.NumberFiniteStateMachineTest

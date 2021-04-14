@@ -9,6 +9,7 @@ public class InputCharacterStream {
         pointer = 0;
     }
 
+
     public char getCurrentSymbol() {
         return sentence.charAt(pointer);
     }

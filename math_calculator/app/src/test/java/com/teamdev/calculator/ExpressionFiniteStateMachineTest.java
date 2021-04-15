@@ -26,7 +26,7 @@ public class ExpressionFiniteStateMachineTest {
         this.expected = expected;
     }
 
-    @Parameterized.Parameters(name = "{index} execute FSM for {0} is {1}")
+    @Parameterized.Parameters(name = "execute expression FSM for {0} is {1}")
     public static Collection<Object[]> data(){
         return Arrays.asList(new Object[][]{
                 {"56+12-5-3+4", 64},

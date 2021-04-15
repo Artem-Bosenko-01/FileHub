@@ -11,7 +11,7 @@ public class Application {
 
     public static void run(){
         //Scanner.output("Please, input value");
-        String str = "52/56+1";
+        String str = "35+12*7";
         Scanner.output("Our input string - " + str);
         InputCharacterStream characterStream = new InputCharacterStream(str);
 

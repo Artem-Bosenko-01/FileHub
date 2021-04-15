@@ -41,7 +41,7 @@ public class ExpressionFiniteStateMachine<T> extends FiniteStateMachine<T> {
                     stack.pushOperator(operator);
                     builder.delete(0, builder.capacity());
 
-                }
+                }else return false;
 
             }
         }

@@ -48,7 +48,6 @@ public class NumberFiniteStateMachine<X> extends FiniteStateMachine<X> {
             }
         }
 
-        Scanner.output(outputChain.toString());
         return true;
     }
 }

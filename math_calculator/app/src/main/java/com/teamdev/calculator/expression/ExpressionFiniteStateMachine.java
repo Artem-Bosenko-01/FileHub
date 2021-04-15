@@ -27,10 +27,11 @@ public class ExpressionFiniteStateMachine<T> extends FiniteStateMachine<T> {
         StringBuilder builder = new StringBuilder();
 
         while (!inputCharacterStream.isEmpty()) {
+
             boolean result = finiteStateMachine.execute(inputCharacterStream, builder);
             Double operand = Double.parseDouble(builder.toString());
             stack.pushOperand(operand);
-            builder.delete(0, builder.capacity());
+            CleanBuilderUtil.clean(builder);
 
             if (result && !inputCharacterStream.isEmpty()){
                 State operatorState = new OperatorState();
@@ -39,11 +40,12 @@ public class ExpressionFiniteStateMachine<T> extends FiniteStateMachine<T> {
 
                     BinaryOperator operator = ChooseOperator.getOperator(builder.toString());
                     stack.pushOperator(operator);
-                    builder.delete(0, builder.capacity());
+                    CleanBuilderUtil.clean(builder);
 
                 }else return false;
 
             }
+
         }
         return true;
     }

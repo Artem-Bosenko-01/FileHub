@@ -29,7 +29,9 @@ public class ExpressionFiniteStateMachineTest {
     @Parameterized.Parameters(name = "{index} execute FSM for {0} is {1}")
     public static Collection<Object[]> data(){
         return Arrays.asList(new Object[][]{
-                {"56+12-5-3+4", 64},{"36+12*7", 120},{"64/8+3",11}
+                {"56+12-5-3+4", 64},
+                {"36+12*7", 120},
+                {"64/8+3",11}
         });
     }
 

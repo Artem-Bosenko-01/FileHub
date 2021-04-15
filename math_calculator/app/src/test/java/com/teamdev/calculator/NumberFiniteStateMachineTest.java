@@ -28,7 +28,10 @@ public class NumberFiniteStateMachineTest {
     @Parameterized.Parameters(name = "{index} execute FSM for {0} is {1}")
     public static Collection<Object[]> data(){
         return Arrays.asList(new Object[][]{
-                {"56",true},{"56.s55",false},{"12.64assa55s4",true}, {"a.564",false}
+                {"56",true},
+                {"56.s55",false},
+                {"12.64assa55s4",true},
+                {"a.564",false}
         });
     }
 

@@ -30,10 +30,10 @@ public class NumberFiniteStateMachine<X> extends FiniteStateMachine<X> {
                 State<Character> state = new SingleCharacterState();
                 state.tryTransition(inputCharacterStream, builder);
             }
-            else if(inputCharacterStream.getCurrentSymbol() == '-'){
+            /*else if(inputCharacterStream.getCurrentSymbol() == '-'){
                 State<Character> state = new MinusState();
                 state.tryTransition(inputCharacterStream, builder);
-            }
+            }*/
             else if (String.valueOf(inputCharacterStream.getCurrentSymbol()).matches("[0-9]")) {
                 State<Integer> state = new DigitState();
                 state.tryTransition(inputCharacterStream, builder);

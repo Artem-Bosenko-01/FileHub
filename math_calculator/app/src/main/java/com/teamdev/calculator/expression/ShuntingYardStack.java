@@ -19,8 +19,8 @@ public class ShuntingYardStack {
                 BinaryOperator operator = operators.pop();
                 double leftOperand = operands.pop();
 
-                operands.push(operator.apply(leftOperand,rightOperand));
-
+               operands.push(operator.apply(leftOperand,rightOperand));
+               pushOperator(binaryOperator);
             }
         }else operators.push(binaryOperator);
     }

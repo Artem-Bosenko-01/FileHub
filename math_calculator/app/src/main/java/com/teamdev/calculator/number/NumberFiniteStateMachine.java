@@ -7,7 +7,7 @@ import com.teamdev.calculator.base.state.State;
 
 import java.util.List;
 
-public class NumberFiniteStateMachine<X> extends FiniteStateMachine<X> {
+public class NumberFiniteStateMachine<X extends StringBuilder> extends FiniteStateMachine<X> {
 
     public NumberFiniteStateMachine() {
         super();

@@ -8,7 +8,7 @@ import com.teamdev.calculator.number.NumberFiniteStateMachine;
 
 import java.util.List;
 
-public class ExpressionFiniteStateMachine<T> extends FiniteStateMachine<T> {
+public class ExpressionFiniteStateMachine<T extends ShuntingYardStack> extends FiniteStateMachine<T> {
 
     public ExpressionFiniteStateMachine() {
         super();

@@ -1,9 +1,11 @@
 package com.teamdev.calculator;
 
 import com.teamdev.calculator.base.InputCharacterStream;
-import com.teamdev.calculator.expression.ExpressionFiniteStateMachine;
+import com.teamdev.calculator.base.finite_state_machine.FiniteStateMachine;
 import com.teamdev.calculator.expression.ShuntingYardStack;
-import com.teamdev.calculator.number.NumberFiniteStateMachine;
+import com.teamdev.calculator.factory.FiniteStateMachineFactory;
+import com.teamdev.calculator.factory.FiniteStateMachineType;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +17,7 @@ import java.util.Collection;
 @RunWith(Parameterized.class)
 public class ExpressionFiniteStateMachineTest {
 
+    FiniteStateMachineFactory factory = new FiniteStateMachineFactory();
     private final String inputValue;
     private final double expected;
 
@@ -34,7 +37,8 @@ public class ExpressionFiniteStateMachineTest {
     public void executeTest(){
         InputCharacterStream stream = new InputCharacterStream(inputValue);
         ShuntingYardStack stack = new ShuntingYardStack();
-        ExpressionFiniteStateMachine machine = new ExpressionFiniteStateMachine();
+
+        FiniteStateMachine machine = factory.create(FiniteStateMachineType.EXPRESSION);
 
         try {
             machine.execute(stream, stack);

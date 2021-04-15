@@ -1,7 +1,10 @@
 package com.teamdev.calculator;
 
 import com.teamdev.calculator.base.InputCharacterStream;
-import com.teamdev.calculator.number.NumberFiniteStateMachine;
+import com.teamdev.calculator.base.finite_state_machine.FiniteStateMachine;
+import com.teamdev.calculator.factory.FiniteStateMachineFactory;
+import com.teamdev.calculator.factory.FiniteStateMachineType;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +16,7 @@ import java.util.Collection;
 @RunWith(Parameterized.class)
 public class NumberFiniteStateMachineTest {
 
+    FiniteStateMachineFactory factory = new FiniteStateMachineFactory();
     private final String inputValue;
     private final boolean expected;
 
@@ -32,7 +36,7 @@ public class NumberFiniteStateMachineTest {
     public void executeTest(){
         InputCharacterStream stream = new InputCharacterStream(inputValue);
         StringBuilder builder = new StringBuilder();
-        NumberFiniteStateMachine machine = new NumberFiniteStateMachine();
+        FiniteStateMachine machine = factory.create(FiniteStateMachineType.NUMBER);
         boolean result = false;
         try {
             result = machine.execute(stream, builder);

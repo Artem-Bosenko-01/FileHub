@@ -26,5 +26,5 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass.set("com.teamdev.calculator.start.Main")
+    mainClass.set("com.teamdev.calculator.Main")
 }

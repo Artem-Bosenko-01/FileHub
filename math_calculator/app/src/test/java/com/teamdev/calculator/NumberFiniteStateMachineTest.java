@@ -1,50 +1,42 @@
 package com.teamdev.calculator;
 
 import com.teamdev.calculator.compiler.InputCharacterStream;
-import com.teamdev.calculator.fsm.FiniteStateMachine;
+import com.teamdev.calculator.compiler.TypeOfExpressionElement;
+import com.teamdev.calculator.runtime.Command;
+import com.teamdev.calculator.runtime.ShuntingYardStack;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import java.util.Optional;
+import java.util.stream.Stream;
 
-import java.util.Arrays;
-import java.util.Collection;
-
-@RunWith(Parameterized.class)
 public class NumberFiniteStateMachineTest {
-/*
-    FiniteStateMachineFactory factory = new FiniteStateMachineFactory();
-    private final String inputValue;
-    private final boolean expected;
 
-    public NumberFiniteStateMachineTest(String inputValue, boolean expected) {
-        this.inputValue = inputValue;
-        this.expected = expected;
+
+    public static Stream<Arguments> positiveNumber(){
+        return Stream.of(
+                Arguments.of(4.0, "4"),
+                Arguments.of(15.447, "15.447a"),
+                Arguments.of(565.55, "565.55"),
+                Arguments.of(44.0, "44asc4")
+        );
     }
 
-    @Parameterized.Parameters(name = "execute number FSM for {0} is {1}")
-    public static Collection<Object[]> data(){
-        return Arrays.asList(new Object[][]{
-                {"56",true},
-                {"56.s55",false},
-                {"12.64assa55s4",true},
-                {"a.564",false}
-        });
-    }
-
-    @Test
-    public void executeTest(){
+    @ParameterizedTest
+    @MethodSource("positiveNumber")
+    public void executeTest(double expected, String inputValue){
         InputCharacterStream stream = new InputCharacterStream(inputValue);
-        StringBuilder builder = new StringBuilder();
-        FiniteStateMachine machine = factory.create(FiniteStateMachineType.NUMBER);
-        boolean result = false;
+        ShuntingYardStack stack = new ShuntingYardStack();
+        Optional<Command> command = new CompilerFactoryImpl().create(TypeOfExpressionElement.NUMBER).compile(stream);
         try {
-            result = machine.execute(stream, builder);
+            //noinspection OptionalGetWithoutIsPresent
+            command.get().execute(stack);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        Assert.assertEquals(result, expected);
-    }*/
+        Assertions.assertEquals(stack.peekOperand(), expected);
+    }
 }

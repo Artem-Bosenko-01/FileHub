@@ -1,0 +1,30 @@
+package com.teamdev.calculator.compiler.fsm.operand;
+
+import com.teamdev.calculator.CompilerFactoryImpl;
+import com.teamdev.calculator.compiler.CompilerFactory;
+import com.teamdev.calculator.compiler.InputCharacterStream;
+import com.teamdev.calculator.compiler.TypeOfExpressionElement;
+import com.teamdev.calculator.compiler.fsm.State;
+import com.teamdev.calculator.runtime.Command;
+import com.teamdev.calculator.runtime.ShuntingYardStack;
+import org.slf4j.LoggerFactory;
+import org.slf4j.impl.Log4jLoggerAdapter;
+
+import java.util.Optional;
+
+public class ExpressionState extends State<ShuntingYardStack> {
+
+    private final Log4jLoggerAdapter logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(ExpressionState.class);
+    @Override
+    public boolean tryTransition(InputCharacterStream characterStream, ShuntingYardStack builder) {
+        logger.info("Try transition for EXPRESSION state");
+        CompilerFactory factory = new CompilerFactoryImpl();
+        Optional<Command> command = factory.create(TypeOfExpressionElement.EXPRESSION).compile(characterStream);
+        if (command.isPresent()){
+            command.get().execute(builder);
+            logger.info("Transition successful");
+            return true;
+        }
+        return false;
+    }
+}

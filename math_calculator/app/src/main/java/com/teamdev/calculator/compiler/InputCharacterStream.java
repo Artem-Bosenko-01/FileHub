@@ -4,8 +4,8 @@ public class InputCharacterStream {
     private final String sentence;
     private int pointer;
 
-    public InputCharacterStream(String string) {
-        this.sentence = string;
+    public InputCharacterStream(String inputString) {
+        this.sentence = inputString;
         pointer = 0;
     }
 
@@ -13,18 +13,10 @@ public class InputCharacterStream {
         return sentence.charAt(pointer);
     }
 
-    public char getPreviousSymbol() {
-        return sentence.charAt(--pointer);
-    }
-    public int getSize() {
-        return sentence.length();
-    }
-
     public void increasePointer() {
         ++pointer;
     }
 
-    public int getPointer(){return pointer;}
     public boolean isEmpty() {
         return pointer == sentence.length();
     }

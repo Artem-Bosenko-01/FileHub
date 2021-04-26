@@ -19,7 +19,7 @@ public class ExpressionState extends State<ShuntingYardStack> {
     public boolean tryTransition(InputCharacterStream characterStream, ShuntingYardStack builder) {
         logger.info("Try transition for EXPRESSION state");
         CompilerFactory factory = new CompilerFactoryImpl();
-        Optional<Command> command = factory.create(TypeOfExpressionElement.EXPRESSION).compile(characterStream);
+        Optional<Command<ShuntingYardStack>> command = factory.create(TypeOfExpressionElement.EXPRESSION).compile(characterStream);
         if (command.isPresent()){
             command.get().execute(builder);
             logger.info("Transition successful");

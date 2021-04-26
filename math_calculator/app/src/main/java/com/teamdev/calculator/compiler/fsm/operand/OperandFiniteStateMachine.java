@@ -1,7 +1,7 @@
 package com.teamdev.calculator.compiler.fsm.operand;
 
 import com.teamdev.calculator.compiler.fsm.FiniteStateMachine;
-import com.teamdev.calculator.compiler.fsm.expression.NumberState;
+import com.teamdev.calculator.compiler.fsm.NumberState;
 import com.teamdev.calculator.runtime.ShuntingYardStack;
 import org.slf4j.LoggerFactory;
 import org.slf4j.impl.Log4jLoggerAdapter;

@@ -1,10 +1,9 @@
-package com.teamdev.calculator.compiler.fsm.expression;
+package com.teamdev.calculator.compiler.fsm;
 
 import com.teamdev.calculator.CompilerFactoryImpl;
 import com.teamdev.calculator.compiler.CompilerFactory;
 import com.teamdev.calculator.compiler.InputCharacterStream;
 import com.teamdev.calculator.compiler.TypeOfExpressionElement;
-import com.teamdev.calculator.compiler.fsm.State;
 import com.teamdev.calculator.runtime.Command;
 import com.teamdev.calculator.runtime.ShuntingYardStack;
 import org.slf4j.LoggerFactory;
@@ -21,7 +20,7 @@ public class NumberState extends State<ShuntingYardStack> {
 
         logger.info("Try transition for number state");
         CompilerFactory factory = new CompilerFactoryImpl();
-        Optional<Command> command = factory.create(TypeOfExpressionElement.NUMBER).compile(characterStream);
+        Optional<Command<ShuntingYardStack>> command = factory.create(TypeOfExpressionElement.NUMBER).compile(characterStream);
         if(command.isPresent()) {
             command.get().execute(stack);
             logger.info("Transition successful");

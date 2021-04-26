@@ -1,8 +1,7 @@
-package com.teamdev.calculator.compiler.fsm.expression;
+package com.teamdev.calculator.compiler.fsm;
 
 import com.teamdev.calculator.compiler.InputCharacterStream;
 import com.teamdev.calculator.compiler.impl.OperandCompiler;
-import com.teamdev.calculator.compiler.fsm.State;
 import com.teamdev.calculator.runtime.Command;
 import com.teamdev.calculator.runtime.ShuntingYardStack;
 import jdk.nashorn.internal.runtime.regexp.joni.exception.SyntaxException;
@@ -27,7 +26,7 @@ public class OperandState extends State<ShuntingYardStack> {
                 return true;
             }
         } catch (SyntaxException e) {
-            e.getMessage();
+            logger.error(e.getMessage());
         }
         return false;
     }

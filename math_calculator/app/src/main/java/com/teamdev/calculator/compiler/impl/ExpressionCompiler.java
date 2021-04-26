@@ -2,7 +2,7 @@ package com.teamdev.calculator.compiler.impl;
 
 import com.teamdev.calculator.compiler.ElementCompiler;
 import com.teamdev.calculator.compiler.InputCharacterStream;
-import com.teamdev.calculator.compiler.fsm.expression.ExpressionFiniteStateMachine;
+import com.teamdev.calculator.compiler.fsm.ExpressionFiniteStateMachine;
 import com.teamdev.calculator.runtime.Command;
 import com.teamdev.calculator.runtime.ExpressionCommand;
 import com.teamdev.calculator.runtime.ShuntingYardStack;
@@ -23,7 +23,7 @@ public class ExpressionCompiler implements ElementCompiler<ShuntingYardStack> {
         try {
             machine.execute(stream, stack);
         } catch (NumberFormatException e) {
-            e.getMessage();
+            logger.error(e.getMessage());
         }
         return Optional.of(new ExpressionCommand(stack));
     }

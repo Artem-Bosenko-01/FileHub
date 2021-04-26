@@ -1,7 +1,6 @@
-package com.teamdev.calculator.compiler.fsm.expression;
+package com.teamdev.calculator.compiler.fsm;
 
 import com.teamdev.calculator.compiler.InputCharacterStream;
-import com.teamdev.calculator.compiler.fsm.State;
 import com.teamdev.calculator.runtime.Command;
 import com.teamdev.calculator.runtime.OperatorCommand;
 import com.teamdev.calculator.runtime.ShuntingYardStack;

@@ -13,6 +13,6 @@ public class FunctionCommand implements Command<ShuntingYardStack>{
 
     @Override
     public void execute(ShuntingYardStack stack) {
-        stack.pushOperand(function.apply(arguments));
+        if(!function.getName().equals("pi")) stack.pushOperand(function.apply(arguments));
     }
 }

@@ -25,7 +25,7 @@ public class OperandCompiler implements ElementCompiler<ShuntingYardStack> {
                 return Optional.of(new OperandFSMCommand(stack));
             }
         } catch (IllegalFormatException e) {
-            e.getMessage();
+            logger.error(e.getMessage());
         }
         return Optional.empty();
     }

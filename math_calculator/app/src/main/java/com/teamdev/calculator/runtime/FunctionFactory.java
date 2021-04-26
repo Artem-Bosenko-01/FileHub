@@ -17,6 +17,8 @@ public class FunctionFactory {
         LogFunction logFunction = new LogFunction();
         SinFunction sinFunction = new SinFunction();
         CosFunction cosFunction = new CosFunction();
+        PiFunc piFunc = new PiFunc();
+        SumFunction sumFunction = new SumFunction();
 
         functionMap.put("avg",absFunction);
         functionMap.put("max", maxFunction);
@@ -25,6 +27,8 @@ public class FunctionFactory {
         functionMap.put("log", logFunction);
         functionMap.put("sin", sinFunction);
         functionMap.put("cos", cosFunction);
+        functionMap.put("pi", piFunc);
+        functionMap.put("sum", sumFunction);
     }
 
     public Function getFunction(String name){

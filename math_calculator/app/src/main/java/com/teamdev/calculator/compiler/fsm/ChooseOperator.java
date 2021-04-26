@@ -1,4 +1,4 @@
-package com.teamdev.calculator.compiler.fsm.expression;
+package com.teamdev.calculator.compiler.fsm;
 
 import com.teamdev.calculator.runtime.BinaryOperator;
 import com.teamdev.calculator.runtime.impl.Degree;

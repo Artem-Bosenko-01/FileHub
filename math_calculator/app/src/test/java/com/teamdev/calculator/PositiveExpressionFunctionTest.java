@@ -18,7 +18,10 @@ public class PositiveExpressionFunctionTest {
                 Arguments.of(3.2188758248682006,"log(5*5)"),
                 Arguments.of(1.3979400086720377,"log10(25)"),
                 Arguments.of(32,"max(5,min(32,45),8,4)"),
-                Arguments.of(6,"avg(5,7)")
+                Arguments.of(5,"avg(max(2,3),7)"),
+                Arguments.of(7,"max(1,5,6,7)"),
+                Arguments.of(15,"sum(min(1*3,5),5,7)"),
+                Arguments.of(3.14,"pi()")
         );
     }
 

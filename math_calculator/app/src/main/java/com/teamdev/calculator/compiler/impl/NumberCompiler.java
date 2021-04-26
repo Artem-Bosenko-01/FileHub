@@ -25,7 +25,7 @@ public class NumberCompiler implements ElementCompiler<ShuntingYardStack> {
             }
 
         } catch (NumberFormatException e) {
-            e.getMessage();
+            logger.error(e.getMessage());
         }
         return Optional.empty();
     }

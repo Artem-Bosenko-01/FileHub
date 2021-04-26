@@ -1,7 +1,7 @@
 package com.teamdev.calculator;
 
 import com.teamdev.calculator.compiler.InputCharacterStream;
-import com.teamdev.calculator.compiler.fsm.expression.ExpressionFiniteStateMachine;
+import com.teamdev.calculator.compiler.fsm.ExpressionFiniteStateMachine;
 import com.teamdev.calculator.runtime.ShuntingYardStack;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;

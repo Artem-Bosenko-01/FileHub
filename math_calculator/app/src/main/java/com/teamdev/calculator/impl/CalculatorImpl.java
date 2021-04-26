@@ -25,7 +25,7 @@ public class CalculatorImpl implements Calculator {
         ShuntingYardStack stack = new ShuntingYardStack();
 
         ElementCompiler compiler = compilerFactory.create(EXPRESSION);
-        Optional<Command> command = compiler.compile(characterStream);
+        Optional<Command<ShuntingYardStack>> command = compiler.compile(characterStream);
 
         command.ifPresent(value -> value.execute(stack));
         return stack.calculate();

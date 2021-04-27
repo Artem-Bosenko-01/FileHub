@@ -4,7 +4,7 @@ import com.teamdev.calculator.compiler.ElementCompiler;
 import com.teamdev.calculator.compiler.InputCharacterStream;
 import com.teamdev.calculator.compiler.fsm.ExpressionFiniteStateMachine;
 import com.teamdev.calculator.runtime.Command;
-import com.teamdev.calculator.runtime.ExpressionCommand;
+import com.teamdev.calculator.runtime.OperandCommand;
 import com.teamdev.calculator.runtime.ShuntingYardStack;
 import org.slf4j.LoggerFactory;
 import org.slf4j.impl.Log4jLoggerAdapter;
@@ -25,6 +25,6 @@ public class ExpressionCompiler implements ElementCompiler<ShuntingYardStack> {
         } catch (NumberFormatException e) {
             logger.error(e.getMessage());
         }
-        return Optional.of(new ExpressionCommand(stack));
+        return Optional.of(new OperandCommand(stack.calculate()));
     }
 }

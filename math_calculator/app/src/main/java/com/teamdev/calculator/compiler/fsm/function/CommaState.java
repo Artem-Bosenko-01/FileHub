@@ -6,6 +6,10 @@ import com.teamdev.calculator.runtime.FunctionScope;
 import org.slf4j.LoggerFactory;
 import org.slf4j.impl.Log4jLoggerAdapter;
 
+/**
+ * This is comma state, that extends {@link State basic state}
+ * This class are used to define comma symbol state in {@link FunctionFiniteStateMachine function FSM}
+ * */
 public class CommaState extends State<FunctionScope> {
     private final Log4jLoggerAdapter logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(CommaState.class);
 

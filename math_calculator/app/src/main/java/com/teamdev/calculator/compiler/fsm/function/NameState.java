@@ -6,6 +6,10 @@ import com.teamdev.calculator.runtime.FunctionScope;
 import org.slf4j.LoggerFactory;
 import org.slf4j.impl.Log4jLoggerAdapter;
 
+/**
+ * This is name state, that extends {@link State basic state} opportunity.
+ * It used like state in {@link FunctionFiniteStateMachine function FSM}
+ * */
 public class NameState extends State<FunctionScope> {
     private final Log4jLoggerAdapter logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(NameState.class);
     @Override

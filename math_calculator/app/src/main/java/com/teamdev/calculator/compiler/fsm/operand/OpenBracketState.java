@@ -2,14 +2,18 @@ package com.teamdev.calculator.compiler.fsm.operand;
 
 import com.teamdev.calculator.compiler.InputCharacterStream;
 import com.teamdev.calculator.compiler.fsm.State;
-import com.teamdev.calculator.runtime.ShuntingYardStack;
 import org.slf4j.LoggerFactory;
 import org.slf4j.impl.Log4jLoggerAdapter;
 
-public class OpenBracketState extends State<ShuntingYardStack> {
+/**
+ *This defines open bracket symbol in {@link com.teamdev.calculator.compiler.fsm.ExpressionFiniteStateMachine expression}
+ * or {@link com.teamdev.calculator.compiler.fsm.function.FunctionFiniteStateMachine function}.
+ * Type of {@link com.teamdev.calculator.compiler.fsm.FiniteStateMachine FSM} defines by parameter {@link T T}
+ * */
+public class OpenBracketState<T> extends State<T> {
     private final Log4jLoggerAdapter logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(OpenBracketState.class);
     @Override
-    public boolean tryTransition(InputCharacterStream characterStream, ShuntingYardStack builder) {
+    public boolean tryTransition(InputCharacterStream characterStream, T builder) {
         logger.info("Try transition for open bracket state");
         if(String.valueOf(characterStream.getCurrentSymbol()).equals("(")){
             characterStream.increasePointer();

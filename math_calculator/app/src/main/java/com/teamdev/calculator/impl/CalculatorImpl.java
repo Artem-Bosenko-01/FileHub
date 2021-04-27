@@ -14,6 +14,9 @@ import java.util.Optional;
 
 import static com.teamdev.calculator.compiler.TypeOfExpressionElement.EXPRESSION;
 
+/**
+ * This is standard implementation of {@link Calculator calculator API}
+ * */
 public class CalculatorImpl implements Calculator {
     private final Log4jLoggerAdapter logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(CompilerFactoryImpl.class);
 
@@ -24,7 +27,7 @@ public class CalculatorImpl implements Calculator {
         CompilerFactory compilerFactory = new CompilerFactoryImpl();
         ShuntingYardStack stack = new ShuntingYardStack();
 
-        ElementCompiler compiler = compilerFactory.create(EXPRESSION);
+        ElementCompiler<ShuntingYardStack> compiler = compilerFactory.create(EXPRESSION);
         Optional<Command<ShuntingYardStack>> command = compiler.compile(characterStream);
 
         command.ifPresent(value -> value.execute(stack));

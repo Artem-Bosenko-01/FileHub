@@ -1,4 +1,4 @@
-package com.teamdev.calculator.runtime.impl;
+package com.teamdev.calculator.runtime.double_operators;
 
 import com.teamdev.calculator.runtime.BinaryOperator;
 

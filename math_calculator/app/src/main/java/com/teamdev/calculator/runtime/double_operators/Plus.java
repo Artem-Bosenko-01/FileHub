@@ -1,19 +1,20 @@
-package com.teamdev.calculator.runtime.impl;
+package com.teamdev.calculator.runtime.double_operators;
 
 import com.teamdev.calculator.runtime.BinaryOperator;
 
 /**
  * Note: this class has a natural ordering that is inconsistent with equals.
  */
-public class Divide implements BinaryOperator {
+public class Plus implements BinaryOperator {
+
     @Override
     public int getPriority() {
-        return 1;
+        return 0;
     }
 
     @Override
     public double apply(double leftArgument, double rightArgument) {
-        return leftArgument/rightArgument;
+        return leftArgument + rightArgument;
     }
 
     @Override

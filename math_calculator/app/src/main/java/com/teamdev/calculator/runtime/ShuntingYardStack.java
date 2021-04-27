@@ -7,6 +7,9 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Optional;
 
+/**
+ * This is <a href="https://en.wikipedia.org/wiki/Stack_(abstract_data_type)">stack</a>, that implement <a href="https://en.wikipedia.org/wiki/Shunting-yard_algorithm">Shunting-yard algorithm</a>
+ * */
 public class ShuntingYardStack implements Cloneable{
 
     private final Log4jLoggerAdapter logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(ShuntingYardStack.class);

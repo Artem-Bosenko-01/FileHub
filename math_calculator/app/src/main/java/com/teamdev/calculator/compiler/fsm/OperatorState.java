@@ -9,6 +9,10 @@ import org.slf4j.impl.Log4jLoggerAdapter;
 
 import java.util.regex.Pattern;
 
+/**
+ *This state compile {@link OperatorCommand operator command} for {@link ShuntingYardStack stack}
+ * in {@link ExpressionFiniteStateMachine expression FSM} if input symbol equals to one of {@link #matcher operator}
+ * */
 public class OperatorState extends State<ShuntingYardStack> {
 
     private static final Pattern matcher = Pattern.compile("[-*/^+]");
@@ -17,7 +21,7 @@ public class OperatorState extends State<ShuntingYardStack> {
     public boolean tryTransition(InputCharacterStream characterStream, ShuntingYardStack outputChain) {
         logger.info("Try transition for operator state");
         if(matcher.matcher(String.valueOf(characterStream.getCurrentSymbol())).matches()){
-            Command command = new OperatorCommand(String.valueOf(characterStream.getCurrentSymbol()));
+            Command<ShuntingYardStack> command = new OperatorCommand(String.valueOf(characterStream.getCurrentSymbol()));
             command.execute(outputChain);
             characterStream.increasePointer();
             logger.info("Transition successful");

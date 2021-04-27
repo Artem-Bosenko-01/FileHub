@@ -11,7 +11,7 @@ public class PiFunc extends Function {
 
     @Override
     public double apply(List<Double> arguments) {
-        if(arguments.size()==0) return 3.1415926535;
+        if(arguments.size()==0) return 3.14159;
         else throw new RuntimeException();
     }
 }

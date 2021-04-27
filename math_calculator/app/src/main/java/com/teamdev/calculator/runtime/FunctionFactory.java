@@ -5,6 +5,9 @@ import com.teamdev.calculator.runtime.functions.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This is factory, that stores a variety of possible {@link Function functions}
+ * */
 public class FunctionFactory {
 
     private final Map<String, Function> functionMap = new HashMap<>();

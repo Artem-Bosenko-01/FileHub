@@ -7,6 +7,11 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ *This is the basic unit in the {@link FiniteStateMachine machine}, that used to determine the possibility of transition
+ *for the input symbol from {@link InputCharacterStream character stream}. Type of output chain is determined by
+ * {@link T parameter}
+ * */
 public abstract class State<T> {
     private List<State<T>> states = new LinkedList<>();
 

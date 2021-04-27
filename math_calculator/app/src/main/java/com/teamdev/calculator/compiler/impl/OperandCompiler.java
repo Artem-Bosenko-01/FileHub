@@ -4,7 +4,7 @@ import com.teamdev.calculator.compiler.ElementCompiler;
 import com.teamdev.calculator.compiler.InputCharacterStream;
 import com.teamdev.calculator.compiler.fsm.operand.OperandFiniteStateMachine;
 import com.teamdev.calculator.runtime.Command;
-import com.teamdev.calculator.runtime.OperandFSMCommand;
+import com.teamdev.calculator.runtime.OperandCommand;
 import com.teamdev.calculator.runtime.ShuntingYardStack;
 import org.slf4j.LoggerFactory;
 import org.slf4j.impl.Log4jLoggerAdapter;
@@ -22,7 +22,7 @@ public class OperandCompiler implements ElementCompiler<ShuntingYardStack> {
         ShuntingYardStack stack = new ShuntingYardStack();
         try {
             if(machine.execute(stream, stack)){
-                return Optional.of(new OperandFSMCommand(stack));
+                return Optional.of(new OperandCommand(stack.calculate()));
             }
         } catch (IllegalFormatException e) {
             logger.error(e.getMessage());

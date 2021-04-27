@@ -1,5 +1,6 @@
 package com.teamdev.calculator;
 
+import com.teamdev.calculator.compiler.CompilerFactory;
 import com.teamdev.calculator.compiler.InputCharacterStream;
 import com.teamdev.calculator.compiler.TypeOfExpressionElement;
 import com.teamdev.calculator.runtime.Command;
@@ -29,14 +30,16 @@ public class NumberFiniteStateMachineTest {
     public void executeTest(double expected, String inputValue){
         InputCharacterStream stream = new InputCharacterStream(inputValue);
         ShuntingYardStack stack = new ShuntingYardStack();
-        Optional<Command> command = new CompilerFactoryImpl().create(TypeOfExpressionElement.NUMBER).compile(stream);
+
+        Optional<Command<ShuntingYardStack>> command = new CompilerFactoryImpl().create(TypeOfExpressionElement.NUMBER).compile(stream);
         try {
             //noinspection OptionalGetWithoutIsPresent
             command.get().execute(stack);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        Assertions.assertEquals(stack.peekOperand(), expected);
+        if(stack.peekOperand().isPresent()){
+            Assertions.assertEquals(stack.peekOperand().get(), expected);
+        }
     }
 }

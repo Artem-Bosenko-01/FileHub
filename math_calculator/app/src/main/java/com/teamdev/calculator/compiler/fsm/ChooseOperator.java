@@ -1,15 +1,17 @@
 package com.teamdev.calculator.compiler.fsm;
 
 import com.teamdev.calculator.runtime.BinaryOperator;
-import com.teamdev.calculator.runtime.impl.Degree;
-import com.teamdev.calculator.runtime.impl.Plus;
-import com.teamdev.calculator.runtime.impl.Subtract;
-import com.teamdev.calculator.runtime.impl.Multiply;
-import com.teamdev.calculator.runtime.impl.Divide;
+import com.teamdev.calculator.runtime.double_operators.Degree;
+import com.teamdev.calculator.runtime.double_operators.Plus;
+import com.teamdev.calculator.runtime.double_operators.Subtract;
+import com.teamdev.calculator.runtime.double_operators.Multiply;
+import com.teamdev.calculator.runtime.double_operators.Divide;
 import org.slf4j.LoggerFactory;
 import org.slf4j.impl.Log4jLoggerAdapter;
 
-
+/**
+ *This utility-class is used to detects {@link BinaryOperator binary operator} for an incoming character
+ * */
 public final class ChooseOperator {
 
     private static final Log4jLoggerAdapter logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(ChooseOperator.class);

@@ -12,6 +12,10 @@ import org.slf4j.impl.Log4jLoggerAdapter;
 
 import java.util.Optional;
 
+/**
+ *This state compile {@link com.teamdev.calculator.compiler.impl.ExpressionCompiler expression compiler}
+ * and push command for {@link ShuntingYardStack stack} in {@link OperandFiniteStateMachine operand FSM}
+ * */
 public class ExpressionState extends State<ShuntingYardStack> {
 
     private final Log4jLoggerAdapter logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(ExpressionState.class);

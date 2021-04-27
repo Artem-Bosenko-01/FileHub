@@ -5,6 +5,10 @@ import com.teamdev.calculator.compiler.fsm.State;
 import org.slf4j.LoggerFactory;
 import org.slf4j.impl.Log4jLoggerAdapter;
 
+/**
+ *This is {@link State state}, that define is input symbol equals digit symbol.
+ * It used like one of states in {@link NumberFiniteStateMachine number FSM}
+ */
 public class DigitState extends State<StringBuilder> {
     private final Log4jLoggerAdapter logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(State.class);
 

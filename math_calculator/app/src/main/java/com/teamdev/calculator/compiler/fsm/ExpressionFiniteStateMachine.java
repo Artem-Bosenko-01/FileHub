@@ -5,21 +5,31 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.impl.Log4jLoggerAdapter;
 
 import java.util.Collections;
+import java.util.List;
 
+/**
+ *This is {@link FiniteStateMachine machine}, that used to detect two operands with binary operator
+ * */
 public class ExpressionFiniteStateMachine extends FiniteStateMachine<ShuntingYardStack> {
 
     private final Log4jLoggerAdapter logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(ExpressionFiniteStateMachine.class);
+    private final OperandState operand = new OperandState();
+    private final OperatorState operator = new OperatorState();
 
     public ExpressionFiniteStateMachine() {
         logger.info("Create Expression FSM");
-        OperandState operand = new OperandState();
-        OperatorState operator = new OperatorState();
 
         operand.addTransition(operator);
         operator.addTransition(operand);
-
-        setStartStates(Collections.singletonList(operand));
-        setFinishStates(Collections.singletonList(operand));
     }
 
+    @Override
+    public List<State<ShuntingYardStack>> getStartStates() {
+        return Collections.singletonList(operand);
+    }
+
+    @Override
+    public List<State<ShuntingYardStack>> getFinishStates() {
+        return Collections.singletonList(operand);
+    }
 }

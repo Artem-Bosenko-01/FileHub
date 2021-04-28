@@ -2,6 +2,8 @@ package com.teamdev.calculator.compiler.fsm.operand;
 
 import com.teamdev.calculator.compiler.InputCharacterStream;
 import com.teamdev.calculator.compiler.fsm.State;
+import com.teamdev.calculator.compiler.fsm.function.CommaState;
+import com.teamdev.calculator.runtime.FunctionScope;
 import org.slf4j.LoggerFactory;
 import org.slf4j.impl.Log4jLoggerAdapter;
 
@@ -21,5 +23,24 @@ public class CloseBracketState<T> extends State<T> {
             return true;
         }
         return false;
+    }
+
+    public static class Builder<T>{
+        private CloseBracketState<T> newState;
+
+        public Builder(){
+            newState = new CloseBracketState<>();
+        }
+        public Builder<T> setTransition(State<T>... transitions){
+            newState.addTransition(transitions);
+            return this;
+        }
+        public Builder<T> isLoop(boolean result){
+            if (result) newState.addTransition(newState);
+            return this;
+        }
+        public CloseBracketState<T> build(){
+            return newState;
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.teamdev.calculator.compiler.fsm.function;
 
 import com.teamdev.calculator.compiler.InputCharacterStream;
 import com.teamdev.calculator.compiler.fsm.State;
+import com.teamdev.calculator.runtime.FunctionScope;
 import org.slf4j.LoggerFactory;
 import org.slf4j.impl.Log4jLoggerAdapter;
 
@@ -22,5 +23,24 @@ public class LetterState extends State<StringBuilder> {
             return true;
         }
         return false;
+    }
+
+    public static class Builder{
+        private LetterState newState;
+
+        public Builder(){
+            newState = new LetterState();
+        }
+        public Builder setTransition(State<StringBuilder>... transitions){
+            newState.addTransition(transitions);
+            return this;
+        }
+        public Builder isLoop(boolean result){
+            if (result) newState.addTransition(newState);
+            return this;
+        }
+        public LetterState build(){
+            return newState;
+        }
     }
 }

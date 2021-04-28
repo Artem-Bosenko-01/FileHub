@@ -17,7 +17,8 @@ public class PositiveBracketsExpressionTest {
                 Arguments.of(36,"(2*3)^2"),
                 Arguments.of(20.0,"(5*2)+10"),
                 Arguments.of(42.0,"8+(21-4)*2"),
-                Arguments.of(56.0,"(2+5)*8")
+                Arguments.of(56.0,"(2+5)*8"),
+                Arguments.of(-116,"3*4-2^(12-4/2-3)")
         );
     }
 

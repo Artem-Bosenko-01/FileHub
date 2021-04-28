@@ -22,7 +22,8 @@ public class PositiveExpressionFunctionTest {
                 Arguments.of(5,"avg(max(2,3),7)"),
                 Arguments.of(7,"max(1,5,6,7)"),
                 Arguments.of(15,"sum(min(1*3,5),5,7)"),
-                Arguments.of(3.14159,"pi()")
+                Arguments.of(3.14159,"pi()"),
+                Arguments.of(6.14159,"sum(min(1*3,5),pi())")
         );
     }
 
@@ -31,7 +32,7 @@ public class PositiveExpressionFunctionTest {
     public void executePositiveExpressionTest(double expected, String inputChain){
         Calculator calculator = new CalculatorImpl();
         Optional<Double> result = calculator.calculate(inputChain);
-        Assertions.assertEquals(expected, result.get());
+        result.ifPresent(aDouble -> Assertions.assertEquals(expected, aDouble));
     }
 
 }

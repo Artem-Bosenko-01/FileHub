@@ -25,4 +25,24 @@ public class DotState extends State<StringBuilder> {
         return false;
     }
 
+    public static class Builder{
+        private DotState newState;
+
+        public Builder(){
+            newState = new DotState();
+        }
+        public Builder setTransition(State<StringBuilder>... transitions){
+            newState.addTransition(transitions);
+            return this;
+        }
+        public Builder isLoop(boolean result){
+            if (result) newState.addTransition(newState);
+            return this;
+        }
+
+        public DotState build(){
+            return newState;
+        }
+    }
+
 }

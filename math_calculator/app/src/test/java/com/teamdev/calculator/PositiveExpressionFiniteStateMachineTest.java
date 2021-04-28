@@ -19,7 +19,8 @@ public class PositiveExpressionFiniteStateMachineTest {
                 Arguments.of(11.4147,"8.15+6.7-3.123*1.1"),
                 Arguments.of(45.0,"6*7+3"),
                 Arguments.of(15.0,"3+2*6"),
-                Arguments.of(6.0,"5+4-7-2+6")
+                Arguments.of(6.0,"5+4-7-2+6"),
+                Arguments.of(-372,"12-6*4^3")
         );
     }
 

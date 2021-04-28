@@ -5,6 +5,8 @@ import com.teamdev.calculator.compiler.fsm.State;
 import org.slf4j.LoggerFactory;
 import org.slf4j.impl.Log4jLoggerAdapter;
 
+import java.util.Arrays;
+
 /**
  *This is {@link State state}, that define is input symbol equals digit symbol.
  * It used like one of states in {@link NumberFiniteStateMachine number FSM}
@@ -24,5 +26,23 @@ public class DigitState extends State<StringBuilder> {
         return false;
     }
 
+    public static class Builder{
+        private DigitState newState;
 
+        public Builder(){
+            newState = new DigitState();
+        }
+        public Builder setTransition(State<StringBuilder>... transitions){
+            newState.addTransition(transitions);
+            return this;
+        }
+
+        public Builder isLoop(boolean result){
+            if (result) newState.addTransition(newState);
+            return this;
+        }
+        public DigitState build(){
+            return newState;
+        }
+    }
 }

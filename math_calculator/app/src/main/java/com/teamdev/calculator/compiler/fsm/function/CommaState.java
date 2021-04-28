@@ -2,6 +2,7 @@ package com.teamdev.calculator.compiler.fsm.function;
 
 import com.teamdev.calculator.compiler.InputCharacterStream;
 import com.teamdev.calculator.compiler.fsm.State;
+import com.teamdev.calculator.compiler.fsm.number.MinusState;
 import com.teamdev.calculator.runtime.FunctionScope;
 import org.slf4j.LoggerFactory;
 import org.slf4j.impl.Log4jLoggerAdapter;
@@ -22,5 +23,24 @@ public class CommaState extends State<FunctionScope> {
             return true;
         }
         return false;
+    }
+
+    public static class Builder{
+        private CommaState newState;
+
+        public Builder(){
+            newState = new CommaState();
+        }
+        public Builder setTransition(State<FunctionScope>... transitions){
+            newState.addTransition(transitions);
+            return this;
+        }
+        public Builder isLoop(boolean result){
+            if (result) newState.addTransition(newState);
+            return this;
+        }
+        public CommaState build(){
+            return newState;
+        }
     }
 }

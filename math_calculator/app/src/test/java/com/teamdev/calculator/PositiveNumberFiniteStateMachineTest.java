@@ -13,7 +13,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-public class NumberFiniteStateMachineTest {
+public class PositiveNumberFiniteStateMachineTest {
 
 
     public static Stream<Arguments> positiveNumber(){

@@ -1,11 +1,9 @@
 package com.teamdev.calculator.compiler.fsm;
 
 import com.teamdev.calculator.compiler.InputCharacterStream;
+import com.teamdev.calculator.compiler.fsm.number.MinusState;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  *This is the basic unit in the {@link FiniteStateMachine machine}, that used to determine the possibility of transition
@@ -13,11 +11,11 @@ import java.util.List;
  * {@link T parameter}
  * */
 public abstract class State<T> {
-    private List<State<T>> states = new LinkedList<>();
+    private List<State<T>> states = new ArrayList<>();
 
-    @SafeVarargs
     public final void addTransition(State<T>... transitions){
-        states = Arrays.asList(transitions);
+        states.addAll(Arrays.asList(transitions));
+
     }
 
     public abstract boolean tryTransition(InputCharacterStream characterStream, T builder);

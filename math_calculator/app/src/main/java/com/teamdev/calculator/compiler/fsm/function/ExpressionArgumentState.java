@@ -40,4 +40,23 @@ public class ExpressionArgumentState extends State<FunctionScope> {
         }
         return false;
     }
+
+    public static class Builder{
+        private ExpressionArgumentState newState;
+
+        public Builder(){
+            newState = new ExpressionArgumentState();
+        }
+        public Builder setTransition(State<FunctionScope>... transitions){
+            newState.addTransition(transitions);
+            return this;
+        }
+        public Builder isLoop(boolean result){
+            if (result) newState.addTransition(newState);
+            return this;
+        }
+        public ExpressionArgumentState build(){
+            return newState;
+        }
+    }
 }

@@ -16,29 +16,26 @@ import java.util.List;
  */
 public class NumberFiniteStateMachine extends FiniteStateMachine<StringBuilder> {
     private final Log4jLoggerAdapter logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(NumberFiniteStateMachine.class);
-    private final MinusState minus = new MinusState();
-    private final DigitState integer = new DigitState();
-    private final DotState dot = new DotState();
-    private final DigitState decimal = new DigitState();
+
+
+    private final DigitState decimalState = new DigitState.Builder().isLoop(true).build();
+    private final DotState dotState = new DotState.Builder().setTransition(decimalState).build();
+    private final DigitState intState = new DigitState.Builder().isLoop(true).setTransition(dotState).build();
+    private final MinusState minusState = new MinusState.Builder().setTransition(intState).build();
 
     public NumberFiniteStateMachine() throws InvalidSymbolException {
         logger.info("Create Number FSM");
-
-        minus.addTransition(integer);
-        integer.addTransition(integer, dot);
-        dot.addTransition(decimal);
-        decimal.addTransition(decimal);
 
     }
 
 
     @Override
     public List<State<StringBuilder>> getStartStates() {
-        return Arrays.asList(minus, integer);
+        return Arrays.asList(minusState, intState);
     }
 
     @Override
     public List<State<StringBuilder>> getFinishStates() {
-        return Arrays.asList(integer, decimal);
+        return Arrays.asList(intState, decimalState);
     }
 }

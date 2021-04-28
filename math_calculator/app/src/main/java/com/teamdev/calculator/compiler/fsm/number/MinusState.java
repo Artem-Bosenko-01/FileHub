@@ -23,4 +23,23 @@ public class MinusState extends State<StringBuilder> {
         }
         return false;
     }
+
+    public static class Builder{
+        private MinusState newState;
+
+        public Builder(){
+            newState = new MinusState();
+        }
+        public Builder setTransition(State<StringBuilder>... transitions){
+            newState.addTransition(transitions);
+            return this;
+        }
+        public Builder isLoop(boolean result){
+            if (result) newState.addTransition(newState);
+            return this;
+        }
+        public MinusState build(){
+            return newState;
+        }
+    }
 }

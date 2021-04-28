@@ -1,6 +1,8 @@
 package com.teamdev.calculator.compiler.fsm;
 
 import com.teamdev.calculator.compiler.InputCharacterStream;
+import com.teamdev.calculator.compiler.fsm.exception.InvalidSymbolException;
+import com.teamdev.calculator.compiler.fsm.exception.NotExistPairBracketException;
 import org.slf4j.LoggerFactory;
 import org.slf4j.impl.Log4jLoggerAdapter;
 
@@ -18,7 +20,8 @@ public abstract class FiniteStateMachine<T> {
 
     public abstract List<State<T>> getFinishStates();
 
-    public boolean execute(InputCharacterStream inputCharacterStream, T outputChain) {
+    public boolean execute(InputCharacterStream inputCharacterStream, T outputChain) throws InvalidSymbolException,
+            NotExistPairBracketException {
 
         logger.info("Start execute fsm");
         List<State<T>> currentPossiblePositions = getStartStates();

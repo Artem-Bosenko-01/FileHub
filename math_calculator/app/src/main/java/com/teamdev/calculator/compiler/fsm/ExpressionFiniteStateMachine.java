@@ -12,6 +12,7 @@ import java.util.List;
  * */
 public class ExpressionFiniteStateMachine extends FiniteStateMachine<ShuntingYardStack> {
 
+
     private final Log4jLoggerAdapter logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(ExpressionFiniteStateMachine.class);
     private final OperandState operand = new OperandState();
     private final OperatorState operator = new OperatorState();

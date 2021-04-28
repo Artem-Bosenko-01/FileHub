@@ -20,7 +20,7 @@ import java.util.Optional;
  * {@link com.teamdev.calculator.compiler.impl.ExpressionCompiler expression compiler}.
  * It state extends {@link State basic state}
  * It used like {@link FunctionFiniteStateMachine function FSM} state.
- * */
+ */
 public class ExpressionArgumentState extends State<FunctionScope> {
     private final Log4jLoggerAdapter logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(ExpressionArgumentState.class);
 

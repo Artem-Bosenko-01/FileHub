@@ -16,12 +16,12 @@ import static com.teamdev.calculator.compiler.TypeOfExpressionElement.EXPRESSION
 
 /**
  * This is standard implementation of {@link Calculator calculator API}
- * */
+ */
 public class CalculatorImpl implements Calculator {
     private final Log4jLoggerAdapter logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(CompilerFactoryImpl.class);
 
     @Override
-    public double calculate(String inputChain) {
+    public Optional<Double> calculate(String inputChain) {
         logger.info("Start calculate operation for" + inputChain);
         InputCharacterStream characterStream = new InputCharacterStream(inputChain);
         CompilerFactory compilerFactory = new CompilerFactoryImpl();
@@ -31,6 +31,7 @@ public class CalculatorImpl implements Calculator {
         Optional<Command<ShuntingYardStack>> command = compiler.compile(characterStream);
 
         command.ifPresent(value -> value.execute(stack));
-        return stack.calculate();
+        return Optional.of(stack.calculate());
+
     }
 }

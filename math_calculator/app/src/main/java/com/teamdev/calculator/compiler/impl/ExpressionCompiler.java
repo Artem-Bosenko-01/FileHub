@@ -3,6 +3,8 @@ package com.teamdev.calculator.compiler.impl;
 import com.teamdev.calculator.compiler.ElementCompiler;
 import com.teamdev.calculator.compiler.InputCharacterStream;
 import com.teamdev.calculator.compiler.fsm.ExpressionFiniteStateMachine;
+import com.teamdev.calculator.compiler.fsm.exception.InvalidSymbolException;
+import com.teamdev.calculator.compiler.fsm.exception.NotExistPairBracketException;
 import com.teamdev.calculator.runtime.Command;
 import com.teamdev.calculator.runtime.OperandCommand;
 import com.teamdev.calculator.runtime.ShuntingYardStack;
@@ -24,7 +26,11 @@ public class ExpressionCompiler implements ElementCompiler<ShuntingYardStack> {
             machine.execute(stream, stack);
         } catch (NumberFormatException e) {
             logger.error(e.getMessage());
+        } catch (NotExistPairBracketException | InvalidSymbolException notExistPairBracket) {
+            notExistPairBracket.printStackTrace();
         }
+
         return Optional.of(new OperandCommand(stack.calculate()));
+
     }
 }

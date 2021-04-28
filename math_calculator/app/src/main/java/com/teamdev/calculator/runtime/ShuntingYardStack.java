@@ -52,9 +52,9 @@ public class ShuntingYardStack implements Cloneable{
     public double calculate(){
         logger.info("Start calculate result");
         while (!operators.isEmpty()){
-            double rightOperand = operands.pop();
+            Double rightOperand = operands.pop();
             BinaryOperator operator = operators.pop();
-            double leftOperand = operands.pop();
+            Double leftOperand = operands.pop();
 
             operands.push(operator.apply(leftOperand,rightOperand));
         }

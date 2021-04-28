@@ -1,6 +1,7 @@
 package com.teamdev.calculator.runtime;
 
 import com.teamdev.calculator.compiler.fsm.ChooseOperator;
+import com.teamdev.calculator.compiler.fsm.exception.InvalidBinaryOperatorException;
 import org.slf4j.LoggerFactory;
 import org.slf4j.impl.Log4jLoggerAdapter;
 
@@ -19,7 +20,11 @@ public class OperatorCommand implements Command<ShuntingYardStack>{
     @Override
     public void execute(ShuntingYardStack stack) {
         logger.info("Start execute command for Operator");
-        stack.pushOperator(ChooseOperator.getOperator(symbol));
+        try {
+            stack.pushOperator(ChooseOperator.getOperator(symbol));
+        } catch (InvalidBinaryOperatorException invalidBinaryOperator) {
+            logger.error(invalidBinaryOperator.getLocalizedMessage());
+        }
         logger.info("End execute command for Operator");
     }
 }

@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 
-
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class PositiveExpressionFiniteStateMachineTest {
@@ -27,7 +27,7 @@ public class PositiveExpressionFiniteStateMachineTest {
     @MethodSource("positiveExpression")
     public void executePositiveExpressionTest(double expected, String inputChain){
         Calculator calculator = new CalculatorImpl();
-        double result = calculator.calculate(inputChain);
-        Assertions.assertEquals(expected, result);
+        Optional<Double> result = calculator.calculate(inputChain);
+        Assertions.assertEquals(expected, result.get());
     }
 }

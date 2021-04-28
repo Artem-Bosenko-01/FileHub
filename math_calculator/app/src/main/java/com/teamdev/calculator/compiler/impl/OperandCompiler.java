@@ -2,6 +2,8 @@ package com.teamdev.calculator.compiler.impl;
 
 import com.teamdev.calculator.compiler.ElementCompiler;
 import com.teamdev.calculator.compiler.InputCharacterStream;
+import com.teamdev.calculator.compiler.fsm.exception.InvalidSymbolException;
+import com.teamdev.calculator.compiler.fsm.exception.NotExistPairBracketException;
 import com.teamdev.calculator.compiler.fsm.operand.OperandFiniteStateMachine;
 import com.teamdev.calculator.runtime.Command;
 import com.teamdev.calculator.runtime.OperandCommand;
@@ -24,7 +26,7 @@ public class OperandCompiler implements ElementCompiler<ShuntingYardStack> {
             if(machine.execute(stream, stack)){
                 return Optional.of(new OperandCommand(stack.calculate()));
             }
-        } catch (IllegalFormatException e) {
+        } catch (IllegalFormatException | NotExistPairBracketException | InvalidSymbolException e) {
             logger.error(e.getMessage());
         }
         return Optional.empty();

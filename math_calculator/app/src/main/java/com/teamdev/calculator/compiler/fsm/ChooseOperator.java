@@ -1,5 +1,6 @@
 package com.teamdev.calculator.compiler.fsm;
 
+import com.teamdev.calculator.compiler.fsm.exception.InvalidBinaryOperatorException;
 import com.teamdev.calculator.runtime.BinaryOperator;
 import com.teamdev.calculator.runtime.double_operators.Degree;
 import com.teamdev.calculator.runtime.double_operators.Plus;
@@ -18,7 +19,7 @@ public final class ChooseOperator {
     private ChooseOperator() {
     }
 
-    public static BinaryOperator getOperator(String symbol){
+    public static BinaryOperator getOperator(String symbol) throws InvalidBinaryOperatorException {
         logger.info("Choose operator for " + symbol);
         switch (symbol){
             case "+": return new Plus();
@@ -26,7 +27,7 @@ public final class ChooseOperator {
             case "*": return new Multiply();
             case "/": return new Divide();
             case "^": return new Degree();
-            default: throw new RuntimeException("invalid symbol. not operator");
+            default: throw new InvalidBinaryOperatorException(symbol);
         }
     }
 }

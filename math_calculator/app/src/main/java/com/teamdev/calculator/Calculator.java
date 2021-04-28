@@ -1,8 +1,10 @@
 package com.teamdev.calculator;
 
+import java.util.Optional;
+
 /**
  * This is API for calculator application
  * */
 public interface Calculator {
-    double calculate(String inputChain);
+    Optional<Double> calculate(String inputChain);
 }

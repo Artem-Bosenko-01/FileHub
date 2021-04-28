@@ -2,6 +2,7 @@ package com.teamdev.calculator;
 
 import com.teamdev.calculator.compiler.InputCharacterStream;
 import com.teamdev.calculator.compiler.fsm.ExpressionFiniteStateMachine;
+import com.teamdev.calculator.compiler.fsm.exception.InvalidSymbolException;
 import com.teamdev.calculator.runtime.ShuntingYardStack;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,10 +14,9 @@ import java.util.stream.Stream;
 public class NegativeExpressionFiniteStateMachineTest {
     public static Stream<Arguments> negativeExpression(){
         return Stream.of(
-                Arguments.of(new RuntimeException(),"2++5"),
-                Arguments.of(new RuntimeException(),"--5"),
-                Arguments.of(new RuntimeException(),"4"),
-                Arguments.of(new RuntimeException(),"565--4")
+                Arguments.of(new InvalidSymbolException(2),"2++5"),
+                Arguments.of(new InvalidSymbolException(1),"--5"),
+                Arguments.of(new InvalidSymbolException(1), "2+5**4")
         );
     }
 

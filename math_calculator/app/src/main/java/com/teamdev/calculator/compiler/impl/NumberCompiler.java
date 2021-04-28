@@ -2,6 +2,8 @@ package com.teamdev.calculator.compiler.impl;
 
 import com.teamdev.calculator.compiler.ElementCompiler;
 import com.teamdev.calculator.compiler.InputCharacterStream;
+import com.teamdev.calculator.compiler.fsm.exception.InvalidSymbolException;
+import com.teamdev.calculator.compiler.fsm.exception.NotExistPairBracketException;
 import com.teamdev.calculator.compiler.fsm.number.NumberFiniteStateMachine;
 import com.teamdev.calculator.runtime.Command;
 import com.teamdev.calculator.runtime.OperandCommand;
@@ -17,15 +19,18 @@ public class NumberCompiler implements ElementCompiler<ShuntingYardStack> {
     @Override
     public Optional<Command<ShuntingYardStack>> compile(InputCharacterStream stream) {
         logger.info("Start compile Number Compiler");
-        NumberFiniteStateMachine machine = new NumberFiniteStateMachine();
-        StringBuilder output = new StringBuilder();
         try {
+
+            NumberFiniteStateMachine machine = new NumberFiniteStateMachine();
+            StringBuilder output = new StringBuilder();
             if(machine.execute(stream, output)){
                 return Optional.of(new OperandCommand(Double.parseDouble(output.toString())));
             }
 
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | InvalidSymbolException e) {
             logger.error(e.getMessage());
+        } catch (NotExistPairBracketException notExistPairBracket) {
+            notExistPairBracket.printStackTrace();
         }
         return Optional.empty();
     }

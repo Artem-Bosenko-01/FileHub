@@ -3,6 +3,7 @@ package com.teamdev.calculator.compiler.fsm.number;
 
 import com.teamdev.calculator.compiler.fsm.FiniteStateMachine;
 import com.teamdev.calculator.compiler.fsm.State;
+import com.teamdev.calculator.compiler.fsm.exception.InvalidSymbolException;
 import org.slf4j.LoggerFactory;
 import org.slf4j.impl.Log4jLoggerAdapter;
 
@@ -20,7 +21,7 @@ public class NumberFiniteStateMachine extends FiniteStateMachine<StringBuilder> 
     private final DotState dot = new DotState();
     private final DigitState decimal = new DigitState();
 
-    public NumberFiniteStateMachine() {
+    public NumberFiniteStateMachine() throws InvalidSymbolException {
         logger.info("Create Number FSM");
 
         minus.addTransition(integer);

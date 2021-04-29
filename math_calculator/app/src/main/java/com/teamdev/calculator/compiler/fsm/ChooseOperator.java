@@ -7,6 +7,7 @@ import com.teamdev.calculator.runtime.double_operators.Plus;
 import com.teamdev.calculator.runtime.double_operators.Subtract;
 import com.teamdev.calculator.runtime.double_operators.Multiply;
 import com.teamdev.calculator.runtime.double_operators.Divide;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.impl.Log4jLoggerAdapter;
 
@@ -15,7 +16,7 @@ import org.slf4j.impl.Log4jLoggerAdapter;
  * */
 public final class ChooseOperator {
 
-    private static final Log4jLoggerAdapter logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(ChooseOperator.class);
+    private static final Logger logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(ChooseOperator.class);
     private ChooseOperator() {
     }
 

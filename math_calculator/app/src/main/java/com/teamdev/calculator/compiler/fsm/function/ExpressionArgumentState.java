@@ -9,6 +9,7 @@ import com.teamdev.calculator.compiler.fsm.State;
 import com.teamdev.calculator.runtime.Command;
 import com.teamdev.calculator.runtime.FunctionScope;
 import com.teamdev.calculator.runtime.ShuntingYardStack;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.impl.Log4jLoggerAdapter;
 
@@ -22,7 +23,7 @@ import java.util.Optional;
  * It used like {@link FunctionFiniteStateMachine function FSM} state.
  */
 public class ExpressionArgumentState extends State<FunctionScope> {
-    private final Log4jLoggerAdapter logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(ExpressionArgumentState.class);
+    private final Logger logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(ExpressionArgumentState.class);
 
     @Override
     public boolean tryTransition(InputCharacterStream characterStream, FunctionScope output) {
@@ -41,22 +42,4 @@ public class ExpressionArgumentState extends State<FunctionScope> {
         return false;
     }
 
-    public static class Builder{
-        private ExpressionArgumentState newState;
-
-        public Builder(){
-            newState = new ExpressionArgumentState();
-        }
-        public Builder setTransition(State<FunctionScope>... transitions){
-            newState.addTransition(transitions);
-            return this;
-        }
-        public Builder isLoop(boolean result){
-            if (result) newState.addTransition(newState);
-            return this;
-        }
-        public ExpressionArgumentState build(){
-            return newState;
-        }
-    }
 }

@@ -6,6 +6,7 @@ import com.teamdev.calculator.compiler.fsm.exception.InvalidSymbolException;
 import com.teamdev.calculator.compiler.fsm.exception.NotExistPairBracketException;
 import com.teamdev.calculator.compiler.fsm.number.MinusState;
 import com.teamdev.calculator.runtime.FunctionScope;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.impl.Log4jLoggerAdapter;
 
@@ -16,7 +17,7 @@ import java.util.Arrays;
  * It used like state in {@link FunctionFiniteStateMachine function FSM}
  * */
 public class NameState extends State<FunctionScope> {
-    private final Log4jLoggerAdapter logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(NameState.class);
+    private final Logger logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(NameState.class);
     @Override
     public boolean tryTransition(InputCharacterStream characterStream, FunctionScope output) {
         logger.info("Start transition for Name state in function");
@@ -35,7 +36,7 @@ public class NameState extends State<FunctionScope> {
     }
 
     public static class Builder{
-        private NameState newState;
+        private final NameState newState;
 
         public Builder(){
             newState = new NameState();

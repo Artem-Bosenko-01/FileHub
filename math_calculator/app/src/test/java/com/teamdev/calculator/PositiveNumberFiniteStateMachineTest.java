@@ -13,10 +13,10 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-public class PositiveNumberFiniteStateMachineTest {
+class PositiveNumberFiniteStateMachineTest {
 
 
-    public static Stream<Arguments> positiveNumber(){
+    static Stream<Arguments> positiveNumber(){
         return Stream.of(
                 Arguments.of(4.0, "4"),
                 Arguments.of(15.447, "15.447a"),
@@ -27,7 +27,7 @@ public class PositiveNumberFiniteStateMachineTest {
 
     @ParameterizedTest
     @MethodSource("positiveNumber")
-    public void executeTest(double expected, String inputValue){
+    void executeTest(double expected, String inputValue){
         InputCharacterStream stream = new InputCharacterStream(inputValue);
         ShuntingYardStack stack = new ShuntingYardStack();
 

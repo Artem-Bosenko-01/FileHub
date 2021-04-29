@@ -1,10 +1,12 @@
 package com.teamdev.calculator.compiler.fsm;
 
+import com.teamdev.calculator.compiler.ElementCompiler;
 import com.teamdev.calculator.compiler.InputCharacterStream;
 import com.teamdev.calculator.compiler.impl.OperandCompiler;
 import com.teamdev.calculator.runtime.Command;
 import com.teamdev.calculator.runtime.ShuntingYardStack;
 import jdk.nashorn.internal.runtime.regexp.joni.exception.SyntaxException;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.impl.Log4jLoggerAdapter;
 
@@ -15,12 +17,12 @@ import java.util.Optional;
  * and push command for {@link ShuntingYardStack stack} in {@link ExpressionFiniteStateMachine expression FSM}
  * */
 public class OperandState extends State<ShuntingYardStack> {
-    private final Log4jLoggerAdapter logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(OperandState.class);
+    private final Logger logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(OperandState.class);
     @Override
     public boolean tryTransition(InputCharacterStream characterStream, ShuntingYardStack builder) {
 
         logger.info("Try transition for operand state");
-        OperandCompiler compiler = new OperandCompiler();
+        ElementCompiler<ShuntingYardStack> compiler = new OperandCompiler();
         Optional<Command<ShuntingYardStack>> command = compiler.compile(characterStream);
 
         try {

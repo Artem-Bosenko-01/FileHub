@@ -8,6 +8,7 @@ import com.teamdev.calculator.compiler.impl.FunctionCompiler;
 import com.teamdev.calculator.compiler.impl.NumberCompiler;
 
 import com.teamdev.calculator.runtime.ShuntingYardStack;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.impl.Log4jLoggerAdapter;
 
@@ -16,7 +17,7 @@ import org.slf4j.impl.Log4jLoggerAdapter;
  * {@link TypeOfExpressionElement type of expression}
  * */
 public class CompilerFactoryImpl implements CompilerFactory {
-    private static final Log4jLoggerAdapter logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(CompilerFactoryImpl.class);
+    private static final Logger logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(CompilerFactoryImpl.class);
 
     @Override
     public ElementCompiler<ShuntingYardStack> create(TypeOfExpressionElement type) {

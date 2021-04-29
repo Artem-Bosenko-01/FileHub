@@ -11,10 +11,10 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-public class PositiveExpressionFiniteStateMachineTest {
+class PositiveExpressionFiniteStateMachineTest {
 
 
-    public static Stream<Arguments> positiveExpression(){
+    static Stream<Arguments> positiveExpression(){
         return Stream.of(
                 Arguments.of(11.4147,"8.15+6.7-3.123*1.1"),
                 Arguments.of(45.0,"6*7+3"),
@@ -26,7 +26,7 @@ public class PositiveExpressionFiniteStateMachineTest {
 
     @ParameterizedTest
     @MethodSource("positiveExpression")
-    public void executePositiveExpressionTest(double expected, String inputChain){
+    void executePositiveExpressionTest(double expected, String inputChain){
         Calculator calculator = new CalculatorImpl();
         Optional<Double> result = calculator.calculate(inputChain);
         Assertions.assertEquals(expected, result.get());

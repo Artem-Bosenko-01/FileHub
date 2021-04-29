@@ -2,6 +2,7 @@ package com.teamdev.calculator.compiler.fsm.number;
 
 import com.teamdev.calculator.compiler.InputCharacterStream;
 import com.teamdev.calculator.compiler.fsm.State;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.impl.Log4jLoggerAdapter;
 
@@ -12,7 +13,7 @@ import java.util.Arrays;
  * It used like one of states in {@link NumberFiniteStateMachine number FSM}
  */
 public class DigitState extends State<StringBuilder> {
-    private final Log4jLoggerAdapter logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(State.class);
+    private final Logger logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(State.class);
 
     @Override
     public boolean tryTransition(InputCharacterStream characterStream, StringBuilder builder) {
@@ -27,7 +28,7 @@ public class DigitState extends State<StringBuilder> {
     }
 
     public static class Builder{
-        private DigitState newState;
+        private final DigitState newState;
 
         public Builder(){
             newState = new DigitState();

@@ -15,7 +15,7 @@ import org.slf4j.impl.Log4jLoggerAdapter;
  * This is standard implementation, that return type of {@link ElementCompiler compiler} for appropriate
  * {@link TypeOfExpressionElement type of expression}
  * */
-public class CompilerFactoryImpl implements CompilerFactory {
+public class CompilerFactoryImpl implements CompilerFactory<TypeOfExpressionElement> {
     private static final Logger logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(CompilerFactoryImpl.class);
 
     @Override

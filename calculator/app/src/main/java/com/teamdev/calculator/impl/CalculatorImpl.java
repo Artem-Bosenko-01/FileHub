@@ -5,6 +5,7 @@ import com.teamdev.calculator.CompilerFactoryImpl;
 import com.teamdev.calculator.compiler.CompilerFactory;
 import com.teamdev.calculator.compiler.ElementCompiler;
 import com.teamdev.calculator.compiler.InputCharacterStream;
+import com.teamdev.calculator.compiler.TypeOfExpressionElement;
 import com.teamdev.calculator.runtime.Command;
 import com.teamdev.calculator.runtime.ShuntingYardStack;
 import org.slf4j.Logger;
@@ -25,10 +26,9 @@ public class CalculatorImpl implements Calculator {
     public Optional<Double> calculate(String inputChain) {
         logger.info("Start calculate operation for" + inputChain);
         InputCharacterStream characterStream = new InputCharacterStream(inputChain);
-        CompilerFactory compilerFactory = new CompilerFactoryImpl();
+        ElementCompiler<ShuntingYardStack> compiler = new CompilerFactoryImpl().create(EXPRESSION);
         ShuntingYardStack stack = new ShuntingYardStack();
 
-        ElementCompiler<ShuntingYardStack> compiler = compilerFactory.create(EXPRESSION);
         Optional<Command<ShuntingYardStack>> command = compiler.compile(characterStream);
 
         command.ifPresent(value -> value.execute(stack));

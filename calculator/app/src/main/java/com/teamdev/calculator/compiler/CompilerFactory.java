@@ -7,6 +7,6 @@ import com.teamdev.calculator.runtime.ShuntingYardStack;
  * <a href="https://www.geeksforgeeks.org/factory-method-design-pattern-in-java/">factory pattern</a>
  * to create {@link ElementCompiler one of element compiler}
  * */
-public interface CompilerFactory {
-    ElementCompiler<ShuntingYardStack> create(TypeOfExpressionElement type);
+public interface CompilerFactory<TYPE, RESULT> {
+    ElementCompiler<RESULT> create(TYPE type);
 }

@@ -1,6 +1,7 @@
 package com.teamdev.calculator.runtime.functions;
 
 import com.teamdev.calculator.runtime.Function;
+import com.teamdev.calculator.runtime.holder.ValueHolder;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +12,7 @@ public class LogFunction extends Function {
     }
 
     @Override
-    public Optional<Double> apply(List<Double> arguments) {
-        return Optional.of(Math.log(arguments.get(0)));
+    public Optional<Double> apply(List<ValueHolder<?>> arguments) {
+        return Optional.of(Math.log((Double) arguments.get(0).getValue()));
     }
 }

@@ -1,5 +1,7 @@
 package com.teamdev.calculator.runtime;
 
+import com.teamdev.calculator.runtime.holder.ValueHolder;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -15,5 +17,5 @@ public abstract class Function {
         this.name = name;
     }
 
-    public abstract Optional<Double> apply(List<Double> arguments);
+    public abstract Optional<Double> apply(List<ValueHolder<?>> arguments);
 }

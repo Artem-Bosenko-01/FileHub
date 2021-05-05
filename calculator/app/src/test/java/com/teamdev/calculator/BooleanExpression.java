@@ -8,6 +8,9 @@ import com.teamdev.calculator.compiler.fsm.booleanexpression.BooleanExpressionFi
 import com.teamdev.calculator.compiler.fsm.exception.InvalidSymbolException;
 import com.teamdev.calculator.compiler.fsm.exception.NotExistPairBracketException;
 import com.teamdev.calculator.runtime.BooleanScope;
+import com.teamdev.calculator.runtime.Operator;
+import com.teamdev.calculator.runtime.holder.ValueHolder;
+import com.teamdev.calculator.runtime.holder.doubletype.DoubleValueHolder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -40,9 +43,9 @@ public class BooleanExpression {
         } catch (InvalidSymbolException | NotExistPairBracketException e) {
             e.printStackTrace();
         }
+        Operator operator = scope.getOperator();
+        ValueHolder<?> result = operator.apply(new DoubleValueHolder(scope.getOperands().get(0)), new DoubleValueHolder(scope.getOperands().get(1)));
 
-        boolean result = scope.getOperator().apply(scope.getOperands().get(0), scope.getOperands().get(1));
-
-        Assertions.assertEquals(expected, result);
+        Assertions.assertEquals(expected, result.getValue());
     }
 }

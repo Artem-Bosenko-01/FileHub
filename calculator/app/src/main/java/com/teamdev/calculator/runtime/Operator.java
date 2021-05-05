@@ -1,14 +1,16 @@
 package com.teamdev.calculator.runtime;
 
-public interface Operator<T> extends Comparable<Operator<T>>{
+import com.teamdev.calculator.runtime.holder.ValueHolder;
+
+public interface Operator extends Comparable<Operator>{
     default int getPriority(){
         return 0;
     }
 
-    T apply(double leftArgument, double rightArgument);
+    ValueHolder<?> apply(ValueHolder<?> leftArgument, ValueHolder<?> rightArgument);
 
     @Override
-    default int compareTo(Operator<T> o){
+    default int compareTo(Operator o){
         return Integer.compare(getPriority(),o.getPriority());
     }
 }

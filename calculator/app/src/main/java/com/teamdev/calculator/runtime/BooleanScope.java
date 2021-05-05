@@ -6,14 +6,14 @@ import java.util.List;
 public class BooleanScope {
 
     private final List<Double> operands = new ArrayList<>();
-    private BooleanBinaryOperator operator;
+    private Operator operator;
 
 
-    public void addOperand(double operand) {
+    public void addOperand(Double operand) {
         operands.add(operand);
     }
 
-    public void setOperator(BooleanBinaryOperator operator) {
+    public void setOperator(Operator operator) {
         this.operator = operator;
     }
 
@@ -21,7 +21,7 @@ public class BooleanScope {
         return operands;
     }
 
-    public BooleanBinaryOperator getOperator() {
+    public Operator getOperator() {
         return operator;
     }
 }

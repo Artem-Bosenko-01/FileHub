@@ -8,6 +8,7 @@ import com.teamdev.calculator.compiler.fsm.number.NumberFiniteStateMachine;
 import com.teamdev.calculator.runtime.Command;
 import com.teamdev.calculator.runtime.OperandCommand;
 import com.teamdev.calculator.runtime.ShuntingYardStack;
+import com.teamdev.calculator.runtime.holder.doubletype.DoubleValueHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.impl.Log4jLoggerAdapter;
@@ -25,7 +26,7 @@ public class NumberCompiler implements ElementCompiler<ShuntingYardStack> {
             NumberFiniteStateMachine machine = new NumberFiniteStateMachine();
             StringBuilder output = new StringBuilder();
             if(machine.execute(stream, output)){
-                return Optional.of(new OperandCommand(Double.parseDouble(output.toString())));
+                return Optional.of(new OperandCommand(new DoubleValueHolder(Double.parseDouble(output.toString()))));
             }
 
         } catch (NumberFormatException | InvalidSymbolException | NotExistPairBracketException e) {

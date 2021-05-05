@@ -1,5 +1,7 @@
 package com.teamdev.calculator.runtime;
 
+import com.teamdev.calculator.runtime.holder.ValueHolder;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +10,7 @@ import java.util.List;
  * */
 public class FunctionScope implements Cloneable {
     private Function function;
-    private List<Double> arguments;
+    private List<ValueHolder<?>> arguments;
 
     public FunctionScope(){
         arguments = new ArrayList<>();
@@ -18,11 +20,11 @@ public class FunctionScope implements Cloneable {
         this.function = new FunctionFactory().getFunction(nameFunction);
     }
 
-    public void addArgument(Double argument){
+    public void addArgument(ValueHolder<?> argument){
         arguments.add(argument);
     }
 
-    public List<Double> getArguments() {
+    public List<ValueHolder<?>> getArguments() {
         return arguments;
     }
     public Function getFunction(){

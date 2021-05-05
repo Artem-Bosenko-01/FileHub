@@ -10,7 +10,7 @@ public class InitVariableFiniteStateMachine extends FiniteStateMachine<StringBui
 
     private final NameStateForBooby nameState = new NameStateForBooby();
     private final AttributionState attributionState = new AttributionState();
-    private final ExpressionStateForBooby expressionState = new ExpressionStateForBooby();
+    private final VariableValueState expressionState = new VariableValueState();
 
     public InitVariableFiniteStateMachine(){
 

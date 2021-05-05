@@ -1,12 +1,14 @@
 package com.teamdev.calculator.runtime.operators;
 
-import com.teamdev.calculator.runtime.BooleanBinaryOperator;
+import com.teamdev.calculator.runtime.Operator;
+import com.teamdev.calculator.runtime.holder.ValueHolder;
+import com.teamdev.calculator.runtime.holder.booleantype.BooleanValueHolder;
 
-public class Equals implements BooleanBinaryOperator {
+public class Equals implements Operator {
 
     @Override
-    public Boolean apply(double leftArgument, double rightArgument) {
-        return leftArgument==rightArgument;
+    public ValueHolder<?> apply(ValueHolder<?> leftArgument, ValueHolder<?> rightArgument) {
+        return new BooleanValueHolder(leftArgument.getValue().equals(rightArgument.getValue()));
     }
 
 }

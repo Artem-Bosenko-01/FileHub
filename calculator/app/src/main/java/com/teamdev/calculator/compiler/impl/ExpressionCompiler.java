@@ -8,6 +8,7 @@ import com.teamdev.calculator.compiler.fsm.exception.NotExistPairBracketExceptio
 import com.teamdev.calculator.runtime.Command;
 import com.teamdev.calculator.runtime.OperandCommand;
 import com.teamdev.calculator.runtime.ShuntingYardStack;
+import com.teamdev.calculator.runtime.holder.doubletype.DoubleVisitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.impl.Log4jLoggerAdapter;

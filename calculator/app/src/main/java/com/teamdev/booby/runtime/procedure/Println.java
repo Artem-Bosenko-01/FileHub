@@ -1,6 +1,7 @@
 package com.teamdev.booby.runtime.procedure;
 
 import com.teamdev.calculator.runtime.Function;
+import com.teamdev.calculator.runtime.holder.ValueHolder;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,9 +12,9 @@ public class Println extends Function {
     }
 
     @Override
-    public Optional<Double> apply(List<Double> arguments) {
-        for (Double arg: arguments) {
-            System.out.println(arg.toString());
+    public Optional<Double> apply(List<ValueHolder<?>> arguments) {
+        for (ValueHolder<?> arg: arguments) {
+            System.out.println(arg.getValue());
         }
         return Optional.empty();
     }

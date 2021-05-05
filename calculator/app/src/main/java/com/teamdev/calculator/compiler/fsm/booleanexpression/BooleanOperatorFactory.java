@@ -1,11 +1,11 @@
 package com.teamdev.calculator.compiler.fsm.booleanexpression;
 
-import com.teamdev.calculator.runtime.BooleanBinaryOperator;
+import com.teamdev.calculator.runtime.Operator;
 import com.teamdev.calculator.runtime.operators.*;
 
 public final class BooleanOperatorFactory {
 
-    public static BooleanBinaryOperator getOperator(String str) {
+    public static Operator getOperator(String str) {
         switch (str) {
             case "<":
                 return new Less();

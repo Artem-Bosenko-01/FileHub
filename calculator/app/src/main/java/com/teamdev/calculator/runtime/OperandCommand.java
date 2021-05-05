@@ -1,5 +1,7 @@
 package com.teamdev.calculator.runtime;
 
+import com.teamdev.calculator.runtime.holder.ValueHolder;
+import com.teamdev.calculator.runtime.holder.doubletype.DoubleValueHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.impl.Log4jLoggerAdapter;
@@ -10,9 +12,9 @@ import org.slf4j.impl.Log4jLoggerAdapter;
  * */
 public class OperandCommand implements Command<ShuntingYardStack>{
     private final Logger logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(OperatorCommand.class);
-    private final double operand;
+    private final ValueHolder<?> operand;
 
-    public OperandCommand(double operand) {
+    public OperandCommand(ValueHolder<?> operand) {
         this.operand = operand;
     }
 

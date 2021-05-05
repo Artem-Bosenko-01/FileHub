@@ -39,7 +39,7 @@ class PositiveNumberFiniteStateMachineTest {
             e.printStackTrace();
         }
         if(stack.peekOperand().isPresent()){
-            Assertions.assertEquals(stack.peekOperand().get(), expected);
+            Assertions.assertEquals(stack.peekOperand().get().getValue(), expected);
         }
     }
 }

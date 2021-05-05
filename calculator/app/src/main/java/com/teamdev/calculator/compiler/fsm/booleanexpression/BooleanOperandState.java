@@ -20,7 +20,7 @@ public class BooleanOperandState extends State<BooleanScope> {
         ShuntingYardStack stack = new ShuntingYardStack();
         if(command.isPresent()){
             command.get().execute(stack);
-            builder.addOperand(stack.calculate());
+            builder.addOperand((Double) stack.calculate().getValue());
             return true;
         }
         return false;

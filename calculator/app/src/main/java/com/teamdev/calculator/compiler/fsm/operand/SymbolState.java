@@ -4,6 +4,9 @@ import com.teamdev.booby.runtime.RuntimeEnvironment;
 import com.teamdev.calculator.compiler.InputCharacterStream;
 import com.teamdev.calculator.compiler.fsm.State;
 import com.teamdev.calculator.runtime.ShuntingYardStack;
+import com.teamdev.calculator.runtime.holder.ValueHolder;
+import com.teamdev.calculator.runtime.holder.booleantype.BooleanValueHolder;
+import com.teamdev.calculator.runtime.holder.doubletype.DoubleValueHolder;
 
 public class SymbolState extends State<ShuntingYardStack> {
 
@@ -13,7 +16,7 @@ public class SymbolState extends State<ShuntingYardStack> {
         RuntimeEnvironment environment = RuntimeEnvironment.getInstance();
 
         if(String.valueOf(characterStream.getCurrentSymbol()).matches("[a-zA-Z]")){
-            Double value = environment.getValue(String.valueOf(characterStream.getCurrentSymbol()));
+            ValueHolder<?> value = environment.getValue(String.valueOf(characterStream.getCurrentSymbol()));
             if(value != null) {
                 builder.pushOperand(value);
                 characterStream.increasePointer();

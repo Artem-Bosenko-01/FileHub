@@ -8,14 +8,12 @@ import com.teamdev.calculator.compiler.fsm.exception.NotExistPairBracketExceptio
 import com.teamdev.calculator.runtime.ShuntingYardStack;
 
 
-public class ExpressionStateForBooby extends State<StringBuilder> {
+public class DoubleExpressionState extends State<ShuntingYardStack> {
     @Override
-    public boolean tryTransition(InputCharacterStream characterStream, StringBuilder builder) {
+    public boolean tryTransition(InputCharacterStream characterStream, ShuntingYardStack builder) {
         ExpressionFiniteStateMachine expressionFiniteStateMachine = new ExpressionFiniteStateMachine();
-        ShuntingYardStack stack = new ShuntingYardStack();
         try {
-            if(expressionFiniteStateMachine.execute(characterStream, stack)){
-                builder.append(stack.calculate());
+            if(expressionFiniteStateMachine.execute(characterStream, builder)){
                 return true;
             }
         } catch (InvalidSymbolException | NotExistPairBracketException e) {

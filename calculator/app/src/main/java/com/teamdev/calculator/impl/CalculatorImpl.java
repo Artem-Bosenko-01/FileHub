@@ -32,7 +32,7 @@ public class CalculatorImpl implements Calculator {
         Optional<Command<ShuntingYardStack>> command = compiler.compile(characterStream);
 
         command.ifPresent(value -> value.execute(stack));
-        return Optional.of(stack.calculate());
+        return Optional.of((Double) stack.calculate().getValue());
 
     }
 }

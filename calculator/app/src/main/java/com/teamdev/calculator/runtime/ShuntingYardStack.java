@@ -1,5 +1,6 @@
 package com.teamdev.calculator.runtime;
 
+import com.teamdev.calculator.runtime.holder.ValueHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,10 +14,10 @@ import java.util.Optional;
 public class ShuntingYardStack implements Cloneable{
 
     private final Logger logger = LoggerFactory.getLogger(ShuntingYardStack.class);
-    private final Deque<BinaryOperator> operators = new ArrayDeque<>();
-    private final Deque<Double> operands = new ArrayDeque<>();
+    private final Deque<Operator> operators = new ArrayDeque<>();
+    private final Deque<ValueHolder<?>> operands = new ArrayDeque<>();
 
-    public void pushOperator(BinaryOperator binaryOperator){
+    public void pushOperator(Operator binaryOperator){
         logger.info("Start push operator" + binaryOperator.toString() + "with priority = " + binaryOperator.getPriority());
         if (operators.size() > 0){
             if(binaryOperator.compareTo(operators.peek()) > 0)
@@ -24,9 +25,9 @@ public class ShuntingYardStack implements Cloneable{
                 operators.push(binaryOperator);
             }
             else {
-                double rightOperand = operands.pop();
-                BinaryOperator operator = operators.pop();
-                double leftOperand = operands.pop();
+                ValueHolder<?> rightOperand = operands.pop();
+                Operator operator = operators.pop();
+                ValueHolder<?> leftOperand = operands.pop();
 
                operands.push(operator.apply(leftOperand,rightOperand));
                pushOperator(binaryOperator);
@@ -40,21 +41,21 @@ public class ShuntingYardStack implements Cloneable{
         operators.addAll(stack.operators);
     }
 
-    public Optional<Double> peekOperand(){
+    public Optional<ValueHolder<?>> peekOperand(){
         return Optional.ofNullable(operands.peek());
     }
 
-    public void pushOperand(Double operand){
+    public void pushOperand(ValueHolder<?> operand){
         logger.info("Start push operand = " + operand);
         operands.push(operand);
     }
 
-    public double calculate(){
+    public ValueHolder<?> calculate(){
         logger.info("Start calculate result");
         while (!operators.isEmpty()){
-            Double rightOperand = operands.pop();
-            BinaryOperator operator = operators.pop();
-            Double leftOperand = operands.pop();
+            ValueHolder<?> rightOperand = operands.pop();
+            Operator operator = operators.pop();
+            ValueHolder<?> leftOperand = operands.pop();
 
             operands.push(operator.apply(leftOperand,rightOperand));
         }

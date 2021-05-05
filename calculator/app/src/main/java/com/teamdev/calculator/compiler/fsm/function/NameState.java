@@ -32,22 +32,4 @@ public class NameState extends State<FunctionScope> {
         return false;
     }
 
-    public static class Builder{
-        private final NameState newState;
-
-        public Builder(){
-            newState = new NameState();
-        }
-        public Builder setTransition(State<FunctionScope>... transitions){
-            newState.addTransition(transitions);
-            return this;
-        }
-        public Builder isLoop(boolean result){
-            if (result) newState.addTransition(newState);
-            return this;
-        }
-        public NameState build(){
-            return newState;
-        }
-    }
 }

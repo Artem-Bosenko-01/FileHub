@@ -24,7 +24,9 @@ public class OperandFiniteStateMachine extends FiniteStateMachine<ShuntingYardSt
     private final OpenBracketState<ShuntingYardStack> openBracket = new OpenBracketState<>();
     private final ExpressionState expressionState = new ExpressionState();
     private final CloseBracketState<ShuntingYardStack> closeBracket = new CloseBracketState<>();
+    private final SymbolState symbolState = new SymbolState();
     private final FunctionState functionState = new FunctionState();
+
 
     public OperandFiniteStateMachine(){
 
@@ -37,11 +39,11 @@ public class OperandFiniteStateMachine extends FiniteStateMachine<ShuntingYardSt
 
     @Override
     public List<State<ShuntingYardStack>> getStartStates() {
-        return Arrays.asList(numberState, openBracket, functionState);
+        return Arrays.asList(numberState, openBracket, functionState, symbolState);
     }
 
     @Override
     public List<State<ShuntingYardStack>> getFinishStates() {
-        return Arrays.asList(numberState, closeBracket, functionState);
+        return Arrays.asList(numberState, closeBracket, functionState, symbolState);
     }
 }

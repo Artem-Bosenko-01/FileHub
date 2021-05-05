@@ -26,23 +26,4 @@ public class LetterState extends State<StringBuilder> {
         }
         return false;
     }
-
-    public static class Builder{
-        private final LetterState newState;
-
-        public Builder(){
-            newState = new LetterState();
-        }
-        public Builder setTransition(State<StringBuilder>... transitions){
-            newState.addTransition(transitions);
-            return this;
-        }
-        public Builder isLoop(boolean result){
-            if (result) newState.addTransition(newState);
-            return this;
-        }
-        public LetterState build(){
-            return newState;
-        }
-    }
 }

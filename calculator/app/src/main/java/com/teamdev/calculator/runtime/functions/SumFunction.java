@@ -3,6 +3,7 @@ package com.teamdev.calculator.runtime.functions;
 import com.teamdev.calculator.runtime.Function;
 
 import java.util.List;
+import java.util.Optional;
 
 public class SumFunction extends Function {
     public SumFunction() {
@@ -10,11 +11,11 @@ public class SumFunction extends Function {
     }
 
     @Override
-    public double apply(List<Double> arguments) {
+    public Optional<Double> apply(List<Double> arguments) {
         double summary = 0.0;
         for (Double argument : arguments) {
             summary += argument;
         }
-        return summary;
+        return Optional.of(summary);
     }
 }

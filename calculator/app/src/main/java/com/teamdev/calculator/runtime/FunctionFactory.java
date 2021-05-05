@@ -1,5 +1,6 @@
 package com.teamdev.calculator.runtime;
 
+import com.teamdev.booby.runtime.procedure.Println;
 import com.teamdev.calculator.runtime.functions.*;
 
 import java.util.HashMap;
@@ -22,6 +23,7 @@ class FunctionFactory {
         CosFunction cosFunction = new CosFunction();
         PiFunc piFunc = new PiFunc();
         SumFunction sumFunction = new SumFunction();
+        Println printlnProcedure = new Println();
 
         functionMap.put("avg",absFunction);
         functionMap.put("max", maxFunction);
@@ -32,6 +34,7 @@ class FunctionFactory {
         functionMap.put("cos", cosFunction);
         functionMap.put("pi", piFunc);
         functionMap.put("sum", sumFunction);
+        functionMap.put("println", printlnProcedure);
     }
 
     public Function getFunction(String name){

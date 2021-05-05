@@ -22,14 +22,16 @@ public class FunctionCompiler implements ElementCompiler<ShuntingYardStack> {
     @Override
     public Optional<Command<ShuntingYardStack>> compile(InputCharacterStream stream) {
         logger.info("Start compile Function Compiler");
-        FunctionFiniteStateMachine machine = null;
-        machine = new FunctionFiniteStateMachine();
+        FunctionFiniteStateMachine machine = new FunctionFiniteStateMachine();
         FunctionScope scope = new FunctionScope();
         try {
-            machine.execute(stream, scope);
+            if(machine.execute(stream, scope)){
+                return Optional.of(new FunctionCommand(scope.getFunction(), scope.getArguments()));
+            }
+
         } catch (InvalidSymbolException | NotExistPairBracketException e) {
             logger.error(e.getMessage());
         }
-        return Optional.of(new FunctionCommand(scope.getFunction(), scope.getArguments()));
+        return Optional.empty();
     }
 }

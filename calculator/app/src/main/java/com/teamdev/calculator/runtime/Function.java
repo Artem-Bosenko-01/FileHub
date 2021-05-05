@@ -1,6 +1,7 @@
 package com.teamdev.calculator.runtime;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * This is basic type of expression,that implement some of
@@ -14,5 +15,5 @@ public abstract class Function {
         this.name = name;
     }
 
-    public abstract double apply(List<Double> arguments);
+    public abstract Optional<Double> apply(List<Double> arguments);
 }

@@ -28,6 +28,7 @@ public abstract class FiniteStateMachine<T> {
         List<State<T>> currentPossiblePositions = getStartStates();
         State<T> currentPosition = null;
         boolean hasBeenTransited;
+        int beginPointer = inputCharacterStream.getCurrentPointer();
 
         do{
             hasBeenTransited = false;
@@ -48,6 +49,7 @@ public abstract class FiniteStateMachine<T> {
             return true;
         }
 
-        return currentPosition != null;
+        inputCharacterStream.setPointer(beginPointer);
+        return false;
     }
 }

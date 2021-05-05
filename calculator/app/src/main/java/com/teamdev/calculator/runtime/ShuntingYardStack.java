@@ -2,7 +2,6 @@ package com.teamdev.calculator.runtime;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.impl.Log4jLoggerAdapter;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -13,7 +12,7 @@ import java.util.Optional;
  * */
 public class ShuntingYardStack implements Cloneable{
 
-    private final Logger logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(ShuntingYardStack.class);
+    private final Logger logger = LoggerFactory.getLogger(ShuntingYardStack.class);
     private final Deque<BinaryOperator> operators = new ArrayDeque<>();
     private final Deque<Double> operands = new ArrayDeque<>();
 

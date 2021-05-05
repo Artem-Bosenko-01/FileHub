@@ -25,22 +25,4 @@ public class CommaState extends State<FunctionScope> {
         return false;
     }
 
-    public static class Builder{
-        private final CommaState newState;
-
-        public Builder(){
-            newState = new CommaState();
-        }
-        public Builder setTransition(State<FunctionScope>... transitions){
-            newState.addTransition(transitions);
-            return this;
-        }
-        public Builder isLoop(boolean result){
-            if (result) newState.addTransition(newState);
-            return this;
-        }
-        public CommaState build(){
-            return newState;
-        }
-    }
 }

@@ -4,6 +4,7 @@ import com.teamdev.calculator.runtime.Function;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class MinFunction extends Function {
     public MinFunction() {
@@ -11,7 +12,7 @@ public class MinFunction extends Function {
     }
 
     @Override
-    public double apply(List<Double> arguments) {
-        return Collections.min(arguments);
+    public Optional<Double> apply(List<Double> arguments) {
+        return Optional.of(Collections.min(arguments));
     }
 }

@@ -16,6 +16,7 @@ public class InputCharacterStream {
         return sentence.charAt(pointer);
     }
 
+
     public void increasePointer() {
         ++pointer;
     }
@@ -23,5 +24,9 @@ public class InputCharacterStream {
     public boolean isEmpty() {
         return pointer == sentence.length();
     }
+
+    public int getCurrentPointer(){return pointer;}
+
+    public void setPointer(int position){pointer = position;}
 
 }

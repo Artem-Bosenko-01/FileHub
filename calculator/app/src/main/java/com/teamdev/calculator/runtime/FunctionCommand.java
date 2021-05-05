@@ -1,6 +1,7 @@
 package com.teamdev.calculator.runtime;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * This command calculate result of the specific {@link Command function}
@@ -16,6 +17,7 @@ public class FunctionCommand implements Command<ShuntingYardStack>{
 
     @Override
     public void execute(ShuntingYardStack stack) {
-         stack.pushOperand(function.apply(arguments));
+        Optional<Double> operand = function.apply(arguments);
+        operand.ifPresent(stack::pushOperand);
     }
 }

@@ -6,9 +6,13 @@ import java.util.List;
 /**
  * This is parser for one type of {@link Function functions} and list of arguments for this function
  * */
-public class FunctionScope {
+public class FunctionScope implements Cloneable {
     private Function function;
-    private final List<Double> arguments = new ArrayList<>();
+    private List<Double> arguments;
+
+    public FunctionScope(){
+        arguments = new ArrayList<>();
+    }
 
     public void addName(String nameFunction){
         this.function = new FunctionFactory().getFunction(nameFunction);

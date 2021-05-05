@@ -16,7 +16,7 @@ import java.util.Optional;
 
 public class ExpressionCompiler implements ElementCompiler<ShuntingYardStack> {
 
-    private final Logger logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(ExpressionCompiler.class);
+    private final Logger logger = LoggerFactory.getLogger(ExpressionCompiler.class);
 
     @Override
     public Optional<Command<ShuntingYardStack>> compile(InputCharacterStream stream) {

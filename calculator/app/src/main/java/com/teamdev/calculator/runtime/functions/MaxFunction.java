@@ -4,6 +4,7 @@ import com.teamdev.calculator.runtime.Function;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class MaxFunction extends Function {
     public MaxFunction() {
@@ -11,7 +12,7 @@ public class MaxFunction extends Function {
     }
 
     @Override
-    public double apply(List<Double> arguments) {
-        return Collections.max(arguments);
+    public Optional<Double> apply(List<Double> arguments) {
+        return Optional.of(Collections.max(arguments));
     }
 }

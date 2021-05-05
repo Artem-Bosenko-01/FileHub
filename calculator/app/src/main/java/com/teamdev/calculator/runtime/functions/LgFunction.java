@@ -3,6 +3,7 @@ package com.teamdev.calculator.runtime.functions;
 import com.teamdev.calculator.runtime.Function;
 
 import java.util.List;
+import java.util.Optional;
 
 public class LgFunction extends Function {
     public LgFunction() {
@@ -10,7 +11,7 @@ public class LgFunction extends Function {
     }
 
     @Override
-    public double apply(List<Double> arguments) {
-        return Math.log10(arguments.get(0));
+    public Optional<Double> apply(List<Double> arguments) {
+        return Optional.of(Math.log10(arguments.get(0)));
     }
 }

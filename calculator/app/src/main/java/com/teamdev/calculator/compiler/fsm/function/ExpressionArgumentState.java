@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.impl.Log4jLoggerAdapter;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -27,7 +28,7 @@ public class ExpressionArgumentState extends State<FunctionScope> {
     @Override
     public boolean tryTransition(InputCharacterStream characterStream, FunctionScope output) {
         logger.info("Start transition for Argument expression in function");
-        CompilerFactory factory = new CompilerFactoryImpl();
+        CompilerFactory<TypeOfExpressionElement, ShuntingYardStack> factory = new CompilerFactoryImpl();
         ElementCompiler<ShuntingYardStack> expressionElement = factory.create(TypeOfExpressionElement.EXPRESSION);
         Optional<Command<ShuntingYardStack>> command = expressionElement.compile(characterStream);
         ShuntingYardStack stack = new ShuntingYardStack();

@@ -2,15 +2,12 @@ package com.teamdev.calculator.impl;
 
 import com.teamdev.calculator.Calculator;
 import com.teamdev.calculator.CompilerFactoryImpl;
-import com.teamdev.calculator.compiler.CompilerFactory;
 import com.teamdev.calculator.compiler.ElementCompiler;
 import com.teamdev.calculator.compiler.InputCharacterStream;
-import com.teamdev.calculator.compiler.TypeOfExpressionElement;
-import com.teamdev.calculator.runtime.Command;
+import com.teamdev.calculator.runtime.command.Command;
 import com.teamdev.calculator.runtime.ShuntingYardStack;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.impl.Log4jLoggerAdapter;
 
 import java.util.Optional;
 
@@ -19,8 +16,9 @@ import static com.teamdev.calculator.compiler.TypeOfExpressionElement.EXPRESSION
 /**
  * This is standard implementation of {@link Calculator calculator API}
  */
+@SuppressWarnings("ClassWithTooManyTransitiveDependencies")
 public class CalculatorImpl implements Calculator {
-    private final Logger logger = (Log4jLoggerAdapter) LoggerFactory.getLogger(CompilerFactoryImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(CompilerFactoryImpl.class);
 
     @Override
     public Optional<Double> calculate(String inputChain) {

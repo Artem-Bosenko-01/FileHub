@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+@SuppressWarnings("ClassWithTooManyTransitiveDependencies")
 class PositiveBracketsExpressionTest {
 
 

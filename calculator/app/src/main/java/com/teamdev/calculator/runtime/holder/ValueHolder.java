@@ -1,9 +1,10 @@
 package com.teamdev.calculator.runtime.holder;
 
+@SuppressWarnings({"ClassWithTooManyTransitiveDependents", "ClassWithTooManyDependents"})
 public abstract class ValueHolder <T>{
     private final T value;
 
-    public ValueHolder(T value) {
+    protected ValueHolder(T value) {
         this.value = value;
     }
 

@@ -1,19 +1,19 @@
 package com.teamdev.calculator.runtime.functions;
 
-import com.teamdev.calculator.runtime.Function;
 import com.teamdev.calculator.runtime.holder.ValueHolder;
 
 import java.util.List;
 import java.util.Optional;
 
-public class PiFunc extends Function {
+@SuppressWarnings("ClassWithTooManyTransitiveDependents")
+public class PiFunc implements Function {
     public PiFunc() {
-        super("pi");
+        super();
     }
 
     @Override
     public Optional<Double> apply(List<ValueHolder<?>> arguments) {
-        if(arguments.isEmpty()) return Optional.of(3.14159);
+        if(arguments.isEmpty()) return Optional.of(StrictMath.PI);
         else return Optional.empty();
     }
 }

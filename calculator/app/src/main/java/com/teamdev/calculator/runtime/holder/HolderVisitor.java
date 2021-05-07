@@ -1,5 +1,6 @@
 package com.teamdev.calculator.runtime.holder;
 
+@SuppressWarnings("ClassWithTooManyTransitiveDependents")
 public class HolderVisitor {
     private boolean isExist = false;
 

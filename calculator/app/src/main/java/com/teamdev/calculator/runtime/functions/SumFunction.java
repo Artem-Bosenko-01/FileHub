@@ -1,14 +1,14 @@
 package com.teamdev.calculator.runtime.functions;
 
-import com.teamdev.calculator.runtime.Function;
 import com.teamdev.calculator.runtime.holder.ValueHolder;
 
 import java.util.List;
 import java.util.Optional;
 
-public class SumFunction extends Function {
+@SuppressWarnings("ClassWithTooManyTransitiveDependents")
+public class SumFunction implements Function {
     public SumFunction() {
-        super("sum");
+        super();
     }
 
     @Override

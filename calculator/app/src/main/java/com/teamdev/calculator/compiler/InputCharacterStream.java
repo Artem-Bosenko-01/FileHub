@@ -3,6 +3,7 @@ package com.teamdev.calculator.compiler;
 /**
  *This is stream, that convert string to character stream using pointer
  * */
+@SuppressWarnings({"ClassWithTooManyTransitiveDependents", "ClassWithTooManyDependents"})
 public class InputCharacterStream {
     private final String sentence;
     private int pointer;

@@ -2,14 +2,16 @@ package com.teamdev.booby.runtime;
 
 import com.teamdev.calculator.runtime.holder.ValueHolder;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 
+@SuppressWarnings({"ClassWithTooManyTransitiveDependents", "ClassWithTooManyDependents"})
 public class RuntimeEnvironment implements Cloneable {
     private final Map<String, ValueHolder<?>> variables;
 
-    private static RuntimeEnvironment instance;
+    private static RuntimeEnvironment instance = null;
 
     private RuntimeEnvironment(){
         variables = new HashMap<>();
@@ -29,12 +31,8 @@ public class RuntimeEnvironment implements Cloneable {
         return variables.get(symbol);
     }
 
-    public Map<String, ValueHolder<?>> getVariables() {
-        return variables;
-    }
-
-    public void clone(RuntimeEnvironment environment){
-        variables.putAll(environment.getVariables());
+    private Map<String, ValueHolder<?>> getVariables() {
+        return Collections.unmodifiableMap(variables);
     }
 
 }

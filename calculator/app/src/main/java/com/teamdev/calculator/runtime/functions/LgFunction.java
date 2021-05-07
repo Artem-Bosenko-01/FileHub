@@ -1,18 +1,18 @@
 package com.teamdev.calculator.runtime.functions;
 
-import com.teamdev.calculator.runtime.Function;
 import com.teamdev.calculator.runtime.holder.ValueHolder;
 
 import java.util.List;
 import java.util.Optional;
 
-public class LgFunction extends Function {
+@SuppressWarnings("ClassWithTooManyTransitiveDependents")
+public class LgFunction implements Function {
     public LgFunction() {
-        super("log10");
+        super();
     }
 
     @Override
     public Optional<Double> apply(List<ValueHolder<?>> arguments) {
-        return Optional.of(Math.log10((Double) arguments.get(0).getValue()));
+        return Optional.of(StrictMath.log10((Double) arguments.get(0).getValue()));
     }
 }

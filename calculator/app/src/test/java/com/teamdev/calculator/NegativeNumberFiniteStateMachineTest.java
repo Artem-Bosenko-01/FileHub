@@ -2,8 +2,8 @@ package com.teamdev.calculator;
 
 import com.teamdev.calculator.compiler.InputCharacterStream;
 import com.teamdev.calculator.compiler.TypeOfExpressionElement;
-import com.teamdev.calculator.compiler.fsm.exception.InvalidSymbolException;
-import com.teamdev.calculator.runtime.Command;
+import com.teamdev.calculator.compiler.exception.InvalidSymbolException;
+import com.teamdev.calculator.runtime.command.Command;
 import com.teamdev.calculator.runtime.ShuntingYardStack;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,6 +13,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+@SuppressWarnings("ClassWithTooManyTransitiveDependencies")
 class NegativeNumberFiniteStateMachineTest {
 
     static Stream<Arguments> negativeNumberExpression(){

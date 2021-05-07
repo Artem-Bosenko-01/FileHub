@@ -1,24 +1,28 @@
 package com.teamdev.calculator.runtime.functions;
 
-import com.teamdev.calculator.runtime.Function;
 import com.teamdev.calculator.runtime.holder.ValueHolder;
-import com.teamdev.calculator.runtime.holder.doubletype.DoubleVisitor;
+import com.teamdev.calculator.runtime.holder.value.DoubleVisitor;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
-public class MaxFunction extends Function {
+@SuppressWarnings("ClassWithTooManyTransitiveDependents")
+public class MaxFunction implements Function {
     public MaxFunction() {
-        super("max");
+        super();
     }
 
     @Override
     public Optional<Double> apply(List<ValueHolder<?>> arguments) {
         DoubleVisitor visitor = new DoubleVisitor();
-        ValueHolder<?> holder = arguments.stream().max(Comparator.comparingDouble(visitor::getDoubleValue)).get();
+        ValueHolder<?> holder = arguments.stream()
+                .max(Comparator.comparingDouble(arg -> visitor.getDoubleValue(arg).get()))
+                .orElse(null);
 
-        return Optional.of(visitor.getDoubleValue(holder));
+        if (holder != null) {
+            return visitor.getDoubleValue(holder);
+        }
+        return Optional.empty();
     }
 }

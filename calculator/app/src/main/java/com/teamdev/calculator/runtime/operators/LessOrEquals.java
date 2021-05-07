@@ -1,8 +1,7 @@
 package com.teamdev.calculator.runtime.operators;
 
-import com.teamdev.calculator.runtime.Operator;
 import com.teamdev.calculator.runtime.holder.ValueHolder;
-import com.teamdev.calculator.runtime.holder.booleantype.BooleanValueHolder;
+import com.teamdev.calculator.runtime.holder.value.BooleanValueHolder;
 
 public class LessOrEquals implements Operator {
 

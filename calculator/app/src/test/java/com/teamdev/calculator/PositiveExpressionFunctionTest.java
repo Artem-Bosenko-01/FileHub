@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+@SuppressWarnings("ClassWithTooManyTransitiveDependencies")
 class PositiveExpressionFunctionTest {
     static Stream<Arguments> positiveExpression(){
         return Stream.of(
@@ -22,8 +23,8 @@ class PositiveExpressionFunctionTest {
                 Arguments.of(5,"avg(max(2,3),7)"),
                 Arguments.of(7,"max(1,5,6,7)"),
                 Arguments.of(15,"sum(min(1*3,5),5,7)"),
-                Arguments.of(3.14159,"pi()"),
-                Arguments.of(6.14159,"sum(min(1*3,5),pi())")
+                Arguments.of(3.141592653589793,"pi()"),
+                Arguments.of(6.141592653589793,"sum(min(1*3,5),pi())")
         );
     }
 

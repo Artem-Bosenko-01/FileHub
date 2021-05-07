@@ -1,6 +1,7 @@
 package com.teamdev.calculator.runtime;
 
 import com.teamdev.calculator.runtime.holder.ValueHolder;
+import com.teamdev.calculator.runtime.operators.Operator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,6 +12,7 @@ import java.util.Optional;
 /**
  * This is <a href="https://en.wikipedia.org/wiki/Stack_(abstract_data_type)">stack</a>, that implement <a href="https://en.wikipedia.org/wiki/Shunting-yard_algorithm">Shunting-yard algorithm</a>
  * */
+@SuppressWarnings({"ClassWithTooManyTransitiveDependents", "ClassWithTooManyDependents"})
 public class ShuntingYardStack implements Cloneable{
 
     private final Logger logger = LoggerFactory.getLogger(ShuntingYardStack.class);
@@ -33,12 +35,6 @@ public class ShuntingYardStack implements Cloneable{
                pushOperator(binaryOperator);
             }
         }else operators.push(binaryOperator);
-    }
-
-    public void clone(ShuntingYardStack stack){
-        logger.info("Start clone function with " + stack.toString());
-        operands.addAll(stack.operands);
-        operators.addAll(stack.operators);
     }
 
     public Optional<ValueHolder<?>> peekOperand(){

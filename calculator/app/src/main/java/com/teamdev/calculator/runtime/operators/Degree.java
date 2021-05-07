@@ -1,12 +1,12 @@
 package com.teamdev.calculator.runtime.operators;
 
-import com.teamdev.calculator.runtime.Operator;
 import com.teamdev.calculator.runtime.holder.ValueHolder;
-import com.teamdev.calculator.runtime.holder.doubletype.DoubleValueHolder;
+import com.teamdev.calculator.runtime.holder.value.DoubleValueHolder;
 
 /**
  * Note: this class has a natural ordering that is inconsistent with equals.
  */
+@SuppressWarnings("ClassWithTooManyTransitiveDependents")
 public class Degree implements Operator {
     @Override
     public int getPriority() {
@@ -19,8 +19,4 @@ public class Degree implements Operator {
     }
 
 
-    @Override
-    public int compareTo(Operator o) {
-         return Integer.compare(this.getPriority(), o.getPriority());
-    }
 }

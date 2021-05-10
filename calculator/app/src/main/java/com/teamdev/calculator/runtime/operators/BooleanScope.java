@@ -9,7 +9,6 @@ public class BooleanScope {
     private final List<Double> operands = new ArrayList<>();
     private Operator operator;
 
-
     public void addOperand(Double operand) {
         operands.add(operand);
     }

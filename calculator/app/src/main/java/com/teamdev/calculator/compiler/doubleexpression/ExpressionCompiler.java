@@ -1,9 +1,9 @@
 package com.teamdev.calculator.compiler.doubleexpression;
 
+import com.teamdev.calculator.impl.CompilerFactoryImpl;
 import com.teamdev.calculator.compiler.CompilerFactory;
 import com.teamdev.calculator.compiler.ElementCompiler;
 import com.teamdev.calculator.compiler.InputCharacterStream;
-import com.teamdev.calculator.compiler.TypeOfExpressionElement;
 import com.teamdev.calculator.runtime.command.Command;
 import com.teamdev.calculator.runtime.command.OperandCommand;
 import com.teamdev.calculator.runtime.ShuntingYardStack;
@@ -16,9 +16,9 @@ import java.util.Optional;
 public class ExpressionCompiler implements ElementCompiler<ShuntingYardStack> {
 
     private final Logger logger = LoggerFactory.getLogger(ExpressionCompiler.class);
-    private final CompilerFactory<TypeOfExpressionElement, ShuntingYardStack> compilerFactory;
+    private final CompilerFactory<ShuntingYardStack> compilerFactory;
 
-    public ExpressionCompiler(CompilerFactory<TypeOfExpressionElement, ShuntingYardStack> compilerFactory) {
+    public ExpressionCompiler(CompilerFactoryImpl compilerFactory) {
         this.compilerFactory = compilerFactory;
     }
 

@@ -1,4 +1,4 @@
 /**
- * This is calculator application
+ * This is calculator application package.
  * */
 package com.teamdev.calculator;

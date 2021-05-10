@@ -22,9 +22,9 @@ import java.util.Optional;
 @SuppressWarnings({"ClassWithTooManyTransitiveDependents", "ClassWithTooManyTransitiveDependencies"})
 public class ExpressionArgumentState extends State<FunctionScope> {
     private final Logger logger = LoggerFactory.getLogger(ExpressionArgumentState.class);
-    private final CompilerFactory<TypeOfExpressionElement, ShuntingYardStack> compilerFactory;
+    private final CompilerFactory<ShuntingYardStack> compilerFactory;
 
-    public ExpressionArgumentState(CompilerFactory<TypeOfExpressionElement, ShuntingYardStack> compilerFactory) {
+    public ExpressionArgumentState(CompilerFactory<ShuntingYardStack> compilerFactory) {
         this.compilerFactory = compilerFactory;
     }
 

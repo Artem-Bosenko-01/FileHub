@@ -29,7 +29,7 @@ public class OperandFiniteStateMachine extends FiniteStateMachine<ShuntingYardSt
     private final FunctionState functionState;
 
 
-    public OperandFiniteStateMachine(CompilerFactory<TypeOfExpressionElement, ShuntingYardStack> compilerFactory){
+    public OperandFiniteStateMachine(CompilerFactory<ShuntingYardStack> compilerFactory){
         Logger logger = LoggerFactory.getLogger(OperandFiniteStateMachine.class);
         logger.info("Create Operand FSM");
 

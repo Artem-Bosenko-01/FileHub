@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * This command calculate result of the specific {@link Command function}
+ * This command calculate result of the specific {@link Function function}.
  * */
 @SuppressWarnings("ClassWithTooManyTransitiveDependents")
 public class FunctionCommand implements Command<ShuntingYardStack>{

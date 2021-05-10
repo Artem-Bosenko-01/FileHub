@@ -4,6 +4,7 @@ import com.teamdev.calculator.compiler.InputCharacterStream;
 import com.teamdev.calculator.compiler.TypeOfExpressionElement;
 import com.teamdev.calculator.compiler.exception.InvalidSymbolException;
 import com.teamdev.calculator.compiler.exception.NotExistPairBracketException;
+import com.teamdev.calculator.impl.CompilerFactoryImpl;
 import com.teamdev.calculator.runtime.command.Command;
 import com.teamdev.calculator.runtime.ShuntingYardStack;
 import org.junit.jupiter.api.Assertions;

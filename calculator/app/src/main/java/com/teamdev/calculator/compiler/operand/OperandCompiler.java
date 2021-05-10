@@ -17,9 +17,9 @@ import java.util.Optional;
 public class OperandCompiler implements ElementCompiler<ShuntingYardStack> {
 
     private final Logger logger = LoggerFactory.getLogger(OperandCompiler.class);
-    private final CompilerFactory<TypeOfExpressionElement, ShuntingYardStack> compilerFactory;
+    private final CompilerFactory<ShuntingYardStack> compilerFactory;
 
-    public OperandCompiler(CompilerFactory<TypeOfExpressionElement, ShuntingYardStack> compilerFactory) {
+    public OperandCompiler(CompilerFactory<ShuntingYardStack> compilerFactory) {
         this.compilerFactory = compilerFactory;
     }
 

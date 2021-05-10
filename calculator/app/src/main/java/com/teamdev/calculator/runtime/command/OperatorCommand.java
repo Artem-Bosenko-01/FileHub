@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * This is {@link Command command}, that generated after successful path transition from
- * {@link OperatorState operator state}
+ * {@link OperatorState operator state}.
  * */
 @SuppressWarnings("ClassWithTooManyTransitiveDependents")
 public class OperatorCommand implements Command<ShuntingYardStack>{

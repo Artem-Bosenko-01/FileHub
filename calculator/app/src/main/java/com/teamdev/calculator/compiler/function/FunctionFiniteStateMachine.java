@@ -24,7 +24,7 @@ public class FunctionFiniteStateMachine extends FiniteStateMachine<FunctionScope
     private final NameState nameState = new NameState();
     private final CloseBracketState<FunctionScope> closeBracketState = new CloseBracketState<>();
 
-    public FunctionFiniteStateMachine(CompilerFactory<TypeOfExpressionElement, ShuntingYardStack> compilerFactory) {
+    public FunctionFiniteStateMachine(CompilerFactory<ShuntingYardStack> compilerFactory) {
         Logger logger = LoggerFactory.getLogger(FunctionFiniteStateMachine.class);
         logger.info("Start Function FSM");
 

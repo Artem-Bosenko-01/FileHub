@@ -15,9 +15,9 @@ import java.util.Optional;
 
 @SuppressWarnings("ClassWithTooManyTransitiveDependencies")
 public class BooleanOperandState extends State<BooleanScope> {
-    private final CompilerFactory<TypeOfExpressionElement, ShuntingYardStack> compilerFactory;
+    private final CompilerFactory<ShuntingYardStack> compilerFactory;
 
-    public BooleanOperandState(CompilerFactory<TypeOfExpressionElement, ShuntingYardStack> compilerFactory) {
+    public BooleanOperandState(CompilerFactory<ShuntingYardStack> compilerFactory) {
         this.compilerFactory = compilerFactory;
     }
 

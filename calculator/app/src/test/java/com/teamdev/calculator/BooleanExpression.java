@@ -2,6 +2,7 @@ package com.teamdev.calculator;
 
 import com.teamdev.calculator.compiler.InputCharacterStream;
 import com.teamdev.calculator.compiler.booleanexpression.BooleanExpressionFiniteStateMachine;
+import com.teamdev.calculator.impl.CompilerFactoryImpl;
 import com.teamdev.calculator.runtime.operators.BooleanScope;
 import com.teamdev.calculator.runtime.operators.Operator;
 import com.teamdev.calculator.runtime.holder.ValueHolder;

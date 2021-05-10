@@ -6,6 +6,6 @@ package com.teamdev.calculator.compiler;
  * to create {@link ElementCompiler one of element compiler}
  * */
 @SuppressWarnings({"ClassWithTooManyTransitiveDependents", "ClassWithTooManyDependents"})
-public interface CompilerFactory<TYPE, RESULT> {
-    ElementCompiler<RESULT> create(TYPE type);
+public interface CompilerFactory<RESULT> {
+    ElementCompiler<RESULT> create(TypeOfExpressionElement type);
 }

@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * This is parser for one type of {@link Function functions} and list of arguments for this function
+ * This is parser for one type of {@link Function functions} and list of arguments for this function.
  * */
 @SuppressWarnings("ClassWithTooManyTransitiveDependents")
 public class FunctionScope implements Cloneable {

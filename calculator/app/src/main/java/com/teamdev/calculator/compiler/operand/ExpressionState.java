@@ -14,15 +14,15 @@ import java.util.Optional;
 
 /**
  *This state compile {@link ExpressionCompiler expression compiler}
- * and push command for {@link ShuntingYardStack stack} in {@link OperandFiniteStateMachine operand FSM}
+ * and push command for {@link ShuntingYardStack stack} in {@link OperandFiniteStateMachine operand FSM}.
  * */
 @SuppressWarnings({"ClassWithTooManyTransitiveDependents", "ClassWithTooManyTransitiveDependencies"})
 public class ExpressionState extends State<ShuntingYardStack> {
 
     private final Logger logger = LoggerFactory.getLogger(ExpressionState.class);
-    private final CompilerFactory<TypeOfExpressionElement, ShuntingYardStack> compilerFactory;
+    private final CompilerFactory<ShuntingYardStack> compilerFactory;
 
-    public ExpressionState(CompilerFactory<TypeOfExpressionElement, ShuntingYardStack> compilerFactory) {
+    public ExpressionState(CompilerFactory<ShuntingYardStack> compilerFactory) {
         this.compilerFactory = compilerFactory;
     }
 

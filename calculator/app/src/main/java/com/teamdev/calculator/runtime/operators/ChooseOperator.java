@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *This utility-class is used to detects {@link Operator binary operator} for an incoming character
+ *This utility-class is used to detects {@link Operator binary operator} for an incoming character.
  * */
 @SuppressWarnings("ClassWithTooManyTransitiveDependents")
 public final class ChooseOperator {

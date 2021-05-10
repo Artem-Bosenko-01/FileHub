@@ -1,4 +1,4 @@
-package com.teamdev.calculator;
+package com.teamdev.calculator.impl;
 
 import com.teamdev.calculator.compiler.TypeOfExpressionElement;
 import com.teamdev.calculator.compiler.ElementCompiler;
@@ -12,11 +12,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This is standard implementation, that return type of {@link ElementCompiler compiler} for appropriate
- * {@link TypeOfExpressionElement type of expression}
+ * This is implementation compiler factory for {@link com.teamdev.calculator.Calculator},
+ * that return type of {@link ElementCompiler compiler} for appropriate
+ * {@link TypeOfExpressionElement type of expression}.
  * */
 @SuppressWarnings({"ClassWithTooManyTransitiveDependents", "ClassWithTooManyTransitiveDependencies"})
-public class CompilerFactoryImpl implements CompilerFactory<TypeOfExpressionElement, ShuntingYardStack> {
+public class CompilerFactoryImpl implements CompilerFactory<ShuntingYardStack> {
     private static final Logger logger = LoggerFactory.getLogger(CompilerFactoryImpl.class);
 
     @Override

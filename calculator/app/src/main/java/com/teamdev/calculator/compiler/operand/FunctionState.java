@@ -14,14 +14,14 @@ import java.util.Optional;
 
 /**
  *This state returns a command for {@link ShuntingYardStack stack} as a result of compiling the
- * {@link FunctionCompiler function compiler} in {@link OperandFiniteStateMachine operand FSM}
+ * {@link FunctionCompiler function compiler} in {@link OperandFiniteStateMachine operand FSM}.
  * */
 @SuppressWarnings({"ClassWithTooManyTransitiveDependents", "ClassWithTooManyTransitiveDependencies"})
 public class FunctionState extends State<ShuntingYardStack> {
     private final Logger logger = LoggerFactory.getLogger(FunctionState.class);
-    private final CompilerFactory<TypeOfExpressionElement, ShuntingYardStack> compilerFactory;
+    private final CompilerFactory<ShuntingYardStack> compilerFactory;
 
-    public FunctionState(CompilerFactory<TypeOfExpressionElement, ShuntingYardStack> compilerFactory) {
+    public FunctionState(CompilerFactory<ShuntingYardStack> compilerFactory) {
         this.compilerFactory = compilerFactory;
     }
 

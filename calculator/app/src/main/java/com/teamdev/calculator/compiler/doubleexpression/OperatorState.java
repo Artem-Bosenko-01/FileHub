@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 
 /**
  *This state compile {@link OperatorCommand operator command} for {@link ShuntingYardStack stack}
- * in {@link ExpressionFiniteStateMachine expression FSM} if input symbol equals to one of {@link #matcher operator}
+ * in {@link ExpressionFiniteStateMachine expression FSM} if input symbol equals to one of {@link #matcher operator}.
  * */
 @SuppressWarnings("ClassWithTooManyTransitiveDependents")
 public class OperatorState extends State<ShuntingYardStack> {

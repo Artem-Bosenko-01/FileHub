@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * This is {@link Command command}, that generated after compiling by
- * {@link OperandCompiler operand compiler}
+ * {@link OperandCompiler operand compiler}.
  * */
 @SuppressWarnings("ClassWithTooManyTransitiveDependents")
 public class OperandCommand implements Command<ShuntingYardStack>{

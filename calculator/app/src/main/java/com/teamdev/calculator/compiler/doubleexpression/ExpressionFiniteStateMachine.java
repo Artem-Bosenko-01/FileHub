@@ -12,13 +12,13 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- *This is {@link FiniteStateMachine machine}, that used to detect two operands with binary operator
+ *This is {@link FiniteStateMachine machine}, that used to detect two operands with binary operator.
  * */
 @SuppressWarnings({"ClassWithTooManyTransitiveDependents", "ClassWithTooManyTransitiveDependencies"})
 public class ExpressionFiniteStateMachine extends FiniteStateMachine<ShuntingYardStack> {
     private final OperandState operand;
 
-    public ExpressionFiniteStateMachine(CompilerFactory<TypeOfExpressionElement, ShuntingYardStack> compilerFactory) {
+    public ExpressionFiniteStateMachine(CompilerFactory<ShuntingYardStack> compilerFactory) {
         Logger logger = LoggerFactory.getLogger(ExpressionFiniteStateMachine.class);
         logger.info("Create Expression FSM");
 

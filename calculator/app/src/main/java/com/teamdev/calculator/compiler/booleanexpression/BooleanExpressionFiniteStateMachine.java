@@ -16,7 +16,7 @@ public class BooleanExpressionFiniteStateMachine extends FiniteStateMachine<Bool
     private final BooleanOperandState leftOperandState;
     private final BooleanOperandState rightOperandState;
 
-    public BooleanExpressionFiniteStateMachine(CompilerFactory<TypeOfExpressionElement, ShuntingYardStack> compilerFactory) {
+    public BooleanExpressionFiniteStateMachine(CompilerFactory<ShuntingYardStack> compilerFactory) {
 
         BooleanOperatorState operatorState = new BooleanOperatorState();
         leftOperandState = new BooleanOperandState(compilerFactory);

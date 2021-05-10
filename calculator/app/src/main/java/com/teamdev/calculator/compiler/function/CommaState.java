@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * This is comma state, that extends {@link State basic state}
- * This class are used to define comma symbol state in {@link FunctionFiniteStateMachine function FSM}
+ * This class are used to define comma symbol state in {@link FunctionFiniteStateMachine function FSM}.
  * */
 @SuppressWarnings("ClassWithTooManyTransitiveDependents")
 public class CommaState extends State<FunctionScope> {

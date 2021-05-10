@@ -14,15 +14,15 @@ import java.util.Optional;
 
 /**
  *This state returns a command for {@link ShuntingYardStack stack} as a result of compiling the
- * {@link NumberCompiler number compiler} in {@link OperandFiniteStateMachine operand FSM}
+ * {@link NumberCompiler number compiler} in {@link OperandFiniteStateMachine operand FSM}.
  * */
 @SuppressWarnings({"ClassWithTooManyTransitiveDependents", "ClassWithTooManyTransitiveDependencies"})
 public class NumberState extends State<ShuntingYardStack> {
 
     private final Logger logger = LoggerFactory.getLogger(NumberState.class);
-    private final CompilerFactory<TypeOfExpressionElement, ShuntingYardStack> compilerFactory;
+    private final CompilerFactory<ShuntingYardStack> compilerFactory;
 
-    public NumberState(CompilerFactory<TypeOfExpressionElement, ShuntingYardStack> compilerFactory) {
+    public NumberState(CompilerFactory<ShuntingYardStack> compilerFactory) {
         this.compilerFactory = compilerFactory;
     }
 

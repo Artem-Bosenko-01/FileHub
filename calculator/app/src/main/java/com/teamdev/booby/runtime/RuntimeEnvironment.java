@@ -6,9 +6,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ *
+ * */
 @SuppressWarnings({"ClassWithTooManyTransitiveDependents", "ClassWithTooManyDependents"})
-public class RuntimeEnvironment implements Cloneable {
+public class RuntimeEnvironment{
     private final Map<String, ValueHolder<?>> variables;
 
     private static RuntimeEnvironment instance = null;

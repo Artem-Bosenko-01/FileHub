@@ -1,7 +1,6 @@
 package com.teamdev.calculator.impl;
 
 import com.teamdev.calculator.Calculator;
-import com.teamdev.calculator.CompilerFactoryImpl;
 import com.teamdev.calculator.compiler.ElementCompiler;
 import com.teamdev.calculator.compiler.InputCharacterStream;
 import com.teamdev.calculator.runtime.command.Command;
@@ -14,7 +13,7 @@ import java.util.Optional;
 import static com.teamdev.calculator.compiler.TypeOfExpressionElement.EXPRESSION;
 
 /**
- * This is standard implementation of {@link Calculator calculator API}
+ * This is implementation for {@link Calculator calculator} of {@link Calculator calculator API}.
  */
 @SuppressWarnings("ClassWithTooManyTransitiveDependencies")
 public class CalculatorImpl implements Calculator {

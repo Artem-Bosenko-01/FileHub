@@ -1,4 +1,4 @@
 /**
- *This package contains compiler <a href="https://en.wikipedia.org/wiki/API">API</a>
+ *This package contains compiler for <a href="https://en.wikipedia.org/wiki/API">API</a>
  * */
 package com.teamdev.calculator.compiler;

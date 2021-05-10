@@ -13,13 +13,16 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
+/**
+ * This is compiler for {@link FunctionFiniteStateMachine}.
+ * */
 @SuppressWarnings({"ClassWithTooManyTransitiveDependents", "ClassWithTooManyTransitiveDependencies"})
 public class FunctionCompiler implements ElementCompiler<ShuntingYardStack> {
 
     private final Logger logger = LoggerFactory.getLogger(FunctionCompiler.class);
-    private final CompilerFactory<TypeOfExpressionElement, ShuntingYardStack> compilerFactory;
+    private final CompilerFactory<ShuntingYardStack> compilerFactory;
 
-    public FunctionCompiler(CompilerFactory<TypeOfExpressionElement, ShuntingYardStack> compilerFactory) {
+    public FunctionCompiler(CompilerFactory<ShuntingYardStack> compilerFactory) {
         this.compilerFactory = compilerFactory;
     }
 

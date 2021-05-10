@@ -6,7 +6,7 @@ import java.util.Optional;
 
 /**
  *This is compiler, that creates {@link Command command} as a result of execute
- * {@link FiniteStateMachine one of machine}
+ * {@link FiniteStateMachine one of machine}.
  * */
 @SuppressWarnings({"ClassWithTooManyTransitiveDependents", "ClassWithTooManyDependents"})
 public interface ElementCompiler<T> {

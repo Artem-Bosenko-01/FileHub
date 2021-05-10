@@ -1,13 +1,12 @@
 package com.teamdev.calculator.runtime.functions;
 
 import com.teamdev.booby.runtime.Println;
-import com.teamdev.calculator.runtime.functions.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This is factory, that stores a variety of possible {@link Function functions}
+ * This is factory, that stores a variety of possible {@link Function functions}.
  * */
 @SuppressWarnings({"ClassWithTooManyTransitiveDependents", "ClassWithTooManyDependencies"})
 final class FunctionFactory {

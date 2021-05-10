@@ -13,7 +13,7 @@ import java.util.Optional;
  * This is <a href="https://en.wikipedia.org/wiki/Stack_(abstract_data_type)">stack</a>, that implement <a href="https://en.wikipedia.org/wiki/Shunting-yard_algorithm">Shunting-yard algorithm</a>
  * */
 @SuppressWarnings({"ClassWithTooManyTransitiveDependents", "ClassWithTooManyDependents"})
-public class ShuntingYardStack implements Cloneable{
+public class ShuntingYardStack{
 
     private final Logger logger = LoggerFactory.getLogger(ShuntingYardStack.class);
     private final Deque<Operator> operators = new ArrayDeque<>();

@@ -6,6 +6,7 @@ import com.teamdev.calculator.compiler.State;
 import java.util.Collections;
 import java.util.List;
 
+@SuppressWarnings("ClassWithTooManyTransitiveDependents")
 public class UnaryOperatorFSM extends FiniteStateMachine<StringBuilder> {
 
     private final DoubleOperatorSymbolState operatorSymbolState = new DoubleOperatorSymbolState();

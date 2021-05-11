@@ -3,7 +3,6 @@ package com.teamdev.calculator.compiler.function;
 import com.teamdev.calculator.compiler.CompilerFactory;
 import com.teamdev.calculator.compiler.ElementCompiler;
 import com.teamdev.calculator.compiler.InputCharacterStream;
-import com.teamdev.calculator.compiler.TypeOfExpressionElement;
 import com.teamdev.calculator.runtime.command.Command;
 import com.teamdev.calculator.runtime.command.FunctionCommand;
 import com.teamdev.calculator.runtime.functions.FunctionScope;

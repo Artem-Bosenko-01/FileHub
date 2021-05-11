@@ -1,5 +1,6 @@
 package com.teamdev.booby.runtime;
 
+@SuppressWarnings("ClassWithTooManyTransitiveDependents")
 public class UnaryOperatorOutputChain {
     private UnaryOperator unaryOperator;
     private Double operand;

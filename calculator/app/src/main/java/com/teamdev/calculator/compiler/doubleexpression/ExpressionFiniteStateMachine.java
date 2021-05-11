@@ -3,7 +3,6 @@ package com.teamdev.calculator.compiler.doubleexpression;
 import com.teamdev.calculator.compiler.CompilerFactory;
 import com.teamdev.calculator.compiler.FiniteStateMachine;
 import com.teamdev.calculator.compiler.State;
-import com.teamdev.calculator.compiler.TypeOfExpressionElement;
 import com.teamdev.calculator.runtime.ShuntingYardStack;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

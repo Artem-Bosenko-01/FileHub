@@ -2,7 +2,6 @@ package com.teamdev.booby.compiler.variable;
 
 import com.teamdev.calculator.compiler.CompilerFactory;
 import com.teamdev.calculator.compiler.InputCharacterStream;
-import com.teamdev.calculator.compiler.TypeOfExpressionElement;
 import com.teamdev.calculator.compiler.State;
 import com.teamdev.calculator.compiler.booleanexpression.BooleanExpressionFiniteStateMachine;
 import com.teamdev.calculator.runtime.operators.BooleanScope;

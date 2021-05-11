@@ -1,7 +1,6 @@
 package com.teamdev.calculator.compiler.booleanexpression;
 
 import com.teamdev.calculator.compiler.CompilerFactory;
-import com.teamdev.calculator.compiler.TypeOfExpressionElement;
 import com.teamdev.calculator.compiler.FiniteStateMachine;
 import com.teamdev.calculator.compiler.State;
 import com.teamdev.calculator.runtime.operators.BooleanScope;

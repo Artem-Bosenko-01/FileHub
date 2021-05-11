@@ -3,8 +3,6 @@ package com.teamdev.booby.runtime;
 import com.teamdev.calculator.runtime.ShuntingYardStack;
 import com.teamdev.calculator.runtime.command.Command;
 
-import java.util.List;
-
 public class ForOutputChain {
 
     private Command<RuntimeEnvironment> initLoopCommand;

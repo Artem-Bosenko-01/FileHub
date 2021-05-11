@@ -18,7 +18,7 @@ public class ExpressionCompiler implements ElementCompiler<ShuntingYardStack> {
     private final Logger logger = LoggerFactory.getLogger(ExpressionCompiler.class);
     private final CompilerFactory<ShuntingYardStack> compilerFactory;
 
-    public ExpressionCompiler(CompilerFactoryImpl compilerFactory) {
+    public ExpressionCompiler(CompilerFactory<ShuntingYardStack> compilerFactory) {
         this.compilerFactory = compilerFactory;
     }
 

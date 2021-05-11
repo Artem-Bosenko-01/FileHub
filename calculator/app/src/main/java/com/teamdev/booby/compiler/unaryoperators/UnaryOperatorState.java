@@ -4,6 +4,7 @@ import com.teamdev.booby.runtime.UnaryOperatorOutputChain;
 import com.teamdev.calculator.compiler.InputCharacterStream;
 import com.teamdev.calculator.compiler.State;
 
+@SuppressWarnings("ClassWithTooManyTransitiveDependents")
 public class UnaryOperatorState extends State<UnaryOperatorOutputChain> {
 
     @Override

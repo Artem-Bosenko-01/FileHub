@@ -9,6 +9,7 @@ import com.teamdev.calculator.compiler.State;
 import java.util.Collections;
 import java.util.List;
 
+@SuppressWarnings("ClassWithTooManyTransitiveDependents")
 public class PostfixOperatorFiniteStateMachine extends FiniteStateMachine<UnaryOperatorOutputChain> {
 
     private final UnaryOperatorState unaryOperatorState = new UnaryOperatorState();

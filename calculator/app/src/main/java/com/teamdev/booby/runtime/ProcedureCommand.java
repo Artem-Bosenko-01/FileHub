@@ -17,5 +17,6 @@ public class ProcedureCommand implements Command<RuntimeEnvironment> {
     @Override
     public void execute(RuntimeEnvironment stack) {
         scope.getFunction().apply(scope.getArguments());
+
     }
 }

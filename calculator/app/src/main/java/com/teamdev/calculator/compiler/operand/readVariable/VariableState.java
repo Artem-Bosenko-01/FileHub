@@ -1,4 +1,4 @@
-package com.teamdev.calculator.compiler.operand;
+package com.teamdev.calculator.compiler.operand.readVariable;
 
 import com.teamdev.booby.runtime.RuntimeEnvironment;
 import com.teamdev.calculator.compiler.InputCharacterStream;
@@ -8,14 +8,12 @@ import com.teamdev.calculator.runtime.holder.ValueHolder;
 
 import java.util.regex.Pattern;
 
-@SuppressWarnings("ClassWithTooManyTransitiveDependents")
-public class SymbolState extends State<ShuntingYardStack> {
+public class VariableState extends State<ShuntingYardStack> {
 
     private final Pattern pattern = Pattern.compile("[a-zA-Z]");
 
     @Override
     public boolean tryTransition(InputCharacterStream characterStream, ShuntingYardStack builder) {
-
         RuntimeEnvironment environment = RuntimeEnvironment.getInstance();
 
         if (pattern.matcher(String.valueOf(characterStream.getCurrentSymbol())).matches()) {

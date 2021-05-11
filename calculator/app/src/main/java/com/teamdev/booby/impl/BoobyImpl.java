@@ -2,11 +2,9 @@ package com.teamdev.booby.impl;
 
 import com.teamdev.booby.Booby;
 import com.teamdev.booby.runtime.RuntimeEnvironment;
-import com.teamdev.calculator.Calculator;
 import com.teamdev.calculator.compiler.CompilerFactory;
 import com.teamdev.calculator.compiler.InputCharacterStream;
 import com.teamdev.calculator.compiler.TypeOfExpressionElement;
-import com.teamdev.calculator.impl.CompilerFactoryImpl;
 import com.teamdev.calculator.runtime.command.Command;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

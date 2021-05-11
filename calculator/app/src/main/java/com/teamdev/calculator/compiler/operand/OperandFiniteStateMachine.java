@@ -24,11 +24,8 @@ public class OperandFiniteStateMachine extends FiniteStateMachine<ShuntingYardSt
     private final NumberState numberState;
     private final OpenBracketState<ShuntingYardStack> openBracket = new OpenBracketState<>();
     private final CloseBracketState<ShuntingYardStack> closeBracket = new CloseBracketState<>();
-    private final SymbolState symbolState = new SymbolState();
+    private final ReadVariableState symbolState = new ReadVariableState();
     private final FunctionState functionState;
-    private final PrefixOperatorState prefixOperatorState = new PrefixOperatorState();
-    private final PostfixOperatorState postfixOperatorState = new PostfixOperatorState();
-
 
     public OperandFiniteStateMachine(CompilerFactory<ShuntingYardStack> compilerFactory){
         Logger logger = LoggerFactory.getLogger(OperandFiniteStateMachine.class);
@@ -44,11 +41,11 @@ public class OperandFiniteStateMachine extends FiniteStateMachine<ShuntingYardSt
 
     @Override
     public List<State<ShuntingYardStack>> getStartStates() {
-        return Arrays.asList(numberState, openBracket, functionState,postfixOperatorState,prefixOperatorState, symbolState );
+        return Arrays.asList(numberState, openBracket, functionState, symbolState );
     }
 
     @Override
     public List<State<ShuntingYardStack>> getFinishStates() {
-        return Arrays.asList(numberState, closeBracket, functionState, symbolState,postfixOperatorState,prefixOperatorState);
+        return Arrays.asList(numberState, closeBracket, functionState, symbolState);
     }
 }

@@ -18,7 +18,6 @@ import java.util.List;
 public class StatementFiniteStateMachine extends FiniteStateMachine<RuntimeEnvironment> {
     private final InitVariableState initVariableState;
     private final ProcedureState procedureState;
-    private final ForLoopState forLoopState = new ForLoopState();
     private final Logger logger = LoggerFactory.getLogger(StatementFiniteStateMachine.class);
 
     public StatementFiniteStateMachine(CompilerFactory<RuntimeEnvironment> compiler){
@@ -29,11 +28,11 @@ public class StatementFiniteStateMachine extends FiniteStateMachine<RuntimeEnvir
 
     @Override
     protected List<State<RuntimeEnvironment>> getStartStates() {
-        return Arrays.asList(forLoopState,initVariableState, procedureState);
+        return Arrays.asList(initVariableState, procedureState);
     }
 
     @Override
     protected List<State<RuntimeEnvironment>> getFinishStates() {
-        return Arrays.asList(forLoopState,initVariableState, procedureState);
+        return Arrays.asList(initVariableState, procedureState);
     }
 }

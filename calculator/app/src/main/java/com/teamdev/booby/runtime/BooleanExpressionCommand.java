@@ -2,7 +2,6 @@ package com.teamdev.booby.runtime;
 
 import com.teamdev.calculator.runtime.ShuntingYardStack;
 import com.teamdev.calculator.runtime.command.Command;
-import com.teamdev.calculator.runtime.command.OperandCommand;
 import com.teamdev.calculator.runtime.holder.value.DoubleValueHolder;
 import com.teamdev.calculator.runtime.operators.Operator;
 

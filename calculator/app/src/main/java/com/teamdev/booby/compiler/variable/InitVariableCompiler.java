@@ -1,13 +1,11 @@
 package com.teamdev.booby.compiler.variable;
 
 import com.teamdev.booby.compiler.statement.StatementCompiler;
-import com.teamdev.booby.compiler.statement.StatementFiniteStateMachine;
 import com.teamdev.booby.runtime.RuntimeEnvironment;
 import com.teamdev.booby.runtime.InitVariableResultCommand;
 import com.teamdev.calculator.compiler.CompilerFactory;
 import com.teamdev.calculator.compiler.ElementCompiler;
 import com.teamdev.calculator.compiler.InputCharacterStream;
-import com.teamdev.calculator.compiler.TypeOfExpressionElement;
 import com.teamdev.calculator.runtime.command.Command;
 import com.teamdev.calculator.runtime.ShuntingYardStack;
 import com.teamdev.calculator.runtime.holder.value.BooleanValueHolder;

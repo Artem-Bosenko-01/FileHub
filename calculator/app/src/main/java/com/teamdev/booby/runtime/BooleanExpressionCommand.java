@@ -8,9 +8,9 @@ import com.teamdev.calculator.runtime.operators.Operator;
 
 public class BooleanExpressionCommand implements Command<ShuntingYardStack> {
 
-    private final String leftOperand;
+    private final Double leftOperand;
     private final Operator operator;
-    private final String rightOperand;
+    private final Double rightOperand;
 
     public BooleanExpressionCommand(Double leftOperand, Operator operator, Double rightOperand) {
         this.leftOperand = leftOperand;

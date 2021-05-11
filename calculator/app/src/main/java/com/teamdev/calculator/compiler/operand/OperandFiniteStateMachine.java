@@ -1,7 +1,6 @@
 package com.teamdev.calculator.compiler.operand;
 
 import com.teamdev.calculator.compiler.CompilerFactory;
-import com.teamdev.calculator.compiler.TypeOfExpressionElement;
 import com.teamdev.calculator.compiler.FiniteStateMachine;
 import com.teamdev.calculator.compiler.State;
 import com.teamdev.calculator.compiler.doubleexpression.ExpressionFiniteStateMachine;
@@ -27,6 +26,8 @@ public class OperandFiniteStateMachine extends FiniteStateMachine<ShuntingYardSt
     private final CloseBracketState<ShuntingYardStack> closeBracket = new CloseBracketState<>();
     private final SymbolState symbolState = new SymbolState();
     private final FunctionState functionState;
+    private final PrefixOperatorState prefixOperatorState = new PrefixOperatorState();
+    private final PostfixOperatorState postfixOperatorState = new PostfixOperatorState();
 
 
     public OperandFiniteStateMachine(CompilerFactory<ShuntingYardStack> compilerFactory){
@@ -43,11 +44,11 @@ public class OperandFiniteStateMachine extends FiniteStateMachine<ShuntingYardSt
 
     @Override
     public List<State<ShuntingYardStack>> getStartStates() {
-        return Arrays.asList(numberState, openBracket, functionState, symbolState);
+        return Arrays.asList(numberState, openBracket, functionState,postfixOperatorState,prefixOperatorState, symbolState );
     }
 
     @Override
     public List<State<ShuntingYardStack>> getFinishStates() {
-        return Arrays.asList(numberState, closeBracket, functionState, symbolState);
+        return Arrays.asList(numberState, closeBracket, functionState, symbolState,postfixOperatorState,prefixOperatorState);
     }
 }

@@ -14,13 +14,15 @@ class PositiveInitVariableTest {
 
     static Stream<Arguments> positiveInitVariable(){
         return Stream.of(
-                Arguments.of("a=5.5;b=a+5;c=a+b;println(c);"),
+                /*Arguments.of("a=5.5;b=a+5;c=a+b;println(c);"),
                 Arguments.of("a=5;b=7;c=avg(a,b);println(a,b,c)"),
                 Arguments.of("a=2;l=a^a;println(l);b=l+1;println(a)"),
                 Arguments.of("a=5<3;println(a);a=6;println(a)"),
                 Arguments.of("a=0;a=a+1;println(a)"),
                 Arguments.of("c=10;println(c);b=c>21;println(b)"),
-                Arguments.of("c=-5.68898;println(c)")
+                Arguments.of("c=-5.68898;println(c)"),*/
+                Arguments.of("c=2;println(++c);println(c)"),
+                Arguments.of("c=5;println(c++);println(c)")
         );
     }
 

@@ -3,6 +3,10 @@ package com.teamdev.booby.runtime;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This is container, that stores implementation of
+ * {@link com.teamdev.booby.compiler.unaryoperators.UnaryOperatorFSM unary operators}.
+ * */
 @SuppressWarnings("ClassWithTooManyTransitiveDependents")
 public class UnaryOperatorFactory {
     private final Map<String, UnaryOperator> operatorMap = new HashMap<>();

@@ -6,6 +6,9 @@ import com.teamdev.calculator.compiler.State;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * This is machine, that processes and build unary operators.
+ * */
 @SuppressWarnings("ClassWithTooManyTransitiveDependents")
 public class UnaryOperatorFSM extends FiniteStateMachine<StringBuilder> {
 

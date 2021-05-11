@@ -32,9 +32,9 @@ public class FunctionState extends State<ShuntingYardStack> {
 
         if(command.isPresent()){
             command.get().execute(builder);
+            logger.info("Transition FunctionState successful");
             return true;
         }
-        logger.info("Transition FunctionState successful");
         return false;
     }
 }

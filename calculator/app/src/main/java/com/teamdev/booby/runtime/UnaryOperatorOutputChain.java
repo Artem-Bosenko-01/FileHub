@@ -1,5 +1,10 @@
 package com.teamdev.booby.runtime;
 
+/**
+ * This is result of processing
+ * {@link com.teamdev.booby.compiler.unaryoperators.prefix.PrefixOperatorCompiler prefix operator compiler} or
+ * {@link com.teamdev.booby.compiler.unaryoperators.postfix.PostfixOperatorCompiler postfix operator compiler}.
+ * */
 @SuppressWarnings("ClassWithTooManyTransitiveDependents")
 public class UnaryOperatorOutputChain {
     private UnaryOperator unaryOperator;

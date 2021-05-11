@@ -15,20 +15,22 @@ import java.util.Optional;
 
 /**
  * This is compiler, that processes {@link PostfixOperatorFiniteStateMachine postfix operator FSM}.
- *  As a result of compiling pushes new operator in {@link ShuntingYardStack stack}.
- * */
+ * As a result of compiling pushes new operator in {@link ShuntingYardStack stack}.
+ */
 @SuppressWarnings("ClassWithTooManyTransitiveDependents")
 public class PostfixOperatorCompiler implements ElementCompiler<ShuntingYardStack> {
     private final Logger logger = LoggerFactory.getLogger(PostfixOperatorCompiler.class);
+
     @Override
     public Optional<Command<ShuntingYardStack>> compile(InputCharacterStream stream) {
         logger.info("Start compile Postfix operator Compiler");
         PostfixOperatorFiniteStateMachine machine = new PostfixOperatorFiniteStateMachine();
         UnaryOperatorOutputChain unaryOperatorOutputChain = new UnaryOperatorOutputChain();
 
-        if(machine.execute(stream,unaryOperatorOutputChain)){
+        if (machine.execute(stream, unaryOperatorOutputChain)) {
             logger.info("Postfix operator compiler execute successful");
             return Optional.of(stack -> stack.pushOperand(new DoubleValueHolder(unaryOperatorOutputChain.execute())));
+
         }
         return Optional.empty();
     }

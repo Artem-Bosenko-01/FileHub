@@ -42,7 +42,7 @@ public class ShuntingYardStack{
     }
 
     public void pushOperand(ValueHolder<?> operand){
-        logger.info("Start push operand = " + operand);
+        logger.info("Start push operand = " + operand.getValue());
         operands.push(operand);
     }
 
@@ -55,7 +55,7 @@ public class ShuntingYardStack{
 
             operands.push(operator.apply(leftOperand,rightOperand));
         }
-        logger.info("End calculate, value = " + peekOperand());
+        logger.info("End calculate, value = " + peekOperand().get().getValue());
         return operands.pop();
     }
 }

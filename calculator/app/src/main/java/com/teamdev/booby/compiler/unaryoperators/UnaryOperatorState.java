@@ -1,5 +1,6 @@
 package com.teamdev.booby.compiler.unaryoperators;
 
+import com.teamdev.booby.runtime.UnaryOperatorFactory;
 import com.teamdev.booby.runtime.UnaryOperatorOutputChain;
 import com.teamdev.calculator.compiler.InputCharacterStream;
 import com.teamdev.calculator.compiler.State;
@@ -20,13 +21,17 @@ public class UnaryOperatorState extends State<UnaryOperatorOutputChain> {
     @Override
     public boolean tryTransition(InputCharacterStream characterStream, UnaryOperatorOutputChain output) {
 
+        UnaryOperatorFactory factory = new UnaryOperatorFactory();
         logger.info("Try transition unary operator state");
         UnaryOperatorFSM fsm = new UnaryOperatorFSM();
         StringBuilder builder = new StringBuilder(10);
         if(fsm.execute(characterStream, builder)){
-            output.setUnaryOperator(builder.toString());
-            logger.info("Transition UnaryOperatorState successful");
-            return true;
+
+            if(factory.isOperatorExist(builder.toString())){
+                output.setUnaryOperator(builder.toString());
+                logger.info("Transition UnaryOperatorState successful");
+                return true;
+            }
         }
         return false;
     }

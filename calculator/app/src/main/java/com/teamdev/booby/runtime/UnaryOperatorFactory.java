@@ -16,6 +16,9 @@ public class UnaryOperatorFactory {
         operatorMap.put("--", operator -> operator - 1);
     }
 
+    public boolean isOperatorExist(String operator){
+        return operatorMap.containsKey(operator);
+    }
     public UnaryOperator getOperator(String str){
         return operatorMap.get(str);
     }

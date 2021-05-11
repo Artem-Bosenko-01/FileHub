@@ -6,7 +6,6 @@ import com.teamdev.calculator.runtime.holder.ValueHolder;
 import java.util.List;
 import java.util.Optional;
 
-@SuppressWarnings("ClassWithTooManyTransitiveDependents")
 public class Println implements Function {
     public Println() {
         super();

@@ -1,7 +1,6 @@
 package com.teamdev.booby.compiler.variable;
 
 import com.teamdev.calculator.compiler.CompilerFactory;
-import com.teamdev.calculator.compiler.TypeOfExpressionElement;
 import com.teamdev.calculator.compiler.FiniteStateMachine;
 import com.teamdev.calculator.compiler.State;
 import com.teamdev.calculator.runtime.ShuntingYardStack;

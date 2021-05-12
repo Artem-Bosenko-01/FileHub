@@ -13,6 +13,10 @@ public class InputCharacterStream {
         pointer = 0;
     }
 
+    public char getPreviousSymbol() {
+        return sentence.charAt(--pointer);
+    }
+
     public char getCurrentSymbol() {
         return sentence.charAt(pointer);
     }

@@ -3,7 +3,6 @@ package com.teamdev.calculator.compiler.booleanexpression;
 import com.teamdev.calculator.compiler.CompilerFactory;
 import com.teamdev.calculator.compiler.ElementCompiler;
 import com.teamdev.calculator.compiler.InputCharacterStream;
-import com.teamdev.calculator.compiler.TypeOfExpressionElement;
 import com.teamdev.calculator.compiler.State;
 
 import com.teamdev.calculator.compiler.operand.OperandCompiler;

@@ -1,6 +1,5 @@
 package com.teamdev.booby.compiler.program;
 
-import com.teamdev.booby.runtime.RuntimeEnvironment;
 import com.teamdev.calculator.compiler.InputCharacterStream;
 import com.teamdev.calculator.compiler.State;
 import org.slf4j.Logger;

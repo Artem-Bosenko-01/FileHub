@@ -3,7 +3,6 @@ package com.teamdev.calculator.compiler.operand;
 import com.teamdev.calculator.compiler.CompilerFactory;
 import com.teamdev.calculator.compiler.ElementCompiler;
 import com.teamdev.calculator.compiler.InputCharacterStream;
-import com.teamdev.calculator.compiler.TypeOfExpressionElement;
 import com.teamdev.calculator.runtime.command.Command;
 import com.teamdev.calculator.runtime.command.OperandCommand;
 import com.teamdev.calculator.runtime.ShuntingYardStack;

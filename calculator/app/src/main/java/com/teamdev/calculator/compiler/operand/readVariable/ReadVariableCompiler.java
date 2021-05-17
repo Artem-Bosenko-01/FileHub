@@ -1,6 +1,5 @@
 package com.teamdev.calculator.compiler.operand.readVariable;
 
-import com.teamdev.booby.compiler.procedure.ProcedureCompiler;
 import com.teamdev.calculator.compiler.ElementCompiler;
 import com.teamdev.calculator.compiler.InputCharacterStream;
 import com.teamdev.calculator.runtime.ShuntingYardStack;
@@ -8,6 +7,7 @@ import com.teamdev.calculator.runtime.command.Command;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.PrintWriter;
 import java.util.Optional;
 
 /**

@@ -8,6 +8,7 @@ import com.teamdev.calculator.runtime.ShuntingYardStack;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.PrintWriter;
 import java.util.Optional;
 
 import static com.teamdev.calculator.compiler.TypeOfExpressionElement.EXPRESSION;
@@ -18,12 +19,17 @@ import static com.teamdev.calculator.compiler.TypeOfExpressionElement.EXPRESSION
 @SuppressWarnings("ClassWithTooManyTransitiveDependencies")
 public class CalculatorImpl implements Calculator {
     private final Logger logger = LoggerFactory.getLogger(CompilerFactoryImpl.class);
+    private final StringBuilder writer;
+
+    public CalculatorImpl(StringBuilder writer) {
+        this.writer = writer;
+    }
 
     @Override
     public Optional<Double> calculate(String inputChain) {
         logger.info("Start calculate operation for" + inputChain);
         InputCharacterStream characterStream = new InputCharacterStream(inputChain);
-        ElementCompiler<ShuntingYardStack> compiler = new CompilerFactoryImpl().create(EXPRESSION);
+        ElementCompiler<ShuntingYardStack> compiler = new CompilerFactoryImpl(writer).create(EXPRESSION);
         ShuntingYardStack stack = new ShuntingYardStack();
 
         Optional<Command<ShuntingYardStack>> command = compiler.compile(characterStream);

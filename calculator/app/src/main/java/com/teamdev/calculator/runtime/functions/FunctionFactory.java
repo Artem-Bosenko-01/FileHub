@@ -2,6 +2,7 @@ package com.teamdev.calculator.runtime.functions;
 
 import com.teamdev.booby.runtime.Println;
 
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +14,7 @@ final class FunctionFactory {
 
     private final Map<String, Function> functionMap = new HashMap<>();
 
-    FunctionFactory(){
+    FunctionFactory(StringBuilder writer){
 
         functionMap.put("avg", new AverageFunction());
         functionMap.put("max", new MaxFunction());
@@ -24,7 +25,7 @@ final class FunctionFactory {
         functionMap.put("cos", new CosFunction());
         functionMap.put("pi", new PiFunc());
         functionMap.put("sum", new SumFunction());
-        functionMap.put("println", new Println());
+        functionMap.put("println", new Println(writer));
     }
 
     public Function getFunction(String name){

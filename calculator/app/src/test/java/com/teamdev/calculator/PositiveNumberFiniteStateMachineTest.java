@@ -11,6 +11,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.io.PrintWriter;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -34,7 +35,7 @@ class PositiveNumberFiniteStateMachineTest {
         InputCharacterStream stream = new InputCharacterStream(inputValue);
         ShuntingYardStack stack = new ShuntingYardStack();
 
-        Optional<Command<ShuntingYardStack>> command = new CompilerFactoryImpl().create(TypeOfExpressionElement.NUMBER).compile(stream);
+        Optional<Command<ShuntingYardStack>> command = new CompilerFactoryImpl(new StringBuilder()).create(TypeOfExpressionElement.NUMBER).compile(stream);
         try {
             command.get().execute(stack);
         } catch (Exception e) {

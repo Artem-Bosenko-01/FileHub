@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.io.PrintWriter;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -31,7 +32,7 @@ class PositiveExpressionFunctionTest {
     @ParameterizedTest
     @MethodSource("positiveExpression")
     void executePositiveExpressionTest(double expected, String inputChain){
-        Calculator calculator = new CalculatorImpl();
+        Calculator calculator = new CalculatorImpl(new StringBuilder());
         Optional<Double> result = calculator.calculate(inputChain);
         result.ifPresent(aDouble -> Assertions.assertEquals(expected, aDouble));
     }

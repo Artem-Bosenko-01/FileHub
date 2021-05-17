@@ -1,7 +1,5 @@
 package com.teamdev.booby.compiler.unaryoperators.prefix;
 
-import com.teamdev.booby.compiler.statement.StatementCompiler;
-import com.teamdev.booby.compiler.unaryoperators.postfix.PostfixOperatorFiniteStateMachine;
 import com.teamdev.booby.runtime.UnaryOperatorOutputChain;
 import com.teamdev.calculator.compiler.ElementCompiler;
 import com.teamdev.calculator.compiler.InputCharacterStream;
@@ -11,6 +9,7 @@ import com.teamdev.calculator.runtime.holder.value.DoubleValueHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.PrintWriter;
 import java.util.Optional;
 
 /**

@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.io.PrintWriter;
 import java.util.stream.Stream;
 
 @SuppressWarnings("ClassWithTooManyTransitiveDependencies")
@@ -28,8 +29,10 @@ class PositiveInitVariableTest {
     @MethodSource("positiveInitVariable")
     void executePositiveExpressionTest(String inputChain){
         System.out.println(inputChain);
-        Booby calculator = new BoobyImpl(new BoobyCompilerFactoryImpl());
+        StringBuilder builder = new StringBuilder();
+        Booby calculator = new BoobyImpl(new BoobyCompilerFactoryImpl(builder));
         RuntimeEnvironment environment = RuntimeEnvironment.getInstance();
         calculator.execute(inputChain, environment);
+        System.out.println(builder);
     }
 }

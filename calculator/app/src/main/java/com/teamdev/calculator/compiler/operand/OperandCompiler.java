@@ -9,6 +9,7 @@ import com.teamdev.calculator.runtime.ShuntingYardStack;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.PrintWriter;
 import java.util.IllegalFormatException;
 import java.util.Optional;
 
@@ -17,7 +18,6 @@ public class OperandCompiler implements ElementCompiler<ShuntingYardStack> {
 
     private final Logger logger = LoggerFactory.getLogger(OperandCompiler.class);
     private final CompilerFactory<ShuntingYardStack> compilerFactory;
-
     public OperandCompiler(CompilerFactory<ShuntingYardStack> compilerFactory) {
         this.compilerFactory = compilerFactory;
     }

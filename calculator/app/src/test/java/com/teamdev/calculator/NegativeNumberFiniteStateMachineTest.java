@@ -11,6 +11,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.io.PrintWriter;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -30,7 +31,7 @@ class NegativeNumberFiniteStateMachineTest {
     void executePositiveExpressionTest(Exception expected, String inputChain){
         InputCharacterStream stream = new InputCharacterStream(inputChain);
         ShuntingYardStack stack = new ShuntingYardStack();
-        Optional<Command<ShuntingYardStack>> command = new CompilerFactoryImpl().create(TypeOfExpressionElement.NUMBER).compile(stream);
+        Optional<Command<ShuntingYardStack>> command = new CompilerFactoryImpl(new StringBuilder()).create(TypeOfExpressionElement.NUMBER).compile(stream);
 
         command.ifPresent(shuntingYardStackCommand -> Assertions.assertThrows(expected.getClass(), () -> shuntingYardStackCommand.execute(stack)));
     }

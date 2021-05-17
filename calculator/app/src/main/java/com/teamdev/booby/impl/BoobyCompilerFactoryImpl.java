@@ -10,6 +10,8 @@ import com.teamdev.calculator.compiler.CompilerFactory;
 import com.teamdev.calculator.compiler.ElementCompiler;
 import com.teamdev.calculator.compiler.TypeOfExpressionElement;
 
+import java.io.PrintWriter;
+
 /**
  * This is implementation compiler factory for {@link com.teamdev.booby.Booby booby compiler},
  * that return type of {@link ElementCompiler compiler} for appropriate
@@ -17,14 +19,19 @@ import com.teamdev.calculator.compiler.TypeOfExpressionElement;
  * */
 @SuppressWarnings("ClassWithTooManyTransitiveDependencies")
 public class BoobyCompilerFactoryImpl implements CompilerFactory<RuntimeEnvironment> {
+    private final StringBuilder writer;
+
+    public BoobyCompilerFactoryImpl(StringBuilder writer) {
+        this.writer = writer;
+    }
 
     @Override
     public ElementCompiler<RuntimeEnvironment> create(TypeOfExpressionElement type) {
         switch (type){
-            case VARIABLE: return new InitVariableCompiler(new CompilerFactoryImpl());
-            case PROCEDURE: return new ProcedureCompiler(new CompilerFactoryImpl());
-            case PROGRAM: return new ProgramCompiler(new BoobyCompilerFactoryImpl());
-            case STATEMENT: return new StatementCompiler(new BoobyCompilerFactoryImpl());
+            case VARIABLE: return new InitVariableCompiler(new CompilerFactoryImpl(writer));
+            case PROCEDURE: return new ProcedureCompiler(new CompilerFactoryImpl(writer), writer);
+            case PROGRAM: return new ProgramCompiler(new BoobyCompilerFactoryImpl(writer));
+            case STATEMENT: return new StatementCompiler(new BoobyCompilerFactoryImpl(writer));
             default: throw new RuntimeException();
         }
     }

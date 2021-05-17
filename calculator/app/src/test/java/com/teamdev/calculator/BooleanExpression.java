@@ -12,6 +12,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.io.PrintWriter;
 import java.util.stream.Stream;
 
 @SuppressWarnings("ClassWithTooManyTransitiveDependencies")
@@ -32,7 +33,7 @@ class BooleanExpression {
     @MethodSource("positiveBooleanExpression")
     void executePositiveExpressionTest(boolean expected, String inputChain) {
 
-        BooleanExpressionFiniteStateMachine machine = new BooleanExpressionFiniteStateMachine(new CompilerFactoryImpl());
+        BooleanExpressionFiniteStateMachine machine = new BooleanExpressionFiniteStateMachine(new CompilerFactoryImpl(new StringBuilder()));
         InputCharacterStream stream = new InputCharacterStream(inputChain);
         BooleanScope scope = new BooleanScope();
         machine.execute(stream, scope);

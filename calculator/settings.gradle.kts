@@ -9,3 +9,4 @@
 
 rootProject.name = "calculator"
 include("app")
+include("web")

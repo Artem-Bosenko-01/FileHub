@@ -2,6 +2,8 @@ package com.teamdev.booby.runtime;
 
 import com.teamdev.calculator.runtime.holder.ValueHolder;
 
+import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +14,6 @@ import java.util.Map;
 @SuppressWarnings({"ClassWithTooManyTransitiveDependents", "ClassWithTooManyDependents"})
 public class RuntimeEnvironment{
     private final Map<String, ValueHolder<?>> variables;
-
     private static RuntimeEnvironment instance = null;
 
     private RuntimeEnvironment(){

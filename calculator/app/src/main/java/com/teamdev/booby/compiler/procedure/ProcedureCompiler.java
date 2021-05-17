@@ -12,6 +12,7 @@ import com.teamdev.calculator.runtime.ShuntingYardStack;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.PrintWriter;
 import java.util.Optional;
 /**
  * This is compiler, that execute {@link FunctionFiniteStateMachine function FSM} and return
@@ -22,16 +23,17 @@ public class ProcedureCompiler implements ElementCompiler<RuntimeEnvironment> {
 
     private final CompilerFactory<ShuntingYardStack> compilerFactory;
     private final Logger logger = LoggerFactory.getLogger(ProcedureCompiler.class);
-
-    public ProcedureCompiler(CompilerFactory<ShuntingYardStack> compilerFactory) {
+    private final StringBuilder writer;
+    public ProcedureCompiler(CompilerFactory<ShuntingYardStack> compilerFactory, StringBuilder writer) {
         this.compilerFactory = compilerFactory;
+        this.writer = writer;
     }
 
     @Override
     public Optional<Command<RuntimeEnvironment>> compile(InputCharacterStream stream) {
         logger.info("Start compile Procedure Compiler");
         FunctionFiniteStateMachine machine = new FunctionFiniteStateMachine(compilerFactory);
-        FunctionScope scope = new FunctionScope();
+        FunctionScope scope = new FunctionScope(writer);
         if(machine.execute(stream, scope)){
             logger.info("Procedure compiler execute successful");
             return Optional.of(new ProcedureCommand(scope));

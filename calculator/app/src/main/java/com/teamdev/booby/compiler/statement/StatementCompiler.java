@@ -8,6 +8,7 @@ import com.teamdev.calculator.runtime.command.Command;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.PrintWriter;
 import java.util.Optional;
 
 /**

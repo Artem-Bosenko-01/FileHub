@@ -1,3 +1,7 @@
+<%@ page import="com.teamdev.booby.Booby" %>
+<%@ page import="com.teamdev.booby.impl.BoobyImpl" %>
+<%@ page import="com.teamdev.booby.impl.BoobyCompilerFactoryImpl" %>
+<%@ page import="com.teamdev.booby.runtime.RuntimeEnvironment" %>
 <%--
   Created by IntelliJ IDEA.
   User: Artem
@@ -5,23 +9,25 @@
   Time: 16:31
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<head>
-  <meta charset="utf-8">
-  <title>Calculator</title>
+<html>
+<body>
+<%
+  String input=request.getParameter("input");
+  if(input==null||input.trim().equals("")){
+    out.print("<h3>Rewrite string</h3><br>");
+  }else{
+    try{
+      StringBuilder builder = new StringBuilder();
+      Booby calculator = new BoobyImpl(new BoobyCompilerFactoryImpl(builder));
+      RuntimeEnvironment environment = RuntimeEnvironment.getInstance();
+      System.out.println(input);
+      calculator.execute(input, environment);
 
-</head>
-<body class="index-page">
-<div>
-  <form action="app" method="POST">
-    <h3>Please input your code for Booby compiler</h3><br>
-    <input name="input" size="100"/>
-    <input type="submit" value="Submit" />
-    <h3>Result is</h3><br>
-    <textarea name="output" cols="40" rows="3" readonly></textarea>
-    <style> textarea{resize: none;}</style>
-  </form>
-</div>
+      out.print("<p>"+"Result is = "+ builder +"</p>");
+    }catch(Exception e){out.print(e);}
+
+  }//end of else
+%>
 </body>
 </html>

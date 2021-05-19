@@ -17,11 +17,6 @@ import java.io.PrintWriter;
 @WebServlet(name = "ApplicationServlet", value = "/app")
 public class ApplicationServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
@@ -32,7 +27,7 @@ public class ApplicationServlet extends HttpServlet {
             Booby compiler = new BoobyImpl(new BoobyCompilerFactoryImpl(builder));
             RuntimeEnvironment environment = RuntimeEnvironment.getInstance();
             compiler.execute(input,environment);
-            writer.println("<p>"+"Result is = "+ builder +"</p>");
+            writer.write(builder.toString());
         }
     }
 }

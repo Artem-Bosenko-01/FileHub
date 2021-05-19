@@ -16,7 +16,7 @@ public class RuntimeEnvironment{
     private final Map<String, ValueHolder<?>> variables;
     private static RuntimeEnvironment instance = null;
 
-    private RuntimeEnvironment(){
+    public RuntimeEnvironment(){
         variables = new HashMap<>();
     }
 

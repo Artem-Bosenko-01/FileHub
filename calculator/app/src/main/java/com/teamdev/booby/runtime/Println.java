@@ -18,7 +18,7 @@ public class Println implements Function {
     @Override
     public Optional<Double> apply(List<ValueHolder<?>> arguments) {
         for (ValueHolder<?> arg: arguments) {
-            writer.append(arg.getValue());
+            writer.append(arg.getValue()).append(";").append("\n");
         }
         return Optional.empty();
     }

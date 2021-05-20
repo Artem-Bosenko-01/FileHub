@@ -24,7 +24,7 @@
       System.out.println(input);
       calculator.execute(input, environment);
 
-      out.print("<p>"+"Result is = "+ builder +"</p>");
+      out.print("<p>"+ builder +"</p>");
     }catch(Exception e){out.print(e);}
 
   }//end of else

@@ -10,3 +10,4 @@
 rootProject.name = "calculator"
 include("app")
 include("web")
+include("spark")

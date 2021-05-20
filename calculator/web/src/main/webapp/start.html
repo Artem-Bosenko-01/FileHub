@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <script type="text/javascript">
         function calculate(){
@@ -16,8 +16,7 @@
             try{
                 request.onreadystatechange=function(){
                     if(request.readyState===4){
-                        var val=request.responseText;
-                        document.getElementById('calc').innerHTML=val;
+                        document.getElementById("calc").innerHTML=request.responseText;
                     }
                 }//end of function
                 request.open("POST",url);
@@ -35,7 +34,7 @@
         <input name="input" size="100"/>
     </label>
     <button id="calculator" type="button" onclick="calculate();">Execute</button>
-    <h3>Result is</h3><br>"
+    <h3>Result is</h3><br>
 </form>
 <span id="calc"></span>
 </body>

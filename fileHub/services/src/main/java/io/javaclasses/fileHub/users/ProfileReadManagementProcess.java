@@ -3,6 +3,7 @@ package io.javaclasses.fileHub.users;
 import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.AbstractInMemoryStorage;
 import io.javaclasses.fileHub.InvalidHandleCommandException;
+import io.javaclasses.fileHub.NotExistIDException;
 import io.javaclasses.fileHub.SecuredProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,12 +30,17 @@ public class ProfileReadManagementProcess implements SecuredProcess<ProfileReadM
             logger.info("Start read user process with id: " + inputCommand.id());
         }
 
-        Optional<User> findUser = userStorage.records().values().stream().filter(user -> user.userID().equals(inputCommand.id())).findFirst();
+        Optional<User> findUser = Optional.empty();
+        try {
+            findUser = userStorage.findByID(inputCommand.id());
+        } catch (NotExistIDException e) {
+            e.printStackTrace();
+        }
         if(findUser.isPresent()){
             if(logger.isInfoEnabled()){
                 logger.info("User " + findUser.get().login() + " exist!");
             }
-            return new UserRegisterDTO(findUser.get().userID(),
+            return new UserRegisterDTO(findUser.get().id(),
                     findUser.get().login(),
                     findUser.get().password(),
                     findUser.get().firstName(),

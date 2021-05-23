@@ -18,7 +18,8 @@ public abstract class AbstractInMemoryStorage<I extends RecordID, E extends Data
     }
 
     @Override
-    public Optional<E> findByID(I dataRecordID) {
+    public Optional<E> findByID(I dataRecordID) throws NotExistIDException{
+        if(!records.containsKey(dataRecordID)) throw new NotExistIDException("Id doest exist" + dataRecordID);
         return records.values().stream().filter(e -> e.id().equals(dataRecordID)).findFirst();
     }
 
@@ -27,12 +28,6 @@ public abstract class AbstractInMemoryStorage<I extends RecordID, E extends Data
         if(!records.containsKey(inputDataObject.id())) throw new NotExistIDException("Id doest exist" + inputDataObject.id());
         records.remove(inputDataObject.id());
         records.put(inputDataObject.id(),inputDataObject);
-    }
-
-    @Override
-    public E read(I inputIDObject) throws NotExistIDException {
-        if(!records.containsKey(inputIDObject)) throw new NotExistIDException("Id doest exist" + inputIDObject);
-        return records.get(inputIDObject);
     }
 
     public Map<I,E> records(){return records;}

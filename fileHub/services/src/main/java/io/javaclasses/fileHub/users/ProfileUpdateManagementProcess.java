@@ -38,7 +38,7 @@ public class ProfileUpdateManagementProcess implements SecuredProcess<ProfileUpd
                 logger.info("Update was successful :" + inputCommand.id());
             }
 
-            return new UserRegisterDTO(user.userID(),
+            return new UserRegisterDTO(user.id(),
                     user.login(),
                     user.password(),
                     user.firstName(),

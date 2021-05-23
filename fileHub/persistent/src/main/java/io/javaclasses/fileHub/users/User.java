@@ -1,5 +1,6 @@
 package io.javaclasses.fileHub.users;
 
+import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.DataRecord;
 
 import java.util.Objects;
@@ -13,15 +14,11 @@ public final class User implements DataRecord<UserID> {
     private String lastName;
 
     public User(UserID userID) {
-        this.userID = userID;
+        this.userID = Preconditions.checkNotNull(userID);
     }
 
     @Override
     public UserID id() {
-        return userID;
-    }
-
-    public UserID userID() {
         return userID;
     }
 
@@ -30,7 +27,7 @@ public final class User implements DataRecord<UserID> {
     }
 
     public void setLogin(String login) {
-        this.login = login;
+        this.login = Preconditions.checkNotNull(login);
     }
 
     public String password() {
@@ -38,7 +35,7 @@ public final class User implements DataRecord<UserID> {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = Preconditions.checkNotNull(password);
     }
 
     public String firstName() {
@@ -46,7 +43,7 @@ public final class User implements DataRecord<UserID> {
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        this.firstName = Preconditions.checkNotNull(firstName);
     }
 
     public String lastName() {
@@ -54,7 +51,7 @@ public final class User implements DataRecord<UserID> {
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.lastName = Preconditions.checkNotNull(lastName);
     }
 
     @Override

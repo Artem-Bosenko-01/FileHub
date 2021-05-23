@@ -19,7 +19,7 @@ class ProfileReadManagementProcessTest {
             e.printStackTrace();
         }
 
-        ProfileReadManagementCommand command = new ProfileReadManagementCommand(new AuthToken("1"), new UserID(2));
+        ProfileReadManagementCommand command = new ProfileReadManagementCommand(new AuthToken("1"), new UserID(1));
         ProfileReadManagementProcess profileReadManagementProcess = new ProfileReadManagementProcess(userStorageInMemory);
 
         try {

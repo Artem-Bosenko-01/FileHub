@@ -13,22 +13,29 @@ public abstract class AbstractInMemoryStorage<I extends RecordID, E extends Data
 
     @Override
     public void create(E inputDataObject) throws DuplicatedIDException {
-        if(records.containsKey(inputDataObject.id())) throw new DuplicatedIDException("Duplicate id" + inputDataObject.id());
+        if(records.containsKey(inputDataObject.id())) throw new DuplicatedIDException("Duplicate id " + inputDataObject.id());
         records.put(inputDataObject.id(),inputDataObject);
     }
 
     @Override
     public Optional<E> findByID(I dataRecordID) throws NotExistIDException{
-        if(!records.containsKey(dataRecordID)) throw new NotExistIDException("Id doest exist" + dataRecordID);
+        if(!records.containsKey(dataRecordID)) throw new NotExistIDException("Id doest exist " + dataRecordID);
         return records.values().stream().filter(e -> e.id().equals(dataRecordID)).findFirst();
     }
 
     @Override
     public void update(E inputDataObject) throws NotExistIDException {
-        if(!records.containsKey(inputDataObject.id())) throw new NotExistIDException("Id doest exist" + inputDataObject.id());
+        if(!records.containsKey(inputDataObject.id())) throw new NotExistIDException("Id doest exist " + inputDataObject.id());
         records.remove(inputDataObject.id());
         records.put(inputDataObject.id(),inputDataObject);
     }
 
-    public Map<I,E> records(){return records;}
+    @Override
+    public void delete(I dataRecordID) throws NotExistIDException {
+        if(!records.containsKey(dataRecordID)) throw new NotExistIDException("Id doest exist " + dataRecordID);
+        records.remove(dataRecordID);
+    }
+
+    protected Map<I,E> records(){return records;}
+    public int getRecordsSize(){return records.size();}
 }

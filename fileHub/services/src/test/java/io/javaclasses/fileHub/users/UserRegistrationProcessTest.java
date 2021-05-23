@@ -14,7 +14,7 @@ class UserRegistrationProcessTest {
         try {
             userRegistrationProcess.handle(command);
 
-            Assertions.assertEquals(userStorageInMemory.records().size(),1);
+            Assertions.assertEquals(userStorageInMemory.getRecordsSize(),1);
         } catch (InvalidHandleCommandException e) {
             e.printStackTrace();
         }

@@ -2,6 +2,7 @@ package io.javaclasses.fileHub.files;
 
 import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.DataRecord;
+import io.javaclasses.fileHub.users.UserID;
 
 import java.util.Objects;
 
@@ -9,6 +10,7 @@ public final class File implements DataRecord<FileID> {
 
     private final FileID fileID;
     private String name;
+    private UserID userID;
     private Integer size;
     private MimeType mimeType;
 
@@ -51,6 +53,14 @@ public final class File implements DataRecord<FileID> {
         if (o == null || getClass() != o.getClass()) return false;
         File file = (File) o;
         return fileID.equals(file.fileID) && name.equals(file.name) && Objects.equals(size, file.size) && mimeType == file.mimeType;
+    }
+
+    public UserID owner() {
+        return userID;
+    }
+
+    public void setUserID(UserID userID) {
+        this.userID = Preconditions.checkNotNull(userID);
     }
 
     @Override

@@ -20,7 +20,7 @@ public class FileStorageInMemory extends AbstractInMemoryStorage<FileID,File>
 
     @Override
     public List<File> findAllByUserID(UserID id) throws NotExistIDException {
-        if(!records().containsKey(id)) throw new NotExistIDException("User with " + id + " not exist");
+        if(records().values().stream().noneMatch(file -> file.owner().equals(id))) throw new NotExistIDException("User with " + id + " not exist");
         else return records().values().stream().filter(file -> file.owner().equals(id)).collect(Collectors.toList());
     }
 

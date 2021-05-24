@@ -2,7 +2,6 @@ package io.javaclasses.fileHub.folders;
 
 import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.RecordID;
-import io.javaclasses.fileHub.users.UserID;
 
 import java.util.Objects;
 

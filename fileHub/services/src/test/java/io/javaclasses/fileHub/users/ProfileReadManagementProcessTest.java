@@ -20,7 +20,7 @@ class ProfileReadManagementProcessTest {
         }
 
         ProfileReadQuery command = new ProfileReadQuery(new AuthToken("1"), new UserID(1));
-        ProfileReadManagementProcess profileReadManagementProcess = new ProfileReadManagementProcess(userStorageInMemory);
+        ProfileReadManagementView profileReadManagementProcess = new ProfileReadManagementView(userStorageInMemory);
 
         try {
             UserRegisterDTO user = profileReadManagementProcess.handle(command);

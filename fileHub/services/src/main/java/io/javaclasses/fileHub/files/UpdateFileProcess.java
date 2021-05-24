@@ -22,10 +22,11 @@ public class UpdateFileProcess implements SecuredProcess<UpdateFileCommand, Crea
         file.setName(inputCommand.name());
         file.setSize(inputCommand.size());
         file.setMimeType(inputCommand.mimeType());
+        file.setFolder(inputCommand.folder());
 
         try {
             fileStorage.update(file);
-            return new CreateFileDTO(file.id(),file.name(),file.mimeType(),file.owner());
+            return new CreateFileDTO(file.id(),file.name(),file.mimeType(),file.owner(), file.folder());
         } catch (NotExistIDException e) {
             throw new InvalidHandleCommandException(e.getMessage());
         }

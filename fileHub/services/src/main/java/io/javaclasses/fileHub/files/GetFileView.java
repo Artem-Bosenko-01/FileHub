@@ -3,7 +3,7 @@ package io.javaclasses.fileHub.files;
 import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.InvalidHandleCommandException;
 import io.javaclasses.fileHub.NotExistIDException;
-import io.javaclasses.fileHub.SecuredProcess;
+import io.javaclasses.fileHub.View;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,12 +12,12 @@ import java.util.Optional;
 /**
  *
  */
-public class GetFileProcess implements SecuredProcess<GetFileQuery, CreateFileDTO> {
+public class GetFileView implements View<GetFileQuery, CreateFileDTO> {
 
     private final FileStorageInMemory fileStorage;
-    private final Logger logger = LoggerFactory.getLogger(GetFileProcess.class);
+    private final Logger logger = LoggerFactory.getLogger(GetFileView.class);
 
-    public GetFileProcess(FileStorageInMemory fileStorage) {
+    public GetFileView(FileStorageInMemory fileStorage) {
         this.fileStorage = Preconditions.checkNotNull(fileStorage);
     }
 
@@ -33,7 +33,12 @@ public class GetFileProcess implements SecuredProcess<GetFileQuery, CreateFileDT
                 if (logger.isInfoEnabled()) {
                     logger.info("Read info was successful: " + file.get().name());
                 }
-                return new CreateFileDTO(file.get().id(), file.get().name(), file.get().mimeType(), file.get().owner());
+                return new CreateFileDTO(file.get().id(),
+                        file.get().name(),
+                        file.get().mimeType(),
+                        file.get().owner(),
+                        file.get().folder()
+                );
             } else {
                 if (logger.isErrorEnabled()) logger.error("File with " + query.id() + " not exist");
                 throw new InvalidHandleCommandException("File with " + query.id() + " not exist");

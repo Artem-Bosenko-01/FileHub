@@ -1,10 +1,7 @@
 package io.javaclasses.fileHub.users;
 
 import com.google.common.base.Preconditions;
-import io.javaclasses.fileHub.AbstractInMemoryStorage;
-import io.javaclasses.fileHub.InvalidHandleCommandException;
-import io.javaclasses.fileHub.NotExistIDException;
-import io.javaclasses.fileHub.SecuredProcess;
+import io.javaclasses.fileHub.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,12 +11,12 @@ import java.util.Optional;
  *
  *
  * */
-public class ProfileReadManagementProcess implements SecuredProcess<ProfileReadQuery, UserRegisterDTO> {
+public class ProfileReadManagementView implements View<ProfileReadQuery, UserRegisterDTO> {
 
     private final AbstractInMemoryStorage<UserID, User> userStorage;
-    private final Logger logger = LoggerFactory.getLogger(ProfileReadManagementProcess.class);
+    private final Logger logger = LoggerFactory.getLogger(ProfileReadManagementView.class);
 
-    public ProfileReadManagementProcess(AbstractInMemoryStorage<UserID, User> userStorage){
+    public ProfileReadManagementView(AbstractInMemoryStorage<UserID, User> userStorage){
         this.userStorage = Preconditions.checkNotNull(userStorage);
     }
 

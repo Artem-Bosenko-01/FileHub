@@ -29,6 +29,7 @@ public class CreateFileManagementProcess implements SecuredProcess<CreateFileCom
         file.setUserID(inputCommand.owner());
         file.setMimeType(inputCommand.mimeType());
         file.setName(inputCommand.name());
+        file.setFolder(inputCommand.folder());
         file.setSize(0);
         try {
             fileStorage.create(file);
@@ -37,7 +38,7 @@ public class CreateFileManagementProcess implements SecuredProcess<CreateFileCom
                 logger.info("Created file was successful. if: " + file.id());
             }
 
-            return new CreateFileDTO(file.id(),file.name(),file.mimeType(), file.owner());
+            return new CreateFileDTO(file.id(),file.name(),file.mimeType(), file.owner(), inputCommand.folder());
         } catch (DuplicatedIDException e) {
             if(logger.isErrorEnabled()){
                 logger.error(e.getMessage());

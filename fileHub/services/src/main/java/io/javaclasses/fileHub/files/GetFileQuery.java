@@ -1,13 +1,13 @@
 package io.javaclasses.fileHub.files;
 
 import io.javaclasses.fileHub.AuthToken;
-import io.javaclasses.fileHub.AuthenticatedUserCommand;
+import io.javaclasses.fileHub.Query;
 
-public final class GetFileCommand extends AuthenticatedUserCommand {
+public final class GetFileQuery extends Query {
 
     private final FileID id;
 
-    public GetFileCommand(AuthToken token, FileID id) {
+    public GetFileQuery(AuthToken token, FileID id) {
         super(token);
         this.id = id;
     }

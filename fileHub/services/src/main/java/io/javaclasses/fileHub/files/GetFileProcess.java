@@ -12,7 +12,7 @@ import java.util.Optional;
 /**
  *
  */
-public class GetFileProcess implements SecuredProcess<GetFileCommand, CreateFileDTO> {
+public class GetFileProcess implements SecuredProcess<GetFileQuery, CreateFileDTO> {
 
     private final FileStorageInMemory fileStorage;
     private final Logger logger = LoggerFactory.getLogger(GetFileProcess.class);
@@ -22,21 +22,21 @@ public class GetFileProcess implements SecuredProcess<GetFileCommand, CreateFile
     }
 
     @Override
-    public CreateFileDTO handle(GetFileCommand inputCommand) throws InvalidHandleCommandException {
+    public CreateFileDTO handle(GetFileQuery query) throws InvalidHandleCommandException {
         if (logger.isInfoEnabled()) {
-            logger.info("Start read info about " + inputCommand.id() + " file");
+            logger.info("Start read info about " + query.id() + " file");
         }
 
         try {
-            Optional<File> file = fileStorage.findByID(inputCommand.id());
+            Optional<File> file = fileStorage.findByID(query.id());
             if (file.isPresent()) {
                 if (logger.isInfoEnabled()) {
                     logger.info("Read info was successful: " + file.get().name());
                 }
                 return new CreateFileDTO(file.get().id(), file.get().name(), file.get().mimeType(), file.get().owner());
             } else {
-                if (logger.isErrorEnabled()) logger.error("File with " + inputCommand.id() + " not exist");
-                throw new InvalidHandleCommandException("File with " + inputCommand.id() + " not exist");
+                if (logger.isErrorEnabled()) logger.error("File with " + query.id() + " not exist");
+                throw new InvalidHandleCommandException("File with " + query.id() + " not exist");
             }
         } catch (NotExistIDException e) {
             if (logger.isErrorEnabled()) {

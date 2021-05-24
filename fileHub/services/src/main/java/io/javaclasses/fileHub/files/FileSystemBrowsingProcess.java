@@ -12,7 +12,7 @@ import java.util.List;
 /**
  *
  * */
-public class FileSystemBrowsingProcess implements SecuredProcess<FileSystemBrowsingCommand, List<File>> {
+public class FileSystemBrowsingProcess implements SecuredProcess<FileSystemBrowsingQuery, List<File>> {
 
     private final FileStorageInMemory fileStorage;
     private final Logger logger = LoggerFactory.getLogger(FileSystemBrowsingProcess.class);
@@ -22,18 +22,18 @@ public class FileSystemBrowsingProcess implements SecuredProcess<FileSystemBrows
     }
 
     @Override
-    public List<File> handle(FileSystemBrowsingCommand inputCommand) throws InvalidHandleCommandException {
+    public List<File> handle(FileSystemBrowsingQuery query) throws InvalidHandleCommandException {
         if(logger.isInfoEnabled()){
-            logger.info("Start read all files for " + inputCommand.id());
+            logger.info("Start read all files for " + query.id());
         }
         try {
-            return fileStorage.findAllByUserID(inputCommand.id());
+            return fileStorage.findAllByUserID(query.id());
         } catch (NotExistIDException e) {
             e.printStackTrace();
         }
         if(logger.isErrorEnabled()){
-            logger.error("User with " + inputCommand.id() + " not exist");
+            logger.error("User with " + query.id() + " not exist");
         }
-        throw new InvalidHandleCommandException("User with " + inputCommand.id() + " not exist");
+        throw new InvalidHandleCommandException("User with " + query.id() + " not exist");
     }
 }

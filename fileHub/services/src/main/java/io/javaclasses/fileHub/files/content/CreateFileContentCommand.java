@@ -4,7 +4,7 @@ import io.javaclasses.fileHub.AuthToken;
 import io.javaclasses.fileHub.AuthenticatedUserCommand;
 import io.javaclasses.fileHub.files.FileID;
 
-public class CreateFileContentCommand extends AuthenticatedUserCommand {
+public final class CreateFileContentCommand extends AuthenticatedUserCommand {
 
     private final FileID fileID;
     private final byte[] content;

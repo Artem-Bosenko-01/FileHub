@@ -2,15 +2,16 @@ package io.javaclasses.fileHub.folders;
 
 import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.RecordID;
+import io.javaclasses.fileHub.users.UserID;
 
 import java.util.Objects;
 
 public final class FolderID implements RecordID {
 
-    private final int id;
+    private final String id;
 
-    public FolderID(int id) {
-        this.id = Preconditions.checkNotNull(id);
+    public FolderID(String name, UserID userID) {
+        this.id = Preconditions.checkNotNull(name) + Preconditions.checkNotNull(userID);
     }
 
     @Override
@@ -18,7 +19,7 @@ public final class FolderID implements RecordID {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FolderID userID = (FolderID) o;
-        return id == userID.id;
+        return id.equals(userID.id);
     }
 
     @Override

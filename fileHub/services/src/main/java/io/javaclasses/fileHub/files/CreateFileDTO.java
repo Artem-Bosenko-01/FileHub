@@ -20,6 +20,8 @@ public final class CreateFileDTO {
         this.folder = Preconditions.checkNotNull(folder);
     }
 
+    public FileID fileID(){ return fileID;}
+
     public String name() {
         return name;
     }

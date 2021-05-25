@@ -21,8 +21,8 @@ public final class FileID implements RecordID {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        FileID userID = (FileID) o;
-        return id == userID.id;
+        FileID fileID = (FileID) o;
+        return id.equals(fileID.id);
     }
 
     @Override

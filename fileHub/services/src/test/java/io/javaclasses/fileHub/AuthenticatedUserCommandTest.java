@@ -1,17 +1,18 @@
-package io.javaclasses.fileHub.users;
-
+package io.javaclasses.fileHub;
 
 import com.google.common.testing.NullPointerTester;
-import io.javaclasses.fileHub.files.File;
-import io.javaclasses.fileHub.files.FileID;
+import io.javaclasses.fileHub.users.UserID;
+import io.javaclasses.fileHub.users.UserRegisterDTO;
 import org.junit.jupiter.api.Test;
 
-class UserTest {
+import static org.junit.jupiter.api.Assertions.*;
+
+class AuthenticatedUserCommandTest {
     @Test
     public void checkForNullPointerInConstructor(){
         NullPointerTester tester = new NullPointerTester();
         try {
-            tester.testConstructor(User.class.getConstructor(UserID.class));
+            tester.testConstructor(AuthenticatedUserCommand.class.getConstructor(AuthToken.class));
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -20,6 +21,6 @@ class UserTest {
     @Test
     public void checkForNullPointerInSetters(){
         NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicInstanceMethods(User.class);
+        tester.testAllPublicInstanceMethods(AuthenticatedUserCommand.class.getMethods());
     }
 }

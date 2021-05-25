@@ -1,5 +1,7 @@
 package io.javaclasses.fileHub.users;
 
+import com.google.common.base.Preconditions;
+
 import java.util.Objects;
 
 /**
@@ -8,16 +10,16 @@ import java.util.Objects;
 public final class UserRegisterDTO {
     private final UserID id;
     private final String loginName;
-    private final String Password;
+    private final String password;
     private final String firstName;
     private final String lastName;
 
     public UserRegisterDTO(UserID id, String loginName, String password, String firstName, String lastName) {
-        this.id = id;
-        this.loginName = loginName;
-        Password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.id = Preconditions.checkNotNull(id);
+        this.loginName = Preconditions.checkNotNull(loginName);
+        this.password = Preconditions.checkNotNull(password);
+        this.firstName = Preconditions.checkNotNull(firstName);
+        this.lastName = Preconditions.checkNotNull(lastName);
     }
 
     public UserID id() {
@@ -41,11 +43,11 @@ public final class UserRegisterDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserRegisterDTO userDTO = (UserRegisterDTO) o;
-        return id.equals(userDTO.id) && loginName.equals(userDTO.loginName) && Password.equals(userDTO.Password) && firstName.equals(userDTO.firstName) && lastName.equals(userDTO.lastName);
+        return id.equals(userDTO.id) && loginName.equals(userDTO.loginName) && password.equals(userDTO.password) && firstName.equals(userDTO.firstName) && lastName.equals(userDTO.lastName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, loginName, Password, firstName, lastName);
+        return Objects.hash(id, loginName, password, firstName, lastName);
     }
 }

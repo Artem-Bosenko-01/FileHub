@@ -26,4 +26,8 @@ public final class UserID implements RecordID {
         return Objects.hash(id);
     }
 
+    @Override
+    public String toString() {
+        return id;
+    }
 }

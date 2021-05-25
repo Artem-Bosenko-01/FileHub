@@ -56,8 +56,9 @@ public final class User implements DataRecord<UserID> {
 
     @Override
     public boolean equals(Object o) {
+        Preconditions.checkNotNull(o);
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (getClass() != o.getClass()) return false;
         User user = (User) o;
         return userID.equals(user.userID) && Objects.equals(login, user.login) && Objects.equals(password, user.password) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName);
     }

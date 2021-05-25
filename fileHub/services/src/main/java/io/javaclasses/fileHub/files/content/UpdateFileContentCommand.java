@@ -1,18 +1,19 @@
 package io.javaclasses.fileHub.files.content;
 
+import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.AuthToken;
 import io.javaclasses.fileHub.AuthenticatedUserCommand;
 import io.javaclasses.fileHub.files.FileID;
 
-public class UpdateFileContentCommand extends AuthenticatedUserCommand {
+public final class UpdateFileContentCommand extends AuthenticatedUserCommand {
 
     private final FileID fileID;
     private final byte[] content;
 
     public UpdateFileContentCommand(AuthToken token, FileID fileID, byte[] content) {
-        super(token);
-        this.fileID = fileID;
-        this.content = content;
+        super(Preconditions.checkNotNull(token));
+        this.fileID = Preconditions.checkNotNull(fileID);
+        this.content = Preconditions.checkNotNull(content);
     }
 
     public FileID fileID() {

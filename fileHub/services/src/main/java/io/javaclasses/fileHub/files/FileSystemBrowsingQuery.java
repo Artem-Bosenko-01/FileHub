@@ -11,7 +11,7 @@ public final class FileSystemBrowsingQuery<I extends RecordID>
     private final I id;
 
     public FileSystemBrowsingQuery(AuthToken token, I id) {
-        super(token);
+        super(Preconditions.checkNotNull(token));
         this.id = Preconditions.checkNotNull(id);
     }
 

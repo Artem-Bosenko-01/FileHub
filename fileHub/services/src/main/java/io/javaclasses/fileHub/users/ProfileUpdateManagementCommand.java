@@ -1,5 +1,6 @@
 package io.javaclasses.fileHub.users;
 
+import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.AuthToken;
 import io.javaclasses.fileHub.AuthenticatedUserCommand;
 
@@ -16,12 +17,12 @@ public final class ProfileUpdateManagementCommand extends AuthenticatedUserComma
     private final String password;
 
     public ProfileUpdateManagementCommand(AuthToken token, UserID userID, String newLoginName, String firstName, String lastName, String password) {
-        super(token);
-        this.userID = userID;
-        this.newLoginName = newLoginName;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.password = password;
+        super(Preconditions.checkNotNull(token));
+        this.userID = Preconditions.checkNotNull(userID);
+        this.newLoginName = Preconditions.checkNotNull(newLoginName);
+        this.firstName = Preconditions.checkNotNull(firstName);
+        this.lastName = Preconditions.checkNotNull(lastName);
+        this.password = Preconditions.checkNotNull(password);
     }
 
     public UserID userID() {

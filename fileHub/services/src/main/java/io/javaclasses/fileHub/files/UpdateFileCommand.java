@@ -1,5 +1,6 @@
 package io.javaclasses.fileHub.files;
 
+import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.AuthToken;
 import io.javaclasses.fileHub.AuthenticatedUserCommand;
 import io.javaclasses.fileHub.folders.FolderID;
@@ -15,13 +16,13 @@ public final class UpdateFileCommand extends AuthenticatedUserCommand {
     private final FolderID folder;
 
     public UpdateFileCommand(AuthToken token, FileID id, String name, MimeType mimeType, Integer size, UserID owner, FolderID folder) {
-        super(token);
-        this.id = id;
-        this.name = name;
-        this.mimeType = mimeType;
-        this.size = size;
-        this.owner = owner;
-        this.folder = folder;
+        super(Preconditions.checkNotNull(token));
+        this.id = Preconditions.checkNotNull(id);
+        this.name = Preconditions.checkNotNull(name);
+        this.mimeType = Preconditions.checkNotNull(mimeType);
+        this.size = Preconditions.checkNotNull(size);
+        this.owner = Preconditions.checkNotNull(owner);
+        this.folder = Preconditions.checkNotNull(folder);
     }
 
     public FileID id() {

@@ -1,17 +1,18 @@
 package io.javaclasses.fileHub.users;
 
+import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.AnonymousUserCommand;
 
 import java.util.Objects;
 
-public class UserAuthenticatedCommand extends AnonymousUserCommand {
+public final class UserAuthenticatedCommand extends AnonymousUserCommand {
 
     private final String loginName;
     private final String password;
 
     public UserAuthenticatedCommand(String loginName, String password) {
-        this.loginName = loginName;
-        this.password = password;
+        this.loginName = Preconditions.checkNotNull(loginName);
+        this.password = Preconditions.checkNotNull(password);
     }
 
     public String loginName() {

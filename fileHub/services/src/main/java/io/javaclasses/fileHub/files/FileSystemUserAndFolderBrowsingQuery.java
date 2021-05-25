@@ -12,7 +12,7 @@ public final class FileSystemUserAndFolderBrowsingQuery extends Query {
     private final UserID userID;
 
     public FileSystemUserAndFolderBrowsingQuery(AuthToken token, FolderID folderID, UserID userID) {
-        super(token);
+        super(Preconditions.checkNotNull(token));
         this.folderID = Preconditions.checkNotNull(folderID);
         this.userID = Preconditions.checkNotNull(userID);
     }

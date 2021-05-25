@@ -1,26 +1,30 @@
 package io.javaclasses.fileHub.users;
 
+import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.AuthToken;
 import io.javaclasses.fileHub.Query;
 
 import java.util.Objects;
 
 public final class ProfileReadQuery extends Query {
-    public ProfileReadQuery(AuthToken token, UserID id) {
-        super(token);
-        this.id = id;
-    }
-
     private final UserID id;
 
+    public ProfileReadQuery(AuthToken token, UserID id) {
+        super(Preconditions.checkNotNull(token));
+        this.id = Preconditions.checkNotNull(id);
+    }
+
+
     public UserID id() {
-        return id;
+        return Preconditions.checkNotNull(id);
     }
 
     @Override
     public boolean equals(Object o) {
+
+        Preconditions.checkNotNull(o);
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (getClass() != o.getClass()) return false;
         ProfileReadQuery that = (ProfileReadQuery) o;
         return id.equals(that.id);
     }
@@ -29,4 +33,6 @@ public final class ProfileReadQuery extends Query {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+
 }

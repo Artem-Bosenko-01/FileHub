@@ -17,8 +17,8 @@ public final class CreateFileCommand extends AuthenticatedUserCommand {
         super(token);
         this.name = Preconditions.checkNotNull(name);
         this.mimeType = Preconditions.checkNotNull(mimeType);
-        this.owner = owner;
-        this.folder = folder;
+        this.owner = Preconditions.checkNotNull(owner);
+        this.folder = Preconditions.checkNotNull(folder);
     }
 
     public String name() {

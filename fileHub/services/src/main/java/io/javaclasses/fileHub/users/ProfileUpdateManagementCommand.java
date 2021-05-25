@@ -8,23 +8,28 @@ import io.javaclasses.fileHub.AuthenticatedUserCommand;
  * */
 public final class ProfileUpdateManagementCommand extends AuthenticatedUserCommand {
 
-    private final UserID id;
-    private final String loginName;
+
+    private final UserID userID;
+    private final String newLoginName;
     private final String firstName;
     private final String lastName;
     private final String password;
 
-    public ProfileUpdateManagementCommand(AuthToken token, UserID id, String loginName, String firstName, String lastName, String password) {
+    public ProfileUpdateManagementCommand(AuthToken token, UserID userID, String newLoginName, String firstName, String lastName, String password) {
         super(token);
-        this.id = id;
-        this.loginName = loginName;
+        this.userID = userID;
+        this.newLoginName = newLoginName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
     }
 
-    public String loginName() {
-        return loginName;
+    public UserID userID() {
+        return userID;
+    }
+
+    public String newLoginName() {
+        return newLoginName;
     }
 
     public String password() {
@@ -39,7 +44,4 @@ public final class ProfileUpdateManagementCommand extends AuthenticatedUserComma
         return lastName;
     }
 
-    public UserID id() {
-        return id;
-    }
 }

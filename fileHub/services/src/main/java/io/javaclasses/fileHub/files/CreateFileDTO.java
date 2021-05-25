@@ -6,22 +6,18 @@ import io.javaclasses.fileHub.users.UserID;
 
 public final class CreateFileDTO {
 
-    private final FileID id;
+    private final FileID fileID;
     private final String name;
     private final MimeType mimeType;
     private final UserID owner;
     private final FolderID folder;
 
-    public CreateFileDTO(FileID id, String name, MimeType mimeType, UserID owner, FolderID folder) {
-        this.id = Preconditions.checkNotNull(id);
+    public CreateFileDTO(FileID fileID, String name, MimeType mimeType, UserID owner, FolderID folder) {
+        this.fileID = Preconditions.checkNotNull(fileID);
         this.name = Preconditions.checkNotNull(name);
         this.mimeType = Preconditions.checkNotNull(mimeType);
         this.owner = Preconditions.checkNotNull(owner);
         this.folder = Preconditions.checkNotNull(folder);
-    }
-
-    public FileID id() {
-        return id;
     }
 
     public String name() {

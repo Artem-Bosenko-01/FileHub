@@ -9,7 +9,7 @@ class ProfileReadManagementProcessTest {
 
     @Test
     public void readInfoAboutUserByIdTest(){
-        RegisterUserCommand registerUserCommand = new RegisterUserCommand(new UserID(1), "badk@h.com","bbb","ccc","56478");
+        RegisterUserCommand registerUserCommand = new RegisterUserCommand("badk@h.com","bbb","ccc","56478");
         UserStorageInMemory userStorageInMemory = new UserStorageInMemory();
         UserRegistrationProcess userRegistrationProcess = new UserRegistrationProcess(userStorageInMemory);
         UserRegisterDTO registerDTO = null;
@@ -19,7 +19,7 @@ class ProfileReadManagementProcessTest {
             e.printStackTrace();
         }
 
-        ProfileReadQuery command = new ProfileReadQuery(new AuthToken("1"), new UserID(1));
+        ProfileReadQuery command = new ProfileReadQuery(new AuthToken("1"), new UserID("badk@h.com"));
         ProfileReadManagementView profileReadManagementProcess = new ProfileReadManagementView(userStorageInMemory);
 
         try {

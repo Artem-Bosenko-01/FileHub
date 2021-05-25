@@ -8,7 +8,7 @@ class UserAuthenticatedProcessTest {
 
     @Test
     public void authenticateTest(){
-        RegisterUserCommand registerUserCommand = new RegisterUserCommand(new UserID(1), "badk@h.com","bbb","ccc","56478");
+        RegisterUserCommand registerUserCommand = new RegisterUserCommand( "badk@h.com","bbb","ccc","56478");
         UserStorageInMemory userStorageInMemory = new UserStorageInMemory();
         UserRegistrationProcess userRegistrationProcess = new UserRegistrationProcess(userStorageInMemory);
         try {

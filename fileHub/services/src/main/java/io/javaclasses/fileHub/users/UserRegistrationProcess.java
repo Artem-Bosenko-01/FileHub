@@ -20,7 +20,7 @@ public class UserRegistrationProcess implements OpenProcess<RegisterUserCommand,
     @Override
     public UserRegisterDTO handle(RegisterUserCommand inputCommand) throws InvalidHandleCommandException {
 
-        UserID id = inputCommand.id();
+        UserID id = new UserID(inputCommand.loginName());
         String login = inputCommand.loginName();
         String password = PasswordEncoder.encode(inputCommand.password());
         String firstName = inputCommand.firstName();
@@ -39,10 +39,4 @@ public class UserRegistrationProcess implements OpenProcess<RegisterUserCommand,
         return new UserRegisterDTO(id,login,password,firstName,lastName);
     }
 
-    /*private int generateID(){
-        if(userStorage.records().isEmpty()){
-            return 1;
-        }
-        else return userStorage.records().size() + 1;
-    }*/
 }

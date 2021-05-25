@@ -7,9 +7,9 @@ import java.util.Objects;
 
 public final class UserID implements RecordID {
 
-    private final int id;
+    private final String id;
 
-    public UserID(int id) {
+    public UserID(String id) {
         this.id = Preconditions.checkNotNull(id);
     }
 
@@ -18,7 +18,7 @@ public final class UserID implements RecordID {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserID userID = (UserID) o;
-        return id == userID.id;
+        return id.equals(userID.id);
     }
 
     @Override
@@ -26,8 +26,4 @@ public final class UserID implements RecordID {
         return Objects.hash(id);
     }
 
-    @Override
-    public String toString() {
-        return String.valueOf(id);
-    }
 }

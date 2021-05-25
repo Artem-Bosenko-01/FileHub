@@ -25,13 +25,14 @@ public class CreateFileManagementProcess implements SecuredProcess<CreateFileCom
             logger.info("Start create file " + inputCommand.name());
         }
 
-        File file = new File(inputCommand.id());
+        File file = new File(new FileID(inputCommand.name(),inputCommand.owner(),inputCommand.folder()));
         file.setUserID(inputCommand.owner());
         file.setMimeType(inputCommand.mimeType());
         file.setName(inputCommand.name());
         file.setFolder(inputCommand.folder());
         file.setSize(0);
-        try {
+
+       try {
             fileStorage.create(file);
 
             if(logger.isInfoEnabled()){

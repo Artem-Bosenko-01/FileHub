@@ -2,6 +2,8 @@ package io.javaclasses.fileHub.files;
 
 import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.RecordID;
+import io.javaclasses.fileHub.folders.FolderID;
+import io.javaclasses.fileHub.users.UserID;
 
 import java.util.Objects;
 
@@ -9,10 +11,10 @@ import java.util.Objects;
  *
  * */
 public final class FileID implements RecordID {
-    private final int id;
+    private final String id;
 
-    public FileID(int id) {
-        this.id = Preconditions.checkNotNull(id);
+    public FileID(String name, UserID userID, FolderID folderID) {
+        this.id = Preconditions.checkNotNull(name) + Preconditions.checkNotNull(userID) + Preconditions.checkNotNull(folderID);
     }
 
     @Override

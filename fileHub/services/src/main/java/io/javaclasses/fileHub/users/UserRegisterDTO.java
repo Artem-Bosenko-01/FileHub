@@ -20,6 +20,14 @@ public final class UserRegisterDTO {
         this.lastName = lastName;
     }
 
+    public UserID id() {
+        return id;
+    }
+
+    public String loginName() {
+        return loginName;
+    }
+
     public String firstName() {
         return firstName;
     }

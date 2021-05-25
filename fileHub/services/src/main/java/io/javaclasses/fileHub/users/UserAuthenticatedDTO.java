@@ -1,23 +1,21 @@
 package io.javaclasses.fileHub.users;
 
+import io.javaclasses.fileHub.AuthToken;
+
 import java.util.Objects;
 
 public final class UserAuthenticatedDTO {
 
-    private final String loginName;
-    private final String password;
+    private final AuthToken token;
+    private final UserID id;
 
-    public UserAuthenticatedDTO(String loginName, String password) {
-        this.loginName = loginName;
-        this.password = password;
+    public UserAuthenticatedDTO(AuthToken token, UserID id) {
+        this.token = token;
+        this.id = id;
     }
 
-    public String loginName() {
-        return loginName;
-    }
-
-    public String password() {
-        return password;
+    public AuthToken token() {
+        return token;
     }
 
     @Override
@@ -25,11 +23,11 @@ public final class UserAuthenticatedDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserAuthenticatedDTO that = (UserAuthenticatedDTO) o;
-        return loginName.equals(that.loginName) && password.equals(that.password);
+        return token.equals(that.token);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(loginName, password);
+        return Objects.hash(token);
     }
 }

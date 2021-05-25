@@ -8,7 +8,7 @@ class UserRegistrationProcessTest {
 
     @Test
     public void registerUserTest(){
-        RegisterUserCommand command = new RegisterUserCommand(new UserID(1), "badk@h.com","bbb","ccc","56478");
+        RegisterUserCommand command = new RegisterUserCommand("badk@h.com","bbb","ccc","56478");
         UserStorageInMemory userStorageInMemory = new UserStorageInMemory();
         UserRegistrationProcess userRegistrationProcess = new UserRegistrationProcess(userStorageInMemory);
         try {
@@ -22,8 +22,8 @@ class UserRegistrationProcessTest {
 
     @Test
     public void registerUsersWithEqualsIdTest(){
-        RegisterUserCommand command = new RegisterUserCommand(new UserID(1), "badk@h.com","bbb","ccc","56478");
-        RegisterUserCommand command1 = new RegisterUserCommand(new UserID(1), "badk@h.com","bbb","ccc","56478");
+        RegisterUserCommand command = new RegisterUserCommand("badk@h.com","bbb","ccc","56478");
+        RegisterUserCommand command1 = new RegisterUserCommand("badk@h.com","bbb","ccc","56478");
         UserStorageInMemory userStorageInMemory = new UserStorageInMemory();
         UserRegistrationProcess userRegistrationProcess = new UserRegistrationProcess(userStorageInMemory);
         try {

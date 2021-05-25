@@ -10,7 +10,7 @@ class ProfileUpdateManagementProcessTest {
 
     @Test
     public void updateInfoUserTest(){
-        RegisterUserCommand registerUserCommand = new RegisterUserCommand(new UserID(1), "badk@h.com","bbb","ccc","56478");
+        RegisterUserCommand registerUserCommand = new RegisterUserCommand("badk@h.com","bbb","ccc","56478");
         UserStorageInMemory userStorageInMemory = new UserStorageInMemory();
         UserRegistrationProcess userRegistrationProcess = new UserRegistrationProcess(userStorageInMemory);
         try {
@@ -19,10 +19,11 @@ class ProfileUpdateManagementProcessTest {
             e.printStackTrace();
         }
         ProfileUpdateManagementCommand command = new ProfileUpdateManagementCommand(new AuthToken("1"),
-                new UserID(1), "aaa@h.com","cas","abc","56478");
+                new UserID("badk@h.com"), "aaa@h.com", "cas","abc","56478");
         ProfileUpdateManagementProcess process = new ProfileUpdateManagementProcess(userStorageInMemory);
         try {
             UserRegisterDTO userRegisterDTO = process.handle(command);
+            Assertions.assertEquals(userRegisterDTO.loginName(), "aaa@h.com");
             Assertions.assertEquals(userRegisterDTO.firstName(), "cas");
             Assertions.assertEquals(userRegisterDTO.lastName(), "abc");
         } catch (InvalidHandleCommandException e) {

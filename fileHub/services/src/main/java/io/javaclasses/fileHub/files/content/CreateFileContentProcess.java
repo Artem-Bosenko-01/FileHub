@@ -3,8 +3,6 @@ package io.javaclasses.fileHub.files.content;
 import io.javaclasses.fileHub.DuplicatedIDException;
 import io.javaclasses.fileHub.InvalidHandleCommandException;
 import io.javaclasses.fileHub.SecuredProcess;
-import io.javaclasses.fileHub.files.FIleContentStorage;
-import io.javaclasses.fileHub.files.FileContent;
 
 public class CreateFileContentProcess implements SecuredProcess<CreateFileContentCommand, CreateFileContentDTO> {
 

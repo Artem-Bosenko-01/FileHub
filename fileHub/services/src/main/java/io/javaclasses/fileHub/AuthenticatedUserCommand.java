@@ -3,7 +3,7 @@ package io.javaclasses.fileHub;
 import com.google.common.base.Preconditions;
 
 /**
- * This is base, that carries information from client, that authenticated in Filegub application.
+ * This is base, that carries information from client, that authenticated in Filehub application.
  **/
 public class AuthenticatedUserCommand implements Command{
 

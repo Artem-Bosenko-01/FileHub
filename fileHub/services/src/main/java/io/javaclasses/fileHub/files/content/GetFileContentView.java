@@ -3,8 +3,6 @@ package io.javaclasses.fileHub.files.content;
 import io.javaclasses.fileHub.InvalidHandleCommandException;
 import io.javaclasses.fileHub.NotExistIDException;
 import io.javaclasses.fileHub.View;
-import io.javaclasses.fileHub.files.FIleContentStorage;
-import io.javaclasses.fileHub.files.FileContent;
 
 import java.util.Optional;
 

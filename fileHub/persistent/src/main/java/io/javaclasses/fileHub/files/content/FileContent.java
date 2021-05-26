@@ -1,8 +1,9 @@
-package io.javaclasses.fileHub.files;
+package io.javaclasses.fileHub.files.content;
 
 import io.javaclasses.fileHub.DataRecord;
+import io.javaclasses.fileHub.files.FileID;
 
-public class FileContent implements DataRecord<FileID> {
+public final class FileContent implements DataRecord<FileID> {
 
     private final FileID id;
     private byte[] content;

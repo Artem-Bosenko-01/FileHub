@@ -4,7 +4,7 @@ package io.javaclasses.fileHub;
 import com.google.common.base.Preconditions;
 
 /**
- * This is key, that gives to object some permissions.
+ * This is key, that gives to object some permissions. This token may uses in services.
  * */
 public final class AuthToken {
 

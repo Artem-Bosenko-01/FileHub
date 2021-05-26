@@ -38,7 +38,7 @@ public final class Folder implements DataRecord<FolderID> {
         this.owner = Preconditions.checkNotNull(owner);
     }
 
-    public FolderID getParentFolder() {
+    public FolderID parentFolder() {
         return parentFolder;
     }
 

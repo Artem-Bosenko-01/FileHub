@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface FolderStorage extends Storage<FolderID,Folder> {
-    List<Folder> findAllByUserID(UserID id) throws NotExistIDException;
-    Optional<Folder> findFolderByName(String name, UserID owner);
+    List<Folder> findAllFoldersByParentFolderId(FolderID parentId) throws NotExistIDException;
+    FolderID findParentFolderByChildId(FolderID childId)throws NotExistIDException;
 }

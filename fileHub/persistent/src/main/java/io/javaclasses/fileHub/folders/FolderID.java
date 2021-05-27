@@ -14,6 +14,8 @@ public final class FolderID implements RecordID {
         this.id = Preconditions.checkNotNull(name) + Preconditions.checkNotNull(userID);
     }
 
+    public FolderID(){id = "";}
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -29,6 +31,6 @@ public final class FolderID implements RecordID {
 
     @Override
     public String toString() {
-        return String.valueOf(id);
+        return id;
     }
 }

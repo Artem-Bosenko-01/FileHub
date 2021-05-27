@@ -13,6 +13,8 @@ public final class AuthToken {
         this.value = Preconditions.checkNotNull(value);
     }
 
+    public AuthToken(){value = "";}
+
     public String value() {
         return value;
     }

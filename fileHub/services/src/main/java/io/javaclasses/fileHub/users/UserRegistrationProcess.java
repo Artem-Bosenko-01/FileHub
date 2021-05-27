@@ -11,9 +11,9 @@ import io.javaclasses.fileHub.OpenProcess;
  * */
 public class UserRegistrationProcess implements OpenProcess<RegisterUserCommand,UserRegisterDTO> {
 
-    private final AbstractInMemoryStorage<UserID, User> userStorage;
+    private final UserStorage userStorage;
 
-    public UserRegistrationProcess(AbstractInMemoryStorage<UserID, User> userStorage){
+    public UserRegistrationProcess(UserStorage userStorage){
         this.userStorage = Preconditions.checkNotNull(userStorage);
     }
 

@@ -10,12 +10,12 @@ import org.slf4j.LoggerFactory;
 /**
  *
  * */
-public class CreateFileManagementProcess implements SecuredProcess<CreateFileCommand, CreateFileDTO> {
+class CreateFileManagementProcess implements SecuredProcess<CreateFileCommand, CreateFileDTO> {
 
-    private final FileStorageInMemory fileStorage;
+    private final FileStorage fileStorage;
     private final Logger logger = LoggerFactory.getLogger(CreateFileManagementProcess.class);
 
-    public CreateFileManagementProcess(FileStorageInMemory fileStorage){
+    public CreateFileManagementProcess(FileStorage fileStorage){
         this.fileStorage = Preconditions.checkNotNull(fileStorage);
     }
 

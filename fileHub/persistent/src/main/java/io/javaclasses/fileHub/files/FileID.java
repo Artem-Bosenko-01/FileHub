@@ -17,6 +17,10 @@ public final class FileID implements RecordID {
         this.id = Preconditions.checkNotNull(name) + Preconditions.checkNotNull(userID) + Preconditions.checkNotNull(folderID);
     }
 
+    public FileID(){
+        id = "";
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -32,6 +36,6 @@ public final class FileID implements RecordID {
 
     @Override
     public String toString() {
-        return String.valueOf(id);
+        return id;
     }
 }

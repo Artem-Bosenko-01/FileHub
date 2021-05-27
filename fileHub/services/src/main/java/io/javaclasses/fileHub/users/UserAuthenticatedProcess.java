@@ -10,9 +10,9 @@ import java.util.UUID;
 
 public class UserAuthenticatedProcess implements OpenProcess<UserAuthenticatedCommand, UserAuthenticatedDTO> {
 
-    private final UserStorageInMemory userStorage;
+    private final UserStorage userStorage;
 
-    public UserAuthenticatedProcess(UserStorageInMemory userStorage){
+    public UserAuthenticatedProcess(UserStorage userStorage){
         this.userStorage = Preconditions.checkNotNull(userStorage);
     }
 

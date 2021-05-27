@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.folders.FolderID;
 import io.javaclasses.fileHub.users.UserID;
 
-public final class CreateFileDTO {
+final class CreateFileDTO {
 
     private final FileID fileID;
     private final String name;

@@ -15,10 +15,10 @@ import java.util.Optional;
  *
  */
 public class ProfileUpdateManagementProcess implements SecuredProcess<ProfileUpdateManagementCommand, UserRegisterDTO> {
-    private final UserStorageInMemory userStorage;
+    private final UserStorage userStorage;
     private final Logger logger = LoggerFactory.getLogger(ProfileUpdateManagementProcess.class);
 
-    public ProfileUpdateManagementProcess(UserStorageInMemory userStorage) {
+    public ProfileUpdateManagementProcess(UserStorage userStorage) {
         this.userStorage = Preconditions.checkNotNull(userStorage);
     }
 

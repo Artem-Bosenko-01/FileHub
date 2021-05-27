@@ -16,10 +16,4 @@ class UserAuthenticatedDTOTest {
             e.printStackTrace();
         }
     }
-
-    @Test
-    public void checkForNullPointerInSetters(){
-        NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicInstanceMethods(UserAuthenticatedDTOTest.class.getMethods());
-    }
 }

@@ -31,4 +31,11 @@ public class FolderStorageInMemory extends AbstractInMemoryStorage<FolderID, Fol
             return findFolder.get().parentFolder();
         }else throw new NotExistIDException("Folder doesn't exist: " + childId);
     }
+
+    @Override
+    public Optional<Folder> findFolderByName(String name, UserID owner) {
+        return records().values().stream().
+                filter(folder -> folder.name().equals(name) && folder.owner().equals(owner)).
+                findFirst();
+    }
 }

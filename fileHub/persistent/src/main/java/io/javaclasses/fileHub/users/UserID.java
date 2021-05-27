@@ -13,6 +13,8 @@ public final class UserID implements RecordID {
         this.id = Preconditions.checkNotNull(id);
     }
 
+    public UserID(){id="";}
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

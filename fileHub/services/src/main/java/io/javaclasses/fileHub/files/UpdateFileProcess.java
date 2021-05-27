@@ -23,6 +23,7 @@ public class UpdateFileProcess implements SecuredProcess<UpdateFileCommand, Crea
         file.setSize(inputCommand.size());
         file.setMimeType(inputCommand.mimeType());
         file.setFolder(inputCommand.folder());
+        file.setUserID(inputCommand.owner());
 
         try {
             fileStorage.update(file);

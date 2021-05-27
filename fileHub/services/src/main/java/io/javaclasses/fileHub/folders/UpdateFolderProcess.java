@@ -26,7 +26,7 @@ public class UpdateFolderProcess implements SecuredProcess<UpdateFolderCommand, 
 
         try {
             folderStorageInMemory.update(folder);
-            return new UpdateFolderDTO(folder.id(), folder.name(), folder.getParentFolder());
+            return new UpdateFolderDTO(folder.id(), folder.name(), folder.parentFolder());
         } catch (NotExistIDException e) {
             throw new InvalidHandleCommandException(e.getMessage());
         }

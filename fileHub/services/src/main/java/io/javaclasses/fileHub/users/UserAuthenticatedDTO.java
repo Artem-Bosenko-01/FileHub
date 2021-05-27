@@ -1,5 +1,6 @@
 package io.javaclasses.fileHub.users;
 
+import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.AuthToken;
 
 import java.util.Objects;
@@ -10,8 +11,8 @@ public final class UserAuthenticatedDTO {
     private final UserID id;
 
     public UserAuthenticatedDTO(AuthToken token, UserID id) {
-        this.token = token;
-        this.id = id;
+        this.token = Preconditions.checkNotNull(token);
+        this.id = Preconditions.checkNotNull(id);
     }
 
     public AuthToken token() {

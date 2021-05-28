@@ -32,6 +32,6 @@ public class UploadFileProcess implements SecuredProcess<UploadFileCommand, Uplo
 
         CreateFileContentDTO fileContentDTO = createFileContentProcess.handle(contentCommand);
 
-        return new UploadFileDTO();
+        return new UploadFileDTO(fileDTO.fileID(), fileContentDTO.content());
     }
 }

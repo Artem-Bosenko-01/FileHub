@@ -1,12 +1,13 @@
 package io.javaclasses.fileHub.users.tokens;
 
 import com.google.common.base.Preconditions;
+import io.javaclasses.fileHub.DataRecord;
 import io.javaclasses.fileHub.users.UserID;
 
 import java.util.Date;
 import java.util.Objects;
 
-public final class AuthorizationUsers {
+public final class AuthorizationUsers implements DataRecord<AuthToken> {
 
     private final AuthToken token;
     private final UserID userID;
@@ -25,10 +26,6 @@ public final class AuthorizationUsers {
 
     public void setDate(Date expirationTime) {
         this.expirationTime = Preconditions.checkNotNull(expirationTime);
-    }
-
-    public AuthToken token() {
-        return token;
     }
 
     public UserID userID() {
@@ -50,5 +47,10 @@ public final class AuthorizationUsers {
     @Override
     public int hashCode() {
         return Objects.hash(token, userID, expirationTime);
+    }
+
+    @Override
+    public AuthToken id() {
+        return token;
     }
 }

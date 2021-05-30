@@ -1,6 +1,6 @@
 package io.javaclasses.fileHub.folders;
 
-import io.javaclasses.fileHub.AuthToken;
+import io.javaclasses.fileHub.users.tokens.AuthToken;
 import io.javaclasses.fileHub.AuthenticatedUserCommand;
 import io.javaclasses.fileHub.users.UserID;
 

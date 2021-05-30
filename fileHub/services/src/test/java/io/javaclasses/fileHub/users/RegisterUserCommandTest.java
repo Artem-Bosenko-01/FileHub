@@ -1,10 +1,7 @@
 package io.javaclasses.fileHub.users;
 
 import com.google.common.testing.NullPointerTester;
-import io.javaclasses.fileHub.AuthToken;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class RegisterUserCommandTest {
     @Test

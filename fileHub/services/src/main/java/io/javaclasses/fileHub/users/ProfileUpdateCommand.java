@@ -1,13 +1,15 @@
 package io.javaclasses.fileHub.users;
 
 import com.google.common.base.Preconditions;
-import io.javaclasses.fileHub.AuthToken;
+import io.javaclasses.fileHub.users.tokens.AuthToken;
 import io.javaclasses.fileHub.AuthenticatedUserCommand;
 
 /**
+ *  This is object, that contains data, that was inputted by user when he want to update
+ *  his profile information.
  *
  * */
-public final class ProfileUpdateManagementCommand extends AuthenticatedUserCommand {
+public final class ProfileUpdateCommand extends AuthenticatedUserCommand {
 
 
     private final UserID userID;
@@ -16,7 +18,7 @@ public final class ProfileUpdateManagementCommand extends AuthenticatedUserComma
     private final String lastName;
     private final String password;
 
-    public ProfileUpdateManagementCommand(AuthToken token, UserID userID, String newLoginName, String firstName, String lastName, String password) {
+    public ProfileUpdateCommand(AuthToken token, UserID userID, String newLoginName, String firstName, String lastName, String password) {
         super(Preconditions.checkNotNull(token));
         this.userID = Preconditions.checkNotNull(userID);
         this.newLoginName = Preconditions.checkNotNull(newLoginName);

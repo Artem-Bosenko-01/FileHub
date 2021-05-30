@@ -15,7 +15,7 @@ import java.util.List;
 public class FileSystemBrowsingViewByFolderAndUser implements View<FileSystemUserAndFolderBrowsingQuery, List<File>> {
 
     private final FileStorageInMemory fileStorage;
-    private final Logger logger = LoggerFactory.getLogger(FileSystemBrowsingViewByUser.class);
+    private final Logger logger = LoggerFactory.getLogger(FileSystemBrowsingViewByFolderAndUser.class);
 
     public FileSystemBrowsingViewByFolderAndUser(FileStorageInMemory fileStorage){
         this.fileStorage = Preconditions.checkNotNull(fileStorage);

@@ -6,6 +6,7 @@ import io.javaclasses.fileHub.AnonymousUserCommand;
 import java.util.Objects;
 
 /**
+ *  This is object, that contains data, that was inputted by user in the process of registration.
  *
  * */
 public final class RegisterUserCommand extends AnonymousUserCommand {

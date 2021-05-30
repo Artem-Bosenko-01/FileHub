@@ -1,10 +1,11 @@
-package io.javaclasses.fileHub;
+package io.javaclasses.fileHub.users.tokens;
 
 
 import com.google.common.base.Preconditions;
 
 /**
- * This is key, that gives to object some permissions. This token may uses in services.
+ * This is key, that authenticated user in application and gives him some permissions.
+ * This token may uses in services.
  * */
 public final class AuthToken {
 

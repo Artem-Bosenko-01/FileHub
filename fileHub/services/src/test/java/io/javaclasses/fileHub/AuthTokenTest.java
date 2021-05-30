@@ -1,8 +1,7 @@
 package io.javaclasses.fileHub;
 
 import com.google.common.testing.NullPointerTester;
-import io.javaclasses.fileHub.users.UserID;
-import io.javaclasses.fileHub.users.UserRegisterDTO;
+import io.javaclasses.fileHub.users.tokens.AuthToken;
 import org.junit.jupiter.api.Test;
 
 

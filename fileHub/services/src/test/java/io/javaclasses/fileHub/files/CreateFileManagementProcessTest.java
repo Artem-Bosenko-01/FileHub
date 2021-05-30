@@ -1,14 +1,11 @@
 package io.javaclasses.fileHub.files;
 
-import io.javaclasses.fileHub.AuthToken;
+import io.javaclasses.fileHub.users.tokens.AuthToken;
 import io.javaclasses.fileHub.InvalidHandleCommandException;
 import io.javaclasses.fileHub.folders.FolderID;
 import io.javaclasses.fileHub.users.UserID;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class CreateFileManagementProcessTest {
 

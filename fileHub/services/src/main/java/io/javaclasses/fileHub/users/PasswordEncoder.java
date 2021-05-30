@@ -6,6 +6,9 @@ import com.google.common.hash.Hashing;
 
 import java.nio.charset.StandardCharsets;
 
+/**
+ * This is utility to encode input password in hashed string.
+ * */
 public final class PasswordEncoder {
 
     public static String encode(String password){

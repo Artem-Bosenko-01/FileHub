@@ -1,11 +1,15 @@
 package io.javaclasses.fileHub.users;
 
 import com.google.common.base.Preconditions;
-import io.javaclasses.fileHub.AuthToken;
+import io.javaclasses.fileHub.users.tokens.AuthToken;
 import io.javaclasses.fileHub.Query;
 
 import java.util.Objects;
 
+/**
+ *  This is object, that contains data, that needs to get full information about user by his {@link UserID id}.
+ *
+ * */
 public final class ProfileReadQuery extends Query {
     private final UserID id;
 

@@ -1,5 +1,7 @@
 package io.javaclasses.fileHub;
 
+import io.javaclasses.fileHub.users.tokens.AuthToken;
+
 /**
  * This is base, that carries information from client, that didn't authenticate in Filegub application.
  **/

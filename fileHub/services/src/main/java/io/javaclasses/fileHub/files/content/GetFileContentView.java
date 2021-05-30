@@ -18,11 +18,10 @@ public class GetFileContentView implements View<GetFileContentQuery, GetFileCont
     @Override
     public GetFileContentDTO handle(GetFileContentQuery inputCommand) throws InvalidHandleCommandException {
         try {
-            Optional<FileContent> content = contentStorage.findByID(inputCommand.fileID());
-            if(content.isPresent()){
-                return new GetFileContentDTO(content.get().content());
-            }
-            else throw new InvalidHandleCommandException("Id doesn't exist "+inputCommand.fileID());
+            FileContent content = contentStorage.findByID(inputCommand.fileID());
+
+                return new GetFileContentDTO(content.content());
+
         } catch (NotExistIDException e) {
             throw new InvalidHandleCommandException(e.getMessage());
         }

@@ -5,16 +5,16 @@ import com.google.common.base.Preconditions;
 import java.util.Objects;
 
 /**
- *
+ *  This is object, that contains full data information about user in Filehub application.
  * */
-public final class UserRegisterDTO {
+public final class UserDTO {
     private final UserID id;
     private final String loginName;
     private final String password;
     private final String firstName;
     private final String lastName;
 
-    public UserRegisterDTO(UserID id, String loginName, String password, String firstName, String lastName) {
+    public UserDTO(UserID id, String loginName, String password, String firstName, String lastName) {
         this.id = Preconditions.checkNotNull(id);
         this.loginName = Preconditions.checkNotNull(loginName);
         this.password = Preconditions.checkNotNull(password);
@@ -42,7 +42,7 @@ public final class UserRegisterDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserRegisterDTO userDTO = (UserRegisterDTO) o;
+        UserDTO userDTO = (UserDTO) o;
         return id.equals(userDTO.id) && loginName.equals(userDTO.loginName) && password.equals(userDTO.password) && firstName.equals(userDTO.firstName) && lastName.equals(userDTO.lastName);
     }
 

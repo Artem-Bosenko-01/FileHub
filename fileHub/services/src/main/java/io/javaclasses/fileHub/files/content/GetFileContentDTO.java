@@ -2,6 +2,10 @@ package io.javaclasses.fileHub.files.content;
 
 import com.google.common.base.Preconditions;
 
+/**
+ * This is object, that contains data after successful
+ * execution {@link GetFileContentView get file's content process}.
+ */
 public final class GetFileContentDTO {
     private final byte[] content;
 

@@ -3,7 +3,11 @@ package io.javaclasses.fileHub.files.content;
 import io.javaclasses.fileHub.DuplicatedIDException;
 import io.javaclasses.fileHub.InvalidHandleCommandException;
 import io.javaclasses.fileHub.SecuredProcess;
+import io.javaclasses.fileHub.files.FileID;
 
+/**
+ * This is service to create file's content to existed {@link FileID  file} in authenticated user's directory.
+ */
 public class CreateFileContentProcess implements SecuredProcess<CreateFileContentCommand, CreateFileContentDTO> {
 
     private final FIleContentStorage contentStorage;

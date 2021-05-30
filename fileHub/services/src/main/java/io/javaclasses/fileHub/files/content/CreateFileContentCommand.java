@@ -5,6 +5,11 @@ import io.javaclasses.fileHub.users.tokens.AuthToken;
 import io.javaclasses.fileHub.AuthenticatedUserCommand;
 import io.javaclasses.fileHub.files.FileID;
 
+/**
+ *  This is object, that contains data, that needs to create content for existed file's in Filehub application
+ *  by authenticated user.
+ *
+ * */
 public final class CreateFileContentCommand extends AuthenticatedUserCommand {
 
     private final FileID fileID;

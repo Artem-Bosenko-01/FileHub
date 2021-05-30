@@ -5,6 +5,11 @@ import io.javaclasses.fileHub.users.tokens.AuthToken;
 import io.javaclasses.fileHub.Query;
 import io.javaclasses.fileHub.users.UserID;
 
+/**
+ *  This is object, that contains data, that needs to get information for existed folder by name
+ *  in Filehub application by {@link UserID authenticated user} .
+ *
+ * */
 public final class GetFolderByNameQuery extends Query {
     private final String name;
     private final UserID owner;

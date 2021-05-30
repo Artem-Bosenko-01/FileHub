@@ -5,6 +5,11 @@ import io.javaclasses.fileHub.users.tokens.AuthToken;
 import io.javaclasses.fileHub.AuthenticatedUserCommand;
 import io.javaclasses.fileHub.users.UserID;
 
+/**
+ *  This is object, that contains data, that needs to create new folder and put to {@link FolderStorage storage}
+ *  in Filehub application by {@link UserID authenticated user} .
+ *
+ * */
 public final class CreateFolderCommand extends AuthenticatedUserCommand {
 
     private final String name;

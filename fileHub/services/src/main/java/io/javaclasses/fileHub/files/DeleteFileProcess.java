@@ -27,7 +27,7 @@ public class DeleteFileProcess implements SecuredProcess<DeleteFileCommand, Dele
         try {
             fileStorage.delete(inputCommand.id());
             if(logger.isInfoEnabled()){
-                logger.info("Deleted"+ inputCommand.id() +" was successful");
+                logger.info("Deleted "+ inputCommand.id() +" was successful");
             }
             return new DeleteFileDTO(inputCommand.id());
         } catch (NotExistIDException e) {

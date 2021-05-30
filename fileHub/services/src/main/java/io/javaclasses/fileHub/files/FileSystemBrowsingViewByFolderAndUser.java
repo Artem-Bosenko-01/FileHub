@@ -10,7 +10,8 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 /**
- * This is service to delete existed file in authenticated user's directory by {@link FileID id}.
+ * This is service to get existed file in authenticated user's directory by {@link io.javaclasses.fileHub.folders.FolderID folder}
+ * and {@link io.javaclasses.fileHub.users.UserID user}.
  */
 public class FileSystemBrowsingViewByFolderAndUser implements View<FileSystemUserAndFolderBrowsingQuery, List<File>> {
 
@@ -35,6 +36,11 @@ public class FileSystemBrowsingViewByFolderAndUser implements View<FileSystemUse
                 logger.error(e.getMessage());
             }
             throw new InvalidHandleCommandException(e.getMessage());
+        }
+        finally {
+            if(logger.isInfoEnabled()){
+                logger.info("Read files by User: " +query.userID() + ". And folder: " + query.folderID() + ". Was successful");
+            }
         }
     }
 }

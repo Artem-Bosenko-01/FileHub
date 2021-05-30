@@ -2,6 +2,10 @@ package io.javaclasses.fileHub.folders;
 
 import com.google.common.base.Preconditions;
 
+/**
+ * This is object, that contains data after successful
+ * execution {@link UpdateFolderProcess update folder process}.
+ */
 public final class UpdateFolderDTO {
 
     private final FolderID folderID;

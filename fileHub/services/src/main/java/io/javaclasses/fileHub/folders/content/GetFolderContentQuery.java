@@ -6,6 +6,11 @@ import io.javaclasses.fileHub.Query;
 import io.javaclasses.fileHub.folders.FolderID;
 import io.javaclasses.fileHub.users.UserID;
 
+/**
+ *  This is object, that contains data, that needs to get content for existed folder's in Filehub application
+ *  by {@link FolderID id} and {@link UserID owner}.
+ *
+ * */
 public final class GetFolderContentQuery extends Query {
 
     private final FolderID id;

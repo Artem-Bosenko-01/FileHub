@@ -1,7 +1,11 @@
 package io.javaclasses.fileHub;
 
-import java.util.Optional;
-
+/**
+ * This is abstract base of CRUD operations for data manipulations.
+ *
+ * @param <E> type of {@link DataRecord record}.
+ * @param <I> identifier key for record.
+ * */
 public interface Storage <I extends RecordID, E extends DataRecord<I>>{
     void create(E inputDataObject) throws DuplicatedIDException;
     void update(E inputDataObject) throws NotExistIDException;

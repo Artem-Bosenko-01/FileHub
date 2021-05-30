@@ -6,18 +6,18 @@ import io.javaclasses.fileHub.users.UserID;
 import java.util.Date;
 import java.util.Objects;
 
-public final class AuthorizationToken {
+public final class AuthorizationUsers {
 
     private final AuthToken token;
     private final UserID userID;
     private Date expirationTime;
 
-    public AuthorizationToken(AuthToken token, UserID userID) {
+    public AuthorizationUsers(AuthToken token, UserID userID) {
         this.token = Preconditions.checkNotNull(token);
         this.userID = Preconditions.checkNotNull(userID);
     }
 
-    public AuthorizationToken(AuthToken token, UserID userID, Date expirationTime) {
+    public AuthorizationUsers(AuthToken token, UserID userID, Date expirationTime) {
         this.token = Preconditions.checkNotNull(token);
         this.userID = Preconditions.checkNotNull(userID);
         this.expirationTime = Preconditions.checkNotNull(expirationTime);
@@ -43,7 +43,7 @@ public final class AuthorizationToken {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AuthorizationToken that = (AuthorizationToken) o;
+        AuthorizationUsers that = (AuthorizationUsers) o;
         return token.equals(that.token) && userID.equals(that.userID) && Objects.equals(expirationTime, that.expirationTime);
     }
 

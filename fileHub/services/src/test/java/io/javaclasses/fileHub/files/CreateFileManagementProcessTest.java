@@ -17,7 +17,7 @@ class CreateFileManagementProcessTest {
                 "file.txt", MimeType.TEXT, userID, folderID);
 
         FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
-        CreateFileManagementProcess createFileManagementProcess = new CreateFileManagementProcess(fileStorageInMemory);
+        CreateFileProcess createFileManagementProcess = new CreateFileProcess(fileStorageInMemory);
 
         try {
             CreateFileDTO fileDTO = createFileManagementProcess.handle(createFileCommand);
@@ -38,7 +38,7 @@ class CreateFileManagementProcessTest {
                 "file.txt", MimeType.TEXT, userID, folderID);
 
         FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
-        CreateFileManagementProcess createFileManagementProcess = new CreateFileManagementProcess(fileStorageInMemory);
+        CreateFileProcess createFileManagementProcess = new CreateFileProcess(fileStorageInMemory);
 
         try {
             createFileManagementProcess.handle(createFileCommand);

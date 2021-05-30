@@ -14,7 +14,7 @@ class UpdateFileProcessTest {
         CreateFileCommand createFileCommand = new CreateFileCommand(new AuthToken(UUID.randomUUID().toString()),
                 name,MimeType.TEXT,userID,folderID);
 
-        CreateFileManagementProcess createFileManagementProcess = new CreateFileManagementProcess(fileStorageInMemory);
+        CreateFileProcess createFileManagementProcess = new CreateFileProcess(fileStorageInMemory);
 
         try {
             return createFileManagementProcess.handle(createFileCommand);

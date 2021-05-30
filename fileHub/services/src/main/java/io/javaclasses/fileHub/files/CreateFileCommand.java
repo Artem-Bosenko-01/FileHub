@@ -6,6 +6,11 @@ import io.javaclasses.fileHub.AuthenticatedUserCommand;
 import io.javaclasses.fileHub.folders.FolderID;
 import io.javaclasses.fileHub.users.UserID;
 
+/**
+ *  This is object, that contains data, that needs to create new file without it file content to Filehub application
+ *  by authenticated user.
+ *
+ * */
 final class CreateFileCommand extends AuthenticatedUserCommand {
 
     private final String name;

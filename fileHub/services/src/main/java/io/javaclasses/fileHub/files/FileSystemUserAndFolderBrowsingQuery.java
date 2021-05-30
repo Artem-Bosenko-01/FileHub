@@ -6,6 +6,11 @@ import io.javaclasses.fileHub.Query;
 import io.javaclasses.fileHub.folders.FolderID;
 import io.javaclasses.fileHub.users.UserID;
 
+/**
+ *  This is object, that contains data, that needs to find list of files by {@link FolderID folder} and
+ *  {@link UserID owner}.
+ *
+ * */
 public final class FileSystemUserAndFolderBrowsingQuery extends Query {
 
     private final FolderID folderID;

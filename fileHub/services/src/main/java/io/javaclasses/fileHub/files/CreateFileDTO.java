@@ -2,8 +2,13 @@ package io.javaclasses.fileHub.files;
 
 import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.folders.FolderID;
+import io.javaclasses.fileHub.users.UserAuthenticatedProcess;
 import io.javaclasses.fileHub.users.UserID;
 
+/**
+ * This is object, that contains data after successful
+ * execution {@link CreateFileProcess create file process}.
+ */
 final class CreateFileDTO {
 
     private final FileID fileID;

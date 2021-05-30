@@ -2,6 +2,10 @@ package io.javaclasses.fileHub.files;
 
 import com.google.common.base.Preconditions;
 
+/**
+ * This is object, that contains data after successful
+ * execution {@link DeleteFileProcess delete file process}.
+ */
 public final class DeleteFileDTO {
     private final String DELETED_FILE_ID;
 

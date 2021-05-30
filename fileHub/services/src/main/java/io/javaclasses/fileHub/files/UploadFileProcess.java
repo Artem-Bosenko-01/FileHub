@@ -8,6 +8,9 @@ import io.javaclasses.fileHub.files.content.CreateFileContentDTO;
 import io.javaclasses.fileHub.files.content.CreateFileContentProcess;
 import io.javaclasses.fileHub.files.content.FIleContentStorage;
 
+/**
+ * This is service to uploading new file in authenticated user's directory.
+ */
 public class UploadFileProcess implements SecuredProcess<UploadFileCommand, UploadFileDTO> {
 
     private final FIleContentStorage contentStorage;
@@ -23,7 +26,7 @@ public class UploadFileProcess implements SecuredProcess<UploadFileCommand, Uplo
     public UploadFileDTO handle(UploadFileCommand inputCommand) throws InvalidHandleCommandException {
         CreateFileCommand createFileCommand = new CreateFileCommand(inputCommand.token(),
                 inputCommand.name(), inputCommand.mimeType(), inputCommand.owner(), inputCommand.folder());
-        CreateFileManagementProcess createFileManagementProcess = new CreateFileManagementProcess(fileStorage);
+        CreateFileProcess createFileManagementProcess = new CreateFileProcess(fileStorage);
 
         CreateFileDTO fileDTO = createFileManagementProcess.handle(createFileCommand);
 

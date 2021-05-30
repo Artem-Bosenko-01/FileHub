@@ -6,6 +6,10 @@ import io.javaclasses.fileHub.AuthenticatedUserCommand;
 import io.javaclasses.fileHub.folders.FolderID;
 import io.javaclasses.fileHub.users.UserID;
 
+/**
+ *  This is object, that contains data, that needs to upload new file to Filehub application by authenticated user.
+ *
+ * */
 public class UploadFileCommand extends AuthenticatedUserCommand {
 
     private final String name;

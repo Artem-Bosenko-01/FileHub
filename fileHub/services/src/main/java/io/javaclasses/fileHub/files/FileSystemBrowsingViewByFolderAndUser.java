@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 /**
- *
- * */
+ * This is service to delete existed file in authenticated user's directory by {@link FileID id}.
+ */
 public class FileSystemBrowsingViewByFolderAndUser implements View<FileSystemUserAndFolderBrowsingQuery, List<File>> {
 
     private final FileStorageInMemory fileStorage;

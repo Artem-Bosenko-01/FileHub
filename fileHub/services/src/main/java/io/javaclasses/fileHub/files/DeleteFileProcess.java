@@ -8,8 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
- * */
+ * This is service to delete existed file in authenticated user's directory.
+ */
 public class DeleteFileProcess implements SecuredProcess<DeleteFileCommand, DeleteFileDTO> {
 
     private final FileStorageInMemory fileStorage;

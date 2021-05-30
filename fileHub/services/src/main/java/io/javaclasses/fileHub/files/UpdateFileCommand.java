@@ -6,6 +6,10 @@ import io.javaclasses.fileHub.AuthenticatedUserCommand;
 import io.javaclasses.fileHub.folders.FolderID;
 import io.javaclasses.fileHub.users.UserID;
 
+/**
+ *  This is object, that contains data, that needs to update file by authenticated user in Filehub application.
+ *
+ * */
 public final class UpdateFileCommand extends AuthenticatedUserCommand {
 
     private final FileID id;

@@ -8,14 +8,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
- * */
-class CreateFileManagementProcess implements SecuredProcess<CreateFileCommand, CreateFileDTO> {
+ * This is service to create new file without file's content in authenticated user's directory.
+ */
+class CreateFileProcess implements SecuredProcess<CreateFileCommand, CreateFileDTO> {
 
     private final FileStorage fileStorage;
-    private final Logger logger = LoggerFactory.getLogger(CreateFileManagementProcess.class);
+    private final Logger logger = LoggerFactory.getLogger(CreateFileProcess.class);
 
-    public CreateFileManagementProcess(FileStorage fileStorage){
+    public CreateFileProcess(FileStorage fileStorage){
         this.fileStorage = Preconditions.checkNotNull(fileStorage);
     }
 
@@ -36,7 +36,7 @@ class CreateFileManagementProcess implements SecuredProcess<CreateFileCommand, C
             fileStorage.create(file);
 
             if(logger.isInfoEnabled()){
-                logger.info("Created file was successful. if: " + file.id());
+                logger.info("Created file was successful. id: " + file.id());
             }
 
             return new CreateFileDTO(file.id(),file.name(),file.mimeType(), file.owner(), inputCommand.folder());

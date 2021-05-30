@@ -2,6 +2,10 @@ package io.javaclasses.fileHub.files;
 
 import com.google.common.base.Preconditions;
 
+/**
+ * This is object, that contains data after successful
+ * execution {@link UploadFileProcess upload file process}.
+ */
 public class UploadFileDTO {
     private final FileID fileID;
     private final byte[] content;

@@ -5,6 +5,8 @@ import io.javaclasses.fileHub.users.UserID;
 import io.javaclasses.fileHub.users.tokens.AuthToken;
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class UpdateFolderCommandTest {
@@ -13,7 +15,7 @@ class UpdateFolderCommandTest {
         NullPointerTester tester = new NullPointerTester();
         try {
             tester.testConstructor(UpdateFolderCommand.class.getConstructor(AuthToken.class, FolderID.class,
-                    String.class, UserID.class, FolderID.class));
+                    String.class, UserID.class, Optional.of(FolderID.class).getClass()));
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }

@@ -5,6 +5,7 @@ import io.javaclasses.fileHub.folders.FolderID;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Optional;
 
 
 class GetFolderContentDTOTest {
@@ -12,7 +13,7 @@ class GetFolderContentDTOTest {
     public void checkForNullPointerInConstructor(){
         NullPointerTester tester = new NullPointerTester();
         try {
-            tester.testConstructor(GetFolderContentDTO.class.getConstructor(FolderID.class,
+            tester.testConstructor(GetFolderContentDTO.class.getConstructor(Optional.of(FolderID.class).getClass(),
                     List.class , List.class));
         } catch (NoSuchMethodException e) {
             e.printStackTrace();

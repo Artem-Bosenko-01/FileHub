@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * This is abstract storage, that saved some records in java memory.
+ * This is abstract storage, that saved some records in runtime memory.
  *
  * @param <E> type of {@link DataRecord record}.
  * @param <I> identifier {@link RecordID id} for record.

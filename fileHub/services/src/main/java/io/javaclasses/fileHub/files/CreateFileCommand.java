@@ -11,7 +11,7 @@ import io.javaclasses.fileHub.users.UserID;
  *  by authenticated user.
  *
  * */
-final class CreateFileCommand extends AuthenticatedUserCommand {
+public final class CreateFileCommand extends AuthenticatedUserCommand {
 
     private final String name;
     private final MimeType mimeType;

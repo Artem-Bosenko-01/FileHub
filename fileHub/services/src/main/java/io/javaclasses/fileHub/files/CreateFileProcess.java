@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 /**
  * This is service to create new file without file's content in authenticated user's directory.
  */
-class CreateFileProcess implements SecuredProcess<CreateFileCommand, CreateFileDTO> {
+public class CreateFileProcess implements SecuredProcess<CreateFileCommand, CreateFileDTO> {
 
     private final FileStorage fileStorage;
     private final Logger logger = LoggerFactory.getLogger(CreateFileProcess.class);

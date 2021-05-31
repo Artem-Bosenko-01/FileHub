@@ -6,6 +6,7 @@ import io.javaclasses.fileHub.users.tokens.AuthToken;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
 import java.util.UUID;
 
 
@@ -13,7 +14,7 @@ class UpdateFolderProcessTest {
 
     private CreateFolderDTO createFolder(FolderStorage folderStorage, String name, UserID userID, FolderID folderID){
         CreateFolderCommand createFolderCommand = new CreateFolderCommand(new AuthToken(UUID.randomUUID().toString()),
-                name, userID, folderID);
+                name, userID,  Optional.of(folderID));
 
         CreateFolderProcess createFolderProcess = new CreateFolderProcess(folderStorage);
 
@@ -33,7 +34,7 @@ class UpdateFolderProcessTest {
         CreateFolderDTO createFolderDTO = createFolder(folderStorage, "folder", userID, folderID);
 
         UpdateFolderCommand command = new UpdateFolderCommand(new AuthToken("1"), createFolderDTO.folderID(),
-                "lkijij", userID, folderID);
+                "lkijij", userID,  Optional.of(folderID));
 
         UpdateFolderProcess process = new UpdateFolderProcess(folderStorage);
 
@@ -55,7 +56,7 @@ class UpdateFolderProcessTest {
 
         UpdateFolderCommand command = new UpdateFolderCommand(new AuthToken("1"), new FolderID("newFolder",
                 userID),
-                "lkijij", userID, folderID);
+                "lkijij", userID,  Optional.of(folderID));
 
         UpdateFolderProcess process = new UpdateFolderProcess(folderStorage);
 

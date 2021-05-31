@@ -9,7 +9,7 @@ import io.javaclasses.fileHub.users.UserID;
  * This is object, that contains data after successful
  * execution {@link CreateFileProcess create file process}.
  */
-final class CreateFileDTO {
+public final class CreateFileDTO {
 
     private final FileID fileID;
     private final String name;

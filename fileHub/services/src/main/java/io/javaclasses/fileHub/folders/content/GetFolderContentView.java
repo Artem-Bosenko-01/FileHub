@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * This is service to get folder's content for existed {@link FolderID folder}.
@@ -29,25 +30,25 @@ public class GetFolderContentView implements View<GetFolderContentQuery, GetFold
 
     @Override
     public GetFolderContentDTO handle(GetFolderContentQuery inputCommand) throws InvalidHandleCommandException {
-        if(logger.isInfoEnabled()){
+        if (logger.isInfoEnabled()) {
             logger.info("Start get folder's content by id " + inputCommand.id());
         }
         try {
 
-            FolderID parentFolder = folderStorage.findParentFolderByChildId(inputCommand.id());
-
+            Optional<FolderID> parentFolder = folderStorage.findParentFolderByChildId(inputCommand.id());
             List<Folder> folders = folderStorage.findAllFoldersByParentFolderId(inputCommand.id());
             List<File> files = fileStorage.findAllFilesByFolderIDAndUserID(inputCommand.id(), inputCommand.owner());
 
-            if(logger.isInfoEnabled()){
+            if (logger.isInfoEnabled()) {
                 logger.info("Getting folder's content was successful by id " + inputCommand.id());
             }
 
-            return new GetFolderContentDTO(parentFolder,folders,files);
+            return new GetFolderContentDTO(parentFolder, folders, files);
+
 
         } catch (NotExistIDException e) {
 
-            if(logger.isErrorEnabled()){
+            if (logger.isErrorEnabled()) {
                 logger.error(e.getMessage());
             }
             throw new InvalidHandleCommandException(e.getMessage());

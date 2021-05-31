@@ -7,23 +7,24 @@ import io.javaclasses.fileHub.folders.Folder;
 import io.javaclasses.fileHub.folders.FolderID;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * This is object, that contains data after successful
  * execution {@link GetFolderContentView get folder's content process}.
  */
 public final class GetFolderContentDTO {
-    private final FolderID parentFolder;
+    private final Optional<FolderID> parentFolder;
     private final List<Folder> folders;
     private final List<File> files;
 
-    public GetFolderContentDTO(FolderID parentFolder, List<Folder> folders, List<File> files) {
+    public GetFolderContentDTO(Optional<FolderID> parentFolder, List<Folder> folders, List<File> files) {
         this.parentFolder = Preconditions.checkNotNull(parentFolder);
         this.folders = Preconditions.checkNotNull(folders);
         this.files = Preconditions.checkNotNull(files);
     }
 
-    public FolderID parentFolder() {
+    public Optional<FolderID> parentFolder() {
         return parentFolder;
     }
 

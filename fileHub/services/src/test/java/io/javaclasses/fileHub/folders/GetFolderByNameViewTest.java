@@ -6,6 +6,7 @@ import io.javaclasses.fileHub.users.tokens.AuthToken;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
 import java.util.UUID;
 
 
@@ -13,7 +14,7 @@ class GetFolderByNameViewTest {
 
     private CreateFolderDTO createFolder(FolderStorage folderStorage, String name, UserID userID, FolderID folderID){
         CreateFolderCommand createFolderCommand = new CreateFolderCommand(new AuthToken(UUID.randomUUID().toString()),
-                name, userID, folderID);
+                name, userID,  Optional.of(folderID));
 
         CreateFolderProcess createFolderProcess = new CreateFolderProcess(folderStorage);
 

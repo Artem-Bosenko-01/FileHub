@@ -5,13 +5,14 @@ import io.javaclasses.fileHub.DataRecord;
 import io.javaclasses.fileHub.users.UserID;
 
 import java.util.Objects;
+import java.util.Optional;
 
 public final class Folder implements DataRecord<FolderID> {
 
     private final FolderID id;
     private String name;
     private UserID owner;
-    private FolderID parentFolder;
+    private Optional<FolderID> parentFolder;
 
     public Folder(FolderID id) {
         this.id = Preconditions.checkNotNull(id);
@@ -38,11 +39,11 @@ public final class Folder implements DataRecord<FolderID> {
         this.owner = Preconditions.checkNotNull(owner);
     }
 
-    public FolderID parentFolder() {
+    public Optional<FolderID> parentFolder() {
         return parentFolder;
     }
 
-    public void setParentFolder(FolderID parentFolder) {
+    public void setParentFolder(Optional<FolderID> parentFolder) {
         this.parentFolder = Preconditions.checkNotNull(parentFolder);
     }
 

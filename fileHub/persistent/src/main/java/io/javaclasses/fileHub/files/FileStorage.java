@@ -10,7 +10,5 @@ import java.util.Optional;
 
 public interface FileStorage extends Storage<FileID,File> {
     Optional<File> findByName(String name);
-    List<File> findAllFilesByUserID(UserID id) throws NotExistIDException;
-    List<File> findAllFilesByFolderID(FolderID id) throws NotExistIDException;
     List<File> findAllFilesByFolderIDAndUserID(FolderID folderID, UserID userID) throws NotExistIDException;
 }

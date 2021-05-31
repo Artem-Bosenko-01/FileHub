@@ -25,7 +25,7 @@ class UpdateFileProcessTest {
 
 
     @Test
-    public void readInfoAboutFileByUserIdTest(){
+    public void updateInfoAboutFileByTest(){
         FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
         UserID userID = new UserID("Artem");
         FolderID folderID = new FolderID("folder", userID);
@@ -46,7 +46,7 @@ class UpdateFileProcessTest {
 
 
     @Test
-    public void failedReadInfoByNotExistIdTest(){
+    public void failedUpdateInfoAboutFileByNotExistIdTest(){
         FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
         UserID userID = new UserID("Artem");
         FolderID folderID = new FolderID("folder", userID);

@@ -7,7 +7,7 @@ import io.javaclasses.fileHub.users.UserID;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class CreateFileManagementProcessTest {
+class CreateFileProcessTest {
 
     @Test
     public void createFileTest(){

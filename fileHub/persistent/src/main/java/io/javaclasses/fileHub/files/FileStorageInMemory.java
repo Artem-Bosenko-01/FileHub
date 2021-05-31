@@ -20,18 +20,6 @@ public class FileStorageInMemory extends AbstractInMemoryStorage<FileID,File>
     }
 
     @Override
-    public List<File> findAllFilesByUserID(UserID id) throws NotExistIDException {
-        if(records().values().stream().noneMatch(file -> file.owner().equals(id))) throw new NotExistIDException("User with " + id + " not exist");
-        else return records().values().stream().filter(file -> file.owner().equals(id)).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<File> findAllFilesByFolderID(FolderID id) throws NotExistIDException {
-        if(records().values().stream().noneMatch(file -> file.folder().equals(id))) throw new NotExistIDException("Folder with " + id + " not exist");
-        else return records().values().stream().filter(file -> file.folder().equals(id)).collect(Collectors.toList());
-    }
-
-    @Override
     public List<File> findAllFilesByFolderIDAndUserID(FolderID folderID, UserID userID) throws NotExistIDException {
         if(records().values().stream().noneMatch(file -> file.folder().equals(folderID))) throw new NotExistIDException("Folder with " + folderID + " not exist");
         if(records().values().stream().noneMatch(file -> file.owner().equals(userID))) throw new NotExistIDException("User with " + userID + " not exist");

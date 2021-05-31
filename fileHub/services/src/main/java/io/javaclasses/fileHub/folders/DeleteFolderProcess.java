@@ -12,10 +12,10 @@ import org.slf4j.LoggerFactory;
  */
 public class DeleteFolderProcess implements SecuredProcess<DeleteFolderCommand, DeleteFolderDTO> {
 
-    private final FolderStorageInMemory folderStorageInMemory ;
+    private final FolderStorage folderStorageInMemory ;
     private final Logger logger = LoggerFactory.getLogger(DeleteFolderProcess.class);
 
-    public DeleteFolderProcess(FolderStorageInMemory folderStorageInMemory){
+    public DeleteFolderProcess(FolderStorage folderStorageInMemory){
         this.folderStorageInMemory = Preconditions.checkNotNull(folderStorageInMemory);
     }
 

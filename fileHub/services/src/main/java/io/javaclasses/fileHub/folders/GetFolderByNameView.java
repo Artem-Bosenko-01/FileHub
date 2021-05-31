@@ -15,10 +15,10 @@ import java.util.Optional;
 public class GetFolderByNameView implements View<GetFolderByNameQuery, GetFolderByNameDTO> {
 
 
-    private final FolderStorageInMemory folderStorageInMemory;
+    private final FolderStorage folderStorageInMemory;
     private final Logger logger = LoggerFactory.getLogger(GetFolderByNameView.class);
 
-    public GetFolderByNameView(FolderStorageInMemory userStorage) {
+    public GetFolderByNameView(FolderStorage userStorage) {
         this.folderStorageInMemory = Preconditions.checkNotNull(userStorage);
     }
 

@@ -4,10 +4,10 @@ import io.javaclasses.fileHub.InvalidHandleCommandException;
 import io.javaclasses.fileHub.NotExistIDException;
 import io.javaclasses.fileHub.View;
 import io.javaclasses.fileHub.files.File;
-import io.javaclasses.fileHub.files.FileStorageInMemory;
+import io.javaclasses.fileHub.files.FileStorage;
 import io.javaclasses.fileHub.folders.Folder;
 import io.javaclasses.fileHub.folders.FolderID;
-import io.javaclasses.fileHub.folders.FolderStorageInMemory;
+import io.javaclasses.fileHub.folders.FolderStorage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,12 +18,12 @@ import java.util.List;
  */
 public class GetFolderContentView implements View<GetFolderContentQuery, GetFolderContentDTO> {
 
-    private final FolderStorageInMemory folderStorageInMemory;
-    private final FileStorageInMemory fileStorage;
+    private final FolderStorage folderStorage;
+    private final FileStorage fileStorage;
     private final Logger logger = LoggerFactory.getLogger(GetFolderContentView.class);
 
-    public GetFolderContentView(FolderStorageInMemory folderStorageInMemory, FileStorageInMemory fileStorage) {
-        this.folderStorageInMemory = folderStorageInMemory;
+    public GetFolderContentView(FolderStorage folderStorageInMemory, FileStorage fileStorage) {
+        this.folderStorage = folderStorageInMemory;
         this.fileStorage = fileStorage;
     }
 
@@ -34,9 +34,9 @@ public class GetFolderContentView implements View<GetFolderContentQuery, GetFold
         }
         try {
 
-            FolderID parentFolder = folderStorageInMemory.findParentFolderByChildId(inputCommand.id());
+            FolderID parentFolder = folderStorage.findParentFolderByChildId(inputCommand.id());
 
-            List<Folder> folders = folderStorageInMemory.findAllFoldersByParentFolderId(inputCommand.id());
+            List<Folder> folders = folderStorage.findAllFoldersByParentFolderId(inputCommand.id());
             List<File> files = fileStorage.findAllFilesByFolderIDAndUserID(inputCommand.id(), inputCommand.owner());
 
             if(logger.isInfoEnabled()){

@@ -12,10 +12,10 @@ import org.slf4j.LoggerFactory;
  */
 public class UpdateFolderProcess implements SecuredProcess<UpdateFolderCommand, UpdateFolderDTO> {
 
-    private final FolderStorageInMemory folderStorageInMemory;
+    private final FolderStorage folderStorageInMemory;
     private final Logger logger = LoggerFactory.getLogger(UpdateFolderProcess.class);
 
-    public UpdateFolderProcess(FolderStorageInMemory userStorage) {
+    public UpdateFolderProcess(FolderStorage userStorage) {
         this.folderStorageInMemory = Preconditions.checkNotNull(userStorage);
     }
 

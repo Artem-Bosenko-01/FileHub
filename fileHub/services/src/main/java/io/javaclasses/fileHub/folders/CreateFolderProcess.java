@@ -12,10 +12,10 @@ import org.slf4j.LoggerFactory;
  */
 public class CreateFolderProcess implements SecuredProcess<CreateFolderCommand, CreateFolderDTO> {
 
-    private final FolderStorageInMemory folderStorageInMemory;
+    private final FolderStorage folderStorageInMemory;
     private final Logger logger = LoggerFactory.getLogger(CreateFolderProcess.class);
 
-    public CreateFolderProcess(FolderStorageInMemory userStorage) {
+    public CreateFolderProcess(FolderStorage userStorage) {
         this.folderStorageInMemory = Preconditions.checkNotNull(userStorage);
     }
 

@@ -15,7 +15,7 @@ class UpdateFolderCommandTest {
         NullPointerTester tester = new NullPointerTester();
         try {
             tester.testConstructor(UpdateFolderCommand.class.getConstructor(AuthToken.class, FolderID.class,
-                    String.class, UserID.class, Optional.of(FolderID.class).getClass()));
+                    String.class, UserID.class, FolderID.class));
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }

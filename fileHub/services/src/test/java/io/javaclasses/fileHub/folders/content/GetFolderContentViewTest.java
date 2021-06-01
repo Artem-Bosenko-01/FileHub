@@ -9,16 +9,14 @@ import io.javaclasses.fileHub.users.tokens.AuthToken;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Optional;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 class GetFolderContentViewTest {
 
     private CreateFolderDTO createFolder(FolderStorage folderStorage, String name, UserID userID, FolderID folderID) {
         CreateFolderCommand createFolderCommand = new CreateFolderCommand(new AuthToken(UUID.randomUUID().toString()),
-                name, userID, Optional.of(folderID));
+                name, userID, folderID);
 
         CreateFolderProcess createFolderProcess = new CreateFolderProcess(folderStorage);
 
@@ -31,7 +29,7 @@ class GetFolderContentViewTest {
 
     private CreateFolderDTO createFolder(FolderStorage folderStorage, String name, UserID userID) {
         CreateFolderCommand createFolderCommand = new CreateFolderCommand(new AuthToken(UUID.randomUUID().toString()),
-                name, userID, Optional.empty());
+                name, userID, null);
 
         CreateFolderProcess createFolderProcess = new CreateFolderProcess(folderStorage);
 
@@ -42,9 +40,9 @@ class GetFolderContentViewTest {
         }
     }
 
-    private CreateFileDTO createFile(FileStorage fileStorageInMemory, String name, UserID userID, FolderID folderID){
+    private CreateFileDTO createFile(FileStorage fileStorageInMemory, String name, UserID userID, FolderID folderID) {
         CreateFileCommand createFileCommand = new CreateFileCommand(new AuthToken(UUID.randomUUID().toString()),
-                name,MimeType.TEXT,userID,folderID);
+                name, MimeType.TEXT, userID, folderID);
 
         CreateFileProcess createFileManagementProcess = new CreateFileProcess(fileStorageInMemory);
 

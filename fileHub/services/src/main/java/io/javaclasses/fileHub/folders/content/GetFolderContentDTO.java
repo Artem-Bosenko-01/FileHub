@@ -6,6 +6,7 @@ import io.javaclasses.fileHub.files.content.GetFileContentView;
 import io.javaclasses.fileHub.folders.Folder;
 import io.javaclasses.fileHub.folders.FolderID;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,17 +15,17 @@ import java.util.Optional;
  * execution {@link GetFolderContentView get folder's content process}.
  */
 public final class GetFolderContentDTO {
-    private final Optional<FolderID> parentFolder;
+    private final FolderID parentFolder;
     private final List<Folder> folders;
     private final List<File> files;
 
-    public GetFolderContentDTO(Optional<FolderID> parentFolder, List<Folder> folders, List<File> files) {
-        this.parentFolder = Preconditions.checkNotNull(parentFolder);
+    public GetFolderContentDTO(@Nullable FolderID parentFolder, List<Folder> folders, List<File> files) {
+        this.parentFolder = parentFolder;
         this.folders = Preconditions.checkNotNull(folders);
         this.files = Preconditions.checkNotNull(files);
     }
 
-    public Optional<FolderID> parentFolder() {
+    public FolderID parentFolder() {
         return parentFolder;
     }
 

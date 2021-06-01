@@ -12,9 +12,9 @@ import java.util.UUID;
 
 class DeleteFolderProcessTest {
 
-    private CreateFolderDTO createFolder(FolderStorage folderStorage, String name, UserID userID, FolderID folderID){
+    private CreateFolderDTO createFolder(FolderStorage folderStorage, String name, UserID userID, FolderID folderID) {
         CreateFolderCommand createFolderCommand = new CreateFolderCommand(new AuthToken(UUID.randomUUID().toString()),
-                name, userID,  Optional.of(folderID));
+                name, userID, folderID);
 
         CreateFolderProcess createFolderProcess = new CreateFolderProcess(folderStorage);
 
@@ -27,13 +27,13 @@ class DeleteFolderProcessTest {
 
 
     @Test
-    public void deleteFileByIdTest(){
+    public void deleteFileByIdTest() {
         FolderStorage folderStorage = new FolderStorageInMemory();
         UserID userID = new UserID("Artem");
         FolderID folderID = new FolderID("parent", userID);
         CreateFolderDTO createFolderDTO = createFolder(folderStorage, "folder", userID, folderID);
 
-        Assertions.assertEquals(folderStorage.getSizeRecordsList(),1);
+        Assertions.assertEquals(folderStorage.getSizeRecordsList(), 1);
 
         DeleteFolderCommand deleteFileCommand = new DeleteFolderCommand(new AuthToken("1"), createFolderDTO.folderID());
 
@@ -50,7 +50,7 @@ class DeleteFolderProcessTest {
 
 
     @Test
-    public void deleteFileWithNotExistedIdTest(){
+    public void deleteFileWithNotExistedIdTest() {
         FolderStorage folderStorage = new FolderStorageInMemory();
         UserID userID = new UserID("Artem");
         FolderID folderID = new FolderID("folder", userID);

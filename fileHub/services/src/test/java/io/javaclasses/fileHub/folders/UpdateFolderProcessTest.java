@@ -12,9 +12,9 @@ import java.util.UUID;
 
 class UpdateFolderProcessTest {
 
-    private CreateFolderDTO createFolder(FolderStorage folderStorage, String name, UserID userID, FolderID folderID){
+    private CreateFolderDTO createFolder(FolderStorage folderStorage, String name, UserID userID, FolderID folderID) {
         CreateFolderCommand createFolderCommand = new CreateFolderCommand(new AuthToken(UUID.randomUUID().toString()),
-                name, userID,  Optional.of(folderID));
+                name, userID, folderID);
 
         CreateFolderProcess createFolderProcess = new CreateFolderProcess(folderStorage);
 
@@ -27,14 +27,14 @@ class UpdateFolderProcessTest {
 
 
     @Test
-    public void updateInfoAboutFolderByTest(){
+    public void updateInfoAboutFolderByTest() {
         FolderStorage folderStorage = new FolderStorageInMemory();
         UserID userID = new UserID("Artem");
         FolderID folderID = new FolderID("parent", userID);
         CreateFolderDTO createFolderDTO = createFolder(folderStorage, "folder", userID, folderID);
 
         UpdateFolderCommand command = new UpdateFolderCommand(new AuthToken("1"), createFolderDTO.folderID(),
-                "lkijij", userID,  Optional.of(folderID));
+                "lkijij", userID, folderID);
 
         UpdateFolderProcess process = new UpdateFolderProcess(folderStorage);
 
@@ -49,14 +49,14 @@ class UpdateFolderProcessTest {
 
 
     @Test
-    public void failedUpdateInfoAboutFolderByNotExistIdTest(){
+    public void failedUpdateInfoAboutFolderByNotExistIdTest() {
         FolderStorage folderStorage = new FolderStorageInMemory();
         UserID userID = new UserID("Artem");
         FolderID folderID = new FolderID("parent", userID);
 
         UpdateFolderCommand command = new UpdateFolderCommand(new AuthToken("1"), new FolderID("newFolder",
                 userID),
-                "lkijij", userID,  Optional.of(folderID));
+                "lkijij", userID, folderID);
 
         UpdateFolderProcess process = new UpdateFolderProcess(folderStorage);
 

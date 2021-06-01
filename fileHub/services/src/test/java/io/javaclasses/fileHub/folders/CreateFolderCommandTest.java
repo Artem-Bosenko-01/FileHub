@@ -14,7 +14,7 @@ class CreateFolderCommandTest {
         NullPointerTester tester = new NullPointerTester();
         try {
             tester.testConstructor(CreateFolderCommand.class.getConstructor(AuthToken.class, String.class, UserID.class,
-                    Optional.of(FolderID.class).getClass()));
+                    FolderID.class));
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }

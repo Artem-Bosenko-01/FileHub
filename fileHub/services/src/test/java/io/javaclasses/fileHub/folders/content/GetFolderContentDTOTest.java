@@ -13,7 +13,7 @@ class GetFolderContentDTOTest {
     public void checkForNullPointerInConstructor(){
         NullPointerTester tester = new NullPointerTester();
         try {
-            tester.testConstructor(GetFolderContentDTO.class.getConstructor(Optional.of(FolderID.class).getClass(),
+            tester.testConstructor(GetFolderContentDTO.class.getConstructor(FolderID.class,
                     List.class , List.class));
         } catch (NoSuchMethodException e) {
             e.printStackTrace();

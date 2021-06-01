@@ -2,6 +2,7 @@ package io.javaclasses.fileHub.folders;
 
 import com.google.common.base.Preconditions;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 
 /**
@@ -12,12 +13,12 @@ public final class UpdateFolderDTO {
 
     private final FolderID folderID;
     private final String name;
-    private final Optional<FolderID> parentFolder;
+    private final FolderID parentFolder;
 
-    public UpdateFolderDTO(FolderID folderID, String name, Optional<FolderID> parentFolder) {
+    public UpdateFolderDTO(FolderID folderID, String name, @Nullable FolderID parentFolder) {
         this.folderID = Preconditions.checkNotNull(folderID);
         this.name = Preconditions.checkNotNull(name);
-        this.parentFolder = Preconditions.checkNotNull(parentFolder);
+        this.parentFolder = parentFolder;
     }
 
     public FolderID id() {
@@ -28,7 +29,7 @@ public final class UpdateFolderDTO {
         return name;
     }
 
-    public Optional<FolderID> parentFolder() {
+    public FolderID parentFolder() {
         return parentFolder;
     }
 }

@@ -5,6 +5,7 @@ import io.javaclasses.fileHub.users.tokens.AuthToken;
 import io.javaclasses.fileHub.AuthenticatedUserCommand;
 import io.javaclasses.fileHub.users.UserID;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 
 /**
@@ -17,14 +18,14 @@ public final class UpdateFolderCommand extends AuthenticatedUserCommand {
     private final FolderID id;
     private final String name;
     private final UserID owner;
-    private final Optional<FolderID> parentFolder;
+    private final FolderID parentFolder;
 
-    public UpdateFolderCommand(AuthToken token, FolderID id, String name, UserID owner, Optional<FolderID> parentFolder) {
+    public UpdateFolderCommand(AuthToken token, FolderID id, String name, UserID owner, @Nullable FolderID parentFolder) {
         super(Preconditions.checkNotNull(token));
         this.id = Preconditions.checkNotNull(id);
         this.name = Preconditions.checkNotNull(name);
         this.owner = Preconditions.checkNotNull(owner);
-        this.parentFolder = Preconditions.checkNotNull(parentFolder);
+        this.parentFolder = parentFolder;
     }
 
     public FolderID id() {
@@ -39,7 +40,7 @@ public final class UpdateFolderCommand extends AuthenticatedUserCommand {
         return owner;
     }
 
-    public Optional<FolderID> parentFolder() {
+    public FolderID parentFolder() {
         return parentFolder;
     }
 }

@@ -20,6 +20,6 @@ class UserTest {
     @Test
     public void checkForNullPointerInSetters(){
         NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicInstanceMethods(User.class);
+        tester.testAllPublicInstanceMethods(User.class.getMethods());
     }
 }

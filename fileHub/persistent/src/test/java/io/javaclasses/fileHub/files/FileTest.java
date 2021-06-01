@@ -18,6 +18,6 @@ class FileTest {
     @Test
     public void checkForNullPointerInSetters(){
         NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicInstanceMethods(File.class);
+        tester.testAllPublicInstanceMethods(new File(new FileID()));
     }
 }

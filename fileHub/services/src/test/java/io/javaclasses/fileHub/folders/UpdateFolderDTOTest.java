@@ -11,7 +11,7 @@ class UpdateFolderDTOTest {
     public void checkForNullPointerInConstructor(){
         NullPointerTester tester = new NullPointerTester();
         try {
-            tester.testConstructor(UpdateFolderDTO.class.getConstructor(FolderID.class, String.class, Optional.of(FolderID.class).getClass()));
+            tester.testConstructor(UpdateFolderDTO.class.getConstructor(FolderID.class, String.class, FolderID.class));
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }

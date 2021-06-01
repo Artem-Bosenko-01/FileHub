@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.DataRecord;
 import io.javaclasses.fileHub.users.UserID;
 
+import javax.annotation.Nullable;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -12,7 +13,7 @@ public final class Folder implements DataRecord<FolderID> {
     private final FolderID id;
     private String name;
     private UserID owner;
-    private Optional<FolderID> parentFolder;
+    private FolderID parentFolder;
 
     public Folder(FolderID id) {
         this.id = Preconditions.checkNotNull(id);
@@ -39,12 +40,12 @@ public final class Folder implements DataRecord<FolderID> {
         this.owner = Preconditions.checkNotNull(owner);
     }
 
-    public Optional<FolderID> parentFolder() {
+    public FolderID parentFolder() {
         return parentFolder;
     }
 
-    public void setParentFolder(Optional<FolderID> parentFolder) {
-        this.parentFolder = Preconditions.checkNotNull(parentFolder);
+    public void setParentFolder(@Nullable FolderID parentFolder) {
+        this.parentFolder = parentFolder;
     }
 
     @Override

@@ -12,9 +12,9 @@ import java.util.UUID;
 
 class GetFolderByNameViewTest {
 
-    private CreateFolderDTO createFolder(FolderStorage folderStorage, String name, UserID userID, FolderID folderID){
+    private CreateFolderDTO createFolder(FolderStorage folderStorage, String name, UserID userID, FolderID folderID) {
         CreateFolderCommand createFolderCommand = new CreateFolderCommand(new AuthToken(UUID.randomUUID().toString()),
-                name, userID,  Optional.of(folderID));
+                name, userID, folderID);
 
         CreateFolderProcess createFolderProcess = new CreateFolderProcess(folderStorage);
 
@@ -26,7 +26,7 @@ class GetFolderByNameViewTest {
     }
 
     @Test
-    public void readInfoAboutFolderByIdTest(){
+    public void readInfoAboutFolderByIdTest() {
         FolderStorage folderStorage = new FolderStorageInMemory();
         UserID userID = new UserID("Artem");
         FolderID folderID = new FolderID("parent", userID);
@@ -47,7 +47,7 @@ class GetFolderByNameViewTest {
 
 
     @Test
-    public void failedReadFolderInfoByNotExistIdTest(){
+    public void failedReadFolderInfoByNotExistIdTest() {
         FolderStorage folderStorage = new FolderStorageInMemory();
         UserID userID = new UserID("Artem");
         FolderID folderID = new FolderID("parent", userID);

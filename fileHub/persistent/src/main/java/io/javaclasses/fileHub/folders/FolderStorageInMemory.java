@@ -8,15 +8,15 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class FolderStorageInMemory extends AbstractInMemoryStorage<FolderID, Folder> implements FolderStorage{
+public class FolderStorageInMemory extends AbstractInMemoryStorage<FolderID, Folder> implements FolderStorage {
 
     @Override
     public List<Folder> findAllFoldersByParentFolderId(FolderID parentId) throws NotExistIDException {
-        if(records().values().stream().noneMatch(folder -> folder.id().equals(parentId)))
+        if (records().values().stream().noneMatch(folder -> folder.id().equals(parentId)))
             throw new NotExistIDException("Parent folder doesn't exist: " + parentId);
 
         return records().values().stream().
-                filter(folder -> folder.parentFolder().equals(Optional.of(parentId))).
+                filter(folder -> folder.parentFolder() != null && folder.parentFolder().equals(parentId)).
                 collect(Collectors.toList());
     }
 
@@ -27,9 +27,10 @@ public class FolderStorageInMemory extends AbstractInMemoryStorage<FolderID, Fol
                 filter(folder -> folder.id().equals(childId)).
                 findFirst();
 
-        if(findFolder.isPresent()){
-            return findFolder.get().parentFolder();
-        }else throw new NotExistIDException("Folder doesn't exist: " + childId);
+        if (findFolder.isPresent()) {
+            if (findFolder.get().parentFolder() != null) return Optional.of(findFolder.get().parentFolder());
+            else return Optional.empty();
+        } else throw new NotExistIDException("Folder id: " + childId + " doesn't exist");
     }
 
     @Override

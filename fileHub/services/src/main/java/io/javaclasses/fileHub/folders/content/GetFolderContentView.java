@@ -11,6 +11,7 @@ import io.javaclasses.fileHub.folders.FolderStorage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,7 +44,7 @@ public class GetFolderContentView implements View<GetFolderContentQuery, GetFold
                 logger.info("Getting folder's content was successful by id " + inputCommand.id());
             }
 
-            return new GetFolderContentDTO(parentFolder, folders, files);
+            return new GetFolderContentDTO(parentFolder.orElse(null), folders, files);
 
 
         } catch (NotExistIDException e) {

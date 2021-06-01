@@ -11,11 +11,11 @@ import java.util.Optional;
 
 class CreateFolderProcessTest {
     @Test
-    public void createFileTest(){
+    public void createFileTest() {
         UserID userID = new UserID("artem@gmail.com");
         FolderID folderID = new FolderID("parent", userID);
         CreateFolderCommand createFileCommand = new CreateFolderCommand(new AuthToken("651"),
-                "folder", userID, Optional.of(folderID));
+                "folder", userID, folderID);
 
         FolderStorage folderStorage = new FolderStorageInMemory();
         CreateFolderProcess createFileManagementProcess = new CreateFolderProcess(folderStorage);
@@ -29,14 +29,14 @@ class CreateFolderProcessTest {
     }
 
     @Test
-    public void createFileWithExistIdTest(){
+    public void createFileWithExistIdTest() {
         UserID userID = new UserID("artem@gmail.com");
         FolderID folderID = new FolderID("parent", userID);
         CreateFolderCommand createFolderCommand = new CreateFolderCommand(new AuthToken("651"),
-                "folder", userID,  Optional.of(folderID));
+                "folder", userID, folderID);
 
         CreateFolderCommand createFolderCommandERROR = new CreateFolderCommand(new AuthToken("4198529"),
-                "folder", userID,  Optional.of(folderID));
+                "folder", userID, folderID);
 
         FolderStorage folderStorage = new FolderStorageInMemory();
         CreateFolderProcess createFileManagementProcess = new CreateFolderProcess(folderStorage);

@@ -9,6 +9,8 @@ import io.javaclasses.fileHub.persistent.users.UserStorage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Optional;
+
 
 /**
  * This is service for updating information about user in {@link UserStorage user table}.
@@ -31,22 +33,34 @@ public class UpdatingProfile implements SecuredProcess<UpdatingProfileCommand, S
             logger.info("Start update user process with id: " + inputCommand.userID());
         }
 
+        Optional<User> user = userStorage.findByID(inputCommand.userID());
+
         try {
 
-            User user = userStorage.findByID(inputCommand.userID());
+            if (user.isPresent()) {
 
-            user.setLogin(inputCommand.newLoginName());
-            user.setFirstName(inputCommand.firstName());
-            user.setLastName(inputCommand.lastName());
-            user.setPassword(PasswordEncoder.encode(inputCommand.password()));
+                user.get().setLogin(inputCommand.newLoginName());
+                user.get().setFirstName(inputCommand.firstName());
+                user.get().setLastName(inputCommand.lastName());
+                user.get().setPassword(PasswordEncoder.encode(inputCommand.password()));
 
-            userStorage.update(user);
 
-            if (logger.isInfoEnabled()) {
-                logger.info("Update was successful :" + inputCommand.userID());
+                userStorage.update(user.get());
+
+                if (logger.isInfoEnabled()) {
+                    logger.info("Update was successful : " + user.get().id());
+                }
+
+                return user.get().login();
+
+            } else {
+
+                if (logger.isErrorEnabled()) {
+                    logger.error("User with id doesn't exist " + inputCommand.userID());
+                }
+
+                throw new InvalidHandleCommandException("User with id doesn't exist " + inputCommand.userID());
             }
-
-            return user.login();
 
         } catch (NotExistUserIdException e) {
 
@@ -55,8 +69,10 @@ public class UpdatingProfile implements SecuredProcess<UpdatingProfileCommand, S
             }
 
             throw new InvalidHandleCommandException(e.getMessage());
+
         }
 
     }
+
 }
 

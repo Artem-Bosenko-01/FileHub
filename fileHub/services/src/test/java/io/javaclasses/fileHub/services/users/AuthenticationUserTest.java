@@ -10,12 +10,7 @@ class AuthenticationUserTest {
     @Test
     public void authenticateTest() throws InvalidHandleCommandException {
 
-        RegistrationUserCommand registrationUserCommand = new RegistrationUserCommand(
-                "badk@h.com",
-                "bbb",
-                "ccc",
-                "56478"
-        );
+        RegistrationUserCommand registrationUserCommand = UserTestData.registerUser("badk@h.com");
 
         UserStorageInMemory userStorageInMemory = new UserStorageInMemory();
 
@@ -23,10 +18,7 @@ class AuthenticationUserTest {
 
         registrationUser.handle(registrationUserCommand);
 
-        AuthenticationUserCommand authenticationUserCommand = new AuthenticationUserCommand(
-                "badk@h.com",
-                "56478"
-        );
+        AuthenticationUserCommand authenticationUserCommand = UserTestData.authenticateUser("badk@h.com");
 
         AuthenticationUser process = new AuthenticationUser(userStorageInMemory);
 

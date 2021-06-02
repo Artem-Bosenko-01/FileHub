@@ -1,6 +1,5 @@
 package io.javaclasses.fileHub.services.users;
 
-import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.Query;

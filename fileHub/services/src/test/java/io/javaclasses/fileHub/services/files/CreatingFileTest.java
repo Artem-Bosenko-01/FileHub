@@ -15,12 +15,7 @@ class CreatingFileTest {
     @Test
     public void createFileTest() throws InvalidHandleCommandException {
 
-        UserId userID = new UserId("artem@gmail.com");
-
-        FolderId folderID = new FolderId("folder", userID);
-
-        CreateFileCommand createFileCommand = new CreateFileCommand(new AuthToken("651"),
-                "file.txt", MimeType.TEXT, userID, folderID);
+        CreateFileCommand createFileCommand = FileTestData.createFile("file.txt");
 
         FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
 
@@ -35,15 +30,10 @@ class CreatingFileTest {
     @Test
     public void createFileWithExistIdTest() throws InvalidHandleCommandException {
 
-        UserId userID = new UserId("artem@gmail.com");
 
-        FolderId folderID = new FolderId("folder", userID);
+        CreateFileCommand createFileCommand = FileTestData.createFile("file.txt");
 
-        CreateFileCommand createFileCommand = new CreateFileCommand(new AuthToken("651"),
-                "file.txt", MimeType.TEXT, userID, folderID);
-
-        CreateFileCommand createFileCommandERROR = new CreateFileCommand(new AuthToken("23654"),
-                "file.txt", MimeType.TEXT, userID, folderID);
+        CreateFileCommand createFileCommandERROR = FileTestData.createFile("file.txt");
 
         FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
 

@@ -20,7 +20,7 @@ class CreateFileCommandTest {
     @Test
     public void checkForNullPointerInSetters(){
         NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicInstanceMethods(new CreateFileCommand(new AuthToken(),
+        tester.testAllPublicInstanceMethods(new CreateFileCommand(new AuthToken(""),
                 "",
                 MimeType.GIF,
                 new UserId(),

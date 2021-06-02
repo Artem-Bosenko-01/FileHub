@@ -15,11 +15,10 @@ import java.util.UUID;
 
 class UpdatingFolderTest {
 
-    private FolderId createFolder(FolderStorage folderStorage, String name, UserId userID, FolderId folderID)
+    private FolderId createFolder(FolderStorage folderStorage)
             throws InvalidHandleCommandException {
 
-        CreateFolderCommand createFolderCommand = new CreateFolderCommand(new AuthToken(UUID.randomUUID().toString()),
-                name, userID, folderID);
+        CreateFolderCommand createFolderCommand = FolderTestData.createFolder();
 
         CreatingFolder creatingFolder = new CreatingFolder(folderStorage);
 
@@ -37,7 +36,7 @@ class UpdatingFolderTest {
 
         FolderId folderID = new FolderId("parent", userID);
 
-        FolderId createFolderId = createFolder(folderStorage, "folder", userID, folderID);
+        FolderId createFolderId = createFolder(folderStorage);
 
         UpdateFolderCommand command = new UpdateFolderCommand(new AuthToken("1"), createFolderId,
                 "lkijij", userID, folderID);
@@ -52,7 +51,7 @@ class UpdatingFolderTest {
 
 
     @Test
-    public void failedUpdateInfoAboutFolderByNotExistIdTest() {
+    public void failedUpdateInfoAboutFolderByNotExistIdTest() throws InvalidHandleCommandException {
 
         FolderStorage folderStorage = new FolderStorageInMemory();
 
@@ -60,7 +59,10 @@ class UpdatingFolderTest {
 
         FolderId folderID = new FolderId("parent", userID);
 
-        UpdateFolderCommand command = new UpdateFolderCommand(new AuthToken("1"), new FolderId("newFolder",
+        createFolder(folderStorage);
+
+        UpdateFolderCommand command = new UpdateFolderCommand(new AuthToken("1"),
+                new FolderId("newFolder",
                 userID),
                 "lkijij", userID, folderID);
 

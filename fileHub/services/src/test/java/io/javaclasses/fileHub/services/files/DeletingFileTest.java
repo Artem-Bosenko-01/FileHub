@@ -15,11 +15,10 @@ import java.util.UUID;
 
 class DeletingFileTest {
 
-    private FileId createFile(FileStorageInMemory fileStorageInMemory, String name, UserId userID, FolderId folderID)
+    private FileId createFile(FileStorageInMemory fileStorageInMemory, String name)
             throws InvalidHandleCommandException {
 
-        CreateFileCommand createFileCommand = new CreateFileCommand(new AuthToken(UUID.randomUUID().toString()),
-                name, MimeType.TEXT, userID, folderID);
+        CreateFileCommand createFileCommand = FileTestData.createFile(name);
 
         CreatingFile createFileManagementProcess = new CreatingFile(fileStorageInMemory);
 
@@ -33,11 +32,7 @@ class DeletingFileTest {
 
         FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
 
-        UserId userID = new UserId("Artem");
-
-        FolderId folderID = new FolderId("folder", userID);
-
-        FileId id = createFile(fileStorageInMemory, "file.txt", userID, folderID);
+        FileId id = createFile(fileStorageInMemory, "file.txt");
 
         DeleteFileCommand deleteFileCommand = new DeleteFileCommand(new AuthToken("1"), id);
 
@@ -55,14 +50,9 @@ class DeletingFileTest {
 
         FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
 
-        UserId userID = new UserId("Artem");
+        createFile(fileStorageInMemory, "file.txt");
 
-        FolderId folderID = new FolderId("folder", userID);
-
-        createFile(fileStorageInMemory, "file.txt", userID, folderID);
-
-        DeleteFileCommand deleteFileCommand = new DeleteFileCommand(new AuthToken("1"),
-                new FileId("name", userID, folderID));
+        DeleteFileCommand deleteFileCommand = FileTestData.deleteFile("name");
 
         DeletingFile deletingFile = new DeletingFile(fileStorageInMemory);
 

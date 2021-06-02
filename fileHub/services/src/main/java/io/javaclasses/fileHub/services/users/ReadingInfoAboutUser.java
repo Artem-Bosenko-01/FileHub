@@ -10,6 +10,8 @@ import io.javaclasses.fileHub.services.View;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Optional;
+
 /**
  * This is service for getting information about authenticated user in Filehub application.
  */
@@ -30,29 +32,30 @@ public class ReadingInfoAboutUser implements View<ReadUserProfileQuery, InfoAbou
             logger.info("Start read user process with id: " + query.id());
         }
 
-        try {
 
-            User findUser = userStorage.findByID(query.id());
+        Optional<User> findUser = userStorage.findByID(query.id());
+
+        if (findUser.isPresent()) {
 
             if (logger.isInfoEnabled()) {
-                logger.info("User " + findUser.login() + " exist!");
+                logger.info("User " + findUser.get().login() + " exist!");
             }
 
             return new InfoAboutUserDto(
-                    findUser.id(),
-                    findUser.login(),
-                    findUser.password(),
-                    findUser.firstName(),
-                    findUser.lastName()
+                    findUser.get().id(),
+                    findUser.get().login(),
+                    findUser.get().password(),
+                    findUser.get().firstName(),
+                    findUser.get().lastName()
             );
 
-        } catch (NotExistUserIdException e) {
+        }else {
 
-            if (logger.isErrorEnabled()) {
-                logger.error(e.getMessage());
+            if(logger.isErrorEnabled()){
+                logger.error("User with id doesn't exist " + query.id());
             }
 
-            throw new InvalidHandleCommandException(e.getMessage());
+            throw new InvalidHandleCommandException("User with id doesn't exist " + query.id());
         }
     }
 }

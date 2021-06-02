@@ -1,5 +1,7 @@
 package io.javaclasses.fileHub.persistent;
 
+import java.util.Optional;
+
 /**
  * This is abstract base of CRUD operations for data manipulations.
  *
@@ -14,6 +16,6 @@ public interface Storage<I extends RecordId, E extends DataRecord<I>> {
 
     void delete(I dataRecordID) throws NotExistUserIdException;
 
-    E findByID(I dataRecordID) throws NotExistUserIdException;
+    Optional<E> findByID(I dataRecordID);
 
 }

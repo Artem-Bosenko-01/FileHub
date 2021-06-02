@@ -25,15 +25,9 @@ public abstract class AbstractInMemoryStorage<I extends RecordId, E extends Data
     }
 
     @Override
-    public E findByID(I dataRecordID) throws NotExistUserIdException {
+    public Optional<E> findByID(I dataRecordID){
 
-        Optional<E> user = records.values().stream().filter(e -> e.id().equals(dataRecordID)).findFirst();
-
-        if (user.isPresent()) {
-            return user.get();
-        } else {
-            throw new NotExistUserIdException("Id doesn't exist " + dataRecordID);
-        }
+        return records.values().stream().filter(e -> e.id().equals(dataRecordID)).findFirst();
 
     }
 

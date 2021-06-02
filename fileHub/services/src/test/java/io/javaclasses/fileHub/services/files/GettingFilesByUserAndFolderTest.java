@@ -12,11 +12,10 @@ import java.util.UUID;
 
 class GettingFilesByUserAndFolderTest {
 
-    private FileId createFile(FileStorageInMemory fileStorageInMemory, String name, UserId userID, FolderId folderID)
+    private FileId createFile(FileStorageInMemory fileStorageInMemory, String name)
             throws InvalidHandleCommandException {
 
-        CreateFileCommand createFileCommand = new CreateFileCommand(new AuthToken(UUID.randomUUID().toString()),
-                name, MimeType.TEXT, userID, folderID);
+        CreateFileCommand createFileCommand = FileTestData.createFile(name);
 
         CreatingFile createFileManagementProcess = new CreatingFile(fileStorageInMemory);
 
@@ -30,11 +29,11 @@ class GettingFilesByUserAndFolderTest {
 
         FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
 
-        UserId userID = new UserId("Artem");
+        UserId userID = new UserId("artem@gmail.com");
 
         FolderId folderID = new FolderId("folder", userID);
 
-        FileId id = createFile(fileStorageInMemory, "file.txt", userID, folderID);
+        FileId id = createFile(fileStorageInMemory, "file.txt");
 
         GetFilesByUserAndFolderQuery command = new GetFilesByUserAndFolderQuery(new AuthToken("1"),
                 folderID, userID);
@@ -53,13 +52,11 @@ class GettingFilesByUserAndFolderTest {
 
         FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
 
-        UserId userID = new UserId("Artem");
+        UserId userID = new UserId("avasav@gmail.com");
 
-        FolderId folderID = new FolderId("folder", userID);
+        createFile(fileStorageInMemory, "file.txt");
 
-        createFile(fileStorageInMemory, "file.txt", userID, folderID);
-
-        folderID = new FolderId("JHGF", userID);
+        FolderId folderID = new FolderId("JHGF", userID);
 
         GetFilesByUserAndFolderQuery command = new GetFilesByUserAndFolderQuery(new AuthToken("1"),
                 folderID, userID);

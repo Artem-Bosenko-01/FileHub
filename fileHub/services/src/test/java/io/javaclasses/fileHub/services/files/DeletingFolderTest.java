@@ -15,11 +15,10 @@ import java.util.UUID;
 
 class DeletingFolderTest {
 
-    private FolderId createFolder(FolderStorage folderStorage, String name, UserId userID, FolderId folderID)
+    private FolderId createFolder(FolderStorage folderStorage)
             throws InvalidHandleCommandException {
 
-        CreateFolderCommand createFolderCommand = new CreateFolderCommand(new AuthToken(UUID.randomUUID().toString()),
-                name, userID, folderID);
+        CreateFolderCommand createFolderCommand = FolderTestData.createFolder();
 
         CreatingFolder creatingFolder = new CreatingFolder(folderStorage);
 
@@ -29,15 +28,11 @@ class DeletingFolderTest {
 
 
     @Test
-    public void deleteFileByIdTest() throws InvalidHandleCommandException {
+    public void deleteFolderByIdTest() throws InvalidHandleCommandException {
 
         FolderStorage folderStorage = new FolderStorageInMemory();
 
-        UserId userID = new UserId("Artem");
-
-        FolderId folderID = new FolderId("parent", userID);
-
-        FolderId id = createFolder(folderStorage, "folder", userID, folderID);
+        FolderId id = createFolder(folderStorage);
 
         Assertions.assertEquals(folderStorage.getSizeRecordsList(), 1);
 
@@ -53,22 +48,19 @@ class DeletingFolderTest {
 
 
     @Test
-    public void deleteFileWithNotExistedIdTest() throws InvalidHandleCommandException {
+    public void deleteFolderWithNotExistedIdTest() throws InvalidHandleCommandException {
 
         FolderStorage folderStorage = new FolderStorageInMemory();
 
-        UserId userID = new UserId("Artem");
+        createFolder(folderStorage);
 
-        FolderId folderID = new FolderId("folder", userID);
-
-        createFolder(folderStorage, "file.txt", userID, folderID);
-
-        DeleteFolderCommand deleteFileCommand = new DeleteFolderCommand(new AuthToken("1"),
-                new FolderId("name", userID));
+        DeleteFolderCommand deleteFolderCommand = new DeleteFolderCommand(new AuthToken("1"),
+                new FolderId("name", new UserId("vadvdva")));
 
         DeletingFolder deleteFileProcess = new DeletingFolder(folderStorage);
 
-        Assertions.assertThrows(InvalidHandleCommandException.class, () -> deleteFileProcess.handle(deleteFileCommand));
+        Assertions.assertThrows(InvalidHandleCommandException.class,
+                () -> deleteFileProcess.handle(deleteFolderCommand));
 
     }
 }

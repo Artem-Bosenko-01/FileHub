@@ -10,12 +10,7 @@ class RegistrationUserTest {
     @Test
     public void registerUserTest() throws InvalidHandleCommandException {
 
-        RegistrationUserCommand command = new RegistrationUserCommand(
-                "badk@h.com",
-                "bbb",
-                "ccc",
-                "56478"
-        );
+        RegistrationUserCommand command = UserTestData.registerUser("badk@h.com");
 
         UserStorageInMemory userStorageInMemory = new UserStorageInMemory();
 
@@ -30,19 +25,9 @@ class RegistrationUserTest {
     @Test
     public void registerUsersWithEqualsIdTest() throws InvalidHandleCommandException {
 
-        RegistrationUserCommand command = new RegistrationUserCommand(
-                "badk@h.com",
-                "bbb",
-                "ccc",
-                "56478"
-        );
+        RegistrationUserCommand command = UserTestData.registerUser("badk@h.com");
 
-        RegistrationUserCommand command1 = new RegistrationUserCommand(
-                "badk@h.com",
-                "dvsvs",
-                "qdwqq",
-                "52"
-        );
+        RegistrationUserCommand command1 = UserTestData.registerUser("badk@h.com");
 
         UserStorageInMemory userStorageInMemory = new UserStorageInMemory();
 

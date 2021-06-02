@@ -17,12 +17,7 @@ class UploadingFileTest {
     @Test
     public void uploadFileTest() throws InvalidHandleCommandException {
 
-        UserId userID = new UserId("artem@gmail.com");
-
-        FolderId folderID = new FolderId("folder", userID);
-
-        UploadFileCommand uploadFileCommand = new UploadFileCommand(new AuthToken("651"),
-                "file.txt", MimeType.TEXT, userID, folderID, new byte[]{1, 5, 8, 7, 5});
+        UploadFileCommand uploadFileCommand = FileTestData.uploadFile();
 
         FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
 
@@ -38,15 +33,9 @@ class UploadingFileTest {
     @Test
     public void uploadFileWithExistIdTest() throws InvalidHandleCommandException {
 
-        UserId userID = new UserId("artem@gmail.com");
+        UploadFileCommand createFileCommand = FileTestData.uploadFile();
 
-        FolderId folderID = new FolderId("folder", userID);
-
-        UploadFileCommand createFileCommand = new UploadFileCommand(new AuthToken("651"),
-                "file.txt", MimeType.TEXT, userID, folderID, new byte[]{1, 5, 8, 7, 5});
-
-        UploadFileCommand createFileCommandERROR = new UploadFileCommand(new AuthToken("23654"),
-                "file.txt", MimeType.TEXT, userID, folderID, new byte[]{1, 5});
+        UploadFileCommand createFileCommandERROR = FileTestData.uploadFile();
 
         FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
 
@@ -55,6 +44,7 @@ class UploadingFileTest {
         UploadingFile createFileManagementProcess = new UploadingFile(contentStorageInMemory, fileStorageInMemory);
 
         createFileManagementProcess.handle(createFileCommand);
+
         Assertions.assertThrows(InvalidHandleCommandException.class,
                 () -> createFileManagementProcess.handle(createFileCommandERROR));
 

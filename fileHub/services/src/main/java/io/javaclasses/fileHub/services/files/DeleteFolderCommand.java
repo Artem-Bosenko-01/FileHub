@@ -1,6 +1,5 @@
 package io.javaclasses.fileHub.services.files;
 
-import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.services.AuthToken;

@@ -13,7 +13,7 @@ class ProfileUpdateManagementProcessTest {
     @Test
     public void updateInfoUserTest() throws InvalidHandleCommandException {
 
-        RegistrationUserCommand registrationUserCommand = new RegistrationUserCommand("badk@h.com", "bbb", "ccc", "56478");
+        RegistrationUserCommand registrationUserCommand = UserTestData.registerUser("badk@h.com");
 
         UserStorageInMemory userStorageInMemory = new UserStorageInMemory();
 
@@ -21,8 +21,7 @@ class ProfileUpdateManagementProcessTest {
 
         registrationUser.handle(registrationUserCommand);
 
-        UpdatingProfileCommand command = new UpdatingProfileCommand(new AuthToken("1"),
-                new UserId("badk@h.com"), "aaa@h.com", "cas", "abc", "56478");
+        UpdatingProfileCommand command = UserTestData.updateUser(new UserId("badk@h.com"));
 
         UpdatingProfile process = new UpdatingProfile(userStorageInMemory);
 

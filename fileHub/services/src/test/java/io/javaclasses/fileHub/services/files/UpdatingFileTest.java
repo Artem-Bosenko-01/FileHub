@@ -14,11 +14,10 @@ import java.util.UUID;
 
 class UpdatingFileTest {
 
-    private FileId createFile(FileStorageInMemory fileStorageInMemory, String name,
-                              UserId userID, FolderId folderID) throws InvalidHandleCommandException {
+    private FileId createFile(FileStorageInMemory fileStorageInMemory, String name)
+            throws InvalidHandleCommandException {
 
-        CreateFileCommand createFileCommand = new CreateFileCommand(new AuthToken(UUID.randomUUID().toString()),
-                name, MimeType.TEXT, userID, folderID);
+        CreateFileCommand createFileCommand = FileTestData.createFile(name);
 
         CreatingFile createFileManagementProcess = new CreatingFile(fileStorageInMemory);
 
@@ -32,11 +31,11 @@ class UpdatingFileTest {
 
         FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
 
-        UserId userID = new UserId("Artem");
+        UserId userID = new UserId("artem@gmail.com");
 
         FolderId folderID = new FolderId("folder", userID);
 
-        FileId creteFileId = createFile(fileStorageInMemory, "file.txt", userID, folderID);
+        FileId creteFileId = createFile(fileStorageInMemory, "file.txt");
 
         UpdateFileCommand command = new UpdateFileCommand(new AuthToken("1"), creteFileId, "lkijij",
                 MimeType.GIF, 65, new UserId("abc"), folderID);
@@ -55,11 +54,11 @@ class UpdatingFileTest {
 
         FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
 
-        UserId userID = new UserId("Artem");
+        UserId userID = new UserId("artem@gmail.com");
 
         FolderId folderID = new FolderId("folder", userID);
 
-        createFile(fileStorageInMemory, "file.txt", userID, folderID);
+        createFile(fileStorageInMemory, "file.txt");
 
         folderID = new FolderId("JHGF", userID);
 

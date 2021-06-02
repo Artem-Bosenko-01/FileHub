@@ -15,11 +15,10 @@ import java.util.UUID;
 
 class GetFolderByNameViewTest {
 
-    private FolderId createFolder(FolderStorage folderStorage, String name, UserId userID, FolderId folderID)
+    private FolderId createFolder(FolderStorage folderStorage)
             throws InvalidHandleCommandException {
 
-        CreateFolderCommand createFolderCommand = new CreateFolderCommand(new AuthToken(UUID.randomUUID().toString()),
-                name, userID, folderID);
+        CreateFolderCommand createFolderCommand = FolderTestData.createFolder();
 
         CreatingFolder creatingFolder = new CreatingFolder(folderStorage);
 
@@ -34,9 +33,7 @@ class GetFolderByNameViewTest {
 
         UserId userID = new UserId("Artem");
 
-        FolderId folderID = new FolderId("parent", userID);
-
-        FolderId id = createFolder(folderStorage, "folder", userID, folderID);
+        FolderId id = createFolder(folderStorage);
 
         GetFolderByNameQuery query = new GetFolderByNameQuery(new AuthToken("1"),
                 "folder", userID);
@@ -44,6 +41,7 @@ class GetFolderByNameViewTest {
         GettingFolderByName view = new GettingFolderByName(folderStorage);
 
         GetFolderByNameDto folderByNameDTO = view.handle(query);
+
         Assertions.assertEquals(folderByNameDTO.folderID(), id);
 
     }
@@ -56,9 +54,7 @@ class GetFolderByNameViewTest {
 
         UserId userID = new UserId("Artem");
 
-        FolderId folderID = new FolderId("parent", userID);
-
-        createFolder(folderStorage, "folder", userID, folderID);
+        createFolder(folderStorage);
 
         Assertions.assertEquals(folderStorage.getSizeRecordsList(), 1);
 

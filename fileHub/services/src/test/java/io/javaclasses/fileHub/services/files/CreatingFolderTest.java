@@ -17,18 +17,13 @@ class CreatingFolderTest {
     @Test
     public void createFolderTest() throws InvalidHandleCommandException {
 
-        UserId userID = new UserId("artem@gmail.com");
-
-        FolderId folderID = new FolderId("parent", userID);
-
-        CreateFolderCommand createFileCommand = new CreateFolderCommand(new AuthToken("651"),
-                "folder", userID, folderID);
+        CreateFolderCommand createFolderCommand = FolderTestData.createFolder();
 
         FolderStorage folderStorage = new FolderStorageInMemory();
 
         CreatingFolder createFileManagementProcess = new CreatingFolder(folderStorage);
 
-        FolderId id = createFileManagementProcess.handle(createFileCommand);
+        FolderId id = createFileManagementProcess.handle(createFolderCommand);
 
         Assertions.assertNotNull(id);
 
@@ -37,15 +32,9 @@ class CreatingFolderTest {
     @Test
     public void createFileWithExistIdTest() throws InvalidHandleCommandException {
 
-        UserId userID = new UserId("artem@gmail.com");
+        CreateFolderCommand createFolderCommand = FolderTestData.createFolder();
 
-        FolderId folderID = new FolderId("parent", userID);
-
-        CreateFolderCommand createFolderCommand = new CreateFolderCommand(new AuthToken("651"),
-                "folder", userID, folderID);
-
-        CreateFolderCommand createFolderCommandERROR = new CreateFolderCommand(new AuthToken("4198529"),
-                "folder", userID, folderID);
+        CreateFolderCommand createFolderCommandERROR = FolderTestData.createFolder();
 
         FolderStorage folderStorage = new FolderStorageInMemory();
 

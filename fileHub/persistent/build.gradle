@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id "net.ltgt.errorprone" version "2.0.1"
+
 }
 
 group 'io.javaclasses.fileHub'
@@ -12,9 +14,11 @@ repositories {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
-    testImplementation group: 'com.google.guava', name: 'guava-testlib', version: '12.0-rc2'
-    implementation group: 'com.google.guava', name: 'guava', version: '11.0.2'
+    testImplementation 'com.google.guava:guava-testlib:30.1.1-jre'
+    implementation 'com.google.guava:guava:11.0.2'
 
+    implementation "com.google.errorprone:error_prone_core:2.7.1"
+    errorproneJavac "com.google.errorprone:error_prone_core:2.7.1"
 }
 
 test {

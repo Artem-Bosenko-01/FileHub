@@ -19,14 +19,14 @@ import java.util.Objects;
  * This is service to get existed file in authenticated user's directory by {@link FolderId folder}
  * and {@link UserId user}.
  */
-public class GettingFilesByUserAndFolde
+public class GettingFilesByUserAndFolder
         implements View<GetFilesByUserAndFolderQuery, List<FileInformation>> {
 
-    private static final Logger logger = LoggerFactory.getLogger(GettingFilesByUserAndFolde.class);
+    private static final Logger logger = LoggerFactory.getLogger(GettingFilesByUserAndFolder.class);
 
     private final FileStorageInMemory fileStorage;
 
-    public GettingFilesByUserAndFolde(FileStorageInMemory fileStorage) {
+    public GettingFilesByUserAndFolder(FileStorageInMemory fileStorage) {
         this.fileStorage = Preconditions.checkNotNull(fileStorage);
     }
 

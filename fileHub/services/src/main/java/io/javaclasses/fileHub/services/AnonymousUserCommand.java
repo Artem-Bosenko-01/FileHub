@@ -1,7 +1,7 @@
 package io.javaclasses.fileHub.services;
 
 /**
- * This is base, that carries information from client, that didn't authenticate in Filegub application.
+ * This is base, that carries information from client, that didn't authenticate in FileHub application.
  **/
 public class AnonymousUserCommand implements Command{
 

@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.UUID;
 
 class GettingFilesByUserAndFolderTest {
 
@@ -38,7 +37,7 @@ class GettingFilesByUserAndFolderTest {
         GetFilesByUserAndFolderQuery command = new GetFilesByUserAndFolderQuery(new AuthToken("1"),
                 folderID, userID);
 
-        GettingFilesByUserAndFolde viewByUser = new GettingFilesByUserAndFolde(fileStorageInMemory);
+        GettingFilesByUserAndFolder viewByUser = new GettingFilesByUserAndFolder(fileStorageInMemory);
 
         List<FileInformation> files = viewByUser.handle(command);
 
@@ -61,7 +60,7 @@ class GettingFilesByUserAndFolderTest {
         GetFilesByUserAndFolderQuery command = new GetFilesByUserAndFolderQuery(new AuthToken("1"),
                 folderID, userID);
 
-        GettingFilesByUserAndFolde viewByUser = new GettingFilesByUserAndFolde(fileStorageInMemory);
+        GettingFilesByUserAndFolder viewByUser = new GettingFilesByUserAndFolder(fileStorageInMemory);
 
         Assertions.assertThrows(InvalidHandleCommandException.class, () -> viewByUser.handle(command));
     }

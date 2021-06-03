@@ -1,7 +1,6 @@
 package io.javaclasses.fileHub.services.files.content;
 
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
-import io.javaclasses.fileHub.persistent.NotExistUserIdException;
 import io.javaclasses.fileHub.services.View;
 import io.javaclasses.fileHub.persistent.files.FileId;
 import io.javaclasses.fileHub.persistent.files.content.FIleContentStorage;

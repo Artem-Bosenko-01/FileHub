@@ -3,7 +3,7 @@ package io.javaclasses.fileHub.services.users;
 import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.DuplicatedUserIdException;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
-import io.javaclasses.fileHub.services.OpenProcess;
+import io.javaclasses.fileHub.services.OpenUserProcess;
 import io.javaclasses.fileHub.persistent.users.User;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.persistent.users.UserStorage;
@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 /**
  * This is service for first registration user in Filehub application.
  */
-public class RegistrationUser implements OpenProcess<RegistrationUserCommand, UserId> {
+public class RegistrationUser implements OpenUserProcess<RegistrationUserCommand, UserId> {
 
     private static final Logger logger = LoggerFactory.getLogger(RegistrationUser.class);
 

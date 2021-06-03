@@ -14,10 +14,6 @@ public final class FolderId implements RecordId {
         this.id = Preconditions.checkNotNull(name) + Preconditions.checkNotNull(userID);
     }
 
-    public FolderId() {
-        id = "";
-    }
-
     @Override
     public boolean equals(Object o) {
 

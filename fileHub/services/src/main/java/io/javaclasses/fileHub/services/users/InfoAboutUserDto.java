@@ -4,9 +4,7 @@ import io.javaclasses.fileHub.persistent.users.UserId;
 
 import static com.google.common.base.Preconditions.*;
 
-/**
- *
- * */
+
 public final class InfoAboutUserDto {
 
     private final UserId id;

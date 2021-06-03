@@ -3,7 +3,7 @@ package io.javaclasses.fileHub.services.files;
 import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.DuplicatedUserIdException;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
-import io.javaclasses.fileHub.services.SecuredProcess;
+import io.javaclasses.fileHub.services.SecuredUserProcess;
 import io.javaclasses.fileHub.persistent.files.Folder;
 import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.files.FolderStorage;
@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 /**
  * This is service to create new empty folder by authenticated user.
  */
-public class CreatingFolder implements SecuredProcess<CreateFolderCommand, FolderId> {
+public class CreatingFolder implements SecuredUserProcess<CreateFolderCommand, FolderId> {
 
     private static final Logger logger = LoggerFactory.getLogger(CreatingFolder.class);
 

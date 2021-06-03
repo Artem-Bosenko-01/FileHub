@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
 import io.javaclasses.fileHub.persistent.NotExistUserIdException;
-import io.javaclasses.fileHub.services.SecuredProcess;
+import io.javaclasses.fileHub.services.SecuredUserProcess;
 import io.javaclasses.fileHub.persistent.files.FolderStorage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 /**
  * This is service to delete existed folder in Filehub application by authenticated user.
  */
-public class DeletingFolder implements SecuredProcess<DeleteFolderCommand, FolderId> {
+public class DeletingFolder implements SecuredUserProcess<DeleteFolderCommand, FolderId> {
 
     private static final Logger logger = LoggerFactory.getLogger(DeletingFolder.class);
 

@@ -6,18 +6,11 @@ import io.javaclasses.fileHub.persistent.users.UserId;
 
 import java.util.Objects;
 
-/**
- *
- */
 public final class FileId implements RecordId {
     private final String id;
 
     public FileId(String name, UserId userID, FolderId folderID) {
         this.id = Preconditions.checkNotNull(name) + Preconditions.checkNotNull(userID) + Preconditions.checkNotNull(folderID);
-    }
-
-    public FileId() {
-        id = "";
     }
 
     @Override

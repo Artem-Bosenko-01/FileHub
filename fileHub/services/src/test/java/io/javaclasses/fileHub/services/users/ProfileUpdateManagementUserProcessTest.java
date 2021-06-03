@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 
-class ProfileUpdateManagementProcessTest {
+class ProfileUpdateManagementUserProcessTest {
 
     @Test
     public void updateInfoUserTest() throws InvalidHandleCommandException {

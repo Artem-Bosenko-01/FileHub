@@ -12,6 +12,10 @@ class ReadingInfoAboutUserQueryTest {
     public void checkForNullPointerInConstructor() throws NoSuchMethodException {
 
         NullPointerTester tester = new NullPointerTester();
+
+        tester.setDefault(AuthToken.class, new AuthToken("vsdvsv656")).
+                setDefault(UserId.class, new UserId("s"));
+
         tester.testConstructor(ReadUserProfileQuery.class.getConstructor(AuthToken.class, UserId.class));
 
     }
@@ -20,7 +24,7 @@ class ReadingInfoAboutUserQueryTest {
     public void checkForNullPointerInSetters() {
 
         NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicInstanceMethods(ReadUserProfileQuery.class.getMethods());
+        tester.testAllPublicInstanceMethods(new ReadUserProfileQuery(new AuthToken("vaas"), new UserId("")));
 
     }
 }

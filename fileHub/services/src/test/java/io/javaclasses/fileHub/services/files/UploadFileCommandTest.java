@@ -1,8 +1,8 @@
 package io.javaclasses.fileHub.services.files;
 
 import com.google.common.testing.NullPointerTester;
-import io.javaclasses.fileHub.persistent.files.MimeType;
 import io.javaclasses.fileHub.persistent.files.FolderId;
+import io.javaclasses.fileHub.persistent.files.MimeType;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.services.AuthToken;
 import org.junit.jupiter.api.Test;
@@ -14,16 +14,25 @@ class UploadFileCommandTest {
 
         NullPointerTester tester = new NullPointerTester();
 
-            tester.testConstructor(UploadFileCommand.class.getConstructor(AuthToken.class, String.class,
-                    MimeType.class, UserId.class, FolderId.class, byte[].class));
+        tester.setDefault(AuthToken.class, new AuthToken("")).
+                setDefault(String.class, "").
+                setDefault(MimeType.class, MimeType.TEXT).
+                setDefault(UserId.class, new UserId("")).
+                setDefault(FolderId.class, new FolderId("v", new UserId(""))).
+                setDefault(byte[].class, new byte[]{});
+
+        tester.testConstructor(UploadFileCommand.class.getConstructor(AuthToken.class, String.class,
+                MimeType.class, UserId.class, FolderId.class, byte[].class));
 
     }
 
     @Test
-    public void checkForNullPointerInSetters(){
+    public void checkForNullPointerInSetters() {
 
         NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicInstanceMethods(UploadFileCommand.class.getMethods());
+        tester.testAllPublicInstanceMethods(new UploadFileCommand(new AuthToken(""),
+                "", MimeType.TEXT, new UserId(""), new FolderId("", new UserId("")),
+                new byte[]{}));
 
     }
 

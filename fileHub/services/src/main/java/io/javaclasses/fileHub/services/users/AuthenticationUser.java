@@ -5,7 +5,7 @@ import io.javaclasses.fileHub.persistent.users.User;
 import io.javaclasses.fileHub.persistent.users.UserStorage;
 import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
-import io.javaclasses.fileHub.services.OpenProcess;
+import io.javaclasses.fileHub.services.OpenUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,7 +15,7 @@ import java.util.UUID;
 /**
  * This is service for authentication user in Filehub application if he is been in {@link UserStorage user storage}.
  */
-public class AuthenticationUser implements OpenProcess<AuthenticationUserCommand, AuthToken> {
+public class AuthenticationUser implements OpenUserProcess<AuthenticationUserCommand, AuthToken> {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthenticationUser.class);
 

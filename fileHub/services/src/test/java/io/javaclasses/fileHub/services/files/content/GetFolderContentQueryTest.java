@@ -13,6 +13,10 @@ class GetFolderContentQueryTest {
 
         NullPointerTester tester = new NullPointerTester();
 
+        tester.setDefault(AuthToken.class, new AuthToken("vsdvd")).
+                setDefault(FolderId.class, new FolderId("avsa", new UserId("dvsaa"))).
+                setDefault(UserId.class, new UserId("dvsaa"));
+
         tester.testConstructor(GetFolderContentQuery.class.getConstructor(
                 AuthToken.class,
                 FolderId.class,
@@ -25,7 +29,8 @@ class GetFolderContentQueryTest {
 
         NullPointerTester tester = new NullPointerTester();
 
-        tester.testAllPublicInstanceMethods(GetFolderContentQuery.class.getMethods());
+        tester.testAllPublicInstanceMethods(new GetFolderContentQuery(new AuthToken("sv"),
+                new FolderId("sv", new UserId("vsdsvs")), new UserId("vsdsvs")));
 
     }
 }

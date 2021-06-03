@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.files.FileId;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
 import io.javaclasses.fileHub.persistent.NotExistUserIdException;
-import io.javaclasses.fileHub.services.SecuredProcess;
+import io.javaclasses.fileHub.services.SecuredUserProcess;
 import io.javaclasses.fileHub.persistent.files.File;
 import io.javaclasses.fileHub.persistent.files.FileStorageInMemory;
 import org.slf4j.Logger;
@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 /**
  * This is service to updating information about existed file in authenticated user's directory.
  */
-public class UpdatingFile implements SecuredProcess<UpdateFileCommand, FileId> {
+public class UpdatingFile implements SecuredUserProcess<UpdateFileCommand, FileId> {
 
     private static final Logger logger = LoggerFactory.getLogger(UpdatingFile.class);
 

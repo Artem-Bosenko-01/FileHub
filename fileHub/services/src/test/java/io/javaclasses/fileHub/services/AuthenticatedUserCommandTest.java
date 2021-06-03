@@ -8,7 +8,7 @@ class AuthenticatedUserCommandTest {
     public void checkForNullPointerInConstructor() throws NoSuchMethodException {
 
         NullPointerTester tester = new NullPointerTester();
-        tester.testConstructor(AuthenticatedUserCommand.class.getConstructor(AuthToken.class));
+        tester.testAllPublicConstructors(AuthenticatedUserCommand.class);
 
     }
 

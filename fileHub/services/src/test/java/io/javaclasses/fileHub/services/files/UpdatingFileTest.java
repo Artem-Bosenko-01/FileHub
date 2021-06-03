@@ -56,11 +56,9 @@ class UpdatingFileTest {
 
         UserId userID = new UserId("artem@gmail.com");
 
-        FolderId folderID = new FolderId("folder", userID);
-
         createFile(fileStorageInMemory, "file.txt");
 
-        folderID = new FolderId("JHGF", userID);
+        FolderId folderID = new FolderId("JHGF", userID);
 
         UpdateFileCommand command = new UpdateFileCommand(new AuthToken("1"), new FileId("csac",
                 userID, folderID), "lkijij",

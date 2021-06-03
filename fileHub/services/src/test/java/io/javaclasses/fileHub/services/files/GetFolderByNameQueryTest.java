@@ -12,8 +12,12 @@ class GetFolderByNameQueryTest {
     public void checkForNullPointerInConstructor() throws NoSuchMethodException {
 
         NullPointerTester tester = new NullPointerTester();
-        tester.testConstructor(GetFolderByNameQuery.class.getConstructor(AuthToken.class, String.class,
-                UserId.class));
+
+        tester.setDefault(AuthToken.class, new AuthToken(""))
+                .setDefault(String.class, "")
+                .setDefault(UserId.class, new UserId(""));
+
+        tester.testAllPublicConstructors(GetFolderByNameQuery.class);
 
     }
 
@@ -21,7 +25,7 @@ class GetFolderByNameQueryTest {
     public void checkForNullPointerInSetters() {
 
         NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicInstanceMethods(GetFolderByNameQuery.class.getMethods());
+        tester.testAllPublicInstanceMethods(new GetFolderByNameQuery(new AuthToken(""),"", new UserId("")));
 
     }
 }

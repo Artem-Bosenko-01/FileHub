@@ -3,7 +3,7 @@ package io.javaclasses.fileHub.services.users;
 import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
 import io.javaclasses.fileHub.persistent.NotExistUserIdException;
-import io.javaclasses.fileHub.services.SecuredProcess;
+import io.javaclasses.fileHub.services.SecuredUserProcess;
 import io.javaclasses.fileHub.persistent.users.User;
 import io.javaclasses.fileHub.persistent.users.UserStorage;
 import org.slf4j.Logger;
@@ -15,7 +15,7 @@ import java.util.Optional;
 /**
  * This is service for updating information about user in {@link UserStorage user table}.
  */
-public class UpdatingProfile implements SecuredProcess<UpdatingProfileCommand, String> {
+public class UpdatingProfile implements SecuredUserProcess<UpdatingProfileCommand, String> {
 
     private static final Logger logger = LoggerFactory.getLogger(UpdatingProfile.class);
 

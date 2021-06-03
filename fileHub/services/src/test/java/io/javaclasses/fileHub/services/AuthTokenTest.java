@@ -10,7 +10,7 @@ class AuthTokenTest {
     public void checkForNullPointerInConstructor() throws NoSuchMethodException {
 
         NullPointerTester tester = new NullPointerTester();
-        tester.testConstructor(AuthToken.class.getConstructor(String.class));
+        tester.testAllPublicConstructors(AuthToken.class);
 
     }
 
@@ -18,7 +18,7 @@ class AuthTokenTest {
     public void checkForNullPointerInSetters() {
 
         NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicInstanceMethods(AuthToken.class.getMethods());
+        tester.testAllPublicInstanceMethods(new AuthToken("vdsd"));
 
     }
 }

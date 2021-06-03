@@ -6,4 +6,4 @@ package io.javaclasses.fileHub.services;
  * @param <E> result entity.
  * @param <C> one of {@link AuthenticatedUserCommand command} from client.
  * */
-public interface SecuredProcess<C extends  AuthenticatedUserCommand, E> extends Process<C,E>{}
+public interface SecuredUserProcess<C extends  AuthenticatedUserCommand, E> extends UserProcess<C,E> {}

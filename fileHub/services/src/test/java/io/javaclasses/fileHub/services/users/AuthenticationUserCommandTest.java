@@ -9,16 +9,11 @@ class AuthenticationUserCommandTest {
     public void checkForNullPointerInConstructor() throws NoSuchMethodException {
 
         NullPointerTester tester = new NullPointerTester();
+
+        tester.setDefault(String.class, "");
+
         tester.testConstructor(AuthenticationUserCommand.class.getConstructor(
                 String.class, String.class));
-
-    }
-
-    @Test
-    public void checkForNullPointerInSetters() {
-
-        NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicInstanceMethods(AuthenticationUserCommand.class.getMethods());
 
     }
 }

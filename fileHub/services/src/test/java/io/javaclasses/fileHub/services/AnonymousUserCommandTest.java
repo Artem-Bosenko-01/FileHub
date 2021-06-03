@@ -10,7 +10,7 @@ class AnonymousUserCommandTest {
     public void checkForNullPointerInConstructor() throws NoSuchMethodException {
 
         NullPointerTester tester = new NullPointerTester();
-        tester.testConstructor(AnonymousUserCommand.class.getConstructor());
+        tester.testAllPublicConstructors(AnonymousUserCommand.class);
 
     }
 }

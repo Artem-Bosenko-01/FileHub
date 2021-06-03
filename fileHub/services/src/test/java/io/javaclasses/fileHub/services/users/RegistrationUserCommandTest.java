@@ -9,6 +9,9 @@ class RegistrationUserCommandTest {
     public void checkForNullPointerInConstructor() throws NoSuchMethodException {
 
         NullPointerTester tester = new NullPointerTester();
+
+        tester.setDefault(String.class, "");
+
         tester.testConstructor(RegistrationUserCommand.class.getConstructor(
                 String.class, String.class, String.class, String.class));
 
@@ -18,7 +21,7 @@ class RegistrationUserCommandTest {
     public void checkForNullPointerInSetters() {
 
         NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicInstanceMethods(RegistrationUserCommand.class.getMethods());
+        tester.testAllPublicInstanceMethods(new RegistrationUserCommand("","", "", ""));
 
     }
 

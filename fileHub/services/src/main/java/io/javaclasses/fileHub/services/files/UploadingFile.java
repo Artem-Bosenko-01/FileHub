@@ -3,7 +3,7 @@ package io.javaclasses.fileHub.services.files;
 import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.files.FileId;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
-import io.javaclasses.fileHub.services.SecuredProcess;
+import io.javaclasses.fileHub.services.SecuredUserProcess;
 import io.javaclasses.fileHub.persistent.files.FileStorage;
 import io.javaclasses.fileHub.services.files.content.CreateFileContentCommand;
 import io.javaclasses.fileHub.services.files.content.CreatingFileContent;
@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 /**
  * This is service to uploading new file in authenticated user's directory.
  */
-public class UploadingFile implements SecuredProcess<UploadFileCommand, FileId> {
+public class UploadingFile implements SecuredUserProcess<UploadFileCommand, FileId> {
 
     private static final Logger logger = LoggerFactory.getLogger(UploadingFile.class);
 

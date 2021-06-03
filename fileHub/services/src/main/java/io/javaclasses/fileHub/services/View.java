@@ -7,4 +7,4 @@ package io.javaclasses.fileHub.services;
  * @param <E> result entity.
  * @param <C> one of query from client.
  * */
-public interface View<C extends Query, E> extends SecuredProcess<C,E>{}
+public interface View<C extends Query, E> extends SecuredUserProcess<C,E> {}

@@ -3,6 +3,10 @@ package io.javaclasses.fileHub.services.files;
 import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.files.FolderStorage;
 import io.javaclasses.fileHub.persistent.files.FolderStorageInMemory;
+import io.javaclasses.fileHub.persistent.users.UserStorage;
+import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.services.AuthToken;
@@ -15,37 +19,27 @@ import java.util.UUID;
 
 class UpdatingFolderTest {
 
-    private FolderId createFolder(FolderStorage folderStorage)
-            throws InvalidHandleCommandException {
-
-        CreateFolderCommand createFolderCommand = FolderTestData.createFolder();
-
-        CreatingFolder creatingFolder = new CreatingFolder(folderStorage);
-
-        return creatingFolder.handle(createFolderCommand);
-
-    }
-
-
     @Test
     public void updateInfoAboutFolderByTest() throws InvalidHandleCommandException {
 
         FolderStorage folderStorage = new FolderStorageInMemory();
 
-        UserId userID = new UserId("Artem");
+        UserStorage userStorage = new UserStorageInMemory();
 
-        FolderId folderID = new FolderId("parent", userID);
+        AuthorizationStorage authorizationStorage = new AuthorizationStorageInMemory();
 
-        FolderId createFolderId = createFolder(folderStorage);
+        FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
 
-        UpdateFolderCommand command = new UpdateFolderCommand(new AuthToken("1"), createFolderId,
-                "lkijij", userID, folderID);
+        FolderId id = fileSystemTestData.createFolder(folderStorage, null);
 
-        UpdatingFolder process = new UpdatingFolder(folderStorage);
+        UpdateFolderCommand command = new UpdateFolderCommand(fileSystemTestData.token(), id,
+                "lkijij", fileSystemTestData.id(), null);
+
+        UpdatingFolder process = new UpdatingFolder(folderStorage, authorizationStorage);
 
         FolderId updateFolderId = process.handle(command);
 
-        Assertions.assertEquals(updateFolderId, createFolderId);
+        Assertions.assertEquals(updateFolderId, id);
 
     }
 
@@ -55,18 +49,23 @@ class UpdatingFolderTest {
 
         FolderStorage folderStorage = new FolderStorageInMemory();
 
-        UserId userID = new UserId("Artem");
+        UserStorage userStorage = new UserStorageInMemory();
 
-        FolderId folderID = new FolderId("parent", userID);
+        AuthorizationStorage authorizationStorage = new AuthorizationStorageInMemory();
 
-        createFolder(folderStorage);
+        FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
+
+        fileSystemTestData.createFolder(folderStorage, null);
+
+        FolderId folderID = new FolderId("parent", fileSystemTestData.id());
+
 
         UpdateFolderCommand command = new UpdateFolderCommand(new AuthToken("1"),
                 new FolderId("newFolder",
-                userID),
-                "lkijij", userID, folderID);
+                        fileSystemTestData.id()),
+                "lkijij", fileSystemTestData.id(), folderID);
 
-        UpdatingFolder process = new UpdatingFolder(folderStorage);
+        UpdatingFolder process = new UpdatingFolder(folderStorage, authorizationStorage);
 
         Assertions.assertThrows(InvalidHandleCommandException.class, () -> process.handle(command));
     }

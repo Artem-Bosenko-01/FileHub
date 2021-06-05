@@ -1,6 +1,7 @@
 package io.javaclasses.fileHub.services.users;
 
 import com.google.common.base.Preconditions;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
 import io.javaclasses.fileHub.persistent.NotExistUserIdException;
 import io.javaclasses.fileHub.services.SecuredUserProcess;
@@ -15,19 +16,22 @@ import java.util.Optional;
 /**
  * This is service for updating information about user in {@link UserStorage user table}.
  */
-public class UpdatingProfile implements SecuredUserProcess<UpdatingProfileCommand, String> {
+public class UpdatingProfile extends SecuredUserProcess<UpdatingProfileCommand, String> {
 
     private static final Logger logger = LoggerFactory.getLogger(UpdatingProfile.class);
 
     private final UserStorage userStorage;
 
 
-    public UpdatingProfile(UserStorage userStorage) {
+    public UpdatingProfile(UserStorage userStorage, AuthorizationStorage authorizationStorage) {
+
+        super(Preconditions.checkNotNull(authorizationStorage));
         this.userStorage = Preconditions.checkNotNull(userStorage);
     }
 
+
     @Override
-    public String handle(UpdatingProfileCommand inputCommand) throws InvalidHandleCommandException {
+    protected String doHandle(UpdatingProfileCommand inputCommand) throws InvalidHandleCommandException {
 
         if (logger.isInfoEnabled()) {
             logger.info("Start update user process with id: " + inputCommand.userID());

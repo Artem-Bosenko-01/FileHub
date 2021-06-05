@@ -2,6 +2,7 @@ package io.javaclasses.fileHub.services.files;
 
 import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.files.FileId;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
 import io.javaclasses.fileHub.persistent.NotExistUserIdException;
 import io.javaclasses.fileHub.services.SecuredUserProcess;
@@ -12,19 +13,21 @@ import org.slf4j.LoggerFactory;
 /**
  * This is service to delete existed file in authenticated user's directory.
  */
-public class DeletingFile implements SecuredUserProcess<DeleteFileCommand, FileId> {
+public class DeletingFile extends SecuredUserProcess<DeleteFileCommand, FileId> {
 
     private static final Logger logger = LoggerFactory.getLogger(DeletingFile.class);
 
 
     private final FileStorageInMemory fileStorage;
 
-    public DeletingFile(FileStorageInMemory fileStorage) {
+    public DeletingFile(FileStorageInMemory fileStorage, AuthorizationStorage authorizationStorage) {
+        super(Preconditions.checkNotNull(authorizationStorage));
         this.fileStorage = Preconditions.checkNotNull(fileStorage);
     }
 
+
     @Override
-    public FileId handle(DeleteFileCommand inputCommand) throws InvalidHandleCommandException {
+    protected FileId doHandle(DeleteFileCommand inputCommand) throws InvalidHandleCommandException {
 
         if (logger.isInfoEnabled()) {
             logger.info("Start delete file " + inputCommand.id());
@@ -48,5 +51,6 @@ public class DeletingFile implements SecuredUserProcess<DeleteFileCommand, FileI
 
             throw new InvalidHandleCommandException(e.getMessage());
         }
+
     }
 }

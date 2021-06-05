@@ -1,5 +1,7 @@
 package io.javaclasses.fileHub.services.files.content;
 
+import com.google.common.base.Preconditions;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
 import io.javaclasses.fileHub.services.View;
 import io.javaclasses.fileHub.persistent.files.FileId;
@@ -13,19 +15,20 @@ import java.util.Optional;
 /**
  * This is service to get file's content for existed {@link FileId file}.
  */
-public class GettingFileContent implements View<GetFileContentQuery, GetFileContentDTO> {
+public class GettingFileContent extends View<GetFileContentQuery, GetFileContentDTO> {
 
     private static final Logger logger = LoggerFactory.getLogger(GettingFileContent.class);
 
     private final FIleContentStorage contentStorage;
 
-    public GettingFileContent(FIleContentStorage contentStorage) {
-        this.contentStorage = contentStorage;
+    public GettingFileContent(FIleContentStorage contentStorage, AuthorizationStorage authorizationStorage) {
+        super(Preconditions.checkNotNull(authorizationStorage));
+        this.contentStorage = Preconditions.checkNotNull(contentStorage);
     }
 
 
     @Override
-    public GetFileContentDTO handle(GetFileContentQuery inputCommand) throws InvalidHandleCommandException {
+    protected GetFileContentDTO doHandle(GetFileContentQuery inputCommand) throws InvalidHandleCommandException {
 
         if (logger.isInfoEnabled()) {
             logger.info("Start get file's content by id " + inputCommand.fileID());

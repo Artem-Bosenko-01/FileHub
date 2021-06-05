@@ -6,6 +6,8 @@ import io.javaclasses.fileHub.services.AuthenticatedUserCommand;
 import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.users.UserId;
 
+import javax.annotation.Nullable;
+
 import static com.google.common.base.Preconditions.*;
 
 /**
@@ -19,13 +21,13 @@ public final class CreateFileCommand extends AuthenticatedUserCommand {
     private final UserId owner;
     private final FolderId folder;
 
-    public CreateFileCommand(AuthToken token, String name, MimeType mimeType, UserId owner, FolderId folder) {
+    public CreateFileCommand(AuthToken token, String name, MimeType mimeType, UserId owner, @Nullable FolderId folder) {
 
         super(checkNotNull(token));
         this.name = checkNotNull(name);
         this.mimeType = checkNotNull(mimeType);
         this.owner = checkNotNull(owner);
-        this.folder = checkNotNull(folder);
+        this.folder = folder;
 
     }
 

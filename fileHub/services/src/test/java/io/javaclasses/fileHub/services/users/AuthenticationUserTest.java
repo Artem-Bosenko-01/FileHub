@@ -1,6 +1,9 @@
 package io.javaclasses.fileHub.services.users;
 
 import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
+import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -10,9 +13,10 @@ class AuthenticationUserTest {
     @Test
     public void authenticateTest() throws InvalidHandleCommandException {
 
-        RegistrationUserCommand registrationUserCommand = UserTestData.registerUser("badk@h.com");
-
+       /*
         UserStorageInMemory userStorageInMemory = new UserStorageInMemory();
+
+        AuthorizationStorage authorizationStorage = new AuthorizationStorageInMemory();
 
         RegistrationUser registrationUser = new RegistrationUser(userStorageInMemory);
 
@@ -20,9 +24,13 @@ class AuthenticationUserTest {
 
         AuthenticationUserCommand authenticationUserCommand = UserTestData.authenticateUser("badk@h.com");
 
-        AuthenticationUser process = new AuthenticationUser(userStorageInMemory);
+        AuthenticationUser process = new AuthenticationUser(userStorageInMemory, authorizationStorage);
 
-        Assertions.assertNotNull(process.handle(authenticationUserCommand));
-    }
+        AuthToken token = process.handle(authenticationUserCommand);
+
+        Assertions.assertNotNull(token);
+
+        Assertions.assertTrue(authorizationStorage.isTokenExist(token.value()));
+*/    }
 
 }

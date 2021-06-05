@@ -4,6 +4,8 @@ import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.AbstractInMemoryStorage;
 import io.javaclasses.fileHub.persistent.users.User;
 import io.javaclasses.fileHub.persistent.users.UserId;
+import io.javaclasses.fileHub.persistent.users.UserStorage;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
 import io.javaclasses.fileHub.services.View;
 import org.slf4j.Logger;
@@ -14,18 +16,19 @@ import java.util.Optional;
 /**
  * This is service for getting information about authenticated user in Filehub application.
  */
-public class ReadingInfoAboutUser implements View<ReadUserProfileQuery, InfoAboutUserDto> {
+public class ReadingInfoAboutUser extends View<ReadUserProfileQuery, InfoAboutUserDto> {
 
     private static final Logger logger = LoggerFactory.getLogger(ReadingInfoAboutUser.class);
 
-    private final AbstractInMemoryStorage<UserId, User> userStorage;
+    private final UserStorage userStorage;
 
-    public ReadingInfoAboutUser(AbstractInMemoryStorage<UserId, User> userStorage) {
+    public ReadingInfoAboutUser(UserStorage userStorage, AuthorizationStorage authorizationStorage) {
+        super(Preconditions.checkNotNull(authorizationStorage));
         this.userStorage = Preconditions.checkNotNull(userStorage);
     }
 
     @Override
-    public InfoAboutUserDto handle(ReadUserProfileQuery query) throws InvalidHandleCommandException {
+    protected InfoAboutUserDto doHandle(ReadUserProfileQuery query) throws InvalidHandleCommandException {
 
         if (logger.isInfoEnabled()) {
             logger.info("Start read user process with id: " + query.id());
@@ -56,5 +59,6 @@ public class ReadingInfoAboutUser implements View<ReadUserProfileQuery, InfoAbou
 
             throw new InvalidHandleCommandException("User with id doesn't exist " + query.id());
         }
+
     }
 }

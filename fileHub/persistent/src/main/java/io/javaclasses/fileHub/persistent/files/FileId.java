@@ -4,13 +4,14 @@ import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.RecordId;
 import io.javaclasses.fileHub.persistent.users.UserId;
 
+import javax.annotation.Nullable;
 import java.util.Objects;
 
 public final class FileId implements RecordId {
     private final String id;
 
-    public FileId(String name, UserId userID, FolderId folderID) {
-        this.id = Preconditions.checkNotNull(name) + Preconditions.checkNotNull(userID) + Preconditions.checkNotNull(folderID);
+    public FileId(String name, UserId userID, @Nullable FolderId folderID) {
+        this.id = Preconditions.checkNotNull(name) + Preconditions.checkNotNull(userID) + folderID;
     }
 
     @Override

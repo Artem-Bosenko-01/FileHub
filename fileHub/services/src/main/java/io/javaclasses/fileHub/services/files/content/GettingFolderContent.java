@@ -1,5 +1,6 @@
 package io.javaclasses.fileHub.services.files.content;
 
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
 import io.javaclasses.fileHub.persistent.NotExistUserIdException;
 import io.javaclasses.fileHub.services.View;
@@ -17,22 +18,25 @@ import java.util.Optional;
 /**
  * This is service to get folder's content for existed {@link FolderId folder}.
  */
-public class GettingFolderContent implements View<GetFolderContentQuery, GetFolderContentDTO> {
+public class GettingFolderContent extends View<GetFolderContentQuery, GetFolderContentDTO> {
 
     private static final Logger logger = LoggerFactory.getLogger(GettingFolderContent.class);
 
     private final FolderStorage folderStorage;
     private final FileStorage fileStorage;
 
-    public GettingFolderContent(FolderStorage folderStorageInMemory, FileStorage fileStorage) {
+    public GettingFolderContent(FolderStorage folderStorageInMemory, FileStorage fileStorage,
+                                AuthorizationStorage authorizationStorage) {
 
+        super(authorizationStorage);
         this.folderStorage = folderStorageInMemory;
         this.fileStorage = fileStorage;
 
     }
 
+
     @Override
-    public GetFolderContentDTO handle(GetFolderContentQuery inputCommand) throws InvalidHandleCommandException {
+    protected GetFolderContentDTO doHandle(GetFolderContentQuery inputCommand) throws InvalidHandleCommandException {
 
         if (logger.isInfoEnabled()) {
             logger.info("Start get folder's content by id " + inputCommand.id());
@@ -58,5 +62,6 @@ public class GettingFolderContent implements View<GetFolderContentQuery, GetFold
             }
             throw new InvalidHandleCommandException(e.getMessage());
         }
+
     }
 }

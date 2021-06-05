@@ -3,6 +3,10 @@ package io.javaclasses.fileHub.services.files;
 import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.files.FolderStorage;
 import io.javaclasses.fileHub.persistent.files.FolderStorageInMemory;
+import io.javaclasses.fileHub.persistent.users.UserStorage;
+import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.services.AuthToken;
@@ -17,11 +21,18 @@ class CreatingFolderTest {
     @Test
     public void createFolderTest() throws InvalidHandleCommandException {
 
-        CreateFolderCommand createFolderCommand = FolderTestData.createFolder();
-
         FolderStorage folderStorage = new FolderStorageInMemory();
 
-        CreatingFolder createFileManagementProcess = new CreatingFolder(folderStorage);
+        AuthorizationStorage authorizationStorage = new AuthorizationStorageInMemory();
+
+        UserStorage userStorage = new UserStorageInMemory();
+
+        FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
+
+        CreateFolderCommand createFolderCommand = new CreateFolderCommand(fileSystemTestData.token(),
+                "folder", fileSystemTestData.id(), null);
+
+        CreatingFolder createFileManagementProcess = new CreatingFolder(folderStorage, authorizationStorage);
 
         FolderId id = createFileManagementProcess.handle(createFolderCommand);
 
@@ -32,13 +43,21 @@ class CreatingFolderTest {
     @Test
     public void createFileWithExistIdTest() throws InvalidHandleCommandException {
 
-        CreateFolderCommand createFolderCommand = FolderTestData.createFolder();
-
-        CreateFolderCommand createFolderCommandERROR = FolderTestData.createFolder();
-
         FolderStorage folderStorage = new FolderStorageInMemory();
 
-        CreatingFolder createFileManagementProcess = new CreatingFolder(folderStorage);
+        AuthorizationStorage authorizationStorage = new AuthorizationStorageInMemory();
+
+        UserStorage userStorage = new UserStorageInMemory();
+
+        FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
+
+        CreateFolderCommand createFolderCommand = new CreateFolderCommand(fileSystemTestData.token(),
+                "folder", fileSystemTestData.id(), null);
+
+        CreateFolderCommand createFolderCommandERROR = new CreateFolderCommand(fileSystemTestData.token(),
+                "folder", fileSystemTestData.id(), null);
+
+        CreatingFolder createFileManagementProcess = new CreatingFolder(folderStorage, authorizationStorage);
 
         createFileManagementProcess.handle(createFolderCommand);
         Assertions.assertThrows(InvalidHandleCommandException.class,

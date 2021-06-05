@@ -2,6 +2,7 @@ package io.javaclasses.fileHub.services.files;
 
 import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.files.FileId;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
 import io.javaclasses.fileHub.persistent.NotExistUserIdException;
 import io.javaclasses.fileHub.services.SecuredUserProcess;
@@ -13,18 +14,20 @@ import org.slf4j.LoggerFactory;
 /**
  * This is service to updating information about existed file in authenticated user's directory.
  */
-public class UpdatingFile implements SecuredUserProcess<UpdateFileCommand, FileId> {
+public class UpdatingFile extends SecuredUserProcess<UpdateFileCommand, FileId> {
 
     private static final Logger logger = LoggerFactory.getLogger(UpdatingFile.class);
 
     private final FileStorageInMemory fileStorage;
 
-    public UpdatingFile(FileStorageInMemory fileStorage) {
+    public UpdatingFile(FileStorageInMemory fileStorage, AuthorizationStorage authorizationStorage) {
+
+        super(Preconditions.checkNotNull(authorizationStorage));
         this.fileStorage = Preconditions.checkNotNull(fileStorage);
     }
 
     @Override
-    public FileId handle(UpdateFileCommand inputCommand) throws InvalidHandleCommandException {
+    protected FileId doHandle(UpdateFileCommand inputCommand) throws InvalidHandleCommandException {
 
         if (logger.isInfoEnabled()) {
             logger.info("Start update information for file " + inputCommand.id());
@@ -53,5 +56,6 @@ public class UpdatingFile implements SecuredUserProcess<UpdateFileCommand, FileI
             }
             throw new InvalidHandleCommandException(e.getMessage());
         }
+
     }
 }

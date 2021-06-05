@@ -3,6 +3,10 @@ package io.javaclasses.fileHub.services.files;
 import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.files.FolderStorage;
 import io.javaclasses.fileHub.persistent.files.FolderStorageInMemory;
+import io.javaclasses.fileHub.persistent.users.UserStorage;
+import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.services.AuthToken;
@@ -15,30 +19,23 @@ import java.util.UUID;
 
 class GetFolderByNameViewTest {
 
-    private FolderId createFolder(FolderStorage folderStorage)
-            throws InvalidHandleCommandException {
-
-        CreateFolderCommand createFolderCommand = FolderTestData.createFolder();
-
-        CreatingFolder creatingFolder = new CreatingFolder(folderStorage);
-
-        return creatingFolder.handle(createFolderCommand);
-
-    }
-
     @Test
     public void readInfoAboutFolderByIdTest() throws InvalidHandleCommandException {
 
         FolderStorage folderStorage = new FolderStorageInMemory();
 
-        UserId userID = new UserId("Artem");
+        UserStorage userStorage = new UserStorageInMemory();
 
-        FolderId id = createFolder(folderStorage);
+        AuthorizationStorage authorizationStorage = new AuthorizationStorageInMemory();
 
-        GetFolderByNameQuery query = new GetFolderByNameQuery(new AuthToken("1"),
-                "folder", userID);
+        FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
 
-        GettingFolderByName view = new GettingFolderByName(folderStorage);
+        FolderId id = fileSystemTestData.createFolder(folderStorage, null);
+
+        GetFolderByNameQuery query = new GetFolderByNameQuery(fileSystemTestData.token(),
+                "folder", fileSystemTestData.id());
+
+        GettingFolderByName view = new GettingFolderByName(folderStorage, authorizationStorage);
 
         GetFolderByNameDto folderByNameDTO = view.handle(query);
 
@@ -52,16 +49,20 @@ class GetFolderByNameViewTest {
 
         FolderStorage folderStorage = new FolderStorageInMemory();
 
-        UserId userID = new UserId("Artem");
+        UserStorage userStorage = new UserStorageInMemory();
 
-        createFolder(folderStorage);
+        AuthorizationStorage authorizationStorage = new AuthorizationStorageInMemory();
+
+        FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
+
+        fileSystemTestData.createFolder(folderStorage, null);
 
         Assertions.assertEquals(folderStorage.getSizeRecordsList(), 1);
 
-        GetFolderByNameQuery query = new GetFolderByNameQuery(new AuthToken("1"),
-                "JHGF", userID);
+        GetFolderByNameQuery query = new GetFolderByNameQuery(fileSystemTestData.token(),
+                "JHGF", fileSystemTestData.id());
 
-        GettingFolderByName view = new GettingFolderByName(folderStorage);
+        GettingFolderByName view = new GettingFolderByName(folderStorage, authorizationStorage);
 
         Assertions.assertThrows(InvalidHandleCommandException.class, () -> view.handle(query));
     }

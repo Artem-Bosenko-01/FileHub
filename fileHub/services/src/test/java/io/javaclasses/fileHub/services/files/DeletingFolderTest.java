@@ -3,6 +3,10 @@ package io.javaclasses.fileHub.services.files;
 import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.files.FolderStorage;
 import io.javaclasses.fileHub.persistent.files.FolderStorageInMemory;
+import io.javaclasses.fileHub.persistent.users.UserStorage;
+import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.services.AuthToken;
@@ -15,30 +19,25 @@ import java.util.UUID;
 
 class DeletingFolderTest {
 
-    private FolderId createFolder(FolderStorage folderStorage)
-            throws InvalidHandleCommandException {
-
-        CreateFolderCommand createFolderCommand = FolderTestData.createFolder();
-
-        CreatingFolder creatingFolder = new CreatingFolder(folderStorage);
-
-        return creatingFolder.handle(createFolderCommand);
-
-    }
-
 
     @Test
     public void deleteFolderByIdTest() throws InvalidHandleCommandException {
 
         FolderStorage folderStorage = new FolderStorageInMemory();
 
-        FolderId id = createFolder(folderStorage);
+        AuthorizationStorage authorizationStorage = new AuthorizationStorageInMemory();
+
+        UserStorage userStorage = new UserStorageInMemory();
+
+        FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
+
+        FolderId id = fileSystemTestData.createFolder(folderStorage, null);
 
         Assertions.assertEquals(folderStorage.getSizeRecordsList(), 1);
 
-        DeleteFolderCommand deleteFileCommand = new DeleteFolderCommand(new AuthToken("1"), id);
+        DeleteFolderCommand deleteFileCommand = new DeleteFolderCommand(fileSystemTestData.token(), id);
 
-        DeletingFolder deleteFileProcess = new DeletingFolder(folderStorage);
+        DeletingFolder deleteFileProcess = new DeletingFolder(folderStorage, authorizationStorage);
 
         deleteFileProcess.handle(deleteFileCommand);
 
@@ -50,14 +49,21 @@ class DeletingFolderTest {
     @Test
     public void deleteFolderWithNotExistedIdTest() throws InvalidHandleCommandException {
 
+
         FolderStorage folderStorage = new FolderStorageInMemory();
 
-        createFolder(folderStorage);
+        AuthorizationStorage authorizationStorage = new AuthorizationStorageInMemory();
 
-        DeleteFolderCommand deleteFolderCommand = new DeleteFolderCommand(new AuthToken("1"),
+        UserStorage userStorage = new UserStorageInMemory();
+
+        FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
+
+        fileSystemTestData.createFolder(folderStorage, null);
+
+        DeleteFolderCommand deleteFolderCommand = new DeleteFolderCommand(fileSystemTestData.token(),
                 new FolderId("name", new UserId("vadvdva")));
 
-        DeletingFolder deleteFileProcess = new DeletingFolder(folderStorage);
+        DeletingFolder deleteFileProcess = new DeletingFolder(folderStorage, authorizationStorage);
 
         Assertions.assertThrows(InvalidHandleCommandException.class,
                 () -> deleteFileProcess.handle(deleteFolderCommand));

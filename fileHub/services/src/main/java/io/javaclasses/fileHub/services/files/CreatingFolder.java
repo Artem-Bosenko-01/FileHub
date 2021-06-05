@@ -2,6 +2,7 @@ package io.javaclasses.fileHub.services.files;
 
 import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.DuplicatedUserIdException;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
 import io.javaclasses.fileHub.services.SecuredUserProcess;
 import io.javaclasses.fileHub.persistent.files.Folder;
@@ -13,18 +14,19 @@ import org.slf4j.LoggerFactory;
 /**
  * This is service to create new empty folder by authenticated user.
  */
-public class CreatingFolder implements SecuredUserProcess<CreateFolderCommand, FolderId> {
+public class CreatingFolder extends SecuredUserProcess<CreateFolderCommand, FolderId> {
 
     private static final Logger logger = LoggerFactory.getLogger(CreatingFolder.class);
 
     private final FolderStorage folderStorageInMemory;
 
-    public CreatingFolder(FolderStorage userStorage) {
+    public CreatingFolder(FolderStorage userStorage, AuthorizationStorage authorizationStorage) {
+        super(authorizationStorage);
         this.folderStorageInMemory = Preconditions.checkNotNull(userStorage);
     }
 
     @Override
-    public FolderId handle(CreateFolderCommand inputCommand) throws InvalidHandleCommandException {
+    protected FolderId doHandle(CreateFolderCommand inputCommand) throws InvalidHandleCommandException {
 
         if (logger.isInfoEnabled()) {
             logger.info("Start create folder " + inputCommand.name());

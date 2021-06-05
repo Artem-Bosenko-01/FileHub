@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.DataRecord;
 import io.javaclasses.fileHub.persistent.users.UserId;
 
+import javax.annotation.Nullable;
 import java.util.Objects;
 
 public final class File implements DataRecord<FileId> {
@@ -52,8 +53,8 @@ public final class File implements DataRecord<FileId> {
         return folder;
     }
 
-    public void setFolder(FolderId folder) {
-        this.folder = Preconditions.checkNotNull(folder);
+    public void setFolder(@Nullable FolderId folder) {
+        this.folder = folder;
     }
 
     public UserId owner() {

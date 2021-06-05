@@ -1,13 +1,14 @@
 package io.javaclasses.fileHub.services.files.content;
 
+import io.javaclasses.fileHub.persistent.users.UserStorage;
+import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
 import io.javaclasses.fileHub.persistent.files.*;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.services.AuthToken;
-import io.javaclasses.fileHub.services.files.CreateFileCommand;
-import io.javaclasses.fileHub.services.files.CreatingFile;
-import io.javaclasses.fileHub.services.files.CreateFolderCommand;
-import io.javaclasses.fileHub.services.files.CreatingFolder;
+import io.javaclasses.fileHub.services.files.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,63 +17,32 @@ import java.util.UUID;
 
 class GettingFolderContentTest {
 
-    private FolderId createFolder(FolderStorage folderStorage, String name, UserId userID, FolderId folderID)
-            throws InvalidHandleCommandException {
-
-        CreateFolderCommand createFolderCommand = new CreateFolderCommand(new AuthToken(UUID.randomUUID().toString()),
-                name, userID, folderID);
-
-        CreatingFolder creatingFolder = new CreatingFolder(folderStorage);
-
-        return creatingFolder.handle(createFolderCommand);
-
-    }
-
-    private FolderId createFolder(FolderStorage folderStorage, String name, UserId userID)
-            throws InvalidHandleCommandException {
-
-        CreateFolderCommand createFolderCommand = new CreateFolderCommand(new AuthToken(UUID.randomUUID().toString()),
-                name, userID, null);
-
-        CreatingFolder creatingFolder = new CreatingFolder(folderStorage);
-
-        return creatingFolder.handle(createFolderCommand);
-
-    }
-
-    private FileId createFile(FileStorage fileStorageInMemory, String name, UserId userID, FolderId folderID)
-            throws InvalidHandleCommandException {
-
-        CreateFileCommand createFileCommand = new CreateFileCommand(new AuthToken(UUID.randomUUID().toString()),
-                name, MimeType.TEXT, userID, folderID);
-
-        CreatingFile createFileManagementProcess = new CreatingFile(fileStorageInMemory);
-
-        return createFileManagementProcess.handle(createFileCommand);
-
-    }
-
-
     @Test
     public void readFolderContentByIdTest() throws InvalidHandleCommandException {
+
         FolderStorage folderStorage = new FolderStorageInMemory();
+
+        AuthorizationStorage authorizationStorage = new AuthorizationStorageInMemory();
+
         FileStorage fileStorage = new FileStorageInMemory();
 
-        UserId userID = new UserId("Artem");
+        UserStorage userStorage = new UserStorageInMemory();
 
-        FolderId parent = createFolder(folderStorage, "parent", userID);
+        FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
 
-        createFile(fileStorage, "file", userID, parent);
+        FolderId parent = fileSystemTestData.createFolder(folderStorage, null);
 
-        createFolder(folderStorage, "folder1", userID, parent);
+        fileSystemTestData.createFile(fileStorage, parent);
 
-        createFolder(folderStorage, "folder2", userID, parent);
+        fileSystemTestData.createFolder(folderStorage, "folder1", parent);
+
+        fileSystemTestData.createFolder(folderStorage, "folder2", parent);
 
 
-        GetFolderContentQuery query = new GetFolderContentQuery(new AuthToken("1"), parent,
-                userID);
+        GetFolderContentQuery query = new GetFolderContentQuery(fileSystemTestData.token(), parent,
+                fileSystemTestData.id());
 
-        GettingFolderContent view = new GettingFolderContent(folderStorage, fileStorage);
+        GettingFolderContent view = new GettingFolderContent(folderStorage, fileStorage, authorizationStorage);
 
         GetFolderContentDTO folderContentDTO = view.handle(query);
 

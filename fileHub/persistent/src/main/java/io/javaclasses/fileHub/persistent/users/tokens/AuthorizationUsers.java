@@ -1,31 +1,32 @@
-/*
 package io.javaclasses.fileHub.persistent.users.tokens;
 
 import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.DataRecord;
 import io.javaclasses.fileHub.persistent.users.UserId;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
-public final class AuthorizationUsers implements DataRecord<AuthToken> {
+/**
+ * This is entity for storing user authentication history.
+ *
+ * Lines unique defines by {@link UserAuthToken user token}.
+ *
+ * */
+public final class AuthorizationUsers implements DataRecord<UserAuthToken> {
 
-    private final AuthToken token;
+    private final UserAuthToken token;
     private final UserId userID;
-    private Date expirationTime;
+    private ZonedDateTime expirationTime;
 
-    public AuthorizationUsers(AuthToken token, UserId userID) {
-        this.token = Preconditions.checkNotNull(token);
-        this.userID = Preconditions.checkNotNull(userID);
-    }
-
-    public AuthorizationUsers(AuthToken token, UserId userID, Date expirationTime) {
+    public AuthorizationUsers(UserAuthToken token, UserId userID, ZonedDateTime expirationTime) {
         this.token = Preconditions.checkNotNull(token);
         this.userID = Preconditions.checkNotNull(userID);
         this.expirationTime = Preconditions.checkNotNull(expirationTime);
     }
 
-    public void setDate(Date expirationTime) {
+    public void setDate(ZonedDateTime expirationTime) {
         this.expirationTime = Preconditions.checkNotNull(expirationTime);
     }
 
@@ -33,7 +34,7 @@ public final class AuthorizationUsers implements DataRecord<AuthToken> {
         return userID;
     }
 
-    public Date date() {
+    public ZonedDateTime expirationTime() {
         return expirationTime;
     }
 
@@ -51,8 +52,7 @@ public final class AuthorizationUsers implements DataRecord<AuthToken> {
     }
 
     @Override
-    public AuthToken id() {
+    public UserAuthToken id() {
         return token;
     }
 }
-*/

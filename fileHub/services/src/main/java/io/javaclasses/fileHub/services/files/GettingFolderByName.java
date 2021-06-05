@@ -1,6 +1,7 @@
 package io.javaclasses.fileHub.services.files;
 
 import com.google.common.base.Preconditions;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
 import io.javaclasses.fileHub.services.View;
 import io.javaclasses.fileHub.persistent.files.FileId;
@@ -14,19 +15,20 @@ import java.util.Optional;
 /**
  * This is service to get existed file in authenticated user's directory by {@link FileId id}.
  */
-public class GettingFolderByName implements View<GetFolderByNameQuery, GetFolderByNameDto> {
+public class GettingFolderByName extends View<GetFolderByNameQuery, GetFolderByNameDto> {
 
     private static final Logger logger = LoggerFactory.getLogger(GettingFolderByName.class);
 
     private final FolderStorage folderStorageInMemory;
 
-    public GettingFolderByName(FolderStorage userStorage) {
+    public GettingFolderByName(FolderStorage userStorage, AuthorizationStorage authorizationStorage) {
+
+        super(Preconditions.checkNotNull(authorizationStorage));
         this.folderStorageInMemory = Preconditions.checkNotNull(userStorage);
     }
 
     @Override
-    public GetFolderByNameDto handle(GetFolderByNameQuery query)
-            throws InvalidHandleCommandException {
+    protected GetFolderByNameDto doHandle(GetFolderByNameQuery query) throws InvalidHandleCommandException {
 
         if (logger.isInfoEnabled()) {
             logger.info("Start get directory for user: " + query.owner() + " and name: " + query.name());
@@ -52,5 +54,6 @@ public class GettingFolderByName implements View<GetFolderByNameQuery, GetFolder
             throw new InvalidHandleCommandException(
                     "Folder with name doesn't exist " + query.name() + ".User " + query.owner());
         }
+
     }
 }

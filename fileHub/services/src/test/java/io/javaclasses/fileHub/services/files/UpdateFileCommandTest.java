@@ -22,7 +22,7 @@ class UpdateFileCommandTest {
                 setDefault(String.class, "").
                 setDefault(FileId.class, new FileId("", new UserId(""), new FolderId("", new UserId("")))).
                 setDefault(MimeType.class, MimeType.TEXT).
-                setDefault(Integer.class, new Integer("0")).
+                setDefault(Integer.class, Integer.valueOf("0")).
                 setDefault(UserId.class, new UserId(""));
 
         tester.testConstructor(UpdateFileCommand.class.getConstructor(

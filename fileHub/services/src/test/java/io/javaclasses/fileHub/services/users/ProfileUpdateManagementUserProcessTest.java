@@ -2,6 +2,8 @@ package io.javaclasses.fileHub.services.users;
 
 import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
 import org.junit.jupiter.api.Assertions;
@@ -13,17 +15,18 @@ class ProfileUpdateManagementUserProcessTest {
     @Test
     public void updateInfoUserTest() throws InvalidHandleCommandException {
 
-        RegistrationUserCommand registrationUserCommand = UserTestData.registerUser("badk@h.com");
-
         UserStorageInMemory userStorageInMemory = new UserStorageInMemory();
 
-        RegistrationUser registrationUser = new RegistrationUser(userStorageInMemory);
+        AuthorizationStorage authorizationStorage = new AuthorizationStorageInMemory();
 
-        registrationUser.handle(registrationUserCommand);
+        UserId id = UserTestData.registerJohnUser(userStorageInMemory);
 
-        UpdatingProfileCommand command = UserTestData.updateUser(new UserId("badk@h.com"));
+        AuthToken authToken = UserTestData.authenticateJohnUser(userStorageInMemory, authorizationStorage);
 
-        UpdatingProfile process = new UpdatingProfile(userStorageInMemory);
+        UpdatingProfileCommand command = new UpdatingProfileCommand(authToken, id, "aaa@h.com",
+                "newName", "newLastName", "casascac");
+
+        UpdatingProfile process = new UpdatingProfile(userStorageInMemory, authorizationStorage);
 
         String userRegisterDTO = process.handle(command);
 

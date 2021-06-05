@@ -3,6 +3,10 @@ package io.javaclasses.fileHub.services.files;
 import io.javaclasses.fileHub.persistent.files.FileId;
 import io.javaclasses.fileHub.persistent.files.FileStorageInMemory;
 import io.javaclasses.fileHub.persistent.files.MimeType;
+import io.javaclasses.fileHub.persistent.users.UserStorage;
+import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
 import io.javaclasses.fileHub.persistent.files.FolderId;
@@ -10,37 +14,27 @@ import io.javaclasses.fileHub.persistent.users.UserId;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.UUID;
-
 class UpdatingFileTest {
-
-    private FileId createFile(FileStorageInMemory fileStorageInMemory, String name)
-            throws InvalidHandleCommandException {
-
-        CreateFileCommand createFileCommand = FileTestData.createFile(name);
-
-        CreatingFile createFileManagementProcess = new CreatingFile(fileStorageInMemory);
-
-        return createFileManagementProcess.handle(createFileCommand);
-
-    }
-
 
     @Test
     public void updateInfoAboutFileByTest() throws InvalidHandleCommandException {
 
         FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
 
-        UserId userID = new UserId("artem@gmail.com");
+        AuthorizationStorage authorizationStorage = new AuthorizationStorageInMemory();
 
-        FolderId folderID = new FolderId("folder", userID);
+        UserStorage userStorage = new UserStorageInMemory();
 
-        FileId creteFileId = createFile(fileStorageInMemory, "file.txt");
+        FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
 
-        UpdateFileCommand command = new UpdateFileCommand(new AuthToken("1"), creteFileId, "lkijij",
-                MimeType.GIF, 65, new UserId("abc"), folderID);
+        FolderId folderID = new FolderId("folder", fileSystemTestData.id());
 
-        UpdatingFile process = new UpdatingFile(fileStorageInMemory);
+        FileId creteFileId = fileSystemTestData.createFile(fileStorageInMemory);
+
+        UpdateFileCommand command = new UpdateFileCommand(fileSystemTestData.token(), creteFileId, "lkijij",
+                MimeType.GIF, 65, fileSystemTestData.id(), folderID);
+
+        UpdatingFile process = new UpdatingFile(fileStorageInMemory, authorizationStorage);
 
         FileId updateFileId = process.handle(command);
 
@@ -54,9 +48,15 @@ class UpdatingFileTest {
 
         FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
 
+        AuthorizationStorage authorizationStorage = new AuthorizationStorageInMemory();
+
+        UserStorage userStorage = new UserStorageInMemory();
+
+        FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
+
         UserId userID = new UserId("artem@gmail.com");
 
-        createFile(fileStorageInMemory, "file.txt");
+        fileSystemTestData.createFile(fileStorageInMemory);
 
         FolderId folderID = new FolderId("JHGF", userID);
 
@@ -64,7 +64,7 @@ class UpdatingFileTest {
                 userID, folderID), "lkijij",
                 MimeType.GIF, 65, new UserId("abc"), folderID);
 
-        UpdatingFile process = new UpdatingFile(fileStorageInMemory);
+        UpdatingFile process = new UpdatingFile(fileStorageInMemory, authorizationStorage);
 
         Assertions.assertThrows(InvalidHandleCommandException.class, () -> process.handle(command));
 

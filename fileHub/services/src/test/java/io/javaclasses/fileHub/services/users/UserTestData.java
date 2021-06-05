@@ -1,38 +1,60 @@
 package io.javaclasses.fileHub.services.users;
 
 import io.javaclasses.fileHub.persistent.users.UserId;
+import io.javaclasses.fileHub.persistent.users.UserStorage;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.AuthToken;
+import io.javaclasses.fileHub.services.InvalidHandleCommandException;
 
 public final class UserTestData {
 
-    public static RegistrationUserCommand registerUser (String loginName){
+    private static final String KevinLoginName = "kevin@gmail.com";
+    private static final String KevinPassword = "acsa7csa4";
+    private static final String JohnLoginName = "john@gmail.com";
+    private static final String JohnPassword = "56498";
 
-        return new RegistrationUserCommand(
-                loginName,
-                "bbb",
-                "ccc",
-                "56478"
-        );
+
+    public static UserId registerKevinUser(UserStorage userStorage) throws InvalidHandleCommandException {
+
+        RegistrationUserCommand registrationUserCommand = new RegistrationUserCommand(KevinLoginName,
+                "Kevin", "Kevin", KevinPassword);
+
+        RegistrationUser registrationUser = new RegistrationUser(userStorage);
+
+        return registrationUser.handle(registrationUserCommand);
     }
 
-    public static AuthenticationUserCommand authenticateUser (String loginName){
+    public static AuthToken authenticateKevinUser(UserStorage userStorage, AuthorizationStorage authorizationStorage)
+            throws InvalidHandleCommandException {
 
-        return new AuthenticationUserCommand(
-                loginName,
-                "56478"
-        );
+        AuthenticationUserCommand authenticationUserCommand = new AuthenticationUserCommand(KevinLoginName, KevinPassword);
+
+        AuthenticationUser authenticationUser = new AuthenticationUser(userStorage, authorizationStorage);
+
+        return authenticationUser.handle(authenticationUserCommand);
+
     }
 
-    public static UpdatingProfileCommand updateUser(UserId id){
 
-        return new UpdatingProfileCommand(
-                new AuthToken("564"),
-                id,
-                "aaa@h.com",
-                "cas",
-                "abc",
-                "56478"
-                );
+    public static UserId registerJohnUser(UserStorage userStorage) throws InvalidHandleCommandException {
+
+        RegistrationUserCommand registrationUserCommand = new RegistrationUserCommand(JohnLoginName,
+                "John", "John", JohnPassword);
+
+        RegistrationUser registrationUser = new RegistrationUser(userStorage);
+
+        return registrationUser.handle(registrationUserCommand);
     }
 
+    public static AuthToken authenticateJohnUser(UserStorage userStorage, AuthorizationStorage authorizationStorage)
+            throws InvalidHandleCommandException {
+
+        AuthenticationUserCommand authenticationUserCommand = new AuthenticationUserCommand(JohnLoginName, JohnPassword);
+
+        AuthenticationUser authenticationUser = new AuthenticationUser(userStorage, authorizationStorage);
+
+        return authenticationUser.handle(authenticationUserCommand);
+
+    }
 }

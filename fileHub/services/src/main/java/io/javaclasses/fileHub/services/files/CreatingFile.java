@@ -1,6 +1,8 @@
 package io.javaclasses.fileHub.services.files;
 
+import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.DuplicatedUserIdException;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
 import io.javaclasses.fileHub.services.SecuredUserProcess;
 import io.javaclasses.fileHub.persistent.files.File;
@@ -14,18 +16,22 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * This is service to create new file without file's content in authenticated user's directory.
  */
-public class CreatingFile implements SecuredUserProcess<CreateFileCommand, FileId> {
+public class CreatingFile extends SecuredUserProcess<CreateFileCommand, FileId> {
 
     private static final Logger logger = LoggerFactory.getLogger(CreatingFile.class);
 
     private final FileStorage fileStorage;
 
-    public CreatingFile(FileStorage fileStorage) {
+    public CreatingFile(FileStorage fileStorage, AuthorizationStorage authorizationStorage) {
+
+        super(Preconditions.checkNotNull(authorizationStorage));
         this.fileStorage = checkNotNull(fileStorage);
+
     }
 
+
     @Override
-    public FileId handle(CreateFileCommand inputCommand) throws InvalidHandleCommandException {
+    protected FileId doHandle(CreateFileCommand inputCommand) throws InvalidHandleCommandException {
 
         if (logger.isInfoEnabled()) {
             logger.info("Start create file " + inputCommand.name());

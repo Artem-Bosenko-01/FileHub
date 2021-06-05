@@ -1,12 +1,11 @@
 package io.javaclasses.fileHub.services.files;
 
-import io.javaclasses.fileHub.persistent.files.FileId;
-import io.javaclasses.fileHub.persistent.files.FileStorageInMemory;
-import io.javaclasses.fileHub.persistent.files.MimeType;
-import io.javaclasses.fileHub.services.AuthToken;
+import io.javaclasses.fileHub.persistent.files.*;
+import io.javaclasses.fileHub.persistent.users.UserStorage;
+import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
-import io.javaclasses.fileHub.persistent.files.FolderId;
-import io.javaclasses.fileHub.persistent.users.UserId;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -15,11 +14,18 @@ class CreatingFileTest {
     @Test
     public void createFileTest() throws InvalidHandleCommandException {
 
-        CreateFileCommand createFileCommand = FileTestData.createFile("file.txt");
+        UserStorage userStorage = new UserStorageInMemory();
 
-        FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
+        AuthorizationStorage authorizationStorage = new AuthorizationStorageInMemory();
 
-        CreatingFile createFileManagementProcess = new CreatingFile(fileStorageInMemory);
+        FileStorage fileStorage = new FileStorageInMemory();
+
+        FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
+
+        CreateFileCommand createFileCommand = new CreateFileCommand(fileSystemTestData.token(), "folder",
+                MimeType.TEXT, fileSystemTestData.id(), null);
+
+        CreatingFile createFileManagementProcess = new CreatingFile(fileStorage, authorizationStorage);
 
         FileId id = createFileManagementProcess.handle(createFileCommand);
 
@@ -30,14 +36,21 @@ class CreatingFileTest {
     @Test
     public void createFileWithExistIdTest() throws InvalidHandleCommandException {
 
+        UserStorage userStorage = new UserStorageInMemory();
 
-        CreateFileCommand createFileCommand = FileTestData.createFile("file.txt");
+        AuthorizationStorage authorizationStorage = new AuthorizationStorageInMemory();
 
-        CreateFileCommand createFileCommandERROR = FileTestData.createFile("file.txt");
+        FileStorage fileStorage = new FileStorageInMemory();
 
-        FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
+        FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
 
-        CreatingFile createFileManagementProcess = new CreatingFile(fileStorageInMemory);
+        CreateFileCommand createFileCommand = new CreateFileCommand(fileSystemTestData.token(), "folder",
+                MimeType.TEXT, fileSystemTestData.id(), null);
+
+        CreateFileCommand createFileCommandERROR = new CreateFileCommand(fileSystemTestData.token(), "folder",
+                MimeType.TEXT, fileSystemTestData.id(), null);
+
+        CreatingFile createFileManagementProcess = new CreatingFile(fileStorage, authorizationStorage);
 
         createFileManagementProcess.handle(createFileCommand);
 

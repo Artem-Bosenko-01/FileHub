@@ -3,6 +3,7 @@ package io.javaclasses.fileHub.services.files;
 import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.users.UserId;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
 import io.javaclasses.fileHub.persistent.NotExistUserIdException;
 import io.javaclasses.fileHub.services.View;
@@ -20,18 +21,21 @@ import java.util.Objects;
  * and {@link UserId user}.
  */
 public class GettingFilesByUserAndFolder
-        implements View<GetFilesByUserAndFolderQuery, List<FileInformation>> {
+        extends View<GetFilesByUserAndFolderQuery, List<FileInformation>> {
 
     private static final Logger logger = LoggerFactory.getLogger(GettingFilesByUserAndFolder.class);
 
     private final FileStorageInMemory fileStorage;
 
-    public GettingFilesByUserAndFolder(FileStorageInMemory fileStorage) {
+    public GettingFilesByUserAndFolder(FileStorageInMemory fileStorage, AuthorizationStorage authorizationStorage) {
+
+        super(authorizationStorage);
         this.fileStorage = Preconditions.checkNotNull(fileStorage);
     }
 
+
     @Override
-    public List<FileInformation> handle(GetFilesByUserAndFolderQuery query)
+    protected List<FileInformation> doHandle(GetFilesByUserAndFolderQuery query)
             throws InvalidHandleCommandException {
 
         if (logger.isInfoEnabled()) {
@@ -62,5 +66,6 @@ public class GettingFilesByUserAndFolder
                         "And folder: " + query.folderID() + ". Was successful");
             }
         }
+
     }
 }

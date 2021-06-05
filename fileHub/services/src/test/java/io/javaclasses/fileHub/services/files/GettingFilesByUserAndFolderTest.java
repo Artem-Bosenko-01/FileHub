@@ -1,7 +1,10 @@
 package io.javaclasses.fileHub.services.files;
 
 import io.javaclasses.fileHub.persistent.files.*;
-import io.javaclasses.fileHub.services.AuthToken;
+import io.javaclasses.fileHub.persistent.users.UserStorage;
+import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import org.junit.jupiter.api.Assertions;
@@ -11,33 +14,25 @@ import java.util.List;
 
 class GettingFilesByUserAndFolderTest {
 
-    private FileId createFile(FileStorageInMemory fileStorageInMemory, String name)
-            throws InvalidHandleCommandException {
-
-        CreateFileCommand createFileCommand = FileTestData.createFile(name);
-
-        CreatingFile createFileManagementProcess = new CreatingFile(fileStorageInMemory);
-
-        return createFileManagementProcess.handle(createFileCommand);
-
-    }
-
-
     @Test
     public void readInfoAboutFileByUserIdTest() throws InvalidHandleCommandException {
 
         FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
 
-        UserId userID = new UserId("artem@gmail.com");
+        UserStorage userStorage = new UserStorageInMemory();
 
-        FolderId folderID = new FolderId("folder", userID);
+        AuthorizationStorage authorizationStorage = new AuthorizationStorageInMemory();
 
-        FileId id = createFile(fileStorageInMemory, "file.txt");
+        FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
 
-        GetFilesByUserAndFolderQuery command = new GetFilesByUserAndFolderQuery(new AuthToken("1"),
-                folderID, userID);
+        FileId id = fileSystemTestData.createFile(fileStorageInMemory);
 
-        GettingFilesByUserAndFolder viewByUser = new GettingFilesByUserAndFolder(fileStorageInMemory);
+        FolderId parent = new FolderId("folder", fileSystemTestData.id());
+
+        GetFilesByUserAndFolderQuery command = new GetFilesByUserAndFolderQuery(fileSystemTestData.token(),
+                parent, fileSystemTestData.id());
+
+        GettingFilesByUserAndFolder viewByUser = new GettingFilesByUserAndFolder(fileStorageInMemory, authorizationStorage);
 
         List<FileInformation> files = viewByUser.handle(command);
 
@@ -51,16 +46,22 @@ class GettingFilesByUserAndFolderTest {
 
         FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
 
-        UserId userID = new UserId("avasav@gmail.com");
+        AuthorizationStorage authorizationStorage = new AuthorizationStorageInMemory();
 
-        createFile(fileStorageInMemory, "file.txt");
+        UserStorage userStorage = new UserStorageInMemory();
+
+        FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
+
+        fileSystemTestData.createFile(fileStorageInMemory);
+
+        UserId userID = new UserId("avdvv");
 
         FolderId folderID = new FolderId("JHGF", userID);
 
-        GetFilesByUserAndFolderQuery command = new GetFilesByUserAndFolderQuery(new AuthToken("1"),
+        GetFilesByUserAndFolderQuery command = new GetFilesByUserAndFolderQuery(fileSystemTestData.token(),
                 folderID, userID);
 
-        GettingFilesByUserAndFolder viewByUser = new GettingFilesByUserAndFolder(fileStorageInMemory);
+        GettingFilesByUserAndFolder viewByUser = new GettingFilesByUserAndFolder(fileStorageInMemory, authorizationStorage);
 
         Assertions.assertThrows(InvalidHandleCommandException.class, () -> viewByUser.handle(command));
     }

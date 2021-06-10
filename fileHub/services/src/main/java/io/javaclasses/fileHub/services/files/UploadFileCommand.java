@@ -48,6 +48,6 @@ public final class UploadFileCommand extends AuthenticatedUserCommand {
     }
 
     public byte[] content() {
-        return content;
+        return content.clone();
     }
 }

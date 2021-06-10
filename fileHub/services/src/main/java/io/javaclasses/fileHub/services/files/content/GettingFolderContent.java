@@ -25,11 +25,11 @@ public class GettingFolderContent extends View<GetFolderContentQuery, GetFolderC
     private final FolderStorage folderStorage;
     private final FileStorage fileStorage;
 
-    public GettingFolderContent(FolderStorage folderStorageInMemory, FileStorage fileStorage,
+    public GettingFolderContent(FolderStorage folderStorage, FileStorage fileStorage,
                                 AuthorizationStorage authorizationStorage) {
 
         super(authorizationStorage);
-        this.folderStorage = folderStorageInMemory;
+        this.folderStorage = folderStorage;
         this.fileStorage = fileStorage;
 
     }

@@ -14,6 +14,7 @@ public final class File implements DataRecord<FileId> {
     private UserId userID;
     private Integer size;
     private MimeType mimeType;
+    @Nullable
     private FolderId folder;
 
     public File(FileId fileID) {
@@ -54,6 +55,7 @@ public final class File implements DataRecord<FileId> {
     }
 
     public void setFolder(@Nullable FolderId folder) {
+        assert folder != null;
         this.folder = folder;
     }
 
@@ -74,17 +76,12 @@ public final class File implements DataRecord<FileId> {
 
         File file = (File) o;
 
-        return fileID.equals(file.fileID) &&
-                name.equals(file.name) &&
-                Objects.equals(userID, file.userID) &&
-                Objects.equals(size, file.size) &&
-                mimeType == file.mimeType &&
-                Objects.equals(folder, file.folder);
+        return fileID.equals(file.fileID);
 
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(fileID, name, userID, size, mimeType, folder);
+        return Objects.hash(fileID);
     }
 }

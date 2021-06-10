@@ -19,10 +19,10 @@ public class DeletingFolder extends SecuredUserProcess<DeleteFolderCommand, Fold
 
     private final FolderStorage folderStorageInMemory;
 
-    public DeletingFolder(FolderStorage folderStorageInMemory, AuthorizationStorage authorizationStorage) {
+    public DeletingFolder(FolderStorage folderStorage, AuthorizationStorage authorizationStorage) {
 
         super(authorizationStorage);
-        this.folderStorageInMemory = Preconditions.checkNotNull(folderStorageInMemory);
+        this.folderStorageInMemory = Preconditions.checkNotNull(folderStorage);
     }
 
     @Override

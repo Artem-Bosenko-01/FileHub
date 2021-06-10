@@ -65,15 +65,11 @@ public final class User implements DataRecord<UserId> {
 
         User user = (User) o;
 
-        return userID.equals(user.userID) &&
-                Objects.equals(login, user.login) &&
-                Objects.equals(password, user.password) &&
-                Objects.equals(firstName, user.firstName) &&
-                Objects.equals(lastName, user.lastName);
+        return userID.equals(user.userID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userID, login, password, firstName, lastName);
+        return Objects.hash(userID);
     }
 }

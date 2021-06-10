@@ -15,7 +15,7 @@ public final class GetFileContentDTO {
     }
 
     public byte[] content() {
-        return content;
+        return content.clone();
     }
 
 }

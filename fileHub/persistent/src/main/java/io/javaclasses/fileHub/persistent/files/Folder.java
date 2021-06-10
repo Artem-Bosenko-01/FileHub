@@ -12,6 +12,7 @@ public final class Folder implements DataRecord<FolderId> {
     private final FolderId id;
     private String name;
     private UserId owner;
+    @Nullable
     private FolderId parentFolder;
 
     public Folder(FolderId id) {
@@ -56,14 +57,11 @@ public final class Folder implements DataRecord<FolderId> {
 
         Folder folder = (Folder) o;
 
-        return id.equals(folder.id) &&
-                name.equals(folder.name) &&
-                Objects.equals(owner, folder.owner) &&
-                Objects.equals(parentFolder, folder.parentFolder);
+        return id.equals(folder.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, owner, parentFolder);
+        return Objects.hash(id);
     }
 }

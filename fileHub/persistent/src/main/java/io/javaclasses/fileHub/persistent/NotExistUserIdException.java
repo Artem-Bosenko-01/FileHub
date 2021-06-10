@@ -5,6 +5,8 @@ package io.javaclasses.fileHub.persistent;
  */
 public class NotExistUserIdException extends Exception {
 
+    private static final long serialVersionUID = 7972850341614916371L;
+
     public NotExistUserIdException(String message) {
         super(message);
     }

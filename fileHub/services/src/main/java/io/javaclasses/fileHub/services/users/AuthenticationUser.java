@@ -1,6 +1,5 @@
 package io.javaclasses.fileHub.services.users;
 
-import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.DuplicatedUserIdException;
 import io.javaclasses.fileHub.persistent.users.User;
 import io.javaclasses.fileHub.persistent.users.UserStorage;
@@ -13,8 +12,6 @@ import io.javaclasses.fileHub.services.OpenUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Optional;

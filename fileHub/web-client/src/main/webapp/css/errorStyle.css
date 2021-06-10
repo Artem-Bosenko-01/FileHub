@@ -1,0 +1,45 @@
+.rawRegisterError{
+    background-color: #ffffff;
+    width: 555px;
+    height: 365px;
+    padding: 18px;
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.boxGetData .invalidInputValue{
+    width: 65%;
+    margin-left: 5px;
+}
+
+.boxGetData .invalidInputValue input{
+    width: 100%;
+    height: 33px;
+    float: right;
+    border-radius: 4px;
+    outline: none;
+    border: 1px solid red;
+    margin-top: 10px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+
+.boxGetData .invalidInputValue input:focus-within{
+    box-shadow: 0 0 5px rgb(80, 162, 222);
+    border: 1px solid #50a2de;
+}
+
+.errorMassage{
+    margin-top: 2px;
+    font-size: 13px;
+    font-weight: bold;
+    color: red;
+}
+
+.boxGetData .nameErrorLabel{
+    width: 34%;
+    float: left;
+    font-size: 13px;
+    font-weight: bold;
+    margin-top: -5px;
+}

@@ -1,7 +1,6 @@
 package io.javaclasses.fileHub.services.users;
 
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
-import io.javaclasses.fileHub.persistent.users.tokens.UserAuthToken;
 import io.javaclasses.fileHub.services.AuthToken;
 
 import java.util.UUID;

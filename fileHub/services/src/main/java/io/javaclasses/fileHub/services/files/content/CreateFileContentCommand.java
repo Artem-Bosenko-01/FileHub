@@ -27,6 +27,6 @@ public final class CreateFileContentCommand extends AuthenticatedUserCommand {
     }
 
     public byte[] content() {
-        return content;
+        return content.clone();
     }
 }

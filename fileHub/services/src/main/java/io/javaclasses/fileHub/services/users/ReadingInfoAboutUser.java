@@ -1,9 +1,7 @@
 package io.javaclasses.fileHub.services.users;
 
 import com.google.common.base.Preconditions;
-import io.javaclasses.fileHub.persistent.AbstractInMemoryStorage;
 import io.javaclasses.fileHub.persistent.users.User;
-import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.persistent.users.UserStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;

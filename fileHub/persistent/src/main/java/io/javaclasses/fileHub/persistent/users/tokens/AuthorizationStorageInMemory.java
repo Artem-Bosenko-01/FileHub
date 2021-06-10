@@ -3,7 +3,7 @@ package io.javaclasses.fileHub.persistent.users.tokens;
 import io.javaclasses.fileHub.persistent.AbstractInMemoryStorage;
 
 /**
- * This is in memory storage for saving users authentication history in FIlehub application.
+ * This is in memory storage for saving users authentication history in Filehub application.
  *
  * */
 public class AuthorizationStorageInMemory extends AbstractInMemoryStorage<UserAuthToken, AuthorizationUsers>

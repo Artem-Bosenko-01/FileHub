@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RegistrationError</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/errorStyle.css">
+</head>
+<body>
+
+<div class="body">
+    <header>
+        <h1>
+            <a class="logo" href="https://www.teamdev.com/" target="_blank">
+                TeamDev
+            </a>
+        </h1>
+    </header>
+    <div class="rawRegisterError">
+        <header class="namePage">
+            <h2>Sign up to FileHub</h2>
+        </header>
+        <hr>
+        <form class="data" action="registerPage.html">
+            <div class="boxGetData">
+                <div class="nameErrorLabel">
+                    <label for="emailUser">Email</label>
+                </div>
+                <div class="invalidInputValue">
+                    <input type="email" id="emailUser" placeholder="    Email">
+                    <div class="errorMassage">
+                        <label>Please include an '@' in the email address.</label>
+                    </div>
+                </div>
+            </div>
+            <div class="boxGetData">
+                <div class="nameErrorLabel">
+                    <label for="passwordUser">Password</label>
+                </div>
+                <div class="invalidInputValue">
+                    <input type="password" id="passwordUser" placeholder="    Password">
+                    <div class="errorMassage">
+                        <label>Password can't be empty.</label>
+                    </div>
+                </div>
+            </div>
+            <div class="boxGetData">
+                <div class="nameErrorLabel">
+                    <label for="confirmPasswordUser">Confirm Password</label>
+                </div>
+                <div class="invalidInputValue">
+                    <input type="password" id="confirmPasswordUser" placeholder="    Confirm Password">
+                    <div class="errorMassage">
+                        <label>Passwords don't match.</label>
+                    </div>
+                </div>
+            </div>
+            <div class="submit">
+                <button class="signIn" name="signIn">Sign In</button>
+                <a class="reference" href="authenticatePage.html">Already have an account?</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

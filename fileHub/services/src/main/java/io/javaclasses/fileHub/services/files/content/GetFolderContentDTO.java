@@ -5,6 +5,7 @@ import io.javaclasses.fileHub.persistent.files.Folder;
 import io.javaclasses.fileHub.persistent.files.FolderId;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -32,10 +33,10 @@ public final class GetFolderContentDTO {
     }
 
     public List<Folder> folders() {
-        return folders;
+        return Collections.unmodifiableList(folders);
     }
 
     public List<File> files() {
-        return files;
+        return Collections.unmodifiableList(files);
     }
 }

@@ -4,7 +4,6 @@ import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.DataRecord;
 import io.javaclasses.fileHub.persistent.users.UserId;
 
-import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
@@ -43,12 +42,12 @@ public final class AuthorizationUsers implements DataRecord<UserAuthToken> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AuthorizationUsers that = (AuthorizationUsers) o;
-        return token.equals(that.token) && userID.equals(that.userID) && Objects.equals(expirationTime, that.expirationTime);
+        return token.equals(that.token) && userID.equals(that.userID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(token, userID, expirationTime);
+        return Objects.hash(token, userID);
     }
 
     @Override

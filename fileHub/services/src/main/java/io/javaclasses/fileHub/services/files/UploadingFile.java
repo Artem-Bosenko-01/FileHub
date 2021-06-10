@@ -43,9 +43,9 @@ public class UploadingFile extends SecuredUserProcess<UploadFileCommand, FileId>
         CreateFileCommand createFileCommand = new CreateFileCommand(inputCommand.token(),
                 inputCommand.name(), inputCommand.mimeType(), inputCommand.owner(), inputCommand.folder());
 
-        CreatingFile createFileManagementProcess = new CreatingFile(fileStorage, authorizationStorage);
+        CreatingFile creatingFile = new CreatingFile(fileStorage, authorizationStorage);
 
-        FileId id = createFileManagementProcess.handle(createFileCommand);
+        FileId id = creatingFile.handle(createFileCommand);
 
         CreateFileContentCommand contentCommand = new CreateFileContentCommand(
                 inputCommand.token(),

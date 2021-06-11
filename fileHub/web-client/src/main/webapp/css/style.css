@@ -366,15 +366,19 @@ a {
 
 a:hover {
     text-decoration: underline;
+    color: #0b12ac;
 }
 
 hr {
-    color: #000000;
+    background-color: #000000;
+    margin-top: 10px;
     margin-bottom: 0;
 }
 
 h1{
+    display: inline-block;
     margin-top: 8px;
+    margin-bottom: 28px;
 }
 
 h2 {
@@ -382,27 +386,33 @@ h2 {
     font-size: 28px;
 }
 
-button{
+.button{
     color: #ffffff;
     background-color: #2e86ce;
     border: 0;
+    float: left;
+    padding: 8px 14px 8px 14px;
+    border-radius: 4px;
 }
 
-button:hover{
+.button:hover{
+    cursor: pointer
+}
+button:active{
 
 }
 
 body {
     background-color: #f2f2f2;
     text-align: center;
-    margin-top: 22px;
+    margin-top: 25px;
 }
 
 .logo{
-    display: block;
+    display: inline-block;
     background: url("../images/logo.png") no-repeat;
+    width: 200px;
     text-indent: -9999px;
-    margin-bottom: 30px;
 }
 
 .body {
@@ -416,14 +426,14 @@ body {
     height: 240px;
     padding: 20px;
     border-radius: 16px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .rawRegister{
     background-color: #ffffff;
     width: 555px;
     height: 290px;
-    padding: 18px;
+    padding: 20px;
     border-radius: 16px;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
@@ -487,10 +497,4 @@ body {
 
 
     margin-top: 10px;
-}
-
-.signIn{
-    float: left;
-    padding: 8px 14px 8px 14px;
-    border-radius: 4px;
 }

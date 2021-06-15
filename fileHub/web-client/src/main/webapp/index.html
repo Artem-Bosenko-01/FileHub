@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Main page</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/page.css">
+    <link rel="stylesheet" href="css/icons.css">
+</head>
+<body>
+<div class="main">
+    <header class="header">
+        <h1 title="TeamDev">
+            <a class="logo" href="index.html">
+                TeamDev
+            </a>
+        </h1>
+        <div class="panel">
+            <ul>
+                <li title="User full name"><span class="glyphicon glyphicon-user"></span> John Doe</li>
+                <li>
+                    <a title="log out" class="logOut" href="authenticatePage.html">
+                        Log out <span class="glyphicon glyphicon-log-out"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div class="raw">
+        <div class="path">
+            <div class="rootFolder">
+                <span>Home</span>
+            </div>
+        </div>
+        <hr class="pageHorizontalLine">
+        <nav class="navbar">
+            <div class="searchPanel">
+                <input title="Search something" type="text" class="searchLine" placeholder="   Enter entity name...">
+                <button title="search button" class="searchButton" type="button">Search</button>
+            </div>
+            <div class="rootButtons">
+                <button title="upload" type="button" class="folderControlButton"><span
+                        class="glyphicon glyphicon-upload"></span>
+                </button>
+
+                <button title="Create new directory" type="button" class="folderControlButton"><span
+                        class="glyphicon glyphicon-plus"></span>
+                </button>
+            </div>
+        </nav>
+        <div class="tableBox">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <td class="folderMarker"><span class="glyphicon glyphicon-chevron-right"></span></td>
+                    <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
+                    <td class="name"><a class="highlight" href="inner.html">Documents</a></td>
+                    <td class="type">Folder</td>
+                    <td class="size">—</td>
+                    <td class="hiddenButtons">
+                        <button title="download" type="button" class="uploadFileButton">
+                            <span class="glyphicon glyphicon-download"></span>
+                        </button>
+                        <button title="delete" type="button" class="deleteFileButton delete">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="folderMarker"><span class="glyphicon glyphicon-chevron-right"></span></td>
+                    <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
+                    <td class="name"><a class="highlight" href="inner.html">Images</a></td>
+                    <td class="type">Folder</td>
+                    <td class="size">—</td>
+                    <td class="hiddenButtons">
+                        <button title="download" type="button" class="uploadFileButton">
+                            <span class="glyphicon glyphicon-download"></span>
+                        </button>
+                        <button title="delete" type="button" class="deleteFileButton delete">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="folderMarker"><span class="glyphicon glyphicon-chevron-right"></span></td>
+                    <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
+                    <td class="name"><a class="highlight" href="inner.html">Videos</a></td>
+                    <td class="type">Folder</td>
+                    <td class="size">—</td>
+                    <td class="hiddenButtons">
+                        <button title="download" type="button" class="uploadFileButton">
+                            <span class="glyphicon glyphicon-download"></span>
+                        </button>
+                        <button title="delete" type="button" class="deleteFileButton delete">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="folderMarker"><span class="glyphicon glyphicon-chevron-right"></span></td>
+                    <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
+                    <td class="name"><a class="highlight" href="">Music</a></td>
+                    <td class="type">Folder</td>
+                    <td class="size">—</td>
+                    <td class="hiddenButtons">
+                        <button title="download" type="button" class="uploadFileButton">
+                            <span class="glyphicon glyphicon-download"></span>
+                        </button>
+                        <button title="delete" type="button" class="deleteFileButton delete">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="folderMarker"><span class="glyphicon glyphicon-chevron-right"></span></td>
+                    <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
+                    <td class="name"><a class="highlight" href="">Other</a></td>
+                    <td class="type">Folder</td>
+                    <td class="size">—</td>
+                    <td class="hiddenButtons">
+                        <button title="download" type="button" class="uploadFileButton">
+                            <span class="glyphicon glyphicon-download"></span>
+                        </button>
+                        <button title="delete" type="button" class="deleteFileButton delete">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                        </button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="folderMarker"></td>
+                    <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
+                    <td class="name"><a class="folder" href="">Other</a></td>
+                    <td class="type">Pdf Document</td>
+                    <td class="size">100 KB</td>
+                    <td class="hiddenButtons"></td>
+                </tr>
+                <tr>
+                    <td class="folderMarker"></td>
+                    <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
+                    <td class="name"><a class="folder" href="">Other</a></td>
+                    <td class="type">Excel Workbook</td>
+                    <td class="size">5 KB</td>
+                    <td class="hiddenButtons"></td>
+                </tr>
+                <tr>
+                    <td class="folderMarker"></td>
+                    <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
+                    <td class="name"><a class="folder" href="">Other</a></td>
+                    <td class="type">Folder</td>
+                    <td class="size">—</td>
+                    <td class="hiddenButtons"></td>
+                </tr>
+                <tr>
+                    <td class="folderMarker"></td>
+                    <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
+                    <td class="name"><a class="folder" href="">Other</a></td>
+                    <td class="type">Folder</td>
+                    <td class="size">—</td>
+                    <td class="hiddenButtons"></td>
+                </tr>
+                <tr>
+                    <td class="folderMarker"></td>
+                    <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
+                    <td class="name"><a class="folder" href="">Other</a></td>
+                    <td class="type">Folder</td>
+                    <td class="size">—</td>
+                    <td class="hiddenButtons"></td>
+                </tr>
+                <tr>
+                    <td class="folderMarker"></td>
+                    <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
+                    <td class="name"><a class="folder" href="">Other</a></td>
+                    <td class="type">Folder</td>
+                    <td class="size">—</td>
+                    <td class="hiddenButtons"></td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <footer class="footer">
+        <a title="linkedin" class="icon" href="https://www.linkedin.com/company/teamdev-ltd-/mycompany/"
+           target="_blank">
+            <img src="images/icon-linkedin.png" alt="linkedin">
+        </a>
+        <a title="facebook" class="icon" href="https://www.facebook.com/TeamDev" target="_blank">
+            <img src="images/icon-facebook.png" alt="facebook">
+        </a>
+        <a title="instagram" class="icon" href="https://www.instagram.com/teamdev_ltd/?hl=ru" target="_blank">
+            <img src="images/icon-instagram.png" alt="instagram">
+        </a>
+        <div title="@copyright">
+            <p>Copyright &#64 2021 <a class="highlight" href="https://www.teamdev.com/" target="_blank">TeamDev</a>. All
+                rights reserved.</p>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

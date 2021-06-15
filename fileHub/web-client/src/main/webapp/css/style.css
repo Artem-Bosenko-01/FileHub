@@ -1,0 +1,296 @@
+/*____________________________________________________________________________________________________________________*/
+
+@font-face {
+    font-family: Roboto;
+    src: url("../fonts/roboto-regular.woff2") format("woff2");
+}
+
+* {
+    box-sizing: border-box;
+    font-family: Roboto, "Times New Roman", serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #0b12ac;
+}
+
+hr {
+    background-color: #000000;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+h1 {
+    display: inline-block;
+    margin-top: 8px;
+    margin-bottom: 25px;
+}
+
+h2 {
+    margin-bottom: 0;
+    font-size: 30px;
+}
+
+.button {
+    color: #ffffff;
+    background-color: #2e86ce;
+    border: 0;
+    float: left;
+    padding: 8px 14px 8px 14px;
+    border-radius: 4px;
+}
+
+.button:hover {
+    cursor: pointer
+}
+
+body {
+    background-color: #f2f2f2;
+    color: #000000;
+    text-align: center;
+    margin-top: 25px;
+    font-size: 14px;
+    line-height: 1.43;
+}
+
+.logo {
+    display: inline-block;
+    background: url("../images/logo.png") no-repeat;
+    width: 200px;
+    text-indent: -9999px;
+}
+
+.main {
+    display: inline-block;
+    text-align: left;
+    margin: 0 auto;
+}
+
+.raw {
+    width: 485px;
+    background-color: #ffffff;
+    padding: 15px 18px;
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.registration {
+    height: 365px;
+}
+
+
+.registration-error {
+    height: 440px;
+}
+
+
+.header h2 {
+    margin: 0;
+}
+
+.registration-error .boxGetData {
+    margin-top: 30px;
+}
+
+.data{
+    margin-top: 20px;
+}
+
+.registration .boxGetData{
+    margin-top: 18px;
+}
+
+.boxGetData::after {
+    display: block;
+    content: '';
+    clear: both;
+}
+
+.nameLabel {
+    margin: 0;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.errorLabel {
+    margin-top: -10px;
+}
+
+
+.inputValue {
+    width: 100%;
+    margin: 0;
+}
+
+.inputValue input {
+    width: 100%;
+    padding: 8px 0 8px 0;
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid #dedbdb;
+    margin-top: 5px;
+}
+
+.invalidInputValue input {
+    border: 1px solid red;
+}
+
+.inputValue input:focus-within {
+    box-shadow: 0 0 5px rgb(80, 162, 222);
+    border: 1px solid #50a2de;
+}
+
+.errorMassage {
+    font-size: 13px;
+    font-weight: bold;
+    margin-top: 5px;
+    color: red;
+}
+
+.submit {
+    width: 100%;
+    float: left;
+    margin-top: 15px;
+}
+
+
+.reference {
+    font-size: 13px;
+    font-weight: bold;
+    color: #4592d3;
+    float: right;
+    margin-top: 10px;
+}
+
+@media screen  and (min-width: 768px) {
+
+    .raw {
+        width: 555px;
+    }
+
+    .authentication {
+        height: 240px
+    }
+
+    .registration {
+        height: 290px;
+    }
+
+    .registration-error {
+        height: 365px;
+    }
+
+    .authentication .data{
+        margin-top: 15px;
+    }
+
+    .registration .data{
+        margin-top: 15px;
+    }
+
+    .registration-error .data{
+        margin-top: 10px;
+    }
+
+    .boxGetData{
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    .registration-error .boxGetData {
+        margin-top: 0;
+        margin-bottom: 5px;
+
+    }
+
+    .registration .boxGetData{
+        margin-top: 10px;
+    }
+
+    .nameLabel {
+        width: 34%;
+        float: left;
+    }
+
+
+    .inputValue {
+        width: 65%;
+        margin-left: 5px;
+    }
+
+    .inputValue input {
+        float: right;
+        margin-left: 5px;
+    }
+
+    .invalidInputValue input{
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+
+    .submit {
+        width: 65%;
+        margin-top: 15px;
+        float: right;
+    }
+
+
+}
+
+@media screen and (min-width: 520px) and (max-width: 767px) {
+
+    .registration-error .data{
+        margin: 0;
+    }
+
+    .registration .data{
+        margin-top: 20px;
+    }
+
+    .raw{
+        width: 560px;
+    }
+
+    .registration {
+        height: 365px;
+        float: none;
+    }
+
+
+    .registration-error {
+        height: 440px;
+        float: none;
+    }
+
+    .registration .boxGetData{
+        margin-top: 18px;
+    }
+
+    .registration-error .boxGetData {
+        margin-top: 20px;
+    }
+
+
+    .errorLabel {
+        margin: 0;
+    }
+
+    .inputValue {
+        width: 100%;
+        margin: 0;
+    }
+
+    .errorSubmit{
+        margin-top: 15px;
+    }
+
+    .registration.submit{
+        margin-top: 15px;
+    }
+}

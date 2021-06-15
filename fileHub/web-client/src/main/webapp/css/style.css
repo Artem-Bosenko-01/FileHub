@@ -2,7 +2,8 @@
 
 @font-face {
     font-family: Roboto;
-    src: url("../fonts/roboto-regular.woff2") format("woff2");
+    src: url("../fonts/roboto-regular.woff2") format("woff2"),
+        url("../fonts/roboto-v27-latin-regular.eot") format("embedded-opentype");
 }
 
 * {

@@ -47,7 +47,8 @@ h2 {
 }
 
 .button:hover {
-    cursor: pointer
+    cursor: pointer;
+    background-color: #0c3378;
 }
 
 body {
@@ -130,7 +131,7 @@ body {
 
 .inputValue input {
     width: 100%;
-    padding: 8px 0 8px 0;
+    padding: 8px;
     border-radius: 3px;
     outline: none;
     border: 1px solid #dedbdb;

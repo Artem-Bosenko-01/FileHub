@@ -6,7 +6,7 @@
     position: absolute;
     display: inline-block;
     right: 0;
-    top: 10px;
+    top: 15px;
 }
 
 .panel ul li {
@@ -26,15 +26,15 @@
 
 .raw {
     background-color: #ffffff;
-    width: 1140px;
+    width: 490px;
     height: 605px;
-    padding: 20px 20px;
+    padding: 20px;
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .footer {
-    margin-top: 24px;
+    margin-top: 25px;
     text-align: center;
     color: #9a9797;
     font-size: 13px;
@@ -66,48 +66,44 @@
 
 .path div {
     display: inline-block;
-    padding: 8px 0 8px 8px;
-    margin-right: -4px;
-}
-
-.path div:first-child{
-    padding: 8px 4px 8px 15px;
-}
-
-.path div:last-child{
-    padding: 8px 15px 8px 15px;
 }
 
 .path .rootFolder{
-    padding: 8px 15px 8px 15px;;
+    padding: 8px 15px 8px 15px;
 }
 
 .pageHorizontalLine {
     border-right: 1px solid black;
+    margin-top: 10px;
 }
 
 .path div span {
 
-    font-size: 13px;
     font-weight: bolder;
 }
 
 .navbar {
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 .searchPanel{
     display: inline-block;
-    width: 48.5%;
-    height: 35px;
     border-radius: 3px;
+    width: 340px;
+}
 
+.inputSearchQuery{
+    display: inline-block;
+    margin: 0;
+}
+
+.inputSearchQuery input{
+    padding: 8px 10px;
 }
 
 .searchLine {
-    width: 87%;
+    width: 75%;
     height: 100%;
-    float: left;
     outline: none;
     border: 1px solid #dedbdb;
     border-bottom-left-radius: inherit;
@@ -123,54 +119,46 @@
 }
 
 .searchButton {
-    color: #ffffff;
-    width: 13%;
-    height: 100%;
-    font-size: 14px;
-    background-color: #2e86ce;
-    float: right;
-    border: 0;
     margin-left: -4px;
-    padding: 9px 12px;
+    display: inline-block;
+}
 
-    border-bottom-right-radius: 3px;
-    border-top-right-radius: 3px;
-    cursor: pointer;
+.button-search{
+    padding-top: 10px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
 }
 
 .rootButtons {
-    display: inline-block;
     font-size: 13px;
     outline: none;
     border: 1px solid #1f1f1f;
     border-radius: 5px;
-    background-color: #2e86ce;
     float: right;
+    margin-top: 5px;
 }
 
 .folderControlButton {
-    border:none;
-    color: #ffffff;
-    background-color: inherit;
-    padding: 9px 12px 9px 12px;
-    cursor: pointer;
+
+    border-radius: 0;
 
 }
 
 .folderControlButton:first-child{
     border-right: 2px solid #1f1f1f;
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
 }
 
 .folderControlButton:last-child{
     margin-left: -4px;
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
 }
 
-.folderControlButton:hover {
-    background-color: #0c3378;
-}
 
 .tableBox {
-    margin-top: 10px;
+    margin-top: 7px;
     height: 80%;
     overflow: auto;
 }
@@ -195,32 +183,35 @@
 }
 
 .table .folderMarker {
-    width: 2%;
+    width: 30px;
+    text-align: center;
     padding-left: 10px;
 }
 
 .table .picture {
     text-align: center;
     font-size: 20px;
-    width: 5%;
+    width: 50px;
 
 }
 
 .table .name {
-    width: 59%;
+    width: 60%;
 }
 
 .table .type {
-    width: 19%;
+    width: 160px;
+    display: none;
 }
 
 .table .size {
-    width: 6%;
+    width: 120px;
     text-align: right;
+    display: none;
 }
 
 .table .hiddenButtons {
-    width: 9%;
+    width: 80px;
     text-align: center;
     font-size: 20px;
 }
@@ -258,9 +249,15 @@ tr:hover .uploadFileButton {
 }
 
 td {
-    padding: 13px 0 10px 15px;
+    padding: 10px;
 }
 
+@media screen and (min-width: 1200px){
+    .raw {
+        width: 940px;
+    }
+
+}
 
 @media screen and (min-width: 992px) and (max-width: 1199px) {
     .raw {
@@ -284,11 +281,4 @@ td {
     }
 
 
-}
-
-@media screen and (max-width: 520px) {
-    .raw {
-        width: 390px;
-        height: 450px;
-    }
 }

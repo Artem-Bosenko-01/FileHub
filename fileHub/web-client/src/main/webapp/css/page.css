@@ -101,7 +101,7 @@
     padding: 8px 10px;
 }
 
-.searchLine {
+/*.searchLine {
     width: 75%;
     height: 100%;
     outline: none;
@@ -116,7 +116,7 @@
     border-bottom: 1px solid #50a2de;
     border-top: 1px solid #50a2de;
 
-}
+}*/
 
 .searchButton {
     margin-left: -4px;
@@ -170,6 +170,8 @@
     border-collapse: collapse;
     text-overflow: ellipsis;
     overflow: hidden;
+    text-align: left;
+
 }
 
 
@@ -177,7 +179,6 @@
     outline: none;
     border-top: 1px solid #dedbdb;
     width: 100%;
-
     font-size: 13px;
     font-weight: bold;
 }
@@ -254,7 +255,27 @@ td {
 
 @media screen and (min-width: 1200px){
     .raw {
-        width: 940px;
+        width: 1140px;
+    }
+
+    .searchPanel{
+        width: 700px;
+    }
+
+    .inputSearchQuery{
+        width: 67%
+    }
+    .inputSearchQuery input{
+        margin-left: 0;
+        float: left;
+    }
+
+    .table .type{
+        display: table-cell;
+    }
+
+    .table .size{
+        display: table-cell;
     }
 
 }
@@ -264,21 +285,75 @@ td {
         width: 940px;
     }
 
+    .searchPanel{
+        width: 550px;
+    }
 
+    .inputSearchQuery{
+        width: 67%
+    }
+    .inputSearchQuery input{
+        margin-left: 0;
+        float: left;
+    }
+
+    .table .type{
+        display: table-cell;
+    }
+
+    .table .size{
+        display: table-cell;
+    }
+
+    .table .hiddenButtons{
+        width: 95px;
+    }
 }
 
 @media screen and (min-width: 768px) and (max-width: 991px) {
     .raw {
-        width: 940px;
+        width: 720px;
+    }
+
+    .searchPanel{
+        width: 400px;
+    }
+
+    .inputSearchQuery{
+        width: 65%
+    }
+    .inputSearchQuery input{
+        margin-left: 0;
+        float: left;
     }
 
 
+    .table .size{
+        display: table-cell;
+    }
+
+    .table .hiddenButtons{
+        width: 95px;
+    }
 }
 
 @media screen and (min-width: 520px) and (max-width: 767px) {
     .raw {
-        width: 940px;
+        width: 735px;
     }
 
+    .searchPanel{
+        width: 500px;
+    }
 
+    .inputSearchQuery{
+        width: 77%
+    }
+    .inputSearchQuery input{
+        float: left;
+    }
+
+    .table .name {
+        width: 80%;
+    }
 }

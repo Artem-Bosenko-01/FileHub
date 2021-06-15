@@ -141,7 +141,7 @@ body {
     border: 1px solid red;
 }
 
-.inputValue input:focus-within {
+.inputValue input:focus {
     box-shadow: 0 0 5px rgb(80, 162, 222);
     border: 1px solid #50a2de;
 }

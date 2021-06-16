@@ -29,26 +29,30 @@
     </header>
     <div class="raw">
         <div class="path">
-            <div>
+            <div class="folder">
                 <span><a class="highlight" href="index.html" title="home">Home</a> </span>
             </div>
-            <div class="separator">/</div>
-            <div>
+
+            <div class="folder">
                 <span>Documents</span>
             </div>
         </div>
         <hr class="pageHorizontalLine">
         <nav class="navbar">
             <div class="searchPanel">
-                    <input title="Search something" type="text" class="searchLine" placeholder="   Enter entity name...">
-                    <button title="search button" class="searchButton" type="button">Search</button>
+                <div class="inputValue inputSearchQuery">
+                    <input title="Search something" type="text" placeholder="Enter entity name...">
+                </div>
+                <div class="searchButton">
+                    <button title="search button" class="button button-search" type="button">Search</button>
+                </div>
             </div>
             <div class="rootButtons">
-                <button title="upload" type="button" class="folderControlButton"><span
+                <button title="upload" type="button" class="button folderControlButton"><span
                         class="glyphicon glyphicon-upload"></span>
                 </button>
 
-                <button title="Create new directory" type="button" class="folderControlButton"><span
+                <button title="Create new directory" type="button" class="button folderControlButton"><span
                         class="glyphicon glyphicon-plus"></span>
                 </button>
             </div>
@@ -63,47 +67,47 @@
                     <td class="type">Folder</td>
                     <td class="size">—</td>
                     <td class="hiddenButtons">
-                        <button title="download" type="button" class="uploadFileButton">
+                        <button title="download" type="button" class="elementControlButton downloadElementButton">
                             <span class="glyphicon glyphicon-download"></span>
                         </button>
-                        <button title="delete" type="button" class="deleteFileButton delete">
+                        <button title="delete" type="button" class="elementControlButton deleteElementButton">
                             <span class="glyphicon glyphicon-remove-circle"></span>
                         </button>
                     </td>
                 </tr>
-<!--
-                <tr>
-                    <td class="folderMarker"></td>
-                    <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
-                    <td class="name"><a class="folder" href="">Other</a></td>
-                    <td class="type">Folder</td>
-                    <td class="size">130 kb</td>
-                    <td class="hiddenButtons"></td>
-                </tr>
-                <tr>
-                    <td class="folderMarker"></td>
-                    <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
-                    <td class="name"><a class="folder" href="">Other</a></td>
-                    <td class="type">Folder</td>
-                    <td class="size">—</td>
-                    <td class="hiddenButtons"></td>
-                </tr>
-                <tr>
-                    <td class="folderMarker"></td>
-                    <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
-                    <td class="name"><a class="folder" href="">Other</a></td>
-                    <td class="type">Folder</td>
-                    <td class="size">—</td>
-                    <td class="hiddenButtons"></td>
-                </tr>
-                <tr>
-                    <td class="folderMarker"></td>
-                    <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
-                    <td class="name"><a class="folder" href="">Other</a></td>
-                    <td class="type">Folder</td>
-                    <td class="size">—</td>
-                    <td class="hiddenButtons"></td>
-                </tr>-->
+                <!--
+                                <tr>
+                                    <td class="folderMarker"></td>
+                                    <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
+                                    <td class="name"><a class="folder" href="">Other</a></td>
+                                    <td class="type">Folder</td>
+                                    <td class="size">130 kb</td>
+                                    <td class="hiddenButtons"></td>
+                                </tr>
+                                <tr>
+                                    <td class="folderMarker"></td>
+                                    <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
+                                    <td class="name"><a class="folder" href="">Other</a></td>
+                                    <td class="type">Folder</td>
+                                    <td class="size">—</td>
+                                    <td class="hiddenButtons"></td>
+                                </tr>
+                                <tr>
+                                    <td class="folderMarker"></td>
+                                    <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
+                                    <td class="name"><a class="folder" href="">Other</a></td>
+                                    <td class="type">Folder</td>
+                                    <td class="size">—</td>
+                                    <td class="hiddenButtons"></td>
+                                </tr>
+                                <tr>
+                                    <td class="folderMarker"></td>
+                                    <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
+                                    <td class="name"><a class="folder" href="">Other</a></td>
+                                    <td class="type">Folder</td>
+                                    <td class="size">—</td>
+                                    <td class="hiddenButtons"></td>
+                                </tr>-->
 
                 </tbody>
             </table>

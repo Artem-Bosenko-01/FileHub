@@ -6,7 +6,7 @@
     position: absolute;
     display: inline-block;
     right: 0;
-    top: 15px;
+    top: 10px;
 }
 
 .panel ul li {
@@ -17,7 +17,7 @@
 }
 
 .panel ul li:first-child {
-    border-right: 2px solid #050505;
+    border-right: 1px solid #050505;
 }
 
 .logOut {
@@ -37,7 +37,6 @@
     margin-top: 25px;
     text-align: center;
     color: #9a9797;
-    font-size: 13px;
     font-weight: bold;
 }
 
@@ -56,7 +55,11 @@
     color: #4592d3;
 }
 
-.path{
+.copyright {
+    margin-top: 3px;
+}
+
+.path {
     display: inline-block;
     margin-bottom: 10px;
     background-color: #f5f5f5;
@@ -64,12 +67,27 @@
     border-radius: 4px;
 }
 
-.path div {
+.folder {
     display: inline-block;
+    margin-right: -4px;
+    padding: 8px 16px;
+
 }
 
-.path .rootFolder{
-    padding: 8px 15px 8px 15px;
+.folder:first-child:before {
+    content: none;
+}
+
+.folder:before {
+    content: "/";
+    color: #d7d7d7;
+    padding-right: 5px;
+    margin-left: -25px;
+}
+
+.folder span {
+
+    font-weight: bolder;
 }
 
 .pageHorizontalLine {
@@ -77,53 +95,37 @@
     margin-top: 10px;
 }
 
-.path div span {
-
-    font-weight: bolder;
-}
 
 .navbar {
     margin-top: 15px;
 }
 
-.searchPanel{
+.searchPanel {
     display: inline-block;
     border-radius: 3px;
     width: 340px;
 }
 
-.inputSearchQuery{
+.inputSearchQuery {
     display: inline-block;
     margin: 0;
+    width: 65%
 }
 
-.inputSearchQuery input{
+.inputSearchQuery input {
     padding: 8px 10px;
+    float: left;
+    margin-left: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
 }
-
-/*.searchLine {
-    width: 75%;
-    height: 100%;
-    outline: none;
-    border: 1px solid #dedbdb;
-    border-bottom-left-radius: inherit;
-    border-top-left-radius: inherit;
-}
-
-.searchLine:focus-within {
-    box-shadow: 0 0 5px rgb(80, 162, 222);
-    border-left: 1px solid #50a2de;
-    border-bottom: 1px solid #50a2de;
-    border-top: 1px solid #50a2de;
-
-}*/
 
 .searchButton {
     margin-left: -4px;
     display: inline-block;
 }
 
-.button-search{
+.button-search {
     padding-top: 10px;
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
@@ -139,23 +141,28 @@
 }
 
 .folderControlButton {
-
     border-radius: 0;
-
 }
 
-.folderControlButton:first-child{
+.folderControlButton:first-child {
     border-right: 2px solid #1f1f1f;
     border-bottom-left-radius: 3px;
     border-top-left-radius: 3px;
 }
 
-.folderControlButton:last-child{
+.folderControlButton:last-child {
     margin-left: -4px;
     border-bottom-right-radius: 3px;
     border-top-right-radius: 3px;
 }
 
+
+.renameElement{
+    margin-left: -10px;
+}
+.renameElement input{
+    margin: 0;
+}
 
 .tableBox {
     margin-top: 7px;
@@ -168,12 +175,9 @@
     width: 100%;
     table-layout: fixed;
     border-collapse: collapse;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    text-align: left;
+
 
 }
-
 
 .table tr {
     outline: none;
@@ -212,40 +216,36 @@
 }
 
 .table .hiddenButtons {
-    width: 80px;
+    width: 95px;
     text-align: center;
     font-size: 20px;
 }
 
-.deleteFileButton {
-    color: #d71313;
+.elementControlButton {
     border: none;
     background-color: transparent;
     cursor: pointer;
     padding: 0;
     visibility: hidden;
-
 }
 
-.uploadFileButton {
-    color: #50a0d9;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    padding: 0;
-    visibility: hidden;
+.deleteElementButton {
+    color: #d71313;
+}
 
+.downloadElementButton {
+    color: #50a0d9;
+}
+
+.uploadElementButton {
+    color: #18c918;
 }
 
 tr:hover {
     background-color: #f5f5f5;
 }
 
-tr:hover .deleteFileButton {
-    visibility: visible;
-}
-
-tr:hover .uploadFileButton {
+tr:hover .elementControlButton {
     visibility: visible;
 }
 
@@ -253,31 +253,34 @@ td {
     padding: 10px;
 }
 
-@media screen and (min-width: 1200px){
+@media screen and (min-width: 1200px) {
     .raw {
         width: 1140px;
     }
 
-    .searchPanel{
+    .searchPanel {
         width: 700px;
     }
 
-    .inputSearchQuery{
+    .inputSearchQuery {
         width: 67%
     }
-    .inputSearchQuery input{
-        margin-left: 0;
-        float: left;
-    }
 
-    .table .type{
+    .table .type {
         display: table-cell;
     }
 
-    .table .size{
+    .table .size {
         display: table-cell;
     }
 
+    .table .hiddenButtons {
+        width: 80px;
+    }
+
+    .renameElement{
+        width: 50%;
+    }
 }
 
 @media screen and (min-width: 992px) and (max-width: 1199px) {
@@ -285,28 +288,24 @@ td {
         width: 940px;
     }
 
-    .searchPanel{
+    .searchPanel {
         width: 550px;
     }
 
-    .inputSearchQuery{
+    .inputSearchQuery {
         width: 67%
     }
-    .inputSearchQuery input{
-        margin-left: 0;
-        float: left;
-    }
 
-    .table .type{
+    .table .type {
         display: table-cell;
     }
 
-    .table .size{
+    .table .size {
         display: table-cell;
     }
 
-    .table .hiddenButtons{
-        width: 95px;
+    .table .hiddenButtons {
+        width: 80px;
     }
 }
 
@@ -315,26 +314,22 @@ td {
         width: 720px;
     }
 
-    .searchPanel{
+    .searchPanel {
         width: 400px;
     }
 
-    .inputSearchQuery{
+    .inputSearchQuery {
         width: 65%
     }
-    .inputSearchQuery input{
-        margin-left: 0;
-        float: left;
-    }
 
-
-    .table .size{
+    .table .size {
         display: table-cell;
     }
 
-    .table .hiddenButtons{
-        width: 95px;
+    .renameElement{
+        width: 75%;
     }
+
 }
 
 @media screen and (min-width: 520px) and (max-width: 767px) {
@@ -342,16 +337,14 @@ td {
         width: 735px;
     }
 
-    .searchPanel{
+    .searchPanel {
         width: 500px;
     }
 
-    .inputSearchQuery{
+    .inputSearchQuery {
         width: 77%
     }
-    .inputSearchQuery input{
-        float: left;
-    }
+
 
     .table .name {
         width: 80%;

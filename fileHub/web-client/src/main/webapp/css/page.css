@@ -12,8 +12,7 @@
 .panel ul li {
     font-size: 14px;
     display: inline;
-    padding-right: 6px;
-    padding-left: 4px;
+    padding: 2px 6px 2px 4px;
 }
 
 .panel ul li:first-child {
@@ -91,13 +90,13 @@
 }
 
 .pageHorizontalLine {
-    border-right: 1px solid black;
+    border-right: 1px solid #000000;
     margin-top: 10px;
 }
 
 
 .navbar {
-    margin-top: 15px;
+    margin-top: 13px;
 }
 
 .searchPanel {
@@ -108,16 +107,14 @@
 
 .inputSearchQuery {
     display: inline-block;
-    margin: 0;
     width: 65%
 }
 
 .inputSearchQuery input {
     padding: 8px 10px;
-    float: left;
-    margin-left: 0;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+    margin-left: 0;
 }
 
 .searchButton {
@@ -126,7 +123,6 @@
 }
 
 .button-search {
-    padding-top: 10px;
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
 }
@@ -134,7 +130,7 @@
 .rootButtons {
     font-size: 13px;
     outline: none;
-    border: 1px solid #1f1f1f;
+    border: 1px solid #505050;
     border-radius: 5px;
     float: right;
     margin-top: 5px;
@@ -145,7 +141,7 @@
 }
 
 .folderControlButton:first-child {
-    border-right: 2px solid #1f1f1f;
+    border-right: 2px solid #383636;
     border-bottom-left-radius: 3px;
     border-top-left-radius: 3px;
 }
@@ -157,15 +153,25 @@
 }
 
 
-.renameElement{
+.renameElement {
     margin-left: -10px;
 }
-.renameElement input{
+
+.renameElement input {
     margin: 0;
 }
 
+.errorRenameMassage{
+    font-size: 12px;
+
+}
+
+.errorRenameMassage label{
+    margin-left: 0;
+}
+
 .tableBox {
-    margin-top: 7px;
+    margin-top: 15px;
     height: 80%;
     overflow: auto;
 }
@@ -202,6 +208,7 @@
 
 .table .name {
     width: 60%;
+    padding: 5px 10px;
 }
 
 .table .type {
@@ -248,9 +255,8 @@ tr:hover {
 tr:hover .elementControlButton {
     visibility: visible;
 }
-
 td {
-    padding: 10px;
+    padding: 10px 15px;
 }
 
 @media screen and (min-width: 1200px) {
@@ -278,12 +284,13 @@ td {
         width: 80px;
     }
 
-    .renameElement{
+    .renameElement {
         width: 50%;
     }
 }
 
 @media screen and (min-width: 992px) and (max-width: 1199px) {
+
     .raw {
         width: 940px;
     }
@@ -304,9 +311,6 @@ td {
         display: table-cell;
     }
 
-    .table .hiddenButtons {
-        width: 80px;
-    }
 }
 
 @media screen and (min-width: 768px) and (max-width: 991px) {
@@ -326,7 +330,7 @@ td {
         display: table-cell;
     }
 
-    .renameElement{
+    .renameElement {
         width: 75%;
     }
 

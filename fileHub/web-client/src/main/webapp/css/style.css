@@ -3,7 +3,7 @@
 @font-face {
     font-family: Roboto;
     src: url("../fonts/roboto-regular.woff2") format("woff2"),
-        url("../fonts/roboto-v27-latin-regular.eot") format("embedded-opentype");
+    url("../fonts/roboto-v27-latin-regular.eot") format("embedded-opentype");
 }
 
 * {
@@ -41,8 +41,7 @@ h2 {
     color: #ffffff;
     background-color: #2e86ce;
     border: 0;
-    float: left;
-    padding: 8px 14px 8px 14px;
+    padding: 9px 14px 9px 14px;
     border-radius: 4px;
 }
 
@@ -99,11 +98,11 @@ body {
     margin-top: 30px;
 }
 
-.data{
+.data {
     margin-top: 20px;
 }
 
-.registration .boxGetData{
+.registration .boxGetData {
     margin-top: 18px;
 }
 
@@ -154,6 +153,10 @@ body {
     color: red;
 }
 
+.errorMassage label {
+    margin-left: 5px;
+}
+
 .submit {
     width: 100%;
     float: left;
@@ -187,19 +190,19 @@ body {
         height: 365px;
     }
 
-    .authentication .data{
+    .authentication .data {
         margin-top: 15px;
     }
 
-    .registration .data{
+    .registration .data {
         margin-top: 15px;
     }
 
-    .registration-error .data{
+    .registration-error .data {
         margin-top: 10px;
     }
 
-    .boxGetData{
+    .boxGetData {
         margin-top: 10px;
         display: flex;
         align-items: center;
@@ -211,7 +214,7 @@ body {
 
     }
 
-    .registration .boxGetData{
+    .registration .boxGetData {
         margin-top: 10px;
     }
 
@@ -223,15 +226,13 @@ body {
 
     .inputValue {
         width: 65%;
-        margin-left: 5px;
     }
 
     .inputValue input {
-        float: right;
         margin-left: 5px;
     }
 
-    .invalidInputValue input{
+    .invalidInputValue input {
         margin-top: 10px;
         margin-bottom: 5px;
     }
@@ -247,30 +248,28 @@ body {
 
 @media screen and (min-width: 520px) and (max-width: 767px) {
 
-    .registration-error .data{
+    .registration-error .data {
         margin: 0;
     }
 
-    .registration .data{
+    .registration .data {
         margin-top: 20px;
     }
 
-    .raw{
+    .raw {
         width: 560px;
     }
 
     .registration {
         height: 365px;
-        float: none;
     }
 
 
     .registration-error {
         height: 440px;
-        float: none;
     }
 
-    .registration .boxGetData{
+    .registration .boxGetData {
         margin-top: 18px;
     }
 
@@ -288,11 +287,11 @@ body {
         margin: 0;
     }
 
-    .errorSubmit{
+    .errorSubmit {
         margin-top: 15px;
     }
 
-    .registration.submit{
+    .registration.submit {
         margin-top: 15px;
     }
 }

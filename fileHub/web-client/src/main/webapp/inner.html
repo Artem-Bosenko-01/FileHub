@@ -32,7 +32,6 @@
             <div class="folder">
                 <span><a class="highlight" href="index.html" title="home">Home</a> </span>
             </div>
-
             <div class="folder">
                 <span>Documents</span>
             </div>
@@ -63,9 +62,52 @@
                 <tr>
                     <td class="folderMarker"><span class="glyphicon glyphicon-chevron-right"></span></td>
                     <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
-                    <td class="name"><a class="highlight" href="">Montenegro2020</a></td>
+                    <td class="name">
+                        <div class="inputValue renameElement invalidInputValue">
+                            <input title="Input email" type="email" placeholder="Html book.pdf">
+                            <div class="errorMassage errorRenameMassage">
+                                <label title="Error massage">No whitespaces allowed.</label>
+                            </div>
+                        </div>
+                    </td>
                     <td class="type">Folder</td>
                     <td class="size">—</td>
+                    <td class="hiddenButtons">
+                        <button title="download" type="button" class="elementControlButton uploadElementButton">
+                            <span class="glyphicon glyphicon-upload"></span>
+                        </button>
+                        <button title="delete" type="button" class="elementControlButton deleteElementButton">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="folderMarker"><span class="glyphicon glyphicon-chevron-right"></span></td>
+                    <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
+                    <td class="name">
+                        <a class="highlight" href="">Montenegro2020</a>
+                    </td>
+                    <td class="type">Folder</td>
+                    <td class="size">—</td>
+                    <td class="hiddenButtons">
+                        <button title="download" type="button" class="elementControlButton uploadElementButton">
+                            <span class="glyphicon glyphicon-upload"></span>
+                        </button>
+                        <button title="delete" type="button" class="elementControlButton deleteElementButton">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="folderMarker"></td>
+                    <td class="picture"><span class="glyphicon glyphicon-file"></span></td>
+                    <td class="name">
+                        <div class="inputValue renameElement">
+                            <input title="Input email" type="email" placeholder="Html book.pdf">
+                        </div>
+                    </td>
+                    <td class="type">Pdf Document</td>
+                    <td class="size">100 KB</td>
                     <td class="hiddenButtons">
                         <button title="download" type="button" class="elementControlButton downloadElementButton">
                             <span class="glyphicon glyphicon-download"></span>
@@ -75,39 +117,21 @@
                         </button>
                     </td>
                 </tr>
-                <!--
-                                <tr>
-                                    <td class="folderMarker"></td>
-                                    <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
-                                    <td class="name"><a class="folder" href="">Other</a></td>
-                                    <td class="type">Folder</td>
-                                    <td class="size">130 kb</td>
-                                    <td class="hiddenButtons"></td>
-                                </tr>
-                                <tr>
-                                    <td class="folderMarker"></td>
-                                    <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
-                                    <td class="name"><a class="folder" href="">Other</a></td>
-                                    <td class="type">Folder</td>
-                                    <td class="size">—</td>
-                                    <td class="hiddenButtons"></td>
-                                </tr>
-                                <tr>
-                                    <td class="folderMarker"></td>
-                                    <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
-                                    <td class="name"><a class="folder" href="">Other</a></td>
-                                    <td class="type">Folder</td>
-                                    <td class="size">—</td>
-                                    <td class="hiddenButtons"></td>
-                                </tr>
-                                <tr>
-                                    <td class="folderMarker"></td>
-                                    <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
-                                    <td class="name"><a class="folder" href="">Other</a></td>
-                                    <td class="type">Folder</td>
-                                    <td class="size">—</td>
-                                    <td class="hiddenButtons"></td>
-                                </tr>-->
+                <tr>
+                    <td class="folderMarker"></td>
+                    <td class="picture"><span class="glyphicon glyphicon-file"></span></td>
+                    <td class="name">File.txt</td>
+                    <td class="type">Pdf Document</td>
+                    <td class="size">100 KB</td>
+                    <td class="hiddenButtons">
+                        <button title="download" type="button" class="elementControlButton downloadElementButton">
+                            <span class="glyphicon glyphicon-download"></span>
+                        </button>
+                        <button title="delete" type="button" class="elementControlButton deleteElementButton">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                        </button>
+                    </td>
+                </tr>
 
                 </tbody>
             </table>
@@ -125,7 +149,8 @@
             <img src="images/icon-instagram.png" alt="instagram">
         </a>
         <div title="@copyright">
-            <p>Copyright &#64 2021 <a class="highlight" href="https://www.teamdev.com/" target="_blank">TeamDev</a>. All
+            <p class="copyright">Copyright &#64 2021 <a class="highlight" href="https://www.teamdev.com/"
+                                                        target="_blank">TeamDev</a>. All
                 rights reserved.</p>
         </div>
     </footer>

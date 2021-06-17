@@ -102,7 +102,7 @@
 .searchPanel {
     display: inline-block;
     border-radius: 3px;
-    width: 340px;
+    width: 65%;
 }
 
 .inputSearchQuery {
@@ -163,7 +163,6 @@
 
 .errorRenameMassage{
     font-size: 12px;
-
 }
 
 .errorRenameMassage label{
@@ -181,15 +180,13 @@
     width: 100%;
     table-layout: fixed;
     border-collapse: collapse;
-
-
+    line-height: 1.15;
 }
 
 .table tr {
     outline: none;
     border-top: 1px solid #dedbdb;
     width: 100%;
-    font-size: 13px;
     font-weight: bold;
 }
 
@@ -207,7 +204,6 @@
 }
 
 .table .name {
-    width: 60%;
     padding: 5px 10px;
 }
 
@@ -223,7 +219,7 @@
 }
 
 .table .hiddenButtons {
-    width: 95px;
+    width: 80px;
     text-align: center;
     font-size: 20px;
 }
@@ -255,21 +251,14 @@ tr:hover {
 tr:hover .elementControlButton {
     visibility: visible;
 }
+
 td {
-    padding: 10px 15px;
+    padding: 10px;
 }
 
 @media screen and (min-width: 1200px) {
     .raw {
         width: 1140px;
-    }
-
-    .searchPanel {
-        width: 700px;
-    }
-
-    .inputSearchQuery {
-        width: 67%
     }
 
     .table .type {
@@ -280,9 +269,6 @@ td {
         display: table-cell;
     }
 
-    .table .hiddenButtons {
-        width: 80px;
-    }
 
     .renameElement {
         width: 50%;
@@ -295,13 +281,6 @@ td {
         width: 940px;
     }
 
-    .searchPanel {
-        width: 550px;
-    }
-
-    .inputSearchQuery {
-        width: 67%
-    }
 
     .table .type {
         display: table-cell;
@@ -316,14 +295,6 @@ td {
 @media screen and (min-width: 768px) and (max-width: 991px) {
     .raw {
         width: 720px;
-    }
-
-    .searchPanel {
-        width: 400px;
-    }
-
-    .inputSearchQuery {
-        width: 65%
     }
 
     .table .size {
@@ -344,11 +315,6 @@ td {
     .searchPanel {
         width: 500px;
     }
-
-    .inputSearchQuery {
-        width: 77%
-    }
-
 
     .table .name {
         width: 80%;

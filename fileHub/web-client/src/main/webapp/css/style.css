@@ -89,11 +89,6 @@ body {
     margin-top: 20px;
 }
 
-.raw::after{
-    display: block;
-    content: '';
-    clear: both;
-}
 
 .data::after {
     display: block;
@@ -105,9 +100,6 @@ body {
     margin-bottom: 15px;
 }
 
-.errorLabel{
-    margin-top: -20px;
-}
 
 .inputValue {
     width: 100%;
@@ -188,6 +180,10 @@ body {
         margin: 5px 0;
     }
 
+    .errorLabel{
+        margin-top: -20px;
+    }
+
     .submitBox {
         width: 65%;
         float: right;
@@ -211,9 +207,6 @@ body {
     }
 
 
-    .errorLabel {
-        margin: 0;
-    }
 
     .invalidInputValue input{
         margin-bottom: 5px;

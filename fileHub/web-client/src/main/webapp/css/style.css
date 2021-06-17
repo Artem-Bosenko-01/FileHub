@@ -44,7 +44,8 @@ h2 {
 }
 
 .button:hover {
-    cursor: pointer
+    cursor: pointer;
+    background-color: #0c3378;
 }
 
 body {

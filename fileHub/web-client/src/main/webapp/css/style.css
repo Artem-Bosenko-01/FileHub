@@ -1,9 +1,8 @@
-/*____________________________________________________________________________________________________________________*/
 
 @font-face {
     font-family: Roboto;
     src: url("../fonts/roboto-regular.woff2") format("woff2"),
-        url("../fonts/roboto-v27-latin-regular.eot") format("embedded-opentype");
+    url("../fonts/roboto-v27-latin-regular.eot") format("embedded-opentype");
 }
 
 * {
@@ -57,6 +56,7 @@ body {
     margin-top: 25px;
     font-size: 14px;
     line-height: 1.43;
+    min-width: 520px;
 }
 
 .logo {
@@ -73,20 +73,11 @@ body {
 }
 
 .raw {
-    width: 485px;
     background-color: #ffffff;
     padding: 15px 18px;
     border-radius: 16px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-.registration {
-    height: 365px;
-}
-
-
-.registration-error {
-    height: 440px;
+    min-width: 485px;
 }
 
 
@@ -94,43 +85,24 @@ body {
     margin: 0;
 }
 
-.registration-error .boxGetData {
-    margin-top: 30px;
-}
-
 .data{
     margin-top: 20px;
 }
 
-.registration .boxGetData{
-    margin-top: 18px;
-}
-
-.boxGetData::after {
+.data::after {
     display: block;
     content: '';
     clear: both;
 }
 
-.nameLabel {
-    margin: 0;
-    font-size: 13px;
-    font-weight: bold;
-}
-
-.errorLabel {
-    margin-top: -10px;
-}
-
 
 .inputValue {
     width: 100%;
-    margin: 0;
 }
 
 .inputValue input {
     width: 100%;
-    padding: 8px 0 8px 0;
+    padding: 8px;
     border-radius: 3px;
     outline: none;
     border: 1px solid #dedbdb;
@@ -148,12 +120,11 @@ body {
 
 .errorMassage {
     font-size: 13px;
-    font-weight: bold;
     margin-top: 5px;
     color: red;
 }
 
-.submit {
+.submitBox {
     width: 100%;
     float: left;
     margin-top: 15px;
@@ -161,11 +132,9 @@ body {
 
 
 .reference {
-    font-size: 13px;
-    font-weight: bold;
     color: #4592d3;
     float: right;
-    margin-top: 10px;
+    margin: 10px 0;
 }
 
 @media screen  and (min-width: 768px) {
@@ -174,29 +143,10 @@ body {
         width: 555px;
     }
 
-    .authentication {
-        height: 240px
-    }
-
-    .registration {
-        height: 290px;
-    }
-
-    .registration-error {
-        height: 365px;
-    }
-
-    .authentication .data{
+    .data{
         margin-top: 15px;
     }
 
-    .registration .data{
-        margin-top: 15px;
-    }
-
-    .registration-error .data{
-        margin-top: 10px;
-    }
 
     .boxGetData{
         margin-top: 10px;
@@ -231,13 +181,11 @@ body {
     }
 
     .invalidInputValue input{
-        margin-top: 10px;
-        margin-bottom: 5px;
+        margin: 5px 0;
     }
 
-    .submit {
+    .submitBox {
         width: 65%;
-        margin-top: 15px;
         float: right;
     }
 
@@ -245,36 +193,16 @@ body {
 }
 
 @media screen and (min-width: 520px) and (max-width: 767px) {
-
-    .registration-error .data{
-        margin: 0;
-    }
-
-    .registration .data{
+    .data{
         margin-top: 20px;
     }
 
-    .raw{
+    .raw {
         width: 560px;
     }
 
-    .registration {
-        height: 365px;
-        float: none;
-    }
-
-
-    .registration-error {
-        height: 440px;
-        float: none;
-    }
-
-    .registration .boxGetData{
-        margin-top: 18px;
-    }
-
-    .registration-error .boxGetData {
-        margin-top: 20px;
+    .boxGetData{
+        margin: 15px 0 0;
     }
 
 
@@ -282,16 +210,4 @@ body {
         margin: 0;
     }
 
-    .inputValue {
-        width: 100%;
-        margin: 0;
-    }
-
-    .errorSubmit{
-        margin-top: 15px;
-    }
-
-    .registration.submit{
-        margin-top: 15px;
-    }
 }

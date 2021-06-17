@@ -17,7 +17,7 @@
             </a>
         </h1>
     </header>
-    <div class="raw registration-error">
+    <div class="raw">
         <header class="header">
             <h2 title="Sign up">Sign up to FileHub</h2>
         </header>
@@ -28,10 +28,9 @@
                     <label title="Email" for="emailUser">Email</label>
                 </div>
                 <div class="inputValue invalidInputValue">
-                    <input title="Input email" type="email" id="emailUser" placeholder="   Email">
-                    <div class="errorMassage">
-                        <label title="Error massage">Please include an '@' in the email address.</label>
-                    </div>
+                    <input title="Input email" type="email" id="emailUser" placeholder="Email">
+                    <span class="errorMassage" title="Error massage">Please include an '@' in the email
+                        address.</span>
                 </div>
             </div>
             <div class="boxGetData">
@@ -39,10 +38,8 @@
                     <label title="Password" for="passwordUser">Password</label>
                 </div>
                 <div class="inputValue invalidInputValue">
-                    <input title="Input password" type="password" id="passwordUser" placeholder="   Password">
-                    <div class="errorMassage">
-                        <label title="Error massage">Password can't be empty.</label>
-                    </div>
+                    <input title="Input password" type="password" id="passwordUser" placeholder="Password">
+                    <span class="errorMassage" title="Error massage">Password can't be empty.</span>
                 </div>
             </div>
             <div class="boxGetData">
@@ -50,13 +47,12 @@
                     <label title="Password" for="confirmPasswordUser">Confirm Password</label>
                 </div>
                 <div class="inputValue invalidInputValue">
-                    <input title="Confirm password" type="password" id="confirmPasswordUser" placeholder="   Confirm Password">
-                    <div class="errorMassage">
-                        <label title="Error massage">Passwords don't match.</label>
-                    </div>
+                    <input title="Confirm password" type="password" id="confirmPasswordUser"
+                           placeholder="Confirm Password">
+                    <span class="errorMassage" title="Error massage">Passwords don't match.</span>
                 </div>
             </div>
-            <div class="submit errorSubmit">
+            <div class="submitBox errorSubmit">
                 <button title="Submit" class="button" name="signIn">Sign Up</button>
                 <a title="Authentication" class="reference" href="authenticatePage.html">Already have an account?</a>
             </div>

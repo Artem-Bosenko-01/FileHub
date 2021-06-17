@@ -1,5 +1,3 @@
-/*____________________________________________________________________________________________________________________*/
-
 @font-face {
     font-family: Roboto;
     src: url("../fonts/roboto-regular.woff2") format("woff2"),
@@ -46,8 +44,7 @@ h2 {
 }
 
 .button:hover {
-    cursor: pointer;
-    background-color: #0c3378;
+    cursor: pointer
 }
 
 body {
@@ -57,6 +54,7 @@ body {
     margin-top: 25px;
     font-size: 14px;
     line-height: 1.43;
+    min-width: 520px;
 }
 
 .logo {
@@ -73,20 +71,11 @@ body {
 }
 
 .raw {
-    width: 485px;
     background-color: #ffffff;
     padding: 15px 18px;
     border-radius: 16px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-.registration {
-    height: 365px;
-}
-
-
-.registration-error {
-    height: 440px;
+    min-width: 485px;
 }
 
 
@@ -94,38 +83,25 @@ body {
     margin: 0;
 }
 
-.registration-error .boxGetData {
-    margin-top: 30px;
-}
-
-.data {
+.data{
     margin-top: 20px;
 }
 
-.registration .boxGetData {
-    margin-top: 18px;
-}
 
-.boxGetData::after {
+.data::after {
     display: block;
     content: '';
     clear: both;
 }
 
-.nameLabel {
-    margin: 0;
-    font-size: 13px;
-    font-weight: bold;
+.boxGetData{
+    margin-bottom: 15px;
 }
 
-.errorLabel {
-    margin-top: -10px;
-}
 
 
 .inputValue {
     width: 100%;
-    margin: 0;
 }
 
 .inputValue input {
@@ -139,6 +115,8 @@ body {
 
 .invalidInputValue input {
     border: 1px solid red;
+    margin-bottom: 5px;
+
 }
 
 .inputValue input:focus {
@@ -148,28 +126,20 @@ body {
 
 .errorMassage {
     font-size: 13px;
-    font-weight: bold;
     margin-top: 5px;
     color: red;
 }
 
-.errorMassage label {
-    margin-left: 5px;
-}
-
-.submit {
+.submitBox {
     width: 100%;
     float: left;
-    margin-top: 15px;
 }
 
 
 .reference {
-    font-size: 13px;
-    font-weight: bold;
     color: #4592d3;
     float: right;
-    margin-top: 10px;
+    margin: 10px 0;
 }
 
 @media screen  and (min-width: 768px) {
@@ -178,44 +148,15 @@ body {
         width: 555px;
     }
 
-    .authentication {
-        height: 240px
-    }
-
-    .registration {
-        height: 290px;
-    }
-
-    .registration-error {
-        height: 365px;
-    }
-
-    .authentication .data {
+    .data{
         margin-top: 15px;
     }
 
-    .registration .data {
-        margin-top: 15px;
-    }
 
-    .registration-error .data {
-        margin-top: 10px;
-    }
-
-    .boxGetData {
-        margin-top: 10px;
+    .boxGetData{
+        margin-bottom: 10px;
         display: flex;
         align-items: center;
-    }
-
-    .registration-error .boxGetData {
-        margin-top: 0;
-        margin-bottom: 5px;
-
-    }
-
-    .registration .boxGetData {
-        margin-top: 10px;
     }
 
     .nameLabel {
@@ -223,58 +164,45 @@ body {
         float: left;
     }
 
+    .errorLabel{
+        margin-top: -20px;
+    }
 
     .inputValue {
         width: 65%;
-    }
-
-    .inputValue input {
         margin-left: 5px;
     }
 
-    .invalidInputValue input {
-        margin-top: 10px;
-        margin-bottom: 5px;
+    .inputValue input {
+        float: right;
+        margin-left: 5px;
     }
 
-    .submit {
+
+    .invalidInputValue input{
+        margin: 5px 0;
+    }
+
+    .submitBox {
         width: 65%;
-        margin-top: 15px;
         float: right;
+        margin-top: 10px;
     }
 
 
 }
 
 @media screen and (min-width: 520px) and (max-width: 767px) {
-
-    .registration-error .data {
-        margin: 0;
-    }
-
-    .registration .data {
+    .data{
         margin-top: 20px;
     }
 
     .raw {
-        width: 560px;
+        min-width: 560px;
     }
 
-    .registration {
-        height: 365px;
-    }
-
-
-    .registration-error {
-        height: 440px;
-    }
-
-    .registration .boxGetData {
-        margin-top: 18px;
-    }
-
-    .registration-error .boxGetData {
-        margin-top: 20px;
+    .boxGetData{
+        margin: 15px 0 0;
     }
 
 
@@ -282,16 +210,11 @@ body {
         margin: 0;
     }
 
-    .inputValue {
-        width: 100%;
-        margin: 0;
+    .invalidInputValue input{
+        margin-bottom: 5px;
     }
 
-    .errorSubmit {
-        margin-top: 15px;
-    }
-
-    .registration.submit {
+    .submitBox{
         margin-top: 15px;
     }
 }

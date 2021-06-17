@@ -89,12 +89,25 @@ body {
     margin-top: 20px;
 }
 
+.raw::after{
+    display: block;
+    content: '';
+    clear: both;
+}
+
 .data::after {
     display: block;
     content: '';
     clear: both;
 }
 
+.boxGetData{
+    margin-bottom: 15px;
+}
+
+.errorLabel{
+    margin-top: -20px;
+}
 
 .inputValue {
     width: 100%;
@@ -111,6 +124,8 @@ body {
 
 .invalidInputValue input {
     border: 1px solid red;
+    margin-bottom: 5px;
+
 }
 
 .inputValue input:focus {
@@ -127,7 +142,6 @@ body {
 .submitBox {
     width: 100%;
     float: left;
-    margin-top: 15px;
 }
 
 
@@ -149,19 +163,9 @@ body {
 
 
     .boxGetData{
-        margin-top: 10px;
+        margin-bottom: 10px;
         display: flex;
         align-items: center;
-    }
-
-    .registration-error .boxGetData {
-        margin-top: 0;
-        margin-bottom: 5px;
-
-    }
-
-    .registration .boxGetData{
-        margin-top: 10px;
     }
 
     .nameLabel {
@@ -187,6 +191,7 @@ body {
     .submitBox {
         width: 65%;
         float: right;
+        margin-top: 10px;
     }
 
 
@@ -198,7 +203,7 @@ body {
     }
 
     .raw {
-        width: 560px;
+        min-width: 560px;
     }
 
     .boxGetData{
@@ -210,4 +215,11 @@ body {
         margin: 0;
     }
 
+    .invalidInputValue input{
+        margin-bottom: 5px;
+    }
+
+    .submitBox{
+        margin-top: 15px;
+    }
 }

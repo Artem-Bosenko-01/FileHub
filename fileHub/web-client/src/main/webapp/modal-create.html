@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modal create</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/page.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/icons.css">
+</head>
+<body>
+<div class="main">
+    <div class="raw">
+        <header class="header">
+            <h2 class="modalHeader">Create New Directory</h2>
+            <button class="button shutDownButton"><span class="glyphicon glyphicon-remove"></span></button>
+        </header>
+        <form class="data">
+            <div class="boxGetData modalBoxGetData">
+                <div class="inputValue invalidInputValue invalidModalInput">
+                    <input title="Input email" type="email" id="emailUser" placeholder="Enter directory name...">
+                    <span class="errorMassage" title="Error massage">No whitespaces allowed.</span>
+                </div>
+            </div>
+            <div class="submitBox submitModalBox">
+                <button title="Submit" class="button cancelButton" name="cancel">Cancel</button>
+                <button title="Submit" class="button" name="create">Create</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

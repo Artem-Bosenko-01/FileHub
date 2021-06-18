@@ -1,0 +1,45 @@
+.raw{
+    margin-top: 5px;
+    width: 400px;
+    height: inherit;
+}
+
+.modalHeader{
+    font-size: 24px;
+}
+
+.modalBoxGetData{
+    display: block;
+}
+
+.invalidModalInput{
+    width: 100%;
+    margin-left: 0;
+}
+
+.cancelButton{
+    background-color: inherit;
+    color: black;
+    border: 1px solid #9a9797;
+    padding: 8px 12px;
+    margin-right: 2px;
+}
+
+.shutDownButton{
+    position: absolute;
+    background-color: inherit;
+    color: #9a9797;
+    right: 0;
+    top: 0;
+    padding: 0;
+}
+
+.cancelButton:hover,
+.shutDownButton:hover{
+    background-color: inherit;
+}
+
+.submitModalBox{
+    margin-top: 25px;
+    width: 32%;
+}

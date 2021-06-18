@@ -1,31 +1,30 @@
-.raw{
-    margin-top: 5px;
+.modalRaw {
     width: 400px;
     height: inherit;
 }
 
-.deleteData{
+.deleteData {
     margin-top: 20px;
 }
 
-.deleteData span{
+.deleteData span {
     font-size: 16px;
 }
 
-.modalHeader{
+.modalHeader {
     font-size: 24px;
 }
 
-.modalBoxGetData{
+.modalBoxGetData {
     display: block;
 }
 
-.invalidModalInput{
+.invalidModalInput {
     width: 100%;
     margin-left: 0;
 }
 
-.cancelButton{
+.cancelButton {
     background-color: inherit;
     color: black;
     border: 1px solid #9a9797;
@@ -33,15 +32,15 @@
     margin-right: 2px;
 }
 
-.deleteButton{
+.deleteButton {
     background-color: #cc5c53;
 }
 
-.deleteButton:hover{
+.deleteButton:hover {
     background-color: #9c2d21
 }
 
-.shutDownButton{
+.shutDownButton {
     position: absolute;
     background-color: inherit;
     color: #9a9797;
@@ -51,15 +50,15 @@
 }
 
 .cancelButton:hover,
-.shutDownButton:hover{
+.shutDownButton:hover {
     background-color: inherit;
 }
 
-.submitModalBox{
+.submitModalBox {
     margin-top: 25px;
-    width: 32%;
+    width: 32.2%;
 }
 
-.submitDeleteModalBox{
-    margin-top: 50px;
+.submitDeleteModalBox {
+    margin-top: 28px;
 }

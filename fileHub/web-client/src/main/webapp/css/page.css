@@ -99,7 +99,7 @@
     width: 75%;
 }
 
-.invalidInputValue input{
+.invalidInputValue input {
     float: none;
 }
 
@@ -162,11 +162,11 @@
     margin: 0;
 }
 
-.errorRenameMassage{
+.errorRenameMassage {
     font-size: 12px;
 }
 
-.errorRenameMassage label{
+.errorRenameMassage label {
     margin-left: 0;
 }
 
@@ -256,12 +256,29 @@ td {
     padding: 9px 10px;
 }
 
+.modalWindow {
+    position: fixed;
+    top: 26px;
+    left: 715px;
+    z-index: 4849;
+}
+
+.fade {
+    position: fixed;
+    z-index: 55;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.7);
+}
+
 @media screen and (min-width: 1200px) {
     .raw {
         width: 1140px;
     }
 
-    .searchPanel{
+    .searchPanel {
         width: 65%;
     }
 
@@ -285,7 +302,7 @@ td {
         width: 940px;
     }
 
-    .searchPanel{
+    .searchPanel {
         width: 63%;
     }
 
@@ -304,7 +321,7 @@ td {
         width: 720px;
     }
 
-    .searchPanel{
+    .searchPanel {
         width: 58%;
     }
 
@@ -323,7 +340,7 @@ td {
         width: 735px;
     }
 
-    .searchPanel{
+    .searchPanel {
         width: 85%;
     }
 

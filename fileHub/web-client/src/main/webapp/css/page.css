@@ -259,7 +259,7 @@ td {
 .modalWindow {
     position: fixed;
     top: 26px;
-    left: 37.4%;
+    left: 3%;
     z-index: 4849;
 }
 
@@ -294,6 +294,10 @@ td {
     .renameElement {
         width: 50%;
     }
+
+    .modalWindow{
+        left: 34%;
+    }
 }
 
 @media screen and (min-width: 992px) and (max-width: 1199px) {
@@ -314,6 +318,9 @@ td {
         display: table-cell;
     }
 
+    .modalWindow{
+        left: 28%;
+    }
 }
 
 @media screen and (min-width: 768px) and (max-width: 991px) {
@@ -333,6 +340,9 @@ td {
         width: 75%;
     }
 
+    .modalWindow{
+        left: 24%;
+    }
 }
 
 @media screen and (min-width: 520px) and (max-width: 767px) {
@@ -346,5 +356,9 @@ td {
 
     .table .name {
         width: 80%;
+    }
+
+    .modalWindow{
+        left: 14%;
     }
 }

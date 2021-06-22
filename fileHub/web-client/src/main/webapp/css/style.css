@@ -28,6 +28,7 @@ body{
 hr {
     border-color: #000000;
     margin-top: 5px;
+    margin-bottom: 15px;
 }
 
 .main{
@@ -45,6 +46,10 @@ hr {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
 }
 
+.form-group{
+    margin-bottom: 10px;
+}
+
 .label-data{
     padding-left: 0;
     padding-right: 0;
@@ -56,36 +61,48 @@ hr {
 
 .input-data{
     padding-right: 0;
-    padding-left: 10px;
+    padding-left: 0;
 }
 
 .btn-primary{
     background-color: #2e86ce;
 }
 
-.btn-submit{
-    margin-left: 10px;
-}
 
 .form-reference{
     margin-top: 10px;
 }
 
-@media screen and (max-width: 768px){
+
+.has-error .form-control{
+    border-color: #f60b0b;
+}
+
+.help-block{
+    margin-bottom: 0;
+}
+
+.has-error .checkbox, .has-error .checkbox-inline, .has-error .control-label, .has-error .help-block, .has-error .radio,
+.has-error .radio-inline, .has-error.checkbox label, .has-error.checkbox-inline label, .has-error.radio label,
+.has-error.radio-inline label{
+    color: #f60b0b;
+}
+
+@media screen and (min-width: 768px){
 
     .input-data{
-        padding-left: 0;
+        padding-left: 10px;
     }
 
     .btn-submit{
-        margin-left: 0;
+        margin-left: 10px;
     }
 
     hr{
-        margin-bottom: 15px;
+        margin-bottom: 20px;
     }
 
     .form-group{
-        margin-bottom: 10px;
+        margin-bottom: 15px;
     }
 }

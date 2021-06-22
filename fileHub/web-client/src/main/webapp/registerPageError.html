@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Registration</title>
+    <title>Registration Error</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <script href="js/bootstrap.min.js"></script>
@@ -12,6 +12,7 @@
 </head>
 
 <body>
+
 <div class="container">
     <div class="main">
         <header>
@@ -26,38 +27,47 @@
                 <h2 title="Sign up">Sign up to FileHub</h2>
             </header>
             <hr class="">
-            <form action="registerPageError.html">
-                <div class="form-group clearfix">
+            <form action="registerPage.html">
+
+                <div class="form-group clearfix has-error">
                     <div class="col-xs-12 col-sm-4 label-data">
                         <label title="Email" for="emailUser">Email</label>
                     </div>
                     <div class="col-xs-12 col-sm-8 input-data">
-                        <input title="Input email" class="form-control" type="email" id="emailUser" placeholder="Email">
+                        <input title="Input email" class="form-control" type="email" aria-describedby="errorEmail"
+                               id="emailUser" placeholder="Email">
+                        <span id="errorEmail" class="help-block">Please include an '@' in the email
+                        address.</span>
                     </div>
                 </div>
 
-                <div class="form-group clearfix">
+                <div class="form-group clearfix has-error">
                     <div class="col-xs-12 col-sm-4 label-data">
                         <label title="Password" for="passwordUser">Password</label>
                     </div>
                     <div class="col-xs-12 col-sm-8 input-data">
-                        <input title="Input password" class="form-control" type="password" id="passwordUser" placeholder="Password">
+                        <input title="Input password" class="form-control" type="password" aria-describedby="errorPassword"
+                               id="passwordUser" placeholder="Password">
+                        <span id="errorPassword" class="help-block">Password can't be empty.</span>
                     </div>
                 </div>
 
-                <div class="form-group clearfix">
+                <div class="form-group clearfix has-error">
                     <div class="col-xs-12 col-sm-4 label-data">
                         <label title="Confirm password" for="confirmPasswordUser">Confirm Password</label>
                     </div>
                     <div class="col-xs-12 col-sm-8 input-data">
-                        <input title="Confirm Password" class="form-control" type="password" id="confirmPasswordUser" placeholder="Confirm Password">
+                        <input title="Confirm Password" class="form-control" type="password" aria-describedby="errorConfirmPassword"
+                               id="confirmPasswordUser" placeholder="Confirm Password">
+                        <span id="errorConfirmPassword" class="help-block">Passwords don't match.</span>
                     </div>
                 </div>
 
                 <div class="form-group clearfix">
                     <div class="col-sm-offset-4">
                         <button class="btn btn-primary btn-submit" title="Submit" type="submit">Sign Up</button>
-                        <a title="Registration" class="pull-right form-reference" href="authenticatePage.html">Already have an account?</a>
+                        <a title="Registration" class="pull-right form-reference" href="authenticatePage.html">Already
+                            have an account?</a>
                     </div>
                 </div>
             </form>

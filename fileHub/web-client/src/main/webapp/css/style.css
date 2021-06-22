@@ -7,3 +7,85 @@
 * {
     font-family: Roboto, "Times New Roman", serif;
 }
+
+a{
+    color: #2e86ce;
+}
+
+.logo {
+    display: inline-block;
+    background: url("../images/logo.png") no-repeat;
+    width: 200px;
+    text-indent: -9999px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+body{
+    background-color: #f2f2f2;
+}
+
+hr {
+    border-color: #000000;
+    margin-top: 5px;
+}
+
+.main{
+    max-width: 560px;
+    min-width: 490px;
+    margin: 0 auto;
+}
+
+.box {
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+.label-data{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.label-data label{
+    margin-top: 6px;
+}
+
+.input-data{
+    padding-right: 0;
+    padding-left: 10px;
+}
+
+.btn-primary{
+    background-color: #2e86ce;
+}
+
+.btn-submit{
+    margin-left: 10px;
+}
+
+.form-reference{
+    margin-top: 10px;
+}
+
+@media screen and (max-width: 768px){
+
+    .input-data{
+        padding-left: 0;
+    }
+
+    .btn-submit{
+        margin-left: 0;
+    }
+
+    hr{
+        margin-bottom: 15px;
+    }
+
+    .form-group{
+        margin-bottom: 10px;
+    }
+}

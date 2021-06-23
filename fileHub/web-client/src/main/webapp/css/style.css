@@ -236,3 +236,30 @@ tr:hover .elementControlButton {
 .copyright{
     color: #a6a6a6;
 }
+
+/*********************************************Styles for modal windows*********************************************/
+
+.modal-header{
+    border-bottom: 0;
+}
+
+.modal-footer{
+    border-top: 0;
+}
+
+.modal-dialog{
+    max-width: 480px;
+}
+
+.modal-body{
+    padding-top: 5px;
+    margin-bottom: 5px;
+}
+
+.modal-content{
+    border-radius: 20px;
+}
+
+.modalDeleteFile{
+    margin-bottom: 0;
+}

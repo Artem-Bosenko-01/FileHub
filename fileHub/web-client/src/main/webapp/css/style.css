@@ -629,6 +629,10 @@ td {
 .elementControlButton .loading{
     font-size: 20px;
 }
+
+.empty-directory-massage .loading{
+    font-size: 20px;
+}
 /*********************************************Styles for modal windows*********************************************/
 
 .modalRaw {

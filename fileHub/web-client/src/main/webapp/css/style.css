@@ -147,6 +147,10 @@ hr {
     overflow: auto;
 }
 
+.table{
+    table-layout: fixed;
+}
+
 .table .folderMarker {
     width: 30px;
     text-align: center;
@@ -161,6 +165,9 @@ hr {
 }
 
 .table .name {
+    padding: 5px 10px;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .table .type {
@@ -208,7 +215,7 @@ tr:hover .elementControlButton {
 }
 
 .renameElement {
-    padding-left: 0;
+    margin-left: -10px;
 }
 
 .renameElement span{

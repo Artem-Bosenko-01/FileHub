@@ -633,6 +633,10 @@ td {
 .empty-directory-massage .loading{
     font-size: 20px;
 }
+
+.submitLoadingModalBox .submitDeleteModalBox span{
+    font-size: 12px;
+}
 /*********************************************Styles for modal windows*********************************************/
 
 .modalRaw {
@@ -644,7 +648,7 @@ td {
     margin-top: 20px;
 }
 
-.deleteData span {
+.deleteData>span {
     font-size: 16px;
 }
 
@@ -702,5 +706,5 @@ td {
 }
 
 .submitDeleteModalBox {
-    margin-top: 28px;
+    margin-top: 50px;
 }

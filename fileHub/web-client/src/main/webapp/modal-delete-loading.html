@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Create modal loading</title>
+    <title>Delete modal loading</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/icons.css">
@@ -262,22 +262,19 @@
     <div class="main">
         <div class="raw modalRaw">
             <header class="header">
-                <h2 class="modalHeader">Create New Directory</h2>
+                <h2 class="modalHeader">Delete File</h2>
                 <button class="button shutDownButton" onclick="window.open('index.html')"><span
                         class="glyphicon glyphicon-remove"></span></button>
             </header>
-            <form class="data" action="index.html">
-                <div class="boxGetData modalBoxGetData">
-                    <div class="inputValue modal-input">
-                        <input title="Input email" type="email" id="emailUser" placeholder="Enter directory name...">
-                    </div>
-                </div>
-                <div class="submitBox submitModalBox submitLoadingModalBox">
+            <div class="data deleteData">
+                <span>Are you sure want to delete "name.txt" file?</span>
+                <div class="submitBox submitModalBox submitDeleteModalBox submitLoadingModalBox">
                     <button title="Submit" class="button cancelButton" name="cancel">Cancel</button>
-                    <button disabled title="Submit" class="button button-disabled" name="create">
-                        <span class="glyphicon glyphicon-repeat loading" aria-hidden="true"></span> Create</button>
+                    <button disabled title="Submit" class="button deleteButton button-disabled" name="delete">
+                        <span class="glyphicon glyphicon-repeat loading" aria-hidden="true"></span> Delete
+                    </button>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 

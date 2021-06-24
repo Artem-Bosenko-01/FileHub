@@ -12,6 +12,10 @@ a{
     color: #2e86ce;
 }
 
+.box h2{
+    margin-top: 0;
+}
+
 .logo {
     display: inline-block;
     background: url("../images/logo.png") no-repeat;
@@ -23,6 +27,7 @@ a{
 
 body{
     background-color: #f2f2f2;
+    min-width: 520px;
 }
 
 hr {
@@ -33,16 +38,13 @@ hr {
 
 .wrapper{
     max-width: 560px;
-    min-width: 490px;
     margin: 0 auto;
 }
 
 .box {
     background-color: #ffffff;
     border-radius: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 10px;
+    padding: 20px 20px 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
 }
 
@@ -50,18 +52,8 @@ hr {
     margin-bottom: 10px;
 }
 
-.label-data{
-    padding-left: 0;
-    padding-right: 0;
-}
-
 .label-data label{
     margin-top: 6px;
-}
-
-.input-data{
-    padding-right: 0;
-    padding-left: 0;
 }
 
 .btn-primary{
@@ -89,14 +81,6 @@ hr {
 }
 
 @media screen and (min-width: 768px){
-
-    .input-data{
-        padding-left: 10px;
-    }
-
-    .btn-submit{
-        margin-left: 10px;
-    }
 
     hr{
         margin-bottom: 20px;

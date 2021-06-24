@@ -430,6 +430,9 @@ body {
 
 .table .name {
     padding: 5px 10px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .table .type {

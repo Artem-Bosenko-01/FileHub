@@ -486,7 +486,7 @@ td {
 
 .modalWindow {
     position: fixed;
-    top: 26px;
+    top: 30px;
     left: 3%;
     z-index: 4849;
 }
@@ -656,7 +656,7 @@ td {
     display: block;
 }
 
-.invalidModalInput {
+.modal-input {
     width: 100%;
     margin-left: 0;
 }
@@ -694,6 +694,11 @@ td {
 .submitModalBox {
     margin-top: 25px;
     width: 32.2%;
+}
+
+.submitLoadingModalBox{
+    margin-top: 35px;
+    width: 36%;
 }
 
 .submitDeleteModalBox {

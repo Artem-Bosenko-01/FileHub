@@ -20,16 +20,14 @@
                     TeamDev
                 </a>
             </h1>
-            <div class="pull-right userPanel">
-                <ul class="list-inline">
-                    <li title="User full name"><span class="glyphicon glyphicon-user"></span> John Doe</li>
-                    <li>
-                        <a title="log out" class="logOut" href="authenticatePage.html">
-                            Log out <span class="glyphicon glyphicon-log-out"></span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            <ul class="list-inline userPanel">
+                <li title="User full name"><span class="glyphicon glyphicon-user"></span> John Doe</li>
+                <li>
+                    <a title="log out" href="authenticatePage.html">
+                        Log out <span class="glyphicon glyphicon-log-out"></span>
+                    </a>
+                </li>
+            </ul>
         </header>
         <div class="box">
             <ol class="breadcrumb">
@@ -113,14 +111,11 @@
                         <td class="folderMarker"><span class="glyphicon glyphicon-chevron-right"></span></td>
                         <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
                         <td class="name">
-                            <div class="row">
-                                <div class="col-xs-10 col-md-6 has-error renameElement">
+                                <div class="has-error renameElement">
                                     <input title="Input email" class="form-control" type="text"
-                                           aria-describedby="errorName"
                                            placeholder="Music">
-                                    <span id="errorName" class="help-block">No whitespaces allowed.</span>
+                                    <span class="help-block">No whitespaces allowed.</span>
                                 </div>
-                            </div>
                         </td>
                         <td class="type hidden-xs hidden-sm">Folder</td>
                         <td class="size hidden-xs">—</td>
@@ -254,47 +249,50 @@
             </div>
         </div>
 
-        <footer class="footer text-center">
-            <div class="socialIcons">
-                <a title="linkedin" class="icon" href="https://www.linkedin.com/company/teamdev-ltd-/mycompany/"
-                   target="_blank">
-                    <img src="images/icon-linkedin.png" alt="linkedin">
-                </a>
-                <a title="facebook" class="icon" href="https://www.facebook.com/TeamDev" target="_blank">
-                    <img src="images/icon-facebook.png" alt="facebook">
-                </a>
-                <a title="instagram" class="icon" href="https://www.instagram.com/teamdev_ltd/?hl=ru" target="_blank">
-                    <img src="images/icon-instagram.png" alt="instagram">
-                </a>
-            </div>
-            <div class="copyright" title="@copyright">
-                <p class="copyright">Copyright &#64; 2021 <a class="highlight" href="https://www.teamdev.com/"
-                                                             target="_blank">TeamDev</a>. All
-                    rights reserved.</p>
-            </div>
+        <footer class="text-center">
+            <ul class="socialIcons list-inline">
+                <li>
+                    <a title="linkedin" class="icon" href="https://www.linkedin.com/company/teamdev-ltd-/mycompany/"
+                       target="_blank">
+                        <img src="images/icon-linkedin.png" alt="linkedin">
+                    </a>
+                </li>
+                <li>
+                    <a title="facebook" class="icon" href="https://www.facebook.com/TeamDev" target="_blank">
+                        <img src="images/icon-facebook.png" alt="facebook">
+                    </a>
+                </li>
+                <li>
+                    <a title="instagram" class="icon" href="https://www.instagram.com/teamdev_ltd/?hl=ru"
+                       target="_blank">
+                        <img src="images/icon-instagram.png" alt="instagram">
+                    </a>
+                </li>
+            </ul>
+            <p class="copyright">Copyright &#64; 2021 <a title="TeamDev" class="highlight"
+                                                         href="https://www.teamdev.com/"
+                                                         target="_blank">TeamDev</a>. All
+                rights reserved.</p>
         </footer>
     </div>
 </div>
 
 
-<div class="modal fade" id="createNewDirectory" tabindex="-1" role="dialog" aria-labelledby="createDirectoryLabel">
+<div class="modal fade" id="createNewDirectory" tabindex="-1" role="dialog" >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title" id="createDirectoryLabel">Create New Directory</h3>
+                <h3 class="modal-title">Create New Directory</h3>
             </div>
             <div class="modal-body">
                 <form action="index.html">
-                    <div class="row">
-                        <div class="col-xs-12 has-error">
+                        <div class="has-error">
                             <input title="Input folder name" class="form-control" type="text"
-                                   aria-describedby="errorNameNewFolder"
                                    placeholder="Enter directory name...">
-                            <span id="errorNameNewFolder" class="help-block">No whitespaces allowed.</span>
+                            <span class="help-block">No whitespaces allowed.</span>
                         </div>
-                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -306,13 +304,13 @@
 </div>
 
 
-<div class="modal fade" id="deleteFile" tabindex="-1" role="dialog" aria-labelledby="deleteFileLabel">
+<div class="modal fade" id="deleteFile" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title" id="deleteFileLabel">Delete File</h3>
+                <h3 class="modal-title">Delete File</h3>
             </div>
             <div class="modal-body modalDeleteFile">
                 <span>Are you sure want to delete "name.txt" file?</span>

@@ -590,7 +590,15 @@ td {
     }
 }
 
+.empty-directory:hover{
+    background-color: transparent;
+}
 
+.empty-directory-massage{
+    text-align: center;
+    margin-top: 190px;
+    font-size: 14px;
+}
 /*********************************************Styles for modal windows*********************************************/
 
 .modalRaw {

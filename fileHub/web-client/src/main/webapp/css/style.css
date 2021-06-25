@@ -208,8 +208,9 @@ tr:hover .elementControlButton {
     font-size: 14px;
 }
 
-.renameElement span{
+.renameElement .error-massage{
     font-size: 12px;
+    margin-left: -13px;
 }
 
 .box{

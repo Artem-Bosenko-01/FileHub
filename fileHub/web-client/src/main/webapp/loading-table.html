@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Loading table page</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script
+</head>
+<body>
+<div class="container">
+    <div class="wrapper wrapper-page clearfix">
+        <header class="header">
+            <h1 title="TeamDev">
+                <a class="logo" href="https://www.teamdev.com/" target="_blank">
+                    TeamDev
+                </a>
+            </h1>
+            <ul class="list-inline userPanel">
+                <li title="User full name"><span class="glyphicon glyphicon-user"></span> John Doe</li>
+                <li>
+                    <a title="log out" href="authenticatePage.html">
+                        Log out <span class="glyphicon glyphicon-log-out"></span>
+                    </a>
+                </li>
+            </ul>
+        </header>
+        <div class="box">
+            <ol class="breadcrumb">
+                <li class="active">Home</li>
+            </ol>
+            <hr class="page-separate-line">
+            <div class="row searchPanel">
+                <div class="col-xs-8 col-sm-6">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Enter entity name...">
+                        <span class="input-group-btn">
+                        <button class="btn btn-primary" type="button">Search</button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-6">
+                    <div class="pull-right btn-group" role="group" aria-label="...">
+                        <button title="upload" type="button" class="btn btn-primary"><span
+                                class="glyphicon glyphicon-upload"></span>
+                        </button>
+
+                        <button title="Create new directory" type="button" class="btn btn-primary"
+                                data-toggle="modal" data-target="#createNewDirectory">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="tableBox">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <p class="text-center">
+                                <span class="glyphicon glyphicon-repeat loading"></span>
+                            </p>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <footer class="text-center">
+            <ul class="socialIcons list-inline">
+                <li>
+                    <a title="linkedin" class="icon" href="https://www.linkedin.com/company/teamdev-ltd-/mycompany/"
+                       target="_blank">
+                        <img src="images/icon-linkedin.png" alt="linkedin">
+                    </a>
+                </li>
+                <li>
+                    <a title="facebook" class="icon" href="https://www.facebook.com/TeamDev" target="_blank">
+                        <img src="images/icon-facebook.png" alt="facebook">
+                    </a>
+                </li>
+                <li>
+                    <a title="instagram" class="icon" href="https://www.instagram.com/teamdev_ltd/?hl=ru"
+                       target="_blank">
+                        <img src="images/icon-instagram.png" alt="instagram">
+                    </a>
+                </li>
+            </ul>
+            <p class="copyright">Copyright &#64; 2021 <a title="TeamDev" class="highlight"
+                                                         href="https://www.teamdev.com/"
+                                                         target="_blank">TeamDev</a>. All
+                rights reserved.</p>
+        </footer>
+    </div>
+</div>
+</body>
+</html>

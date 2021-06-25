@@ -197,10 +197,15 @@ tr:hover .elementControlButton {
     vertical-align: middle;
 }
 
-.renameElement {
+.renameElement input {
+    display: inline-block;
     margin-left: -13px;
     width: 50%;
     min-width: 168px;
+}
+
+.renameElement .loading{
+    font-size: 14px;
 }
 
 .renameElement span{
@@ -229,6 +234,24 @@ tr:hover .elementControlButton {
     color: #a6a6a6;
 }
 
+td>p>.loading,
+.empty-directory-massage{
+    margin-top: 190px;
+}
+
+td>p>.loading{
+    font-size: 20px;
+}
+
+.loading{
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 0.75s linear infinite;
+}
+
+@keyframes spin {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
 /*********************************************Styles for modal windows*********************************************/
 
 .modal-header{

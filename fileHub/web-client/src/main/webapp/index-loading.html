@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Main page loading</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="wrapper wrapper-page clearfix">
+        <header class="header">
+            <h1 title="TeamDev">
+                <a class="logo" href="https://www.teamdev.com/" target="_blank">
+                    TeamDev
+                </a>
+            </h1>
+            <ul class="list-inline userPanel">
+                <li title="User full name"><span class="glyphicon glyphicon-repeat loading"></span></li>
+                <li>
+                    <a title="log out" href="authenticatePage.html">
+                        Log out <span class="glyphicon glyphicon-log-out"></span>
+                    </a>
+                </li>
+            </ul>
+        </header>
+        <div class="box">
+            <ol class="breadcrumb">
+                <li class="active"><span class="glyphicon glyphicon-repeat loading"></span></li>
+            </ol>
+            <hr class="page-separate-line">
+            <div class="row searchPanel">
+                <div class="col-xs-8 col-sm-6">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Enter entity name...">
+                        <span class="input-group-btn">
+                        <button disabled class="btn btn-primary" type="button">
+                            <span class="glyphicon glyphicon-repeat loading"></span> Search
+                        </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-6">
+                    <div class="pull-right btn-group" role="group" aria-label="...">
+                        <button disabled title="upload" type="button" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-repeat loading"></span>
+                        </button>
+
+                        <button title="Create new directory" type="button" class="btn btn-primary"
+                                data-toggle="modal" data-target="#createNewDirectory">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="tableBox">
+                <table class="table table-hover">
+                    <tbody>
+                    <tr>
+                        <td class="folderMarker"><span class="glyphicon glyphicon-chevron-right"></span></td>
+                        <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
+                        <td class="name"><a class="highlight" href="inner.html">Documents</a></td>
+                        <td class="type hidden-xs hidden-sm">Folder</td>
+                        <td class="size hidden-xs">—</td>
+                        <td class="hiddenButtons">
+                            <button title="download" type="button" class="elementControlButton uploadElementButton">
+                                <span class="glyphicon glyphicon-repeat loading"></span>
+                            </button>
+                            <button title="delete" type="button" class="elementControlButton deleteElementButton"
+                                    data-toggle="modal" data-target="#deleteFile">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="folderMarker"><span class="glyphicon glyphicon-chevron-right"></span></td>
+                        <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
+                        <td class="name"><a class="highlight" href="inner.html">Images</a></td>
+                        <td class="type hidden-xs hidden-sm">Folder</td>
+                        <td class="size hidden-xs">—</td>
+                        <td class="hiddenButtons">
+                            <button title="download" type="button" class="elementControlButton uploadElementButton">
+                                <span class="glyphicon glyphicon-upload"></span>
+                            </button>
+                            <button title="delete" type="button" class="elementControlButton deleteElementButton"
+                                    data-toggle="modal" data-target="#deleteFile">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="folderMarker"><span class="glyphicon glyphicon-chevron-right"></span></td>
+                        <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
+                        <td class="name"><a class="highlight" href="inner.html">Videos</a></td>
+                        <td class="type hidden-xs hidden-sm">Folder</td>
+                        <td class="size hidden-xs">—</td>
+                        <td class="hiddenButtons">
+                            <button title="download" type="button" class="elementControlButton uploadElementButton">
+                                <span class="glyphicon glyphicon-upload"></span>
+                            </button>
+                            <button title="delete" type="button" class="elementControlButton deleteElementButton"
+                                    data-toggle="modal" data-target="#deleteFile">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="folderMarker"><span class="glyphicon glyphicon-chevron-right"></span></td>
+                        <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
+                        <td class="name">
+                            <div class="renameElement">
+                                <input title="Input email" class="form-control" type="text"
+                                       placeholder="Music">
+                                <span class="glyphicon glyphicon-repeat loading"></span>
+                            </div>
+                        </td>
+                        <td class="type hidden-xs hidden-sm">Folder</td>
+                        <td class="size hidden-xs">—</td>
+                        <td class="hiddenButtons">
+                            <button title="download" type="button" class="elementControlButton downloadElementButton">
+                                <span class="glyphicon glyphicon-download"></span>
+                            </button>
+                            <button title="delete" type="button" class="elementControlButton deleteElementButton"
+                                    data-toggle="modal" data-target="#deleteFile">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="folderMarker"><span class="glyphicon glyphicon-chevron-right"></span></td>
+                        <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
+                        <td class="name"><a class="highlight" href="">Other</a></td>
+                        <td class="type hidden-xs hidden-sm">Folder</td>
+                        <td class="size hidden-xs">—</td>
+                        <td class="hiddenButtons">
+                            <button title="download" type="button" class="elementControlButton downloadElementButton">
+                                <span class="glyphicon glyphicon-download"></span>
+                            </button>
+                            <button title="delete" type="button" class="elementControlButton deleteElementButton"
+                                    data-toggle="modal" data-target="#deleteFile">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="folderMarker"></td>
+                        <td class="picture"><span class="glyphicon glyphicon-book"></span></td>
+                        <td class="name">Html_guidelines.pdf</td>
+                        <td class="type hidden-xs hidden-sm">Pdf Document</td>
+                        <td class="size hidden-xs">100 KB</td>
+                        <td class="hiddenButtons">
+                            <button title="download" type="button" class="elementControlButton downloadElementButton">
+                                <span class="glyphicon glyphicon-repeat loading"></span>
+                            </button>
+                            <button title="delete" type="button" class="elementControlButton deleteElementButton"
+                                    data-toggle="modal" data-target="#deleteFile">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="folderMarker"></td>
+                        <td class="picture"><span class="glyphicon glyphicon-list-alt"></span></td>
+                        <td class="name">vacation_schedule.xlsx</td>
+                        <td class="type hidden-xs hidden-sm">Excel Workbook</td>
+                        <td class="size hidden-xs">5 KB</td>
+                        <td class="hiddenButtons">
+                            <button title="download" type="button" class="elementControlButton downloadElementButton">
+                                <span class="glyphicon glyphicon-download"></span>
+                            </button>
+                            <button title="delete" type="button" class="elementControlButton deleteElementButton"
+                                    data-toggle="modal" data-target="#deleteFile">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="folderMarker"></td>
+                        <td class="picture"><span class="glyphicon glyphicon-picture"></span></td>
+                        <td class="name">selfie.jpg</td>
+                        <td class="type hidden-xs hidden-sm">JPEG Image</td>
+                        <td class="size hidden-xs">4.1 MB</td>
+                        <td class="hiddenButtons">
+                            <button title="download" type="button" class="elementControlButton downloadElementButton">
+                                <span class="glyphicon glyphicon-download"></span>
+                            </button>
+                            <button title="delete" type="button" class="elementControlButton deleteElementButton"
+                                    data-toggle="modal" data-target="#deleteFile">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="folderMarker"></td>
+                        <td class="picture"><span class="glyphicon glyphicon-film"></span></td>
+                        <td class="name">summer_party.avi</td>
+                        <td class="type hidden-xs hidden-sm">AVI movie</td>
+                        <td class="size hidden-xs">1.2 GB</td>
+                        <td class="hiddenButtons">
+                            <button title="download" type="button" class="elementControlButton downloadElementButton">
+                                <span class="glyphicon glyphicon-download"></span>
+                            </button>
+                            <button title="delete" type="button" class="elementControlButton deleteElementButton"
+                                    data-toggle="modal" data-target="#deleteFile">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="folderMarker"></td>
+                        <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
+                        <td class="name"><a href="">Other</a></td>
+                        <td class="type hidden-xs hidden-sm">Folder</td>
+                        <td class="size hidden-xs">—</td>
+                        <td class="hiddenButtons">
+                            <button title="download" type="button" class="elementControlButton downloadElementButton">
+                                <span class="glyphicon glyphicon-download"></span>
+                            </button>
+                            <button title="delete" type="button" class="elementControlButton deleteElementButton"
+                                    data-toggle="modal" data-target="#deleteFile">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="folderMarker"></td>
+                        <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
+                        <td class="name">
+                            <a href="">Other</a></td>
+                        <td class="type hidden-xs hidden-sm">Folder</td>
+                        <td class="size hidden-xs">—</td>
+                        <td class="hiddenButtons">
+                            <button title="download" type="button" class="elementControlButton downloadElementButton">
+                                <span class="glyphicon glyphicon-download"></span>
+                            </button>
+                            <button title="delete" type="button" class="elementControlButton deleteElementButton"
+                                    data-toggle="modal" data-target="#deleteFile">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                            </button>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <footer class="text-center">
+            <ul class="socialIcons list-inline">
+                <li>
+                    <a title="linkedin" class="icon" href="https://www.linkedin.com/company/teamdev-ltd-/mycompany/"
+                       target="_blank">
+                        <img src="images/icon-linkedin.png" alt="linkedin">
+                    </a>
+                </li>
+                <li>
+                    <a title="facebook" class="icon" href="https://www.facebook.com/TeamDev" target="_blank">
+                        <img src="images/icon-facebook.png" alt="facebook">
+                    </a>
+                </li>
+                <li>
+                    <a title="instagram" class="icon" href="https://www.instagram.com/teamdev_ltd/?hl=ru"
+                       target="_blank">
+                        <img src="images/icon-instagram.png" alt="instagram">
+                    </a>
+                </li>
+            </ul>
+            <p class="copyright">Copyright &#64; 2021 <a title="TeamDev" class="highlight"
+                                                         href="https://www.teamdev.com/"
+                                                         target="_blank">TeamDev</a>. All
+                rights reserved.</p>
+        </footer>
+    </div>
+</div>
+
+
+<div class="modal fade" id="createNewDirectory" tabindex="-1" role="dialog" >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title">Create New Directory</h3>
+            </div>
+            <div class="modal-body">
+                <form action="index.html">
+                    <div>
+                        <input title="Input folder name" class="form-control" type="text"
+                               placeholder="Enter directory name...">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button disabled type="submit" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-repeat loading"></span> Create
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="deleteFile" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title">Delete File</h3>
+            </div>
+            <div class="modal-body modalDeleteFile">
+                <span>Are you sure want to delete "name.txt" file?</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button disabled type="submit" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-repeat loading"></span> Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -233,13 +233,13 @@ body {
     top: 10px;
 }
 
-.panel ul li {
+.panel li {
     font-size: 14px;
     display: inline;
     padding: 2px 6px 2px 4px;
 }
 
-.panel ul li:first-child {
+.panel li:first-child {
     border-right: 1px solid #050505;
 }
 
@@ -388,6 +388,7 @@ body {
 
 .errorRenameMassage {
     font-size: 12px;
+    margin-bottom: 0;
 }
 
 .errorRenameMassage label {
@@ -500,6 +501,14 @@ td {
     background: rgba(0, 0, 0, 0.7);
 }
 
+.socialIcons{
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.socialIcons li{
+    display: inline-block;
+}
 @media screen and (min-width: 1200px) {
     .pageRaw {
         width: 1140px;

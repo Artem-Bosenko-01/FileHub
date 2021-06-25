@@ -247,7 +247,7 @@ body {
     color: #2e86ce;
 }
 
-.pageRaw {
+.page-raw {
     background-color: #ffffff;
     width: 490px;
     height: 605px;
@@ -317,7 +317,7 @@ body {
     margin-top: 15px;
 }
 
-.searchPanel {
+.search-panel {
     display: inline-block;
     border-radius: 3px;
     width: 75%;
@@ -378,11 +378,11 @@ body {
 }
 
 
-.renameElement {
+.rename-element {
     margin-left: -10px;
 }
 
-.renameElement input {
+.rename-element input {
     margin: 0;
     float: none;
 }
@@ -416,44 +416,44 @@ body {
     width: 100%;
 }
 
-.table .folderMarker {
+.table .cell-folder-marker {
     width: 30px;
     text-align: center;
     padding-left: 10px;
 }
 
-.table .picture {
+.table .cell-icon {
     text-align: center;
     font-size: 20px;
     width: 50px;
 
 }
 
-.table .name {
+.table .cell-name {
     padding: 5px 10px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
 }
 
-.table .type {
+.table .cell-type {
     width: 160px;
     display: none;
 }
 
-.table .size {
+.table .cell-file-size {
     width: 120px;
     text-align: right;
     display: none;
 }
 
-.table .hiddenButtons {
+.table .cell-file-action-buttons {
     width: 80px;
     text-align: center;
     font-size: 20px;
 }
 
-.elementControlButton {
+.element-control-button {
     border: none;
     background-color: transparent;
     cursor: pointer;
@@ -461,15 +461,15 @@ body {
     visibility: hidden;
 }
 
-.deleteElementButton {
+.delete-element-button {
     color: #d71313;
 }
 
-.downloadElementButton {
+.download-element-button {
     color: #50a0d9;
 }
 
-.uploadElementButton {
+.upload-element-button {
     color: #18c918;
 }
 
@@ -477,7 +477,7 @@ tr:hover {
     background-color: #f5f5f5;
 }
 
-tr:hover .elementControlButton {
+tr:hover .element-control-button {
     visibility: visible;
 }
 
@@ -485,7 +485,7 @@ td {
     padding: 9px 10px;
 }
 
-.modalWindow {
+.modal-window {
     position: fixed;
     top: 30px;
     left: 3%;
@@ -502,101 +502,101 @@ td {
     background: rgba(0, 0, 0, 0.7);
 }
 
-.socialIcons{
+.social-icons{
     padding-left: 0;
     margin-bottom: 0;
 }
 
-.socialIcons li{
+.social-icons li{
     display: inline-block;
 }
 
 @media screen and (min-width: 1200px) {
-    .pageRaw {
+    .page-raw {
         width: 1140px;
     }
 
-    .searchPanel {
+    .search-panel {
         width: 65%;
     }
 
-    .table .type {
+    .table .cell-type {
         display: table-cell;
     }
 
-    .table .size {
+    .table .cell-file-size {
         display: table-cell;
     }
 
 
-    .renameElement {
+    .rename-element {
         width: 50%;
     }
 
-    .modalWindow{
+    .modal-window{
         left: 37.4%;
     }
 }
 
 @media screen and (min-width: 992px) and (max-width: 1199px) {
 
-    .pageRaw {
+    .page-raw {
         width: 940px;
     }
 
-    .searchPanel {
+    .search-panel {
         width: 63%;
     }
 
-    .table .type {
+    .table .cell-type {
         display: table-cell;
     }
 
-    .table .size {
+    .table .cell-file-size {
         display: table-cell;
     }
 
-    .modalWindow{
+    .modal-window{
         left: 28%;
     }
 }
 
 @media screen and (min-width: 768px) and (max-width: 991px) {
-    .pageRaw {
+    .page-raw {
         width: 720px;
     }
 
-    .searchPanel {
+    .search-panel {
         width: 58%;
     }
 
-    .table .size {
+    .table .cell-file-size {
         display: table-cell;
     }
 
-    .renameElement {
+    .rename-element {
         width: 75%;
     }
 
-    .modalWindow{
+    .modal-window{
         left: 24%;
     }
 }
 
 @media screen and (min-width: 520px) and (max-width: 767px) {
-    .pageRaw {
+    .page-raw {
         width: 735px;
     }
 
-    .searchPanel {
+    .search-panel {
         width: 85%;
     }
 
-    .table .name {
+    .table .cell-name {
         width: 80%;
     }
 
-    .modalWindow{
+    .modal-window{
         left: 14%;
     }
 }
@@ -632,11 +632,11 @@ td {
 }
 
 .panel .loading,
-.renameElement .loading{
+.rename-element .loading{
     font-size: 14px;
 }
 
-.elementControlButton .loading{
+.element-control-button .loading{
     font-size: 20px;
 }
 
@@ -649,16 +649,16 @@ td {
 }
 /*********************************************Styles for modal windows*********************************************/
 
-.modalRaw {
+.modal-raw {
     max-width: 400px;
     height: inherit;
 }
 
-.deleteData {
+.delete-data {
     margin-top: 20px;
 }
 
-.deleteData>span {
+.delete-data>span {
     font-size: 16px;
 }
 

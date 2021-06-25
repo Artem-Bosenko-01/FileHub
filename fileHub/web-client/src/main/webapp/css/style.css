@@ -389,6 +389,7 @@ body {
 
 .errorRenameMassage {
     font-size: 12px;
+    margin-bottom: 0;
 }
 
 .errorRenameMassage label {
@@ -499,6 +500,15 @@ td {
     right: 0;
     left: 0;
     background: rgba(0, 0, 0, 0.7);
+}
+
+.socialIcons{
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.socialIcons li{
+    display: inline-block;
 }
 
 @media screen and (min-width: 1200px) {

@@ -95,17 +95,15 @@ body {
     clear: both;
 }
 
-.boxGetData{
+.get-user-data{
     margin-bottom: 15px;
 }
 
-
-
-.inputValue {
+.input-value {
     width: 100%;
 }
 
-.inputValue input {
+.input-value input {
     width: 100%;
     padding: 8px;
     border-radius: 3px;
@@ -114,24 +112,24 @@ body {
     margin-top: 5px;
 }
 
-.invalidInputValue input {
+.invalid-input-value input {
     border: 1px solid red;
     margin-bottom: 5px;
 
 }
 
-.inputValue input:focus {
+.input-value input:focus {
     box-shadow: 0 0 5px rgb(80, 162, 222);
     border: 1px solid #50a2de;
 }
 
-.errorMassage {
+.error-massage {
     font-size: 13px;
     margin-top: 5px;
     color: red;
 }
 
-.submitBox {
+.submit-box {
     width: 100%;
     float: left;
 }
@@ -154,13 +152,13 @@ body {
     }
 
 
-    .boxGetData{
+    .get-user-data{
         margin-bottom: 10px;
         display: flex;
         align-items: center;
     }
 
-    .nameLabel {
+    .label-name {
         width: 34%;
         float: left;
     }
@@ -169,22 +167,22 @@ body {
         margin-top: -20px;
     }
 
-    .inputValue {
+    .input-value {
         width: 65%;
         margin-left: 5px;
     }
 
-    .inputValue input {
+    .input-value input {
         float: right;
         margin-left: 5px;
     }
 
 
-    .invalidInputValue input{
+    .invalid-input-value input{
         margin: 5px 0;
     }
 
-    .submitBox {
+    .submit-box {
         width: 65%;
         float: right;
         margin-top: 10px;
@@ -202,7 +200,7 @@ body {
         min-width: 560px;
     }
 
-    .boxGetData{
+    .get-user-data{
         margin: 15px 0 0;
     }
 
@@ -211,11 +209,11 @@ body {
         margin: 0;
     }
 
-    .invalidInputValue input{
+    .invalid-input-value input{
         margin-bottom: 5px;
     }
 
-    .submitBox{
+    .submit-box{
         margin-top: 15px;
     }
 }
@@ -245,10 +243,6 @@ body {
 
 .panel ul li:first-child {
     border-right: 1px solid #050505;
-}
-
-.logOut {
-    color: #2e86ce;
 }
 
 .page-raw {
@@ -313,7 +307,7 @@ body {
     margin-left: -25px;
 }
 
-.pageHorizontalLine {
+.user-view-page-separate-line {
     border-right: 1px solid #000000;
     margin-top: 10px;
 }
@@ -329,17 +323,19 @@ body {
     width: 75%;
 }
 
-.invalidInputValue input {
+.invalid-input-value input {
     float: none;
 }
 
-.inputSearchQuery {
+.input-search-query {
     display: inline-block;
     width: 65%;
     margin-left: 0;
 }
 
-.inputSearchQuery input {
+
+
+.input-search-query input {
     padding: 8px 10px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
@@ -347,7 +343,13 @@ body {
     float: none;
 }
 
-.searchButton {
+.input-search-query-loading input{
+    height: 100%;
+    padding: 9px 10px 8px;
+
+}
+
+.search-button-box {
     margin-left: -4px;
     display: inline-block;
 }
@@ -357,7 +359,7 @@ body {
     border-top-left-radius: 0;
 }
 
-.rootButtons {
+.control-folder-buttons-box {
     font-size: 13px;
     outline: none;
     border: 1px solid #505050;
@@ -366,18 +368,18 @@ body {
     margin-top: 5px;
 }
 
-.folderControlButton {
+.control-folder-button {
     border-radius: 0;
     padding: 8px 12px;
 }
 
-.folderControlButton:first-child {
+.control-folder-button:first-child {
     border-right: 2px solid #383636;
     border-bottom-left-radius: 3px;
     border-top-left-radius: 3px;
 }
 
-.folderControlButton:last-child {
+.control-folder-button:last-child {
     margin-left: -4px;
     border-bottom-right-radius: 3px;
     border-top-right-radius: 3px;
@@ -393,17 +395,17 @@ body {
     float: none;
 }
 
-.errorRenameMassage {
+.error-rename-massage {
     font-size: 12px;
     margin-bottom: 0;
 }
 
-.errorRenameMassage label {
+.error-rename-massage label {
     margin-left: 0;
 }
 
-.tableBox {
-    margin-top: 16px;
+.table-box {
+    margin-top: 15px;
     height: 80%;
     overflow: auto;
 }
@@ -620,7 +622,6 @@ td {
 .loading{
     -webkit-animation: spin 2s linear infinite;
     animation: spin 0.75s linear infinite;
-    font-size: 12px;
 }
 
 
@@ -650,7 +651,7 @@ td {
     font-size: 20px;
 }
 
-.submitLoadingModalBox .submitDeleteModalBox span{
+.submit-loading-modal-box .submit-delete-modal-box span{
     font-size: 12px;
 }
 /*********************************************Styles for modal windows*********************************************/
@@ -668,11 +669,11 @@ td {
     font-size: 16px;
 }
 
-.modalHeader {
+.modal-header {
     font-size: 24px;
 }
 
-.modalBoxGetData {
+.modal-get-user-data {
     display: block;
 }
 
@@ -681,7 +682,7 @@ td {
     margin-left: 0;
 }
 
-.cancelButton {
+.button-cancel {
     background-color: transparent;
     color: black;
     border: 1px solid #9a9797;
@@ -689,15 +690,15 @@ td {
     margin-right: 2px;
 }
 
-.deleteButton {
+.button-delete {
     background-color: #cc5c53;
 }
 
-.deleteButton:hover {
+.button-delete:hover {
     background-color: #9c2d21
 }
 
-.shutDownButton {
+.button-shut-down {
     position: absolute;
     background-color: transparent;
     color: #9a9797;
@@ -706,21 +707,21 @@ td {
     padding: 0;
 }
 
-.cancelButton:hover,
-.shutDownButton:hover {
+.button-cancel:hover,
+.button-shut-down:hover {
     background-color: transparent;
 }
 
-.submitModalBox {
+.submit-modal-box {
     margin-top: 25px;
     width: 32.2%;
 }
 
-.submitLoadingModalBox{
+.submit-loading-modal-box{
     margin-top: 35px;
     width: 36%;
 }
 
-.submitDeleteModalBox {
-    margin-top: 50px;
+.submit-delete-modal-box {
+    margin-top: 15px;
 }

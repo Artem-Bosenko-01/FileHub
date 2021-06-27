@@ -20,7 +20,7 @@
             <ul>
                 <li title="User full name"><span class="glyphicon glyphicon-user"></span> John Doe</li>
                 <li>
-                    <a title="log out" class="logOut" href="authenticatePage.html">
+                    <a title="log out" class="highlight" href="authenticatePage.html">
                         Log out <span class="glyphicon glyphicon-log-out"></span>
                     </a>
                 </li>
@@ -33,30 +33,30 @@
                 <span class="glyphicon glyphicon-repeat loading" aria-hidden="true"></span>
             </li>
         </ul>
-        <hr class="pageHorizontalLine">
+        <hr class="user-view-page-separate-line">
         <nav class="navbar">
             <div class="search-panel">
-                <div class="inputValue inputSearchQuery">
+                <div class="input-value input-search-query input-search-query-loading">
                     <input title="Search something" type="text" placeholder="Enter entity name...">
                 </div>
-                <div class="searchButton">
+                <div class="search-button-box">
                     <button title="search button" class="button button-search button-disabled" type="button">
                         <span class="glyphicon glyphicon-repeat loading" aria-hidden="true"></span>Search
                     </button>
                 </div>
             </div>
-            <div class="rootButtons">
-                <button title="upload" type="button" class="button folderControlButton button-disabled">
+            <div class="control-folder-buttons-box">
+                <button title="upload" type="button" class="button control-folder-button button-disabled">
                     <span class="glyphicon glyphicon-repeat loading" aria-hidden="true"></span>
                 </button>
 
-                <button title="Create new directory" type="button" class="button folderControlButton"
+                <button title="Create new directory" type="button" class="button control-folder-button"
                         onclick="window.open('modal-create-lo.html')"><span
                         class="glyphicon glyphicon-plus"></span>
                 </button>
             </div>
         </nav>
-        <div class="tableBox">
+        <div class="table-box">
             <table class="table">
                 <tbody>
                 <tr>
@@ -111,7 +111,7 @@
                     <td class="cell-folder-marker"><span class="glyphicon glyphicon-chevron-right"></span></td>
                     <td class="cell-icon"><span class="glyphicon glyphicon-folder-close"></span></td>
                     <td class="cell-name">
-                        <div class="inputValue rename-element">
+                        <div class="input-value rename-element">
                             <input title="Input email" type="email" placeholder="Enter directory name...">
                             <span class="glyphicon glyphicon-repeat loading" aria-hidden="true"></span>
                         </div>
@@ -272,18 +272,18 @@
     <div class="main">
         <div class="raw modal-raw">
             <header class="header">
-                <h2 class="modalHeader">Create New Directory</h2>
-                <button class="button shutDownButton" onclick="window.open('index.html')"><span
+                <h2 class="modal-header">Create New Directory</h2>
+                <button class="button button-shut-down" onclick="window.open('index.html')"><span
                         class="glyphicon glyphicon-remove"></span></button>
             </header>
             <form class="data" action="index.html">
-                <div class="boxGetData modalBoxGetData">
-                    <div class="inputValue modal-input">
+                <div class="get-user-data modal-get-user-data">
+                    <div class="input-value modal-input">
                         <input title="Input email" type="email" id="emailUser" placeholder="Enter directory name...">
                     </div>
                 </div>
-                <div class="submitBox submitModalBox submitLoadingModalBox">
-                    <button title="Submit" class="button cancelButton" name="cancel">Cancel</button>
+                <div class="submit-box submit-modal-box submit-loading-modal-box">
+                    <button title="Submit" class="button button-cancel" name="cancel">Cancel</button>
                     <button disabled title="Submit" class="button button-disabled" name="create">
                         <span class="glyphicon glyphicon-repeat loading" aria-hidden="true"></span> Create</button>
                 </div>

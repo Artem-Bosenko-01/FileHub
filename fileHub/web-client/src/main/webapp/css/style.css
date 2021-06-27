@@ -283,10 +283,12 @@ body {
 
 .path {
     display: inline-block;
+    margin-top: 0;
     margin-bottom: 9px;
     background-color: #f5f5f5;
     color: #919191;
     border-radius: 4px;
+    padding-left: 0;
 }
 
 .folder {

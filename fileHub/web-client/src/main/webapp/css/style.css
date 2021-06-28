@@ -389,12 +389,12 @@ body {
     margin: 0;
 }
 
-.errorRenameMassage{
+.error-rename-massage{
     font-size: 12px;
     margin-bottom: 0;
 }
 
-.errorRenameMassage label{
+.error-rename-massage label{
     margin-left: 0;
 }
 
@@ -467,7 +467,7 @@ body {
     color: #d71313;
 }
 
-.download-element-butto {
+.download-element-button {
     color: #50a0d9;
 }
 

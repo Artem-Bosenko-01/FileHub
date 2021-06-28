@@ -515,10 +515,6 @@ td {
         display: table-cell;
     }
 
-
-    .rename-element {
-        width: 50%;
-    }
 }
 
 @media screen and (min-width: 992px) and (max-width: 1199px) {
@@ -554,9 +550,6 @@ td {
         display: table-cell;
     }
 
-    .rename-element {
-        width: 75%;
-    }
 
 }
 

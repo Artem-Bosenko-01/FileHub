@@ -96,16 +96,16 @@ body {
     clear: both;
 }
 
-.boxGetData{
+.get-user-data{
     margin-bottom: 15px;
 }
 
 
-.inputValue {
+.input-value {
     width: 100%;
 }
 
-.inputValue input {
+.input-value input {
     width: 100%;
     padding: 8px;
     border-radius: 3px;
@@ -114,24 +114,24 @@ body {
     margin-top: 5px;
 }
 
-.invalidInputValue input {
+.invalid-input-value input {
     border: 1px solid red;
     margin-bottom: 5px;
 
 }
 
-.inputValue input:focus {
+.input-value input:focus {
     box-shadow: 0 0 5px rgb(80, 162, 222);
     border: 1px solid #50a2de;
 }
 
-.errorMassage {
+.error-massage {
     font-size: 13px;
     margin-top: 5px;
     color: red;
 }
 
-.submitBox {
+.submit-box {
     width: 100%;
     float: left;
 }
@@ -154,37 +154,37 @@ body {
     }
 
 
-    .boxGetData{
+    .get-user-data{
         margin-bottom: 10px;
         display: flex;
         align-items: center;
     }
 
-    .nameLabel {
+    .name-label {
         width: 34%;
         float: left;
     }
 
 
-    .inputValue {
+    .input-value {
         width: 65%;
         margin-left: 5px;
     }
 
-    .inputValue input {
+    .input-value input {
         float: right;
         margin-left: 5px;
     }
 
-    .invalidInputValue input{
+    .invalid-input-value input{
         margin: 5px 0;
     }
 
-    .errorLabel{
+    .error-label{
         margin-top: -20px;
     }
 
-    .submitBox {
+    .submit-box {
         width: 65%;
         float: right;
         margin-top: 10px;
@@ -202,17 +202,17 @@ body {
         min-width: 560px;
     }
 
-    .boxGetData{
+    .get-user-data{
         margin: 15px 0 0;
     }
 
 
 
-    .invalidInputValue input{
+    .invalid-input-value input{
         margin-bottom: 5px;
     }
 
-    .submitBox{
+    .submit-box{
         margin-top: 15px;
     }
 }

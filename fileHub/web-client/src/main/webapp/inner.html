@@ -20,7 +20,7 @@
                     TeamDev
                 </a>
             </h1>
-            <ul class="list-inline userPanel">
+            <ul class="list-inline user-panel">
                 <li title="User full name"><span class="glyphicon glyphicon-user"></span> John Doe</li>
                 <li>
                     <a title="log out" href="authenticatePage.html">
@@ -35,7 +35,7 @@
                 <li class="active">Documents</li>
             </ol>
             <hr class="page-separate-line">
-            <div class="row searchPanel">
+            <div class="row search-panel">
                 <div class="col-xs-8 col-sm-6">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Enter entity name...">
@@ -57,112 +57,112 @@
                     </div>
                 </div>
             </div>
-            <div class="tableBox">
+            <div class="table-box">
                 <table class="table table-hover">
                     <tbody>
                     <tr>
-                        <td class="folderMarker"><span class="glyphicon glyphicon-chevron-right"></span></td>
-                        <td class="picture"><span class="glyphicon glyphicon-folder-close"></span></td>
-                        <td class="name">
-                                <div class=" renameElement">
+                        <td class="cell-folder-marker"><span class="glyphicon glyphicon-chevron-right"></span></td>
+                        <td class="cell-icon"><span class="glyphicon glyphicon-folder-close"></span></td>
+                        <td class="cell-name">
+                                <div class=" rename-element">
                                     <input title="Input name" class="form-control" type="text" placeholder="Enter directory name">
                                 </div>
                         </td>
-                        <td class="type hidden-xs hidden-sm">Folder</td>
-                        <td class="size hidden-xs">—</td>
+                        <td class="cell-type hidden-xs hidden-sm">Folder</td>
+                        <td class="cell-file-size hidden-xs">—</td>
                         <td class="hiddenButtons">
-                            <button title="download" type="button" class="elementControlButton uploadElementButton">
+                            <button title="download" type="button" class="element-control-button upload-element-button">
                                 <span class="glyphicon glyphicon-upload"></span>
                             </button>
-                            <button title="delete" type="button" class="elementControlButton deleteElementButton"
+                            <button title="delete" type="button" class="element-control-button delete-element-button"
                                     data-toggle="modal" data-target="#deleteFile">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                             </button>
                         </td>
                     </tr>
                     <tr>
-                        <td class="folderMarker"></td>
-                        <td class="picture"><span class="glyphicon glyphicon-book"></span></td>
-                        <td class="name">
-                                <div class=" renameElement">
+                        <td class="cell-folder-marker"></td>
+                        <td class="cell-icon"><span class="glyphicon glyphicon-book"></span></td>
+                        <td class="cell-name">
+                                <div class=" rename-element">
                                     <input title="Input name" class="form-control" type="text" placeholder="Enter file name">
                                 </div>
                         </td>
-                        <td class="type hidden-xs hidden-sm">Pdf Document</td>
-                        <td class="size hidden-xs">100 KB</td>
+                        <td class="cell-type hidden-xs hidden-sm">Pdf Document</td>
+                        <td class="cell-file-size hidden-xs">100 KB</td>
                         <td class="hiddenButtons">
-                            <button title="download" type="button" class="elementControlButton downloadElementButton">
+                            <button title="download" type="button" class="element-control-button download-element-button">
                                 <span class="glyphicon glyphicon-download"></span>
                             </button>
-                            <button title="delete" type="button" class="elementControlButton deleteElementButton"
+                            <button title="delete" type="button" class="element-control-button delete-element-button"
                                     data-toggle="modal" data-target="#deleteFile">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                             </button>
                         </td>
                     </tr>
                     <tr>
-                        <td class="folderMarker"></td>
-                        <td class="picture"><span class="glyphicon glyphicon-list-alt"></span></td>
-                        <td class="name">
-                                <div class=" renameElement">
+                        <td class="cell-folder-marker"></td>
+                        <td class="cell-icon"><span class="glyphicon glyphicon-list-alt"></span></td>
+                        <td class="cell-name">
+                                <div class=" rename-element">
                                     <input title="Input name" class="form-control" type="text" placeholder="Enter file name">
                                 </div>
                         </td>
-                        <td class="type hidden-xs hidden-sm">Excel Workbook</td>
-                        <td class="size hidden-xs">5 KB</td>
+                        <td class="cell-type hidden-xs hidden-sm">Excel Workbook</td>
+                        <td class="cell-file-size hidden-xs">5 KB</td>
                         <td class="hiddenButtons">
-                            <button title="download" type="button" class="elementControlButton downloadElementButton">
+                            <button title="download" type="button" class="element-control-button download-element-button">
                                 <span class="glyphicon glyphicon-download"></span>
                             </button>
-                            <button title="delete" type="button" class="elementControlButton deleteElementButton"
+                            <button title="delete" type="button" class="element-control-button delete-element-button"
                                     data-toggle="modal" data-target="#deleteFile">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                             </button>
                         </td>
                     </tr>
                     <tr>
-                        <td class="folderMarker"></td>
-                        <td class="picture"><span class="glyphicon glyphicon-picture"></span></td>
-                        <td class="name">selfie.jpg</td>
-                        <td class="type hidden-xs hidden-sm">JPEG Image</td>
-                        <td class="size hidden-xs">4.1 MB</td>
+                        <td class="cell-folder-marker"></td>
+                        <td class="cell-icon"><span class="glyphicon glyphicon-picture"></span></td>
+                        <td class="cell-name">selfie.jpg</td>
+                        <td class="cell-type hidden-xs hidden-sm">JPEG Image</td>
+                        <td class="cell-file-size hidden-xs">4.1 MB</td>
                         <td class="hiddenButtons">
-                            <button title="download" type="button" class="elementControlButton downloadElementButton">
+                            <button title="download" type="button" class="element-control-button download-element-button">
                                 <span class="glyphicon glyphicon-download"></span>
                             </button>
-                            <button title="delete" type="button" class="elementControlButton deleteElementButton"
+                            <button title="delete" type="button" class="element-control-button delete-element-button"
                                     data-toggle="modal" data-target="#deleteFile">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                             </button>
                         </td>
                     </tr>
                     <tr>
-                        <td class="folderMarker"></td>
-                        <td class="picture"><span class="glyphicon glyphicon-film"></span></td>
-                        <td class="name">summer_party.avi</td>
-                        <td class="type hidden-xs hidden-sm">AVI movie</td>
-                        <td class="size hidden-xs">1.2 GB</td>
+                        <td class="cell-folder-marker"></td>
+                        <td class="cell-icon"><span class="glyphicon glyphicon-film"></span></td>
+                        <td class="cell-name">summer_party.avi</td>
+                        <td class="cell-type hidden-xs hidden-sm">AVI movie</td>
+                        <td class="cell-file-size hidden-xs">1.2 GB</td>
                         <td class="hiddenButtons">
-                            <button title="download" type="button" class="elementControlButton downloadElementButton">
+                            <button title="download" type="button" class="element-control-button download-element-button">
                                 <span class="glyphicon glyphicon-download"></span>
                             </button>
-                            <button title="delete" type="button" class="elementControlButton deleteElementButton"
+                            <button title="delete" type="button" class="element-control-button delete-element-button"
                                     data-toggle="modal" data-target="#deleteFile">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                             </button>
                         </td>
                     </tr>
                     <tr>
-                        <td class="folderMarker"></td>
-                        <td class="picture"><span class="glyphicon glyphicon-music"></span></td>
-                        <td class="name">hello.mp3</td>
-                        <td class="type hidden-xs hidden-sm">AVI movie</td>
-                        <td class="size hidden-xs">12.5 MB</td>
+                        <td class="cell-folder-marker"></td>
+                        <td class="cell-icon"><span class="glyphicon glyphicon-music"></span></td>
+                        <td class="cell-name">hello.mp3</td>
+                        <td class="cell-type hidden-xs hidden-sm">AVI movie</td>
+                        <td class="cell-file-size hidden-xs">12.5 MB</td>
                         <td class="hiddenButtons">
-                            <button title="download" type="button" class="elementControlButton downloadElementButton">
+                            <button title="download" type="button" class="element-control-button download-element-button">
                                 <span class="glyphicon glyphicon-download"></span>
                             </button>
-                            <button title="delete" type="button" class="elementControlButton deleteElementButton"
+                            <button title="delete" type="button" class="element-control-button delete-element-button"
                                     data-toggle="modal" data-target="#deleteFile">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                             </button>
@@ -174,7 +174,7 @@
         </div>
 
         <footer class="text-center">
-            <ul class="socialIcons list-inline">
+            <ul class="social-icons list-inline">
                 <li>
                     <a title="linkedin" class="icon" href="https://www.linkedin.com/company/teamdev-ltd-/mycompany/"
                        target="_blank">
@@ -238,7 +238,7 @@
                     <span aria-hidden="true">&times;</span></button>
                 <h3 class="modal-title" id="deleteFileLabel">Delete File</h3>
             </div>
-            <div class="modal-body modalDeleteFile">
+            <div class="modal-body modal-delete-file">
                 <span>Are you sure want to delete "name.txt" file?</span>
             </div>
             <div class="modal-footer">

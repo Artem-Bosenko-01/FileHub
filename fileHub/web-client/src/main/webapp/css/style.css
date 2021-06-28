@@ -388,6 +388,8 @@ body {
 
 .rename-element {
     margin-left: -10px;
+    width: 50%;
+    min-width: 168px;
 }
 
 .rename-element input {
@@ -537,9 +539,6 @@ td {
     }
 
 
-    .rename-element {
-        width: 50%;
-    }
 
     .modal-window{
         left: 37.4%;
@@ -580,10 +579,6 @@ td {
 
     .table .cell-file-size {
         display: table-cell;
-    }
-
-    .rename-element {
-        width: 75%;
     }
 
     .modal-window{

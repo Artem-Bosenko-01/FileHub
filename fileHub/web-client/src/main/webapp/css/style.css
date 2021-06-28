@@ -531,10 +531,6 @@ td {
     }
 
 
-    .rename-element {
-        width: 50%;
-    }
-
     .modal-window{
         left: 37.4%;
     }
@@ -576,9 +572,6 @@ td {
         display: table-cell;
     }
 
-    .rename-element {
-        width: 75%;
-    }
 
     .modal-window{
         left: 24%;

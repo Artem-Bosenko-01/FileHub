@@ -209,6 +209,10 @@ tr:hover .element-control-button {
     font-size: 14px;
 }
 
+.error-massage{
+    color: #ff0000;
+}
+
 .rename-element .error-massage{
     font-size: 12px;
     margin-left: -13px;

@@ -6,7 +6,7 @@
     <title>Authentication</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="app/index.js"></script>
+    <script type="module" src="app/index.js"></script>
 </head>
 <body>
 
@@ -23,7 +23,7 @@
             <h2 title="Sign in">Sign in to FileHub</h2>
         </header>
         <hr>
-        <form class="data">
+        <form id="form" class="data">
             <div class="get-user-data">
                 <div class="label-name">
                     <label title="Email" for="email-user">Email</label>
@@ -41,7 +41,7 @@
                 </div>
             </div>
             <div class="submit-box">
-                <button title="Submit" class="button" name="signIn" onclick="info()">Sign In</button>
+                <button title="Submit" class="button" name="signIn">Sign In</button>
                 <a title="Registration" class="reference" href="registerPage.html">Don't have an account yet?</a>
             </div>
         </form>

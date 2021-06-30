@@ -5,29 +5,50 @@ document.getElementById("button").addEventListener('click', () => {
     const email = inputs[0].value;
     const password = inputs[1].value;
 
-    const validationUserData = new Promise((resolve, reject) => {
-        emailValidation(email).catch((reject) => {
+    const emailPromise = emailValidation(email);
+    const passwordPromise = passwordValidation(password);
+
+    /*
+        const mainValidation = new Promise((resolve, reject) => {
+            resolve();
+        })
+
+            mainValidation.then(() => emailValidation(email), (reject) => drawErrorState("user-email", reject));
+            mainValidation.then(() => passwordValidation(password), (reject) => drawErrorState("user-password", reject));
+            mainValidation.then(()=>{
+                alert(email + "\n" + password)
+            })
+            mainValidation.catch()*/
+
+    /*    emailPromise.catch((reject) => {
             drawErrorState("user-email", reject)
-        });
+        })
 
-        passwordValidation(password).catch((reject) => { drawErrorState("user-password", reject)});
+        passwordPromise.catch((reject) => {
+            drawErrorState("user-password", reject)
+        })*/
 
-        resolve();
-    });
+    Promise.all([emailPromise, passwordPromise])
+        .then(() => alert(email + "\n" + password))
+        .catch(
+            (reason, id) => drawErrorState(id, reason)
+        );
 
-    validationUserData.then(() => alert(email + "\n" + password));
 })
 
 
 function emailValidation(emailUser) {
 
     return new Promise((resolve, reject) => {
+
+        debugger
+
         if (emailUser.length < 5) {
-            reject(`Email length should be more than 4 symbols`);
+            reject(`Email length should be more than 4 symbols`, 'user-email');
         }
 
         if (/^[a-zA-Z0-9+._@-]*$/.test(emailUser) === false) {
-            reject(`Email should be contains a-zA-Z, 0-9 or symbols like "+._@-"`);
+            reject(`Email should be contains a-zA-Z, 0-9 or symbols like "+._@-"`, 'user-email');
         }
 
         resolve();
@@ -37,7 +58,7 @@ function emailValidation(emailUser) {
 function passwordValidation(passwordUser) {
     return new Promise((resolve, reject) => {
         if (passwordUser.length < 6) {
-            reject(`Password length should be more than 5 symbols`);
+            reject(`Password length should be more than 5 symbols`, 'user-password');
         }
 
         resolve();

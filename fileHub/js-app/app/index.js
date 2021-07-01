@@ -2,7 +2,7 @@ import {
     confirmPasswordValidation,
     emailLengthValidation,
     emailStructureValidation,
-    formValidation,
+    formInputValuesValidation,
     passwordValidation
 } from "./validation-rules.js";
 
@@ -24,7 +24,7 @@ document.getElementById("button").addEventListener('click', () => {
         promises.push(confirmPasswordValidation(password, confirmPassword.value))
     }
 
-    formValidation(promises, email, password);
+    formInputValuesValidation(promises, email, password);
 
 })
 

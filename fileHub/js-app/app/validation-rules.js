@@ -4,7 +4,7 @@ const EMAIL_NAME = 'user-email-box';
 const PASSWORD_NAME = 'user-password-box';
 const CONFIRM_PASSWORD_NAME = 'user-confirm-password-box';
 
-export function formValidation(promises, email, password){
+export function formInputValuesValidation(promises, email, password){
     Promise.allSettled(promises)
         .then(
             (results) => {

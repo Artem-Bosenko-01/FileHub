@@ -10,18 +10,32 @@ document.getElementById("button").addEventListener('click', () => {
 
     const inputs = document.querySelectorAll(".input-value input");
 
-    const email = inputs[0].value;
-    const password = inputs[1].value;
+    const email = inputs[0];
+    const password = inputs[1];
+    const confirmPassword = inputs[2];
 
-    const emailPromise = emailValidation(email);
-    const passwordPromise = passwordValidation(password);
+    let promises = [
+        emailValidation(email.value),
+        passwordValidation(password.value)
+    ]
+    if(confirmPassword){
+        promises.push(confirmPasswordValidation(password.value, confirmPassword.value))
+    }
 
-
-    Promise.all([emailPromise, passwordPromise])
-        .then(() => alert("Email -> " + email + ".\nPassword -> " + password + "."))
-        .catch(
-            (error) => drawErrorState(error.id, error.reason)
-        );
+    Promise.allSettled(promises)
+        .then(
+            (results) => {
+                let isValidationPassed = true;
+                for (const result of results) {
+                    if (result.status === 'rejected') {
+                        drawErrorState(result.reason.id, result.reason.reason);
+                        isValidationPassed = false;
+                    }
+                }
+                if (isValidationPassed) {
+                    alert("Email -> " + email.value + ".\nPassword -> " + password.value + ".");
+                }
+            })
 
 })
 
@@ -44,6 +58,16 @@ function passwordValidation(passwordUser) {
     return new Promise((resolve, reject) => {
         if (passwordUser.length < 6) {
             reject(new ValidationError('user-password', `Password length should be more than 5 symbols`));
+        }
+
+        resolve();
+    });
+}
+
+function confirmPasswordValidation(passwordUser, confirmPassword) {
+    return new Promise((resolve, reject) => {
+        if (passwordUser !== confirmPassword) {
+            reject(new ValidationError('user-confirm-password', `Passwords doesn't match.`));
         }
 
         resolve();

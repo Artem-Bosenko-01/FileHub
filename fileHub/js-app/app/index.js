@@ -21,7 +21,8 @@ document.getElementById("button").addEventListener('click', () => {
     const confirmPassword = inputs[2];
 
     let promises = [
-        emailValidation(email),
+        emailLengthValidation(email),
+        emailStructureValidation(email),
         passwordValidation(password)
     ]
     if (confirmPassword) {
@@ -48,13 +49,20 @@ function formValidation(promises, email, password){
             })
 }
 
-function emailValidation(emailUser) {
+function emailLengthValidation(emailUser) {
     return new Promise((resolve, reject) => {
 
         if (emailUser.length < 5) {
             reject(new ValidationError(EMAIL_NAME, `Email length should be more than 4 symbols`));
         }
 
+        resolve();
+    });
+}
+
+function emailStructureValidation(emailUser){
+
+    return new Promise((resolve, reject) => {
         if (/^[a-zA-Z0-9+._@-]*$/.test(emailUser) === false) {
             reject(new ValidationError(EMAIL_NAME, `Email should be contains a-zA-Z, 0-9 or symbols like "+._@-"`));
         }
@@ -90,7 +98,7 @@ function drawErrorState(error) {
     const errorEmailInput = document.querySelector(`#${error.idElement} .input-value`);
     errorEmailInput.classList.add('invalid-input-value');
 
-    let errorMassage = document.createElement('span');
+    let errorMassage = document.createElement('p');
     errorMassage.className = 'error-massage';
     errorMassage.innerText = error.massage;
 

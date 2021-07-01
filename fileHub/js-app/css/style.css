@@ -126,6 +126,7 @@ body {
 .error-massage {
     font-size: 13px;
     margin-top: 5px;
+    margin-bottom: 0;
     color: red;
 }
 

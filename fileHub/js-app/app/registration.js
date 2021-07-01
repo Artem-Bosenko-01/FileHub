@@ -6,23 +6,22 @@ class ValidationError {
     }
 }
 
-document.getElementById("button").addEventListener('click', () => {
-
+document.getElementById('button-registration').addEventListener('click', () => {
     const inputs = document.querySelectorAll(".input-value input");
 
     const email = inputs[0].value;
     const password = inputs[1].value;
+    const confirmPassword = inputs[2].value;
 
     const emailPromise = emailValidation(email);
     const passwordPromise = passwordValidation(password);
+    const confirmPasswordPromise = confirmPasswordValidation(password, confirmPassword);
 
-
-    Promise.all([emailPromise, passwordPromise])
-        .then(() => alert("Email -> " + email + ".\nPassword -> " + password + "."))
+    Promise.all([emailPromise, passwordPromise, confirmPasswordPromise])
+        .then(() => alert("Email -> " + email + ".\nPassword -> " + password + ".\nConfirm password -> " + confirmPassword +"."))
         .catch(
             (error) => drawErrorState(error.id, error.reason)
         );
-
 })
 
 function emailValidation(emailUser) {
@@ -44,6 +43,16 @@ function passwordValidation(passwordUser) {
     return new Promise((resolve, reject) => {
         if (passwordUser.length < 6) {
             reject(new ValidationError('user-password', `Password length should be more than 5 symbols`));
+        }
+
+        resolve();
+    });
+}
+
+function confirmPasswordValidation(passwordUser, confirmPassword) {
+    return new Promise((resolve, reject) => {
+        if (passwordUser !== confirmPassword) {
+            reject(new ValidationError('user-confirm-password', `Passwords doesn't match.`));
         }
 
         resolve();

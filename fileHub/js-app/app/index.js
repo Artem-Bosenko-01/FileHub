@@ -10,9 +10,9 @@ document.getElementById("button").addEventListener('click', () => {
 
     clearErrorState();
 
-    const email = document.getElementById('user-email').value;
-    const password = document.getElementById('user-password').value;
-    const confirmPassword = document.getElementById('user-confirm-password');
+    const email = document.getElementById('email-user').value;
+    const password = document.getElementById('password-user').value;
+    const confirmPassword = document.getElementById('confirm-password-user');
 
     let promises = [
         emailLengthValidation(email),

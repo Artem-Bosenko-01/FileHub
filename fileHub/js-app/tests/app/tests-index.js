@@ -45,8 +45,3 @@ QUnit.module('should fail confirm password validation', () => {
 });
 
 
-QUnit.module('should success password structure validation', () => {
-    QUnit.test('should check password length more than 5 symbols', (assert) => {
-        assert.ok(passwordValidation(CORRECT_PASSWORD), `Correct value -> ${CORRECT_PASSWORD}`)
-    });
-});

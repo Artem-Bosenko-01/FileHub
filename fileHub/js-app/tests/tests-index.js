@@ -1,0 +1,1 @@
+import * as rulesTests from './app/tests-validation-rules.js'

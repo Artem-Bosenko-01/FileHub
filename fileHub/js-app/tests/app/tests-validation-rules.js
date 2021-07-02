@@ -61,10 +61,9 @@ module('should success email length validation', () => {
     test.each(
         'should check email length more than 4 symbols',
         ['emails', 'artem@gmail', 'hmail@com'],
-        (assert, email) => {
-            lengthValidation(EMAIL_NAME, email, MIN_EMAIL_LENGTH).then(
-                (result) => assert.equal(result, email, `"${result}" is correct email's length.`)
-            )
+        async (assert, email) => {
+            const result = await lengthValidation(EMAIL_NAME, email, MIN_EMAIL_LENGTH)
+            assert.equal(result, email, `"${result}" is correct email's length.`)
         });
 });
 
@@ -72,10 +71,9 @@ module('should success email structure validation', () => {
     test.each(
         'should check email contains only that symbols: a-zA-Z 0-9 +.-_@',
         ['email@em', 'ascx.bu-ku', '+dvs546'],
-        (assert, email) => {
-            structureValidation(EMAIL_NAME, email).then(
-                (result) => assert.equal(result, email, `"${result}" is correct email.`)
-            )
+        async (assert, email) => {
+            const result = await structureValidation(EMAIL_NAME, email)
+            assert.equal(result, email, `"${result}" is correct email.`)
         });
 });
 
@@ -83,18 +81,17 @@ module('should success password structure validation', () => {
     test.each(
         'should check password length more than 5 symbols',
         ['123456', 'qwerty6', '123qwer'],
-        (assert, password) => {
-            lengthValidation(PASSWORD_NAME, password, MIN_PASSWORD_LENGTH).then(
-                (result) => assert.equal(result, password, `"${result}" is correct password.`)
-            )
+        async (assert, password) => {
+            const result = await lengthValidation(PASSWORD_NAME, password, MIN_PASSWORD_LENGTH)
+            assert.equal(result, password, `"${result}" is correct password.`)
         });
 });
 
 module('should success confirm password validation', () => {
     test('should check that two passwords are equals',
-        (assert) => {
-            confirmPasswordValidation('123456', CORRECT_PASSWORD).then(
-                (result) => assert.equal(result, CORRECT_PASSWORD, `Passwords equals`))
+        async (assert) => {
+            const result = await confirmPasswordValidation('123456', CORRECT_PASSWORD)
+            assert.equal(result, CORRECT_PASSWORD, `Passwords equals`)
         }
     )
 });

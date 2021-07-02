@@ -27,7 +27,7 @@ export function emailLengthValidation(emailUser) {
             reject(new ValidationError(EMAIL_NAME, `Email length should be more than 4 symbols`));
         }
 
-        resolve();
+        resolve(emailUser);
     });
 }
 
@@ -38,7 +38,7 @@ export function emailStructureValidation(emailUser){
             reject(new ValidationError(EMAIL_NAME, `Email should be contains a-zA-Z, 0-9 or symbols like "+._@-"`));
         }
 
-        resolve();
+        resolve(emailUser);
     });
 }
 
@@ -48,7 +48,7 @@ export function passwordValidation(passwordUser) {
             reject(new ValidationError(PASSWORD_NAME, `Password length should be more than 5 symbols`));
         }
 
-        resolve();
+        resolve(passwordUser);
     });
 }
 
@@ -58,7 +58,7 @@ export function confirmPasswordValidation(passwordUser, confirmPassword) {
             reject(new ValidationError(CONFIRM_PASSWORD_NAME, `Passwords doesn't match.`));
         }
 
-        resolve();
+        resolve(passwordUser);
     });
 }
 

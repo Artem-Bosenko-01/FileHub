@@ -10,6 +10,11 @@ const INVALID_CONFIRM_PASSWORD = '123654'
 
 const {module, test} = QUnit;
 
+/*
+* Negative scenery tests.
+* */
+
+
 module('should fail email length validation', () => {
     test.each(
         'should check email length more than 4 symbols',
@@ -43,6 +48,12 @@ module('should fail confirm password validation', () => {
             `${CORRECT_PASSWORD} not equal ${INVALID_CONFIRM_PASSWORD}`)
     });
 });
+
+
+/*
+* Positive scenery tests.
+* */
+
 
 module('should success email length validation', () => {
     test.each(

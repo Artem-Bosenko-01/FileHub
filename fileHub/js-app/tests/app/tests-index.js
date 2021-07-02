@@ -18,7 +18,8 @@ const {module, test} = QUnit;
 module('should fail email length validation', () => {
     test.each(
         'should check email length more than 4 symbols',
-        ['ema', '12', '3555'], (assert, email) => {
+        ['ema', '12', '3555'],
+        (assert, email) => {
             assert.rejects(emailLengthValidation(email), `Invalid value -> ${email}`)
         });
 });
@@ -27,7 +28,6 @@ module('should fail email structure validation', () => {
     test.each(
         'should check email contains only that symbols: a-zA-Z 0-9 +.-_@',
         ['fvs##ds', 'dsc$dmkl', 'as!cas'],
-
         (assert, email) => {
             assert.rejects(emailStructureValidation(email), `Invalid value -> ${email}`)
         });
@@ -43,10 +43,11 @@ module('should fail password structure validation', () => {
 });
 
 module('should fail confirm password validation', () => {
-    test('should check that two passwords are equals', (assert) => {
-        assert.rejects(confirmPasswordValidation(CORRECT_PASSWORD, INVALID_CONFIRM_PASSWORD),
-            `${CORRECT_PASSWORD} not equal ${INVALID_CONFIRM_PASSWORD}`)
-    });
+    test('should check that two passwords are equals',
+        (assert) => {
+            assert.rejects(confirmPasswordValidation(CORRECT_PASSWORD, INVALID_CONFIRM_PASSWORD),
+                `${CORRECT_PASSWORD} not equal ${INVALID_CONFIRM_PASSWORD}`)
+        });
 });
 
 
@@ -60,7 +61,6 @@ module('should success email length validation', () => {
         'should check email length more than 4 symbols',
         ['emails', 'artem@gmail', 'hmail@com'],
         (assert, email) => {
-
             emailLengthValidation(email).then(
                 (result) => assert.equal(result, email, `"${result}" is correct email's length.`)
             )
@@ -72,7 +72,6 @@ module('should success email structure validation', () => {
         'should check email contains only that symbols: a-zA-Z 0-9 +.-_@',
         ['email@em', 'ascx.bu-ku', '+dvs546'],
         (assert, email) => {
-
             emailStructureValidation(email).then(
                 (result) => assert.equal(result, email, `"${result}" is correct email.`)
             )
@@ -87,12 +86,12 @@ module('should success password structure validation', () => {
             passwordValidation(password).then(
                 (result) => assert.equal(result, password, `"${result}" is correct password.`)
             )
-
-    });
+        });
 });
 
 module('should success confirm password validation', () => {
-    test('should check that two passwords are equals', (assert) => {
+    test('should check that two passwords are equals',
+        (assert) => {
             confirmPasswordValidation('123456', CORRECT_PASSWORD).then(
                 (result) => assert.equal(result, CORRECT_PASSWORD, `Passwords equals`))
         }

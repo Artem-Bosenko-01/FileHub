@@ -62,16 +62,16 @@ export function confirmPasswordValidation(passwordUser, confirmPassword) {
     });
 }
 
-function drawErrorState(error) {
-    const errorEmailLabel = document.querySelector(`#${error.idElement} .label-name`);
+function drawErrorState(errorValidation) {
+    const errorEmailLabel = document.querySelector(`#${errorValidation.idElement} .label-name`);
     errorEmailLabel.classList.add('errorLabel');
 
-    const errorEmailInput = document.querySelector(`#${error.idElement} .input-value`);
+    const errorEmailInput = document.querySelector(`#${errorValidation.idElement} .input-value`);
     errorEmailInput.classList.add('invalid-input-value');
 
     let errorMassage = document.createElement('p');
     errorMassage.className = 'error-massage';
-    errorMassage.innerText = error.massage;
+    errorMassage.innerText = errorValidation.massage;
 
     errorEmailInput.append(errorMassage);
 }

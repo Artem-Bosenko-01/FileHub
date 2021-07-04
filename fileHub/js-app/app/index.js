@@ -1,5 +1,5 @@
-import {validationForm} from "./validation-form.js";
+import {validationForm} from './validation-form.js';
 
 const form = document.getElementById('form');
 
-document.getElementById("button").addEventListener('click', () => validationForm(form))
+document.getElementById('button').addEventListener('click', () => validationForm(form));

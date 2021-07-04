@@ -1,40 +1,49 @@
-import {confirmPasswordValidation, drawErrorState, lengthValidation, structureValidation} from "./validation-rules.js";
+import {confirmPasswordValidation, drawErrorState, lengthValidation, structureValidation} from './validation-rules.js';
 
 const EMAIL_NAME = 'user-email-box';
 const PASSWORD_NAME = 'user-password-box';
 
+/**
+ * This is main function for validation form, that runs require rules.
+ * @param {HTMLElement} formElement - is
+ * @returns {Promise<void>} - is
+ */
 export async function validationForm(formElement) {
-    clearErrorState(formElement);
+  clearErrorState(formElement);
 
-    const email = formElement.querySelector('#email-user').value;
-    const password = formElement.querySelector('#password-user').value;
-    const confirmPassword = formElement.querySelector('#confirm-password-user');
+  const email = formElement.querySelector('#email-user').value;
+  const password = formElement.querySelector('#password-user').value;
+  const confirmPassword = formElement.querySelector('#confirm-password-user');
 
-    const promises = [];
-    promises.push(lengthValidation(EMAIL_NAME, email, 5));
-    promises.push(structureValidation(EMAIL_NAME, email));
-    promises.push(lengthValidation(PASSWORD_NAME, password, 6))
+  const promises = [];
+  promises.push(lengthValidation(EMAIL_NAME, email, 5));
+  promises.push(structureValidation(EMAIL_NAME, email));
+  promises.push(lengthValidation(PASSWORD_NAME, password, 6));
 
-    if (confirmPassword) {
-        promises.push(confirmPasswordValidation(password, confirmPassword.value))
-    }
+  if (confirmPassword) {
+    promises.push(confirmPasswordValidation(password, confirmPassword.value));
+  }
 
 
-    const results = await Promise.allSettled(promises)
+  const results = await Promise.allSettled(promises);
 
-    const isAnyPromiseStatusReject = results.some(result => result.status === 'rejected');
+  const isAnyPromiseStatusReject = results.some((result) => result.status === 'rejected');
 
-    if (!isAnyPromiseStatusReject) {
-        alert("Email -> " + email + ".\nPassword -> " + password + ".");
-    }
+  if (!isAnyPromiseStatusReject) {
+    alert('Email -> ' + email + '.\nPassword -> ' + password + '.');
+  }
 
-    results.filter(result => result.status === 'rejected')
-        .forEach(result => drawErrorState(result.reason))
+  results.filter((result) => result.status === 'rejected')
+      .forEach((result) => drawErrorState(result.reason));
 }
 
+/**
+ * This is function for cleaning error massages and error states, if it necessary.
+ * @param {HTMLElement} element - is form, that will be cleaned.
+ */
 function clearErrorState(element) {
-    const invalidInputBoxes = element.querySelectorAll('.invalid-input-value');
-    invalidInputBoxes.forEach(invalidBox => invalidBox.classList.remove('invalid-input-value'));
+  const invalidInputBoxes = element.querySelectorAll('.invalid-input-value');
+  invalidInputBoxes.forEach((invalidBox) => invalidBox.classList.remove('invalid-input-value'));
 
-    [...element.getElementsByClassName('error-massage')].forEach(massage => massage.remove());
+  [...element.getElementsByClassName('error-massage')].forEach((massage) => massage.remove());
 }

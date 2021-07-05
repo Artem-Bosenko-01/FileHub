@@ -101,8 +101,8 @@ test('Should validate authentication form with incorrect and too short email str
 /**
  * This function allows to add value to user input line.
  * @param {HTMLElement} form - is element, where necessary search input add value.
- * @param {string} elementId - is
- * @param {string} value
+ * @param {string} elementId - is id of input element.
+ * @param {string} value - is string, which assigned to input.
  */
 export function addParameterToInput(form, elementId, value) {
   const selector = form.querySelector(`#${elementId}`);

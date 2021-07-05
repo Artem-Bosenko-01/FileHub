@@ -43,7 +43,7 @@ export function structureValidation(idElement, userInputData) {
 export function confirmPasswordValidation(passwordUser, confirmPassword) {
   return new Promise((resolve, reject) => {
     if (passwordUser !== confirmPassword) {
-      reject(new ValidationError('user-confirm-password-box', `Passwords doesn't match.`));
+      reject(new ValidationError('confirm-password-user', `Passwords doesn't match.`));
     }
 
     resolve(passwordUser);
@@ -55,15 +55,12 @@ export function confirmPasswordValidation(passwordUser, confirmPassword) {
  * @param {ValidationError} errorValidation - is exception when promise are rejected
  */
 export function drawErrorState(errorValidation) {
-  const errorEmailLabel = document.querySelector(`#${errorValidation.idElement} .label-name`);
-  errorEmailLabel.classList.add('errorLabel');
-
-  const errorEmailInput = document.querySelector(`#${errorValidation.idElement} .input-value`);
-  errorEmailInput.classList.add('invalid-input-value');
+  const errorEmailInput = document.querySelector(`#${errorValidation.idElement}`);
+  errorEmailInput.parentElement.classList.add('invalid-input-value');
 
   const errorMassage = document.createElement('p');
   errorMassage.className = 'error-massage';
   errorMassage.innerText = errorValidation.message;
 
-  errorEmailInput.append(errorMassage);
+  errorEmailInput.after(errorMassage);
 }

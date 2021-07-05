@@ -94,7 +94,7 @@ test('Should validate authentication form with incorrect and too short email str
   assert.strictEqual(allErrorMessages.length, 2, 'Should show 2 error messages under email input element');
   assert.strictEqual(
       messages,
-      'Data length should be more than 5 symbols;Data should be contains a-zA-Z, 0-9 or symbols like "+._@-"',
+      'Data should be contains a-zA-Z, 0-9 or symbols like "+._@-";Data length should be more than 5 symbols',
       'Should show 2 error messages under user email input element');
 });
 

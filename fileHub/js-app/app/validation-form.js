@@ -1,7 +1,7 @@
 import {confirmPasswordValidation, drawErrorState, lengthValidation, structureValidation} from './validation-rules.js';
 
-const EMAIL_NAME = 'user-email-box';
-const PASSWORD_NAME = 'user-password-box';
+const EMAIL_NAME = 'email-user';
+const PASSWORD_NAME = 'password-user';
 
 /**
  * This is main function for validation form. This function creates necessary promises and
@@ -12,8 +12,8 @@ const PASSWORD_NAME = 'user-password-box';
 export async function validationForm(formElement) {
   clearErrorState(formElement);
 
-  const email = formElement.querySelector('#email-user').value;
-  const password = formElement.querySelector('#password-user').value;
+  const email = formElement.querySelector(`#${EMAIL_NAME}`).value;
+  const password = formElement.querySelector(`#${PASSWORD_NAME}`).value;
   const confirmPassword = formElement.querySelector('#confirm-password-user');
 
   const promises = [];

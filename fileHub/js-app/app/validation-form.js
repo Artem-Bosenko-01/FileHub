@@ -4,9 +4,10 @@ const EMAIL_NAME = 'user-email-box';
 const PASSWORD_NAME = 'user-password-box';
 
 /**
- * This is main function for validation form, that runs require rules.
- * @param {HTMLElement} formElement - is
- * @returns {Promise<void>} - is
+ * This is main function for validation form. This function creates necessary promises and
+ * analyzes results of them running. If all promises resolves, function will shaw alert.
+ * @param {HTMLElement} formElement - is element, that contains user input data.
+ * This user data are necessary to be validate.
  */
 export async function validationForm(formElement) {
   clearErrorState(formElement);

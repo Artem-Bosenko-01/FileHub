@@ -11,38 +11,28 @@ const PASSWORD_NAME = 'user-password-box';
 
 const {module, test} = QUnit;
 
-/*
-* Negative scenery tests.
-* */
-
-module('should fail email length validation', () => {
+module('Negative scenery tests.', () => {
   test.each(
       'should check email length more than 4 symbols',
       ['ema', '12', '3555'],
       (assert, email) => {
         assert.rejects(lengthValidation(EMAIL_NAME, email, MIN_EMAIL_LENGTH), `Invalid value -> ${email}`);
       });
-});
 
-module('should fail email structure validation', () => {
   test.each(
       'should check email contains only that symbols: a-zA-Z 0-9 +.-_@',
       ['fvs##ds', 'dsc$dmkl', 'as!cas'],
       (assert, email) => {
         assert.rejects(structureValidation(EMAIL_NAME, email), `Invalid value -> ${email}`);
       });
-});
 
-module('should fail password structure validation', () => {
   test.each(
       'should check password length more than 5 symbols',
       ['1654', 'DAC', 'q'],
       (assert, password) => {
         assert.rejects(lengthValidation(PASSWORD_NAME, password, MIN_PASSWORD_LENGTH), `Invalid value -> ${password}`);
       });
-});
 
-module('should fail confirm password validation', () => {
   test('should check that two passwords are equals',
       (assert) => {
         assert.rejects(confirmPasswordValidation(CORRECT_PASSWORD, INVALID_CONFIRM_PASSWORD),
@@ -50,11 +40,7 @@ module('should fail confirm password validation', () => {
       });
 });
 
-/*
-* Positive scenery tests.
-* */
-
-module('should success email length validation', () => {
+module('Positive scenery tests', () => {
   test.each(
       'should check email length more than 4 symbols',
       ['emails', 'artem@gmail', 'hmail@com'],
@@ -62,9 +48,7 @@ module('should success email length validation', () => {
         const result = await lengthValidation(EMAIL_NAME, email, MIN_EMAIL_LENGTH);
         assert.equal(result, email, `"${result}" is correct email's length.`);
       });
-});
 
-module('should success email structure validation', () => {
   test.each(
       'should check email contains only that symbols: a-zA-Z 0-9 +.-_@',
       ['email@em', 'ascx.bu-ku', '+dvs546'],
@@ -72,9 +56,7 @@ module('should success email structure validation', () => {
         const result = await structureValidation(EMAIL_NAME, email);
         assert.equal(result, email, `"${result}" is correct email.`);
       });
-});
 
-module('should success password structure validation', () => {
   test.each(
       'should check password length more than 5 symbols',
       ['123456', 'qwerty6', '123qwer'],
@@ -82,9 +64,7 @@ module('should success password structure validation', () => {
         const result = await lengthValidation(PASSWORD_NAME, password, MIN_PASSWORD_LENGTH);
         assert.equal(result, password, `"${result}" is correct password.`);
       });
-});
 
-module('should success confirm password validation', () => {
   test('should check that two passwords are equals',
       async (assert) => {
         const result = await confirmPasswordValidation('123456', CORRECT_PASSWORD);

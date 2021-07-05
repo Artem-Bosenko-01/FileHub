@@ -1,10 +1,11 @@
 import {validationForm} from '../../app/validation-form.js';
+
 const {module, test} = QUnit;
+let fixture;
 
-module('form validation', () => {
-  test('Should validate authentication form', async (assert)=>{
-    const fixture = document.getElementById('qunit-fixture');
-
+module('form validation', {
+  beforeEach: () => {
+    fixture = document.getElementById('qunit-fixture');
     fixture.innerHTML = '<form id="form" class="data">\n' +
 '            <div id="user-email-box" class="get-user-data">\n' +
 '                <div class="label-name">\n' +
@@ -27,12 +28,24 @@ module('form validation', () => {
 '                <a title="Registration" class="reference" href="registration.html">Don\'t have an account yet?</a>\n' +
 '            </div>\n' +
 '        </form>';
+  },
+});
 
-    const form = fixture.getElementsByTagName('form');
+test('Should validate authentication form with 2 empty inputs.', async (assert) => {
+  const form = fixture.getElementsByTagName('form');
 
-    await validationForm(form[0]);
+  await validationForm(form[0]);
 
-    const errorMassages = form[0].getElementsByClassName('error-massage');
-    assert.equal(errorMassages.length, 2, 'Should show 2 error massages');
-  });
+  const errorMassages = form[0].getElementsByClassName('error-massage');
+  assert.equal(errorMassages.length, 2, 'Should show 2 error messages');
+});
+
+test('Should validate authentication form', async (assert) => {
+  const form = fixture.getElementsByTagName('form');
+  const selector = form[0].querySelector('.get-user-data .input-value input');
+  selector.value = 'email-someone';
+  await validationForm(form[0]);
+
+  const errorMassages = form[0].getElementsByClassName('error-massage');
+  assert.equal(errorMassages.length, 1, 'Should show 1 error messages');
 });

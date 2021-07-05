@@ -6,6 +6,7 @@ const form = document.getElementsByClassName('data')[0];
 
 const emailBox = new FormGetData(form);
 const passwordBox = new FormGetData(form);
+const confirmPasswordBox = new FormGetData(form);
 const submitBox = new SubmitBox(form);
 
 emailBox.addLabel('email-user', 'Email');
@@ -14,7 +15,10 @@ emailBox.addInput('email-user', 'Email', 'Email');
 passwordBox.addLabel('password-user', 'Password');
 passwordBox.addInput('password-user', 'Password', 'Password');
 
-submitBox.addLink('Registration', 'Didn\'t have an account yet?', 'registration.html');
+confirmPasswordBox.addLabel('confirm-password-user', 'Confirm Password');
+confirmPasswordBox.addInput('confirm-password-user', 'Confirm Password', 'Confirm Password');
+
+submitBox.addLink('Registration', 'Already have an account?', 'index.html');
 submitBox.addButton('Sign In', 'Sign In');
 
 document.getElementById('button').addEventListener('click', () => validationForm(form));

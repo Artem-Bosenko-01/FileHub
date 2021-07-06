@@ -37,7 +37,7 @@ test('Should check create 1 label with title and id of input simultaneously', (a
   const label = new Label(fixture);
   label.title(TITLE);
   label.id(FOR_ID);
-  assert.strictEqual(fixture.getElementsByClassName('label-name')[0], FOR_ID,
+  assert.ok(fixture.querySelector(`.label-name[for="${FOR_ID}"]`),
       'Should create new label with id of input-: ' + FOR_ID);
   assert.strictEqual(fixture.getElementsByClassName('label-name')[0].title, TITLE,
       'Should create new label with title: ' + TITLE);

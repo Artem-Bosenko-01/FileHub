@@ -19,6 +19,6 @@ confirmPasswordBox.addLabel('confirm-password-user', 'Confirm Password');
 confirmPasswordBox.addInput('confirm-password-user', 'Confirm Password', 'Confirm Password');
 
 submitBox.addLink('Registration', 'Already have an account?', 'index.html');
-submitBox.addButton('Sign In', 'Sign In');
+submitBox.addButton('Sign Up', 'Sign Up');
 
 document.getElementById('button').addEventListener('click', () => validationForm(form));

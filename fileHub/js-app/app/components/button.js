@@ -26,7 +26,6 @@ export class Button extends Component {
    * @returns {string} - is html markup for rendering button.
    */
   get markup() {
-    return `<button id="button" title="${this._title}" class="button" name="signIn" type="button">
-                ${this._innerText}</button>`;
+    return `<button id="button" title="${this._title}" class="button" name="signIn" type="button">${this._innerText}</button>`;
   }
 }

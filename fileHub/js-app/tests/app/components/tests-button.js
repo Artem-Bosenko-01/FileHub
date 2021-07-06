@@ -41,6 +41,7 @@ test('Should check create 1 button with title', (assert) => {
 });
 
 test('Should check create 1 button with title and inner text simultaneously', (assert) => {
+  assert.expect(2);
   const button = new Button(fixture);
   button.title(TITLE);
   button.text(INNER_TEXT);

@@ -33,6 +33,7 @@ test('Should check create 1 label with title', (assert) => {
 });
 
 test('Should check create 1 label with title and id of input simultaneously', (assert) => {
+  assert.expect(2);
   const label = new Label(fixture);
   label.title(TITLE);
   label.id(FOR_ID);

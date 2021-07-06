@@ -37,7 +37,7 @@ export class Input extends Component {
    */
   get markup() {
     return `<div class="input-value">
-                <input title="Input ${this._title}" type="password" id="${this._id}" placeholder="${this._placeholder}">
+                <input title="Input ${this._title}" type="text" id="${this._id}" placeholder="${this._placeholder}">
             </div>`;
   }
 }

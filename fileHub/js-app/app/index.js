@@ -6,7 +6,7 @@ const form = document.getElementsByClassName('data')[0];
 
 const emailBox = new FormGroupBox(form);
 const passwordBox = new FormGroupBox(form);
-const submitBox = new SubmitBox(form);
+const submitButtonBox = new SubmitBox(form);
 
 emailBox.id = 'email-user';
 emailBox.title = 'Email';
@@ -17,7 +17,7 @@ passwordBox.id = 'password-user';
 passwordBox.title = 'Password';
 passwordBox.inputType = 'password';
 
-submitBox.buttonTitle = 'Sign In';
-submitBox.linkReference = 'registration.html';
-submitBox.linkMessage = 'Didn\'t have an account yet?';
-submitBox.onClick(() => validationForm(form));
+submitButtonBox.buttonTitle = 'Sign In';
+submitButtonBox.linkReference = 'registration.html';
+submitButtonBox.linkMessage = 'Didn\'t have an account yet?';
+submitButtonBox.onClick(() => validationForm(form));

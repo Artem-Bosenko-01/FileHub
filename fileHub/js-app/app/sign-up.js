@@ -7,7 +7,7 @@ const form = document.getElementsByClassName('data')[0];
 const emailBox = new FormGroupBox(form);
 const passwordBox = new FormGroupBox(form);
 const confirmPasswordBox = new FormGroupBox(form);
-const submitBox = new SubmitBox(form);
+const submitButtonBox = new SubmitBox(form);
 
 emailBox.id = 'email-user';
 emailBox.title = 'Email';
@@ -21,7 +21,7 @@ confirmPasswordBox.id = 'confirm-password-user';
 confirmPasswordBox.title = 'Confirm Password';
 confirmPasswordBox.inputType = 'password';
 
-submitBox.buttonTitle = 'Sign Up';
-submitBox.linkReference = 'index.html';
-submitBox.linkMessage = 'Are you already an account?';
-submitBox.onClick(() => validationForm(form));
+submitButtonBox.buttonTitle = 'Sign Up';
+submitButtonBox.linkReference = 'index.html';
+submitButtonBox.linkMessage = 'Are you already an account?';
+submitButtonBox.onClick(() => validationForm(form));

@@ -1,24 +1,27 @@
 import {validationForm} from './validation-form.js';
-import {FormGetData} from './components/form-get-data.js';
+import {FormGroupBox} from './components/form-group-box.js';
 import {SubmitBox} from './components/submit-box.js';
 
 const form = document.getElementsByClassName('data')[0];
 
-const emailBox = new FormGetData(form);
-const passwordBox = new FormGetData(form);
-const confirmPasswordBox = new FormGetData(form);
+const emailBox = new FormGroupBox(form);
+const passwordBox = new FormGroupBox(form);
+const confirmPasswordBox = new FormGroupBox(form);
 const submitBox = new SubmitBox(form);
 
-emailBox.addLabel('email-user', 'Email');
-emailBox.addInput('email-user', 'Email', 'Email');
+emailBox.id = 'email-user';
+emailBox.title = 'Email';
+emailBox.inputType = 'email';
 
-passwordBox.addLabel('password-user', 'Password');
-passwordBox.addInput('password-user', 'Password', 'Password');
+passwordBox.id = 'password-user';
+passwordBox.title = 'Password';
+passwordBox.inputType = 'password';
 
-confirmPasswordBox.addLabel('confirm-password-user', 'Confirm Password');
-confirmPasswordBox.addInput('confirm-password-user', 'Confirm Password', 'Confirm Password');
+confirmPasswordBox.id = 'confirm-password-user';
+confirmPasswordBox.title = 'Confirm Password';
+confirmPasswordBox.inputType = 'password';
 
-submitBox.addLink('Registration', 'Already have an account?', 'index.html');
-submitBox.addButton('Sign Up', 'Sign Up');
-
-document.getElementById('button').addEventListener('click', () => validationForm(form));
+submitBox.buttonTitle = 'Sign Up';
+submitBox.linkReference = 'index.html';
+submitBox.linkMessage = 'Are you already an account?';
+submitBox.onClick(() => validationForm(form));

@@ -1,20 +1,23 @@
 import {validationForm} from './validation-form.js';
-import {FormGetData} from './components/form-get-data.js';
+import {FormGroupBox} from './components/form-group-box.js';
 import {SubmitBox} from './components/submit-box.js';
 
 const form = document.getElementsByClassName('data')[0];
 
-const emailBox = new FormGetData(form);
-const passwordBox = new FormGetData(form);
+const emailBox = new FormGroupBox(form);
+const passwordBox = new FormGroupBox(form);
 const submitBox = new SubmitBox(form);
 
-emailBox.addLabel('email-user', 'Email');
-emailBox.addInput('email-user', 'Email', 'Email');
+emailBox.id = 'email-user';
+emailBox.title = 'Email';
+emailBox.inputType = 'email';
+emailBox.onChange((message) => emailBox.errorMessage = message);
 
-passwordBox.addLabel('password-user', 'Password');
-passwordBox.addInput('password-user', 'Password', 'Password');
+passwordBox.id = 'password-user';
+passwordBox.title = 'Password';
+passwordBox.inputType = 'password';
 
-submitBox.addLink('Registration', 'Didn\'t have an account yet?', 'registration.html');
-submitBox.addButton('Sign In', 'Sign In');
-
-document.getElementById('button').addEventListener('click', () => validationForm(form));
+submitBox.buttonTitle = 'Sign In';
+submitBox.linkReference = 'registration.html';
+submitBox.linkMessage = 'Didn\'t have an account yet?';
+submitBox.onClick(() => validationForm(form));

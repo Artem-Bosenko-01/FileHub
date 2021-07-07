@@ -49,7 +49,7 @@ export class SubmitBox extends Component {
   }
 
   /**
-     * @returns {string} - is html markup for rendering link.
+     * @returns {string} - is html markup for submit box.
      */
   get markup() {
     return `<div class="submit-box">

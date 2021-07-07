@@ -59,7 +59,7 @@ export class FormGroupBox extends Component {
   }
 
   /**
-     * @returns {string} - is html markup for rendering link.
+     * @returns {string} - is html markup for form group component.
      */
   get markup() {
     const error = `<p class="error-massage">${this._errorMessage}</p>`;

@@ -79,6 +79,11 @@ body {
     min-width: 485px;
 }
 
+.raw::after{
+    display: block;
+    content: '';
+    clear: both;
+}
 
 .header h2 {
     margin: 0;

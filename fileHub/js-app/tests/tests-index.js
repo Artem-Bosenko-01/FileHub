@@ -5,4 +5,4 @@ import './app/tests-validation-form.js';
 
 import './app/components/tests-form-group-box.js';
 
-import './app/components/tests-submit-box.js';
+import './app/components/tests-button.js';

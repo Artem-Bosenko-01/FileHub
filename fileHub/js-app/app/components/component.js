@@ -41,6 +41,7 @@ export class Component {
   addEventListeners() {
   }
 
+  initNestedCompoments() {}
   /**
      * This is function to render some components in {@link parentElement parent element}.
      */
@@ -58,5 +59,6 @@ export class Component {
       this.parentElement.appendChild(this.rootElement);
     }
     this.addEventListeners();
+    this.initNestedCompoments();
   }
 }

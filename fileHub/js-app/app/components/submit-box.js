@@ -32,8 +32,9 @@ export class SubmitBox extends Component {
   }
 
   /**
-     * @param {function} callback
-     */
+   * This is function for adding some event for listeners on click button.
+   * @param {function} callback
+   */
   onClick(callback) {
     this._onClickAction = callback;
   }

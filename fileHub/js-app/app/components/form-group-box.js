@@ -41,6 +41,7 @@ export class FormGroupBox extends Component {
   }
 
   /**
+   * This is function for adding some event for listeners on change value of input.
      * @param {function} callback
      */
   onChange(callback) {
@@ -62,9 +63,9 @@ export class FormGroupBox extends Component {
      */
   get markup() {
     const error = `<p class="error-massage">${this._errorMessage}</p>`;
-        this._valueInput ? this._valueInput = this.getElement('.input-value input').value : this._valueInput = ' ';
+    this._valueInput ? this._valueInput = this.getElement('.input-value input').value : this._valueInput = ' ';
 
-        return `<div class="get-user-data">
+    return `<div class="get-user-data">
                 <div class="label-name">
                     <label title="${this._title}" for="${this._id}">${this._title}</label>
                 </div>

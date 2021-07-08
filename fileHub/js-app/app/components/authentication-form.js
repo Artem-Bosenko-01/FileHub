@@ -1,41 +1,48 @@
 import {Component} from './component.js';
 import {Form} from './form.js';
 import {FormGroupBox} from './form-group-box.js';
-import {ParameterValidation} from '../parameter-validation.js';
-import {validateForm} from '../form-validation';
+import {Validator} from '../validation/validator.js';
+import {ParameterConfiguration, ValidationConfiguration} from '../validation/validationConfiguration.js';
+import {lengthValidation, structureValidation} from '../validation/validation-rules.js';
 
 /**
  * This is.
  */
 export class AuthenticationForm extends Component {
   initNestedComponents() {
-    const form = new Form(this.rootElement);
-    form.header = 'Sign In to FileHub';
-    form.buttonTitle = 'Sign In';
-    form.linkMessage = 'Didn\'t have an account yet?';
-    form.linkReference = 'registration.html';
-    form.onSubmit = validateForm();
-    form.initInputs((container) => {
-      const emailBox = new FormGroupBox(container);
-      const passwordBox = new FormGroupBox(container);
+    this._form = new Form(this.rootElement);
+    this._form.header = 'Sign In to FileHub';
+    this._form.buttonTitle = 'Sign In';
+    this._form.linkMessage = 'Didn\'t have an account yet?';
+    this._form.linkReference = 'registration.html';
 
-      emailBox.cleanErrorMessage();
-      passwordBox.cleanErrorMessage();
-      emailBox.id = 'email-user';
-      emailBox.title = 'Email';
-      emailBox.inputType = 'text';
-      /*
-      emailBox.onChange((message) => emailBox.errorMessage = message);
-*/
+    this._form.initInputs((container) => {
+      this._emailBox = new FormGroupBox(container);
+      this._passwordBox = new FormGroupBox(container);
 
-      passwordBox.id = 'password-user';
-      passwordBox.title = 'Password';
-      passwordBox.inputType = 'text';
+      this._emailBox.id = 'email-user';
+      this._emailBox.title = 'Email';
+      this._emailBox.inputType = 'text';
 
-      const emailValidation = new ParameterValidation(emailBox, 'email');
-      const passwordValidation = new ParameterValidation(passwordBox, 'password');
-      form.formAction = [emailValidation, passwordValidation];
+      this._passwordBox.id = 'password-user';
+      this._passwordBox.title = 'Password';
+      this._passwordBox.inputType = 'text';
     });
+
+    this._form.onSubmit = () => {
+      this._emailBox.cleanErrorMessage();
+      this._passwordBox.cleanErrorMessage();
+      new Validator(
+          new ValidationConfiguration(
+              [
+                new ParameterConfiguration('inputemail-user',
+                    lengthValidation(this._emailBox, this._emailBox.inputValue, 5)),
+                new ParameterConfiguration('inputemail-user',
+                    structureValidation(this._emailBox, this._emailBox.inputValue)),
+                new ParameterConfiguration('inputpassword-user',
+                    lengthValidation(this._passwordBox, this._passwordBox.inputValue, 6))]),
+      ).validate().then(() => alert('Hello')).catch(()=>{});
+    };
   }
 
   get markup() {

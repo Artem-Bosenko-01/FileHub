@@ -1,4 +1,4 @@
-import {confirmPasswordValidation, lengthValidation, structureValidation} from '../../app/validation-rules.js';
+import {confirmPasswordValidation, lengthValidation, structureValidation} from '../../app/validation/validation-rules.js';
 
 const CORRECT_PASSWORD = '123456';
 const INVALID_CONFIRM_PASSWORD = '123654';

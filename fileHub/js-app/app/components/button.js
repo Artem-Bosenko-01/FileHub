@@ -14,27 +14,10 @@ export class Button extends Component {
   }
 
   /**
-   * This is function for adding some event for listeners on click button.
-   * @param {function} callback
-   */
-  onClick(callback) {
-    this._onClickAction = callback;
-  }
-
-  /**
-   * This is overriding of basic function of {@link Component abstract component}.
-   */
-  addEventListeners() {
-    this.getElement('button').addEventListener('click', (evt) => {
-      this._onClickAction(evt);
-    });
-  }
-
-  /**
    * @returns {string} - is html markup for submit box.
    */
   get markup() {
     return `<button id="button" title="Submit" data-fh="button" 
-                class="button" type="submit">${this._titleButton}</button>`;
+                class="button">${this._titleButton}</button>`;
   }
 }

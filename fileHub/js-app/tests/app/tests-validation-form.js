@@ -1,4 +1,4 @@
-import {formValidation} from '../../app/form-validation.js';
+import {formValidation} from '../../app/validation/form-validation.js';
 
 const {module, test} = QUnit;
 let fixture;

@@ -7,6 +7,10 @@ export class Component {
    * @param {HTMLElement} parentElement - is element, in which necessary create or update some components.
    */
   constructor(parentElement) {
+    this.init(parentElement);
+  }
+
+  init(parentElement) {
     this.parentElement = parentElement;
     this.render();
   }
@@ -39,6 +43,7 @@ export class Component {
     const slot = this.getElement(slotId);
     initializer(slot);
   }
+
   /**
    * This is function to render some components in {@link parentElement parent element}.
    */

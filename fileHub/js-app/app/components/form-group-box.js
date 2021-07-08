@@ -40,8 +40,13 @@ export class FormGroupBox extends Component {
     this.render();
   }
 
+  cleanErrorMessage() {
+    this._errorMessage = '';
+    this.render();
+  }
+
   get inputValue() {
-    return this.getElement('input').value;
+    return this._valueInput;
   }
 
   /**
@@ -52,13 +57,16 @@ export class FormGroupBox extends Component {
     this._onChangeAction = callback;
   }
 
+  validator(value) {
+
+  }
   /**
    * This is overriding of basic function of {@link Component abstract component}.
    */
   addEventListeners() {
-    this.getElement('input')
+    this.getElement(`input${this._id}`)
         .addEventListener('change', (evt) => {
-          this._onChangeAction(evt.target.value);
+          this._onChangeAction && this._onChangeAction(evt.target.value);
         });
   }
 
@@ -67,13 +75,14 @@ export class FormGroupBox extends Component {
    */
   get markup() {
     const error = `<p data-fh="error-massage" class="error-massage">${this._errorMessage}</p>`;
-    this._valueInput ? this._valueInput = this.getElement('input').value : this._valueInput = ' ';
+    const getInput = this.getElement(`input${this._id}`);
+    getInput ? this._valueInput = getInput.value : this._valueInput = '';
 
     return `<div class="get-user-data" data-fh="get-user-data">
                 <label class="label-name" data-fh="label-name" for="${this._id}">${this._title}</label>
                 <div class="input-value ${this._errorMessage ? 'invalid-input-value' : ''}">
-                   <input data-fh="input" title="Input ${this._title}" type="${this._inputType}" id="${this._id}" 
-                   placeholder="${this._title}" value="${this._valueInput}">
+                   <input data-fh="input${this._id}" title="Input ${this._title}" type="${this._inputType}" 
+                   id="${this._id}" placeholder="${this._title}" value="${this._valueInput}">
                    ${this._errorMessage ? error : ''}
                 </div>
             </div>`;

@@ -1,4 +1,4 @@
-import {confirmPasswordValidation, drawErrorState, lengthValidation, structureValidation} from './validation-rules.js';
+import {confirmPasswordValidation, lengthValidation, structureValidation} from './validation-rules.js';
 
 
 /**
@@ -7,9 +7,17 @@ import {confirmPasswordValidation, drawErrorState, lengthValidation, structureVa
  * @param {ParameterValidation[]} parameters - is element, that contains user input data.
  * This user data are necessary to be validate.
  */
-export async function formValidation(parameters) {
-  const promises = [];
+export async function validateForm(promises) {
+  const results = await Promise.allSettled(promises);
 
+  results.filter((result) => result.status === 'rejected')
+      .forEach((result) => {
+        result.reason.component.errorMessage = result.reason.message;
+      });
+}
+
+export function prepareValidateForm(parameters) {
+  const promises = [];
   parameters.forEach((parameter)=>{
     switch (parameter.parameterValidationType) {
       case 'email': {
@@ -27,17 +35,5 @@ export async function formValidation(parameters) {
       }
     }
   });
-
-  const results = await Promise.allSettled(promises);
-
-  const isAnyPromiseStatusReject = results.some((result) => result.status === 'rejected');
-
-  if (!isAnyPromiseStatusReject) {
-    alert('Successful validation');
-  }
-
-  results.filter((result) => result.status === 'rejected')
-      .forEach((result) => {
-        result.reason.component.errorMessage = result.reason.message;
-      });
+  return promises;
 }

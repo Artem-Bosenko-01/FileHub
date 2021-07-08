@@ -1,5 +1,6 @@
 import {Component} from './component.js';
 import {Button} from './button.js';
+import {prepareValidateForm, validateForm} from '../form-validation.js';
 
 export class Form extends Component {
   set header(value) {
@@ -37,8 +38,8 @@ export class Form extends Component {
     this.render();
   }
 
-  set formAction(callback) {
-    this._actionForm = callback;
+  set onSubmit(handler) {
+    this._elements = handler;
   }
 
   initNestedComponents() {
@@ -48,14 +49,18 @@ export class Form extends Component {
     this.mount('button', (component) => {
       const button = new Button(component);
       button.buttonTitle = `${this._buttonTitle}`;
-      console.log('Add onCLick');
-      this._actionForm && button.onClick(() => this._actionForm);
+
+      this._elements && button.onClick(async () => {
+        const promises = prepareValidateForm(this._elements);
+        await validateForm(promises);
+        alert('Successful validation');
+      });
     });
   }
 
   get markup() {
-    return `<div>
-            <header class="header">
+    return `<form>
+            <header class="header">SS
                 <h2>${this._formHeader}</h2>
             </header>
             <hr>
@@ -64,6 +69,6 @@ export class Form extends Component {
                     <slot data-fh="button"></slot>
                     <a title="Registration" class="reference" href="${this._link}">${this._message}</a>
                 </div>
-        </div>`;
+        </form>`;
   }
 }

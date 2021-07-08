@@ -40,6 +40,10 @@ export class FormGroupBox extends Component {
     this.render();
   }
 
+  get inputValue() {
+    return this.getElement('input').value;
+  }
+
   /**
    * This is function for adding some event for listeners on change value of input.
    * @param {function} callback

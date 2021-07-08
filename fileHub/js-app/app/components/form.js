@@ -37,6 +37,10 @@ export class Form extends Component {
     this.render();
   }
 
+  set formAction(callback) {
+    this._actionForm = callback;
+  }
+
   initNestedComponents() {
     const inputRoot = this.getElement('data');
     this._initInputs && this._initInputs(inputRoot);
@@ -44,11 +48,13 @@ export class Form extends Component {
     this.mount('button', (component) => {
       const button = new Button(component);
       button.buttonTitle = `${this._buttonTitle}`;
+      console.log('Add onCLick');
+      this._actionForm && button.onClick(() => this._actionForm);
     });
   }
 
   get markup() {
-    return `<form>
+    return `<div>
             <header class="header">
                 <h2>${this._formHeader}</h2>
             </header>
@@ -58,6 +64,6 @@ export class Form extends Component {
                     <slot data-fh="button"></slot>
                     <a title="Registration" class="reference" href="${this._link}">${this._message}</a>
                 </div>
-        </form>`;
+        </div>`;
   }
 }

@@ -25,7 +25,7 @@ export class ValidationConfiguration {
 export class ParameterConfiguration {
   /**
    * @constructor
-   * @param {function} validationRule
+   * @param {Promise} validationRule
    */
   constructor(validationRule) {
     this._validators = validationRule;

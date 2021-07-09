@@ -57,6 +57,12 @@ export class Form extends Component {
     });
   }
 
+  renderErrorMessages(resultsOfValidation) {
+    resultsOfValidation
+        .filter((result) => result.status === 'rejected')
+        .forEach((result) => result.reason.component.errorMessage = result.reason.message);
+  }
+
   get markup() {
     return `<form data-fh="form" onsubmit="return false">
             <header class="header">

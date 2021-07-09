@@ -29,10 +29,11 @@ export class AuthenticationForm extends Component {
       this._passwordBox.inputType = 'text';
     });
 
-    this._form.onSubmit = () => {
+    this._form.onSubmit = async () => {
       this._emailBox.cleanErrorMessage();
       this._passwordBox.cleanErrorMessage();
-      new Validator(
+
+      const authenticationPageValidator = new Validator(
           new ValidationConfiguration(
               [
                 new ParameterConfiguration('inputemail-user',
@@ -40,8 +41,18 @@ export class AuthenticationForm extends Component {
                 new ParameterConfiguration('inputemail-user',
                     structureValidation(this._emailBox, this._emailBox.inputValue)),
                 new ParameterConfiguration('inputpassword-user',
-                    lengthValidation(this._passwordBox, this._passwordBox.inputValue, 6))]),
-      ).validate().then(() => alert('Hello')).catch(()=>{});
+                    lengthValidation(this._passwordBox, this._passwordBox.inputValue, 6)),
+              ],
+          ),
+      );
+
+      const results = await authenticationPageValidator.validate();
+      const isAnyPromiseStatusReject = results.some((result) => result.status === 'rejected');
+      if (isAnyPromiseStatusReject) {
+        this._form.renderErrorMessages(results);
+      } else {
+        alert('successful validation');
+      }
     };
   }
 

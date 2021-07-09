@@ -33,26 +33,20 @@ export class AuthenticationForm extends Component {
       this._emailBox.cleanErrorMessage();
       this._passwordBox.cleanErrorMessage();
 
-      const authenticationPageValidator = new Validator(
+      const authenticationFormValidator = new Validator(
           new ValidationConfiguration(
               [
-                new ParameterConfiguration('inputemail-user',
+                new ParameterConfiguration(
                     lengthValidation(this._emailBox, this._emailBox.inputValue, 5)),
-                new ParameterConfiguration('inputemail-user',
+                new ParameterConfiguration(
                     structureValidation(this._emailBox, this._emailBox.inputValue)),
-                new ParameterConfiguration('inputpassword-user',
+                new ParameterConfiguration(
                     lengthValidation(this._passwordBox, this._passwordBox.inputValue, 6)),
               ],
           ),
       );
 
-      const results = await authenticationPageValidator.validate();
-      const isAnyPromiseStatusReject = results.some((result) => result.status === 'rejected');
-      if (isAnyPromiseStatusReject) {
-        this._form.renderErrorMessages(results);
-      } else {
-        alert('successful validation');
-      }
+      this._form.validateForm(authenticationFormValidator);
     };
   }
 

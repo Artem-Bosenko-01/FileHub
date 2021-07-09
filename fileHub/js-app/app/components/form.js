@@ -57,6 +57,21 @@ export class Form extends Component {
     });
   }
 
+  /**
+   *
+   * @param validator
+   * @returns {void}
+   */
+  async validateForm(validator) {
+    const results = await validator.validate();
+    const isAnyPromiseStatusReject = results.some((result) => result.status === 'rejected');
+    if (isAnyPromiseStatusReject) {
+      this.renderErrorMessages(results);
+    } else {
+      alert('successful validation registration form');
+    }
+  }
+
   renderErrorMessages(resultsOfValidation) {
     resultsOfValidation
         .filter((result) => result.status === 'rejected')

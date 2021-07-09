@@ -14,13 +14,8 @@ export class ValidationConfiguration {
 
 
 export class ParameterConfiguration {
-  constructor(fieldId, validationRule) {
-    this._field = fieldId;
+  constructor(validationRule) {
     this._validators = validationRule;
-  }
-
-  get fieldId() {
-    return this._field;
   }
 
   get validationRule() {

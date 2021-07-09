@@ -4,7 +4,7 @@ import ValidationError from './validation-error.js';
  * This method allows to validate user input data by fixed length. If data are too short, promise will reject.
  * @param {string} value - is line of user data, which he are input.
  * @param {number} length - is minimum allowed length of the user input data.
- * @param {FormGroupBox} fieldId
+ * @param {FormInputField} fieldId
  * @returns {Promise} - is result of validation process: promise will resolve or reject.
  */
 export function lengthValidation(fieldId, value, length) {
@@ -22,7 +22,7 @@ export function lengthValidation(fieldId, value, length) {
  * If data consists of characters other than those allowed, promise will reject.
 
  * @param {string} value - is line of user data, which he are input.
- * @param {FormGroupBox} fieldId
+ * @param {FormInputField} fieldId
  * @returns {Promise} - is result of validation process: promise will resolve or reject.
  */
 export function structureValidation(fieldId, value) {
@@ -37,7 +37,7 @@ export function structureValidation(fieldId, value) {
 
 /**
  * This is method, that check equals of password string and confirm password string.
- * @param {FormGroupBox} fieldId
+ * @param {FormInputField} fieldId
  * @param {string} passwordUser - is first line, where user input password.
  * @param {string} confirmPassword - is second line, where user confirm his password.
  * @returns {Promise} - is result of va

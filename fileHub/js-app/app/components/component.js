@@ -1,5 +1,5 @@
 /**
- * This is abstract base for adding html-components to document.
+ * Abstract base for adding html-components to document.
  */
 export class Component {
   /**
@@ -10,6 +10,10 @@ export class Component {
     this.init(parentElement);
   }
 
+  /**
+   * Initializes component properties and markup of component.
+   * @param {HTMLElement} parentElement
+   */
   init(parentElement) {
     this.parentElement = parentElement;
     this.render();
@@ -22,7 +26,7 @@ export class Component {
   }
 
   /**
-   * This is function for searching element in DOM.
+   * Searches element in DOM.
    * @param {string} searchClass
    * @returns {HTMLElement}
    */
@@ -31,21 +35,30 @@ export class Component {
   }
 
   /**
-   *
+   * Adds some function on event to listener.
    */
   addEventListeners() {
   }
 
+  /**
+   * Init nested components after rendering.
+   */
   initNestedComponents() {
   }
 
+  /**
+   * Initializes something at special place, which defines by slot id.
+   * @param {string} slotId
+   * @param {function} initializer
+   */
   mount(slotId, initializer) {
     const slot = this.getElement(slotId);
-    initializer(slot);
+    const component = initializer(slot);
+    slot.replaceWith(component.rootElement);
   }
 
   /**
-   * This is function to render some components in {@link parentElement parent element}.
+   * Shows some components in {@link parentElement parent element}.
    */
   render() {
     const {markup} = this;

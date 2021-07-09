@@ -1,14 +1,21 @@
 import {Component} from './component.js';
 import {Button} from './button.js';
 
+/**
+ * Abstract base component to configure user forms.
+ */
 export class Form extends Component {
-  set header(value) {
+  /**
+   * Adds title for form header.
+   * @param {string}  value
+   */
+  set formHeader(value) {
     this._formHeader = value;
     this.render();
   }
 
   /**
-   * This is function for adding reference action, when user click on text-link.
+   * Adds reference action, when user click on text-link.
    * @param {string}  value
    */
   set linkReference(value) {
@@ -17,7 +24,7 @@ export class Form extends Component {
   }
 
   /**
-   * This is function for adding specific inner message or symbol to link.
+   * Adds specific inner message or symbol to link.
    * @param {string}  value
    */
   set linkMessage(value) {
@@ -25,11 +32,16 @@ export class Form extends Component {
     this.render();
   }
 
+  /**
+   * Adds title to button.
+   * @param {string} value
+   */
   set buttonTitle(value) {
     this._buttonTitle = value;
   }
 
   /**
+   * Initializes input fields on form for getting user's data.
    * @param{function(HTMLElement)} initializer
    */
   initInputs(initializer) {
@@ -37,16 +49,25 @@ export class Form extends Component {
     this.render();
   }
 
+  /**
+   * Adds some event to form, which process on submit form.
+   * @param {function} handler
+   */
   set onSubmit(handler) {
     this._eventOnSubmit = handler;
     this.render();
   }
 
-
+  /**
+   * @inheritDoc
+   */
   addEventListeners() {
     this._eventOnSubmit && this.rootElement.addEventListener('submit', this._eventOnSubmit);
   }
 
+  /**
+   * @inheritDoc
+   */
   initNestedComponents() {
     const inputRoot = this.getElement('data');
     this._initInputs && this._initInputs(inputRoot);
@@ -54,15 +75,16 @@ export class Form extends Component {
     this.mount('button', (component) => {
       const button = new Button(component);
       button.buttonTitle = `${this._buttonTitle}`;
+      return button;
     });
   }
 
   /**
-   *
-   * @param validator
+   * Validates actual form by something rules, which kept in validate configuration.
+   * @param {Validator} validator
    * @returns {void}
    */
-  async validateForm(validator) {
+  async validateActualForm(validator) {
     const results = await validator.validate();
     const isAnyPromiseStatusReject = results.some((result) => result.status === 'rejected');
     if (isAnyPromiseStatusReject) {
@@ -72,12 +94,18 @@ export class Form extends Component {
     }
   }
 
+  /**
+   * Adds error messages to inputs after analyzes validation results.
+   * @param {PromiseRejectedResult[]} resultsOfValidation
+   * @returns {void}
+   */
   renderErrorMessages(resultsOfValidation) {
     resultsOfValidation
         .filter((result) => result.status === 'rejected')
         .forEach((result) => result.reason.component.errorMessage = result.reason.message);
   }
 
+  /** @inheritDoc */
   get markup() {
     return `<form data-fh="form" onsubmit="return false">
             <header class="header">

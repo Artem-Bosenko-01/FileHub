@@ -1,9 +1,13 @@
 import {Component} from './component.js';
 
 /**
- * This is row that define special area to get some necessary user data.
+ * This is field field that allows to receive user data.
  */
-export class FormGroupBox extends Component {
+export class FormInputField extends Component {
+  /**
+   * @inheritDoc
+   * @constructor
+   */
   constructor(parentElement) {
     super(parentElement);
     this._errorMessages = [];
@@ -44,11 +48,18 @@ export class FormGroupBox extends Component {
     this.render();
   }
 
+  /**
+   * Remove error messages from input field box.
+   */
   cleanErrorMessage() {
     this._errorMessages = [];
     this.render();
   }
 
+  /**
+   * Get an actual input field value.
+   * @returns {string|undefined}
+   */
   get inputValue() {
     return this._valueInput;
   }
@@ -61,9 +72,7 @@ export class FormGroupBox extends Component {
     this._onChangeAction = callback;
   }
 
-  /**
-   * This is overriding of basic function of {@link Component abstract component}.
-   */
+  /** @inheritDoc */
   addEventListeners() {
     this.getElement(`input${this._id}`)
         .addEventListener('change', (evt) => {
@@ -71,14 +80,12 @@ export class FormGroupBox extends Component {
         });
   }
 
-  /**
-   * @returns {string} - is html markup for form group component.
-   */
+  /** @inheritDoc */
   get markup() {
     let errorMessages;
     if (this._errorMessages) {
       errorMessages = this._errorMessages
-          .map((error) => `<p data-fh="error-massage" class="error-massage">${error}</p>`)
+          .map((error) => `<p data-fh="error-message" class="error-message">${error}</p>`)
           .join('');
     }
 

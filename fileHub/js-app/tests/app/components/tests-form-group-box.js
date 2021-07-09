@@ -1,4 +1,4 @@
-import {FormGroupBox} from '../../../app/components/form-group-box.js';
+import {FormInputField} from '../../../app/components/form-input-field.js';
 
 const TITLE = 'title';
 const TYPE = 'password';
@@ -8,10 +8,10 @@ const ERROR_MESSAGE = 'error';
 const {module, test} = QUnit;
 let formGroup;
 
-module('Form group box', {
+module('Form input field', {
   beforeEach: () => {
     const fixture = document.getElementById('qunit-fixture');
-    formGroup = new FormGroupBox(fixture);
+    formGroup = new FormInputField(fixture);
   },
 });
 

@@ -1,55 +1,60 @@
 import {Component} from './component.js';
 import {Form} from './form.js';
-import {FormGroupBox} from './form-group-box.js';
+import {FormInputField} from './form-input-field.js';
 import {Validator} from '../validation/validator.js';
 import {ParameterConfiguration, ValidationConfiguration} from '../validation/validationConfiguration.js';
 import {lengthValidation, structureValidation} from '../validation/validation-rules.js';
 
 /**
- * This is.
+ * Component for authentication page that allows to get and validate user email and password.
  */
 export class AuthenticationForm extends Component {
+  /**
+   * @inheritDoc
+   */
   initNestedComponents() {
     this._form = new Form(this.rootElement);
-    this._form.header = 'Sign In to FileHub';
+    this._form.formHeader = 'Sign In to FileHub';
     this._form.buttonTitle = 'Sign In';
     this._form.linkMessage = 'Didn\'t have an account yet?';
     this._form.linkReference = 'registration.html';
 
     this._form.initInputs((container) => {
-      this._emailBox = new FormGroupBox(container);
-      this._passwordBox = new FormGroupBox(container);
+      this._emailInputField = new FormInputField(container);
+      this._passwordInputField = new FormInputField(container);
 
-      this._emailBox.id = 'email-user';
-      this._emailBox.title = 'Email';
-      this._emailBox.inputType = 'text';
+      this._emailInputField.id = 'email-user';
+      this._emailInputField.title = 'Email';
+      this._emailInputField.inputType = 'text';
 
-      this._passwordBox.id = 'password-user';
-      this._passwordBox.title = 'Password';
-      this._passwordBox.inputType = 'text';
+      this._passwordInputField.id = 'password-user';
+      this._passwordInputField.title = 'Password';
+      this._passwordInputField.inputType = 'text';
     });
 
     this._form.onSubmit = async () => {
-      this._emailBox.cleanErrorMessage();
-      this._passwordBox.cleanErrorMessage();
+      this._emailInputField.cleanErrorMessage();
+      this._passwordInputField.cleanErrorMessage();
 
       const authenticationFormValidator = new Validator(
           new ValidationConfiguration(
               [
                 new ParameterConfiguration(
-                    lengthValidation(this._emailBox, this._emailBox.inputValue, 5)),
+                    lengthValidation(this._emailInputField, this._emailInputField.inputValue, 5)),
                 new ParameterConfiguration(
-                    structureValidation(this._emailBox, this._emailBox.inputValue)),
+                    structureValidation(this._emailInputField, this._emailInputField.inputValue)),
                 new ParameterConfiguration(
-                    lengthValidation(this._passwordBox, this._passwordBox.inputValue, 6)),
+                    lengthValidation(this._passwordInputField, this._passwordInputField.inputValue, 6)),
               ],
           ),
       );
-
-      this._form.validateForm(authenticationFormValidator);
+      await this._form.validateActualForm(authenticationFormValidator);
     };
   }
 
+  /**
+   * @inheritDoc
+   */
   get markup() {
     return `<div class="raw"></div>`;
   }

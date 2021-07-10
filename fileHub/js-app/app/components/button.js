@@ -22,12 +22,27 @@ export class Button extends Component {
     this.render();
   }
 
+  /**
+   * Adds some event for listeners on click button.
+   * @param {function} event
+   */
+  onClick(event) {
+    this._onCLickEvent = event;
+  }
+
+  /** @inheritDoc */
+  addEventListeners() {
+    this.getElement('button').addEventListener('click', (evt)=>{
+      this._onCLickEvent(evt);
+    });
+  }
+
   /** @inheritDoc */
   get markup() {
     const icon = `<span class="glyphicon glyphicon-${this._buttonIcon} 
                         ${this._buttonIcon === 'repeat' ? 'loading': ''}"></span>`;
-    return `<button id="button" title="Submit" data-fh="button" class="button">
-                ${this._buttonIcon ? icon : ''} ${this._buttonTitle ? this._buttonTitle : ''}
-            </button>`;
+    return `<button id="button" title="Submit" 
+                data-fh="button" class="button"
+                >${this._buttonIcon ? icon : ''}${this._buttonTitle ? this._buttonTitle : ''}</button>`;
   }
 }

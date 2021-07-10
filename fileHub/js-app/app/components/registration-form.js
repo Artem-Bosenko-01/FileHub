@@ -2,7 +2,7 @@ import {Component} from './component.js';
 import {Form} from './form.js';
 import {FormInputField} from './form-input-field.js';
 import {Validator} from '../validation/validator.js';
-import {ParameterConfiguration, ValidationConfiguration} from '../validation/validationConfiguration.js';
+import {ParameterConfiguration, ValidationConfiguration} from '../validation/validation-configuration.js';
 import {confirmPasswordValidation, lengthValidation, structureValidation} from '../validation/validation-rules.js';
 
 /**

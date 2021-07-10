@@ -2,7 +2,7 @@ import {Component} from './component.js';
 import {Form} from './form.js';
 import {FormInputField} from './form-input-field.js';
 import {Validator} from '../validation/validator.js';
-import {ParameterConfiguration, ValidationConfiguration} from '../validation/validationConfiguration.js';
+import {ParameterConfiguration, ValidationConfiguration} from '../validation/validation-configuration.js';
 import {lengthValidation, structureValidation} from '../validation/validation-rules.js';
 
 /**
@@ -26,7 +26,7 @@ export class AuthenticationForm extends Component {
       this._emailInputField.id = 'email-user';
       this._emailInputField.title = 'Email';
       this._emailInputField.inputType = 'text';
-
+      this._emailInputField.onChange((message)=> this._emailInputField.errorMessage = message);
       this._passwordInputField.id = 'password-user';
       this._passwordInputField.title = 'Password';
       this._passwordInputField.inputType = 'text';

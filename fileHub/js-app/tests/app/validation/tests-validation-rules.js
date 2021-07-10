@@ -1,4 +1,4 @@
-import {confirmPasswordValidation, lengthValidation, structureValidation} from '../../app/validation/validation-rules.js';
+import {confirmPasswordValidation, lengthValidation, structureValidation} from '../../../app/validation/validation-rules.js';
 
 const CORRECT_PASSWORD = '123456';
 const INVALID_CONFIRM_PASSWORD = '123654';
@@ -8,6 +8,7 @@ const MIN_PASSWORD_LENGTH = 6;
 
 const EMAIL_NAME = 'user-email-box';
 const PASSWORD_NAME = 'user-password-box';
+const CONFIRM_PASSWORD_NAME = 'user-confirm-password-box';
 
 const {module, test} = QUnit;
 
@@ -67,7 +68,7 @@ module('Positive scenery tests', () => {
 
   test('should check that two passwords are equals',
       async (assert) => {
-        const result = await confirmPasswordValidation('123456', CORRECT_PASSWORD);
+        const result = await confirmPasswordValidation(CONFIRM_PASSWORD_NAME, '123456', CORRECT_PASSWORD);
         assert.equal(result, CORRECT_PASSWORD, `Passwords equals`);
       },
   );

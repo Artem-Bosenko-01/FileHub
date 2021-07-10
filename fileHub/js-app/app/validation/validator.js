@@ -11,8 +11,8 @@ export class Validator {
   }
 
   /**
-   *
-   * @returns {Promise<*>}
+   * Validates all fields by rules from configuration.
+   * @returns {Promise<resolve|reject>}
    */
   async validate() {
     const promises = [];

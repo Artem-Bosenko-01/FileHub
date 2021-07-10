@@ -24,11 +24,11 @@ test('Should create button with title', (assert) => {
       'Should add inner text to button: ' + TITLE);
 });
 
-/* test('Should adding event listener on button click', (assert) => {
+test('Should adding event listener on button click', (assert) => {
   const STEP = 'This step on event button';
-
+  assert.expect(2);
   button.onClick(() => assert.step(STEP));
   button.getElement('button').dispatchEvent(new Event('click'));
 
   assert.verifySteps([STEP]);
-});*/
+});

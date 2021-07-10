@@ -1,7 +1,7 @@
 import {Component} from './component.js';
 
 /**
- * This is field field that allows to receive user data.
+ * Field that allows to receive user data.
  */
 export class FormInputField extends Component {
   /**
@@ -12,8 +12,9 @@ export class FormInputField extends Component {
     super(parentElement);
     this._errorMessages = [];
   }
+
   /**
-   * This is function for adding id to input field.
+   * Adds id to input field.
    * @param {string}  value
    */
   set id(value) {
@@ -22,7 +23,7 @@ export class FormInputField extends Component {
   }
 
   /**
-   * This is function for adding title and name to label.
+   * Adds title and name to label.
    * @param {string}  value
    */
   set title(value) {
@@ -31,7 +32,16 @@ export class FormInputField extends Component {
   }
 
   /**
-   * This is function for adding special type of input string to input field.
+   * Set value to input.
+   * @param {string} value
+   */
+  set value(value) {
+    this._valueInput = value;
+    this.render();
+  }
+
+  /**
+   * Adds special type of input string to input field.
    * @param {string}  value
    */
   set inputType(value) {
@@ -40,7 +50,7 @@ export class FormInputField extends Component {
   }
 
   /**
-   * This is is function for adding error message under input field.
+   * Adds error message under input field.
    * @param {string} message
    */
   set errorMessage(message) {
@@ -65,7 +75,7 @@ export class FormInputField extends Component {
   }
 
   /**
-   * This is function for adding some event for listeners on change value of input.
+   * Adds some event for listeners on change value of input.
    * @param {function} callback
    */
   onChange(callback) {
@@ -85,7 +95,7 @@ export class FormInputField extends Component {
     let errorMessages;
     if (this._errorMessages) {
       errorMessages = this._errorMessages
-          .map((error) => `<p data-fh="error-message" class="error-message">${error}</p>`)
+          .map((error) => error && `<p data-fh="error-message" class="error-message">${error}</p>`)
           .join('');
     }
 

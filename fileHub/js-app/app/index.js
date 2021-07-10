@@ -1,5 +1,5 @@
-import {validationForm} from './validation-form.js';
 
-const form = document.getElementsByClassName('data')[0];
+import {AuthenticationForm} from './components/authentication-form.js';
 
-document.getElementById('button').addEventListener('click', () => validationForm(form));
+const app = document.getElementById('main');
+new AuthenticationForm(app);

@@ -36,16 +36,16 @@ export function structureValidation(field, value) {
 
 /**
  * This is method, that check equals of password string and confirm password string.
- * @param {FormInputField} fieldId
+ * @param {FormInputField} field
  * @param {string} passwordUser - is first line, where user input password.
  * @param {string} confirmPassword - is second line, where user confirm his password.
  * @returns {Promise} - is result of va
  * lidation process: promise will resolve or reject.
  */
-export function confirmPasswordValidation(fieldId, passwordUser, confirmPassword) {
+export function confirmPasswordValidation(field, passwordUser, confirmPassword) {
   return new Promise((resolve, reject) => {
     if (passwordUser !== confirmPassword) {
-      reject(new ValidationError(fieldId, `Passwords doesn't match.`));
+      reject(new ValidationError(field, `Passwords doesn't match.`));
     }
 
     resolve(passwordUser);

@@ -20,7 +20,7 @@ export class Component {
   }
 
   /**
-   * This is property to render markup for special component.
+   * Renders markup for special component.
    */
   get markup() {
   }

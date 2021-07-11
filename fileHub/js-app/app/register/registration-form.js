@@ -1,6 +1,6 @@
-import {Component} from './component.js';
-import {Form} from './form.js';
-import {FormInputField} from './form-input-field.js';
+import {Component} from '../components/component.js';
+import {Form} from '../components/form.js';
+import {FormInputField} from '../components/form-input-field.js';
 import {Validator} from '../validation/validator.js';
 import {ParameterConfiguration, ValidationConfiguration} from '../validation/validation-configuration.js';
 import {confirmPasswordValidation, lengthValidation, structureValidation} from '../validation/validation-rules.js';
@@ -10,6 +10,14 @@ import {confirmPasswordValidation, lengthValidation, structureValidation} from '
  * validate user email and password and check equals of input's password and input's confirm password.
  */
 export class RegistrationForm extends Component {
+  /**
+   * Adds some event, which will be called on submitting form.
+   * @param {function} event
+   */
+  onSubmit(event) {
+    this._onSubmitAuthenticationEvent = event;
+  }
+
   /** @inheritDoc */
   initNestedComponents() {
     this._form = new Form(this.rootElement);
@@ -36,30 +44,43 @@ export class RegistrationForm extends Component {
       this._confirmPasswordInputField.inputType = 'password';
     });
 
-    this._form.onSubmit = () => {
+    this._form.onSubmit = async () => {
       this._emailInputField.cleanErrorMessage();
       this._passwordInputField.cleanErrorMessage();
       this._confirmPasswordInputField.cleanErrorMessage();
+
+      const emailInputValue = this._emailInputField.inputValue;
+      const passwordInputValue = this._passwordInputField.inputValue;
 
       const registrationFormValidator = new Validator(
           new ValidationConfiguration(
               [
                 new ParameterConfiguration(
-                    lengthValidation(this._emailInputField, this._emailInputField.inputValue, 5)),
+                    lengthValidation(this._emailInputField, emailInputValue, 5)),
                 new ParameterConfiguration(
-                    structureValidation(this._emailInputField, this._emailInputField.inputValue)),
+                    structureValidation(this._emailInputField, emailInputValue)),
                 new ParameterConfiguration(
-                    lengthValidation(this._passwordInputField, this._passwordInputField.inputValue, 6)),
+                    lengthValidation(this._passwordInputField, passwordInputValue, 6)),
                 new ParameterConfiguration(
                     confirmPasswordValidation(
                         this._confirmPasswordInputField,
-                        this._passwordInputField.inputValue,
-                        this._confirmPasswordInputField.value),
+                        passwordInputValue,
+                        this._confirmPasswordInputField.inputValue),
                 ),
               ],
           ));
-      this._form.validateActualForm(registrationFormValidator);
+      if (await this._form.validateActualForm(registrationFormValidator)) {
+        this._onSubmitAuthenticationEvent && this._onSubmitAuthenticationEvent(emailInputValue, passwordInputValue);
+      }
     };
+  }
+
+  /**
+   * Adds server's error message to authentication form.
+   * @param {string} errorMessage
+   */
+  addServerError(errorMessage) {
+    alert(errorMessage);
   }
 
   /** @inheritDoc */

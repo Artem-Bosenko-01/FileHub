@@ -1,5 +1,4 @@
-
-import {AuthenticationForm} from './components/authentication-form.js';
+import {Application} from './application.js';
 
 const app = document.getElementById('main');
-new AuthenticationForm(app);
+new Application(app);

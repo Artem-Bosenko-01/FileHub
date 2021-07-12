@@ -24,7 +24,7 @@ export class RegistrationForm extends Component {
     this._form.formHeader = 'Sign Up to FileHub';
     this._form.buttonTitle = 'Sign Up';
     this._form.linkMessage = 'Already have an account?';
-    this._form.linkReference = 'index.html';
+    this._form.linkReference = '#login';
 
     this._form.initInputs((container) => {
       this._emailInputField = new FormInputField(container);

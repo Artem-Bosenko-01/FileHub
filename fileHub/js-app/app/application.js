@@ -15,26 +15,25 @@ export class Application extends Component {
     const apiService = new ApiService();
     const configuration = new RoutingConfiguration('login')
         .addRoute('login', () => {
+          this.rootElement.innerHTML = '';
           const authenticationPage = new AuthenticationPage(this.rootElement);
           authenticationPage.apiService = apiService;
         })
         .addRoute('register', () => {
+          this.rootElement.innerHTML = '';
           const registrationPage = new RegistrationPage(this.rootElement);
           registrationPage.apiService = apiService;
         })
-        .addRoute('404', () => new ErrorPage(this.rootElement));
+        .addRoute('404', () => {
+          this.rootElement.innerHTML = '';
+          new ErrorPage(this.rootElement);
+        });
     configuration.notFoundHash = '404';
     new Router(configuration);
   }
 
   /** @inheritDoc */
   get markup() {
-    return '<header>\n' +
-        '              <h1 title="TeamDev">\n' +
-        '                  <a class="logo" href="https://www.teamdev.com/" target="_blank">\n' +
-        '                      TeamDev\n' +
-        '                  </a>\n' +
-        '              </h1>\n' +
-        '           </header>';
+    return `<div></div>`;
   }
 }

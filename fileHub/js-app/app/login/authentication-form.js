@@ -50,10 +50,8 @@ export class AuthenticationForm extends Component {
       const authenticationFormValidator = new Validator(
           new ValidationConfiguration(
               [
-                new ParameterConfiguration(
-                    lengthValidation(this._emailInputField, emailInputValue, 5)),
-                new ParameterConfiguration(
-                    structureValidation(this._emailInputField, emailInputValue)),
+                new ParameterConfiguration(lengthValidation(this._emailInputField, emailInputValue, 5)),
+                new ParameterConfiguration(structureValidation(this._emailInputField, emailInputValue)),
                 new ParameterConfiguration(
                     lengthValidation(this._passwordInputField, passwordInputValue, 6)),
               ],

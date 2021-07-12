@@ -3,15 +3,15 @@
  */
 export class Router {
   /**
-   * @constructor
-   * @param {RoutingConfiguration} configuration
-   */
+     * @constructor
+     * @param {RoutingConfiguration} configuration
+     */
   constructor(configuration) {
     this._routingConfiguration = configuration;
     const location = window.location;
+    this.hash = location.hash;
     window.addEventListener('hashchange', () => {
-      this.hash = location.hash;
-      this._showPage(this.hash);
+      this._showPage(location.hash);
     });
 
     if (!this.hash) {
@@ -21,14 +21,23 @@ export class Router {
     this._showPage(this.hash);
   }
 
+  /**
+     * Calls page creator from configuration by hash.
+     * @param {string} hash
+     * @private
+     */
   _showPage(hash) {
-    if (hash) {
-      const hashBody = hash.substring(1);
-      const route = this._routingConfiguration.getPageByHash(hashBody);
-      route();
-    }
+    const hashBody = hash.substring(1);
+    const route = this._routingConfiguration.getPageByHash(hashBody);
+    this.rootElement.innerHTML = '';
+    route();
   }
 
+  /**
+     * Sets necessary address to hash.
+     * @param {string} hash
+     * @private
+     */
   _redirect(hash) {
     window.location.hash = `#${hash}`;
   }

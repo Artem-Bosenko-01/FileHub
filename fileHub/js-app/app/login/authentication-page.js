@@ -28,6 +28,12 @@ export class AuthenticationPage extends Component {
 
   /** @inheritDoc */
   get markup() {
-    return '<div></div>';
+    return ' <header>\n' +
+        '        <h1 title="TeamDev">\n' +
+        '            <a class="logo" href="https://www.teamdev.com/" target="_blank">\n' +
+        '                TeamDev\n' +
+        '            </a>\n' +
+        '        </h1>\n' +
+        '    </header>';
   }
 }

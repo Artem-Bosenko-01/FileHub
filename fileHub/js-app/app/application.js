@@ -28,7 +28,7 @@ export class Application extends Component {
           this.rootElement.innerHTML = '';
           new ErrorPage(this.rootElement);
         });
-    configuration.notFoundHash = '404';
+    configuration.notFoundRoute = '404';
     new Router(configuration);
   }
 

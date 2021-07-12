@@ -80,22 +80,6 @@ export class Form extends Component {
   }
 
   /**
-   * Validates actual form by something rules, which kept in validate configuration.
-   * @param {Validator} validator
-   */
-  async validateActualForm(validator) {
-    const results = await validator.validate();
-    const isAnyPromiseStatusReject = results.some((result) => result.status === 'rejected');
-    if (isAnyPromiseStatusReject) {
-      this.renderErrorMessages(results);
-      return false;
-    } else {
-      alert('Successful validate input data');
-      return true;
-    }
-  }
-
-  /**
    * Adds error messages to inputs after analyzes validation results.
    * @param {PromiseRejectedResult[]} resultsOfValidation
    * @returns {void}

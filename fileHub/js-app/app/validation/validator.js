@@ -12,7 +12,7 @@ export class Validator {
 
   /**
    * Validates all fields by rules from configuration.
-   * @returns {Promise<resolve|reject>}
+   * @returns {Promise<resolve|reject>[]}
    */
   async validate() {
     const promises = [];

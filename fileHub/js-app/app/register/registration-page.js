@@ -8,7 +8,8 @@ export class RegistrationPage extends Component {
   /** @inheritDoc */
   initNestedComponents() {
     const form = new RegistrationForm(this.rootElement);
-    form.onSubmit(async (email, password) => {
+    form.onSubmit(async (credentials) => {
+      const {email, password} = credentials;
       try {
         await this._apiService.registration(email, password);
         alert(`${email}\n${password}`);

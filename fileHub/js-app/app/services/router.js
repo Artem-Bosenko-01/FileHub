@@ -1,5 +1,5 @@
 /**
- *
+ * Manages user transitions through application pages.
  */
 export class Router {
   /**
@@ -15,7 +15,7 @@ export class Router {
     });
 
     if (!this.hash) {
-      const defaultHash = this._routingConfiguration.defaultRoutingHash;
+      const defaultHash = this._routingConfiguration.defaultRoute;
       this._redirect(defaultHash);
     }
     this._showPage(this.hash);
@@ -29,7 +29,6 @@ export class Router {
   _showPage(hash) {
     const hashBody = hash.substring(1);
     const route = this._routingConfiguration.getPageByHash(hashBody);
-    this.rootElement.innerHTML = '';
     route();
   }
 

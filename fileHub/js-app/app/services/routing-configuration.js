@@ -1,33 +1,37 @@
 /**
- *
+ * Configuration for {@link Router router}, which saved list of routes and page creator for each.
  */
 export class RoutingConfiguration {
   /**
-   *
-   * @param {string} defaultHashRoute
+   * @constructor
+   * @param {string} defaultRoute
    */
-  constructor(defaultHashRoute) {
-    this._defaultHash = defaultHashRoute;
+  constructor(defaultRoute) {
+    this._defaultHash = defaultRoute;
     this._routes = new Map();
   }
 
   /**
-   *
+   * Adds route for page, which creates when redirects to not existed routes.
    * @param {string} hash
    */
-  set notFoundHash(hash) {
+  set notFoundRoute(hash) {
     this._error404Hash = hash;
   }
 
-  get defaultRoutingHash() {
+  /**
+   * Gets default Route hash.
+   * @returns {string}
+   */
+  get defaultRoute() {
     return this._defaultHash;
   }
 
 
   /**
-   *
-   * @param hash
-   * @param pageInit
+   * Adds new route's hash and page creator for it.
+   * @param {string} hash
+   * @param {function} pageInit
    * @returns {RoutingConfiguration}
    */
   addRoute(hash, pageInit) {

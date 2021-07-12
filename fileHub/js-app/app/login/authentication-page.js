@@ -8,7 +8,8 @@ export class AuthenticationPage extends Component {
   /** @inheritDoc */
   initNestedComponents() {
     const form = new AuthenticationForm(this.rootElement);
-    form.onSubmit(async (email, password) => {
+    form.onSubmit(async (credentials) => {
+      const {email, password} = credentials;
       try {
         await this._apiService.logIn(email, password);
         alert(`${email}\n${password}`);

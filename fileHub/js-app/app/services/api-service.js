@@ -10,7 +10,7 @@ export class ApiService {
   logIn(email, password) {
     return this._fetch('/login', {
       method: 'POST',
-      body: JSON.stringify(email, password),
+      body: JSON.stringify({email, password}),
     });
   }
 
@@ -23,7 +23,7 @@ export class ApiService {
   registration(email, password) {
     return this._fetch('/register', {
       method: 'POST',
-      body: JSON.stringify(email, password),
+      body: JSON.stringify({email, password}),
     });
   }
 

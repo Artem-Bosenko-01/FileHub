@@ -5,18 +5,18 @@ export class Component {
   /**
    * @constructor
    * @param {HTMLElement} parentElement - is element, in which necessary create or update some components.
+   * @param {any} arg
    */
-  constructor(parentElement) {
-    this.init(parentElement);
+  constructor(parentElement, ...arg) {
+    this.parentElement = parentElement;
+    this.init(...arg);
+    this.render();
   }
 
   /**
    * Initializes component properties and markup of component.
-   * @param {HTMLElement} parentElement
    */
-  init(parentElement) {
-    this.parentElement = parentElement;
-    this.render();
+  init() {
   }
 
   /**

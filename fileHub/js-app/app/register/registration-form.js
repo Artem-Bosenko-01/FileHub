@@ -73,13 +73,24 @@ export class RegistrationForm extends Component {
       const results = await registrationFormValidator.validate();
       const isAnyPromiseStatusReject = results.some((result) => result.status === 'rejected');
       if (isAnyPromiseStatusReject) {
-        this._form.renderErrorMessages(results);
+        this.renderErrorMessages(results);
       } else {
         alert('Successful validate input data');
         this._onSubmitAuthenticationEvent && this._onSubmitAuthenticationEvent(
             new UsersInputsData(emailInputValue, passwordInputValue));
       }
     };
+  }
+
+  /**
+   * Adds error messages to inputs after analyzes validation results.
+   * @param {PromiseRejectedResult[]} resultsOfValidation
+   * @returns {void}
+   */
+  renderErrorMessages(resultsOfValidation) {
+    resultsOfValidation
+        .filter((result) => result.status === 'rejected')
+        .forEach((result) => result.reason.component.errorMessage = result.reason.message);
   }
 
   /**

@@ -19,6 +19,25 @@ export class AuthenticationForm extends Component {
   }
 
   /**
+   * Adds server's error message to authentication form.
+   * @param {string} errorMessage
+   */
+  addServerError(errorMessage) {
+    alert(errorMessage);
+  }
+
+  /**
+   * Adds error messages to inputs after analyzes validation results.
+   * @param {PromiseRejectedResult[]} resultsOfValidation
+   * @returns {void}
+   */
+  renderErrorMessages(resultsOfValidation) {
+    resultsOfValidation
+        .filter((result) => result.status === 'rejected')
+        .forEach((result) => result.reason.component.errorMessage = result.reason.message);
+  }
+
+  /**
    * @inheritDoc
    */
   initNestedComponents() {
@@ -61,21 +80,13 @@ export class AuthenticationForm extends Component {
       const results = await authenticationFormValidator.validate();
       const isAnyPromiseStatusReject = results.some((result) => result.status === 'rejected');
       if (isAnyPromiseStatusReject) {
-        this._form.renderErrorMessages(results);
+        this.renderErrorMessages(results);
       } else {
         alert('Successful validate input data');
         this._onSubmitAuthenticationEvent && this._onSubmitAuthenticationEvent(
             new UsersInputsData(emailInputValue, passwordInputValue));
       }
     };
-  }
-
-  /**
-   * Adds server's error message to authentication form.
-   * @param {string} errorMessage
-   */
-  addServerError(errorMessage) {
-    alert(errorMessage);
   }
 
   /**

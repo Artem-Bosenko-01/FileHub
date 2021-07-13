@@ -79,28 +79,17 @@ export class Form extends Component {
     });
   }
 
-  /**
-   * Adds error messages to inputs after analyzes validation results.
-   * @param {PromiseRejectedResult[]} resultsOfValidation
-   * @returns {void}
-   */
-  renderErrorMessages(resultsOfValidation) {
-    resultsOfValidation
-        .filter((result) => result.status === 'rejected')
-        .forEach((result) => result.reason.component.errorMessage = result.reason.message);
-  }
-
   /** @inheritDoc */
   get markup() {
     return `<form data-fh="form" onsubmit="return false">
             <header class="header">
-                <h2>${this._formHeader}</h2>
+                <h2 data-fh="header">${this._formHeader}</h2>
             </header>
             <hr>
             <div class="data" data-fh="data"></div>
             <div class="submit-box" data-fh="submit-box">
                     <slot data-fh="button"></slot>
-                    <a title="Registration" class="reference" href="${this._link}">${this._message}</a>
+                    <a data-fh="link" title="Registration" class="reference" href="${this._link}">${this._message}</a>
                 </div>
         </form>`;
   }

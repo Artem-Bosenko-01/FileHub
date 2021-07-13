@@ -5,6 +5,18 @@ import {RegistrationForm} from './registration-form.js';
  * Creates registration form and puts some API service for it.
  */
 export class RegistrationPage extends Component {
+  /**
+   * @inheritDoc
+   * Adds api and title services to page
+   * @param {ApiService} apiService
+   * @param {TitleService}titleService
+   */
+  init(apiService, titleService) {
+    this._apiService = apiService;
+    this._titleService =titleService;
+    this._titleService.addTitleForPage('Registration');
+  }
+
   /** @inheritDoc */
   initNestedComponents() {
     const form = new RegistrationForm(this.rootElement);
@@ -17,14 +29,6 @@ export class RegistrationPage extends Component {
         form.addServerError(error.message);
       }
     });
-  }
-
-  /**
-   * Adds api service to page
-   * @param {ApiService} service
-   */
-  set apiService(service) {
-    this._apiService = service;
   }
 
   /** @inheritDoc */

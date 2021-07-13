@@ -27,7 +27,6 @@ export class RoutingConfiguration {
     return this._defaultHash;
   }
 
-
   /**
    * Adds new route's hash and page creator for it.
    * @param {string} hash

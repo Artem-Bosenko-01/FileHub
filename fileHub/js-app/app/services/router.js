@@ -3,21 +3,19 @@
  */
 export class Router {
   /**
-     * @constructor
-     * @param {RoutingConfiguration} configuration
-     */
-  constructor(configuration) {
+   * @constructor
+   * @param {RoutingConfiguration} configuration
+   * @param {any} window
+   */
+  constructor(configuration, window) {
     this._routingConfiguration = configuration;
-    const location = window.location;
-    this.hash = location.hash;
-    window.addEventListener('hashchange', () => {
-      this._showPage(location.hash);
+    this._window = window;
+    this.hash = this._window.location.hash;
+    debugger;
+    this._window.addEventListener('hashchange', () => {
+      this._showPage(this._window.location.hash);
     });
 
-    if (!this.hash) {
-      const defaultHash = this._routingConfiguration.defaultRoute;
-      this._redirect(defaultHash);
-    }
     this._showPage(this.hash);
   }
 
@@ -27,6 +25,10 @@ export class Router {
      * @private
      */
   _showPage(hash) {
+    if (!hash || hash === '#') {
+      const defaultHash = this._routingConfiguration.defaultRoute;
+      this._redirect(defaultHash);
+    }
     const hashBody = hash.substring(1);
     const route = this._routingConfiguration.getPageByHash(hashBody);
     route();
@@ -38,6 +40,6 @@ export class Router {
      * @private
      */
   _redirect(hash) {
-    window.location.hash = `#${hash}`;
+    this._window.location.hash = `#${hash}`;
   }
 }

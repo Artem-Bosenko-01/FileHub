@@ -29,7 +29,7 @@ export class Application extends Component {
           new ErrorPage(this.rootElement);
         });
     configuration.notFoundRoute = '404';
-    new Router(configuration);
+    new Router(configuration, window);
   }
 
   /** @inheritDoc */

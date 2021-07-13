@@ -9,7 +9,7 @@ export class Component {
    */
   constructor(parentElement, ...arg) {
     this.parentElement = parentElement;
-    this.init(...arg);
+    arg && this.init(...arg);
     this.render();
   }
 

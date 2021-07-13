@@ -12,3 +12,6 @@ import './app/components/tests-form.js';
 import './app/login/tests-authentication-form.js';
 
 import './app/register/tests-registration-form.js';
+
+import './app/services/tests-router.js';
+

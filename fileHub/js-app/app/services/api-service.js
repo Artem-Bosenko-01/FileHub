@@ -38,9 +38,9 @@ export class ApiService {
     return window.fetch(url, init)
         .then((response) => {
           if (response.ok) {
-            response.json();
+            return response.json();
           } else {
-            throw new Error('403');
+            throw new Error('500');
           }
         })
         .catch(() => {

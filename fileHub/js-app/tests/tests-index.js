@@ -15,3 +15,6 @@ import './app/register/tests-registration-form.js';
 
 import './app/services/tests-router.js';
 
+import './app/services/tests-title-service.js';
+
+

@@ -5,9 +5,11 @@ export class TitleService {
   /**
    * @constructor
    * @param {string} applicationName
+   * @param {Document} document
    */
-  constructor(applicationName) {
+  constructor(applicationName, document) {
     this._applicationName = applicationName;
+    this._document = document;
   }
 
   /**
@@ -16,6 +18,6 @@ export class TitleService {
    */
   addTitleForPage(name) {
     this._pageName = name;
-    document.title = `${this._pageName} - ${this._applicationName}`;
+    this._document.title = `${this._pageName} - ${this._applicationName}`;
   }
 }

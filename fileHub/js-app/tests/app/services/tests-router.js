@@ -34,6 +34,20 @@ module('Router service', (hooks) => {
     new Router(configuration, testWindow);
     assert.verifySteps([DEFAULT_ROUTE, DEFAULT_ROUTE], 'Should route to default page.');
   });
+
+  test('Should show error page when hash is invalid', (assert) => {
+    const testWindow = {
+      location: {hash: '#router456'},
+
+      addEventListener(event, init) {
+        init();
+      },
+    };
+
+    const configuration = getConfig(assert);
+    new Router(configuration, testWindow);
+    assert.verifySteps([ERROR_ROUTE, ERROR_ROUTE], 'Should route to error page.');
+  });
 });
 
 function getConfig(assert) {

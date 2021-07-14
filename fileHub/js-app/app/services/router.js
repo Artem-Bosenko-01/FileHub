@@ -20,14 +20,14 @@ export class Router {
   }
 
   /**
-     * Calls page creator from configuration by hash.
-     * @param {string} hash
-     * @private
-     */
+   * Calls page creator from configuration by hash.
+   * @param {string} hash
+   * @private
+   */
   _showPage(hash) {
     if (!hash || hash === '#') {
       const defaultHash = this._routingConfiguration.defaultRoute;
-      this._redirect(defaultHash);
+      hash = this._redirect(defaultHash);
     }
     const hashBody = hash.substring(1);
     const route = this._routingConfiguration.getPageByHash(hashBody);
@@ -35,11 +35,14 @@ export class Router {
   }
 
   /**
-     * Sets necessary address to hash.
-     * @param {string} hash
-     * @private
-     */
+   * Sets necessary address to hash.
+   * @param {string} hash
+   * @returns {string} new route
+   * @private
+   */
   _redirect(hash) {
-    this._window.location.hash = `#${hash}`;
+    const newHash = `#${hash}`;
+    this._window.location.hash = newHash;
+    return newHash;
   }
 }

@@ -14,7 +14,7 @@ export class Application extends Component {
   /** @inheritDoc */
   initNestedComponents() {
     const apiService = new ApiService();
-    const titleService = new TitleService('FileHub');
+    const titleService = new TitleService('FileHub', document);
     const configuration = new RoutingConfiguration('login')
         .addRoute('login', () => {
           this.rootElement.innerHTML = '';

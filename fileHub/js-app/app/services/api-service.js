@@ -1,3 +1,6 @@
+import {ServerError} from './server-error.js';
+import {RequestError} from './request-error.js';
+
 /**
  * Allows you to interact with the main features of the application
  */
@@ -7,10 +10,12 @@ export class ApiService {
    * @param {string} password
    * @returns {Promise<Response>}>}
    */
-  logIn(email, password) {
-    return this._fetch('/login', {
+  async logIn(email, password) {
+    return await this._fetch('/login', {
       method: 'POST',
       body: JSON.stringify({email, password}),
+    }).catch((error)=>{
+      console.log(error.message);
     });
   }
 
@@ -24,6 +29,8 @@ export class ApiService {
     return this._fetch('/register', {
       method: 'POST',
       body: JSON.stringify({email, password}),
+    }).catch((error)=>{
+      return;
     });
   }
 
@@ -34,17 +41,17 @@ export class ApiService {
    * @returns {Promise<Response>}
    * @private
    */
-  _fetch(url, init) {
-    return window.fetch(url, init)
+  async _fetch(url, init) {
+    return await fetch(url, init)
         .then((response) => {
           if (response.ok) {
             return response.json();
           } else {
-            throw new Error('500');
+            throw new ServerError('500');
           }
         })
-        .catch(() => {
-          throw new Error('404');
+        .catch((error) => {
+          throw new RequestError(error.message);
         });
   }
 }

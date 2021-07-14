@@ -20,5 +20,8 @@
     "eslint": "^7.30.0",
     "eslint-config-google": "^0.14.0",
     "qunit": "^2.16.0"
+  },
+  "dependencies": {
+    "fetch-mock": "^9.11.0"
   }
 }

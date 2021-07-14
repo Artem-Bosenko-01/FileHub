@@ -11,7 +11,6 @@ export class Router {
     this._routingConfiguration = configuration;
     this._window = window;
     this.hash = this._window.location.hash;
-    debugger;
     this._window.addEventListener('hashchange', () => {
       this._showPage(this._window.location.hash);
     });

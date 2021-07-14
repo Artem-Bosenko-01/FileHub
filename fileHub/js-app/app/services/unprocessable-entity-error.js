@@ -10,6 +10,10 @@ export class UnprocessableEntityError extends Error {
     super('This is 422 http failed response.');
     this._errors = errors;
   }
+
+  get errors() {
+    return this._errors;
+  }
 }
 
 /**
@@ -32,13 +36,5 @@ export class ErrorEntityDTO {
    */
   get field() {
     return this._field;
-  }
-
-  /**
-   *
-   * @returns {string}
-   */
-  get message() {
-    return this._message;
   }
 }

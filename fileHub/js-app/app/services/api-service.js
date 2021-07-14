@@ -1,5 +1,6 @@
-import {ServerError} from './server-error.js';
 import {RequestError} from './request-error.js';
+import {ServerError} from './server-error.js';
+import {ErrorEntityDTO, UnprocessableEntityError} from './unprocessable-entity-error.js';
 
 /**
  * Allows you to interact with the main features of the application
@@ -14,8 +15,6 @@ export class ApiService {
     return await this._fetch('/login', {
       method: 'POST',
       body: JSON.stringify({email, password}),
-    }).catch((error)=>{
-      console.log(error.message);
     });
   }
 
@@ -25,12 +24,10 @@ export class ApiService {
    * @param {string} password
    * @returns {Promise<Response>}
    */
-  registration(email, password) {
-    return this._fetch('/register', {
+  async registration(email, password) {
+    return await this._fetch('/register', {
       method: 'POST',
       body: JSON.stringify({email, password}),
-    }).catch((error)=>{
-      return;
     });
   }
 
@@ -45,13 +42,19 @@ export class ApiService {
     return await fetch(url, init)
         .then((response) => {
           if (response.ok) {
-            return response.json();
-          } else {
-            throw new ServerError('500');
+            const token = 'token';
+            return {token};
+          } else if (response.status === 422) {
+            return new UnprocessableEntityError([new ErrorEntityDTO('email', 'test-message')]);
+          } else if ((response.status >= 400 && response.status <= 421) ||
+              (response.status >= 423 && response.status < 500)) {
+            return new RequestError(response.status);
+          } else if (response.status === 500) {
+            return new ServerError(response.status);
           }
         })
         .catch((error) => {
-          throw new RequestError(error.message);
+          throw new Error(error.message);
         });
   }
 }

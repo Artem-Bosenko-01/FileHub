@@ -7,6 +7,6 @@ export class ServerError extends Error {
    * @param {string} message
    */
   constructor(message) {
-    super(message);
+    super('500: ' + message);
   }
 }

@@ -7,6 +7,6 @@ export class RequestError extends Error {
    * @param {string} message
    */
   constructor(message) {
-    super(message);
+    super('400: ' + message);
   }
 }

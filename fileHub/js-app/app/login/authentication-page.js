@@ -23,8 +23,8 @@ export class AuthenticationPage extends Component {
     form.onSubmit(async (credentials) => {
       const {email, password} = credentials;
       try {
-        await this._apiService.logIn(email, password);
-        alert(`${email}\n${password}`);
+        const response = await this._apiService.logIn(email, password);
+        alert(`${response}`);
       } catch (error) {
         form.addServerError(error.message);
       }

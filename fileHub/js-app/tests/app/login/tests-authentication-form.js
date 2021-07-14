@@ -33,12 +33,15 @@ module('Authentication form', (hooks) => {
   });
 
   test('Should be calls event after successful validation form', (assert) => {
+    const done = assert.async();
     const form = new AuthenticationForm(fixture);
-    const STEP = 'step';
     form.getElement('inputemail-user').value = 'email@la';
     form.getElement('inputpassword-user').value = '123456';
-    form.onSubmit((credentials) => assert.step(STEP));
-    form.getElement('form').dispatchEvent(new Event('submit'));
-    assert.verifySteps([STEP], 'Should successfully calls event on submit form');
+    form.onSubmit((credentials) => {
+      assert.ok(credentials, 'Should get correct credentials after validation.');
+      done();
+    });
+    const component = form.getElement('form');
+    component.dispatchEvent(new Event('submit'));
   });
 });

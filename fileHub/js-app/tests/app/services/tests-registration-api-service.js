@@ -45,14 +45,15 @@ module('Registration: API service', (hooks) => {
   });
 
   test('Should create query with response status 422', async (assert) => {
-    assert.expect(3);
+    assert.expect(4);
     fetchMock.mock({
       url: '/register',
       method: 'POST',
     }, 422);
     const res = await apiService.registration(email, password);
     assert.ok(fetchMock.called(), 'Should call mock for fetch');
-    assert.equal(res.errors, [{_field: 'email', _message: 'test-message'}], 'Should return error with special field');
-    assert.equal(res.message, 'This is 422 http failed response.', 'Should return error with message');
+    assert.equal(res.message, 'This is 422 http failed response.', 'Should return error with message.');
+    assert.equal(res.errors[0].field, 'email', 'Should return error with special field.');
+    assert.equal(res.errors[0].message, 'test-message', 'Should return error with special message for field.');
   });
 });

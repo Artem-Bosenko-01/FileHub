@@ -11,6 +11,10 @@ export class UnprocessableEntityError extends Error {
     this._errors = errors;
   }
 
+  /**
+   * Gets massive of errors after backend query.
+   * @returns {ErrorEntityDTO[]}
+   */
   get errors() {
     return this._errors;
   }
@@ -31,10 +35,18 @@ export class ErrorEntityDTO {
   }
 
   /**
-   *
+   * Gets field where needs show error.
    * @returns {string}
    */
   get field() {
     return this._field;
+  }
+
+  /**
+   * Gets message of error.
+   * @returns {string}
+   */
+  get message() {
+    return this._message;
   }
 }

@@ -21,3 +21,5 @@ import './app/services/tests-authentication-api-service.js';
 import './app/services/tests-registration-api-service.js';
 
 import './app/login/tests-authentication-page.js';
+
+import './app/register/tests-registration-page.js';

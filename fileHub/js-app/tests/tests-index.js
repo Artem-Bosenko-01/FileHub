@@ -17,4 +17,6 @@ import './app/services/tests-router.js';
 
 import './app/services/tests-title-service.js';
 
+import './app/login/tests-authentication-page.js';
+
 

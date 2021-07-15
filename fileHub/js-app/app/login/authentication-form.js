@@ -54,26 +54,28 @@ export class AuthenticationForm extends Component {
       this._emailInputField.id = 'email-user';
       this._emailInputField.title = 'Email';
       this._emailInputField.inputType = 'text';
+      this._emailInputField.onChange((value)=> this._emailInputValue = value);
 
       this._passwordInputField.id = 'password-user';
       this._passwordInputField.title = 'Password';
       this._passwordInputField.inputType = 'password';
+      this._passwordInputField.onChange((value)=> this._passwordInputValue = value);
     });
 
     this._form.onSubmit = async () => {
       this._emailInputField.cleanErrorMessage();
       this._passwordInputField.cleanErrorMessage();
 
-      const emailInputValue = this._emailInputField.inputValue;
-      const passwordInputValue = this._passwordInputField.inputValue;
+      this._emailInputValue = this._emailInputField.inputValue;
+      this._passwordInputValue = this._passwordInputField.inputValue;
 
       const authenticationFormValidator = new Validator(
           new ValidationConfiguration(
               [
-                new ParameterConfiguration(lengthValidation(this._emailInputField, emailInputValue, 5)),
-                new ParameterConfiguration(structureValidation(this._emailInputField, emailInputValue)),
+                new ParameterConfiguration(lengthValidation(this._emailInputField, this._emailInputValue, 5)),
+                new ParameterConfiguration(structureValidation(this._emailInputField, this._emailInputValue)),
                 new ParameterConfiguration(
-                    lengthValidation(this._passwordInputField, passwordInputValue, 6)),
+                    lengthValidation(this._passwordInputField, this._passwordInputValue, 6)),
               ],
           ),
       );
@@ -84,7 +86,7 @@ export class AuthenticationForm extends Component {
       } else {
         alert('Successful validate input data');
         this._onSubmitAuthenticationEvent && this._onSubmitAuthenticationEvent(
-            new UsersInputsData(emailInputValue, passwordInputValue));
+            new UsersInputsData(this._emailInputField, this._passwordInputValue));
       }
     };
   }

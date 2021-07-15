@@ -1,5 +1,5 @@
 /**
- *
+ * Error that throws when response status equals 422.
  */
 export class UnprocessableEntityError extends Error {
   /**
@@ -17,36 +17,5 @@ export class UnprocessableEntityError extends Error {
    */
   get errors() {
     return this._errors;
-  }
-}
-
-/**
- *
- */
-export class ErrorEntityDTO {
-  /**
-   * @constructor
-   * @param {string} field
-   * @param {string} message
-   */
-  constructor(field, message) {
-    this._field = field;
-    this._message = message;
-  }
-
-  /**
-   * Gets field where needs show error.
-   * @returns {string}
-   */
-  get field() {
-    return this._field;
-  }
-
-  /**
-   * Gets message of error.
-   * @returns {string}
-   */
-  get message() {
-    return this._message;
   }
 }

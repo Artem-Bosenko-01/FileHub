@@ -1,6 +1,7 @@
 import {RequestError} from './request-error.js';
 import {ServerError} from './server-error.js';
-import {ErrorEntityDTO, UnprocessableEntityError} from './unprocessable-entity-error.js';
+import {UnprocessableEntityError} from './unprocessable-entity-error.js';
+import {ErrorEntityDTO} from './error-entity-dto.js';
 
 /**
  * Allows you to interact with the main features of the application

@@ -50,6 +50,11 @@ module('Router service', (hooks) => {
   });
 });
 
+/**
+ * Gets configuration for routers.
+ * @param {any} assert
+ * @returns {RoutingConfiguration}
+ */
 function getConfig(assert) {
   const configuration = new RoutingConfiguration(DEFAULT_ROUTE)
       .addRoute(DEFAULT_ROUTE, () => assert.step(DEFAULT_ROUTE))

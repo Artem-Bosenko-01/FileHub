@@ -1,4 +1,3 @@
-
 import './app/validation/tests-validation-rules.js';
 
 import './app/validation/tests-validator.js';
@@ -21,3 +20,4 @@ import './app/services/tests-authentication-api-service.js';
 
 import './app/services/tests-registration-api-service.js';
 
+import './app/login/tests-authentication-page.js';

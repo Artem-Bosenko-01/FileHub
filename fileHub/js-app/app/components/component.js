@@ -9,24 +9,27 @@ export class Component {
    */
   constructor(parentElement, ...arg) {
     this.parentElement = parentElement;
-    arg && this.init(...arg);
-    this.render();
+    arg && this._init(...arg);
+    this._render();
   }
 
   /**
    * Initializes component properties and markup of component.
+   * @param {any} arg - parameters which need to initialize component.
+   * @protected
    */
-  init() {
+  _init(...arg) {
   }
 
   /**
    * Renders markup for special component.
+   * @protected
    */
-  get markup() {
+  get _markup() {
   }
 
   /**
-   * Searches element in DOM.
+   * Searches element in DOM by data attribute.
    * @param {string} searchClass
    * @returns {HTMLElement}
    */
@@ -36,22 +39,25 @@ export class Component {
 
   /**
    * Adds some function on event to listener.
+   * @protected
    */
-  addEventListeners() {
+  _addEventListeners() {
   }
 
   /**
-   * Init nested components after rendering.
+   * Init nested components in process of rendering.
+   * @protected
    */
-  initNestedComponents() {
+  _initNestedComponents() {
   }
 
   /**
    * Initializes something at special place, which defines by slot id.
    * @param {string} slotId
    * @param {function} initializer
+   * @protected
    */
-  mount(slotId, initializer) {
+  _mount(slotId, initializer) {
     const slot = this.getElement(slotId);
     const component = initializer(slot);
     slot.replaceWith(component.rootElement);
@@ -59,11 +65,12 @@ export class Component {
 
   /**
    * Shows some components in {@link parentElement parent element}.
+   * @protected
    */
-  render() {
-    const {markup} = this;
+  _render() {
+    const {_markup} = this;
     const tempElement = document.createElement('div');
-    tempElement.innerHTML = markup;
+    tempElement.innerHTML = _markup;
 
     if (this.rootElement) {
       const existElement = tempElement.firstElementChild;
@@ -73,7 +80,7 @@ export class Component {
       this.rootElement = tempElement.firstElementChild;
       this.parentElement.appendChild(this.rootElement);
     }
-    this.addEventListeners();
-    this.initNestedComponents();
+    this._addEventListeners();
+    this._initNestedComponents();
   }
 }

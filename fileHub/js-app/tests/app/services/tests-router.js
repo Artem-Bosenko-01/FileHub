@@ -7,18 +7,17 @@ const REGISTER_ROUTE = 'register';
 const ERROR_ROUTE = '404';
 
 module('Router service', (hooks) => {
-  test('Should show default page when hash is correctly', (assert) => {
+  test('Should show default page when hash is correct', (assert) => {
     const testWindow = {
       location: {hash: '#register'},
 
       addEventListener(event, init) {
-        init();
       },
     };
 
     const configuration = getConfig(assert);
     new Router(configuration, testWindow);
-    assert.verifySteps([REGISTER_ROUTE, REGISTER_ROUTE], 'Should route to default page.');
+    assert.verifySteps([REGISTER_ROUTE], 'Should route to default page.');
   });
 
   test('Should show default page when hash is empty', (assert) => {
@@ -26,13 +25,12 @@ module('Router service', (hooks) => {
       location: {hash: '#'},
 
       addEventListener(event, init) {
-        init();
       },
     };
 
     const configuration = getConfig(assert);
     new Router(configuration, testWindow);
-    assert.verifySteps([DEFAULT_ROUTE, DEFAULT_ROUTE], 'Should route to default page.');
+    assert.verifySteps([DEFAULT_ROUTE], 'Should route to default page.');
   });
 
   test('Should show error page when hash is invalid', (assert) => {
@@ -40,13 +38,12 @@ module('Router service', (hooks) => {
       location: {hash: '#router456'},
 
       addEventListener(event, init) {
-        init();
       },
     };
 
     const configuration = getConfig(assert);
     new Router(configuration, testWindow);
-    assert.verifySteps([ERROR_ROUTE, ERROR_ROUTE], 'Should route to error page.');
+    assert.verifySteps([ERROR_ROUTE], 'Should route to error page.');
   });
 });
 

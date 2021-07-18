@@ -41,10 +41,10 @@ export class RoutingConfiguration {
   /**
    * Finds page from routes list by hash.
    * @param {string} hash
-   * @returns {Component}
+   * @returns {Function}
    */
   getPageByHash(hash) {
-    if (this._routes.get(hash)) {
+    if (this._routes.has(hash)) {
       return this._routes.get(hash);
     } else return this._routes.get(this._error404Hash);
   }

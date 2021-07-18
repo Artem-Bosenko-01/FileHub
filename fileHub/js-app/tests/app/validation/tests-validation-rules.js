@@ -1,4 +1,4 @@
-import {confirmPasswordValidation, lengthValidation, structureValidation} from '../../../app/validation/validation-rules.js';
+import {confirmPasswordValidation, lengthValidation, emailRegexpValidation} from '../../../app/validation/validation-rules.js';
 
 const CORRECT_PASSWORD = '123456';
 const INVALID_CONFIRM_PASSWORD = '123654';
@@ -24,7 +24,7 @@ module('Negative scenery tests.', () => {
       'should check email contains only that symbols: a-zA-Z 0-9 +.-_@',
       ['fvs##ds', 'dsc$dmkl', 'as!cas'],
       (assert, email) => {
-        assert.rejects(structureValidation(EMAIL_NAME, email), `Invalid value -> ${email}`);
+        assert.rejects(emailRegexpValidation(EMAIL_NAME, email), `Invalid value -> ${email}`);
       });
 
   test.each(
@@ -54,7 +54,7 @@ module('Positive scenery tests', () => {
       'should check email contains only that symbols: a-zA-Z 0-9 +.-_@',
       ['email@em', 'ascx.bu-ku', '+dvs546'],
       async (assert, email) => {
-        const result = await structureValidation(EMAIL_NAME, email);
+        const result = await emailRegexpValidation(EMAIL_NAME, email);
         assert.equal(result, email, `"${result}" is correct email.`);
       });
 

@@ -3,8 +3,8 @@ import {Form} from '../components/form.js';
 import {FormInputField} from '../components/form-input-field.js';
 import {Validator} from '../validation/validator.js';
 import {ParameterConfiguration, ValidationConfiguration} from '../validation/validation-configuration.js';
-import {confirmPasswordValidation, lengthValidation, structureValidation} from '../validation/validation-rules.js';
-import {UsersInputsData} from '../user-inputs-data.js';
+import {confirmPasswordValidation, lengthValidation, emailRegexpValidation} from '../validation/validation-rules.js';
+import {UserData} from '../user-data.js';
 
 /**
  * Component for registration page that allows to get and
@@ -20,7 +20,7 @@ export class RegistrationForm extends Component {
   }
 
   /** @inheritDoc */
-  initNestedComponents() {
+  _initNestedComponents() {
     this._form = new Form(this.rootElement);
     this._form.formHeader = 'Sign Up to FileHub';
     this._form.buttonTitle = 'Sign Up';
@@ -59,7 +59,7 @@ export class RegistrationForm extends Component {
                 new ParameterConfiguration(
                     lengthValidation(this._emailInputField, emailInputValue, 5)),
                 new ParameterConfiguration(
-                    structureValidation(this._emailInputField, emailInputValue)),
+                    emailRegexpValidation(this._emailInputField, emailInputValue)),
                 new ParameterConfiguration(
                     lengthValidation(this._passwordInputField, passwordInputValue, 6)),
                 new ParameterConfiguration(
@@ -73,11 +73,10 @@ export class RegistrationForm extends Component {
       const results = await registrationFormValidator.validate();
       const isAnyPromiseStatusReject = results.some((result) => result.status === 'rejected');
       if (isAnyPromiseStatusReject) {
-        this.renderErrorMessages(results);
+        this._renderErrorMessages(results);
       } else {
-        alert('Successful validate input data');
         this._onSubmitAuthenticationEvent && this._onSubmitAuthenticationEvent(
-            new UsersInputsData(emailInputValue, passwordInputValue));
+            new UserData(emailInputValue, passwordInputValue));
       }
     };
   }
@@ -85,9 +84,10 @@ export class RegistrationForm extends Component {
   /**
    * Adds error messages to inputs after analyzes validation results.
    * @param {PromiseRejectedResult[]} resultsOfValidation
+   * @private
    * @returns {void}
    */
-  renderErrorMessages(resultsOfValidation) {
+  _renderErrorMessages(resultsOfValidation) {
     resultsOfValidation
         .filter((result) => result.status === 'rejected')
         .forEach((result) => result.reason.component.errorMessage = result.reason.message);
@@ -102,7 +102,7 @@ export class RegistrationForm extends Component {
   }
 
   /** @inheritDoc */
-  get markup() {
+  get _markup() {
     return `<div class="raw"></div>`;
   }
 }

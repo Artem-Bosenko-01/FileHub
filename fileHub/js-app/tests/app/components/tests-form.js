@@ -4,10 +4,6 @@ import {FormInputField} from '../../../app/components/form-input-field.js';
 const {module, test} = QUnit;
 let fixture;
 
-const HEADER = 'header';
-const LINK_REF = 'link';
-const LINK_MESSAGE = 'this is link message';
-
 module('Form', {
   beforeEach: () => {
     fixture = document.getElementById('qunit-fixture');
@@ -15,17 +11,21 @@ module('Form', {
 });
 
 test('Should create form with header, link reference and message, buttonTitle', (assert) => {
+  const header = 'header';
+  const linkRef = 'link';
+  const linkMessage = 'this is link message';
+
   assert.expect(3);
   const form = new Form(fixture);
-  form.formHeader = HEADER;
+  form.formHeader = header;
   assert.ok(form.getElement('header'), 'Should create header in form');
 
-  form.linkReference = LINK_REF;
-  assert.ok(document.querySelector(`[data-fh="link"][href="${LINK_REF}"]`),
+  form.linkReference = linkRef;
+  assert.ok(document.querySelector(`[data-fh="link"][href="${linkRef}"]`),
       'Should add reference to link in form');
 
-  form.linkMessage = LINK_MESSAGE;
-  assert.equal(form.getElement('link').innerHTML, LINK_MESSAGE, 'Should create header in form');
+  form.linkMessage = linkMessage;
+  assert.equal(form.getElement('link').innerHTML, linkMessage, 'Should create header in form');
 });
 
 test('Should create form with input field', (assert) => {
@@ -39,9 +39,9 @@ test('Should create form with input field', (assert) => {
 });
 
 test('Should check event calls in form ', (assert) => {
-  const STEP = 'step';
+  const step = 'step';
   const form = new Form(fixture);
-  form.onSubmit = () => assert.step(STEP);
+  form.onSubmit = () => assert.step(step);
   form.getElement('form').dispatchEvent(new Event('submit'));
-  assert.verifySteps([STEP], 'Should successfully calls event on submit form');
+  assert.verifySteps([step], 'Should successfully calls event on submit form');
 });

@@ -10,12 +10,12 @@ export class Router {
   constructor(configuration, window) {
     this._routingConfiguration = configuration;
     this._window = window;
-    this.hash = this._window.location.hash;
+    const hash = this._window.location.hash;
     this._window.addEventListener('hashchange', () => {
       this._showPage(this._window.location.hash);
     });
 
-    this._showPage(this.hash);
+    this._showPage(hash);
   }
 
   /**
@@ -29,8 +29,8 @@ export class Router {
       hash = this._redirect(defaultHash);
     }
     const hashBody = hash.substring(1);
-    const route = this._routingConfiguration.getPageByHash(hashBody);
-    route();
+    const pageCreator = this._routingConfiguration.getPageByHash(hashBody);
+    pageCreator();
   }
 
   /**

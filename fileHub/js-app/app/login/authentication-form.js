@@ -3,8 +3,8 @@ import {Form} from '../components/form.js';
 import {FormInputField} from '../components/form-input-field.js';
 import {Validator} from '../validation/validator.js';
 import {ParameterConfiguration, ValidationConfiguration} from '../validation/validation-configuration.js';
-import {lengthValidation, structureValidation} from '../validation/validation-rules.js';
-import {UsersInputsData} from '../user-inputs-data.js';
+import {lengthValidation, emailRegexpValidation} from '../validation/validation-rules.js';
+import {UserData} from '../user-data.js';
 
 /**
  * Component for authentication page that allows to get and validate user email and password.
@@ -29,9 +29,10 @@ export class AuthenticationForm extends Component {
   /**
    * Adds error messages to inputs after analyzes validation results.
    * @param {PromiseRejectedResult[]} resultsOfValidation
+   * @private
    * @returns {void}
    */
-  renderErrorMessages(resultsOfValidation) {
+  _renderErrorMessages(resultsOfValidation) {
     resultsOfValidation
         .filter((result) => result.status === 'rejected')
         .forEach((result) => result.reason.component.errorMessage = result.reason.message);
@@ -40,7 +41,7 @@ export class AuthenticationForm extends Component {
   /**
    * @inheritDoc
    */
-  initNestedComponents() {
+  _initNestedComponents() {
     this._form = new Form(this.rootElement);
     this._form.formHeader = 'Sign In to FileHub';
     this._form.buttonTitle = 'Sign In';
@@ -54,7 +55,7 @@ export class AuthenticationForm extends Component {
       this._emailInputField.id = 'email-user';
       this._emailInputField.title = 'Email';
       this._emailInputField.inputType = 'text';
-      this._emailInputField.onChange((value)=> this._emailInputValue = value);
+      this._emailInputField.onChange((value)=> this._emailInputField.errorMessage = value);
 
       this._passwordInputField.id = 'password-user';
       this._passwordInputField.title = 'Password';
@@ -73,7 +74,7 @@ export class AuthenticationForm extends Component {
           new ValidationConfiguration(
               [
                 new ParameterConfiguration(lengthValidation(this._emailInputField, this._emailInputValue, 5)),
-                new ParameterConfiguration(structureValidation(this._emailInputField, this._emailInputValue)),
+                new ParameterConfiguration(emailRegexpValidation(this._emailInputField, this._emailInputValue)),
                 new ParameterConfiguration(
                     lengthValidation(this._passwordInputField, this._passwordInputValue, 6)),
               ],
@@ -82,11 +83,10 @@ export class AuthenticationForm extends Component {
       const results = await authenticationFormValidator.validate();
       const isAnyPromiseStatusReject = results.some((result) => result.status === 'rejected');
       if (isAnyPromiseStatusReject) {
-        this.renderErrorMessages(results);
+        this._renderErrorMessages(results);
       } else {
-        alert('Successful validate input data');
         this._onSubmitAuthenticationEvent && this._onSubmitAuthenticationEvent(
-            new UsersInputsData(this._emailInputField, this._passwordInputValue));
+            new UserData(this._emailInputField, this._passwordInputValue));
       }
     };
   }
@@ -94,7 +94,7 @@ export class AuthenticationForm extends Component {
   /**
    * @inheritDoc
    */
-  get markup() {
+  get _markup() {
     return `<div class="raw"></div>`;
   }
 }

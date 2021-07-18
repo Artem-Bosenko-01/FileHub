@@ -1,7 +1,7 @@
 /**
  * DTO for carrying user's data from inputs field to server.
  */
-export class UsersInputsData {
+export class UserData {
   /**
    * @constructor
    * @param {string} email

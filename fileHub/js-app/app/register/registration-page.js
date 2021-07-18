@@ -11,14 +11,14 @@ export class RegistrationPage extends Component {
    * @param {ApiService} apiService
    * @param {TitleService}titleService
    */
-  init(apiService, titleService) {
+  _init(apiService, titleService) {
     this._apiService = apiService;
     this._titleService =titleService;
     this._titleService.addTitleForPage('Registration');
   }
 
   /** @inheritDoc */
-  initNestedComponents() {
+  _initNestedComponents() {
     const form = new RegistrationForm(this.rootElement);
     form.onSubmit(async (credentials) => {
       const {email, password} = credentials;
@@ -32,7 +32,7 @@ export class RegistrationPage extends Component {
   }
 
   /** @inheritDoc */
-  get markup() {
+  get _markup() {
     return ' <header>\n' +
         '        <h1 title="TeamDev">\n' +
         '            <a class="logo" href="https://www.teamdev.com/" target="_blank">\n' +

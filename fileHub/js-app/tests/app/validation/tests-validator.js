@@ -4,7 +4,7 @@ import {ParameterConfiguration, ValidationConfiguration} from '../../../app/vali
 import {
   confirmPasswordValidation,
   lengthValidation,
-  structureValidation,
+  emailRegexpValidation,
 } from '../../../app/validation/validation-rules.js';
 
 const {module, test} = QUnit;
@@ -26,7 +26,7 @@ module('Validator', (hooks) => {
   test(`Resolve: Should validate configuration with 3 parameter `, async (assert) => {
     assert.expect(2);
     const conf = new ValidationConfiguration([new ParameterConfiguration(lengthValidation(field, 'length', 6)),
-      new ParameterConfiguration(structureValidation(field, 'validField')),
+      new ParameterConfiguration(emailRegexpValidation(field, 'validField')),
       new ParameterConfiguration(confirmPasswordValidation(field, '123456', '123456'))]);
     const results = await new Validator(conf).validate();
     assert.ok(results, 'Results of validation should be non null or undefined');
@@ -46,7 +46,7 @@ module('Validator', (hooks) => {
   test(`Reject: Should validate configuration with 3 parameter `, async (assert) => {
     assert.expect(2);
     const conf = new ValidationConfiguration([new ParameterConfiguration(lengthValidation(field, 'short', 6)),
-      new ParameterConfiguration(structureValidation(field, 'val$date')),
+      new ParameterConfiguration(emailRegexpValidation(field, 'val$date')),
       new ParameterConfiguration(confirmPasswordValidation(field, '123456', '123654'))]);
     const results = await new Validator(conf).validate();
     assert.ok(results, 'Results of validation should be non null or undefined');

@@ -14,48 +14,48 @@ export class FormInputField extends Component {
   }
 
   /**
-   * Adds id to input field.
+   * Id to input field.
    * @param {string}  value
    */
   set id(value) {
     this._id = value;
-    this.render();
+    this._render();
   }
 
   /**
-   * Adds title and name to label.
+   * Title and name to label.
    * @param {string}  value
    */
   set title(value) {
     this._title = value;
-    this.render();
+    this._render();
   }
 
   /**
-   * Set value to input.
+   * Value to input.
    * @param {string} value
    */
   set value(value) {
     this._valueInput = value;
-    this.render();
+    this._render();
   }
 
   /**
-   * Adds special type of input string to input field.
+   * Special type of input string to input field.
    * @param {string}  value
    */
   set inputType(value) {
     this._inputType = value;
-    this.render();
+    this._render();
   }
 
   /**
-   * Adds error message under input field.
+   * Error message under input field.
    * @param {string} message
    */
   set errorMessage(message) {
     this._errorMessages.push(message);
-    this.render();
+    this._render();
   }
 
   /**
@@ -63,11 +63,11 @@ export class FormInputField extends Component {
    */
   cleanErrorMessage() {
     this._errorMessages = [];
-    this.render();
+    this._render();
   }
 
   /**
-   * Get an actual input field value.
+   * Actual input field value.
    * @returns {string|undefined}
    */
   get inputValue() {
@@ -83,30 +83,28 @@ export class FormInputField extends Component {
   }
 
   /** @inheritDoc */
-  addEventListeners() {
+  _addEventListeners() {
     this.getElement(`input${this._id}`)
         .addEventListener('change', (evt) => {
           this._onChangeAction && this._onChangeAction(evt.target.value);
+          this._valueInput = evt.target.value;
+          this.getElement(`input${this._id}`).value = evt.target.value;
         });
   }
 
   /** @inheritDoc */
-  get markup() {
-    let errorMessages;
-    if (this._errorMessages) {
-      errorMessages = this._errorMessages
-          .map((error) => error && `<p data-fh="error-message" class="error-message">${error}</p>`)
-          .join('');
-    }
-
-    const getInput = this.getElement(`input${this._id}`);
-    getInput ? this._valueInput = getInput.value : this._valueInput = '';
+  get _markup() {
+    let messages;
+    this._errorMessages ? messages = this._errorMessages : messages = [];
+    const errorMessages = messages
+        .map((error) => error && `<p data-fh="error-message" class="error-message">${error}</p>`)
+        .join('');
 
     return `<div class="get-user-data" data-fh="get-user-data">
                 <label class="label-name" data-fh="label-name" for="${this._id}">${this._title}</label>
                 <div class="input-value ${errorMessages ? 'invalid-input-value' : ''}">
-                   <input data-fh="input${this._id}" title="Input ${this._title}" type="${this._inputType}" 
-                   id="${this._id}" placeholder="${this._title}" value="${this._valueInput}">
+                   <input data-fh="input${this._id}" title="${this._title}" type="${this._inputType}" 
+                   id="${this._id}" placeholder="${this._title}" value="${this._valueInput ? this._valueInput : ''}">
                    ${errorMessages ? errorMessages : ''}
                 </div>
             </div>`;

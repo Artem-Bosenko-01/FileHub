@@ -1,7 +1,7 @@
 import {Component} from './components/component.js';
 
 export class ErrorPage extends Component {
-  get markup() {
+  get _markup() {
     return `<div>
                 <h1>NOT FOUND PAGE</h1>
                 <div style="">

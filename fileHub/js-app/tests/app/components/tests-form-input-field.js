@@ -32,7 +32,7 @@ test('Should create form group with id, title and inputType', (assert) => {
   inputField.title = TITLE;
   inputField.inputType = TYPE;
 
-  assert.equal(inputField.getElement(`input${ID}`).title, 'Input ' + TITLE,
+  assert.equal(inputField.getElement(`input${ID}`).title, TITLE,
       'Should add title to label: ' + TITLE);
   assert.equal(inputField.getElement(`input${ID}`).id, ID,
       'Should add id to input field: ' + ID);
@@ -57,15 +57,15 @@ test('Should ignore creating error message under input field', (assert) => {
       'Shouldn\'t add error message to input-value div. ');
 });
 
-test('Should expect successful adding event listeners', (assert) => {
+test('Should call change event listener', (assert) => {
   assert.expect(2);
-  const STEP = 'This step on event change input value';
+  const step = 'This step on event change input value';
   inputField.id = ID;
   inputField.onChange((message) => {
-    assert.step(STEP);
+    assert.step(step);
   });
   const event = new Event('change');
   inputField.getElement(`input${ID}`).dispatchEvent(event);
-  assert.verifySteps([STEP]);
+  assert.verifySteps([step]);
 });
 

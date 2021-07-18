@@ -2,38 +2,38 @@ import {Component} from './component.js';
 import {Button} from './button.js';
 
 /**
- * Abstract base component to configure user forms.
+ * Base component to configure user forms.
  */
 export class Form extends Component {
   /**
-   * Adds title for form header.
+   * Title for form header.
    * @param {string}  value
    */
   set formHeader(value) {
     this._formHeader = value;
-    this.render();
+    this._render();
   }
 
   /**
-   * Adds reference action, when user click on text-link.
+   * Reference action, when user click on text-link.
    * @param {string}  value
    */
   set linkReference(value) {
     this._link = value;
-    this.render();
+    this._render();
   }
 
   /**
-   * Adds specific inner message or symbol to link.
+   * Specific inner message or symbol to link.
    * @param {string}  value
    */
   set linkMessage(value) {
     this._message = value;
-    this.render();
+    this._render();
   }
 
   /**
-   * Adds title to button.
+   * Title to button.
    * @param {string} value
    */
   set buttonTitle(value) {
@@ -46,41 +46,41 @@ export class Form extends Component {
    */
   initInputs(initializer) {
     this._initInputs = initializer;
-    this.render();
+    this._render();
   }
 
   /**
-   * Adds some event to form, which process on submit form.
+   * Some event to form, which process on submit form.
    * @param {function} handler
    */
   set onSubmit(handler) {
     this._eventOnSubmit = handler;
-    this.render();
+    this._render();
   }
 
   /**
    * @inheritDoc
    */
-  addEventListeners() {
+  _addEventListeners() {
     this._eventOnSubmit && this.rootElement.addEventListener('submit', this._eventOnSubmit);
   }
 
   /**
    * @inheritDoc
    */
-  initNestedComponents() {
+  _initNestedComponents() {
     const inputRoot = this.getElement('data');
     this._initInputs && this._initInputs(inputRoot);
 
-    this.mount('button', (component) => {
-      const button = new Button(component);
+    this._mount('button', (slotElement) => {
+      const button = new Button(slotElement);
       button.buttonTitle = `${this._buttonTitle}`;
       return button;
     });
   }
 
   /** @inheritDoc */
-  get markup() {
+  get _markup() {
     return `<form data-fh="form" onsubmit="return false">
             <header class="header">
                 <h2 data-fh="header">${this._formHeader}</h2>

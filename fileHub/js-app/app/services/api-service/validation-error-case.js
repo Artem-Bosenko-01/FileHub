@@ -1,7 +1,7 @@
 /**
  * Object that needs for saves data about error which calls when response status equals 422.
  */
-export class ErrorEntityDTO {
+export class ValidationErrorCase {
   /**
 	 * @constructor
 	 * @param {string} field

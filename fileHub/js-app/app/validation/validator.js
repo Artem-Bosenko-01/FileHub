@@ -15,8 +15,7 @@ export class Validator {
    * @returns {Promise<resolve|reject>[]}
    */
   async validate() {
-    const promises = [];
-    this._configuration.rules.forEach((rule) => promises.push(rule.validationRule));
+    const promises = this._configuration.rules.map((rule) => rule.validationRule);
     return await Promise.allSettled(promises);
   }
 }

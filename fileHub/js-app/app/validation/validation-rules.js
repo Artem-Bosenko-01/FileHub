@@ -24,7 +24,7 @@ export function lengthValidation(field, value, length) {
  * @param {string} value - line of user data, which he are input.
  * @returns {Promise} - is result of validation process: promise will resolve or reject.
  */
-export function structureValidation(field, value) {
+export function emailRegexpValidation(field, value) {
   return new Promise((resolve, reject) => {
     if (/^[a-zA-Z0-9+._@-]*$/.test(value) === false) {
       reject(new ValidationError(field, `Data should be contains a-zA-Z, 0-9 or symbols like "+._@-"`));

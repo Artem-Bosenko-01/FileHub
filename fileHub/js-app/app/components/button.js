@@ -5,21 +5,21 @@ import {Component} from './component.js';
  */
 export class Button extends Component {
   /**
-   * Adds inner text to button.
+   * Inner text to button.
    * @param {string}  value - button title.
    */
   set buttonTitle(value) {
     this._buttonTitle = value;
-    this.render();
+    this._render();
   }
 
   /**
-   * Adds a special icon to the button by indication class of symbol in value field.
+   * Special icon to the button by indication class of symbol in value field.
    * @param {string}  value - class of symbol.
    */
   set buttonIcon(value) {
     this._buttonIcon = value;
-    this.render();
+    this._render();
   }
 
   /**
@@ -31,14 +31,14 @@ export class Button extends Component {
   }
 
   /** @inheritDoc */
-  addEventListeners() {
+  _addEventListeners() {
     this.getElement('button').addEventListener('click', (evt)=>{
-      this._onCLickEvent(evt);
+      this._onCLickEvent && this._onCLickEvent(evt);
     });
   }
 
   /** @inheritDoc */
-  get markup() {
+  get _markup() {
     const icon = `<span class="glyphicon glyphicon-${this._buttonIcon} 
                         ${this._buttonIcon === 'repeat' ? 'loading': ''}"></span>`;
     return `<button id="button" title="Submit" 

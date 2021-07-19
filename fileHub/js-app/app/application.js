@@ -33,7 +33,7 @@ export class Application extends Component {
   }
 
   /**
-   * CLeares previous HTML elements from index.html
+   * Clear previous HTML elements from index.html
    * @private
    */
   _clearContainer() {

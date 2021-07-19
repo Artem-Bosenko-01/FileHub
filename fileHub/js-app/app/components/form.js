@@ -69,7 +69,7 @@ export class Form extends Component {
    * @inheritDoc
    */
   _initNestedComponents() {
-    const inputRoot = this.getElement('data');
+    const inputRoot = this._getElement('data');
     this._initInputs && this._initInputs(inputRoot);
 
     this._mount('button', (slotElement) => {

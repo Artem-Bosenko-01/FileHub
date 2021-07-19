@@ -15,8 +15,14 @@ export class Validator {
    * @returns {Promise<resolve|reject>[]}
    */
   async validate() {
-    const promises = this._configuration.rules.map((rule) => rule.validationRule);
-    return await Promise.allSettled(promises);
+    return await Promise.all(this._configuration.rules.map(async (rule) => {
+      try {
+        const result = await rule.validationRule();
+        return {status: 'resolve', field: rule.field, value: result};
+      } catch (e) {
+        return {status: 'rejected', field: rule.field, message: e.message};
+      }
+    }));
   }
 }
 

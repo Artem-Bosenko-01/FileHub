@@ -1,4 +1,5 @@
 import {AuthenticationForm} from '../../../app/login/authentication-form.js';
+import {searchElement} from '../search-element-function.js';
 
 const {module, test} = QUnit;
 
@@ -10,15 +11,15 @@ module('Authentication form', (hooks) => {
 
   test('Should create authentication form', (assert) => {
     assert.expect(4);
-    const form = new AuthenticationForm(fixture);
-    const header = form.getElement('header').innerHTML;
+    new AuthenticationForm(fixture);
+    const header = searchElement('header').innerHTML;
     assert.equal(header, 'Sign In to FileHub', 'Should check form title');
     const LINK_REF = '#register';
     assert.ok(document.querySelector(`[data-fh="link"][href="${LINK_REF}"]`),
         'Should check reference link in form');
-    const linkMessage = form.getElement('link').innerHTML;
+    const linkMessage = searchElement('link').innerHTML;
     assert.equal(linkMessage, 'Didn\'t have an account yet?', 'Should check link message in form');
-    const buttonTitle = form.getElement('button').innerHTML;
+    const buttonTitle = searchElement('button').innerHTML;
     assert.equal(buttonTitle, 'Sign In', 'Should check title of button in form');
   });
 
@@ -41,7 +42,7 @@ module('Authentication form', (hooks) => {
       assert.ok(credentials, 'Should get correct credentials after validation.');
       done();
     });
-    const component = form.getElement('form');
+    const component = searchElement('form');
     component.dispatchEvent(new Event('submit'));
   });
 });

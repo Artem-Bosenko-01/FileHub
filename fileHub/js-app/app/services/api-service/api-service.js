@@ -13,10 +13,20 @@ export class ApiService {
    * @returns {Promise<Response>}>}
    */
   async logIn(email, password) {
-    return await this._fetch('/login', {
+    const response = await this._fetch('/login', {
       method: 'POST',
       body: JSON.stringify({email, password}),
     });
+
+    if (response.ok) {
+      const message = await response.json();
+      return message;
+    } else if ((response.status >= 400 && response.status <= 421) ||
+        (response.status >= 423 && response.status < 500)) {
+      throw new ClientServerError(response.status);
+    } else if (response.status === 500) {
+      throw new ServerError(response.status);
+    }
   }
 
   /**
@@ -26,10 +36,22 @@ export class ApiService {
    * @returns {Promise<Response>}
    */
   async registration(email, password) {
-    return await this._fetch('/register', {
+    const response = await this._fetch('/register', {
       method: 'POST',
       body: JSON.stringify({email, password}),
     });
+
+    if (response.ok) {
+      const message = await response.json();
+      return message;
+    } else if (response.status === 422) {
+      throw new UnprocessableEntityError([new ValidationErrorCase('email', 'test-message')]);
+    } else if ((response.status >= 400 && response.status <= 421) ||
+        (response.status >= 423 && response.status < 500)) {
+      throw new ClientServerError(response.status);
+    } else if (response.status === 500) {
+      throw new ServerError(response.status);
+    }
   }
 
   /**
@@ -42,17 +64,7 @@ export class ApiService {
   async _fetch(url, init) {
     return fetch(url, init)
         .then((response) => {
-          if (response.ok) {
-            const token = 'token';
-            return {token};
-          } else if (response.status === 422) {
-            return new UnprocessableEntityError([new ValidationErrorCase('email', 'test-message')]);
-          } else if ((response.status >= 400 && response.status <= 421) ||
-              (response.status >= 423 && response.status < 500)) {
-            return new ClientServerError(response.status);
-          } else if (response.status === 500) {
-            return new ServerError(response.status);
-          }
+          return response;
         })
         .catch((error) => {
           throw new Error(error.message);

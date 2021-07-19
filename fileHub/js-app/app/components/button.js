@@ -5,6 +5,15 @@ import {Component} from './component.js';
  */
 export class Button extends Component {
   /**
+   * @constructor
+   * @param {HTMLElement} parentElement
+   */
+  constructor(parentElement) {
+    super(parentElement);
+    this._iconCLasses = [];
+  }
+
+  /**
    * Inner text to button.
    * @param {string}  value - button title.
    */
@@ -23,6 +32,15 @@ export class Button extends Component {
   }
 
   /**
+   * Adds classes to button HTML tag if it necessary.
+   * @param {string} iconClass
+   */
+  addIconClasses(iconClass) {
+    this._iconCLasses.push(iconClass);
+    this._render();
+  }
+
+  /**
    * Adds some event for listeners on click button.
    * @param {function} event
    */
@@ -32,15 +50,15 @@ export class Button extends Component {
 
   /** @inheritDoc */
   _addEventListeners() {
-    this.getElement('button').addEventListener('click', (evt)=>{
-      this._onCLickEvent && this._onCLickEvent(evt);
-    });
+    this._getElement('button') && this._getElement('button')
+        .addEventListener('click', this._onCLickEvent);
   }
 
   /** @inheritDoc */
   get _markup() {
-    const icon = `<span class="glyphicon glyphicon-${this._buttonIcon} 
-                        ${this._buttonIcon === 'repeat' ? 'loading': ''}"></span>`;
+    const expression = this._iconCLasses && this._iconCLasses.length > 0;
+    const icon = `<span class="glyphicon glyphicon-${this._buttonIcon} ${expression &&
+    this._iconCLasses.forEach((iconClass) => iconClass)}"></span>`;
     return `<button id="button" title="Submit" 
                 data-fh="button" class="button"
                 >${this._buttonIcon ? icon : ''}${this._buttonTitle ? this._buttonTitle : ''}</button>`;

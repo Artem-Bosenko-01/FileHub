@@ -84,11 +84,11 @@ export class FormInputField extends Component {
 
   /** @inheritDoc */
   _addEventListeners() {
-    this.getElement(`input${this._id}`)
+    this._getElement(`input${this._id}`)
         .addEventListener('change', (evt) => {
           this._onChangeAction && this._onChangeAction(evt.target.value);
           this._valueInput = evt.target.value;
-          this.getElement(`input${this._id}`).value = evt.target.value;
+          this._getElement(`input${this._id}`).value = evt.target.value;
         });
   }
 

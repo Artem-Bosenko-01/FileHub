@@ -2,8 +2,8 @@ import {Component} from '../components/component.js';
 import {Form} from '../components/form.js';
 import {FormInputField} from '../components/form-input-field.js';
 import {Validator} from '../validation/validator.js';
-import {ParameterConfiguration, ValidationConfiguration} from '../validation/validation-configuration.js';
-import {confirmPasswordValidation, lengthValidation, emailRegexpValidation} from '../validation/validation-rules.js';
+import {ValidationConfiguration, ValidationRule} from '../validation/validation-configuration.js';
+import {confirmPasswordValidation, emailRegexpValidation, lengthValidation} from '../validation/validation-rules.js';
 import {UserData} from '../user-data.js';
 
 /**
@@ -35,14 +35,17 @@ export class RegistrationForm extends Component {
       this._emailInputField.id = 'email-user';
       this._emailInputField.title = 'Email';
       this._emailInputField.inputType = 'email';
+      this._emailInputField.onChange((value) => this._emailInputValue = value);
 
       this._passwordInputField.id = 'password-user';
       this._passwordInputField.title = 'Password';
       this._passwordInputField.inputType = 'password';
+      this._passwordInputField.onChange((value) => this._passwordInputValue = value);
 
       this._confirmPasswordInputField.id = 'confirm-password-user';
       this._confirmPasswordInputField.title = 'Confirm Password';
       this._confirmPasswordInputField.inputType = 'password';
+      this._confirmPasswordInputField.onChange((value) => this._confipasswordInputValue = value);
     });
 
     this._form.onSubmit = async () => {
@@ -50,24 +53,14 @@ export class RegistrationForm extends Component {
       this._passwordInputField.cleanErrorMessage();
       this._confirmPasswordInputField.cleanErrorMessage();
 
-      const emailInputValue = this._emailInputField.inputValue;
-      const passwordInputValue = this._passwordInputField.inputValue;
-
       const registrationFormValidator = new Validator(
           new ValidationConfiguration(
               [
-                new ParameterConfiguration(
-                    lengthValidation(this._emailInputField, emailInputValue, 5)),
-                new ParameterConfiguration(
-                    emailRegexpValidation(this._emailInputField, emailInputValue)),
-                new ParameterConfiguration(
-                    lengthValidation(this._passwordInputField, passwordInputValue, 6)),
-                new ParameterConfiguration(
-                    confirmPasswordValidation(
-                        this._confirmPasswordInputField,
-                        passwordInputValue,
-                        this._confirmPasswordInputField.inputValue),
-                ),
+                new ValidationRule(this._emailInputField, () => lengthValidation(this._emailInputValue, 5)),
+                new ValidationRule(this._emailInputField, () => emailRegexpValidation(this._emailInputValue)),
+                new ValidationRule(this._passwordInputField, () => lengthValidation(this._passwordInputValue, 6)),
+                new ValidationRule(this._confirmPasswordInputField, () => confirmPasswordValidation(
+                    this._passwordInputValue, this._confipasswordInputValue)),
               ],
           ));
       const results = await registrationFormValidator.validate();
@@ -76,7 +69,7 @@ export class RegistrationForm extends Component {
         this._renderErrorMessages(results);
       } else {
         this._onSubmitAuthenticationEvent && this._onSubmitAuthenticationEvent(
-            new UserData(emailInputValue, passwordInputValue));
+            new UserData(this._emailInputValue, this._passwordInputValue));
       }
     };
   }
@@ -90,7 +83,7 @@ export class RegistrationForm extends Component {
   _renderErrorMessages(resultsOfValidation) {
     resultsOfValidation
         .filter((result) => result.status === 'rejected')
-        .forEach((result) => result.reason.component.errorMessage = result.reason.message);
+        .forEach((result) => result.field.errorMessage = result.message);
   }
 
   /**

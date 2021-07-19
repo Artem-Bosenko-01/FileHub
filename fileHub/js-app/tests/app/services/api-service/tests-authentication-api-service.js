@@ -1,5 +1,5 @@
-import fetchMock from '../../../node_modules/fetch-mock/esm/client.js';
-import {ApiService} from '../../../app/services/api-service/api-service.js';
+import fetchMock from '../../../../node_modules/fetch-mock/esm/client.js';
+import {ApiService} from '../../../../app/services/api-service/api-service.js';
 
 const {module, test} = QUnit;
 
@@ -15,7 +15,7 @@ module('Authentication: API service', (hooks) => {
     fetchMock.mock({
       url: '/login',
       method: 'POST',
-    }, 200);
+    }, {token});
     const apiService = new ApiService();
     const res = await apiService.logIn(email, password);
     assert.ok(fetchMock.called(), 'Should call mock for fetch');
@@ -29,9 +29,13 @@ module('Authentication: API service', (hooks) => {
       method: 'POST',
     }, 404);
     const apiService = new ApiService();
-    const res = await apiService.logIn(email, password);
-    assert.ok(fetchMock.called(), 'Should call mock for fetch');
-    assert.equal(res.message, '400: 404', 'Should return error with response status');
+    try {
+      await apiService.logIn(email, password);
+    } catch (error) {
+      assert.equal(error.message, '400: 404', 'Should return error with response status');
+    } finally {
+      assert.ok(fetchMock.called(), 'Should call mock for fetch');
+    }
   });
 
   test('Should handle a response with code 500', async (assert) => {
@@ -41,8 +45,12 @@ module('Authentication: API service', (hooks) => {
       method: 'POST',
     }, 500);
     const apiService = new ApiService();
-    const res = await apiService.logIn(email, password);
-    assert.ok(fetchMock.called(), 'Should call mock for fetch');
-    assert.equal(res.message, '500: 500', 'Should return error with response status');
+    try {
+      await apiService.logIn(email, password);
+    } catch (error) {
+      assert.equal(error.message, '500: 500', 'Should return error with response status');
+    } finally {
+      assert.ok(fetchMock.called(), 'Should call mock for fetch');
+    }
   });
 });

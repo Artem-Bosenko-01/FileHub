@@ -31,10 +31,11 @@ export class Component {
   /**
    * Searches element in DOM by data attribute.
    * @param {string} searchClass
+   * @protected
    * @returns {HTMLElement}
    */
-  getElement(searchClass) {
-    return document.querySelector(`[data-fh="${searchClass}"]`);
+  _getElement(searchClass) {
+    return this.rootElement.querySelector(`[data-fh="${searchClass}"]`);
   }
 
   /**
@@ -58,7 +59,7 @@ export class Component {
    * @protected
    */
   _mount(slotId, initializer) {
-    const slot = this.getElement(slotId);
+    const slot = this._getElement(slotId);
     const component = initializer(slot);
     slot.replaceWith(component.rootElement);
   }

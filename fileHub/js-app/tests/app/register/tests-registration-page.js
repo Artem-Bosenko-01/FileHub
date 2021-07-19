@@ -1,5 +1,6 @@
 import {TitleService} from '../../../app/services/title-service.js';
 import {RegistrationPage} from '../../../app/register/registration-page.js';
+import {searchElement} from '../search-element-function.js';
 
 const {module, test} = QUnit;
 
@@ -22,12 +23,12 @@ module('Registration page', (hooks) => {
       },
     };
     const titleService = new TitleService('FileHub', testDocument);
-    const page = new RegistrationPage(fixture, testApiService, titleService);
+    new RegistrationPage(fixture, testApiService, titleService);
 
-    page.getElement('inputemail-user').value = 'emailvvvdvdv';
-    page.getElement('inputpassword-user').value = '123654987';
-    page.getElement('inputconfirm-password-user').value = '123654987';
-    page.getElement('form').dispatchEvent(new Event('submit'));
+    searchElement('inputemail-user').value = 'emailvvvdvdv';
+    searchElement('inputpassword-user').value = '123654987';
+    searchElement('inputconfirm-password-user').value = '123654987';
+    searchElement('form').dispatchEvent(new Event('submit'));
 
     assert.equal(testDocument.title, 'Registration - FileHub', 'Should add title to page');
   });

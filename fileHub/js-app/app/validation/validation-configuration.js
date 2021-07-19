@@ -4,38 +4,48 @@
 export class ValidationConfiguration {
   /**
    * @constructor
-   * @param {ParameterConfiguration[]} rules
+   * @param {ValidationRule[]} rules
    */
   constructor(rules) {
-    this._validationFields = rules;
+    this._validationRules = rules;
   }
 
   /**
    * Gets all rules from configuration.
-   * @returns {ParameterConfiguration[]}
+   * @returns {ValidationRule[]}
    */
   get rules() {
-    return this._validationFields;
+    return this._validationRules;
   }
 }
 
 /**
  * Wrapper for validation rule.
  */
-export class ParameterConfiguration {
+export class ValidationRule {
   /**
    * @constructor
-   * @param {Promise} validationRule
+   * @param {FormInputField} field
+   * @param {function(): Promise} validationRule
    */
-  constructor(validationRule) {
-    this._validators = validationRule;
+  constructor(field, validationRule) {
+    this._validator = validationRule;
+    this._field = field;
   }
 
   /**
-   * Gets rule from parameter configuration.
+   * Rule from parameter configuration.
    * @returns {Function}
    */
   get validationRule() {
-    return this._validators;
+    return this._validator;
+  }
+
+  /**
+   * Field which have a rule.
+   * @returns {FormInputField}
+   */
+  get field() {
+    return this._field;
   }
 }

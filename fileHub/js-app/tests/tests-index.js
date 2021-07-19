@@ -16,9 +16,9 @@ import './app/services/tests-router.js';
 
 import './app/services/tests-title-service.js';
 
-import './app/services/tests-authentication-api-service.js';
+import './app/services/api-service/tests-authentication-api-service.js';
 
-import './app/services/tests-registration-api-service.js';
+import './app/services/api-service/tests-registration-api-service.js';
 
 import './app/login/tests-authentication-page.js';
 

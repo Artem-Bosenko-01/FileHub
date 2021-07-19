@@ -1,5 +1,6 @@
 import {AuthenticationPage} from '../../../app/login/authentication-page.js';
 import {TitleService} from '../../../app/services/title-service.js';
+import {searchElement} from '../search-element-function.js';
 
 const {module, test} = QUnit;
 
@@ -22,11 +23,11 @@ module('Authentication page', (hooks) => {
       },
     };
     const titleService = new TitleService('FileHub', testDocument);
-    const page = new AuthenticationPage(fixture, testApiService, titleService);
+    new AuthenticationPage(fixture, testApiService, titleService);
 
-    page.getElement('inputemail-user').value = 'emailvvvdvdv';
-    page.getElement('inputpassword-user').value = '123654987';
-    page.getElement('form').dispatchEvent(new Event('submit'));
+    searchElement('inputemail-user').value = 'emailvvvdvdv';
+    searchElement('inputpassword-user').value = '123654987';
+    searchElement('form').dispatchEvent(new Event('submit'));
 
     assert.equal(testDocument.title, 'Authentication - FileHub', 'Should add title to page');
   });

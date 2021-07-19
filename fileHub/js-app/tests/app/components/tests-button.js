@@ -24,12 +24,18 @@ test('Should create button with title', (assert) => {
       'Should add inner text to button: ' + title);
 });
 
-/*
-test('Should adding event listener on button click', (assert) => {
-  const step = 'This step on event button';
-  assert.expect(2);
-  button.onClick(() => assert.step(step));
-  searchElement('button').dispatchEvent(new Event('click'));
-  assert.verifySteps([step]);
+test('Should create button with icon and icon\'s classes', (assert) => {
+  const icon = 'repeat';
+  button.buttonIcon = icon;
+  button.iconClasses = ['loading', 'buttons'];
+  button.addIconClasses('class');
+  const iconElement = searchElement('button').getElementsByTagName('span');
+  assert.equal(iconElement.length, 1, 'Should span with icon class to button: ');
+  const iconClasses = iconElement[0].classList;
+
+  assert.ok(iconClasses.contains(`glyphicon-${icon}`), 'Should span special icon class');
+  const isExistIconClasses = iconClasses.contains('loading') && iconClasses.contains('buttons') &&
+      iconClasses.contains('class');
+
+  assert.true(isExistIconClasses, 'Should add 3 custom icon classes to span');
 });
-*/

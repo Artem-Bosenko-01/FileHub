@@ -32,6 +32,15 @@ export class Button extends Component {
   }
 
   /**
+   *
+   * @param {string[]} value
+   */
+  set iconClasses(value) {
+    this._iconCLasses = value;
+    this._render();
+  }
+
+  /**
    * Adds classes to button HTML tag if it necessary.
    * @param {string} iconClass
    */
@@ -58,7 +67,7 @@ export class Button extends Component {
   get _markup() {
     const expression = this._iconCLasses && this._iconCLasses.length > 0;
     const icon = `<span class="glyphicon glyphicon-${this._buttonIcon} ${expression &&
-    this._iconCLasses.forEach((iconClass) => iconClass)}"></span>`;
+    this._iconCLasses.map((iconClass) => iconClass).join(' ')}"></span>`;
     return `<button id="button" title="Submit" 
                 data-fh="button" class="button"
                 >${this._buttonIcon ? icon : ''}${this._buttonTitle ? this._buttonTitle : ''}</button>`;

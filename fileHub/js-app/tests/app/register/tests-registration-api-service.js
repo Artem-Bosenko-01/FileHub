@@ -1,9 +1,9 @@
-import fetchMock from '../../../../node_modules/fetch-mock/esm/client.js';
-import {ApiService} from '../../../../app/services/api-service/api-service.js';
+import fetchMock from '../../../node_modules/fetch-mock/esm/client.js';
+import {ApiService} from '../../../app/services/api-service/api-service.js';
 
 const {module, test} = QUnit;
 
-module('Registration: API service', (hooks) => {
+export default () => module('Registration', (hooks) => {
   hooks.afterEach(() => fetchMock.reset());
 
   const email = 'login';

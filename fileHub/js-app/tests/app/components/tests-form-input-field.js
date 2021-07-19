@@ -43,7 +43,7 @@ test('Should create form group with id, title and inputType', (assert) => {
 
 test('Should create error message under input field', (assert) => {
   assert.expect(2);
-  inputField.errorMessage = ERROR_MESSAGE;
+  inputField.addErrorMessage(ERROR_MESSAGE);
 
   assert.ok(searchElement(`error-message`),
       'Should add error message to input-value div. ');

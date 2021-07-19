@@ -36,8 +36,15 @@ module('Authentication form', (hooks) => {
   test('Should be calls event after successful validation form', (assert) => {
     const done = assert.async();
     const form = new AuthenticationForm(fixture);
-    fixture.querySelector('[data-fh="inputemail-user"]').value = 'email@la';
-    fixture.querySelector('[data-fh="inputpassword-user"]').value = '123456';
+
+    const emailField = searchElement('inputemail-user');
+    emailField.value = 'email@jajas';
+    emailField.dispatchEvent(new Event('change'));
+
+    const passwordField = searchElement('inputpassword-user');
+    passwordField.value = 'email@123456';
+    passwordField.dispatchEvent(new Event('change'));
+
     form.onSubmit((credentials) => {
       assert.ok(credentials, 'Should get correct credentials after validation.');
       done();

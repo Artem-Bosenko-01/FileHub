@@ -1,6 +1,5 @@
-import {TitleService} from '../../../app/services/title-service.js';
-import {RegistrationPage} from '../../../app/register/registration-page.js';
 import {searchElement} from '../search-element-function.js';
+import {RegistrationPage} from '../../../app/register/registration-page.js';
 
 const {module, test} = QUnit;
 
@@ -16,18 +15,34 @@ module('Registration page', (hooks) => {
   test('Should add title and api services to registration page', (assert) => {
     assert.expect(2);
     const done = assert.async();
+
     const testApiService = {
       registration(email, password) {
         assert.ok(true, 'Should be called event on submit.');
         done();
       },
     };
-    const titleService = new TitleService('FileHub', testDocument);
-    new RegistrationPage(fixture, testApiService, titleService);
 
-    searchElement('inputemail-user').value = 'emailvvvdvdv';
-    searchElement('inputpassword-user').value = '123654987';
-    searchElement('inputconfirm-password-user').value = '123654987';
+    const testTitleService = {
+      addTitleForPage() {
+        testDocument.title = 'Registration - FileHub';
+      },
+    };
+
+    new RegistrationPage(fixture, testApiService, testTitleService);
+
+    const emailField = searchElement('inputemail-user');
+    emailField.value = 'email@jajas';
+    emailField.dispatchEvent(new Event('change'));
+
+    const passwordField = searchElement('inputpassword-user');
+    passwordField.value = '123456';
+    passwordField.dispatchEvent(new Event('change'));
+
+    const confirmPasswordField = searchElement('inputconfirm-password-user');
+    confirmPasswordField.value = '123456';
+    confirmPasswordField.dispatchEvent(new Event('change'));
+
     searchElement('form').dispatchEvent(new Event('submit'));
 
     assert.equal(testDocument.title, 'Registration - FileHub', 'Should add title to page');

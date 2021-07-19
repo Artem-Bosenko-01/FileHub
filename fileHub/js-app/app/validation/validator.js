@@ -11,8 +11,14 @@ export class Validator {
   }
 
   /**
+   * @typedef {Object} ValidationResult
+   * @property {string} status - status of processed promise.
+   * @property {FormInputField} field - field, which may haves an error message.
+   * @property {string} (value|message) - if promise rejected - object will have an error message parameter.
+   */
+  /**
    * Validates all fields by rules from configuration.
-   * @returns {Promise<resolve|reject>[]}
+   * @returns {ValidationResult[]}
    */
   async validate() {
     return await Promise.all(this._configuration.rules.map(async (rule) => {

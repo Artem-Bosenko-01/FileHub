@@ -67,7 +67,6 @@ export class AuthenticationForm extends Component {
       this._emailInputField.cleanErrorMessage();
       this._passwordInputField.cleanErrorMessage();
 
-
       const authenticationFormValidator = new Validator(
           new ValidationConfiguration(
               [

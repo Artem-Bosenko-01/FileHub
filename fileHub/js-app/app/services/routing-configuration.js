@@ -12,7 +12,7 @@ export class RoutingConfiguration {
   }
 
   /**
-   * Adds route for page, which creates when redirects to not existed routes.
+   * Route for page, which creates when redirects to not existed routes.
    * @param {string} hash
    */
   set notFoundRoute(hash) {
@@ -20,7 +20,7 @@ export class RoutingConfiguration {
   }
 
   /**
-   * Gets default Route hash.
+   * Default Route hash.
    * @returns {string}
    */
   get defaultRoute() {
@@ -28,7 +28,7 @@ export class RoutingConfiguration {
   }
 
   /**
-   * Adds new route's hash and page creator for it.
+   * New route's hash and page creator for it.
    * @param {string} hash
    * @param {function} pageInit
    * @returns {RoutingConfiguration}

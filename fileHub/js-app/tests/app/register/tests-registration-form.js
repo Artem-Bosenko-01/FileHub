@@ -36,9 +36,19 @@ module('Registration form', (hooks) => {
   test('Should be calls event after successful validation form', (assert) => {
     const done = assert.async();
     const form = new RegistrationForm(fixture);
-    searchElement('inputemail-user').value = 'email@la';
-    searchElement('inputpassword-user').value = '123456';
-    searchElement('inputconfirm-password-user').value = '123456';
+
+    const emailField = searchElement('inputemail-user');
+    emailField.value = 'email@jajas';
+    emailField.dispatchEvent(new Event('change'));
+
+    const passwordField = searchElement('inputpassword-user');
+    passwordField.value = '123456';
+    passwordField.dispatchEvent(new Event('change'));
+
+    const confirmPasswordField = searchElement('inputconfirm-password-user');
+    confirmPasswordField.value = '123456';
+    confirmPasswordField.dispatchEvent(new Event('change'));
+
     form.onSubmit((credentials) => {
       assert.ok(credentials, 'Should get correct credentials after validation.');
       done();

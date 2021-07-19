@@ -23,7 +23,9 @@ export class AuthenticationForm extends Component {
    * @param {string} errorMessage
    */
   addServerError(errorMessage) {
-    alert(errorMessage);
+    const tagP = document.createElement('p');
+    tagP.innerHTML = errorMessage;
+    this.rootElement.append(tagP);
   }
 
   /**
@@ -35,7 +37,7 @@ export class AuthenticationForm extends Component {
   _renderErrorMessages(resultsOfValidation) {
     resultsOfValidation
         .filter((result) => result.status === 'rejected')
-        .forEach((result) => result.field.errorMessage = result.message);
+        .forEach((result) => result.field.addErrorMessage(result.message));
   }
 
   /**

@@ -50,10 +50,19 @@ export class FormInputField extends Component {
   }
 
   /**
+   * List of error messages under input field.
+   * @param {string[]} messages
+   */
+  set errorMessages(messages) {
+    this._errorMessages = messages;
+    this._render();
+  }
+
+  /**
    * Error message under input field.
    * @param {string} message
    */
-  set errorMessage(message) {
+  addErrorMessage(message) {
     this._errorMessages.push(message);
     this._render();
   }

@@ -17,7 +17,7 @@ module('Router service', (hooks) => {
 
     const configuration = getConfig(assert);
     new Router(configuration, testWindow);
-    assert.verifySteps([REGISTER_ROUTE], 'Should route to default page.');
+    assert.verifySteps([REGISTER_ROUTE], 'Should route to register page.');
   });
 
   test('Should show default page when hash is empty', (assert) => {
@@ -44,6 +44,27 @@ module('Router service', (hooks) => {
     const configuration = getConfig(assert);
     new Router(configuration, testWindow);
     assert.verifySteps([ERROR_ROUTE], 'Should route to error page.');
+  });
+
+  test('Should router works correctly when hash is changed', (assert) => {
+    const configuration = getConfig(assert);
+
+    const testWindow = {
+      location: {hash: '#'},
+
+      addEventListener(event, init) {
+        if (event === 'hashChange') {
+          const step = configuration.getPageByHash(init);
+          step();
+        }
+      },
+    };
+
+    new Router(configuration, testWindow);
+    assert.verifySteps([DEFAULT_ROUTE], 'Should route to default page.');
+    testWindow.location.hash = '#register';
+    testWindow.addEventListener('hashChange', REGISTER_ROUTE);
+    assert.verifySteps([REGISTER_ROUTE], 'Should route to register page.');
   });
 });
 

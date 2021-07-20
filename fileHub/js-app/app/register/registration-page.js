@@ -27,8 +27,11 @@ export class RegistrationPage extends Component {
         alert(`${response.email}\n${response.password}`);
       } catch (error) {
         if (error.errors) {
-          const exception = error.errors[0];
-          form.addServerError(`field: ${exception.field}\nmessage: ${exception.message}`);
+          error.errors.forEach(
+              (error)=>{
+                form.addServerError(`field: ${error.field}\nmessage: ${error.message}`);
+              },
+          );
         } else {
           form.addServerError(error.message);
         }

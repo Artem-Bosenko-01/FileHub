@@ -12,16 +12,21 @@ fetchMock.post('/login', {token: 'AUTH_TOKEN'});
   };
 });*/
 
-/* fetchMock.post('/register', () => {
+fetchMock.post('/register', () => {
   return {
     status: 422,
-    body: {
+    body: [{
       field: 'email',
       message: 'this is message',
     },
+    {
+      field: 'password',
+      message: 'this is password message',
+    }],
   };
-});*/
+});
 
+/*
 fetchMock.post('/register', () => {
   return {
     status: 500,
@@ -30,3 +35,4 @@ fetchMock.post('/register', () => {
     },
   };
 });
+*/

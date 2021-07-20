@@ -69,10 +69,10 @@ export default () => module('Registration', (hooks) => {
       method: 'POST',
     }, {
       status: 422,
-      body: {
+      body: [{
         field: 'email',
         message: 'this is message',
-      }});
+      }]});
     const apiService = new ApiService();
     try {
       await apiService.register(email, password);

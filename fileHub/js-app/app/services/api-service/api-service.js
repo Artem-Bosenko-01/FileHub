@@ -8,10 +8,10 @@ import {ValidationErrorCase} from './validation-error-case.js';
  */
 export class ApiService {
   /**
-   * @param {string} email
-   * @param {string} password
-   * @returns {Promise<Response>}>}
-   */
+	 * @param {string} email
+	 * @param {string} password
+	 * @returns {Promise<Response>}>}
+	 */
   async logIn(email, password) {
     const response = await this._fetch('/login', {
       method: 'POST',
@@ -23,7 +23,7 @@ export class ApiService {
     if (response.ok) {
       return responseBody;
     } else if ((response.status >= 400 && response.status <= 421) ||
-        (response.status >= 423 && response.status < 500)) {
+				(response.status >= 423 && response.status < 500)) {
       throw new ClientServerError(responseBody.message);
     } else if (response.status === 500) {
       throw new ServerError(responseBody.message);
@@ -31,11 +31,11 @@ export class ApiService {
   }
 
   /**
-   *
-   * @param {string} email
-   * @param {string} password
-   * @returns {Promise<Response>}
-   */
+	 *
+	 * @param {string} email
+	 * @param {string} password
+	 * @returns {Promise<Response>}
+	 */
   async register(email, password) {
     const response = await this._fetch('/register', {
       method: 'POST',
@@ -43,13 +43,15 @@ export class ApiService {
     });
 
     const responseBody = await response.json();
+    debugger;
 
     if (response.ok) {
       return responseBody;
     } else if (response.status === 422) {
-      throw new UnprocessableEntityError([new ValidationErrorCase(responseBody.field, responseBody.message)]);
+      const errors = responseBody.map((responseError) => new ValidationErrorCase(responseError.field, responseError.message));
+      throw new UnprocessableEntityError(errors);
     } else if ((response.status >= 400 && response.status <= 421) ||
-        (response.status >= 423 && response.status < 500)) {
+				(response.status >= 423 && response.status < 500)) {
       throw new ClientServerError(responseBody.message);
     } else if (response.status === 500) {
       throw new ServerError(responseBody.message);
@@ -58,11 +60,11 @@ export class ApiService {
 
   /**
    *
-   * @param {RequestInfo} url
-   * @param {RequestInit} init
-   * @returns {Promise<Response>}
-   * @private
-   */
+	 * @param {RequestInfo} url
+	 * @param {RequestInit} init
+	 * @returns {Promise<Response>}
+	 * @private
+	 */
   async _fetch(url, init) {
     return fetch(url, init)
         .then((response) => {

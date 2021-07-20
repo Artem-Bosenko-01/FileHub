@@ -23,8 +23,8 @@ export class RegistrationPage extends Component {
     form.onSubmit(async (credentials) => {
       const {email, password} = credentials;
       try {
-        await this._apiService.registration(email, password);
-        alert(`${email}\n${password}`);
+        const response = await this._apiService.registration(email, password);
+        alert(`${response.email}\n${response.password}`);
       } catch (error) {
         form.addServerError(error.message);
       }

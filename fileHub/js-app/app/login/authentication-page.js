@@ -24,7 +24,7 @@ export class AuthenticationPage extends Component {
       const {email, password} = credentials;
       try {
         const response = await this._apiService.logIn(email, password);
-        alert(`${response}`);
+        alert(`${response.token}`);
       } catch (error) {
         form.addServerError(error.message);
       }

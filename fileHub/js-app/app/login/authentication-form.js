@@ -25,7 +25,7 @@ export class AuthenticationForm extends Component {
   addServerError(errorMessage) {
     const tagP = document.createElement('p');
     tagP.innerHTML = errorMessage;
-    this.rootElement.append(tagP);
+    this._getElement('form').append(tagP);
   }
 
   /**

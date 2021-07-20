@@ -27,12 +27,17 @@ export default () => module('Authentication', (hooks) => {
     fetchMock.mock({
       url: '/login',
       method: 'POST',
-    }, 404);
+    }, {
+      status: 404,
+      body: {
+        message: 'client error',
+      },
+    });
     const apiService = new ApiService();
     try {
       await apiService.logIn(email, password);
     } catch (error) {
-      assert.equal(error.message, '400: 404', 'Should return error with response status');
+      assert.equal(error.message, '400: client error', 'Should return error with response status');
     } finally {
       assert.ok(fetchMock.called(), 'Should call mock for fetch');
     }
@@ -43,12 +48,17 @@ export default () => module('Authentication', (hooks) => {
     fetchMock.mock({
       url: '/login',
       method: 'POST',
-    }, 500);
+    }, {
+      status: 500,
+      body: {
+        message: 'server error',
+      },
+    });
     const apiService = new ApiService();
     try {
       await apiService.logIn(email, password);
     } catch (error) {
-      assert.equal(error.message, '500: 500', 'Should return error with response status');
+      assert.equal(error.message, '500: server error', 'Should return error with response status');
     } finally {
       assert.ok(fetchMock.called(), 'Should call mock for fetch');
     }

@@ -23,10 +23,15 @@ export class RegistrationPage extends Component {
     form.onSubmit(async (credentials) => {
       const {email, password} = credentials;
       try {
-        const response = await this._apiService.registration(email, password);
+        const response = await this._apiService.register(email, password);
         alert(`${response.email}\n${response.password}`);
       } catch (error) {
-        form.addServerError(error.message);
+        if (error.errors) {
+          const exception = error.errors[0];
+          form.addServerError(`field: ${exception.field}\nmessage: ${exception.message}`);
+        } else {
+          form.addServerError(error.message);
+        }
       }
     });
   }

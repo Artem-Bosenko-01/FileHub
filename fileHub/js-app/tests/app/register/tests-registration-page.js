@@ -17,7 +17,7 @@ module('Registration page', (hooks) => {
     const done = assert.async();
 
     const testApiService = {
-      registration(email, password) {
+      register(email, password) {
         assert.ok(true, 'Should be called event on submit.');
         done();
       },

@@ -18,14 +18,15 @@ export class ApiService {
       body: JSON.stringify({email, password}),
     });
 
+    const responseBody = await response.json();
+
     if (response.ok) {
-      const message = await response.json();
-      return message;
+      return responseBody;
     } else if ((response.status >= 400 && response.status <= 421) ||
         (response.status >= 423 && response.status < 500)) {
-      throw new ClientServerError(response.status);
+      throw new ClientServerError(responseBody.message);
     } else if (response.status === 500) {
-      throw new ServerError(response.status);
+      throw new ServerError(responseBody.message);
     }
   }
 
@@ -35,22 +36,23 @@ export class ApiService {
    * @param {string} password
    * @returns {Promise<Response>}
    */
-  async registration(email, password) {
+  async register(email, password) {
     const response = await this._fetch('/register', {
       method: 'POST',
       body: JSON.stringify({email, password}),
     });
 
+    const responseBody = await response.json();
+
     if (response.ok) {
-      const message = await response.json();
-      return message;
+      return responseBody;
     } else if (response.status === 422) {
-      throw new UnprocessableEntityError([new ValidationErrorCase('email', 'test-message')]);
+      throw new UnprocessableEntityError([new ValidationErrorCase(responseBody.field, responseBody.message)]);
     } else if ((response.status >= 400 && response.status <= 421) ||
         (response.status >= 423 && response.status < 500)) {
-      throw new ClientServerError(response.status);
+      throw new ClientServerError(responseBody.message);
     } else if (response.status === 500) {
-      throw new ServerError(response.status);
+      throw new ServerError(responseBody.message);
     }
   }
 

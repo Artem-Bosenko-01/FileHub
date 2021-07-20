@@ -17,7 +17,7 @@ export default () => module('Registration', (hooks) => {
       method: 'POST',
     }, {token});
     const apiService = new ApiService();
-    const res = await apiService.registration(email, password);
+    const res = await apiService.register(email, password);
     assert.ok(fetchMock.called(), 'Should call mock for fetch');
     assert.equal(res.token, token, 'Should return token after successful query');
   });
@@ -27,12 +27,16 @@ export default () => module('Registration', (hooks) => {
     fetchMock.mock({
       url: '/register',
       method: 'POST',
-    }, 404);
+    }, {
+      status: 404,
+      body: {
+        message: 'client error',
+      }});
     const apiService = new ApiService();
     try {
-      await apiService.registration(email, password);
+      await apiService.register(email, password);
     } catch (error) {
-      assert.equal(error.message, '400: 404', 'Should return error with response status');
+      assert.equal(error.message, '400: client error', 'Should return error with response status');
     } finally {
       assert.ok(fetchMock.called(), 'Should call mock for fetch');
     }
@@ -43,12 +47,16 @@ export default () => module('Registration', (hooks) => {
     fetchMock.mock({
       url: '/register',
       method: 'POST',
-    }, 500);
+    }, {
+      status: 500,
+      body: {
+        message: 'server error',
+      }});
     const apiService = new ApiService();
     try {
-      await apiService.registration(email, password);
+      await apiService.register(email, password);
     } catch (error) {
-      assert.equal(error.message, '500: 500', 'Should return error with response status');
+      assert.equal(error.message, '500: server error', 'Should return error with response status');
     } finally {
       assert.ok(fetchMock.called(), 'Should call mock for fetch');
     }
@@ -59,14 +67,19 @@ export default () => module('Registration', (hooks) => {
     fetchMock.mock({
       url: '/register',
       method: 'POST',
-    }, 422);
+    }, {
+      status: 422,
+      body: {
+        field: 'email',
+        message: 'this is message',
+      }});
     const apiService = new ApiService();
     try {
-      await apiService.registration(email, password);
+      await apiService.register(email, password);
     } catch (error) {
       assert.equal(error.message, 'This is 422 http failed response.', 'Should return error with message.');
       assert.equal(error.errors[0].field, 'email', 'Should return error with special field.');
-      assert.equal(error.errors[0].message, 'test-message', 'Should return error with special message for field.');
+      assert.equal(error.errors[0].message, 'this is message', 'Should return error with special message for field.');
     } finally {
       assert.ok(fetchMock.called(), 'Should call mock for fetch');
     }

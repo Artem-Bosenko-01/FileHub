@@ -29,7 +29,7 @@ export class Component {
   }
 
   /**
-   * Searches element in DOM by data attribute.
+   * Searches first element in DOM by data attribute.
    * @param {string} searchClass
    * @protected
    * @returns {HTMLElement}
@@ -38,6 +38,15 @@ export class Component {
     return this.rootElement.querySelector(`[data-fh="${searchClass}"]`);
   }
 
+  /**
+   * Searches all elements in DOM by data attribute.
+   * @param {string} searchClass
+   * @protected
+   * @returns {HTMLElement}
+   */
+  _getElements(searchClass) {
+    return this.rootElement.querySelectorAll(`[data-fh="${searchClass}"]`);
+  }
   /**
    * Adds some function on event to listener.
    * @protected

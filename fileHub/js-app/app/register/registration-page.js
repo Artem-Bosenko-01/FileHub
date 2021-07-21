@@ -26,6 +26,7 @@ export class RegistrationPage extends Component {
         const response = await this._apiService.register(email, password);
         alert(`${response.email}\n${response.password}`);
       } catch (error) {
+        this.clearPreviousServerErrors();
         if (error.errors) {
           error.errors.forEach(
               (error)=>{
@@ -37,6 +38,19 @@ export class RegistrationPage extends Component {
         }
       }
     });
+  }
+
+  /**
+   * Remove server error messages, which was rendered after previous response.
+   * @returns {void}
+   */
+  clearPreviousServerErrors() {
+    const errors = this._getElements('server-error');
+    if (errors) {
+      [...errors].forEach(
+          (error)=> error.remove(),
+      );
+    }
   }
 
   /** @inheritDoc */

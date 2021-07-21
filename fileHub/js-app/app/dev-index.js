@@ -28,6 +28,7 @@ fetchMock.post('/login', (url, opts)=>{
   }
 });
 
+/*
 fetchMock.post('/register', (url, opts) => {
   const body = opts.body;
   const email = JSON.parse(body).email;
@@ -45,8 +46,8 @@ fetchMock.post('/register', (url, opts) => {
     };
   }
 });
+*/
 
-/*
 fetchMock.post('/register', () => {
   return {
     status: 422,
@@ -56,7 +57,6 @@ fetchMock.post('/register', () => {
     ],
   };
 });
-*/
 
 /*
 fetchMock.post('/register', () => {

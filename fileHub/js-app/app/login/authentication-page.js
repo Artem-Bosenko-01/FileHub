@@ -26,9 +26,23 @@ export class AuthenticationPage extends Component {
         const response = await this._apiService.logIn(email, password);
         alert(`${response.token}`);
       } catch (error) {
+        this.clearPreviousServerErrors();
         form.addServerError(error.message);
       }
     });
+  }
+
+  /**
+   * Remove server error messages, which was rendered after previous response.
+   * @returns {void}
+   */
+  clearPreviousServerErrors() {
+    const errors = this._getElements('server-error');
+    if (errors) {
+      [...errors].forEach(
+          (error)=> error.remove(),
+      );
+    }
   }
 
   /** @inheritDoc */

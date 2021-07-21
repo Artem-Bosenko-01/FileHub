@@ -23,14 +23,13 @@ export class AuthenticationForm extends Component {
    * @param {string} errorMessage
    */
   addServerError(errorMessage) {
-    this.clearPreviousServerErrors();
-    const tagP = document.createElement('p');
+    const messageBox = document.createElement('p');
     const dataAttribute = document.createAttribute('data-fh');
     dataAttribute.value = 'server-error';
-    tagP.attributes.setNamedItem(dataAttribute);
-    tagP.classList.add('error-message');
-    tagP.innerHTML = errorMessage;
-    this._getElement('data').before(tagP);
+    messageBox.attributes.setNamedItem(dataAttribute);
+    messageBox.classList.add('error-message');
+    messageBox.innerHTML = errorMessage;
+    this._getElement('data').before(messageBox);
   }
 
   /**
@@ -92,11 +91,6 @@ export class AuthenticationForm extends Component {
             new UserData(this._emailInputValue, this._passwordInputValue));
       }
     };
-  }
-
-  clearPreviousServerErrors() {
-    const error = this._getElement('server-error');
-    error && error.remove();
   }
 
   /**

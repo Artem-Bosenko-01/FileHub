@@ -1,4 +1,5 @@
 import {Component} from '../components/component.js';
+import {UnprocessableEntityError} from '../services/api-service/unprocessable-entity-error.js';
 import {RegistrationForm} from './registration-form.js';
 
 /**
@@ -27,7 +28,7 @@ export class RegistrationPage extends Component {
         alert(`${response.email}\n${response.password}`);
       } catch (error) {
         this.clearPreviousServerErrors();
-        if (error.errors) {
+        if (error instanceof UnprocessableEntityError) {
           error.errors.forEach(
               (error)=>{
                 form.addServerError(`field: ${error.field}\nmessage: ${error.message}`);

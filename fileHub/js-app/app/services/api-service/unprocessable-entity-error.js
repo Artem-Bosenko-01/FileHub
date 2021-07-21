@@ -1,10 +1,12 @@
+import {ValidationErrorCase} from './validation-error-case.js';
+
 /**
  * Error that throws when response status equals 422.
  */
 export class UnprocessableEntityError extends Error {
   /**
    * @constructor
-   * @param {ErrorEntityDTO[]} errors
+   * @param {ValidationErrorCase[]} errors
    */
   constructor(errors) {
     super('This is 422 http failed response.');
@@ -13,7 +15,7 @@ export class UnprocessableEntityError extends Error {
 
   /**
    * Gets massive of errors after backend query.
-   * @returns {ErrorEntityDTO[]}
+   * @returns {ValidationErrorCase[]}
    */
   get errors() {
     return this._errors;

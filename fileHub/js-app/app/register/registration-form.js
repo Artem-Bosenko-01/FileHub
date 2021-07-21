@@ -64,8 +64,8 @@ export class RegistrationForm extends Component {
               ],
           ));
       const results = await registrationFormValidator.validate();
-      const isAnyPromiseStatusReject = results.some((result) => result.status === 'rejected');
-      if (isAnyPromiseStatusReject) {
+      const isAnyFieldHaveInvalidValue = results.some((result) => result.isValid === false);
+      if (isAnyFieldHaveInvalidValue) {
         this._renderErrorMessages(results);
       } else {
         this._onSubmitAuthenticationEvent && this._onSubmitAuthenticationEvent(
@@ -82,7 +82,7 @@ export class RegistrationForm extends Component {
    */
   _renderErrorMessages(resultsOfValidation) {
     resultsOfValidation
-        .filter((result) => result.status === 'rejected')
+        .filter((result) => result.isValid === false)
         .forEach((result) => result.field.addErrorMessage(result.message));
   }
 

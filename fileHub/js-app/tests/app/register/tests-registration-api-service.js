@@ -19,8 +19,8 @@ export default () => module('Registration', () => {
 
     const res = await apiService.register(email, password);
 
-    assert.ok(fetch.called(), 'Should call mock for fetch');
-    assert.equal(res.token, token, 'Should return token after successful query');
+    assert.ok(fetch.called(), 'Should send a request');
+    assert.equal(res.token, token, 'Should return token after successful response');
   });
 
   test('Should handle a response with code 4**', async (assert) => {
@@ -40,7 +40,7 @@ export default () => module('Registration', () => {
     } catch (error) {
       assert.equal(error.message, '400: client error', 'Should return error with response status');
     } finally {
-      assert.ok(fetch.called(), 'Should call mock for fetch');
+      assert.ok(fetch.called(), 'Should send a request');
     }
   });
 
@@ -61,7 +61,7 @@ export default () => module('Registration', () => {
     } catch (error) {
       assert.equal(error.message, '500: server error', 'Should return error with response status');
     } finally {
-      assert.ok(fetch.called(), 'Should call mock for fetch');
+      assert.ok(fetch.called(), 'Should send a request');
     }
   });
 
@@ -86,7 +86,7 @@ export default () => module('Registration', () => {
       assert.equal(error.errors[0].field, 'email', 'Should return error with special field.');
       assert.equal(error.errors[0].message, 'this is message', 'Should return error with special message for field.');
     } finally {
-      assert.ok(fetch.called(), 'Should call mock for fetch');
+      assert.ok(fetch.called(), 'Should send a request');
     }
   });
 });

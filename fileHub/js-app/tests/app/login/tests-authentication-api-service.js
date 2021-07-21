@@ -19,8 +19,8 @@ export default () => module('Authentication', () => {
 
     const res = await apiService.logIn(email, password);
 
-    assert.ok(fetch.called(), 'Should call mock for fetch');
-    assert.equal(res.token, token, 'Should return token after successful query');
+    assert.ok(fetch.called(), 'Should send a request');
+    assert.equal(res.token, token, 'Should return token after successful response');
   });
 
   test('Should handle a response with code 4**', async (assert) => {
@@ -42,7 +42,7 @@ export default () => module('Authentication', () => {
     } catch (error) {
       assert.equal(error.message, '400: client error', 'Should return error with response status');
     } finally {
-      assert.ok(fetch.called(), 'Should call mock for fetch');
+      assert.ok(fetch.called(), 'Should send a request');
     }
   });
 
@@ -65,7 +65,7 @@ export default () => module('Authentication', () => {
     } catch (error) {
       assert.equal(error.message, '500: server error', 'Should return error with response status');
     } finally {
-      assert.ok(fetch.called(), 'Should call mock for fetch');
+      assert.ok(fetch.called(), 'Should send a request');
     }
   });
 });

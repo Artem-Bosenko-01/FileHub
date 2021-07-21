@@ -93,11 +93,11 @@ export class FormInputField extends Component {
 
   /** @inheritDoc */
   _addEventListeners() {
-    this._getElement(`input${this._id}`)
+    this._getElement(`input-${this._id ? this._id :'defaultId'}`)
         .addEventListener('change', (evt) => {
           this._onChangeAction && this._onChangeAction(evt.target.value);
           this._valueInput = evt.target.value;
-          this._getElement(`input${this._id}`).value = evt.target.value;
+          this._getElement(`input-${this._id ? this._id :'defaultId'}`).value = evt.target.value;
         });
   }
 
@@ -112,8 +112,9 @@ export class FormInputField extends Component {
     return `<div class="get-user-data" data-fh="get-user-data">
                 <label class="label-name" data-fh="label-name" for="${this._id}">${this._title}</label>
                 <div class="input-value ${errorMessages ? 'invalid-input-value' : ''}">
-                   <input data-fh="input${this._id}" title="${this._title}" type="${this._inputType}" 
-                   id="${this._id}" placeholder="${this._title}" value="${this._valueInput ? this._valueInput : ''}">
+                   <input data-fh="input-${this._id ? this._id :'defaultId'}" title="${this._title}" 
+                   type="${this._inputType}" id="${this._id ? this._id :'defaultId'}" placeholder="${this._title}" 
+                   value="${this._valueInput ? this._valueInput : ''}">
                    ${errorMessages ? errorMessages : ''}
                 </div>
             </div>`;

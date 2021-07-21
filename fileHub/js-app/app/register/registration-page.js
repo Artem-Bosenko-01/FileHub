@@ -28,7 +28,7 @@ export class RegistrationPage extends Component {
         alert(`${response.email}\n${response.password}`);
       } catch (error) {
         this.clearPreviousServerErrors();
-        if (error.errors instanceof UnprocessableEntityError) {
+        if (error instanceof UnprocessableEntityError) {
           error.errors.forEach(
               (error) => {
                 form.addServerError(`field: ${error.field}\nmessage: ${error.message}`);

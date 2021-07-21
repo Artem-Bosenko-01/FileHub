@@ -16,10 +16,10 @@ export class ApiService {
   }
 
   /**
-	 * @param {string} email
-	 * @param {string} password
-	 * @returns {Promise<Response>}>}
-	 */
+   * @param {string} email
+   * @param {string} password
+   * @returns {Promise<Response>}>}
+   */
   async logIn(email, password) {
     const response = await this._fetch('/login', {
       method: 'POST',
@@ -30,8 +30,7 @@ export class ApiService {
 
     if (response.ok) {
       return responseBody;
-    } else if ((response.status >= 400 && response.status <= 421) ||
-        (response.status >= 423 && response.status < 500)) {
+    } else if ((response.status >= 400 && response.status < 500)) {
       throw new ClientServerError(responseBody.message);
     } else if (response.status === 500) {
       throw new ServerError(responseBody.message);
@@ -41,9 +40,9 @@ export class ApiService {
   /**
    *
    * @param {string} email
-	 * @param {string} password
-	 * @returns {Promise<Response>}
-	 */
+   * @param {string} password
+   * @returns {Promise<Response>}
+   */
   async register(email, password) {
     const response = await this._fetch('/register', {
       method: 'POST',
@@ -58,8 +57,7 @@ export class ApiService {
       const errors = responseBody.map((responseError) =>
         new ValidationErrorCase(responseError.field, responseError.message));
       throw new UnprocessableEntityError(errors);
-    } else if ((response.status >= 400 && response.status <= 421) ||
-				(response.status >= 423 && response.status < 500)) {
+    } else if ((response.status >= 400 && response.status < 500)) {
       throw new ClientServerError(responseBody.message);
     } else if (response.status === 500) {
       throw new ServerError(responseBody.message);
@@ -68,11 +66,11 @@ export class ApiService {
 
   /**
    *
-	 * @param {RequestInfo} url
-	 * @param {RequestInit} init
-	 * @returns {Promise<Response>}
-	 * @private
-	 */
+   * @param {RequestInfo} url
+   * @param {RequestInit} init
+   * @returns {Promise<Response>}
+   * @private
+   */
   async _fetch(url, init) {
     return this._window.fetch(url, init)
         .then((response) => {

@@ -3,27 +3,27 @@
  */
 export class ValidationErrorCase {
   /**
-	 * @constructor
-	 * @param {string} field
-	 * @param {string} message
-	 */
+   * @constructor
+   * @param {string} field
+   * @param {string} message
+   */
   constructor(field, message) {
     this._field = field;
     this._message = message;
   }
 
   /**
-	 * Gets field where needs show error.
-	 * @returns {string}
-	 */
+   * Gets field where needs show error.
+   * @returns {string}
+   */
   get field() {
     return this._field;
   }
 
   /**
-	 * Gets message of error.
-	 * @returns {string}
-	 */
+   * Gets message of error.
+   * @returns {string}
+   */
   get message() {
     return this._message;
   }

@@ -40,7 +40,7 @@ export class AuthenticationForm extends Component {
    */
   _renderErrorMessages(resultsOfValidation) {
     resultsOfValidation
-        .filter((result) => result.status === 'rejected')
+        .filter((result) => result.isValid === false)
         .forEach((result) => result.field.addErrorMessage(result.message));
   }
 
@@ -83,12 +83,12 @@ export class AuthenticationForm extends Component {
           ),
       );
       const results = await authenticationFormValidator.validate();
-      const isAnyPromiseStatusReject = results.some((result) => result.status === 'rejected');
-      if (isAnyPromiseStatusReject) {
+      const isAnyFieldHaveInvalidValue = results.some((result) => result.isValid === false);
+      if (isAnyFieldHaveInvalidValue) {
         this._renderErrorMessages(results);
       } else {
         this._onSubmitAuthenticationEvent && this._onSubmitAuthenticationEvent(
-            new UserData(this._emailInputField, this._passwordInputValue));
+            new UserData(this._emailInputValue, this._passwordInputValue));
       }
     };
   }

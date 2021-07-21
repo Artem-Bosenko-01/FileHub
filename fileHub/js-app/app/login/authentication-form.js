@@ -23,9 +23,14 @@ export class AuthenticationForm extends Component {
    * @param {string} errorMessage
    */
   addServerError(errorMessage) {
+    this.clearPreviousServerErrors();
     const tagP = document.createElement('p');
+    const dataAttribute = document.createAttribute('data-fh');
+    dataAttribute.value = 'server-error';
+    tagP.attributes.setNamedItem(dataAttribute);
+    tagP.classList.add('error-message');
     tagP.innerHTML = errorMessage;
-    this._getElement('form').append(tagP);
+    this._getElement('data').before(tagP);
   }
 
   /**
@@ -84,9 +89,14 @@ export class AuthenticationForm extends Component {
         this._renderErrorMessages(results);
       } else {
         this._onSubmitAuthenticationEvent && this._onSubmitAuthenticationEvent(
-            new UserData(this._emailInputField, this._passwordInputValue));
+            new UserData(this._emailInputValue, this._passwordInputValue));
       }
     };
+  }
+
+  clearPreviousServerErrors() {
+    const error = this._getElement('server-error');
+    error && error.remove();
   }
 
   /**

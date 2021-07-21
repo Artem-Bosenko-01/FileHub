@@ -91,11 +91,20 @@ export class RegistrationForm extends Component {
    * @param {string} errorMessage
    */
   addServerError(errorMessage) {
+    this.clearPreviousServerErrors();
     const tagP = document.createElement('p');
+    const dataAttribute = document.createAttribute('data-fh');
+    dataAttribute.value = 'server-error';
+    tagP.attributes.setNamedItem(dataAttribute);
+    tagP.classList.add('error-message');
     tagP.innerHTML = errorMessage;
-    this.rootElement.append(tagP);
+    this._getElement('data').before(tagP);
   }
 
+  clearPreviousServerErrors() {
+    const error = this._getElement('server-error');
+    error && error.remove();
+  }
   /** @inheritDoc */
   get _markup() {
     return `<div class="raw"></div>`;

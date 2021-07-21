@@ -1,4 +1,5 @@
 import {Component} from '../components/component.js';
+import {UnprocessableEntityError} from '../services/api-service/unprocessable-entity-error.js';
 import {RegistrationForm} from './registration-form.js';
 
 /**
@@ -13,7 +14,7 @@ export class RegistrationPage extends Component {
    */
   _init(apiService, titleService) {
     this._apiService = apiService;
-    this._titleService =titleService;
+    this._titleService = titleService;
     this._titleService.addTitleForPage('Registration');
   }
 
@@ -26,9 +27,10 @@ export class RegistrationPage extends Component {
         const response = await this._apiService.register(email, password);
         alert(`${response.email}\n${response.password}`);
       } catch (error) {
-        if (error.errors) {
+        this.clearPreviousServerErrors();
+        if (error.errors instanceof UnprocessableEntityError) {
           error.errors.forEach(
-              (error)=>{
+              (error) => {
                 form.addServerError(`field: ${error.field}\nmessage: ${error.message}`);
               },
           );
@@ -37,6 +39,19 @@ export class RegistrationPage extends Component {
         }
       }
     });
+  }
+
+  /**
+   * Remove server error messages, which was rendered after previous response.
+   * @returns {void}
+   */
+  clearPreviousServerErrors() {
+    const errors = this._getElements('server-error');
+    if (errors) {
+      [...errors].forEach(
+          (error) => error.remove(),
+      );
+    }
   }
 
   /** @inheritDoc */

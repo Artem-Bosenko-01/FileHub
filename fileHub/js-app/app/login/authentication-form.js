@@ -23,14 +23,18 @@ export class AuthenticationForm extends Component {
    * @param {string} errorMessage
    */
   addServerError(errorMessage) {
-    const tagP = document.createElement('p');
-    tagP.innerHTML = errorMessage;
-    this._getElement('form').append(tagP);
+    const messageBox = document.createElement('p');
+    const dataAttribute = document.createAttribute('data-fh');
+    dataAttribute.value = 'server-error';
+    messageBox.attributes.setNamedItem(dataAttribute);
+    messageBox.classList.add('error-message');
+    messageBox.innerHTML = errorMessage;
+    this._getElement('data').before(messageBox);
   }
 
   /**
    * Adds error messages to inputs after analyzes validation results.
-   * @param {PromiseRejectedResult[]} resultsOfValidation
+   * @param {ValidationResult[]} resultsOfValidation
    * @private
    * @returns {void}
    */

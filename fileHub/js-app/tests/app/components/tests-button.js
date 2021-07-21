@@ -28,7 +28,7 @@ test('Should create button with icon and icon\'s classes', (assert) => {
   const icon = 'repeat';
   button.buttonIcon = icon;
   button.iconClasses = ['loading', 'buttons'];
-  button.addIconClasses('class');
+  button.addIconClass('class');
   const iconElement = searchElement('button').getElementsByTagName('span');
   assert.equal(iconElement.length, 1, 'Should span with icon class to button: ');
   const iconClasses = iconElement[0].classList;

@@ -76,7 +76,7 @@ export class FormInputField extends Component {
   }
 
   /**
-   * Actual input field value.
+   * Input field value.
    * @returns {string|undefined}
    */
   get inputValue() {

@@ -9,7 +9,7 @@ export class Component {
    */
   constructor(parentElement, ...arg) {
     this.parentElement = parentElement;
-    arg && this._init(...arg);
+    this._init(...arg);
     this._render();
   }
 
@@ -36,6 +36,16 @@ export class Component {
    */
   _getElement(searchClass) {
     return this.rootElement.querySelector(`[data-fh="${searchClass}"]`);
+  }
+
+  /**
+   * Searches all elements in DOM by data attribute.
+   * @param {string} searchClass
+   * @protected
+   * @returns {HTMLElement}
+   */
+  _getElements(searchClass) {
+    return this.rootElement.querySelectorAll(`[data-fh="${searchClass}"]`);
   }
 
   /**

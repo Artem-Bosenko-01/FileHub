@@ -8,6 +8,14 @@ import {ValidationErrorCase} from './validation-error-case.js';
  */
 export class ApiService {
   /**
+   * @constructor
+   * @param {Window} window
+   */
+  constructor(window) {
+    this._window = window;
+  }
+
+  /**
 	 * @param {string} email
 	 * @param {string} password
 	 * @returns {Promise<Response>}>}
@@ -23,7 +31,7 @@ export class ApiService {
     if (response.ok) {
       return responseBody;
     } else if ((response.status >= 400 && response.status <= 421) ||
-				(response.status >= 423 && response.status < 500)) {
+        (response.status >= 423 && response.status < 500)) {
       throw new ClientServerError(responseBody.message);
     } else if (response.status === 500) {
       throw new ServerError(responseBody.message);
@@ -31,8 +39,8 @@ export class ApiService {
   }
 
   /**
-	 *
-	 * @param {string} email
+   *
+   * @param {string} email
 	 * @param {string} password
 	 * @returns {Promise<Response>}
 	 */
@@ -43,12 +51,12 @@ export class ApiService {
     });
 
     const responseBody = await response.json();
-    debugger;
 
     if (response.ok) {
       return responseBody;
     } else if (response.status === 422) {
-      const errors = responseBody.map((responseError) => new ValidationErrorCase(responseError.field, responseError.message));
+      const errors = responseBody.map((responseError) =>
+        new ValidationErrorCase(responseError.field, responseError.message));
       throw new UnprocessableEntityError(errors);
     } else if ((response.status >= 400 && response.status <= 421) ||
 				(response.status >= 423 && response.status < 500)) {
@@ -66,7 +74,7 @@ export class ApiService {
 	 * @private
 	 */
   async _fetch(url, init) {
-    return fetch(url, init)
+    return this._window.fetch(url, init)
         .then((response) => {
           return response;
         })

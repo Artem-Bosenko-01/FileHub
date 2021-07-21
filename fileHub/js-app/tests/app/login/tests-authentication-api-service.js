@@ -3,28 +3,30 @@ import {ApiService} from '../../../app/services/api-service/api-service.js';
 
 const {module, test} = QUnit;
 
-export default () => module('Authentication', (hooks) => {
-  hooks.afterEach(() => fetchMock.reset());
-
+export default () => module('Authentication', () => {
   const email = 'login';
   const password = 'password';
   const token = 'token';
 
   test('Should handle a response with code 200', async (assert) => {
     assert.expect(2);
-    fetchMock.mock({
+    const fetch = fetchMock.sandbox();
+    fetch.mock({
       url: '/login',
       method: 'POST',
     }, {token});
-    const apiService = new ApiService();
+    const apiService = new ApiService({fetch});
+
     const res = await apiService.logIn(email, password);
-    assert.ok(fetchMock.called(), 'Should call mock for fetch');
+
+    assert.ok(fetch.called(), 'Should call mock for fetch');
     assert.equal(res.token, token, 'Should return token after successful query');
   });
 
   test('Should handle a response with code 4**', async (assert) => {
     assert.expect(2);
-    fetchMock.mock({
+    const fetch = fetchMock.sandbox();
+    fetch.mock({
       url: '/login',
       method: 'POST',
     }, {
@@ -33,19 +35,21 @@ export default () => module('Authentication', (hooks) => {
         message: 'client error',
       },
     });
-    const apiService = new ApiService();
+    const apiService = new ApiService({fetch});
+
     try {
       await apiService.logIn(email, password);
     } catch (error) {
       assert.equal(error.message, '400: client error', 'Should return error with response status');
     } finally {
-      assert.ok(fetchMock.called(), 'Should call mock for fetch');
+      assert.ok(fetch.called(), 'Should call mock for fetch');
     }
   });
 
   test('Should handle a response with code 500', async (assert) => {
     assert.expect(2);
-    fetchMock.mock({
+    const fetch = fetchMock.sandbox();
+    fetch.mock({
       url: '/login',
       method: 'POST',
     }, {
@@ -54,13 +58,14 @@ export default () => module('Authentication', (hooks) => {
         message: 'server error',
       },
     });
-    const apiService = new ApiService();
+    const apiService = new ApiService({fetch});
+
     try {
       await apiService.logIn(email, password);
     } catch (error) {
       assert.equal(error.message, '500: server error', 'Should return error with response status');
     } finally {
-      assert.ok(fetchMock.called(), 'Should call mock for fetch');
+      assert.ok(fetch.called(), 'Should call mock for fetch');
     }
   });
 });

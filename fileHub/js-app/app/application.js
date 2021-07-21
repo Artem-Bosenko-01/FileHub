@@ -13,7 +13,7 @@ import {TitleService} from './services/title-service.js';
 export class Application extends Component {
   /** @inheritDoc */
   _initNestedComponents() {
-    const apiService = new ApiService();
+    const apiService = new ApiService(window);
     const titleService = new TitleService('FileHub', document);
     const configuration = new RoutingConfiguration('login')
         .addRoute('login', () => {

@@ -1,10 +1,4 @@
-document.getElementById("form").addEventListener('submit', ()=>{
+import {Application} from './application.js';
 
-    const inputs = document.querySelectorAll(".input-value input");
-
-    const email = inputs[0].value;
-    const password = inputs[1].value;
-
-    alert("Email -> " + email + ".\nPassword -> " + password + ".");
-
-});
+const app = document.getElementById('main');
+new Application(app);

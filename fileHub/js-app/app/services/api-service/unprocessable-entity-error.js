@@ -1,3 +1,5 @@
+import {ValidationErrorCase} from './validation-error-case.js';
+
 /**
  * Error that throws when response status equals 422.
  */

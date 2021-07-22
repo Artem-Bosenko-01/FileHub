@@ -19,7 +19,7 @@ module('Validator', (hooks) => {
     const conf = new ValidationConfiguration([new ValidationRule(field, () => lengthValidation('length', 6))]);
     const results = await new Validator(conf).validate();
     assert.ok(results, 'Results of validation should be non null or undefined');
-    const successfulResults = results.filter((result) => result.status === 'resolve');
+    const successfulResults = results.filter((result) => result.isValid === true);
     assert.equal(successfulResults.length, 1, 'Should be 1 fulfilled promise status.');
   });
 
@@ -30,7 +30,7 @@ module('Validator', (hooks) => {
       new ValidationRule(field, () => confirmPasswordValidation('123456', '123456'))]);
     const results = await new Validator(conf).validate();
     assert.ok(results, 'Results of validation should be non null or undefined');
-    const successfulResults = results.filter((result) => result.status === 'resolve');
+    const successfulResults = results.filter((result) => result.isValid === true);
     assert.equal(successfulResults.length, 3, 'Should be 2 fulfilled promise status.');
   });
 
@@ -39,7 +39,7 @@ module('Validator', (hooks) => {
     const conf = new ValidationConfiguration([new ValidationRule(field, () => lengthValidation('short', 6))]);
     const results = await new Validator(conf).validate();
     assert.ok(results, 'Results of validation should be non null or undefined');
-    const successfulResults = results.filter((result) => result.status === 'rejected');
+    const successfulResults = results.filter((result) => result.isValid === false);
     assert.equal(successfulResults.length, 1, 'Should be 1 fulfilled promise status.');
   });
 
@@ -50,7 +50,7 @@ module('Validator', (hooks) => {
       new ValidationRule(field, () => confirmPasswordValidation('123456', '123654'))]);
     const results = await new Validator(conf).validate();
     assert.ok(results, 'Results of validation should be non null or undefined');
-    const successfulResults = results.filter((result) => result.status === 'rejected');
+    const successfulResults = results.filter((result) => result.isValid === false);
     assert.equal(successfulResults.length, 3, 'Should be 1 fulfilled promise status.');
   });
 });

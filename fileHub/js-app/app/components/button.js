@@ -10,7 +10,7 @@ export class Button extends Component {
    */
   constructor(parentElement) {
     super(parentElement);
-    this._iconCLasses = [];
+    this._iconClasses = [];
   }
 
   /**
@@ -36,7 +36,7 @@ export class Button extends Component {
    * @param {string[]} value
    */
   set iconClasses(value) {
-    this._iconCLasses = value;
+    this._iconClasses = value;
     this._render();
   }
 
@@ -44,8 +44,8 @@ export class Button extends Component {
    * Adds classes to button HTML tag if it necessary.
    * @param {string} iconClass
    */
-  addIconClasses(iconClass) {
-    this._iconCLasses.push(iconClass);
+  addIconClass(iconClass) {
+    this._iconClasses.push(iconClass);
     this._render();
   }
 
@@ -59,15 +59,17 @@ export class Button extends Component {
 
   /** @inheritDoc */
   _addEventListeners() {
-    this._getElement('button') && this._getElement('button')
-        .addEventListener('click', this._onCLickEvent);
+    const button = this._getElement('button');
+    if (button) {
+      button.addEventListener('click', this._onCLickEvent);
+    }
   }
 
   /** @inheritDoc */
   get _markup() {
-    const expression = this._iconCLasses && this._iconCLasses.length > 0;
+    const expression = this._iconClasses && this._iconClasses.length > 0;
     const icon = `<span class="glyphicon glyphicon-${this._buttonIcon} ${expression &&
-    this._iconCLasses.map((iconClass) => iconClass).join(' ')}"></span>`;
+    this._iconClasses.join(' ')}"></span>`;
     return `<button id="button" title="Submit" 
                 data-fh="button" class="button"
                 >${this._buttonIcon ? icon : ''}${this._buttonTitle ? this._buttonTitle : ''}</button>`;

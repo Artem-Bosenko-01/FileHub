@@ -19,14 +19,13 @@ test('Should create form with header, link reference and message, buttonTitle', 
   assert.expect(3);
   const form = new Form(fixture);
   form.formHeader = header;
-  assert.ok(searchElement('header'), 'Should create header in form');
-
+  form.linkMessage = linkMessage;
   form.linkReference = linkRef;
+
+  assert.ok(searchElement('header', fixture), 'Should create header in form');
   assert.ok(document.querySelector(`[data-fh="link"][href="${linkRef}"]`),
       'Should add reference to link in form');
-
-  form.linkMessage = linkMessage;
-  assert.equal(searchElement('link').innerHTML, linkMessage, 'Should create header in form');
+  assert.equal(searchElement('link', fixture).innerHTML, linkMessage, 'Should create header in form');
 });
 
 test('Should create form with input field', (assert) => {
@@ -36,13 +35,15 @@ test('Should create form with input field', (assert) => {
     inputField.id = 'id';
   });
 
-  assert.ok(searchElement('inputid'), 'Should create input field in form');
+  assert.ok(searchElement('input-id', fixture), 'Should create input field in form');
 });
 
 test('Should check event calls in form ', (assert) => {
   const step = 'step';
   const form = new Form(fixture);
   form.onSubmit = () => assert.step(step);
-  searchElement('form').dispatchEvent(new Event('submit'));
+
+  searchElement('form', fixture).dispatchEvent(new Event('submit'));
+
   assert.verifySteps([step], 'Should successfully calls event on submit form');
 });

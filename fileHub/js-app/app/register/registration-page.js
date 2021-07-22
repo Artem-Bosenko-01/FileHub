@@ -14,7 +14,7 @@ export class RegistrationPage extends Component {
    */
   _init(apiService, titleService) {
     this._apiService = apiService;
-    this._titleService =titleService;
+    this._titleService = titleService;
     this._titleService.addTitleForPage('Registration');
   }
 
@@ -27,10 +27,10 @@ export class RegistrationPage extends Component {
         const response = await this._apiService.register(email, password);
         alert(`${response.email}\n${response.password}`);
       } catch (error) {
-        this.clearPreviousServerErrors();
+        this.clearErrorMessages();
         if (error instanceof UnprocessableEntityError) {
           error.errors.forEach(
-              (error)=>{
+              (error) => {
                 form.addServerError(`field: ${error.field}\nmessage: ${error.message}`);
               },
           );
@@ -45,13 +45,11 @@ export class RegistrationPage extends Component {
    * Remove server error messages, which was rendered after previous response.
    * @returns {void}
    */
-  clearPreviousServerErrors() {
+  clearErrorMessages() {
     const errors = this._getElements('server-error');
-    if (errors) {
-      [...errors].forEach(
-          (error)=> error.remove(),
-      );
-    }
+    [...errors].forEach(
+        (error) => error.remove(),
+    );
   }
 
   /** @inheritDoc */

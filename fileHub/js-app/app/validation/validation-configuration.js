@@ -37,7 +37,7 @@ export class ValidationRule {
    * Rule from parameter configuration.
    * @returns {Function}
    */
-  get validationRule() {
+  get validator() {
     return this._validator;
   }
 

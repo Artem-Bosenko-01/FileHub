@@ -34,13 +34,13 @@ export class AuthenticationForm extends Component {
 
   /**
    * Adds error messages to inputs after analyzes validation results.
-   * @param {PromiseRejectedResult[]} resultsOfValidation
+   * @param {ValidationResult[]} resultsOfValidation
    * @private
    * @returns {void}
    */
   _renderErrorMessages(resultsOfValidation) {
     resultsOfValidation
-        .filter((result) => result.status === 'rejected')
+        .filter((result) => !result.isValid)
         .forEach((result) => result.field.addErrorMessage(result.message));
   }
 
@@ -83,8 +83,8 @@ export class AuthenticationForm extends Component {
           ),
       );
       const results = await authenticationFormValidator.validate();
-      const isAnyPromiseStatusReject = results.some((result) => result.status === 'rejected');
-      if (isAnyPromiseStatusReject) {
+      const hasInvalidValue = results.some((result) => !result.isValid);
+      if (hasInvalidValue) {
         this._renderErrorMessages(results);
       } else {
         this._onSubmitAuthenticationEvent && this._onSubmitAuthenticationEvent(

@@ -50,16 +50,12 @@ export default () => module('Registration', () => {
     fetch.mock({
       url: '/register',
       method: 'POST',
-    }, {
-      status: 500,
-      body: {
-        message: 'server error',
-      }});
+    }, 500);
     const apiService = new ApiService({fetch});
     try {
       await apiService.register(email, password);
     } catch (error) {
-      assert.equal(error.message, '500: server error', 'Should return error with response status');
+      assert.equal(error.message, '500: Server Error', 'Should return error with response status');
     } finally {
       assert.ok(fetch.called(), 'Should send a request');
     }

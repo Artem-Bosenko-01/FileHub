@@ -20,7 +20,7 @@ export default () => module('Authentication', () => {
     const res = await apiService.logIn(email, password);
 
     assert.ok(fetch.called(), 'Should send a request');
-    assert.equal(res.token, token, 'Should return token after successful response');
+    assert.equal(res, token, 'Should return token after successful response');
   });
 
   test('Should handle a response with code 4**', async (assert) => {
@@ -52,18 +52,13 @@ export default () => module('Authentication', () => {
     fetch.mock({
       url: '/login',
       method: 'POST',
-    }, {
-      status: 500,
-      body: {
-        message: 'server error',
-      },
-    });
+    }, 500);
     const apiService = new ApiService({fetch});
 
     try {
       await apiService.logIn(email, password);
     } catch (error) {
-      assert.equal(error.message, '500: server error', 'Should return error with response status');
+      assert.equal(error.message, '500: Server Error', 'Should return error with response status');
     } finally {
       assert.ok(fetch.called(), 'Should send a request');
     }

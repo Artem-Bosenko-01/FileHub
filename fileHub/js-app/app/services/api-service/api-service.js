@@ -16,9 +16,12 @@ export class ApiService {
   }
 
   /**
+   * @typedef {Object} token
+   *
+   * Authenticates user in FileHub application.
    * @param {string} email
    * @param {string} password
-   * @returns {Promise<Response>}>}
+   * @returns {Promise<token, ClientServerError|ServerError>}>}
    */
   async logIn(email, password) {
     const response = await this._fetch('/login', {
@@ -28,20 +31,22 @@ export class ApiService {
 
     const responseBody = await response.json();
 
-    if (response.ok) {
-      return responseBody;
-    } else if ((response.status >= 400 && response.status < 500)) {
+    if ((response.status >= 400 && response.status < 500)) {
       throw new ClientServerError(responseBody.message);
-    } else if (response.status === 500) {
-      throw new ServerError(responseBody.message);
     }
+    return responseBody.token;
   }
 
   /**
    *
+   * @typedef {Object} userData
+   * @property {string} email
+   * @property {string} password
+   *
+   * Registers user in FileHub application.
    * @param {string} email
    * @param {string} password
-   * @returns {Promise<Response>}
+   * @returns {Promise<userData, UnprocessableEntityError|ClientServerError|ServerError>}
    */
   async register(email, password) {
     const response = await this._fetch('/register', {
@@ -51,17 +56,17 @@ export class ApiService {
 
     const responseBody = await response.json();
 
-    if (response.ok) {
-      return responseBody;
-    } else if (response.status === 422) {
+    if (response.status === 422) {
       const errors = responseBody.map((responseError) =>
         new ValidationErrorCase(responseError.field, responseError.message));
       throw new UnprocessableEntityError(errors);
-    } else if ((response.status >= 400 && response.status < 500)) {
-      throw new ClientServerError(responseBody.message);
-    } else if (response.status === 500) {
-      throw new ServerError(responseBody.message);
     }
+
+    if ((response.status >= 400 && response.status < 500)) {
+      throw new ClientServerError(responseBody.message);
+    }
+
+    return responseBody;
   }
 
   /**
@@ -73,7 +78,10 @@ export class ApiService {
    */
   async _fetch(url, init) {
     return this._window.fetch(url, init)
-        .then((response) => {
+        .then(async (response) => {
+          if (response.status === 500) {
+            throw new ServerError();
+          }
           return response;
         })
         .catch((error) => {

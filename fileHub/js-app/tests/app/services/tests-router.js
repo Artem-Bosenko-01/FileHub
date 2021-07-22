@@ -8,12 +8,7 @@ const ERROR_ROUTE = '404';
 
 module('Router service', (hooks) => {
   test('Should show default page when hash is correct', (assert) => {
-    const testWindow = {
-      location: {hash: '#register'},
-
-      addEventListener(event, init) {
-      },
-    };
+    const testWindow = new WindowMock('#register');
 
     const configuration = getConfig(assert);
     new Router(configuration, testWindow);
@@ -21,12 +16,7 @@ module('Router service', (hooks) => {
   });
 
   test('Should show default page when hash is empty', (assert) => {
-    const testWindow = {
-      location: {hash: '#'},
-
-      addEventListener(event, init) {
-      },
-    };
+    const testWindow = new WindowMock('#');
 
     const configuration = getConfig(assert);
     new Router(configuration, testWindow);
@@ -34,12 +24,7 @@ module('Router service', (hooks) => {
   });
 
   test('Should show error page when hash is invalid', (assert) => {
-    const testWindow = {
-      location: {hash: '#router456'},
-
-      addEventListener(event, init) {
-      },
-    };
+    const testWindow = new WindowMock('#route456');
 
     const configuration = getConfig(assert);
     new Router(configuration, testWindow);
@@ -47,24 +32,15 @@ module('Router service', (hooks) => {
   });
 
   test('Should router works correctly when hash is changed', (assert) => {
+    assert.expect(3);
     const configuration = getConfig(assert);
 
-    const testWindow = {
-      location: {hash: '#'},
-
-      addEventListener(event, init) {
-        if (event === 'hashChange') {
-          const step = configuration.getPageByHash(init);
-          step();
-        }
-      },
-    };
+    const testWindow = new WindowMock('#');
 
     new Router(configuration, testWindow);
-    assert.verifySteps([DEFAULT_ROUTE], 'Should route to default page.');
-    testWindow.location.hash = '#register';
-    testWindow.addEventListener('hashChange', REGISTER_ROUTE);
-    assert.verifySteps([REGISTER_ROUTE], 'Should route to register page.');
+    testWindow.hash = '#register';
+    testWindow.dispatchEvent(new Event('hashchange'));
+    assert.verifySteps([DEFAULT_ROUTE, REGISTER_ROUTE], 'Should route to default page and after to register page.');
   });
 });
 
@@ -82,3 +58,32 @@ function getConfig(assert) {
   return configuration;
 }
 
+/**
+ * Custom object, which behaviour looks like window object.
+ */
+class WindowMock extends EventTarget {
+  /**
+   * @constructor
+   * @param {string} hash
+   */
+  constructor(hash) {
+    super();
+    this._location = {hash: hash};
+  }
+
+  /**
+   * Hash for location.
+   * @param {string} value
+   */
+  set hash(value) {
+    this._location = {hash: value};
+  }
+
+  /**
+   * Location of window.
+   * @returns {{hash: string}}
+   */
+  get location() {
+    return this._location;
+  }
+}

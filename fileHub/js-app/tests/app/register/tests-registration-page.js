@@ -8,13 +8,12 @@ module('Registration page', (hooks) => {
   hooks.beforeEach(() => {
     fixture = document.getElementById('qunit-fixture');
   });
-  const testDocument = {
-    title: '',
-  };
 
   test('Should add title and api services to registration page', (assert) => {
     assert.expect(2);
     const done = assert.async();
+
+    const testDocument = {title: ''};
 
     const testApiService = {
       register(email, password) {
@@ -31,19 +30,19 @@ module('Registration page', (hooks) => {
 
     new RegistrationPage(fixture, testApiService, testTitleService);
 
-    const emailField = searchElement('inputemail-user');
+    const emailField = searchElement('input-email-user', fixture);
     emailField.value = 'email@jajas';
     emailField.dispatchEvent(new Event('change'));
 
-    const passwordField = searchElement('inputpassword-user');
+    const passwordField = searchElement('input-password-user', fixture);
     passwordField.value = '123456';
     passwordField.dispatchEvent(new Event('change'));
 
-    const confirmPasswordField = searchElement('inputconfirm-password-user');
+    const confirmPasswordField = searchElement('input-confirm-password-user', fixture);
     confirmPasswordField.value = '123456';
     confirmPasswordField.dispatchEvent(new Event('change'));
 
-    searchElement('form').dispatchEvent(new Event('submit'));
+    searchElement('form', fixture).dispatchEvent(new Event('submit'));
 
     assert.equal(testDocument.title, 'Registration - FileHub', 'Should add title to page');
   });

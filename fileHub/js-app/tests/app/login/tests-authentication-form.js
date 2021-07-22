@@ -12,14 +12,15 @@ module('Authentication form', (hooks) => {
   test('Should create authentication form', (assert) => {
     assert.expect(4);
     new AuthenticationForm(fixture);
-    const header = searchElement('header').innerHTML;
-    assert.equal(header, 'Sign In to FileHub', 'Should check form title');
+    const header = searchElement('header', fixture).innerHTML;
     const LINK_REF = '#register';
+    const linkMessage = searchElement('link', fixture).innerHTML;
+    const buttonTitle = searchElement('button', fixture).innerHTML;
+
+    assert.equal(header, 'Sign In to FileHub', 'Should check form title');
     assert.ok(document.querySelector(`[data-fh="link"][href="${LINK_REF}"]`),
         'Should check reference link in form');
-    const linkMessage = searchElement('link').innerHTML;
     assert.equal(linkMessage, 'Didn\'t have an account yet?', 'Should check link message in form');
-    const buttonTitle = searchElement('button').innerHTML;
     assert.equal(buttonTitle, 'Sign In', 'Should check title of button in form');
   });
 
@@ -27,29 +28,34 @@ module('Authentication form', (hooks) => {
     assert.expect(2);
     new AuthenticationForm(fixture);
     const labels = document.querySelectorAll(`[data-fh="label-name"]`);
-    assert.equal(labels.length, 2, 'Should be 2 labels');
-
     const inputs = document.querySelectorAll(`[data-fh="get-user-data"] input`);
+
+    assert.equal(labels.length, 2, 'Should be 2 labels');
     assert.equal(inputs.length, 2, 'Should be 2 inputs field');
   });
 
-  test('Should be calls event after successful validation form', (assert) => {
+  test('Should call event after successful validation form', (assert) => {
+    assert.expect(3);
     const done = assert.async();
     const form = new AuthenticationForm(fixture);
-
-    const emailField = searchElement('inputemail-user');
-    emailField.value = 'email@jajas';
+    const emailField = searchElement('input-email-user', fixture);
+    const passwordField = searchElement('input-password-user', fixture);
+    const emailValue = 'email@jajas';
+    const passwordValue = 'email@123456';
+    emailField.value = emailValue;
     emailField.dispatchEvent(new Event('change'));
-
-    const passwordField = searchElement('inputpassword-user');
-    passwordField.value = 'email@123456';
+    passwordField.value = passwordValue;
     passwordField.dispatchEvent(new Event('change'));
 
     form.onSubmit((credentials) => {
+      const {email, password} = credentials;
       assert.ok(credentials, 'Should get correct credentials after validation.');
+      assert.equal(email, emailValue, 'Should get email.');
+      assert.equal(password, passwordValue, 'Should get password.');
       done();
     });
-    const component = searchElement('form');
+
+    const component = searchElement('form', fixture);
     component.dispatchEvent(new Event('submit'));
   });
 });

@@ -9,7 +9,7 @@ export class Component {
    */
   constructor(parentElement, ...arg) {
     this.parentElement = parentElement;
-    arg && this._init(...arg);
+    this._init(...arg);
     this._render();
   }
 
@@ -31,11 +31,22 @@ export class Component {
   /**
    * Searches first element in DOM by data attribute.
    * @param {string} searchClass
+
    * @protected
    * @returns {HTMLElement}
    */
-  _getElement(searchClass) {
-    return this.rootElement.querySelector(`[data-fh="${searchClass}"]`);
+  _getElement(searchDataAttribute) {
+    return this.rootElement.querySelector(`[data-fh="${searchDataAttribute}"]`);
+  }
+
+  /**
+   * Searches all elements in DOM by data attribute.
+   * @param {string} searchDataAttribute
+   * @protected
+   * @returns {HTMLElement}
+   */
+  _getElements(searchDataAttribute) {
+    return this.rootElement.querySelectorAll(`[data-fh="${searchDataAttribute}"]`);
   }
 
   /**

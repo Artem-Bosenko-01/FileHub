@@ -42,7 +42,7 @@ export class Component {
    * Searches all elements in DOM by data attribute.
    * @param {string} searchDataAttribute
    * @protected
-   * @returns {HTMLElement}
+   * @returns {HTMLCollection}
    */
   _getElements(searchDataAttribute) {
     return this.rootElement.querySelectorAll(`[data-fh="${searchDataAttribute}"]`);

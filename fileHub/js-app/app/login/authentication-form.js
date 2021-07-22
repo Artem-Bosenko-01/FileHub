@@ -40,7 +40,7 @@ export class AuthenticationForm extends Component {
    */
   _renderErrorMessages(resultsOfValidation) {
     resultsOfValidation
-        .filter((result) => result.isValid === false)
+        .filter((result) => !result.isValid)
         .forEach((result) => result.field.addErrorMessage(result.message));
   }
 
@@ -83,8 +83,8 @@ export class AuthenticationForm extends Component {
           ),
       );
       const results = await authenticationFormValidator.validate();
-      const isAnyFieldHaveInvalidValue = results.some((result) => result.isValid === false);
-      if (isAnyFieldHaveInvalidValue) {
+      const hasInvalidValue = results.some((result) => !result.isValid);
+      if (hasInvalidValue) {
         this._renderErrorMessages(results);
       } else {
         this._onSubmitAuthenticationEvent && this._onSubmitAuthenticationEvent(

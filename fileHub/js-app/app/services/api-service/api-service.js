@@ -31,22 +31,21 @@ export class ApiService {
 
     const responseBody = await response.json();
 
-    if ((response.status >= 400 && response.status < 500)) {
-      throw new ClientServerError(responseBody.message);
-    }
+    this._checkResponseOnClientError(response, responseBody);
+
     return responseBody.token;
   }
 
   /**
    *
-   * @typedef {Object} userData
+   * @typedef {Object} UserData
    * @property {string} email
    * @property {string} password
    *
    * Registers user in FileHub application.
    * @param {string} email
    * @param {string} password
-   * @returns {Promise<userData, UnprocessableEntityError|ClientServerError|ServerError>}
+   * @returns {Promise<UserData, UnprocessableEntityError|ClientServerError|ServerError>}
    */
   async register(email, password) {
     const response = await this._fetch('/register', {
@@ -55,16 +54,13 @@ export class ApiService {
     });
 
     const responseBody = await response.json();
-
     if (response.status === 422) {
       const errors = responseBody.map((responseError) =>
         new ValidationErrorCase(responseError.field, responseError.message));
       throw new UnprocessableEntityError(errors);
     }
 
-    if ((response.status >= 400 && response.status < 500)) {
-      throw new ClientServerError(responseBody.message);
-    }
+    this._checkResponseOnClientError(response, responseBody);
 
     return responseBody;
   }
@@ -87,5 +83,17 @@ export class ApiService {
         .catch((error) => {
           throw new Error(error.message);
         });
+  }
+
+  /**
+   * Checking response on 4** status.
+   * @param {Response} response
+   * @param {any} responseBody
+   * @private
+   */
+  _checkResponseOnClientError(response, responseBody) {
+    if ((response.status >= 400 && response.status < 500)) {
+      throw new ClientServerError(responseBody.message);
+    }
   }
 }

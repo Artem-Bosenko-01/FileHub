@@ -6,7 +6,7 @@ const registeredUsers = new Map()
     .set('vasya@kakk', '123654')
     .set('email.jj@jash.com', '654123');
 
-fetchMock.post('/login', (url, opts)=>{
+fetchMock.post('/login', (url, opts) => {
   const body = opts.body;
   const email = JSON.parse(body).email;
   const password = JSON.parse(body).password;
@@ -28,7 +28,6 @@ fetchMock.post('/login', (url, opts)=>{
   }
 });
 
-/*
 fetchMock.post('/register', (url, opts) => {
   const body = opts.body;
   const email = JSON.parse(body).email;
@@ -46,9 +45,8 @@ fetchMock.post('/register', (url, opts) => {
     };
   }
 });
-*/
 
-fetchMock.post('/register', () => {
+/* fetchMock.post('/register', () => {
   return {
     status: 422,
     body: [
@@ -56,7 +54,7 @@ fetchMock.post('/register', () => {
       {field: 'password', message: 'this is password message'},
     ],
   };
-});
+});*/
 
 /*
 fetchMock.post('/register', () => {

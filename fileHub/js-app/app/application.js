@@ -6,6 +6,7 @@ import {RoutingConfiguration} from './services/routing-configuration.js';
 import {RegistrationPage} from './register/registration-page.js';
 import {ErrorPage} from './ErrorPage.js';
 import {TitleService} from './services/title-service.js';
+import {FileListPage} from './user-page/file-list-page.js';
 
 /**
  * Entry point of FileHub application.
@@ -27,6 +28,10 @@ export class Application extends Component {
         .addRoute('404', () => {
           this._clearContainer();
           new ErrorPage(this.rootElement);
+        })
+        .addRoute('index', () => {
+          this._clearContainer();
+          new FileListPage(this.rootElement, apiService, titleService);
         });
     configuration.notFoundRoute = '404';
     new Router(configuration, window);

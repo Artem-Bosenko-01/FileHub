@@ -1,7 +1,7 @@
 import {Component} from '../components/component.js';
 
 /**
- *
+ * Renders element to exit the application.
  */
 export class LogOut extends Component {
   /** @inheritDoc */

@@ -1,7 +1,7 @@
 import {Component} from '../components/component.js';
 
 /**
- *
+ * Footer for user main page.
  */
 export class FileListFooter extends Component {
   /** @inheritDoc */

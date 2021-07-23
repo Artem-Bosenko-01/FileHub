@@ -4,7 +4,7 @@ import {FileListFooter} from './file-list-footer.js';
 import {FileListHeaderPanel} from './file-list-header-panel.js';
 
 /**
- *
+ * Main page for authenticated user, that contains information about him and his saved files.
  */
 export class FileListPage extends Component {
   /**

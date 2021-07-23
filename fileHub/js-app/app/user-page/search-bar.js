@@ -2,7 +2,7 @@ import {Component} from '../components/component.js';
 import {Button} from '../components/button.js';
 
 /**
- *
+ * Component for searching necessary files at folder content list.
  */
 export class SearchBar extends Component {
   /** @inheritDoc */

@@ -1,7 +1,7 @@
 import {Component} from '../components/component.js';
 
 /**
- *
+ * Component that renders information about user.
  */
 export class UserDetails extends Component {
   /**

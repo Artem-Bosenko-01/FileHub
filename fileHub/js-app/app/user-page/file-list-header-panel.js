@@ -3,7 +3,7 @@ import {UserDetails} from './user-details.js';
 import {LogOut} from './log-out.js';
 
 /**
- *
+ * Component that rendered at header at user main page.
  */
 export class FileListHeaderPanel extends Component {
   /** @inheritDoc */

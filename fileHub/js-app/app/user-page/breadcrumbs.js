@@ -1,7 +1,7 @@
 import {Component} from '../components/component.js';
 
 /**
- *
+ * The component that renders file path in main user page.
  */
 export class Breadcrumbs extends Component {
   /**

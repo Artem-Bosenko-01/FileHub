@@ -1,7 +1,7 @@
 /**
- *
+ * Dto that saves data about file list item.
  */
-export class FileListItemDto {
+export class FileListItem {
   /** @param {string} value */
   set itemId(value) {
     this._itemId = value;

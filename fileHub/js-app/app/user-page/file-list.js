@@ -1,8 +1,8 @@
 import {Component} from '../components/component.js';
-import {FileListItem} from './file-list-item.js';
+import {FileListItemView} from './file-list-item-view.js';
 
 /**
- *
+ * Component that renders folder content list.
  */
 export class FileList extends Component {
   /**
@@ -18,7 +18,7 @@ export class FileList extends Component {
     if (this._fileItems && this._fileItems.length > 0) {
       const tableElement = this._getElement('fileListItems');
       this._fileItems.forEach((fileItem) => {
-        const item = new FileListItem(tableElement);
+        const item = new FileListItemView(tableElement);
         item.listItemFromDto = fileItem;
       });
     }
@@ -26,7 +26,7 @@ export class FileList extends Component {
 
   /**
    *
-   * @param {FileListItemDto[]} value
+   * @param {FileListItem[]} value
    */
   set fileItems(value) {
     this._fileItems = value;

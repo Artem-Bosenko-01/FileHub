@@ -43,6 +43,10 @@ h2 {
     border-radius: 4px;
 }
 
+.button-raw{
+    display: inline;
+}
+
 .button:hover {
     cursor: pointer;
     background-color: #0c3378;
@@ -380,16 +384,16 @@ body {
     padding: 8px 12px;
 }
 
-.control-folder-button:first-child {
-    border-right: 1px solid #383636;
-    border-bottom-left-radius: 3px;
-    border-top-left-radius: 3px;
+.button-raw{
+
 }
 
-.control-folder-button:last-child {
+.upload-file-button {
+    border-right: 1px solid #383636;
+}
+
+.create-dir-button{
     margin-left: -3px;
-    border-bottom-right-radius: 3px;
-    border-top-right-radius: 3px;
 }
 
 

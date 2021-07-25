@@ -20,6 +20,6 @@ export class UserDetails extends Component {
     const expression = this._userFullName ?
         `<span class="glyphicon glyphicon-user"></span> ${this._userFullName}` : errorState;
 
-    return `<li title="${this._userFullName ? this._userFullName : ''}"> ${expression}</li>`;
+    return `<li data-fh="user-full-name" title="${this._userFullName ? this._userFullName : ''}"> ${expression}</li>`;
   }
 }

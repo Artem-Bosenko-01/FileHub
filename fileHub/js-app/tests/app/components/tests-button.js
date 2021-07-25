@@ -13,7 +13,7 @@ module('Button', {
 });
 
 test('Should create button', (assert) => {
-  assert.ok(searchElement('button', fixture),
+  assert.equal(fixture.getElementsByTagName('button').length, 1,
       'Should add 1 button with class button');
 });
 

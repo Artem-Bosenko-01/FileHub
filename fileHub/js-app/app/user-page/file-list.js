@@ -5,14 +5,6 @@ import {FileListItemView} from './file-list-item-view.js';
  * Component that renders folder content list.
  */
 export class FileList extends Component {
-  /**
-   * @constructor
-   * @param {HTMLElement} parentElement
-   */
-  constructor(parentElement) {
-    super(parentElement);
-  }
-
   /** @inheritDoc */
   _initNestedComponents() {
     if (this._fileItems && this._fileItems.length > 0) {
@@ -38,7 +30,7 @@ export class FileList extends Component {
     const invalidState = `<tr class="empty-directory">
                             <td>
                                 <p class="empty-directory-message">
-                                    <span class="error-message">
+                                    <span data-fh="file-list-error-message" class="error-message">
                                         <span 
                                         class="glyphicon glyphicon-exclamation-sign"></span> Can't load directory data.
                                     </span>
@@ -48,7 +40,8 @@ export class FileList extends Component {
 
     const emptyState = `<tr class="empty-directory">
                             <td>
-                                <p class="empty-directory-message">There are no files/directories created yet.</p>
+                                <p data-fh="empty-file-list-message" 
+                                    class="empty-directory-message">There are no files/directories created yet.</p>
                             </td>
                         </tr>`;
 

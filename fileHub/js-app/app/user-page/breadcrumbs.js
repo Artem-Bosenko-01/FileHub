@@ -16,7 +16,7 @@ export class Breadcrumbs extends Component {
   /** @inheritDoc */
   get _markup() {
     const errorState = `<li class="folder">
-                            <span class="error-message">
+                            <span data-fh="breadcrumbs-error-message" class="error-message">
                                <span class="glyphicon glyphicon-exclamation-sign"></span> Can't load breadcrumb data.
                             </span>
                        </li>`;
@@ -26,11 +26,11 @@ export class Breadcrumbs extends Component {
                          <li class="folder">
                             <span><a class="highlight" href="#index" title="Previous page">..</a> </span>
                          </li>
-                         <li class="folder">
-                            <span>${this._currentDirectory}</span>
+                         <li data-fh="current-dir" class="folder">
+                            <span data-fh="current-dir-name">${this._currentDirectory}</span>
                           </li>`;
 
-    return `<ul class="path">
+    return `<ul data-fh="breadcrumbs" class="path">
                 ${this._currentDirectory ? validState : errorState}
             </ul>`;
   }

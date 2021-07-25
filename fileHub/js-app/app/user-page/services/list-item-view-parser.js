@@ -24,7 +24,7 @@ export class ListItemViewParser {
    */
   getItemName(itemType, itemName) {
     if (itemType === 'folder') {
-      return `<a class="highlight" href="">${itemName}</a>`;
+      return `<a data-fh="folder-name" class="highlight" href="">${itemName}</a>`;
     } else {
       return itemName;
     }
@@ -47,7 +47,7 @@ export class ListItemViewParser {
   /**
    * Adds type of item for item view in the file list.
    * @param {string} itemType
-   * @param {string} itemMimeType
+   * @param {string} [itemMimeType]
    * @returns {string}
    */
   getItemType(itemType, itemMimeType) {
@@ -61,8 +61,8 @@ export class ListItemViewParser {
   /**
    * Converts size of the file to necessary format, which understandable for the user.
    * @param {string} itemType
-   * @param {number} itemSize
-   * @param {number} itemsAmount
+   * @param {number} [itemSize]
+   * @param {number} [itemsAmount]
    * @returns {string}
    */
   getItemSize(itemType, itemSize, itemsAmount) {

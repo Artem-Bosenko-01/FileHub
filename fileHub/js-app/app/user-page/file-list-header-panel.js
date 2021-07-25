@@ -15,7 +15,7 @@ export class FileListHeaderPanel extends Component {
 
   /** @inheritDoc */
   get _markup() {
-    return `<ul class="panel">
+    return `<ul data-fh="user-panel" class="panel">
             </ul>`;
   }
 }

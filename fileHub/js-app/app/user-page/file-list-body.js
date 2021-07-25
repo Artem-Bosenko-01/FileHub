@@ -35,6 +35,6 @@ export class FileListBody extends Component {
 
   /** @inheritDoc */
   get _markup() {
-    return '<div class="raw page-raw"></div>';
+    return '<div data-fh="file-list-body" class="raw page-raw"></div>';
   }
 }

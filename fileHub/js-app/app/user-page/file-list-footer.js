@@ -6,7 +6,7 @@ import {Component} from '../components/component.js';
 export class FileListFooter extends Component {
   /** @inheritDoc */
   get _markup() {
-    return `<footer class="footer">
+    return `<footer data-fh="footer" class="footer">
         <ul class="social-icons">
             <li>
                 <a title="linkedin" class="icon" href="https://www.linkedin.com/company/teamdev-ltd-/mycompany/"

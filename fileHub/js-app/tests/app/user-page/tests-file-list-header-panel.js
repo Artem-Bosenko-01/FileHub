@@ -9,7 +9,8 @@ module('User panel at header', () => {
     const userFullName = 'Artem Bosenko';
     const fixture = document.getElementById('qunit-fixture');
 
-    new FileListHeaderPanel(fixture);
+    const panel = new FileListHeaderPanel(fixture);
+    panel.userFullName = userFullName;
 
     assert.ok(searchElement('user-panel', fixture), 'Should render user panel at header');
     assert.equal(searchElement('user-full-name', fixture).innerText, userFullName,

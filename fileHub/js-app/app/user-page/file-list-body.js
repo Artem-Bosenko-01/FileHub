@@ -4,33 +4,37 @@ import {SearchBar} from './search-bar.js';
 import {DividingLine} from './dividing-line.js';
 import {FolderControlButtons} from './folder-control-buttons.js';
 import {FileList} from './file-list.js';
-import {FileListItem} from './services/file-list-item.js';
 
 /**
  * Unites components for user main page.
  */
 export class FileListBody extends Component {
+  /**
+   * Folder where the user is now.
+   * @param {string} value
+   */
+  set currentFolder(value) {
+    this._currentFolder = value;
+    this._render();
+  }
+
+  /**
+   * List of items for user data table.
+   * @param {FileListItem[]} value
+   */
+  set fileListItems(value) {
+    this._fileListItems = value;
+    this._render();
+  }
   /** @inheritDoc */
   _initNestedComponents() {
     const breadcrumbs = new Breadcrumbs(this.rootElement);
-    breadcrumbs.currentDirectory = 'Temp';
+    breadcrumbs.currentDirectory = this._currentFolder;
     new DividingLine(this.rootElement);
     new SearchBar(this.rootElement);
     new FolderControlButtons(this.rootElement);
     const fileList = new FileList(this.rootElement);
-
-    const itemDto = new FileListItem();
-    itemDto.itemId = '1';
-    itemDto.itemName = 'file1';
-    itemDto.itemType = 'folder';
-    itemDto.itemsAmount = 44;
-    const itemDto1 = new FileListItem();
-    itemDto1.itemId = '2';
-    itemDto1.itemName = 'file';
-    itemDto1.itemType = 'file';
-    itemDto1.itemMimeType = 'pdf';
-    itemDto1.itemSize = 7987864;
-    fileList.fileItems = [itemDto, itemDto1];
+    fileList.fileItems = this._fileListItems;
   }
 
   /** @inheritDoc */

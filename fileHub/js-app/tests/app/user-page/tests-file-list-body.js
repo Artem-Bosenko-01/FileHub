@@ -5,13 +5,19 @@ const {module, test} = QUnit;
 
 module('File list body', () => {
   test('Should render file list body', (assert) => {
-    assert.expect(2);
+    assert.expect(3);
+    const fileListItemTest = {};
+    const folderName = 'Current folder';
     const fixture = document.getElementById('qunit-fixture');
 
-    new FileListBody(fixture);
+    const listBody = new FileListBody(fixture);
+    listBody.fileListItems = [fileListItemTest];
+    listBody.currentFolder = folderName;
 
     assert.ok(searchElement('file-list-body', fixture), 'Should render tag for file list body');
     const listItems = fixture.querySelectorAll('[data-fh="folder-marker"]');
-    assert.equal(listItems.length, 2, 'Should render table with 2 list items');
+    assert.equal(listItems.length, 1, 'Should render table with 2 list items');
+    assert.equal(searchElement('current-dir', fixture).innerText, folderName,
+        'Should add name of current folder');
   });
 });

@@ -14,7 +14,10 @@ module('Breadcrumbs', (hooks) => {
     const currentDirectoryName = 'Directory';
     const breadcrumbs = new Breadcrumbs(fixture);
 
-    breadcrumbs.currentDirectory = currentDirectoryName;
+    const currentFolder = {
+      itemName: currentDirectoryName,
+    };
+    breadcrumbs.currentDirectory = currentFolder;
 
     assert.ok(searchElement('breadcrumbs', fixture), 'Should render breadcrumbs');
     assert.ok(searchElement('current-dir', fixture), 'Should render tag for current folder');

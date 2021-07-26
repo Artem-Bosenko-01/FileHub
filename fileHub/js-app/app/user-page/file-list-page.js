@@ -26,20 +26,22 @@ export class FileListPage extends Component {
     headerPanel.userFullName = 'Oxxxymiron';
     const listBody = new FileListBody(this.rootElement);
 
-    listBody.currentFolder = 'Temp';
-
     const itemDto = new FileListItem();
+
     itemDto.itemId = '1';
-    itemDto.itemName = 'file1';
+    itemDto.itemName = 'folder';
     itemDto.itemType = 'folder';
     itemDto.itemsAmount = 44;
+    itemDto.parentFolderId = 'as';
     const itemDto1 = new FileListItem();
     itemDto1.itemId = '2';
     itemDto1.itemName = 'file';
     itemDto1.itemType = 'file';
     itemDto1.itemMimeType = 'pdf';
     itemDto1.itemSize = 7987864;
+    itemDto1.parentFolderId = '54';
 
+    listBody.currentFolder = itemDto;
     listBody.fileListItems = [itemDto, itemDto1];
 
     new FileListFooter(this.rootElement);

@@ -6,13 +6,16 @@ const {module, test} = QUnit;
 module('File list body', () => {
   test('Should render file list body', (assert) => {
     assert.expect(3);
+    const folderName = 'Folder name';
     const fileListItemTest = {};
-    const folderName = 'Current folder';
+    const currentFolder = {
+      itemName: folderName,
+    };
     const fixture = document.getElementById('qunit-fixture');
 
     const listBody = new FileListBody(fixture);
     listBody.fileListItems = [fileListItemTest];
-    listBody.currentFolder = folderName;
+    listBody.currentFolder = currentFolder;
 
     assert.ok(searchElement('file-list-body', fixture), 'Should render tag for file list body');
     const listItems = fixture.querySelectorAll('[data-fh="folder-marker"]');

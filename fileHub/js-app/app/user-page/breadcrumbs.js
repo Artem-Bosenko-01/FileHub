@@ -6,7 +6,7 @@ import {Component} from '../components/component.js';
 export class Breadcrumbs extends Component {
   /**
    * Directory where user is located.
-   * @param {string} value
+   * @param {FileListItem} value
    */
   set currentDirectory(value) {
     this._currentDirectory = value;
@@ -20,15 +20,21 @@ export class Breadcrumbs extends Component {
                                <span class="glyphicon glyphicon-exclamation-sign"></span> Can't load breadcrumb data.
                             </span>
                        </li>`;
-    const validState = `<li class="folder">
+
+    const linkPathElement = `<li class="folder">
                             <span><a class="highlight" href="#index" title="home">Home</a> </span>
                          </li>
                          <li class="folder">
                             <span><a class="highlight" href="#index" title="Previous page">..</a> </span>
-                         </li>
-                         <li data-fh="current-dir" class="folder">
-                            <span data-fh="current-dir-name">${this._currentDirectory}</span>
+                         </li>`;
+
+    const staticPathElement = `<li data-fh="current-dir" class="folder">
+                            <span data-fh="current-dir-name">${this._currentDirectory &&
+                                                                this._currentDirectory.itemName}</span>
                           </li>`;
+
+    const validState = `${this._currentDirectory &&
+                          this._currentDirectory.itemParentFolderId ? linkPathElement : ''}${staticPathElement}`;
 
     return `<ul data-fh="breadcrumbs" class="path">
                 ${this._currentDirectory ? validState : errorState}

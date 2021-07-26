@@ -17,6 +17,11 @@ export class FileListItem {
     this._itemType = value;
   }
 
+  /** @param {string} value */
+  set parentFolderId(value) {
+    this._parentFolderId = value;
+  }
+
   /** @param {number}  value */
   set itemSize(value) {
     this._itemSize = value;
@@ -45,6 +50,11 @@ export class FileListItem {
   /** @returns {string} */
   get itemType() {
     return this._itemType;
+  }
+
+  /** @returns {string} */
+  get itemParentFolderId() {
+    return this._parentFolderId;
   }
 
   /** @returns {number} */

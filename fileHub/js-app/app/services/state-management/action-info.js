@@ -8,26 +8,6 @@ export class ActionInfo {
    */
   static typeName = '';
 
-  /**
-   * @constructor
-   * @param {object} services
-   * @param {object} state
-   */
-  constructor(services, state) {
-    this._services = services;
-    this._state = state;
-  }
-
-  /** @returns {Object} */
-  get services() {
-    return this._services;
-  }
-
-  /** @returns {Object} */
-  get state() {
-    return this._state;
-  }
-
   /** @returns {string} */
   get typeName() {
     return ActionInfo.typeName

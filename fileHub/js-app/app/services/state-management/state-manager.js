@@ -46,7 +46,7 @@ export class StateManager {
    */
   dispatch(action) {
     const executor = this._actions.getActionExecutor(action.typeName);
-    executor.apply(action);
+    executor.apply(action, this._services, this._state);
   }
 
   /**

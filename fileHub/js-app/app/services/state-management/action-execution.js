@@ -4,7 +4,9 @@
 export default class ActionExecutor {
   /**
    * @param {ActionInfo} actionInfo  - data for running action executor.
+   * @param {object} services
+   * @param {object} state
    */
-  apply(actionInfo) {
+  apply(actionInfo, services, state) {
   }
 }

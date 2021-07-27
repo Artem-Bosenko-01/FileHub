@@ -13,12 +13,10 @@ export class FileListPage extends Component {
   /**
    * @inheritDoc
    * Adds api and title services to page
-   * @param {ApiService} apiService
    * @param {TitleService} titleService
    * @param {StateManager} stateManager
    */
-  _init(apiService, titleService, stateManager) {
-    this._apiService = apiService;
+  _init(titleService, stateManager) {
     this._titleService = titleService;
     this._titleService.addTitleForPage('Main Page');
     this._stateManager = stateManager;
@@ -52,8 +50,8 @@ export class FileListPage extends Component {
 
     const currentFolder = this._stateManager.state.currentFolder;
     if (!currentFolder) {
-      this._stateManager.dispatch(new FetchCurrentFolder({apiService: this._apiService}, this._stateManager.state));
-      this._stateManager.dispatch(new DeleteFile({apiService: this._apiService}, this._stateManager.state));
+      this._stateManager.dispatch(new FetchCurrentFolder());
+      this._stateManager.dispatch(new DeleteFile('id'));
     }
   }
 

@@ -8,8 +8,6 @@ module('File list page', () => {
 
     const testDocument = {title: ''};
 
-    const testApiService = {};
-
     const testTitleService = {
       addTitleForPage() {
         testDocument.title = 'Main page - FileHub';
@@ -20,7 +18,7 @@ module('File list page', () => {
       state: {currentFolder: 'folder'},
     };
 
-    new FileListPage(fixture, testApiService, testTitleService, testServerManager);
+    new FileListPage(fixture, testTitleService, testServerManager);
 
     assert.equal(testDocument.title, 'Main page - FileHub', 'Should add title to page');
   });

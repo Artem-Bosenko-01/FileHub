@@ -7,10 +7,12 @@ export default class FetchCurrentFolderExecutor extends ActionExecutor {
   /**
    * @inheritDoc
    * @param {FetchCurrentFolder} actionInfo
+   * @param {object} services
+   * @param {object} state
    */
-  apply(actionInfo) {
-    const currentFolderId = actionInfo.state.currentFolderId;
-    const folder = actionInfo.services.apiService.getFolder(currentFolderId);
-    actionInfo.state.currentFolder = folder;
+  apply(actionInfo, services, state ) {
+    const currentFolderId = state.currentFolderId;
+    const folder = services.apiService.getFolder(currentFolderId);
+    state.currentFolder = folder;
   }
 }

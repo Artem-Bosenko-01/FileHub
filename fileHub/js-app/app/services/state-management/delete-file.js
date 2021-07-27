@@ -9,12 +9,10 @@ export default class DeleteFile extends ActionInfo {
 
   /**
    * @constructor
-   * @param {object} services
-   * @param {object} state
    * @param {string} fileId
    */
-  constructor(services, state, fileId) {
-    super(services, state);
+  constructor(fileId) {
+    super();
     this._fileId = fileId;
   }
 

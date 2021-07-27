@@ -3,6 +3,8 @@ import {FileListBody} from './file-list-body.js';
 import {FileListFooter} from './file-list-footer.js';
 import {FileListHeaderPanel} from './file-list-header-panel.js';
 import {FileListItem} from './services/file-list-item.js';
+import FetchCurrentFolder from '../services/state-management/fetch-current-folder.js';
+import DeleteFile from '../services/state-management/delete-file.js';
 
 /**
  * Main page for authenticated user, that contains information about him and his saved files.
@@ -12,12 +14,14 @@ export class FileListPage extends Component {
    * @inheritDoc
    * Adds api and title services to page
    * @param {ApiService} apiService
-   * @param {TitleService}titleService
+   * @param {TitleService} titleService
+   * @param {StateManager} stateManager
    */
-  _init(apiService, titleService) {
+  _init(apiService, titleService, stateManager) {
     this._apiService = apiService;
     this._titleService = titleService;
     this._titleService.addTitleForPage('Main Page');
+    this._stateManager = stateManager;
   }
 
   /** @inheritDoc */
@@ -45,6 +49,12 @@ export class FileListPage extends Component {
     listBody.fileListItems = [itemDto, itemDto1];
 
     new FileListFooter(this.rootElement);
+
+    const currentFolder = this._stateManager.state.currentFolder;
+    if (!currentFolder) {
+      this._stateManager.dispatch(new FetchCurrentFolder({apiService: this._apiService}, this._stateManager.state));
+      this._stateManager.dispatch(new DeleteFile({apiService: this._apiService}, this._stateManager.state));
+    }
   }
 
   /** @inheritDoc */

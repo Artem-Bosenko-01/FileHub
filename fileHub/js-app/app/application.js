@@ -7,6 +7,8 @@ import {RegistrationPage} from './register/registration-page.js';
 import {ErrorPage} from './ErrorPage.js';
 import {TitleService} from './services/title-service.js';
 import {FileListPage} from './user-page/file-list-page.js';
+import {StateManager} from './services/state-management/state-manager.js';
+import {ActionFactory} from './services/state-management/action-factory.js';
 
 /**
  * Entry point of FileHub application.
@@ -16,6 +18,9 @@ export class Application extends Component {
   _initNestedComponents() {
     const apiService = new ApiService(window);
     const titleService = new TitleService('FileHub', document);
+    const factory = new ActionFactory();
+    const stateManager = new StateManager({}, {apiService}, factory);
+
     const configuration = new RoutingConfiguration('login')
         .addRoute('login', () => {
           this._clearContainer();
@@ -31,7 +36,7 @@ export class Application extends Component {
         })
         .addRoute('index', () => {
           this._clearContainer();
-          new FileListPage(this.rootElement, apiService, titleService);
+          new FileListPage(this.rootElement, apiService, titleService, stateManager);
         });
     configuration.notFoundRoute = '404';
     new Router(configuration, window);

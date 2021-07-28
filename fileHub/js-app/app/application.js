@@ -9,6 +9,7 @@ import {TitleService} from './services/title-service.js';
 import {FileListPage} from './user-page/file-list-page.js';
 import {StateManager} from './services/state-management/state-manager.js';
 import {ActionFactory} from './services/state-management/action-factory.js';
+import {HashChanged} from './services/state-management/hash-changed-action/hash-changed.js';
 
 /**
  * Entry point of FileHub application.
@@ -18,28 +19,37 @@ export class Application extends Component {
   _initNestedComponents() {
     const apiService = new ApiService(window);
     const titleService = new TitleService('FileHub', document);
-    const factory = new ActionFactory();
-    const stateManager = new StateManager({}, {apiService}, factory);
+    const configuration = new RoutingConfiguration('login');
+    const router = new Router(configuration, window);
 
-    const configuration = new RoutingConfiguration('login')
-        .addRoute('login', () => {
-          this._clearContainer();
-          new AuthenticationPage(this.rootElement, apiService, titleService);
-        })
-        .addRoute('register', () => {
-          this._clearContainer();
-          new RegistrationPage(this.rootElement, apiService, titleService);
-        })
-        .addRoute('404', () => {
-          this._clearContainer();
-          new ErrorPage(this.rootElement);
-        })
-        .addRoute('index', () => {
-          this._clearContainer();
-          new FileListPage(this.rootElement, apiService, titleService, stateManager);
-        });
-    configuration.notFoundRoute = '404';
-    new Router(configuration, window);
+    const factory = new ActionFactory();
+    const stateManager = new StateManager({}, {apiService, router}, factory);
+    router.onHashChanged((urlEvent) => {
+      const url = urlEvent.newURL.split('#');
+      stateManager.dispatch(new HashChanged(url[1]));
+    });
+
+    stateManager.onStateChanged('location', ({location}) => {
+      this._clearContainer();
+
+      switch (location.pageRoute) {
+        case '': {
+          router.redirect('login');
+          break;
+        }
+        case 'login':
+          return new AuthenticationPage(this.rootElement, apiService, titleService);
+
+        case 'register':
+          return new RegistrationPage(this.rootElement, apiService, titleService);
+
+        case 'index':
+          return new FileListPage(this.rootElement, titleService, stateManager);
+
+        default:
+          return new ErrorPage(this.rootElement);
+      }
+    });
   }
 
   /**

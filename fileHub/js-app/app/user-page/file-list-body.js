@@ -11,7 +11,7 @@ import {FileList} from './file-list.js';
 export class FileListBody extends Component {
   /**
    * Folder where the user is now.
-   * @param {FileListItem} value
+   * @param {string|FileListItem} value
    */
   set currentFolder(value) {
     this._currentFolder = value;

@@ -3,8 +3,7 @@ import {FileListBody} from './file-list-body.js';
 import {FileListFooter} from './file-list-footer.js';
 import {FileListHeaderPanel} from './file-list-header-panel.js';
 import {FileListItem} from './services/file-list-item.js';
-import FetchCurrentFolder from '../services/state-management/fetch-current-folder.js';
-import DeleteFile from '../services/state-management/delete-file.js';
+import FetchCurrentFolder from '../services/state-management/fetch-current-directory/fetch-current-folder.js';
 
 /**
  * Main page for authenticated user, that contains information about him and his saved files.
@@ -43,15 +42,23 @@ export class FileListPage extends Component {
     itemDto1.itemSize = 7987864;
     itemDto1.parentFolderId = '54';
 
-    listBody.currentFolder = itemDto;
+    this._stateManager.onStateChanged('currentFolder', (state) => {
+      if (state.isCurrentFolderFetching) {
+        listBody.currentFolder = 'loading';
+      }
+      listBody.currentFolder = state.currentFolder;
+    });
+
     listBody.fileListItems = [itemDto, itemDto1];
 
     new FileListFooter(this.rootElement);
 
     const currentFolder = this._stateManager.state.currentFolder;
+
     if (!currentFolder) {
       this._stateManager.dispatch(new FetchCurrentFolder());
-      this._stateManager.dispatch(new DeleteFile('id'));
+    } else {
+      listBody.currentFolder = currentFolder;
     }
   }
 

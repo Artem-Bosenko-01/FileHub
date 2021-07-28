@@ -29,9 +29,9 @@ fetchMock.post('/login', (url, opts) => {
 });
 
 fetchMock.post('/register', (url, opts) => {
-  const body = opts.body;
-  const email = JSON.parse(body).email;
-  const password = JSON.parse(body).password;
+  const body = JSON.parse(opts.body);
+  const email = body.email;
+  const password = body.password;
 
   if (registeredUsers.has(email)) {
     return {
@@ -46,6 +46,15 @@ fetchMock.post('/register', (url, opts) => {
   }
 });
 
+fetchMock.get('/folder/:5', () => {
+  return {
+    id: '5',
+    name: 'temp_file',
+    type: 'folder',
+    itemsAmount: 45,
+    parentFolderId: 'vadsdvs',
+  };
+});
 /* fetchMock.post('/register', () => {
   return {
     status: 422,

@@ -1,4 +1,4 @@
-import {ActionInfo} from "./action-info.js";
+import {ActionInfo} from '../action-info.js';
 
 /**
  * Contains data for fetching current folder for user main page.
@@ -9,6 +9,6 @@ export default class FetchCurrentFolder extends ActionInfo {
 
   /** @inheritDoc */
   get typeName() {
-    return FetchCurrentFolder.typeName
+    return FetchCurrentFolder.typeName;
   }
 }

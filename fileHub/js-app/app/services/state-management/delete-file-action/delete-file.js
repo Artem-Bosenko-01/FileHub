@@ -1,4 +1,4 @@
-import {ActionInfo} from "./action-info.js";
+import {ActionInfo} from '../action-info.js';
 
 /**
  * Contains data for deleting a file from the directory.
@@ -23,6 +23,6 @@ export default class DeleteFile extends ActionInfo {
 
   /** @inheritDoc */
   get typeName() {
-    return DeleteFile.typeName
+    return DeleteFile.typeName;
   }
 }

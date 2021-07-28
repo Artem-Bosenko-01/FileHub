@@ -2,6 +2,7 @@ import {ClientServerError} from './client-server-error.js';
 import {ServerError} from './server-error.js';
 import {UnprocessableEntityError} from './unprocessable-entity-error.js';
 import {ValidationErrorCase} from './validation-error-case.js';
+import {FileListItem} from '../../user-page/services/file-list-item.js';
 
 /**
  * Allows you to interact with the main features of the application
@@ -63,6 +64,52 @@ export class ApiService {
     this._checkResponseOnClientError(response, responseBody);
 
     return responseBody;
+  }
+
+  /**
+   * Gets item dto with folder type.
+   * @param {string} folderId
+   * @returns {Promise<FileListItem|ClientServerError|ServerError>}
+   */
+  async getFolder(folderId) {
+    const response = await this._fetch(`/folder/:${folderId}`, {
+      method: 'GET',
+      body: JSON.stringify(folderId),
+    });
+
+    const responseBody = await response.json();
+    this._checkResponseOnClientError(response, responseBody);
+
+    const item = new FileListItem();
+    item.itemId = responseBody.id;
+    item.itemName = responseBody.name;
+    item.itemType = responseBody.type;
+    item.itemsAmount = responseBody.itemsAmount;
+    item.parentFolderId = responseBody.parentFolderId;
+
+    return item;
+  }
+
+  /**
+   * Gets item dto with folder type.
+   * @param {string} folderId
+   * @returns {Promise<FileListItem|ClientServerError|ServerError>}
+   */
+  async getRootFolder(folderId) {
+    const response = await this._fetch(`/root-folder`, {
+      method: 'GET',
+    });
+
+    const responseBody = await response.json();
+    this._checkResponseOnClientError(response, responseBody);
+
+    const item = new FileListItem();
+    item.itemId = responseBody.id;
+    item.itemName = responseBody.name;
+    item.itemType = responseBody.type;
+    item.itemsAmount = responseBody.itemsAmount;
+
+    return item;
   }
 
   /**

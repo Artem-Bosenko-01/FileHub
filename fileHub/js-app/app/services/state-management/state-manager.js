@@ -1,3 +1,5 @@
+import {mutator} from './mutator/mutator.js';
+
 /**
  * Manages the states of the application by processing actions.
  */
@@ -15,21 +17,34 @@ export class StateManager {
     this._eventBus = new EventTarget();
     this._actions = actionFactory;
 
+    const eventBus = this._eventBus;
     this._state = new Proxy(this._eventBus, {
       set(target, key, newValue) {
         if (target[key] === newValue) {
-          return;
+          return true;
         }
 
         const updateTargetValue = Reflect.set(target, key, newValue);
         if (updateTargetValue) {
-          this._eventBus.dispatchEvent(new CustomEvent('stateChanged', {
+          eventBus.dispatchEvent(new CustomEvent(`stateChanged-${key}`, {
             detail: {state: target},
           }));
+          return true;
         }
       },
-    },
-    );
+    });
+  }
+
+  /**
+   * Changes application components states.
+   * @param {string} mutatorName
+   * @param {object} details
+   * @private
+   */
+  _mutate(mutatorName, details) {
+    const state = this._state;
+    const mutatedState = mutator(mutatorName, details, state);
+    this._state = Object.assign(this._state, mutatedState);
   }
 
   /**
@@ -46,14 +61,17 @@ export class StateManager {
    */
   dispatch(action) {
     const executor = this._actions.getActionExecutor(action.typeName);
-    executor.apply(action, this._services, this._state);
+    executor.apply(action, this._services, this._state, (mutatorName, details) => {
+      this._mutate(mutatorName, details);
+    });
   }
 
   /**
    * Adds some event for listeners on change state.
+   * @param {string} fieldName
    * @param {function({CustomEventInit})} listener
    */
-  onStateChanged(listener) {
-    this._eventBus.addEventListener('stateChanged', ({details}) => listener(details.state));
+  onStateChanged(fieldName, listener) {
+    this._eventBus.addEventListener(`stateChanged-${fieldName}`, (e) => listener(e.detail.state));
   }
 }

@@ -17,7 +17,8 @@
   "author": "Artem Bosenko",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^7.30.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.31.0",
     "eslint-config-google": "^0.14.0",
     "fetch-mock": "^9.11.0",
     "qunit": "^2.16.0"

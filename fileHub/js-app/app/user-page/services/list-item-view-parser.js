@@ -19,12 +19,13 @@ export class ListItemViewParser {
   /**
    * Adds name for item view in the file list.
    * @param {string} itemType
+   * @param {string} itemId
    * @param {string} itemName
    * @returns {string}
    */
-  getItemName(itemType, itemName) {
+  getItemName(itemType, itemId, itemName) {
     if (itemType === 'folder') {
-      return `<a data-fh="folder-name" class="highlight" href="">${itemName}</a>`;
+      return `<a data-fh="folder-name" class="highlight" href="#index/${itemId}">${itemName}</a>`;
     } else {
       return itemName;
     }

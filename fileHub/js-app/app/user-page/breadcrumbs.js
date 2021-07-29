@@ -25,16 +25,16 @@ export class Breadcrumbs extends Component {
                             <span><a class="highlight" href="#index" title="home">Home</a> </span>
                          </li>
                          <li class="folder">
-                            <span><a class="highlight" href="#index" title="Previous page">..</a> </span>
+                            <span><a class="highlight"
+                            href="#index/${this._currentDirectory.itemParentFolderId}" 
+                            title="Previous page">..</a> </span>
                          </li>`;
 
       const staticPathElement = `<li data-fh="current-dir" class="folder">
-                            <span data-fh="current-dir-name">${this._currentDirectory &&
-      this._currentDirectory.itemName}</span>
+                            <span data-fh="current-dir-name">${this._currentDirectory.itemName}</span>
                           </li>`;
 
-      bodyBreadcrumb = `${this._currentDirectory &&
-      this._currentDirectory.itemParentFolderId ? linkPathElement : ''}${staticPathElement}`;
+      bodyBreadcrumb = `${this._currentDirectory.itemParentFolderId ? linkPathElement : ''}${staticPathElement}`;
     } else {
       bodyBreadcrumb = `<li class="folder">
                             <span data-fh="breadcrumbs-error-message" class="error-message">

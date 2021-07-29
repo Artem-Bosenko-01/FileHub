@@ -16,12 +16,13 @@ module('List item view parser', () => {
   test('Should return link with name if it necessary', (assert) => {
     assert.expect(2);
     const parser = new ListItemViewParser();
+    const id = 'id';
     const folderName = 'folder';
     const fileName = 'file';
 
-    const nameForFolder = parser.getItemName('folder', folderName);
-    const nameForFile = parser.getItemName('file', fileName);
-    assert.equal(nameForFolder, `<a data-fh="folder-name" class="highlight" href="">${folderName}</a>`,
+    const nameForFolder = parser.getItemName('folder', id, folderName);
+    const nameForFile = parser.getItemName('file', id, fileName);
+    assert.equal(nameForFolder, `<a data-fh="folder-name" class="highlight" href="#index/id">${folderName}</a>`,
         'Should return link for folder name');
     assert.equal(nameForFile, fileName, 'Should return file name');
   });

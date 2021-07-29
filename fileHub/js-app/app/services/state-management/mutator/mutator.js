@@ -26,7 +26,7 @@ export const mutator = (mutatorName, details, state) => {
       });
     case GET_ROOT_FOLDER_MUTATOR.COMPLETED:
       return Object.assign({}, state, {
-        locationParams: details,
+        rootFolder: details,
       });
   }
 };

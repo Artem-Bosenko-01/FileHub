@@ -33,7 +33,8 @@ class="element-control-button upload-element-button"><span class="glyphicon glyp
                     <td data-fh="icon" class="cell-icon">
                         <span class="glyphicon ${parser.getItemIcon(this._itemType, this._itemMimeType)}"></span>
                     </td>
-                    <td data-fh="name" class="cell-name">${parser.getItemName(this._itemType, this._itemName)}</td>
+                    <td data-fh="name" 
+                        class="cell-name">${parser.getItemName(this._itemType, this._itemId, this._itemName)}</td>
                     <td data-fh="type" class="cell-type">${parser.getItemType(this._itemType, this._itemMimeType)}</td>
                     <td data-fh="size"
                     class="cell-file-size">${parser.getItemSize(this._itemType, this._itemSize, this._itemsAmount)}</td>

@@ -1,4 +1,5 @@
 import ActionExecutor from '../action-execution.js';
+import {GET_ROOT_FOLDER_MUTATOR} from '../mutator/get-root-folder-mutator.js';
 
 /**
  *
@@ -13,6 +14,6 @@ export class GetRootFolderExecutor extends ActionExecutor {
    */
   async apply(actionInfo, services, state, mutate) {
     const rootFolder = await services.apiService.getRootFolder();
-    actionInfo.redirect(`index/${rootFolder.itemId}`);
+    mutate(GET_ROOT_FOLDER_MUTATOR.COMPLETED, rootFolder);
   }
 }

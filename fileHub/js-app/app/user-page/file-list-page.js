@@ -29,7 +29,7 @@ export class FileListPage extends Component {
     const listBody = new FileListBody(this.rootElement);
 
     const itemDto = new FileListItem();
-    itemDto.itemId = '1';
+    itemDto.itemId = 'fold777';
     itemDto.itemName = 'folder';
     itemDto.itemType = 'folder';
     itemDto.itemsAmount = 44;
@@ -52,12 +52,15 @@ export class FileListPage extends Component {
       listBody.currentFolder = state.currentFolder;
     });
 
+    this._stateManager.onStateChanged('rootFolder', (state) => {
+      this._redirect(`index/${state.rootFolder.itemId}`);
+      /* this._stateManager.dispatch(new HashChanged(`index/${state.rootFolder.itemId}`));*/
+    });
+
     this._stateManager.onStateChanged('locationParams', ({locationParams}) => {
-      const currentFolderId = this._stateManager.state.locationParams.currentFolderId;
+      const currentFolderId = locationParams.currentFolderId;
       if (!currentFolderId) {
-        this._stateManager.dispatch(new GetRootFolder(
-            (hash) => this._redirect(hash),
-        ));
+        this._stateManager.dispatch(new GetRootFolder());
       } else {
         this._stateManager.dispatch(new FetchCurrentFolder());
       }

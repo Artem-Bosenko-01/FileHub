@@ -25,12 +25,20 @@ export class AuthenticationPage extends Component {
       try {
         const response = await this._apiService.logIn(email, password);
         alert(`${response}`);
-        window.location.hash = 'index';
+        this._onLoggedInEvent();
       } catch (error) {
         this.clearErrorMessages();
         form.addServerError(error.message);
       }
     });
+  }
+
+  /**
+   * The event that calls when a user successfully authenticated in the FileHub application.
+   * @param {function()} event
+   */
+  onLoggedIn(event) {
+    this._onLoggedInEvent = event;
   }
 
   /**
@@ -41,7 +49,7 @@ export class AuthenticationPage extends Component {
     const errors = this._getElements('server-error');
     if (errors) {
       [...errors].forEach(
-          (error)=> error.remove(),
+          (error) => error.remove(),
       );
     }
   }

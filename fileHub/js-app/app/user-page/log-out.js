@@ -7,7 +7,7 @@ export class LogOut extends Component {
   /** @inheritDoc */
   get _markup() {
     return `<li>
-                    <a data-fh="log-out-ref" title="log out" class="highlight" href="#">
+                    <a data-fh="log-out-ref" title="log out" class="highlight" href="">
                         Log out <span class="glyphicon glyphicon-log-out"></span>
                     </a>
                 </li>`;

@@ -13,11 +13,11 @@ export default class FetchCurrentFolderExecutor extends ActionExecutor {
    * @param {function} mutate
    */
   async apply(actionInfo, services, state, mutate) {
-    const currentFolderId = state.currentFolderId;
+    const currentFolderId = state.locationParams.currentFolderId;
     try {
       mutate(CURRENT_FOLDER_MUTATOR.FETCHING_STARTED);
-      /* const folder = await services.apiService.getFolder(currentFolderId);*/
-      const folder = await services.apiService.getFolder('5');
+      const folder = await services.apiService.getFolder(currentFolderId);
+      /* const folder = await services.apiService.getFolder('5');*/
       state.currentFolder = folder;
       mutate(CURRENT_FOLDER_MUTATOR.FETCHING_COMPLETED, {folder});
     } catch (error) {

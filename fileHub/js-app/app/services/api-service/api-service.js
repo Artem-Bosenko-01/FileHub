@@ -92,10 +92,9 @@ export class ApiService {
 
   /**
    * Gets item dto with folder type.
-   * @param {string} folderId
    * @returns {Promise<FileListItem|ClientServerError|ServerError>}
    */
-  async getRootFolder(folderId) {
+  async getRootFolder() {
     const response = await this._fetch(`/root-folder`, {
       method: 'GET',
     });

@@ -24,8 +24,9 @@ export class RegistrationPage extends Component {
     form.onSubmit(async (credentials) => {
       const {email, password} = credentials;
       try {
-        const response = await this._apiService.register(email, password);
-        alert(`${response.email}\n${response.password}`);
+        await this._apiService.register(email, password);
+        alert(`You are successfully registered`);
+        this._onRegisteredEvent();
       } catch (error) {
         this.clearErrorMessages();
         if (error instanceof UnprocessableEntityError) {
@@ -39,6 +40,14 @@ export class RegistrationPage extends Component {
         }
       }
     });
+  }
+
+  /**
+   * The event that calls when a user successfully registered in the FileHub application.
+   * @param {function()} event
+   */
+  onRegistered(event) {
+    this._onRegisteredEvent = event;
   }
 
   /**

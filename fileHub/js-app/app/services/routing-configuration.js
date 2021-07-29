@@ -4,10 +4,8 @@
 export class RoutingConfiguration {
   /**
    * @constructor
-   * @param {string} defaultRoute
    */
-  constructor(defaultRoute) {
-    this._defaultHash = defaultRoute;
+  constructor() {
     this._routes = new Map();
   }
 
@@ -17,14 +15,6 @@ export class RoutingConfiguration {
    */
   set notFoundRoute(hash) {
     this._error404Hash = hash;
-  }
-
-  /**
-   * Default Route hash.
-   * @returns {string}
-   */
-  get defaultRoute() {
-    return this._defaultHash;
   }
 
   /**
@@ -39,13 +29,27 @@ export class RoutingConfiguration {
   }
 
   /**
+   * Event that calls when configuration will redirect user to necessary url.
+   * @param {function(hash: string)} listener
+   */
+  onRedirect(listener) {
+    this._onRedirect = listener;
+  }
+
+  /**
    * Finds page from routes list by hash.
    * @param {string} hash
    * @returns {Function}
    */
   getPageByHash(hash) {
+    if (!hash) {
+      this._onRedirect('login');
+    }
+
     if (this._routes.has(hash)) {
       return this._routes.get(hash);
-    } else return this._routes.get(this._error404Hash);
+    } else {
+      return this._routes.get(this._error404Hash);
+    }
   }
 }

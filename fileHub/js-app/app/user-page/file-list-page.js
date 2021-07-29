@@ -3,7 +3,8 @@ import {FileListBody} from './file-list-body.js';
 import {FileListFooter} from './file-list-footer.js';
 import {FileListHeaderPanel} from './file-list-header-panel.js';
 import {FileListItem} from './services/file-list-item.js';
-import FetchCurrentFolder from '../services/state-management/fetch-current-directory/fetch-current-folder.js';
+import FetchCurrentFolder from '../services/state-management/fetch-current-directory-action/fetch-current-folder.js';
+import {GetRootFolder} from '../services/state-management/get-root-folder-action/get-root-folder.js';
 
 /**
  * Main page for authenticated user, that contains information about him and his saved files.
@@ -28,7 +29,6 @@ export class FileListPage extends Component {
     const listBody = new FileListBody(this.rootElement);
 
     const itemDto = new FileListItem();
-
     itemDto.itemId = '1';
     itemDto.itemName = 'folder';
     itemDto.itemType = 'folder';
@@ -41,6 +41,9 @@ export class FileListPage extends Component {
     itemDto1.itemMimeType = 'pdf';
     itemDto1.itemSize = 7987864;
     itemDto1.parentFolderId = '54';
+    listBody.fileListItems = [itemDto, itemDto1];
+
+    new FileListFooter(this.rootElement);
 
     this._stateManager.onStateChanged('currentFolder', (state) => {
       if (state.isCurrentFolderFetching) {
@@ -49,17 +52,24 @@ export class FileListPage extends Component {
       listBody.currentFolder = state.currentFolder;
     });
 
-    listBody.fileListItems = [itemDto, itemDto1];
+    this._stateManager.onStateChanged('locationParams', ({locationParams}) => {
+      const currentFolderId = this._stateManager.state.locationParams.currentFolderId;
+      if (!currentFolderId) {
+        this._stateManager.dispatch(new GetRootFolder(
+            (hash) => this._redirect(hash),
+        ));
+      } else {
+        this._stateManager.dispatch(new FetchCurrentFolder());
+      }
+    });
+  }
 
-    new FileListFooter(this.rootElement);
-
-    const currentFolder = this._stateManager.state.currentFolder;
-
-    if (!currentFolder) {
-      this._stateManager.dispatch(new FetchCurrentFolder());
-    } else {
-      listBody.currentFolder = currentFolder;
-    }
+  /**
+   * Event to redirect user.
+   * @param {function(hash: string)} listener
+   */
+  onRedirect(listener) {
+    this._redirect = listener;
   }
 
   /** @inheritDoc */

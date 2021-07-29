@@ -80,14 +80,7 @@ export class ApiService {
     const responseBody = await response.json();
     this._checkResponseOnClientError(response, responseBody);
 
-    const item = new FileListItem();
-    item.itemId = responseBody.id;
-    item.itemName = responseBody.name;
-    item.itemType = responseBody.type;
-    item.itemsAmount = responseBody.itemsAmount;
-    item.parentFolderId = responseBody.parentFolderId;
-
-    return item;
+    return this._convertItemsFromJson(responseBody.folder);
   }
 
   /**
@@ -102,13 +95,29 @@ export class ApiService {
     const responseBody = await response.json();
     this._checkResponseOnClientError(response, responseBody);
 
-    const item = new FileListItem();
-    item.itemId = responseBody.id;
-    item.itemName = responseBody.name;
-    item.itemType = responseBody.type;
-    item.itemsAmount = responseBody.itemsAmount;
+    return this._convertItemsFromJson(responseBody.folder);
+  }
 
-    return item;
+  /**
+   * Gets folder content by folder id.
+   * @param {string} folderId
+   * @returns {Promise<FileListItem[]|ClientServerError|ServerError>}
+   */
+  async getFolderContent(folderId) {
+    const response = await this._fetch(`/folder/:${folderId}/content`, {
+      method: 'GET',
+      body: JSON.stringify(folderId),
+    });
+
+    const responseBody = await response.json();
+    this._checkResponseOnClientError(response, responseBody);
+    const content = [];
+    responseBody.items.forEach(
+        (itemJson) => {
+          content.push(this._convertItemsFromJson(itemJson));
+        },
+    );
+    return content;
   }
 
   /**
@@ -141,5 +150,23 @@ export class ApiService {
     if ((response.status >= 400 && response.status < 500)) {
       throw new ClientServerError(responseBody.message);
     }
+  }
+
+  /**
+   * Convert item from json object to {@link FileListItem standard format}.
+   * @param {object} responseBody
+   * @returns {FileListItem}
+   * @private
+   */
+  _convertItemsFromJson(responseBody) {
+    const item = new FileListItem();
+    item.itemId = responseBody.id;
+    item.itemName = responseBody.name;
+    item.itemType = responseBody.type;
+    item.itemsAmount = responseBody.itemsAmount;
+    item.parentFolderId = responseBody.parentFolderId;
+    item.itemMimeType = responseBody.mimeType;
+    item.itemSize = responseBody.size;
+    return item;
   }
 }

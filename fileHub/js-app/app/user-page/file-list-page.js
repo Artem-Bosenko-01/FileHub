@@ -2,9 +2,10 @@ import {Component} from '../components/component.js';
 import {FileListBody} from './file-list-body.js';
 import {FileListFooter} from './file-list-footer.js';
 import {FileListHeaderPanel} from './file-list-header-panel.js';
-import {FileListItem} from './services/file-list-item.js';
 import FetchCurrentFolder from '../services/state-management/fetch-current-directory-action/fetch-current-folder.js';
 import {GetRootFolder} from '../services/state-management/get-root-folder-action/get-root-folder.js';
+import {FetchCurrentFolderContent}
+  from '../services/state-management/fetch-current-folder-content-action/fetch-current-folder-content.js';
 
 /**
  * Main page for authenticated user, that contains information about him and his saved files.
@@ -28,21 +29,6 @@ export class FileListPage extends Component {
     headerPanel.userFullName = 'Oxxxymiron';
     const listBody = new FileListBody(this.rootElement);
 
-    const itemDto = new FileListItem();
-    itemDto.itemId = 'fold777';
-    itemDto.itemName = 'folder';
-    itemDto.itemType = 'folder';
-    itemDto.itemsAmount = 44;
-    itemDto.parentFolderId = 'as';
-    const itemDto1 = new FileListItem();
-    itemDto1.itemId = '2';
-    itemDto1.itemName = 'file';
-    itemDto1.itemType = 'file';
-    itemDto1.itemMimeType = 'pdf';
-    itemDto1.itemSize = 7987864;
-    itemDto1.parentFolderId = '54';
-    listBody.fileListItems = [itemDto, itemDto1];
-
     new FileListFooter(this.rootElement);
 
     this._stateManager.onStateChanged('currentFolder', (state) => {
@@ -52,18 +38,26 @@ export class FileListPage extends Component {
       listBody.currentFolder = state.currentFolder;
     });
 
-    this._stateManager.onStateChanged('rootFolder', (state) => {
-      this._redirect(`index/${state.rootFolder.itemId}`);
-      /* this._stateManager.dispatch(new HashChanged(`index/${state.rootFolder.itemId}`));*/
-    });
-
     this._stateManager.onStateChanged('locationParams', ({locationParams}) => {
       const currentFolderId = locationParams.currentFolderId;
       if (!currentFolderId) {
         this._stateManager.dispatch(new GetRootFolder());
       } else {
         this._stateManager.dispatch(new FetchCurrentFolder());
+        this._stateManager.dispatch(new FetchCurrentFolderContent());
       }
+    });
+
+    this._stateManager.onStateChanged('rootFolder', (state) => {
+      this._redirect(`index/${state.rootFolder.itemId}`);
+      /* this._stateManager.dispatch(new HashChanged(`index/${state.rootFolder.itemId}`));*/
+    });
+
+    this._stateManager.onStateChanged('currentFolderContent', (state) => {
+      if (state.isCurrentFolderContentFetching) {
+        listBody.fileListItems = 'loading';
+      }
+      listBody.fileListItems = state.currentFolderContent;
     });
   }
 

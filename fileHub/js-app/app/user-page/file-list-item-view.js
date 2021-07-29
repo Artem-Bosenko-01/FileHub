@@ -27,6 +27,7 @@ export class FileListItemView extends Component {
                         </button>`;
     const uploadButton = `<button data-fh="upload-button" title="download" type="button" 
 class="element-control-button upload-element-button"><span class="glyphicon glyphicon-upload"></span></button>`;
+
     return `<tr>
                     <td data-fh="folder-marker" 
                         class="cell-folder-marker">${parser.getFolderMarker(this._itemType)}</td>

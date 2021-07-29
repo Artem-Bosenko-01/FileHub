@@ -6,6 +6,9 @@ import {HashChanged} from './hash-changed-action/hash-changed.js';
 import {HashChangedExecutor} from './hash-changed-action/hash-changed-executor.js';
 import {GetRootFolder} from './get-root-folder-action/get-root-folder.js';
 import {GetRootFolderExecutor} from './get-root-folder-action/get-root-folder-executor.js';
+import {FetchCurrentFolderContent} from './fetch-current-folder-content-action/fetch-current-folder-content.js';
+import {FetchCurrentFolderContentExecutor}
+  from './fetch-current-folder-content-action/fetch-current-folder-content-executor.js';
 
 /**
  * The factory contains a map of the action name and executor.
@@ -20,6 +23,7 @@ export class ActionFactory {
     this._actions.set(DeleteFile.typeName, new DeleteFileExecutor());
     this._actions.set(HashChanged.typeName, new HashChangedExecutor());
     this._actions.set(GetRootFolder.typeName, new GetRootFolderExecutor());
+    this._actions.set(FetchCurrentFolderContent.typeName, new FetchCurrentFolderContentExecutor());
   }
 
   /**

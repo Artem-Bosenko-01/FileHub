@@ -6,7 +6,7 @@ import {Component} from '../components/component.js';
 export class Breadcrumbs extends Component {
   /**
    * Directory where user is located.
-   * @param {FileListItem} value
+   * @param {string | FileListItem} value
    */
   set currentDirectory(value) {
     this._currentDirectory = value;

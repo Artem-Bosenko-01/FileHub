@@ -17,7 +17,6 @@ export default class FetchCurrentFolderExecutor extends ActionExecutor {
     try {
       mutate(CURRENT_FOLDER_MUTATOR.FETCHING_STARTED);
       const folder = await services.apiService.getFolder(currentFolderId);
-      state.currentFolder = folder;
       mutate(CURRENT_FOLDER_MUTATOR.FETCHING_COMPLETED, {folder});
     } catch (error) {
       mutate(CURRENT_FOLDER_MUTATOR.FETCHING_FAILED, {error});

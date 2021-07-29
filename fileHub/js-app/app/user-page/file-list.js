@@ -18,7 +18,7 @@ export class FileList extends Component {
 
   /**
    *
-   * @param {FileListItem[]} value
+   * @param {string|FileListItem[]} value
    */
   set fileItems(value) {
     this._fileItems = value;
@@ -27,7 +27,24 @@ export class FileList extends Component {
 
   /** @inheritDoc */
   get _markup() {
-    const invalidState = `<tr class="empty-directory">
+    let directoryContent;
+    if (this._fileItems === 'loading') {
+      directoryContent = `<tr class="empty-directory">
+                    <td>
+                        <p class="empty-directory-massage"><span class="glyphicon glyphicon-repeat loading" 
+                        aria-hidden="true"></span></p>
+                    </td>
+                </tr>`;
+    } else if (this._fileItems) {
+      const emptyState = `<tr class="empty-directory">
+                            <td>
+                                <p data-fh="empty-file-list-message" 
+                                    class="empty-directory-message">There are no files/directories created yet.</p>
+                            </td>
+                        </tr>`;
+      this._fileItems.length <= 0 ? directoryContent = emptyState : directoryContent = '';
+    } else {
+      directoryContent = `<tr class="empty-directory">
                             <td>
                                 <p class="empty-directory-message">
                                     <span data-fh="file-list-error-message" class="error-message">
@@ -37,18 +54,12 @@ export class FileList extends Component {
                                 </p>
                             </td>
                           </tr>`;
-
-    const emptyState = `<tr class="empty-directory">
-                            <td>
-                                <p data-fh="empty-file-list-message" 
-                                    class="empty-directory-message">There are no files/directories created yet.</p>
-                            </td>
-                        </tr>`;
+    }
 
     return `<div class="table-box">
                 <table class="table">
                      <tbody data-fh="fileListItems">
-                        ${!this._fileItems ? invalidState : this._fileItems.length <= 0 ? emptyState : ''}
+                        ${directoryContent}
                      </tbody>
                 </table>
             </div>`;

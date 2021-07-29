@@ -20,7 +20,7 @@ export class FileListBody extends Component {
 
   /**
    * List of items for user data table.
-   * @param {FileListItem[]} value
+   * @param {string|FileListItem[]} value
    */
   set fileListItems(value) {
     this._fileListItems = value;

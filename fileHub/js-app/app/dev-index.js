@@ -49,10 +49,19 @@ fetchMock.post('/register', (url, opts) => {
 fetchMock.get('/folder/:root-folder', () => {
   return {
     id: 'root-folder',
-    name: 'temp_file',
+    name: 'ROOT',
     type: 'folder',
     itemsAmount: 45,
-    parentFolderId: 'vadsdvs',
+  };
+});
+
+fetchMock.get('/folder/:fold777', () => {
+  return {
+    id: 'fold777',
+    name: 'Inner_folder',
+    type: 'folder',
+    itemsAmount: 77,
+    parentFolderId: 'root-folder',
   };
 });
 

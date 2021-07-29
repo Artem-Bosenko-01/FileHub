@@ -14,11 +14,13 @@ module('File list page', () => {
       },
     };
 
-    const testServerManager = {
+    const testStateManager = {
       state: {currentFolder: 'folder'},
+      onStateChanged() {
+      },
     };
 
-    new FileListPage(fixture, testTitleService, testServerManager);
+    new FileListPage(fixture, testTitleService, testStateManager);
 
     assert.equal(testDocument.title, 'Main page - FileHub', 'Should add title to page');
   });

@@ -2,7 +2,7 @@ import ActionExecutor from '../action-execution.js';
 import {HASH_CHANGED_MUTATOR} from '../mutator/hash-changed-mutator.js';
 
 /**
- *
+ * Execute saving about url params in state when url address changes.
  */
 export class HashChangedExecutor extends ActionExecutor {
   /**

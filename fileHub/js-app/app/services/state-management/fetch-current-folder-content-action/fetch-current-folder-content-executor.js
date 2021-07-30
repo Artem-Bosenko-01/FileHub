@@ -2,7 +2,7 @@ import ActionExecutor from '../action-execution.js';
 import {FETCH_CURRENT_FOLDER_CONTENT_MUTATOR} from '../mutator/fetch-current-folder-content-mutator.js';
 
 /**
- *
+ * Execute fetching information about current folder content where user located.
  */
 export class FetchCurrentFolderContentExecutor extends ActionExecutor {
   /**

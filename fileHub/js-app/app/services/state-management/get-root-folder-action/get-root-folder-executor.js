@@ -2,7 +2,7 @@ import ActionExecutor from '../action-execution.js';
 import {GET_ROOT_FOLDER_MUTATOR} from '../mutator/get-root-folder-mutator.js';
 
 /**
- *
+ * Execute fetching information about root folder.
  */
 export class GetRootFolderExecutor extends ActionExecutor {
   /**

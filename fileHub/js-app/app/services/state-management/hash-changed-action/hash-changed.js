@@ -1,7 +1,7 @@
 import {ActionInfo} from '../action-info.js';
 
 /**
- *
+ * Contains data about url params.
  */
 export class HashChanged extends ActionInfo {
   /** @inheritDoc */

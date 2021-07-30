@@ -9,6 +9,8 @@ import {GetRootFolderExecutor} from './get-root-folder-action/get-root-folder-ex
 import {FetchCurrentFolderContent} from './fetch-current-folder-content-action/fetch-current-folder-content.js';
 import {FetchCurrentFolderContentExecutor}
   from './fetch-current-folder-content-action/fetch-current-folder-content-executor.js';
+import GetCurrentUser from './get-current-user-action/get-current-user.js';
+import GetCurrentUserExecutor from './get-current-user-action/get-current-user-executor.js';
 
 /**
  * The factory contains a map of the action name and executor.
@@ -24,6 +26,7 @@ export class ActionFactory {
     this._actions.set(HashChanged.typeName, new HashChangedExecutor());
     this._actions.set(GetRootFolder.typeName, new GetRootFolderExecutor());
     this._actions.set(FetchCurrentFolderContent.typeName, new FetchCurrentFolderContentExecutor());
+    this._actions.set(GetCurrentUser.typeName, new GetCurrentUserExecutor());
   }
 
   /**

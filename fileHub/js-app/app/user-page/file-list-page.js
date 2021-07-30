@@ -6,6 +6,7 @@ import FetchCurrentFolder from '../services/state-management/fetch-current-direc
 import {GetRootFolder} from '../services/state-management/get-root-folder-action/get-root-folder.js';
 import {FetchCurrentFolderContent}
   from '../services/state-management/fetch-current-folder-content-action/fetch-current-folder-content.js';
+import GetCurrentUser from '../services/state-management/get-current-user-action/get-current-user.js';
 
 /**
  * Main page for authenticated user, that contains information about him and his saved files.
@@ -26,7 +27,6 @@ export class FileListPage extends Component {
   /** @inheritDoc */
   _initNestedComponents() {
     const headerPanel = new FileListHeaderPanel(this.rootElement);
-    headerPanel.userFullName = 'Oxxxymiron';
     const listBody = new FileListBody(this.rootElement);
 
     new FileListFooter(this.rootElement);
@@ -38,6 +38,13 @@ export class FileListPage extends Component {
       listBody.currentFolder = state.currentFolder;
     });
 
+    this._stateManager.onStateChanged('userData', (state) => {
+      if (state.isCurrentUserInfoFetching) {
+        headerPanel.userFullName = 'loading';
+      }
+      headerPanel.userFullName = state.userData.name;
+    });
+
     this._stateManager.onStateChanged('locationParams', ({locationParams}) => {
       const currentFolderId = locationParams.currentFolderId;
       if (!currentFolderId) {
@@ -45,6 +52,7 @@ export class FileListPage extends Component {
       } else {
         this._stateManager.dispatch(new FetchCurrentFolder());
         this._stateManager.dispatch(new FetchCurrentFolderContent());
+        this._stateManager.dispatch(new GetCurrentUser());
       }
     });
 

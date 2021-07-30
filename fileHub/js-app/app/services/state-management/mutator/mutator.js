@@ -2,6 +2,7 @@ import {CURRENT_FOLDER_MUTATOR} from './fetch-current-folder-mutator.js';
 import {HASH_CHANGED_MUTATOR} from './hash-changed-mutator.js';
 import {GET_ROOT_FOLDER_MUTATOR} from './get-root-folder-mutator.js';
 import {FETCH_CURRENT_FOLDER_CONTENT_MUTATOR} from './fetch-current-folder-content-mutator.js';
+import {GET_CURRENT_USER_MUTATOR} from './get-current-user-mutator.js';
 
 export const mutator = (mutatorName, details, state) => {
   switch (mutatorName) {
@@ -43,6 +44,20 @@ export const mutator = (mutatorName, details, state) => {
         isCurrentFolderContentFetching: false,
         currentFolderContent: '',
         fetchingCurrentFolderErrorMessage: details.error,
+      });
+    case GET_CURRENT_USER_MUTATOR.FETCHING_STARTED:
+      return Object.assign({}, state, {
+        isCurrentUserInfoFetching: true,
+      });
+    case GET_CURRENT_USER_MUTATOR.FETCHING_COMPLETED:
+      return Object.assign({}, state, {
+        isCurrentUserInfoFetching: false,
+        userData: details,
+      });
+    case GET_CURRENT_USER_MUTATOR.FETCHING_FAILED:
+      return Object.assign({}, state, {
+        isCurrentUserInfoFetching: false,
+        userData: '',
       });
   }
 };

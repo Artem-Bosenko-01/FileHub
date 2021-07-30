@@ -121,6 +121,21 @@ export class ApiService {
   }
 
   /**
+   * Gets info about current user.
+   * @returns {Promise<object|ClientServerError|ServerError>}
+   */
+  async getCurrentUser() {
+    const response = await this._fetch('/user', {
+      method: 'GET',
+    });
+
+    const responseBody = await response.json();
+    this._checkResponseOnClientError(response, responseBody);
+
+    return responseBody;
+  }
+
+  /**
    *
    * @param {RequestInfo} url
    * @param {RequestInit} init

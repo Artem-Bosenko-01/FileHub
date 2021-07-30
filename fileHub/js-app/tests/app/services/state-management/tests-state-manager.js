@@ -4,6 +4,7 @@ const {module, test} = QUnit;
 
 module('State manager', () => {
   test('Should dispatch special action', (assert) => {
+    assert.expect(3);
     const actions = new ActionsMock(assert);
     const manager = new StateManager({}, {}, actions);
 
@@ -11,6 +12,16 @@ module('State manager', () => {
     manager.dispatch({typeName: 'event2'});
 
     assert.verifySteps(['event1', 'event2']);
+  });
+
+  test('Should add action on change field', (assert) => {
+    assert.expect(2);
+    const actions = new ActionsMock(assert);
+    const manager = new StateManager({}, {}, actions);
+    manager.onStateChanged('field', (state) => assert.step(state.field));
+    manager.state.field = 'changes';
+
+    assert.verifySteps(['changes']);
   });
 });
 

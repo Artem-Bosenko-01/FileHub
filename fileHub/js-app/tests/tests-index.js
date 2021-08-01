@@ -35,3 +35,4 @@ import './app/services/state-management/get-root-folder-action/tetsts-get-root-f
 import './app/services/state-management/fetch-current-directory-action/tetsts-fetch-current-folder-executor.js';
 import './app/services/state-management/fetch-current-folder-content-action/fetch-current-folder-content-executor.js';
 import './app/services/state-management/hash-changed-action/tetsts-hash-changed-executor.js';
+import './app/services/state-management/get-current-user-action/get-current-user-executor.js';

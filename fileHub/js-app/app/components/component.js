@@ -80,15 +80,16 @@ export class Component {
    */
   _render() {
     const {_markup} = this;
-    const tempElement = document.createElement('div');
+    const tempElement = document.createElement('template');
     tempElement.innerHTML = _markup;
 
     if (this.rootElement) {
-      const existElement = tempElement.firstElementChild;
+      const existElement = tempElement.content.firstChild;
+
       this.rootElement.replaceWith(existElement);
       this.rootElement = existElement;
     } else {
-      this.rootElement = tempElement.firstElementChild;
+      this.rootElement = tempElement.content.firstChild;
       this.parentElement.appendChild(this.rootElement);
     }
     this._addEventListeners();

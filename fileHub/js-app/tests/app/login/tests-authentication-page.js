@@ -1,9 +1,9 @@
 import {AuthenticationPage} from '../../../app/login/authentication-page.js';
-import {searchElement} from '../search-element-function.js';
+import searchElement from '../search-element-function.js';
 
 const {module, test} = QUnit;
 
-module('Authentication page', (hooks) => {
+module('AuthenticationForm', (hooks) => {
   let fixture;
   hooks.beforeEach(() => {
     fixture = document.getElementById('qunit-fixture');

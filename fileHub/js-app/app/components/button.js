@@ -14,6 +14,14 @@ export class Button extends Component {
   }
 
   /**
+   * @param {string} value
+   */
+  set buttonName(value) {
+    this._buttonName = value;
+    this._render();
+  }
+
+  /**
    * Inner text to button.
    * @param {string}  value - button title.
    */
@@ -41,6 +49,15 @@ export class Button extends Component {
   }
 
   /**
+   * Classes for button tag.
+   * @param {string[]} value
+   */
+  set buttonClasses(value) {
+    this._buttonClasses = value;
+    this._render();
+  }
+
+  /**
    * Adds classes to button HTML tag if it necessary.
    * @param {string} iconClass
    */
@@ -59,9 +76,9 @@ export class Button extends Component {
 
   /** @inheritDoc */
   _addEventListeners() {
-    const button = this._getElement('button');
+    const button = this._getElement(`${this._buttonName}`);
     if (button) {
-      button.addEventListener('click', this._onCLickEvent);
+      button.addEventListener('click', () => this._onCLickEvent && this._onCLickEvent());
     }
   }
 
@@ -70,8 +87,10 @@ export class Button extends Component {
     const expression = this._iconClasses && this._iconClasses.length > 0;
     const icon = `<span class="glyphicon glyphicon-${this._buttonIcon} ${expression &&
     this._iconClasses.join(' ')}"></span>`;
-    return `<button id="button" title="Submit" 
-                data-fh="button" class="button"
-                >${this._buttonIcon ? icon : ''}${this._buttonTitle ? this._buttonTitle : ''}</button>`;
+    return `<div class="button-raw">
+                <button title="Submit" data-fh="${this._buttonName}" 
+                class="button ${this._buttonClasses ? this._buttonClasses : ''}"
+               >${this._buttonIcon ? icon : ''}${this._buttonTitle ? this._buttonTitle : ''}</button>
+            </div>`;
   }
 }

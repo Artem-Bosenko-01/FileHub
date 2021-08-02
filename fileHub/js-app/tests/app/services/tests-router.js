@@ -6,7 +6,7 @@ const DEFAULT_ROUTE = 'route';
 const REGISTER_ROUTE = 'register';
 const ERROR_ROUTE = '404';
 
-module('Router service', (hooks) => {
+module('Router', () => {
   test('Should show default page when hash is correct', (assert) => {
     const testWindow = new WindowMock('#register');
 

@@ -1,6 +1,6 @@
 import {Form} from '../../../app/components/form.js';
 import {FormInputField} from '../../../app/components/form-input-field.js';
-import {searchElement} from '../search-element-function.js';
+import searchElement from '../search-element-function.js';
 
 const {module, test} = QUnit;
 let fixture;

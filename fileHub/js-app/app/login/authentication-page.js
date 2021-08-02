@@ -19,12 +19,14 @@ export class AuthenticationPage extends Component {
 
   /** @inheritDoc */
   _initNestedComponents() {
+    debugger;
     const form = new AuthenticationForm(this.rootElement);
     form.onSubmit(async (credentials) => {
       const {email, password} = credentials;
       try {
         const response = await this._apiService.logIn(email, password);
-        alert(`${response.token}`);
+        alert(`${response}`);
+        window.location.hash = 'index';
       } catch (error) {
         this.clearErrorMessages();
         form.addServerError(error.message);
@@ -47,12 +49,12 @@ export class AuthenticationPage extends Component {
 
   /** @inheritDoc */
   get _markup() {
-    return ' <header>\n' +
-        '        <h1 title="TeamDev">\n' +
-        '            <a class="logo" href="https://www.teamdev.com/" target="_blank">\n' +
-        '                TeamDev\n' +
-        '            </a>\n' +
-        '        </h1>\n' +
-        '    </header>';
+    return `<header>
+             <h1 title="TeamDev">
+                    <a class="logo" href="https://www.teamdev.com/" target="_blank">
+                        TeamDev
+                    </a>
+                </h1>
+            </header>`;
   }
 }

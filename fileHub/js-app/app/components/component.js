@@ -75,41 +75,21 @@ export class Component {
   }
 
   /**
-   * @param {HTMLElement} tagElement
-   * @private
-   * @returns {ChildNode}
-   */
-  _getChildElement(tagElement) {
-    let element;
-    if (tagElement.tagName === 'TEMPLATE') {
-      element = tagElement.content.firstChild;
-    } else {
-      element = tagElement.firstElementChild;
-    }
-    return element;
-  }
-
-  /**
    * Shows some components in {@link parentElement parent element}.
    * @protected
    */
   _render() {
     const {_markup} = this;
-    let tempElement;
-    if (_markup.includes('<tr>')) {
-      tempElement = document.createElement('template');
-    } else {
-      tempElement = document.createElement('div');
-    }
+    const tempElement = document.createElement('template');
     tempElement.innerHTML = _markup;
 
     if (this.rootElement) {
-      const existElement = this._getChildElement(tempElement);
+      const existElement = tempElement.content.firstChild;
 
       this.rootElement.replaceWith(existElement);
       this.rootElement = existElement;
     } else {
-      this.rootElement = this._getChildElement(tempElement);
+      this.rootElement = tempElement.content.firstChild;
       this.parentElement.appendChild(this.rootElement);
     }
     this._addEventListeners();

@@ -1,17 +1,21 @@
 import {Component} from '../components/component.js';
-import {FileListItemView} from './file-list-item-view.js';
+import {FileListItemView} from './file-list-item-view/file-list-item-view.js';
 
 /**
  * Component that renders folder content list.
  */
 export class FileList extends Component {
   /** @inheritDoc */
+  _init(...arg) {
+    this._fileListName = 'fileListItems';
+  }
+
+  /** @inheritDoc */
   _initNestedComponents() {
     if (this._fileItems && this._fileItems.length > 0) {
-      const tableElement = this._getElement('fileListItems');
+      const tableElement = this._getElement(this._fileListName);
       this._fileItems.forEach((fileItem) => {
-        const item = new FileListItemView(tableElement);
-        item.listItemFromDto = fileItem;
+        new FileListItemView(tableElement, fileItem);
       });
     }
   }
@@ -47,7 +51,7 @@ export class FileList extends Component {
 
     return `<div class="table-box">
                 <table class="table">
-                     <tbody data-fh="fileListItems">
+                     <tbody data-fh="${this._fileListName}">
                         ${!this._fileItems ? invalidState : this._fileItems.length <= 0 ? emptyState : ''}
                      </tbody>
                 </table>

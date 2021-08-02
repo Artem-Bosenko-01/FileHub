@@ -1,8 +1,11 @@
 import {Component} from '../components/component.js';
-import {FileListBody} from './file-list-body.js';
-import {FileListFooter} from './file-list-footer.js';
-import {FileListHeaderPanel} from './file-list-header-panel.js';
-import {FileListItem} from './services/file-list-item.js';
+import {FileListItem} from '../file-list-item.js';
+import {UserDetails} from './user-details.js';
+import {LogOut} from './log-out.js';
+import {Breadcrumbs} from './breadcrumbs.js';
+import {SearchBar} from './search-bar.js';
+import {FolderControlButtons} from './folder-control-buttons.js';
+import {FileList} from './file-list.js';
 
 /**
  * Main page for authenticated user, that contains information about him and his saved files.
@@ -22,39 +25,80 @@ export class FileListPage extends Component {
 
   /** @inheritDoc */
   _initNestedComponents() {
-    const headerPanel = new FileListHeaderPanel(this.rootElement);
-    headerPanel.userFullName = 'Oxxxymiron';
-    const listBody = new FileListBody(this.rootElement);
+    const userPanelElement = this._getElement('user-panel');
+    const userDetails = new UserDetails(userPanelElement);
+    userDetails.userFullName = 'Oxxxymiron';
+    new LogOut(userPanelElement);
 
-    const itemDto = new FileListItem();
+    const fileListBodyElement = this._getElement('file-list-body');
+    const breadcrumbs = new Breadcrumbs(fileListBodyElement);
+    new SearchBar(fileListBodyElement);
+    new FolderControlButtons(fileListBodyElement);
+    const fileList = new FileList(fileListBodyElement);
 
-    itemDto.itemId = '1';
-    itemDto.itemName = 'folder';
-    itemDto.itemType = 'folder';
-    itemDto.itemsAmount = 44;
-    itemDto.parentFolderId = 'as';
-    const itemDto1 = new FileListItem();
-    itemDto1.itemId = '2';
-    itemDto1.itemName = 'file';
-    itemDto1.itemType = 'file';
-    itemDto1.itemMimeType = 'pdf';
-    itemDto1.itemSize = 7987864;
-    itemDto1.parentFolderId = '54';
+    const item1 = {
+      id: '1',
+      name: 'folder',
+      type: 'folder',
+      itemsAmount: 44,
+      parentFolderId: 'as',
+    };
 
-    listBody.currentFolder = itemDto;
-    listBody.fileListItems = [itemDto, itemDto1];
+    const item2 = {
+      id: '2',
+      name: 'file',
+      type: 'file',
+      mimeType: 'pdf',
+      size: 7987864,
+      parentFolderId: '54',
+    };
 
-    new FileListFooter(this.rootElement);
+    const itemDto = new FileListItem(item1);
+
+    const itemDto1 = new FileListItem(item2);
+
+    breadcrumbs.currentDirectory = itemDto;
+    fileList.fileItems = [itemDto, itemDto1];
   }
 
   /** @inheritDoc */
   get _markup() {
-    return `<header class="header">
-              <h1 title="TeamDev">
-                 <a class="logo" href="#index">
-                    TeamDev
-                 </a>
-              </h1>
-            </header>`;
+    return `<div>
+                <header class="header">
+                  <h1 title="TeamDev">
+                     <a class="logo" href="#index">
+                        TeamDev
+                     </a>
+                  </h1>
+                  <ul data-fh="user-panel" class="panel"></ul>
+                </header>
+                <div data-fh="file-list-body" class="raw page-raw"></div>
+                <footer data-fh="footer" class="footer">
+                  <ul class="social-icons">
+                    <li>
+                        <a title="linkedin" class="icon" href="https://www.linkedin.com/company/teamdev-ltd-/mycompany/"
+                           target="_blank">
+                            <img src="./images/icon-linkedin.png" alt="linkedin">
+                        </a>
+                    </li>
+                    <li>
+                        <a title="facebook" class="icon" href="https://www.facebook.com/TeamDev" target="_blank">
+                            <img src="./images/icon-facebook.png" alt="facebook">
+                        </a>
+                    </li>
+                    <li>
+                        <a title="instagram" class="icon" href="https://www.instagram.com/teamdev_ltd/?hl=ru"
+                           target="_blank">
+                            <img src="./images/icon-instagram.png" alt="instagram">
+                        </a>
+                    </li>
+                  </ul>
+                  <p class="copyright"
+                      >Copyright &copy; 2021 <a 
+                      title="TeamDev" class="highlight" href="https://www.teamdev.com/" target="_blank">TeamDev</a>. All
+                      rights reserved.</p>
+                </footer>
+            </div>
+            `;
   }
 }

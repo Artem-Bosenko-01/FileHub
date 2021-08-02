@@ -1,9 +1,9 @@
 import {FolderControlButtons} from '../../../app/user-page/folder-control-buttons.js';
-import {searchElement} from '../search-element-function.js';
+import searchElement from '../search-element-function.js';
 
 const {module, test} = QUnit;
 
-module('Folder control buttons', () => {
+module('FolderControlButtons', () => {
   test('Should render two buttons with icons', (assert) => {
     assert.expect(2);
     const fixture = document.getElementById('qunit-fixture');

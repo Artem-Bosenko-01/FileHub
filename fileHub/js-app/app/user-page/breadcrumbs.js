@@ -36,8 +36,11 @@ export class Breadcrumbs extends Component {
     const validState = `${this._currentDirectory &&
                           this._currentDirectory.itemParentFolderId ? linkPathElement : ''}${staticPathElement}`;
 
-    return `<ul data-fh="breadcrumbs" class="path">
-                ${this._currentDirectory ? validState : errorState}
-            </ul>`;
+    return `    <div>
+                  <ul data-fh="breadcrumbs" class="path">
+                      ${this._currentDirectory ? validState : errorState}
+                  </ul>
+                  <hr class="user-view-page-separate-line">
+                </div>`;
   }
 }

@@ -1,5 +1,5 @@
 import {Breadcrumbs} from '../../../app/user-page/breadcrumbs.js';
-import {searchElement} from '../search-element-function.js';
+import searchElement from '../search-element-function.js';
 
 const {module, test} = QUnit;
 
@@ -14,10 +14,9 @@ module('Breadcrumbs', (hooks) => {
     const currentDirectoryName = 'Directory';
     const breadcrumbs = new Breadcrumbs(fixture);
 
-    const currentFolder = {
+    breadcrumbs.currentDirectory = {
       itemName: currentDirectoryName,
     };
-    breadcrumbs.currentDirectory = currentFolder;
 
     assert.ok(searchElement('breadcrumbs', fixture), 'Should render breadcrumbs');
     assert.ok(searchElement('current-dir', fixture), 'Should render tag for current folder');

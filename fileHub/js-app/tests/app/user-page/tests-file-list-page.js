@@ -2,7 +2,7 @@ import {FileListPage} from '../../../app/user-page/file-list-page.js';
 
 const {module, test} = QUnit;
 
-module('File list page', () => {
+module('FileListPage', () => {
   test('Should render component for page', (assert) => {
     const fixture = document.getElementById('qunit-fixture');
 

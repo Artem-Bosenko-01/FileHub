@@ -1,5 +1,5 @@
 import {Button} from '../../../app/components/button.js';
-import {searchElement} from '../search-element-function.js';
+import searchElement from '../search-element-function.js';
 
 const {module, test} = QUnit;
 let button;
@@ -19,9 +19,11 @@ test('Should create button', (assert) => {
 
 test('Should create button with title', (assert) => {
   const title = 'title';
+  const buttonName = 'button';
+  button.buttonName = buttonName;
   button.buttonTitle = title;
 
-  assert.equal(searchElement('button', fixture).innerHTML, title,
+  assert.equal(searchElement(buttonName, fixture).innerHTML, title,
       'Should add inner text to button: ' + title);
 });
 
@@ -29,10 +31,12 @@ test('Should create button with icon and icon\'s classes', (assert) => {
   const icon = 'repeat';
   const classes = ['loading', 'buttons'];
   const singleIconClass = 'class';
+  const buttonName = 'button';
+  button.buttonName = buttonName;
   button.buttonIcon = icon;
   button.iconClasses = classes;
   button.addIconClass(singleIconClass);
-  const iconElement = searchElement('button', fixture).getElementsByTagName('span');
+  const iconElement = searchElement(buttonName, fixture).getElementsByTagName('span');
   const iconClasses = iconElement[0].classList;
   const isExistIconClasses = iconClasses.contains(classes[0]) && iconClasses.contains(classes[1]) &&
       iconClasses.contains(singleIconClass);

@@ -9,7 +9,7 @@ export class SearchBar extends Component {
   _initNestedComponents() {
     this._mount('button', (slotElement) => {
       const button = new Button(slotElement);
-      button.buttonId = 'searchButtonId';
+      button.buttonName = 'search-button';
       button.buttonTitle = 'Search';
       button.buttonClasses = ['button-search'];
       return button;

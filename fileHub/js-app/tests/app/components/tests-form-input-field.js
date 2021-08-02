@@ -1,5 +1,5 @@
 import {FormInputField} from '../../../app/components/form-input-field.js';
-import {searchElement} from '../search-element-function.js';
+import searchElement from '../search-element-function.js';
 
 const TITLE = 'title';
 const TYPE = 'password';
@@ -10,7 +10,7 @@ const {module, test} = QUnit;
 let inputField;
 let fixture;
 
-module('Form input field', {
+module('FormInputField', {
   beforeEach: () => {
     fixture = document.getElementById('qunit-fixture');
     inputField = new FormInputField(fixture);

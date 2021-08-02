@@ -1,9 +1,9 @@
 import {FileList} from '../../../app/user-page/file-list.js';
-import {searchElement} from '../search-element-function.js';
+import searchElement from '../search-element-function.js';
 
 const {module, test} = QUnit;
 
-module('File list', (hooks) => {
+module('FileList', (hooks) => {
   let fixture;
   hooks.beforeEach(() => {
     fixture = document.getElementById('qunit-fixture');

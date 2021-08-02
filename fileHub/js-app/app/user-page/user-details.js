@@ -17,9 +17,8 @@ export class UserDetails extends Component {
   get _markup() {
     const errorState = `<span class="error-message"><span
                     class="glyphicon glyphicon-exclamation-sign"></span> Can't load user data.</span>`;
-    const expression = this._userFullName ?
-        `<span class="glyphicon glyphicon-user"></span> ${this._userFullName}` : errorState;
 
-    return `<li data-fh="user-full-name" title="${this._userFullName ? this._userFullName : ''}"> ${expression}</li>`;
+    return `<li data-fh="user-full-name" title="${this._userFullName ? this._userFullName : ''}"> ${this._userFullName ?
+        `<span class="glyphicon glyphicon-user"></span> ${this._userFullName}` : errorState}</li>`;
   }
 }

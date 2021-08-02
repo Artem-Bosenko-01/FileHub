@@ -27,7 +27,10 @@ export class FileList extends Component {
 
   /** @inheritDoc */
   get _markup() {
+    // TODO Refactor execution flow. You're not a C programmer.
+
     let directoryContent;
+
     if (this._fileItems === 'loading') {
       directoryContent = `<tr class="empty-directory">
                     <td>

@@ -2,10 +2,15 @@ import {Component} from '../components/component.js';
 import {UserDetails} from './user-details.js';
 import {LogOut} from './log-out.js';
 
+// TODO Semantic sense has left this chat.
+
 /**
  * Component that rendered at header at user main page.
  */
 export class FileListHeaderPanel extends Component {
+
+  // TODO DTO or Typedef
+
   /**
    * Full user name.
    * @param {string} value
@@ -14,6 +19,7 @@ export class FileListHeaderPanel extends Component {
     this._userFullName = value;
     this._render();
   }
+
   /** @inheritDoc */
   _initNestedComponents() {
     const userDetails = new UserDetails(this.rootElement);
@@ -23,7 +29,6 @@ export class FileListHeaderPanel extends Component {
 
   /** @inheritDoc */
   get _markup() {
-    return `<ul data-fh="user-panel" class="panel">
-            </ul>`;
+    return `<ul data-fh="user-panel" class="panel"></ul>`;
   }
 }

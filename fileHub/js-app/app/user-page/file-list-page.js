@@ -1,17 +1,22 @@
 import {Component} from '../components/component.js';
-import {FileListBody} from './file-list-body.js';
+import {FileListPageContent} from './file-list-page-content.js';
 import {FileListFooter} from './file-list-footer.js';
 import {FileListHeaderPanel} from './file-list-header-panel.js';
 import FetchCurrentFolder from '../services/state-management/fetch-current-directory-action/fetch-current-folder.js';
 import {GetRootFolder} from '../services/state-management/get-root-folder-action/get-root-folder.js';
+import GetCurrentUser from '../services/state-management/get-current-user-action/get-current-user.js';
+
 import {FetchCurrentFolderContent}
   from '../services/state-management/fetch-current-folder-content-action/fetch-current-folder-content.js';
-import GetCurrentUser from '../services/state-management/get-current-user-action/get-current-user.js';
+
+// TODO Split them.
 
 /**
  * Main page for authenticated user, that contains information about him and his saved files.
  */
 export class FileListPage extends Component {
+  // TODO Don't mix them.
+
   /**
    * @inheritDoc
    * Adds api and title services to page
@@ -19,15 +24,15 @@ export class FileListPage extends Component {
    * @param {StateManager} stateManager
    */
   _init(titleService, stateManager) {
+    this._stateManager = stateManager;
     this._titleService = titleService;
     this._titleService.addTitleForPage('Main Page');
-    this._stateManager = stateManager;
   }
 
   /** @inheritDoc */
   _initNestedComponents() {
     const headerPanel = new FileListHeaderPanel(this.rootElement);
-    const listBody = new FileListBody(this.rootElement);
+    const listBody = new FileListPageContent(this.rootElement);
 
     new FileListFooter(this.rootElement);
 
@@ -76,6 +81,10 @@ export class FileListPage extends Component {
   onRedirect(listener) {
     this._redirect = listener;
   }
+
+  // TODO We DO use header in different places and we DO NOT extract it.
+  // TODO Meantime, We DO use footer in the only place and we DO extract it.
+  // TODO What's your philosophy ?
 
   /** @inheritDoc */
   get _markup() {

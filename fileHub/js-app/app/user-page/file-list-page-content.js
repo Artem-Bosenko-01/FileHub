@@ -8,7 +8,7 @@ import {FileList} from './file-list.js';
 /**
  * Unites components for user main page.
  */
-export class FileListBody extends Component {
+export class FileListPageContent extends Component {
   /**
    * Folder where the user is now.
    * @param {string|FileListItem} value
@@ -26,6 +26,7 @@ export class FileListBody extends Component {
     this._fileListItems = value;
     this._render();
   }
+
   /** @inheritDoc */
   _initNestedComponents() {
     const breadcrumbs = new Breadcrumbs(this.rootElement);

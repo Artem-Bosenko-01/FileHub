@@ -7,7 +7,8 @@ import {ErrorPage} from './ErrorPage.js';
 import {TitleService} from './services/title-service.js';
 import {FileListPage} from './user-page/file-list-page.js';
 import {StateManager} from './services/state-management/state-manager.js';
-import {ActionFactory} from './services/state-management/action-factory.js';
+// TODO Use export default
+import ActionFactory from './services/state-management/action-factory.js';
 import {HashChanged} from './services/state-management/hash-changed-action/hash-changed.js';
 import {RoutingConfiguration} from './services/routing-configuration.js';
 
@@ -28,8 +29,9 @@ export class Application extends Component {
 
     configuration
         .addRoute('login', () => {
-          const page = new AuthenticationPage(this.rootElement, apiService, titleService);
-          page.onLoggedIn(() => router.redirect('index'));
+          // TODO Code style - chaining
+          new AuthenticationPage(this.rootElement, apiService, titleService)
+              .onLoggedIn(() => router.redirect('index'));
         })
         .addRoute('register', () => {
           const page = new RegistrationPage(this.rootElement, apiService, titleService);
@@ -49,7 +51,7 @@ export class Application extends Component {
 
     stateManager.onStateChanged('location', ({location}) => {
       this._clearContainer();
-      const pageCreator = configuration.getPageByHash(location);
+      const pageCreator = configuration.getPageByHash(location)();
       pageCreator();
     });
 

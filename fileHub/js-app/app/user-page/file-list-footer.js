@@ -4,12 +4,15 @@ import {Component} from '../components/component.js';
  * Footer for user main page.
  */
 export class FileListFooter extends Component {
-  /** @inheritDoc */
-  get _markup() {
-    return `<footer data-fh="footer" class="footer">
-        <ul class="social-icons">
-            <li>
-                <a title="linkedin" class="icon" href="https://www.linkedin.com/company/teamdev-ltd-/mycompany/"
+    // TODO Please, I want my eyes to get some sort of pleasure during code review.
+    // TODO It's painful now, bro. Sorry!
+
+    /** @inheritDoc */
+    get _markup() {
+        return `<footer data-fh="footer" class="footer">
+                    <ul class="social-icons">
+                        <li>
+                            <a title="linkedin" class="icon" href="https://www.linkedin.com/company/teamdev-ltd-/mycompany/"
                    target="_blank">
                     <img src="./images/icon-linkedin.png" alt="linkedin">
                 </a>
@@ -31,5 +34,5 @@ export class FileListFooter extends Component {
                                                      target="_blank">TeamDev</a>. All
             rights reserved.</p>
     </footer>`;
-  }
+    }
 }

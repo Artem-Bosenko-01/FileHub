@@ -24,7 +24,7 @@ export class ApiService {
    * @param {string} password
    * @returns {Promise<token, ClientServerError|ServerError>}>}
    */
-  async logIn(email, password) {
+  async logIn(credentials) {
     const response = await this._fetch('/login', {
       method: 'POST',
       body: JSON.stringify({email, password}),
@@ -39,16 +39,16 @@ export class ApiService {
 
   /**
    *
-   * @typedef {Object} UserData
+   * @typedef {Object} UserCrdentials
    * @property {string} email
    * @property {string} password
    *
    * Registers user in FileHub application.
    * @param {string} email
    * @param {string} password
-   * @returns {Promise<UserData, UnprocessableEntityError|ClientServerError|ServerError>}
+   * @returns {Promise<UserCrdentials, UnprocessableEntityError|ClientServerError|ServerError>}
    */
-  async register(email, password) {
+  async register(userData) {
     const response = await this._fetch('/register', {
       method: 'POST',
       body: JSON.stringify({email, password}),
@@ -66,8 +66,10 @@ export class ApiService {
     return responseBody;
   }
 
+  // TODO don't use 'dto'
+
   /**
-   * Gets item dto with folder type.
+   * Gets a file item with folder type.
    * @param {string} folderId
    * @returns {Promise<FileListItem|ClientServerError|ServerError>}
    */
@@ -84,7 +86,7 @@ export class ApiService {
   }
 
   /**
-   * Gets item dto with folder type.
+   * Gets a root file item with folder type.
    * @returns {Promise<FileListItem|ClientServerError|ServerError>}
    */
   async getRootFolder() {
@@ -99,7 +101,7 @@ export class ApiService {
   }
 
   /**
-   * Gets folder content by folder id.
+   * Gets folder content by a folder id.
    * @param {string} folderId
    * @returns {Promise<FileListItem[]|ClientServerError|ServerError>}
    */
@@ -121,7 +123,7 @@ export class ApiService {
   }
 
   /**
-   * Gets info about current user.
+   * Gets info about a current user.
    * @returns {Promise<object|ClientServerError|ServerError>}
    */
   async getCurrentUser() {
@@ -135,14 +137,15 @@ export class ApiService {
     return responseBody;
   }
 
+  // TODO Get rid of 'async' where possible.
+
   /**
-   *
    * @param {RequestInfo} url
    * @param {RequestInit} init
    * @returns {Promise<Response>}
    * @private
    */
-  async _fetch(url, init) {
+  _fetch(url, init) {
     return this._window.fetch(url, init)
         .then(async (response) => {
           if (response.status === 500) {
@@ -155,8 +158,10 @@ export class ApiService {
         });
   }
 
+  // TODO Let's handle response errors in a single place.
+
   /**
-   * Checking response on 4** status.
+   * Handle response on 4** status.
    * @param {Response} response
    * @param {any} responseBody
    * @private
@@ -174,6 +179,8 @@ export class ApiService {
    * @private
    */
   _convertItemsFromJson(responseBody) {
+    // TODO Lets introduce FileListItem.toJson() / fromJson();
+
     const item = new FileListItem();
     item.itemId = responseBody.id;
     item.itemName = responseBody.name;

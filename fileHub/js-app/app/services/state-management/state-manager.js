@@ -67,7 +67,8 @@ export class StateManager {
   }
 
   /**
-   * Adds some event for listeners on change state.
+   * // TODO Utilize articles
+   * Adds an event listener on a change state.
    * @param {string} fieldName
    * @param {function({CustomEventInit})} listener
    */

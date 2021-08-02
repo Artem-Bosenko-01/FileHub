@@ -1,5 +1,6 @@
 /**
- * Configuration for {@link Router router}, which saved list of routes and page creator for each.
+ * Configuration for {@link Router router}, which contains list of routes and page creators for each of them.
+ * // TODO Correct tense please
  */
 export class RoutingConfiguration {
   /**
@@ -36,6 +37,7 @@ export class RoutingConfiguration {
     this._onRedirect = listener;
   }
 
+  // TODO PageSupplier / Provider / Creator
   /**
    * Finds page from routes list by hash.
    * @param {string} hash
@@ -45,6 +47,8 @@ export class RoutingConfiguration {
     if (!hash) {
       this._onRedirect('login');
     }
+
+    // TODO Extract specific cases
 
     if (this._routes.has(hash)) {
       return this._routes.get(hash);

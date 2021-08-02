@@ -12,6 +12,8 @@ export class TitleService {
     this._document = document;
   }
 
+  // TODO set title()
+
   /**
    * Adds page name to service.
    * @param {string} name

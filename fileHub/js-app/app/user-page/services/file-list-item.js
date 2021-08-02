@@ -1,5 +1,5 @@
 /**
- * Dto that saves data about file list item.
+ * Dto that contains data about file list item.
  */
 export class FileListItem {
   /** @param {string} value */

@@ -1,4 +1,4 @@
-import {FileListBody} from '../../../app/user-page/file-list-body.js';
+import {FileListPageContent} from '../../../app/user-page/file-list-page-content.js';
 import {searchElement} from '../search-element-function.js';
 
 const {module, test} = QUnit;
@@ -13,7 +13,7 @@ module('File list body', () => {
     };
     const fixture = document.getElementById('qunit-fixture');
 
-    const listBody = new FileListBody(fixture);
+    const listBody = new FileListPageContent(fixture);
     listBody.fileListItems = [fileListItemTest];
     listBody.currentFolder = currentFolder;
 

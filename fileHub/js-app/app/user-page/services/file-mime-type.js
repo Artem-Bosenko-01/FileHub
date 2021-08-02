@@ -1,3 +1,5 @@
+// TODO Split this class => MimeType and FileType.
+
 /**
  * Type of file, that saves the full name and special icon for it.
  */

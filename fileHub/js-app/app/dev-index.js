@@ -6,6 +6,9 @@ const registeredUsers = new Map()
     .set('vasya@kakk', '123654')
     .set('email.jj@jash.com', '654123');
 
+// TODO Consider add logging
+// TODO Variance is not what you used to think. Change your mind.
+
 fetchMock.post('/login', (url, opts) => {
   const body = opts.body;
   const email = JSON.parse(body).email;

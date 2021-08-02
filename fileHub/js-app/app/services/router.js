@@ -1,5 +1,5 @@
 /**
- * Manages user transitions through application pages.
+ * Manages user's transitions through the application pages.
  */
 export class Router {
   /**
@@ -32,6 +32,7 @@ export class Router {
    * @returns {string} new route
    */
   redirect(hash) {
+    // TODO Drop out returns
     const newHash = `#${hash}`;
     this._window.location.hash = newHash;
     return newHash;

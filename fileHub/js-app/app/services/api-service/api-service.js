@@ -31,7 +31,7 @@ export class ApiService {
 
     const responseBody = await response.json();
 
-    this._checkResponseOnClientError(response, responseBody);
+    this._checkResponseOnClientOrServerError(response, responseBody);
 
     return responseBody.token;
   }
@@ -60,7 +60,7 @@ export class ApiService {
       throw new UnprocessableEntityError(errors);
     }
 
-    this._checkResponseOnClientError(response, responseBody);
+    this._checkResponseOnClientOrServerError(response, responseBody);
 
     return responseBody;
   }
@@ -77,7 +77,7 @@ export class ApiService {
     });
 
     const responseBody = await response.json();
-    this._checkResponseOnClientError(response, responseBody);
+    this._checkResponseOnClientOrServerError(response, responseBody);
 
     return responseBody.folder;
   }
@@ -92,7 +92,7 @@ export class ApiService {
     });
 
     const responseBody = await response.json();
-    this._checkResponseOnClientError(response, responseBody);
+    this._checkResponseOnClientOrServerError(response, responseBody);
 
     return responseBody.folder;
   }
@@ -109,7 +109,7 @@ export class ApiService {
     });
 
     const responseBody = await response.json();
-    this._checkResponseOnClientError(response, responseBody);
+    this._checkResponseOnClientOrServerError(response, responseBody);
 
     return responseBody.items;
   }
@@ -124,9 +124,6 @@ export class ApiService {
   async _fetch(url, init) {
     return this._window.fetch(url, init)
         .then(async (response) => {
-          if (response.status === 500) {
-            throw new ServerError();
-          }
           return response;
         })
         .catch((error) => {
@@ -140,7 +137,11 @@ export class ApiService {
    * @param {any} responseBody
    * @private
    */
-  _checkResponseOnClientError(response, responseBody) {
+  _checkResponseOnClientOrServerError(response, responseBody) {
+    if (response.status === 500) {
+      throw new ServerError();
+    }
+
     if ((response.status >= 400 && response.status < 500)) {
       throw new ClientServerError(responseBody.message);
     }

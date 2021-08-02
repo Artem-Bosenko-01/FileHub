@@ -11,14 +11,13 @@ export class StateManager {
    * @param {ActionFactory} actionFactory
    */
   constructor(initialState, services, actionFactory) {
-    this._initialState = initialState;
     this._services = services;
 
     this._eventBus = new EventTarget();
     this._actions = actionFactory;
 
     const eventBus = this._eventBus;
-    this._state = new Proxy(this._eventBus, {
+    this._state = new Proxy(initialState, {
       set(target, key, newValue) {
         if (target[key] === newValue) {
           return true;
@@ -49,7 +48,7 @@ export class StateManager {
 
   /**
    * Proxy of state.
-   * @returns {EventTarget}
+   * @returns {object}
    */
   get state() {
     return this._state;

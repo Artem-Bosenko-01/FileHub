@@ -6,6 +6,14 @@ import {AuthenticationForm} from './authentication-form.js';
  */
 export class AuthenticationPage extends Component {
   /**
+   * The event that calls when a user successfully authenticated in the FileHub application.
+   * @param {function()} event
+   */
+  onLoggedIn(event) {
+    this._onLoggedInEvent = event;
+  }
+
+  /**
    * @inheritDoc
    * Adds api and title services to page
    * @param {ApiService} apiService
@@ -19,27 +27,17 @@ export class AuthenticationPage extends Component {
 
   /** @inheritDoc */
   _initNestedComponents() {
-    debugger;
     const form = new AuthenticationForm(this.rootElement);
     form.onSubmit(async (credentials) => {
       const {email, password} = credentials;
       try {
-        const response = await this._apiService.logIn(email, password);
-        alert(`${response}`);
+        await this._apiService.logIn(email, password);
         this._onLoggedInEvent();
       } catch (error) {
         this.clearErrorMessages();
         form.addServerError(error.message);
       }
     });
-  }
-
-  /**
-   * The event that calls when a user successfully authenticated in the FileHub application.
-   * @param {function()} event
-   */
-  onLoggedIn(event) {
-    this._onLoggedInEvent = event;
   }
 
   /**

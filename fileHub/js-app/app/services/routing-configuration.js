@@ -4,50 +4,52 @@
 export class RoutingConfiguration {
   /**
    * @constructor
+   * @param {string} defaultRoute
    */
-  constructor() {
+  constructor(defaultRoute) {
     this._routes = new Map();
+    this._defaultRoute = defaultRoute;
   }
 
   /**
    * Route for page, which creates when redirects to not existed routes.
-   * @param {string} hash
+   * @param {string} route
    */
-  set notFoundRoute(hash) {
-    this._error404Hash = hash;
+  set notFoundRoute(route) {
+    this._error404Hash = route;
   }
 
   /**
-   * New route's hash and page creator for it.
-   * @param {string} hash
+   * New route and page creator for it.
+   * @param {string} route
    * @param {function} pageInit
    * @returns {RoutingConfiguration}
    */
-  addRoute(hash, pageInit) {
-    this._routes.set(hash, pageInit);
+  addRoute(route, pageInit) {
+    this._routes.set(route, pageInit);
     return this;
   }
 
   /**
    * Event that calls when configuration will redirect user to necessary url.
-   * @param {function(hash: string)} listener
+   * @param {function(route: string)} listener
    */
   onRedirect(listener) {
     this._onRedirect = listener;
   }
 
   /**
-   * Finds page from routes list by hash.
-   * @param {string} hash
+   * Finds page from routes list by route.
+   * @param {string} route
    * @returns {Function}
    */
-  getPageByHash(hash) {
-    if (!hash) {
-      this._onRedirect('login');
+  getPageCreatorByRoute(route) {
+    if (!route) {
+      this._onRedirect(this._defaultRoute);
     }
 
-    if (this._routes.has(hash)) {
-      return this._routes.get(hash);
+    if (this._routes.has(route)) {
+      return this._routes.get(route);
     } else {
       return this._routes.get(this._error404Hash);
     }

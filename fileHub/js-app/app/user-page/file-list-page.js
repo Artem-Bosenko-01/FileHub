@@ -15,6 +15,15 @@ import {FetchCurrentFolderContent}
  */
 export class FileListPage extends Component {
   /**
+   * Event for redirecting a user to folder.
+   * @param {function(folderId: string)} listener
+   */
+  onNavigate(listener) {
+    this._navigate = listener;
+    this._render();
+  }
+
+  /**
    * @inheritDoc
    * Adds api and title services to page
    * @param {TitleService} titleService
@@ -38,14 +47,7 @@ export class FileListPage extends Component {
     new SearchBar(fileListBodyElement);
     new FolderControlButtons(fileListBodyElement);
     const fileList = new FileList(fileListBodyElement);
-
-
-    this._stateManager.onStateChanged('currentFolder', (state) => {
-      if (state.isCurrentFolderFetching) {
-        breadcrumbs.currentDirectory = 'loading';
-      }
-      breadcrumbs.currentDirectory = state.currentFolder;
-    });
+    fileList.navigateEvent = this._navigate;
 
     this._stateManager.onStateChanged('locationParams', ({locationParams}) => {
       const currentFolderId = locationParams.currentFolderId;
@@ -57,24 +59,36 @@ export class FileListPage extends Component {
       }
     });
 
-    this._stateManager.onStateChanged('rootFolder', (state) => {
-      this._redirect(`index/${state.rootFolder.id}`);
+    this._stateManager.onStateChanged('currentFolder', (state) => {
+      breadcrumbs.currentDirectory = state.currentFolder;
+    });
+
+    this._stateManager.onStateChanged('isCurrentFolderFetching', (state) => {
+      breadcrumbs.loadingCurrentFolderDataState = state.isCurrentFolderFetching;
+    });
+
+    this._stateManager.onStateChanged('fetchingCurrentFolderErrorMessage', (state) => {
+      breadcrumbs.currentDirectory = null;
+      breadcrumbs.errorMessage = state.fetchingCurrentFolderErrorMessage;
     });
 
     this._stateManager.onStateChanged('currentFolderContent', (state) => {
-      if (state.isCurrentFolderContentFetching) {
-        fileList.fileItems = 'loading';
-      }
       fileList.fileItems = state.currentFolderContent;
     });
-  }
 
-  /**
-   * Event to redirect user.
-   * @param {function(hash: string)} listener
-   */
-  onRedirect(listener) {
-    this._redirect = listener;
+    this._stateManager.onStateChanged('isCurrentFolderContentFetching', (state) => {
+      fileList.loadingFolderContentState = state.isCurrentFolderContentFetching;
+    });
+
+    this._stateManager.onStateChanged('fetchingCurrentFolderContentErrorMessage', (state) => {
+      fileList.fileItems = null;
+      fileList.errorMessage = state.fetchingCurrentFolderContentErrorMessage;
+    });
+
+
+    this._stateManager.onStateChanged('rootFolder', (state) => {
+      this._navigate(state.rootFolder.id);
+    });
   }
 
   /** @inheritDoc */

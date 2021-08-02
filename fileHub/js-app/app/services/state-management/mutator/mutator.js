@@ -17,7 +17,6 @@ export const mutator = (mutatorName, details, state) => {
     case CURRENT_FOLDER_MUTATOR.FETCHING_FAILED:
       return Object.assign({}, state, {
         isCurrentFolderFetching: false,
-        currentFolder: '',
         fetchingCurrentFolderErrorMessage: details.error,
       });
     case HASH_CHANGED_MUTATOR.COMPLETED:
@@ -25,9 +24,13 @@ export const mutator = (mutatorName, details, state) => {
         location: details.pageRoute,
         locationParams: details.dynamicPart,
       });
-    case GET_ROOT_FOLDER_MUTATOR.COMPLETED:
+    case GET_ROOT_FOLDER_MUTATOR.FETCHING_COMPLETED:
       return Object.assign({}, state, {
-        rootFolder: details,
+        rootFolder: details.rootFolder,
+      });
+    case GET_ROOT_FOLDER_MUTATOR.FETCHING_FAILED:
+      return Object.assign({}, state, {
+        fetchingRootFolderErrorMessage: details.error,
       });
     case FETCH_CURRENT_FOLDER_CONTENT_MUTATOR.FETCHING_STARTED:
       return Object.assign({}, state, {
@@ -41,8 +44,7 @@ export const mutator = (mutatorName, details, state) => {
     case FETCH_CURRENT_FOLDER_CONTENT_MUTATOR.FETCHING_FAILED:
       return Object.assign({}, state, {
         isCurrentFolderContentFetching: false,
-        currentFolderContent: '',
-        fetchingCurrentFolderErrorMessage: details.error,
+        fetchingCurrentFolderContentErrorMessage: details.error,
       });
   }
 };

@@ -1,7 +1,5 @@
 import FetchCurrentFolder from './fetch-current-directory-action/fetch-current-folder.js';
-import DeleteFile from './delete-file-action/delete-file.js';
 import FetchCurrentFolderExecutor from './fetch-current-directory-action/fetch-current-folder-executor.js';
-import DeleteFileExecutor from './delete-file-action/delete-file-executor.js';
 import {HashChanged} from './hash-changed-action/hash-changed.js';
 import {HashChangedExecutor} from './hash-changed-action/hash-changed-executor.js';
 import {GetRootFolder} from './get-root-folder-action/get-root-folder.js';
@@ -18,12 +16,11 @@ export class ActionFactory {
    * @constructor
    */
   constructor() {
-    this._actions = new Map();
-    this._actions.set(FetchCurrentFolder.typeName, new FetchCurrentFolderExecutor());
-    this._actions.set(DeleteFile.typeName, new DeleteFileExecutor());
-    this._actions.set(HashChanged.typeName, new HashChangedExecutor());
-    this._actions.set(GetRootFolder.typeName, new GetRootFolderExecutor());
-    this._actions.set(FetchCurrentFolderContent.typeName, new FetchCurrentFolderContentExecutor());
+    this._actions = new Map()
+        .set(FetchCurrentFolder.typeName, new FetchCurrentFolderExecutor())
+        .set(HashChanged.typeName, new HashChangedExecutor())
+        .set(GetRootFolder.typeName, new GetRootFolderExecutor())
+        .set(FetchCurrentFolderContent.typeName, new FetchCurrentFolderContentExecutor());
   }
 
   /**

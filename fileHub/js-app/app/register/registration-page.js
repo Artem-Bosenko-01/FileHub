@@ -25,7 +25,6 @@ export class RegistrationPage extends Component {
       const {email, password} = credentials;
       try {
         await this._apiService.register(email, password);
-        alert(`You are successfully registered`);
         this._onRegisteredEvent();
       } catch (error) {
         this.clearErrorMessages();

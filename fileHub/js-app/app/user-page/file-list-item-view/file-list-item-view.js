@@ -5,9 +5,27 @@ import {typeFullName, typeIcon} from './file-mime-types-list.js';
  * Line from {@link FileList folder content list}.
  */
 export class FileListItemView extends Component {
+  /**
+   * Event for navigation through folders.
+   * @param {function(folderId: string)} value
+   */
+  set onNavigate(value) {
+    this._navigate = value;
+    this._render();
+  }
+
   /** @inheritDoc */
   _init(itemDto) {
     this._item = itemDto;
+  }
+
+  /** @inheritDoc */
+  _addEventListeners() {
+    const folderNameElement = this._getElement('folder-name');
+    folderNameElement && folderNameElement.addEventListener('click', (event) => {
+      this._navigate(this._item.id);
+      event.preventDefault();
+    });
   }
 
   /**
@@ -29,7 +47,7 @@ export class FileListItemView extends Component {
    */
   _getItemName() {
     if (this._item.type === 'folder') {
-      return `<a data-fh="folder-name" class="highlight" href="#index/${this._item.id}">${this._item.name}</a>`;
+      return `<a data-fh="folder-name" class="highlight" href="">${this._item.name}</a>`;
     } else {
       return this._item.name;
     }

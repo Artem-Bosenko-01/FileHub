@@ -4,7 +4,7 @@ const {module, test} = QUnit;
 const DEFAULT_ROUTE = 'route';
 const REGISTER_ROUTE = 'register';
 
-module('Router service', () => {
+module('Router', () => {
   test('Should show default page when hash is correct', (assert) => {
     const testWindow = new WindowMock('#register');
 

@@ -1,9 +1,9 @@
 import {LogOut} from '../../../app/user-page/log-out.js';
-import {searchElement} from '../search-element-function.js';
+import searchElement from '../search-element-function.js';
 
 const {module, test} = QUnit;
 
-module('Log out', () => {
+module('LogOut', () => {
   test('Should render link with message: \'log out\'', (assert)=>{
     assert.expect(2);
     const fixture = document.getElementById('qunit-fixture');

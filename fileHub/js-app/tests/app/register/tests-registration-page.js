@@ -1,9 +1,9 @@
-import {searchElement} from '../search-element-function.js';
+import searchElement from '../search-element-function.js';
 import {RegistrationPage} from '../../../app/register/registration-page.js';
 
 const {module, test} = QUnit;
 
-module('Registration page', (hooks) => {
+module('RegistrationPage', (hooks) => {
   let fixture;
   hooks.beforeEach(() => {
     fixture = document.getElementById('qunit-fixture');

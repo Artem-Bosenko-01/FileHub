@@ -1,9 +1,9 @@
 import {UserDetails} from '../../../app/user-page/user-details.js';
-import {searchElement} from '../search-element-function.js';
+import searchElement from '../search-element-function.js';
 
 const {module, test} = QUnit;
 
-module('User details', (hooks) => {
+module('UserDetails', (hooks) => {
   let fixture;
   hooks.beforeEach(() => {
     fixture = document.getElementById('qunit-fixture');

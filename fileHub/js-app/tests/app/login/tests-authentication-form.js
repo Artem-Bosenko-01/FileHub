@@ -1,9 +1,9 @@
 import {AuthenticationForm} from '../../../app/login/authentication-form.js';
-import {searchElement} from '../search-element-function.js';
+import searchElement from '../search-element-function.js';
 
 const {module, test} = QUnit;
 
-module('Authentication form', (hooks) => {
+module('AuthenticationForm', (hooks) => {
   let fixture;
   hooks.beforeEach(() => {
     fixture = document.getElementById('qunit-fixture');
@@ -15,7 +15,7 @@ module('Authentication form', (hooks) => {
     const header = searchElement('header', fixture).innerHTML;
     const LINK_REF = '#register';
     const linkMessage = searchElement('link', fixture).innerHTML;
-    const buttonTitle = searchElement('button', fixture).innerHTML;
+    const buttonTitle = searchElement('submit-button', fixture).innerHTML;
 
     assert.equal(header, 'Sign In to FileHub', 'Should check form title');
     assert.ok(document.querySelector(`[data-fh="link"][href="${LINK_REF}"]`),

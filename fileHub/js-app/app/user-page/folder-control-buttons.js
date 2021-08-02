@@ -9,7 +9,7 @@ export class FolderControlButtons extends Component {
   _initNestedComponents() {
     this._mount('uploadButton', (slotElement) => {
       const uploadButton = new Button(slotElement);
-      uploadButton.buttonId = 'upload-button';
+      uploadButton.buttonName = 'upload-button';
       uploadButton.buttonIcon = 'upload';
       uploadButton.buttonClasses = ['control-folder-button upload-file-button'];
       uploadButton.onClick(() => alert('Upload new file into directory'));
@@ -18,7 +18,7 @@ export class FolderControlButtons extends Component {
 
     this._mount('createNewDirButton', (slotElement) => {
       const createNewDirButton = new Button(slotElement);
-      createNewDirButton.buttonId = 'create-new-dir-button';
+      createNewDirButton.buttonName = 'create-new-dir-button';
       createNewDirButton.buttonIcon = 'plus';
       createNewDirButton.buttonClasses = ['control-folder-button create-dir-button'];
       createNewDirButton.onClick(() => alert('Create new directory'));

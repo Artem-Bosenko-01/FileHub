@@ -2,7 +2,7 @@ import testsAuthenticationApiService from '../../login/tests-authentication-api-
 import testsRegistrationApiService from '../../register/tests-registration-api-service.js';
 const {module} = QUnit;
 
-module('API service', () => {
+module('APIService', () => {
   testsAuthenticationApiService();
   testsRegistrationApiService();
 });

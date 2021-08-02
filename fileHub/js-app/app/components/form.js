@@ -74,6 +74,7 @@ export class Form extends Component {
 
     this._mount('button', (slotElement) => {
       const button = new Button(slotElement);
+      button.buttonName = 'submit-button';
       button.buttonTitle = `${this._buttonTitle}`;
       return button;
     });

@@ -1,9 +1,9 @@
 import {RegistrationForm} from '../../../app/register/registration-form.js';
-import {searchElement} from '../search-element-function.js';
+import searchElement from '../search-element-function.js';
 
 const {module, test} = QUnit;
 
-module('Registration form', (hooks) => {
+module('RegistrationForm', (hooks) => {
   let fixture;
   hooks.beforeEach(() => {
     fixture = document.getElementById('qunit-fixture');
@@ -19,7 +19,7 @@ module('Registration form', (hooks) => {
         'Should check reference link in form');
     const linkMessage = searchElement('link', fixture).innerHTML;
     assert.equal(linkMessage, 'Already have an account?', 'Should check link message in form');
-    const buttonTitle = searchElement('button', fixture).innerHTML;
+    const buttonTitle = searchElement('submit-button', fixture).innerHTML;
     assert.equal(buttonTitle, 'Sign Up', 'Should check title of button in form');
   });
 

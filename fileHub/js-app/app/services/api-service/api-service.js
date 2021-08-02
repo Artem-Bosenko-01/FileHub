@@ -2,7 +2,6 @@ import {ClientServerError} from './client-server-error.js';
 import {ServerError} from './server-error.js';
 import {UnprocessableEntityError} from './unprocessable-entity-error.js';
 import {ValidationErrorCase} from './validation-error-case.js';
-import {FileListItem} from '../../user-page/services/file-list-item.js';
 
 /**
  * Allows you to interact with the main features of the application
@@ -80,7 +79,7 @@ export class ApiService {
     const responseBody = await response.json();
     this._checkResponseOnClientError(response, responseBody);
 
-    return this._convertItemsFromJson(responseBody.folder);
+    return responseBody.folder;
   }
 
   /**
@@ -95,7 +94,7 @@ export class ApiService {
     const responseBody = await response.json();
     this._checkResponseOnClientError(response, responseBody);
 
-    return this._convertItemsFromJson(responseBody.folder);
+    return responseBody.folder;
   }
 
   /**
@@ -111,13 +110,8 @@ export class ApiService {
 
     const responseBody = await response.json();
     this._checkResponseOnClientError(response, responseBody);
-    const content = [];
-    responseBody.items.forEach(
-        (itemJson) => {
-          content.push(this._convertItemsFromJson(itemJson));
-        },
-    );
-    return content;
+
+    return responseBody.items;
   }
 
   /**
@@ -150,23 +144,5 @@ export class ApiService {
     if ((response.status >= 400 && response.status < 500)) {
       throw new ClientServerError(responseBody.message);
     }
-  }
-
-  /**
-   * Convert item from json object to {@link FileListItem standard format}.
-   * @param {object} responseBody
-   * @returns {FileListItem}
-   * @private
-   */
-  _convertItemsFromJson(responseBody) {
-    const item = new FileListItem();
-    item.itemId = responseBody.id;
-    item.itemName = responseBody.name;
-    item.itemType = responseBody.type;
-    item.itemsAmount = responseBody.itemsAmount;
-    item.parentFolderId = responseBody.parentFolderId;
-    item.itemMimeType = responseBody.mimeType;
-    item.itemSize = responseBody.size;
-    return item;
   }
 }

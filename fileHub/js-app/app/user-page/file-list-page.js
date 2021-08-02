@@ -58,7 +58,7 @@ export class FileListPage extends Component {
     });
 
     this._stateManager.onStateChanged('rootFolder', (state) => {
-      this._redirect(`index/${state.rootFolder.itemId}`);
+      this._redirect(`index/${state.rootFolder.id}`);
     });
 
     this._stateManager.onStateChanged('currentFolderContent', (state) => {

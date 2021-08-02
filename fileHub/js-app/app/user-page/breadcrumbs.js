@@ -26,15 +26,15 @@ export class Breadcrumbs extends Component {
                          </li>
                          <li class="folder">
                             <span><a class="highlight"
-                            href="#index/${this._currentDirectory.itemParentFolderId}" 
+                            href="#index/${this._currentDirectory.parentFolderId}" 
                             title="Previous page">..</a> </span>
                          </li>`;
 
       const staticPathElement = `<li data-fh="current-dir" class="folder">
-                            <span data-fh="current-dir-name">${this._currentDirectory.itemName}</span>
+                            <span data-fh="current-dir-name">${this._currentDirectory.name}</span>
                           </li>`;
 
-      bodyBreadcrumb = `${this._currentDirectory.itemParentFolderId ? linkPathElement : ''}${staticPathElement}`;
+      bodyBreadcrumb = `${this._currentDirectory.parentFolderId ? linkPathElement : ''}${staticPathElement}`;
     } else {
       bodyBreadcrumb = `<li class="folder">
                             <span data-fh="breadcrumbs-error-message" class="error-message">
@@ -43,8 +43,11 @@ export class Breadcrumbs extends Component {
                        </li>`;
     }
 
-    return `<ul data-fh="breadcrumbs" class="path">
-                ${bodyBreadcrumb}
-            </ul>`;
+    return `<div>
+                <ul data-fh="breadcrumbs" class="path">
+                    ${bodyBreadcrumb}
+                </ul>
+                <hr class="user-view-page-separate-line">
+            </div>`;
   }
 }

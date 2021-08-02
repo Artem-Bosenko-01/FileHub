@@ -16,7 +16,7 @@ export class FileListItemView extends Component {
    * @returns {string}
    */
   _getFolderMarker() {
-    if (this._item.itemType === 'folder') {
+    if (this._item.type === 'folder') {
       return '<span class="glyphicon glyphicon-chevron-right"></span>';
     }
     return '';
@@ -28,10 +28,10 @@ export class FileListItemView extends Component {
    * @returns {string}
    */
   _getItemName() {
-    if (this._item.itemType === 'folder') {
-      return `<a data-fh="folder-name" class="highlight" href="">${this._item.itemName}</a>`;
+    if (this._item.type === 'folder') {
+      return `<a data-fh="folder-name" class="highlight" href="#index/${this._item.id}">${this._item.name}</a>`;
     } else {
-      return this._item.itemName;
+      return this._item.name;
     }
   }
 
@@ -41,10 +41,10 @@ export class FileListItemView extends Component {
    * @returns {string}
    */
   _getItemIcon() {
-    if (this._item.itemType === 'folder') {
+    if (this._item.type === 'folder') {
       return 'glyphicon-folder-close';
     } else {
-      return typeIcon(this._item.itemMimeType);
+      return typeIcon(this._item.mimeType);
     }
   }
 
@@ -54,10 +54,10 @@ export class FileListItemView extends Component {
    * @returns {string}
    */
   _getItemType() {
-    if (this._item.itemType === 'folder') {
+    if (this._item.type === 'folder') {
       return 'Folder';
     } else {
-      return typeFullName(this._item.itemMimeType);
+      return typeFullName(this._item.mimeType);
     }
   }
 
@@ -67,10 +67,10 @@ export class FileListItemView extends Component {
    * @returns {string}
    */
   _getItemSize() {
-    if (this._item.itemType === 'folder') {
+    if (this._item.type === 'folder') {
       return this._item.itemsAmount.toString();
     } else {
-      return this._formatBytes(this._item.itemSize, 1);
+      return this._formatBytes(this._item.size, 1);
     }
   }
 

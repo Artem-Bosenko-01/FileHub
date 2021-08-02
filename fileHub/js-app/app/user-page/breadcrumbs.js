@@ -5,6 +5,15 @@ import {Component} from '../components/component.js';
  */
 export class Breadcrumbs extends Component {
   /**
+   * Event for navigation through folders.
+   * @param {function(folderId: string)} value
+   */
+  set navigateEvent(value) {
+    this._navigate = value;
+    this._render();
+  }
+
+  /**
    * Directory where user is located.
    * @param {FileListItem} value
    */
@@ -32,6 +41,21 @@ export class Breadcrumbs extends Component {
   }
 
   /** @inheritDoc */
+  _addEventListeners() {
+    const rootFolderElement = this._getElement('root-folder');
+    rootFolderElement && rootFolderElement.addEventListener('click', (event) => {
+      this._navigate('');
+      event.preventDefault();
+    });
+
+    const previousFolderElement = this._getElement('previous-folder');
+    previousFolderElement && previousFolderElement.addEventListener('click', (event) => {
+      this._navigate(this._currentDirectory.parentFolderId);
+      event.preventDefault();
+    });
+  }
+
+  /** @inheritDoc */
   get _markup() {
     if (this._isLoadingState) {
       return `<div>
@@ -45,13 +69,12 @@ export class Breadcrumbs extends Component {
     }
 
     if (this._currentDirectory) {
-      const linkPathElement = `<li class="folder">
-                            <span><a class="highlight" href="#index" title="home">Home</a> </span>
+      const linkPathElement = `<li  class="folder">
+                            <span><a data-fh="root-folder" class="highlight" href="" title="home">Home</a> </span>
                          </li>
                          <li class="folder">
-                            <span><a class="highlight"
-                            href="#index/${this._currentDirectory.parentFolderId}" 
-                            title="Previous page">..</a> </span>
+                            <span><a data-fh="previous-folder" class="highlight"
+                            href="" title="Previous page">..</a> </span>
                          </li>`;
 
       const staticPathElement = `<li data-fh="current-dir" class="folder">

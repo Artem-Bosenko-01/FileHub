@@ -44,6 +44,7 @@ export class FileListPage extends Component {
 
     const fileListBodyElement = this._getElement('file-list-body');
     const breadcrumbs = new Breadcrumbs(fileListBodyElement);
+    breadcrumbs.navigateEvent = this._navigate;
     new SearchBar(fileListBodyElement);
     new FolderControlButtons(fileListBodyElement);
     const fileList = new FileList(fileListBodyElement);

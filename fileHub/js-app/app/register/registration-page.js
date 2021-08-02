@@ -7,6 +7,15 @@ import {RegistrationForm} from './registration-form.js';
  */
 export class RegistrationPage extends Component {
   /**
+   * The event that calls when a user successfully registered in the FileHub application.
+   * @param {function()} event
+   */
+  onRegistered(event) {
+    this._onRegisteredEvent = event;
+    this._render();
+  }
+
+  /**
    * @inheritDoc
    * Adds api and title services to page
    * @param {ApiService} apiService
@@ -39,14 +48,6 @@ export class RegistrationPage extends Component {
         }
       }
     });
-  }
-
-  /**
-   * The event that calls when a user successfully registered in the FileHub application.
-   * @param {function()} event
-   */
-  onRegistered(event) {
-    this._onRegisteredEvent = event;
   }
 
   /**

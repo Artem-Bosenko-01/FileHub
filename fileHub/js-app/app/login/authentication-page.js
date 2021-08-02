@@ -11,6 +11,7 @@ export class AuthenticationPage extends Component {
    */
   onLoggedIn(event) {
     this._onLoggedInEvent = event;
+    this._render();
   }
 
   /**

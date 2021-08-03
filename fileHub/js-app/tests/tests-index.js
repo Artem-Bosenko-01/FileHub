@@ -24,10 +24,6 @@ import './app/user-page/tests-file-list-item-view.js';
 import './app/user-page/tests-file-list.js';
 import './app/user-page/tests-file-list-page.js';
 import './app/user-page/tests-folder-control-buttons.js';
-import './app/user-page/tests-file-list-header-panel.js';
-import './app/user-page/tests-file-list-footer.js';
-import './app/user-page/tests-file-list-body.js';
-import './app/user-page/services/tests-list-item-view-parser.js';
 
 import './app/services/state-management/tests-state-manager.js';
 

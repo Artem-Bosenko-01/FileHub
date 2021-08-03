@@ -6,6 +6,24 @@ import {AuthenticationForm} from './authentication-form.js';
  */
 export class AuthenticationPage extends Component {
   /**
+   * The event that calls when a user successfully authenticated in the FileHub application.
+   * @param {function()} event
+   */
+  onLoggedIn(event) {
+    this._onLoggedInEvent = event;
+    this._render();
+  }
+
+  /**
+   * Adds an event, event for navigation through pages.
+   * @param {function()} event
+   */
+  onRedirectToRegistrationPage(event) {
+    this._onRedirectToRegistrationPage = event;
+    this._render();
+  }
+
+  /**
    * @inheritDoc
    * Adds api and title services to page
    * @param {ApiService} apiService
@@ -20,25 +38,17 @@ export class AuthenticationPage extends Component {
   /** @inheritDoc */
   _initNestedComponents() {
     const form = new AuthenticationForm(this.rootElement);
+    form.navigateEvent = this._onRedirectToRegistrationPage;
     form.onSubmit(async (credentials) => {
       const {email, password} = credentials;
       try {
-        const response = await this._apiService.logIn(email, password);
-        alert(`${response}`);
+        await this._apiService.logIn(email, password);
         this._onLoggedInEvent();
       } catch (error) {
         this.clearErrorMessages();
         form.addServerError(error.message);
       }
     });
-  }
-
-  /**
-   * The event that calls when a user successfully authenticated in the FileHub application.
-   * @param {function()} event
-   */
-  onLoggedIn(event) {
-    this._onLoggedInEvent = event;
   }
 
   /**
@@ -56,12 +66,12 @@ export class AuthenticationPage extends Component {
 
   /** @inheritDoc */
   get _markup() {
-    return ' <header>\n' +
-        '        <h1 title="TeamDev">\n' +
-        '            <a class="logo" href="https://www.teamdev.com/" target="_blank">\n' +
-        '                TeamDev\n' +
-        '            </a>\n' +
-        '        </h1>\n' +
-        '    </header>';
+    return `<header>
+             <h1 title="TeamDev">
+                    <a class="logo" href="https://www.teamdev.com/" target="_blank">
+                        TeamDev
+                    </a>
+                </h1>
+            </header>`;
   }
 }

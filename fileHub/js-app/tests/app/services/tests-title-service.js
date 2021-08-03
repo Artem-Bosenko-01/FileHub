@@ -5,7 +5,7 @@ const {module, test} = QUnit;
 const APPLICATION_NAME = 'application';
 const PAGE_NAME = 'page';
 
-module('Title service', (hooks) => {
+module('TitleService', () => {
   const testDocument = {
     title: '',
   };

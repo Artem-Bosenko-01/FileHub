@@ -1,25 +1,22 @@
 import {RegistrationForm} from '../../../app/register/registration-form.js';
-import {searchElement} from '../search-element-function.js';
+import searchElement from '../search-element-function.js';
 
 const {module, test} = QUnit;
 
-module('Registration form', (hooks) => {
+module('RegistrationForm', (hooks) => {
   let fixture;
   hooks.beforeEach(() => {
     fixture = document.getElementById('qunit-fixture');
   });
 
   test('Should create authentication form', (assert) => {
-    assert.expect(4);
+    assert.expect(3);
     new RegistrationForm(fixture);
     const header = searchElement('header', fixture).innerHTML;
     assert.equal(header, 'Sign Up to FileHub', 'Should check form title');
-    const LINK_REF = '#login';
-    assert.ok(document.querySelector(`[data-fh="link"][href="${LINK_REF}"]`),
-        'Should check reference link in form');
     const linkMessage = searchElement('link', fixture).innerHTML;
     assert.equal(linkMessage, 'Already have an account?', 'Should check link message in form');
-    const buttonTitle = searchElement('button', fixture).innerHTML;
+    const buttonTitle = searchElement('submit-button', fixture).innerHTML;
     assert.equal(buttonTitle, 'Sign Up', 'Should check title of button in form');
   });
 
@@ -62,5 +59,17 @@ module('Registration form', (hooks) => {
       done();
     });
     searchElement('form', fixture).dispatchEvent(new Event('submit'));
+  });
+
+  test('Should call event redirect to register page', (assert) => {
+    const onClickLinkStep = 'Link was clicked';
+    const form = new RegistrationForm(fixture);
+    form.navigateEvent = () => {
+      assert.step(onClickLinkStep);
+    };
+
+    const component = searchElement('link', fixture);
+    component.dispatchEvent(new Event('click'));
+    assert.verifySteps([onClickLinkStep]);
   });
 });

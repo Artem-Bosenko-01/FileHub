@@ -7,6 +7,24 @@ import {RegistrationForm} from './registration-form.js';
  */
 export class RegistrationPage extends Component {
   /**
+   * The event that calls when a user successfully registered in the FileHub application.
+   * @param {function()} event
+   */
+  onRegistered(event) {
+    this._onRegisteredEvent = event;
+    this._render();
+  }
+
+  /**
+   * Adds an event, event for navigation through pages.
+   * @param {function()} event
+   */
+  onRedirectToAuthenticationPage(event) {
+    this._onRedirectToAuthenticationPage = event;
+    this._render();
+  }
+
+  /**
    * @inheritDoc
    * Adds api and title services to page
    * @param {ApiService} apiService
@@ -21,11 +39,11 @@ export class RegistrationPage extends Component {
   /** @inheritDoc */
   _initNestedComponents() {
     const form = new RegistrationForm(this.rootElement);
+    form.navigateEvent = this._onRedirectToAuthenticationPage;
     form.onSubmit(async (credentials) => {
       const {email, password} = credentials;
       try {
         await this._apiService.register(email, password);
-        alert(`You are successfully registered`);
         this._onRegisteredEvent();
       } catch (error) {
         this.clearErrorMessages();
@@ -43,14 +61,6 @@ export class RegistrationPage extends Component {
   }
 
   /**
-   * The event that calls when a user successfully registered in the FileHub application.
-   * @param {function()} event
-   */
-  onRegistered(event) {
-    this._onRegisteredEvent = event;
-  }
-
-  /**
    * Remove server error messages, which was rendered after previous response.
    * @returns {void}
    */
@@ -63,12 +73,12 @@ export class RegistrationPage extends Component {
 
   /** @inheritDoc */
   get _markup() {
-    return ' <header>\n' +
-        '        <h1 title="TeamDev">\n' +
-        '            <a class="logo" href="https://www.teamdev.com/" target="_blank">\n' +
-        '                TeamDev\n' +
-        '            </a>\n' +
-        '        </h1>\n' +
-        '    </header>';
+    return `<header>
+                <h1 title="TeamDev">
+                    <a class="logo" href="https://www.teamdev.com/" target="_blank">
+                        TeamDev
+                    </a>
+                </h1>
+            </header>`;
   }
 }

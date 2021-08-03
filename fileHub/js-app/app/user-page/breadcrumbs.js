@@ -5,46 +5,103 @@ import {Component} from '../components/component.js';
  */
 export class Breadcrumbs extends Component {
   /**
+   * Event for navigation through folders.
+   * @param {function(folderId: string)} value
+   */
+  set navigateEvent(value) {
+    this._navigate = value;
+    this._render();
+  }
+
+  /**
    * Directory where user is located.
-   * @param {string | FileListItem} value
+   * @param {FileListItem} value
    */
   set currentDirectory(value) {
     this._currentDirectory = value;
     this._render();
   }
 
+  /**
+   *
+   * @param {boolean} value
+   */
+  set loadingCurrentFolderDataState(value) {
+    this._isLoadingState = value;
+    this._render();
+  }
+
+  /**
+   *
+   * @param {string} value
+   */
+  set errorMessage(value) {
+    this._errorMessage = value;
+    this._render();
+  }
+
+  /** @inheritDoc */
+  _addEventListeners() {
+    const rootFolderElement = this._getElement('root-folder');
+    rootFolderElement && rootFolderElement.addEventListener('click', (event) => {
+      this._navigate('');
+      event.preventDefault();
+    });
+
+    const previousFolderElement = this._getElement('previous-folder');
+    previousFolderElement && previousFolderElement.addEventListener('click', (event) => {
+      this._navigate(this._currentDirectory.parentFolderId);
+      event.preventDefault();
+    });
+  }
+
   /** @inheritDoc */
   get _markup() {
-    let bodyBreadcrumb;
-    if (this._currentDirectory === 'loading') {
-      bodyBreadcrumb = `<li class="folder">
-                                <span class="glyphicon glyphicon-repeat loading" aria-hidden="true"></span>
-                         </li>`;
-    } else if (this._currentDirectory) {
-      const linkPathElement = `<li class="folder">
-                            <span><a class="highlight" href="#index" title="home">Home</a> </span>
+    if (this._isLoadingState) {
+      return `<div>
+                <ul data-fh="breadcrumbs" class="path">
+                    <li class="folder">
+                         <span data-fh="loading-symbol" 
+                         class="glyphicon glyphicon-repeat loading" aria-hidden="true"></span>
+                    </li>
+                </ul>
+                <hr class="user-view-page-separate-line">
+              </div>`;
+    }
+
+    if (this._currentDirectory) {
+      const linkPathElement = `<li  class="folder">
+                            <span><a data-fh="root-folder" class="highlight" href="" title="home">Home</a> </span>
                          </li>
                          <li class="folder">
-                            <span><a class="highlight"
-                            href="#index/${this._currentDirectory.itemParentFolderId}" 
-                            title="Previous page">..</a> </span>
+                            <span><a data-fh="previous-folder" class="highlight"
+                            href="" title="Previous page">..</a> </span>
                          </li>`;
 
       const staticPathElement = `<li data-fh="current-dir" class="folder">
-                            <span data-fh="current-dir-name">${this._currentDirectory.itemName}</span>
+                            <span data-fh="current-dir-name">${this._currentDirectory.name}</span>
                           </li>`;
+      return `<div>
+                <ul data-fh="breadcrumbs" class="path">
+                    ${this._currentDirectory.parentFolderId ? linkPathElement : ''}${staticPathElement}
+                </ul>
+                <hr class="user-view-page-separate-line">
+            </div>`;
+    }
 
-      bodyBreadcrumb = `${this._currentDirectory.itemParentFolderId ? linkPathElement : ''}${staticPathElement}`;
-    } else {
-      bodyBreadcrumb = `<li class="folder">
+    if (this._errorMessage) {
+      return `<div>
+                <ul data-fh="breadcrumbs" class="path">
+                    <li class="folder">
                             <span data-fh="breadcrumbs-error-message" class="error-message">
                                <span class="glyphicon glyphicon-exclamation-sign"></span> Can't load breadcrumb data.
                             </span>
-                       </li>`;
+                       </li>
+                </ul>
+                <hr class="user-view-page-separate-line">
+            </div>`;
     }
 
-    return `<ul data-fh="breadcrumbs" class="path">
-                ${bodyBreadcrumb}
-            </ul>`;
+    return `<div></div>`;
   }
 }

@@ -18,12 +18,11 @@ export class ActionFactory {
    * @constructor
    */
   constructor() {
-    this._actions = new Map();
-    this._actions.set(FetchCurrentFolder.typeName, new FetchCurrentFolderExecutor());
-    this._actions.set(HashChanged.typeName, new HashChangedExecutor());
-    this._actions.set(GetRootFolder.typeName, new GetRootFolderExecutor());
-    this._actions.set(FetchCurrentFolderContent.typeName, new FetchCurrentFolderContentExecutor());
-    this._actions.set(GetCurrentUser.typeName, new GetCurrentUserExecutor());
+    this._actions = new Map()
+        .set(FetchCurrentFolder.typeName, new FetchCurrentFolderExecutor())
+        .set(HashChanged.typeName, new HashChangedExecutor())
+        .set(GetRootFolder.typeName, new GetRootFolderExecutor())
+        .set(FetchCurrentFolderContent.typeName, new FetchCurrentFolderContentExecutor());
   }
 
   /**

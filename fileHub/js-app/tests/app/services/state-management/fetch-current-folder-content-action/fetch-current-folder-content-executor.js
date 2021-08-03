@@ -5,7 +5,8 @@ const {module, test} = QUnit;
 
 module('Fetch current folder content action executor', () => {
   test('Should successfully apply executor', async (assert) => {
-    assert.expect(3);
+    assert.expect(4);
+    const startFetching = 'Start fetching';
     const getFolderContentStep = 'Get folder by id request';
     const setFolderContentInStateStep = 'Set folder content';
     const id = 'folder';
@@ -28,6 +29,10 @@ module('Fetch current folder content action executor', () => {
     };
 
     const mutateMock = (type, details) => {
+      if (type === 'CURRENT_FOLDER_CONTENT_FETCHING_STARTED') {
+        assert.step(startFetching);
+      }
+
       if (details && details.folderContent === folderContent) {
         assert.step(setFolderContentInStateStep);
       }
@@ -36,6 +41,40 @@ module('Fetch current folder content action executor', () => {
     const executor = new FetchCurrentFolderContentExecutor();
     await executor.apply({}, mockServices, stateMock, mutateMock);
 
-    assert.verifySteps([getFolderContentStep, setFolderContentInStateStep]);
+    assert.verifySteps([startFetching, getFolderContentStep, setFolderContentInStateStep]);
+  });
+
+  test('Should fail apply executor', async (assert) => {
+    assert.expect(4);
+    const startFetching = 'Start fetching';
+    const errorMessage = 'Fetching was failed';
+    const stateMock = {
+      locationParams: {
+        currentFolderId: 'id',
+      },
+    };
+
+    const mockServices = {
+      apiService: {
+        getFolderContent(folderId) {
+          throw new Error(errorMessage);
+        },
+      },
+    };
+
+    const mutateMock = (type, details) => {
+      if (type === 'CURRENT_FOLDER_CONTENT_FETCHING_STARTED') {
+        assert.step(startFetching);
+      }
+
+      if (type === 'CURRENT_FOLDER_CONTENT_FETCHING_FAILED') {
+        assert.step(details.error);
+        assert.equal(details.error, errorMessage, 'Should get error message after fetching fail');
+      }
+    };
+    const executor = new FetchCurrentFolderContentExecutor();
+    await executor.apply({}, mockServices, stateMock, mutateMock);
+
+    assert.verifySteps([startFetching, errorMessage]);
   });
 });

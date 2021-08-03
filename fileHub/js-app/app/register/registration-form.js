@@ -19,13 +19,22 @@ export class RegistrationForm extends Component {
     this._onSubmitAuthenticationEvent = event;
   }
 
+  /**
+   * Adds an event, event for navigation through pages.
+   * @param {function()} event
+   */
+  set navigateEvent(event) {
+    this._navigateEvent = event;
+    this._render();
+  }
+
   /** @inheritDoc */
   _initNestedComponents() {
     this._form = new Form(this.rootElement);
     this._form.formHeader = 'Sign Up to FileHub';
     this._form.buttonTitle = 'Sign Up';
     this._form.linkMessage = 'Already have an account?';
-    this._form.linkReference = '#login';
+    this._form.linkEvent = this._navigateEvent;
 
     this._form.initInputs((container) => {
       this._emailInputField = new FormInputField(container);

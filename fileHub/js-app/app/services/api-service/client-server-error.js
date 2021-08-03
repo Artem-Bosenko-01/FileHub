@@ -5,9 +5,8 @@
 export class ClientServerError extends Error {
   /**
    * @constructor
-   * @param {string} message
    */
-  constructor(message) {
-    super('400: ' + message);
+  constructor() {
+    super('400: client error');
   }
 }

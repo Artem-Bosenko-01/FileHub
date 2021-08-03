@@ -10,6 +10,7 @@ import {StateManager} from './services/state-management/state-manager.js';
 import {ActionFactory} from './services/state-management/action-factory.js';
 import {HashChanged} from './services/state-management/hash-changed-action/hash-changed.js';
 import {RoutingConfiguration} from './services/routing-configuration.js';
+import {mutator} from './services/state-management/mutator/mutator.js';
 
 /**
  * Entry point of FileHub application.
@@ -19,42 +20,42 @@ export class Application extends Component {
   _initNestedComponents() {
     const apiService = new ApiService(window);
     const titleService = new TitleService('FileHub', document);
-    const configuration = new RoutingConfiguration();
+    const configuration = new RoutingConfiguration('login');
     const router = new Router(window);
     const factory = new ActionFactory();
-    const stateManager = new StateManager({}, {apiService}, factory);
+    const stateManager = new StateManager({}, {apiService}, factory, mutator);
 
-    configuration.onRedirect((hash) => router.redirect(hash));
+    configuration.onRedirect((route) => router.redirect(route));
 
     configuration
         .addRoute('login', () => {
           const page = new AuthenticationPage(this.rootElement, apiService, titleService);
           page.onLoggedIn(() => router.redirect('index'));
+          page.onRedirectToRegistrationPage(() => router.redirect('register'));
         })
         .addRoute('register', () => {
           const page = new RegistrationPage(this.rootElement, apiService, titleService);
           page.onRegistered(() => router.redirect('login'));
+          page.onRedirectToAuthenticationPage(() => router.redirect('login'));
         })
         .addRoute('index', () => {
-          const page = new FileListPage(this.rootElement, titleService, stateManager);
-          page.onRedirect((hash) => router.redirect(hash));
+          new FileListPage(this.rootElement, titleService, stateManager)
+              .onNavigate((folderId) => router.redirect(`index/${folderId}`));
         })
         .addRoute('404', () => new ErrorPage(this.rootElement))
         .notFoundRoute = '404';
 
-    router.onHashChanged((urlEvent) => {
-      const url = urlEvent.newURL.split('#');
-      stateManager.dispatch(new HashChanged(url[1]));
+    router.onHashChanged((hash) => {
+      stateManager.dispatch(new HashChanged(hash));
     });
 
     stateManager.onStateChanged('location', ({location}) => {
       this._clearContainer();
-      const pageCreator = configuration.getPageByHash(location);
-      pageCreator();
+      configuration.getPageCreatorByRoute(location)();
     });
 
-    const locationHash = router.hash.substring(1);
-    stateManager.dispatch(new HashChanged(locationHash));
+    const locationRoute = router.route.substring(1);
+    stateManager.dispatch(new HashChanged(locationRoute));
   }
 
   /**

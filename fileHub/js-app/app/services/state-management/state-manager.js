@@ -1,5 +1,3 @@
-import {mutator} from './mutator/mutator.js';
-
 /**
  * Manages the states of the application by processing actions.
  */
@@ -9,16 +7,37 @@ export class StateManager {
    * @param {object} initialState
    * @param {object} services
    * @param {ActionFactory} actionFactory
+   * @param {function} mutator
    */
-  constructor(initialState, services, actionFactory) {
-    this._initialState = initialState;
+  constructor(initialState, services, actionFactory, mutator) {
     this._services = services;
-
-    this._eventBus = new EventTarget();
+    this._state = initialState;
     this._actions = actionFactory;
+    this._mutator = mutator;
+    this._eventBus = new EventTarget();
+  }
 
-    const eventBus = this._eventBus;
-    this._state = new Proxy(this._eventBus, {
+  /**
+   * Changes application components states.
+   * @param {string} mutatorName
+   * @param {object} details
+   * @private
+   */
+  _mutate(mutatorName, details) {
+    const mutatedState = this._mutator(mutatorName, details, this._state);
+    const previousState = this._state;
+    this._dispatchStateChangedAction(previousState, mutatedState, this._eventBus);
+  }
+
+  /**
+   * @param {object} previousState
+   * @param {object} newState
+   * @param {EventTarget} eventBus
+   * @returns {void}
+   * @private
+   */
+  _dispatchStateChangedAction(previousState, newState, eventBus) {
+    const changedState = new Proxy(previousState, {
       set(target, key, newValue) {
         if (target[key] === newValue) {
           return true;
@@ -29,27 +48,16 @@ export class StateManager {
           eventBus.dispatchEvent(new CustomEvent(`stateChanged-${key}`, {
             detail: {state: target},
           }));
-          return true;
         }
+        return true;
       },
     });
-  }
-
-  /**
-   * Changes application components states.
-   * @param {string} mutatorName
-   * @param {object} details
-   * @private
-   */
-  _mutate(mutatorName, details) {
-    const state = this._state;
-    const mutatedState = mutator(mutatorName, details, state);
-    this._state = Object.assign(this._state, mutatedState);
+    Object.assign(changedState, newState);
   }
 
   /**
    * Proxy of state.
-   * @returns {EventTarget}
+   * @returns {object}
    */
   get state() {
     return this._state;

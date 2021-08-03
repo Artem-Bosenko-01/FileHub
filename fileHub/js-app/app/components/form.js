@@ -18,8 +18,8 @@ export class Form extends Component {
    * Reference action, when user click on text-link.
    * @param {string}  value
    */
-  set linkReference(value) {
-    this._link = value;
+  set linkEvent(value) {
+    this._linkEvent = value;
     this._render();
   }
 
@@ -63,6 +63,11 @@ export class Form extends Component {
    */
   _addEventListeners() {
     this._eventOnSubmit && this.rootElement.addEventListener('submit', this._eventOnSubmit);
+
+    this._getElement('link').addEventListener('click', (event) => {
+      this._linkEvent();
+      event.preventDefault();
+    });
   }
 
   /**
@@ -74,6 +79,7 @@ export class Form extends Component {
 
     this._mount('button', (slotElement) => {
       const button = new Button(slotElement);
+      button.buttonName = 'submit-button';
       button.buttonTitle = `${this._buttonTitle}`;
       return button;
     });
@@ -89,7 +95,7 @@ export class Form extends Component {
             <div class="data" data-fh="data"></div>
             <div class="submit-box" data-fh="submit-box">
                     <slot data-fh="button"></slot>
-                    <a data-fh="link" title="Registration" class="reference" href="${this._link}">${this._message}</a>
+                    <a data-fh="link" class="reference" href="">${this._message}</a>
                 </div>
         </form>`;
   }

@@ -5,23 +5,37 @@ const {module, test} = QUnit;
 module('State manager', () => {
   test('Should dispatch special action', (assert) => {
     assert.expect(3);
+    const firstActionName = 'event1';
+    const secondActionName = 'event2';
     const actions = new ActionsMock(assert);
     const manager = new StateManager({}, {}, actions);
 
-    manager.dispatch({typeName: 'event1'});
-    manager.dispatch({typeName: 'event2'});
+    manager.dispatch({typeName: firstActionName});
+    manager.dispatch({typeName: secondActionName});
 
-    assert.verifySteps(['event1', 'event2']);
+    assert.verifySteps([firstActionName, secondActionName]);
   });
 
   test('Should add action on change field', (assert) => {
     assert.expect(2);
-    const actions = new ActionsMock(assert);
-    const manager = new StateManager({}, {}, actions);
-    manager.onStateChanged('field', (state) => assert.step(state.field));
-    manager.state.field = 'changes';
+    const fieldName = 'filed name';
+    const changedField = 'field';
 
-    assert.verifySteps(['changes']);
+    const mutatorMock = (mutatorName, details) => {
+      if (mutatorName === 'CHANGE_VALUE') {
+        return {field: details.fieldName};
+      }
+    };
+
+    const actions = new ActionsMock(assert);
+    const manager = new StateManager({}, {}, actions, mutatorMock);
+
+    manager.onStateChanged(changedField, (state) => {
+      assert.step(state.field);
+    });
+
+    manager.dispatch({typeName: changedField, fieldName});
+    assert.verifySteps([fieldName]);
   });
 });
 
@@ -34,18 +48,22 @@ class ActionsMock {
    * @param {assert} assert
    */
   constructor(assert) {
-    this._actions = new Map();
-    this._actions.set('event1', {
-      apply(action) {
-        assert.step(action.typeName);
-      },
-    });
-
-    this._actions.set('event2', {
-      apply(action) {
-        assert.step(action.typeName);
-      },
-    });
+    this._actions = new Map()
+        .set('event1', {
+          apply(action) {
+            assert.step(action.typeName);
+          },
+        })
+        .set('event2', {
+          apply(action) {
+            assert.step(action.typeName);
+          },
+        })
+        .set('field', {
+          apply(action, {}, {}, mutator) {
+            mutator('CHANGE_VALUE', {fieldName: action.fieldName});
+          },
+        });
   }
 
   /**

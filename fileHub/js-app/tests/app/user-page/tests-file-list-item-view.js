@@ -1,10 +1,10 @@
-import {FileListItemView} from '../../../app/user-page/file-list-item-view.js';
-import {FileListItem} from '../../../app/user-page/services/file-list-item.js';
-import {searchElement} from '../search-element-function.js';
+import {FileListItemView} from '../../../app/user-page/file-list-item-view/file-list-item-view.js';
+import {FileListItem} from '../../../app/file-list-item.js';
+import searchElement from '../search-element-function.js';
 
 const {module, test} = QUnit;
 
-module('File list item view', (hooks) => {
+module('FileListItemView', (hooks) => {
   let fixture;
   hooks.beforeEach(() => {
     fixture = document.getElementById('qunit-fixture');
@@ -12,14 +12,15 @@ module('File list item view', (hooks) => {
 
   test('Should render folder at file list', (assert) => {
     assert.expect(6);
-    const itemView = new FileListItemView(fixture);
-    const item = new FileListItem();
-    item.itemId = 'id';
-    item.itemType = 'folder';
-    item.itemName = 'folder';
-    item.itemsAmount = 5;
-    itemView.listItemFromDto = item;
+    const itemJson = {
+      id: 'id',
+      type: 'folder',
+      name: 'folder',
+      itemsAmount: 5,
+    };
+    const listItem = new FileListItem(itemJson);
 
+    new FileListItemView(fixture, listItem);
     assert.ok(searchElement('folder-marker', fixture).innerHTML,
         'Should render special icon for folder marker');
     assert.ok(fixture.querySelector('[class="glyphicon glyphicon-folder-close"]'),
@@ -36,19 +37,20 @@ module('File list item view', (hooks) => {
   test('Should render file at file list', (assert) => {
     assert.expect(6);
     const convertedMimeType = 'Pdf Document';
-    const convertedSize = '63.954 KB';
+    const convertedSize = '64 KB';
     const size = 65489;
     const mimeType = 'pdf';
-
-    const itemView = new FileListItemView(fixture);
-    const item = new FileListItem();
-    item.itemId = 'id';
-    item.itemType = 'file';
     const name = 'file';
-    item.itemName = name;
-    item.itemMimeType = mimeType;
-    item.itemSize = size;
-    itemView.listItemFromDto = item;
+
+    const itemJson = {
+      id: 'id',
+      type: 'file',
+      name: name,
+      size: size,
+      mimeType: mimeType,
+    };
+    const item = new FileListItem(itemJson);
+    new FileListItemView(fixture, item);
 
     assert.notOk(searchElement('folder-marker', fixture).innerHTML,
         'Shouldn\'t render special icon for folder marker');

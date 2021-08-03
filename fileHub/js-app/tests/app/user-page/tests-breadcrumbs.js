@@ -1,5 +1,5 @@
 import {Breadcrumbs} from '../../../app/user-page/breadcrumbs.js';
-import {searchElement} from '../search-element-function.js';
+import searchElement from '../search-element-function.js';
 
 const {module, test} = QUnit;
 
@@ -14,10 +14,9 @@ module('Breadcrumbs', (hooks) => {
     const currentDirectoryName = 'Directory';
     const breadcrumbs = new Breadcrumbs(fixture);
 
-    const currentFolder = {
-      itemName: currentDirectoryName,
+    breadcrumbs.currentDirectory = {
+      name: currentDirectoryName,
     };
-    breadcrumbs.currentDirectory = currentFolder;
 
     assert.ok(searchElement('breadcrumbs', fixture), 'Should render breadcrumbs');
     assert.ok(searchElement('current-dir', fixture), 'Should render tag for current folder');
@@ -28,10 +27,37 @@ module('Breadcrumbs', (hooks) => {
   test('Should render breadcrumbs with error message', (assert) => {
     assert.expect(2);
     const errorMessage = 'Can\'t load breadcrumb data.';
-    new Breadcrumbs(fixture);
+    const breadcrumbs = new Breadcrumbs(fixture);
+    breadcrumbs.errorMessage = 'error';
 
     assert.ok(searchElement('breadcrumbs', fixture), 'Should render breadcrumbs');
     assert.equal(searchElement('breadcrumbs-error-message', fixture).innerText, errorMessage,
         'Should render error message at breadcrumbs');
+  });
+
+  test('Should render breadcrumbs with loading state', (assert) => {
+    assert.expect(2);
+    const breadcrumbs = new Breadcrumbs(fixture);
+    breadcrumbs.loadingCurrentFolderDataState = true;
+
+    assert.ok(searchElement('breadcrumbs', fixture), 'Should render breadcrumbs');
+    assert.ok(searchElement('loading-symbol', fixture), 'Should render loading symbol at breadcrumbs');
+  });
+
+  test('Should add navigate event to breadcrumbs', (assert) => {
+    assert.expect(2);
+    const currentDirectoryName = 'Directory';
+    const parentId = 'as54';
+    const breadcrumbs = new Breadcrumbs(fixture);
+    breadcrumbs.currentDirectory = {
+      name: currentDirectoryName,
+      parentFolderId: parentId,
+      type: 'folder',
+    };
+    breadcrumbs.navigateEvent = (url) => assert.step(url);
+
+    const previousFolderLink = searchElement('previous-folder', fixture);
+    previousFolderLink.dispatchEvent(new Event('click'));
+    assert.verifySteps([parentId]);
   });
 });

@@ -12,28 +12,31 @@ export class Router {
 
   /**
    * Action that calls when hash in url changes.
-   * @param {function(event: HashChangeEvent)} listener
+   * @param {function(hash: string)} listener
    */
   onHashChanged(listener) {
-    this._window.addEventListener('hashchange', (event) => listener(event));
+    this._window.addEventListener('hashchange', (event) => {
+      const url = event.target.location.hash.substring(1);
+      listener(url);
+    });
   }
 
   /**
    * Hash that means where user located now.
    * @returns {string}
    */
-  get hash() {
+  get route() {
     return this._window.location.hash;
   }
 
   /**
-   * Sets necessary address to hash.
-   * @param {string} hash
+   * Sets necessary address to route.
+   * @param {string} route
    * @returns {string} new route
    */
-  redirect(hash) {
-    const newHash = `#${hash}`;
-    this._window.location.hash = newHash;
-    return newHash;
+  redirect(route) {
+    const newRoute = `#${route}`;
+    this._window.location.hash = newRoute;
+    return newRoute;
   }
 }

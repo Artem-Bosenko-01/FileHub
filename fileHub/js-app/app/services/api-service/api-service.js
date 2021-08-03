@@ -2,7 +2,6 @@ import {ClientServerError} from './client-server-error.js';
 import {ServerError} from './server-error.js';
 import {UnprocessableEntityError} from './unprocessable-entity-error.js';
 import {ValidationErrorCase} from './validation-error-case.js';
-import {FileListItem} from '../../user-page/services/file-list-item.js';
 
 /**
  * Allows you to interact with the main features of the application
@@ -30,9 +29,9 @@ export class ApiService {
       body: JSON.stringify({email, password}),
     });
 
-    const responseBody = await response.json();
 
-    this._checkResponseOnClientError(response, responseBody);
+    this._checkResponseOnClientOrServerError(response);
+    const responseBody = await response.json();
 
     return responseBody.token;
   }
@@ -54,16 +53,15 @@ export class ApiService {
       body: JSON.stringify({email, password}),
     });
 
-    const responseBody = await response.json();
     if (response.status === 422) {
-      const errors = responseBody.map((responseError) =>
+      const errorMessages = await response.json();
+      const errors = errorMessages.map((responseError) =>
         new ValidationErrorCase(responseError.field, responseError.message));
       throw new UnprocessableEntityError(errors);
     }
+    this._checkResponseOnClientOrServerError(response);
 
-    this._checkResponseOnClientError(response, responseBody);
-
-    return responseBody;
+    return await response.json();
   }
 
   /**
@@ -77,10 +75,10 @@ export class ApiService {
       body: JSON.stringify(folderId),
     });
 
+    this._checkResponseOnClientOrServerError(response);
     const responseBody = await response.json();
-    this._checkResponseOnClientError(response, responseBody);
 
-    return this._convertItemsFromJson(responseBody.folder);
+    return responseBody.folder;
   }
 
   /**
@@ -92,10 +90,10 @@ export class ApiService {
       method: 'GET',
     });
 
+    this._checkResponseOnClientOrServerError(response);
     const responseBody = await response.json();
-    this._checkResponseOnClientError(response, responseBody);
 
-    return this._convertItemsFromJson(responseBody.folder);
+    return responseBody.folder;
   }
 
   /**
@@ -109,15 +107,10 @@ export class ApiService {
       body: JSON.stringify(folderId),
     });
 
+    this._checkResponseOnClientOrServerError(response);
     const responseBody = await response.json();
-    this._checkResponseOnClientError(response, responseBody);
-    const content = [];
-    responseBody.items.forEach(
-        (itemJson) => {
-          content.push(this._convertItemsFromJson(itemJson));
-        },
-    );
-    return content;
+
+    return responseBody.items;
   }
 
   /**
@@ -145,9 +138,6 @@ export class ApiService {
   async _fetch(url, init) {
     return this._window.fetch(url, init)
         .then(async (response) => {
-          if (response.status === 500) {
-            throw new ServerError();
-          }
           return response;
         })
         .catch((error) => {
@@ -158,30 +148,15 @@ export class ApiService {
   /**
    * Checking response on 4** status.
    * @param {Response} response
-   * @param {any} responseBody
    * @private
    */
-  _checkResponseOnClientError(response, responseBody) {
-    if ((response.status >= 400 && response.status < 500)) {
-      throw new ClientServerError(responseBody.message);
+  _checkResponseOnClientOrServerError(response) {
+    if (response.status === 500) {
+      throw new ServerError();
     }
-  }
 
-  /**
-   * Convert item from json object to {@link FileListItem standard format}.
-   * @param {object} responseBody
-   * @returns {FileListItem}
-   * @private
-   */
-  _convertItemsFromJson(responseBody) {
-    const item = new FileListItem();
-    item.itemId = responseBody.id;
-    item.itemName = responseBody.name;
-    item.itemType = responseBody.type;
-    item.itemsAmount = responseBody.itemsAmount;
-    item.parentFolderId = responseBody.parentFolderId;
-    item.itemMimeType = responseBody.mimeType;
-    item.itemSize = responseBody.size;
-    return item;
+    if ((response.status >= 400 && response.status < 500)) {
+      throw new ClientServerError();
+    }
   }
 }

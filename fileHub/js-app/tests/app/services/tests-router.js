@@ -4,13 +4,13 @@ const {module, test} = QUnit;
 const DEFAULT_ROUTE = 'route';
 const REGISTER_ROUTE = 'register';
 
-module('Router service', () => {
+module('Router', () => {
   test('Should show default page when hash is correct', (assert) => {
     const testWindow = new WindowMock('#register');
 
     const router = new Router(testWindow);
-    router.onHashChanged((event) => {
-      assert.step(event.target.location.hash.substring(1));
+    router.onHashChanged((url) => {
+      assert.step(url);
     });
     testWindow.dispatchEvent(new Event('hashchange'));
     assert.verifySteps([REGISTER_ROUTE], 'Should route to register page.');
@@ -22,8 +22,8 @@ module('Router service', () => {
     const testWindow = new WindowMock('#route');
 
     const router = new Router(testWindow);
-    router.onHashChanged((event) => {
-      assert.step(event.target.location.hash.substring(1));
+    router.onHashChanged((url) => {
+      assert.step(url);
     });
     testWindow.dispatchEvent(new Event('hashchange'));
     router.redirect('register');

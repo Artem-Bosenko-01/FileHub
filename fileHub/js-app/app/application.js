@@ -10,6 +10,7 @@ import {StateManager} from './services/state-management/state-manager.js';
 import {ActionFactory} from './services/state-management/action-factory.js';
 import {HashChanged} from './services/state-management/hash-changed-action/hash-changed.js';
 import {RoutingConfiguration} from './services/routing-configuration.js';
+import {mutator} from './services/state-management/mutator/mutator.js';
 
 /**
  * Entry point of FileHub application.
@@ -22,7 +23,7 @@ export class Application extends Component {
     const configuration = new RoutingConfiguration('login');
     const router = new Router(window);
     const factory = new ActionFactory();
-    const stateManager = new StateManager({}, {apiService}, factory);
+    const stateManager = new StateManager({}, {apiService}, factory, mutator);
 
     configuration.onRedirect((route) => router.redirect(route));
 

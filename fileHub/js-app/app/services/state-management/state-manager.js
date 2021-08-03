@@ -1,5 +1,3 @@
-import {mutator} from './mutator/mutator.js';
-
 /**
  * Manages the states of the application by processing actions.
  */
@@ -9,11 +7,13 @@ export class StateManager {
    * @param {object} initialState
    * @param {object} services
    * @param {ActionFactory} actionFactory
+   * @param {function} mutator
    */
-  constructor(initialState, services, actionFactory) {
+  constructor(initialState, services, actionFactory, mutator) {
     this._services = services;
     this._state = initialState;
     this._actions = actionFactory;
+    this._mutator = mutator;
     this._eventBus = new EventTarget();
   }
 
@@ -24,7 +24,7 @@ export class StateManager {
    * @private
    */
   _mutate(mutatorName, details) {
-    const mutatedState = mutator(mutatorName, details, this._state);
+    const mutatedState = this._mutator(mutatorName, details, this._state);
     const previousState = this._state;
     this._dispatchStateChangedAction(previousState, mutatedState, this._eventBus);
   }

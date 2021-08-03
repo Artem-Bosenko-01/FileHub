@@ -7,8 +7,7 @@ import {SearchBar} from './search-bar.js';
 import {FileList} from './file-list.js';
 import {GetRootFolder} from '../services/state-management/get-root-folder-action/get-root-folder.js';
 import FetchCurrentFolder from '../services/state-management/fetch-current-directory-action/fetch-current-folder.js';
-import {FetchCurrentFolderContent}
-  from '../services/state-management/fetch-current-folder-content-action/fetch-current-folder-content.js';
+import {FetchCurrentFolderContent} from '../services/state-management/fetch-current-folder-content-action/fetch-current-folder-content.js';
 import GetCurrentUser from '../services/state-management/get-current-user-action/get-current-user.js';
 
 /**
@@ -50,14 +49,16 @@ export class FileListPage extends Component {
     const fileList = new FileList(fileListBodyElement);
     fileList.navigateEvent = this._navigate;
 
-    this._stateManager.onStateChanged('locationParams', ({locationParams}) => {
-      const currentFolderId = locationParams.currentFolderId;
+    this._stateManager.onStateChanged('locationParams', (state) => {
+      const currentFolderId = state.locationParams.currentFolderId;
       if (!currentFolderId) {
         this._stateManager.dispatch(new GetRootFolder());
       } else {
         this._stateManager.dispatch(new FetchCurrentFolder());
         this._stateManager.dispatch(new FetchCurrentFolderContent());
-        this._stateManager.dispatch(new GetCurrentUser());
+        if (!state.userData) {
+          this._stateManager.dispatch(new GetCurrentUser());
+        }
       }
     });
 
@@ -86,15 +87,17 @@ export class FileListPage extends Component {
         });
 
     this._stateManager.onStateChanged('userData',
-        (state) => userDetails.userFullName = state.userData.name);
+        (state) => {
+          userDetails.userFullName = state.userData.name;
+        });
 
     this._stateManager.onStateChanged('isCurrentUserInfoFetching',
         (state) => userDetails.loadingFetchingUserData = state.isCurrentUserInfoFetching);
 
-    this._stateManager.onStateChanged('fetchingCurrentFolderContentErrorMessage',
+    this._stateManager.onStateChanged('fetchingCurrentUserDetailsErrorMessage',
         (state) => {
           userDetails.userFullName = '';
-          userDetails.errorMessage = state.fetchingCurrentFolderContentErrorMessage;
+          userDetails.errorMessage = state.fetchingCurrentUserDetailsErrorMessage;
         });
 
     this._stateManager.onStateChanged('rootFolder',

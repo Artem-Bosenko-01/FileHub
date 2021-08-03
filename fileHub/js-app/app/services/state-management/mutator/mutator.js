@@ -59,7 +59,7 @@ export const mutator = (mutatorName, details, state) => {
     case GET_CURRENT_USER_MUTATOR.FETCHING_FAILED:
       return Object.assign({}, state, {
         isCurrentUserInfoFetching: false,
-        fetchingCurrentFolderContentErrorMessage: details.error,
+        fetchingCurrentUserDetailsErrorMessage: details.error,
       });
   }
 };

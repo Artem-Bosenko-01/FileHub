@@ -11,6 +11,7 @@ import {ActionFactory} from './services/state-management/action-factory.js';
 import {HashChanged} from './services/state-management/hash-changed-action/hash-changed.js';
 import {RoutingConfiguration} from './services/routing-configuration.js';
 import {mutator} from './services/state-management/mutator/mutator.js';
+import GetCurrentUser from './services/state-management/get-current-user-action/get-current-user.js';
 
 /**
  * Entry point of FileHub application.
@@ -41,6 +42,7 @@ export class Application extends Component {
         .addRoute('index', () => {
           new FileListPage(this.rootElement, titleService, stateManager)
               .onNavigate((folderId) => router.redirect(`index/${folderId}`));
+          stateManager.dispatch(new GetCurrentUser());
         })
         .addRoute('404', () => new ErrorPage(this.rootElement))
         .notFoundRoute = '404';

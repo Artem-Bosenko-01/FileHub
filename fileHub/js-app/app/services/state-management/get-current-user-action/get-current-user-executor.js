@@ -16,9 +16,9 @@ export default class GetCurrentUserExecutor extends ActionExecutor {
     mutate(GET_CURRENT_USER_MUTATOR.FETCHING_STARTED);
     try {
       const currentUserInfo = await services.apiService.getCurrentUser();
-      mutate(GET_CURRENT_USER_MUTATOR.FETCHING_COMPLETED, currentUserInfo);
+      mutate(GET_CURRENT_USER_MUTATOR.FETCHING_COMPLETED, {user: currentUserInfo});
     } catch (error) {
-      mutate(GET_CURRENT_USER_MUTATOR.FETCHING_FAILED);
+      mutate(GET_CURRENT_USER_MUTATOR.FETCHING_FAILED, {error: error.message});
     }
   }
 }

@@ -61,56 +61,44 @@ export class FileListPage extends Component {
       }
     });
 
-    this._stateManager.onStateChanged('currentFolder', (state) => {
-      breadcrumbs.currentDirectory = state.currentFolder;
-    });
+    this._stateManager.onStateChanged('currentFolder',
+        (state) => breadcrumbs.currentDirectory = state.currentFolder);
 
-    this._stateManager.onStateChanged('isCurrentFolderFetching', (state) => {
-      breadcrumbs.loadingCurrentFolderDataState = state.isCurrentFolderFetching;
-    });
+    this._stateManager.onStateChanged('isCurrentFolderFetching',
+        (state) => breadcrumbs.loadingCurrentFolderDataState = state.isCurrentFolderFetching);
 
-    this._stateManager.onStateChanged('fetchingCurrentFolderErrorMessage', (state) => {
-      breadcrumbs.currentDirectory = null;
-      breadcrumbs.errorMessage = state.fetchingCurrentFolderErrorMessage;
-    });
+    this._stateManager.onStateChanged('fetchingCurrentFolderErrorMessage',
+        (state) => {
+          breadcrumbs.currentDirectory = null;
+          breadcrumbs.errorMessage = state.fetchingCurrentFolderErrorMessage;
+        });
 
-    this._stateManager.onStateChanged('currentFolderContent', (state) => {
-      fileList.fileItems = state.currentFolderContent;
-    });
+    this._stateManager.onStateChanged('currentFolderContent',
+        (state) => fileList.fileItems = state.currentFolderContent);
 
-    this._stateManager.onStateChanged('isCurrentFolderContentFetching', (state) => {
-      fileList.loadingFolderContentState = state.isCurrentFolderContentFetching;
-    });
+    this._stateManager.onStateChanged('isCurrentFolderContentFetching',
+        (state) => fileList.loadingFolderContentState = state.isCurrentFolderContentFetching);
 
-    this._stateManager.onStateChanged('fetchingCurrentFolderContentErrorMessage', (state) => {
-      fileList.fileItems = null;
-      fileList.errorMessage = state.fetchingCurrentFolderContentErrorMessage;
-    });
+    this._stateManager.onStateChanged('fetchingCurrentFolderContentErrorMessage',
+        (state) => {
+          fileList.fileItems = null;
+          fileList.errorMessage = state.fetchingCurrentFolderContentErrorMessage;
+        });
 
-    this._stateManager.onStateChanged('userData', (state) => {
-      userDetails.userFullName = state.userData.name;
-    });
+    this._stateManager.onStateChanged('userData',
+        (state) => userDetails.userFullName = state.userData.name);
 
-    /* this._stateManager.onStateChanged('isCurrentUserInfoFetching', (state) => {
-      userDetails.loadingFolderContentState = state.isCurrentUserInfoFetching;
-    });
+    this._stateManager.onStateChanged('isCurrentUserInfoFetching',
+        (state) => userDetails.loadingFetchingUserData = state.isCurrentUserInfoFetching);
 
-    this._stateManager.onStateChanged('fetchingCurrentFolderContentErrorMessage', (state) => {
-      userDetails.fileItems = null;
-      userDetails.errorMessage = state.fetchingCurrentFolderContentErrorMessage;
-    });*/
+    this._stateManager.onStateChanged('fetchingCurrentFolderContentErrorMessage',
+        (state) => {
+          userDetails.userFullName = '';
+          userDetails.errorMessage = state.fetchingCurrentFolderContentErrorMessage;
+        });
 
-    this._stateManager.onStateChanged('rootFolder', (state) => {
-      this._navigate(state.rootFolder.id);
-    });
-  }
-
-  /**
-   * Event to redirect user.
-   * @param {function(hash: string)} listener
-   */
-  onRedirect(listener) {
-    this._redirect = listener;
+    this._stateManager.onStateChanged('rootFolder',
+        (state) => this._navigate(state.rootFolder.id));
   }
 
   /** @inheritDoc */

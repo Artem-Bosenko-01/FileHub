@@ -10,16 +10,13 @@ module('AuthenticationForm', (hooks) => {
   });
 
   test('Should create authentication form', (assert) => {
-    assert.expect(4);
+    assert.expect(3);
     new AuthenticationForm(fixture);
     const header = searchElement('header', fixture).innerHTML;
-    const LINK_REF = '#register';
     const linkMessage = searchElement('link', fixture).innerHTML;
     const buttonTitle = searchElement('submit-button', fixture).innerHTML;
 
     assert.equal(header, 'Sign In to FileHub', 'Should check form title');
-    assert.ok(document.querySelector(`[data-fh="link"][href="${LINK_REF}"]`),
-        'Should check reference link in form');
     assert.equal(linkMessage, 'Didn\'t have an account yet?', 'Should check link message in form');
     assert.equal(buttonTitle, 'Sign In', 'Should check title of button in form');
   });
@@ -57,5 +54,17 @@ module('AuthenticationForm', (hooks) => {
 
     const component = searchElement('form', fixture);
     component.dispatchEvent(new Event('submit'));
+  });
+
+  test('Should call event redirect to register page', (assert) => {
+    const onClickLinkStep = 'Link was clicked';
+    const form = new AuthenticationForm(fixture);
+    form.navigateEvent = () => {
+      assert.step(onClickLinkStep);
+    };
+
+    const component = searchElement('link', fixture);
+    component.dispatchEvent(new Event('click'));
+    assert.verifySteps([onClickLinkStep]);
   });
 });

@@ -28,12 +28,14 @@ export class Application extends Component {
 
     configuration
         .addRoute('login', () => {
-          new AuthenticationPage(this.rootElement, apiService, titleService)
-              .onLoggedIn(() => router.redirect('index'));
+          const page = new AuthenticationPage(this.rootElement, apiService, titleService);
+          page.onLoggedIn(() => router.redirect('index'));
+          page.onRedirectToRegistrationPage(() => router.redirect('register'));
         })
         .addRoute('register', () => {
-          new RegistrationPage(this.rootElement, apiService, titleService)
-              .onRegistered(() => router.redirect('login'));
+          const page = new RegistrationPage(this.rootElement, apiService, titleService);
+          page.onRegistered(() => router.redirect('login'));
+          page.onRedirectToAuthenticationPage(() => router.redirect('login'));
         })
         .addRoute('index', () => {
           new FileListPage(this.rootElement, titleService, stateManager)

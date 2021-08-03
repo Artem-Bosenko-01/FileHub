@@ -16,6 +16,15 @@ export class RegistrationPage extends Component {
   }
 
   /**
+   * Adds an event, event for navigation through pages.
+   * @param {function()} event
+   */
+  onRedirectToAuthenticationPage(event) {
+    this._onRedirectToAuthenticationPage = event;
+    this._render();
+  }
+
+  /**
    * @inheritDoc
    * Adds api and title services to page
    * @param {ApiService} apiService
@@ -30,6 +39,7 @@ export class RegistrationPage extends Component {
   /** @inheritDoc */
   _initNestedComponents() {
     const form = new RegistrationForm(this.rootElement);
+    form.navigateEvent = this._onRedirectToAuthenticationPage;
     form.onSubmit(async (credentials) => {
       const {email, password} = credentials;
       try {

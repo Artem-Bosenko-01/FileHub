@@ -13,18 +13,14 @@ module('Form', {
 
 test('Should create form with header, link reference and message, buttonTitle', (assert) => {
   const header = 'header';
-  const linkRef = 'link';
   const linkMessage = 'this is link message';
 
-  assert.expect(3);
+  assert.expect(2);
   const form = new Form(fixture);
   form.formHeader = header;
   form.linkMessage = linkMessage;
-  form.linkReference = linkRef;
 
   assert.ok(searchElement('header', fixture), 'Should create header in form');
-  assert.ok(document.querySelector(`[data-fh="link"][href="${linkRef}"]`),
-      'Should add reference to link in form');
   assert.equal(searchElement('link', fixture).innerHTML, linkMessage, 'Should create header in form');
 });
 
@@ -46,4 +42,16 @@ test('Should check event calls in form ', (assert) => {
   searchElement('form', fixture).dispatchEvent(new Event('submit'));
 
   assert.verifySteps([step], 'Should successfully calls event on submit form');
+});
+
+test('Should add action on click link to form', (assert) => {
+  const onClickedLinkStep = 'link was clicked';
+
+  assert.expect(2);
+  const form = new Form(fixture);
+  form.linkEvent = () => assert.step(onClickedLinkStep);
+
+  const component = searchElement('link', fixture);
+  component.dispatchEvent(new Event('click'));
+  assert.verifySteps([onClickedLinkStep]);
 });

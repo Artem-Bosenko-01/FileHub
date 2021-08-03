@@ -122,10 +122,8 @@ export class ApiService {
       method: 'GET',
     });
 
-    const responseBody = await response.json();
-    this._checkResponseOnClientError(response, responseBody);
-
-    return responseBody;
+    this._checkResponseOnClientOrServerError(response);
+    return await response.json();
   }
 
   /**

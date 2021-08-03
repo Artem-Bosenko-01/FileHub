@@ -50,13 +50,6 @@ export class FileListPage extends Component {
     const fileList = new FileList(fileListBodyElement);
     fileList.navigateEvent = this._navigate;
 
-    this._stateManager.onStateChanged('userData', (state) => {
-      if (state.isCurrentUserInfoFetching) {
-        userDetails.userFullName = 'loading';
-      }
-      userDetails.userFullName = state.userData.name;
-    });
-
     this._stateManager.onStateChanged('locationParams', ({locationParams}) => {
       const currentFolderId = locationParams.currentFolderId;
       if (!currentFolderId) {
@@ -94,11 +87,22 @@ export class FileListPage extends Component {
       fileList.errorMessage = state.fetchingCurrentFolderContentErrorMessage;
     });
 
+    this._stateManager.onStateChanged('userData', (state) => {
+      userDetails.userFullName = state.userData.name;
+    });
+
+    /* this._stateManager.onStateChanged('isCurrentUserInfoFetching', (state) => {
+      userDetails.loadingFolderContentState = state.isCurrentUserInfoFetching;
+    });
+
+    this._stateManager.onStateChanged('fetchingCurrentFolderContentErrorMessage', (state) => {
+      userDetails.fileItems = null;
+      userDetails.errorMessage = state.fetchingCurrentFolderContentErrorMessage;
+    });*/
 
     this._stateManager.onStateChanged('rootFolder', (state) => {
       this._navigate(state.rootFolder.id);
     });
-
   }
 
   /**

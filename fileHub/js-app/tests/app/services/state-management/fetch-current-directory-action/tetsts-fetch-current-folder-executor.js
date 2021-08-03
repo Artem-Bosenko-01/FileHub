@@ -5,7 +5,8 @@ const {module, test} = QUnit;
 
 module('Fetch current folder action executor', () => {
   test('Should successfully apply executor', async (assert) => {
-    assert.expect(3);
+    assert.expect(4);
+    const startFetching = 'Start fetching';
     const getFolderStep = 'Get folder by id request';
     const setFolderInStateStep = 'Set root folder';
     const id = 'folder';
@@ -28,6 +29,10 @@ module('Fetch current folder action executor', () => {
     };
 
     const mutateMock = (type, details) => {
+      if (type === 'CURRENT_FOLDER_FETCHING_STARTED') {
+        assert.step(startFetching);
+      }
+
       if (details && details.folder === folder) {
         assert.step(setFolderInStateStep);
       }
@@ -36,6 +41,40 @@ module('Fetch current folder action executor', () => {
     const executor = new FetchCurrentFolderExecutor();
     await executor.apply({}, mockServices, stateMock, mutateMock);
 
-    assert.verifySteps([getFolderStep, setFolderInStateStep]);
+    assert.verifySteps([startFetching, getFolderStep, setFolderInStateStep]);
+  });
+
+  test('Should fail apply executor', async (assert) => {
+    assert.expect(4);
+    const startFetching = 'Start fetching';
+    const errorMessage = 'Fetching was failed';
+    const stateMock = {
+      locationParams: {
+        currentFolderId: 'id',
+      },
+    };
+
+    const mockServices = {
+      apiService: {
+        getFolder(folderId) {
+          throw new Error(errorMessage);
+        },
+      },
+    };
+
+    const mutateMock = (type, details) => {
+      if (type === 'CURRENT_FOLDER_FETCHING_STARTED') {
+        assert.step(startFetching);
+      }
+
+      if (type === 'CURRENT_FOLDER_FETCHING_FAILED') {
+        assert.step(details.error);
+        assert.equal(details.error, errorMessage, 'Should get error message after fetching fail');
+      }
+    };
+    const executor = new FetchCurrentFolderExecutor();
+    await executor.apply({}, mockServices, stateMock, mutateMock);
+
+    assert.verifySteps([startFetching, errorMessage]);
   });
 });

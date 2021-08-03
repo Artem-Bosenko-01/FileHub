@@ -32,11 +32,21 @@ module('FileList', (hooks) => {
   test('Should render file list with error message', (assert) => {
     assert.expect(2);
     const errorMessage = 'Can\'t load directory data.';
-    new FileList(fixture);
+    const list = new FileList(fixture);
+    list.errorMessage = 'error';
 
     assert.ok(searchElement('fileListItems', fixture), 'Should create file list');
     assert.equal(searchElement('file-list-error-message', fixture).innerText, errorMessage,
         'Should render error message');
+  });
+
+  test('Should render file list with loading state', (assert) => {
+    assert.expect(2);
+    const list = new FileList(fixture);
+    list.loadingFolderContentState = true;
+
+    assert.ok(searchElement('fileListItems', fixture), 'Should create file list');
+    assert.ok(searchElement('loading-symbol', fixture), 'Should render loading state symbol');
   });
 });
 

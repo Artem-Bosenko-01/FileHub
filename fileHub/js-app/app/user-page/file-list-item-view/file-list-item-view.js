@@ -117,7 +117,7 @@ export class FileListItemView extends Component {
                                     class="element-control-button download-element-button">
                             <span class="glyphicon glyphicon-download"></span>
                         </button>`;
-    const uploadButton = `<button data-fh="upload-button" title="download" type="button" 
+    const uploadButton = `<button data-fh="upload-button" title="upload" type="button" 
 class="element-control-button upload-element-button"><span class="glyphicon glyphicon-upload"></span></button>`;
 
     return `<tr>
@@ -127,7 +127,7 @@ class="element-control-button upload-element-button"><span class="glyphicon glyp
                     <td data-fh="type" class="cell-type">${this._getItemType()}</td>
                     <td data-fh="size" class="cell-file-size">${this._getItemSize()}</td>
                     <td class="cell-file-action-buttons">
-                        ${this._item.itemType === 'folder' ? uploadButton : downloadButton}
+                        ${this._item.type === 'folder' ? uploadButton : downloadButton}
                         <button title="delete" type="button" class="element-control-button delete-element-button">
                             <span class="glyphicon glyphicon-remove-circle"></span>
                         </button>

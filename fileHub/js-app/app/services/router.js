@@ -16,8 +16,8 @@ export class Router {
    */
   onHashChanged(listener) {
     this._window.addEventListener('hashchange', (event) => {
-      const url = event.newURL.split('#');
-      listener(url[1]);
+      const url = event.target.location.hash.substring(1);
+      listener(url);
     });
   }
 

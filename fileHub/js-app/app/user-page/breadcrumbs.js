@@ -61,7 +61,8 @@ export class Breadcrumbs extends Component {
       return `<div>
                 <ul data-fh="breadcrumbs" class="path">
                     <li class="folder">
-                         <span class="glyphicon glyphicon-repeat loading" aria-hidden="true"></span>
+                         <span data-fh="loading-symbol" 
+                         class="glyphicon glyphicon-repeat loading" aria-hidden="true"></span>
                     </li>
                 </ul>
                 <hr class="user-view-page-separate-line">

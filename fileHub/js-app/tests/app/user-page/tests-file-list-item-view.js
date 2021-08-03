@@ -21,8 +21,6 @@ module('FileListItemView', (hooks) => {
     const listItem = new FileListItem(itemJson);
 
     new FileListItemView(fixture, listItem);
-
-
     assert.ok(searchElement('folder-marker', fixture).innerHTML,
         'Should render special icon for folder marker');
     assert.ok(fixture.querySelector('[class="glyphicon glyphicon-folder-close"]'),

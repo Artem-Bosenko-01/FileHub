@@ -9,8 +9,8 @@ module('Router', () => {
     const testWindow = new WindowMock('#register');
 
     const router = new Router(testWindow);
-    router.onHashChanged((event) => {
-      assert.step(event.target.location.hash.substring(1));
+    router.onHashChanged((url) => {
+      assert.step(url);
     });
     testWindow.dispatchEvent(new Event('hashchange'));
     assert.verifySteps([REGISTER_ROUTE], 'Should route to register page.');
@@ -22,8 +22,8 @@ module('Router', () => {
     const testWindow = new WindowMock('#route');
 
     const router = new Router(testWindow);
-    router.onHashChanged((event) => {
-      assert.step(event.target.location.hash.substring(1));
+    router.onHashChanged((url) => {
+      assert.step(url);
     });
     testWindow.dispatchEvent(new Event('hashchange'));
     router.redirect('register');

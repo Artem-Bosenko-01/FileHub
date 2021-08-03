@@ -29,9 +29,9 @@ export class ApiService {
       body: JSON.stringify({email, password}),
     });
 
-    const responseBody = await response.json();
 
-    this._checkResponseOnClientOrServerError(response, responseBody);
+    this._checkResponseOnClientOrServerError(response);
+    const responseBody = await response.json();
 
     return responseBody.token;
   }
@@ -53,16 +53,15 @@ export class ApiService {
       body: JSON.stringify({email, password}),
     });
 
-    const responseBody = await response.json();
     if (response.status === 422) {
-      const errors = responseBody.map((responseError) =>
+      const errorMessages = await response.json();
+      const errors = errorMessages.map((responseError) =>
         new ValidationErrorCase(responseError.field, responseError.message));
       throw new UnprocessableEntityError(errors);
     }
+    this._checkResponseOnClientOrServerError(response);
 
-    this._checkResponseOnClientOrServerError(response, responseBody);
-
-    return responseBody;
+    return await response.json();
   }
 
   /**
@@ -76,8 +75,8 @@ export class ApiService {
       body: JSON.stringify(folderId),
     });
 
+    this._checkResponseOnClientOrServerError(response);
     const responseBody = await response.json();
-    this._checkResponseOnClientOrServerError(response, responseBody);
 
     return responseBody.folder;
   }
@@ -91,8 +90,8 @@ export class ApiService {
       method: 'GET',
     });
 
+    this._checkResponseOnClientOrServerError(response);
     const responseBody = await response.json();
-    this._checkResponseOnClientOrServerError(response, responseBody);
 
     return responseBody.folder;
   }
@@ -108,8 +107,8 @@ export class ApiService {
       body: JSON.stringify(folderId),
     });
 
+    this._checkResponseOnClientOrServerError(response);
     const responseBody = await response.json();
-    this._checkResponseOnClientOrServerError(response, responseBody);
 
     return responseBody.items;
   }
@@ -134,16 +133,15 @@ export class ApiService {
   /**
    * Checking response on 4** status.
    * @param {Response} response
-   * @param {any} responseBody
    * @private
    */
-  _checkResponseOnClientOrServerError(response, responseBody) {
+  _checkResponseOnClientOrServerError(response) {
     if (response.status === 500) {
       throw new ServerError();
     }
 
     if ((response.status >= 400 && response.status < 500)) {
-      throw new ClientServerError(responseBody.message);
+      throw new ClientServerError();
     }
   }
 }

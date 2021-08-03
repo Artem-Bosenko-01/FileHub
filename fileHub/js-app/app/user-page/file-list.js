@@ -66,7 +66,8 @@ export class FileList extends Component {
                         <tr class="empty-directory">
                             <td>
                                 <p class="empty-directory-message">
-                                    <span class="glyphicon glyphicon-repeat loading" aria-hidden="true"></span>
+                                    <span data-fh="loading-symbol" 
+                                    class="glyphicon glyphicon-repeat loading" aria-hidden="true"></span>
                                 </p>
                             </td>
                         </tr>

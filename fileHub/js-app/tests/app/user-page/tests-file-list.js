@@ -48,5 +48,23 @@ module('FileList', (hooks) => {
     assert.ok(searchElement('fileListItems', fixture), 'Should create file list');
     assert.ok(searchElement('loading-symbol', fixture), 'Should render loading state symbol');
   });
+
+  test('Should add navigate event to file list', (assert) => {
+    const currentDirectoryName = 'Directory';
+    const id = 'id';
+    const list = new FileList(fixture);
+    list.fileItems = [{
+      id: id,
+      name: currentDirectoryName,
+      type: 'folder',
+      itemsAmount: 4,
+    }];
+    list.navigateEvent = (url) => {
+      assert.equal(url, id, 'Should get folder id to navigate event');
+    };
+
+    const folderName = searchElement('folder-name', fixture);
+    folderName.dispatchEvent(new Event('click'));
+  });
 });
 

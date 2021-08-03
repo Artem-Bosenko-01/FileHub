@@ -43,4 +43,21 @@ module('Breadcrumbs', (hooks) => {
     assert.ok(searchElement('breadcrumbs', fixture), 'Should render breadcrumbs');
     assert.ok(searchElement('loading-symbol', fixture), 'Should render loading symbol at breadcrumbs');
   });
+
+  test('Should add navigate event to breadcrumbs', (assert) => {
+    assert.expect(2);
+    const currentDirectoryName = 'Directory';
+    const parentId = 'as54';
+    const breadcrumbs = new Breadcrumbs(fixture);
+    breadcrumbs.currentDirectory = {
+      name: currentDirectoryName,
+      parentFolderId: parentId,
+      type: 'folder',
+    };
+    breadcrumbs.navigateEvent = (url) => assert.step(url);
+
+    const previousFolderLink = searchElement('previous-folder', fixture);
+    previousFolderLink.dispatchEvent(new Event('click'));
+    assert.verifySteps([parentId]);
+  });
 });

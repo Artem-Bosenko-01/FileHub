@@ -68,8 +68,7 @@ export class ApiService {
   /**
    * Gets item dto with folder type.
    * @param {string} folderId
-   * @returns {FileListItem}
-   * @throws ClientServerError|ServerError
+   * @returns {Promise<FileListItem, ClientServerError|ServerError>}
    */
   async getFolder(folderId) {
     const response = await this._fetch(`/folder/:${folderId}`, {
@@ -85,8 +84,7 @@ export class ApiService {
 
   /**
    * Gets item dto with folder type.
-   * @returns {FileListItem}
-   * @throws ClientServerError|ServerError
+   * @returns {Promise<FileListItem, ClientServerError|ServerError>}
    */
   async getRootFolder() {
     const response = await this._fetch(`/root-folder`, {
@@ -102,8 +100,7 @@ export class ApiService {
   /**
    * Gets folder content by folder id.
    * @param {string} folderId
-   * @returns {FileListItem[]}
-   * @throws ClientServerError|ServerError
+   * @returns {Promise<FileListItem[], ClientServerError|ServerError>}
    */
   async getFolderContent(folderId) {
     const response = await this._fetch(`/folder/:${folderId}/content`, {
@@ -119,8 +116,7 @@ export class ApiService {
 
   /**
    * Gets info about current user.
-   * @returns {UserModel}
-   * @throws ClientServerError|ServerError
+   * @returns {Promise<UserModel, ClientServerError|ServerError>}
    */
   async getCurrentUser() {
     const response = await this._fetch('/user', {

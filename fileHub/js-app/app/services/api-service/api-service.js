@@ -2,6 +2,7 @@ import {ClientServerError} from './client-server-error.js';
 import {ServerError} from './server-error.js';
 import {UnprocessableEntityError} from './unprocessable-entity-error.js';
 import {ValidationErrorCase} from './validation-error-case.js';
+import {UserModel} from '../../user-model.js';
 
 /**
  * Allows you to interact with the main features of the application
@@ -67,7 +68,8 @@ export class ApiService {
   /**
    * Gets item dto with folder type.
    * @param {string} folderId
-   * @returns {Promise<FileListItem|ClientServerError|ServerError>}
+   * @returns {FileListItem}
+   * @throws ClientServerError|ServerError
    */
   async getFolder(folderId) {
     const response = await this._fetch(`/folder/:${folderId}`, {
@@ -83,7 +85,8 @@ export class ApiService {
 
   /**
    * Gets item dto with folder type.
-   * @returns {Promise<FileListItem|ClientServerError|ServerError>}
+   * @returns {FileListItem}
+   * @throws ClientServerError|ServerError
    */
   async getRootFolder() {
     const response = await this._fetch(`/root-folder`, {
@@ -99,7 +102,8 @@ export class ApiService {
   /**
    * Gets folder content by folder id.
    * @param {string} folderId
-   * @returns {Promise<FileListItem[]|ClientServerError|ServerError>}
+   * @returns {FileListItem[]}
+   * @throws ClientServerError|ServerError
    */
   async getFolderContent(folderId) {
     const response = await this._fetch(`/folder/:${folderId}/content`, {
@@ -115,7 +119,8 @@ export class ApiService {
 
   /**
    * Gets info about current user.
-   * @returns {Promise<object|ClientServerError|ServerError>}
+   * @returns {UserModel}
+   * @throws ClientServerError|ServerError
    */
   async getCurrentUser() {
     const response = await this._fetch('/user', {
@@ -123,7 +128,8 @@ export class ApiService {
     });
 
     this._checkResponseOnClientOrServerError(response);
-    return await response.json();
+    const body = await response.json();
+    return new UserModel(body);
   }
 
   /**

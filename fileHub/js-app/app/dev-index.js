@@ -31,17 +31,15 @@ fetchMock.post('/login', (url, opts) => {
 fetchMock.post('/register', (url, opts) => {
   const body = JSON.parse(opts.body);
   const email = body.email;
-  const password = body.password;
 
   if (registeredUsers.has(email)) {
     return {
-      status: 400,
-      body: {message: `User with email: «${email}» already existed`},
+      status: 422,
+      body: {errors: [{field: 'email', message: `User with this email already existed`}]},
     };
   } else {
     return {
-      email: email,
-      password: password,
+      status: 200,
     };
   }
 });
@@ -103,24 +101,3 @@ fetchMock.get('/user', () => {
     id: '4521a4sca',
   };
 });
-
-/* fetchMock.post('/register', () => {
-  return {
-    status: 422,
-    body: [
-      {field: 'email', message: 'this is message'},
-      {field: 'password', message: 'this is password message'},
-    ],
-  };
-});*/
-
-/*
-fetchMock.post('/register', () => {
-  return {
-    status: 500,
-    body: {
-      message: 'This is server error',
-    },
-  };
-});
-*/

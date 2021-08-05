@@ -37,7 +37,7 @@ test('Should create form with input field', (assert) => {
 test('Should check event calls in form ', (assert) => {
   const step = 'step';
   const form = new Form(fixture);
-  form.onSubmit = () => assert.step(step);
+  form.onSubmit(() => assert.step(step));
 
   searchElement('form', fixture).dispatchEvent(new Event('submit'));
 
@@ -49,7 +49,7 @@ test('Should add action on click link to form', (assert) => {
 
   assert.expect(2);
   const form = new Form(fixture);
-  form.linkEvent = () => assert.step(onClickedLinkStep);
+  form.onLinkClick(() => assert.step(onClickedLinkStep));
 
   const component = searchElement('link', fixture);
   component.dispatchEvent(new Event('click'));

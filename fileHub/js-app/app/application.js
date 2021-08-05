@@ -8,7 +8,7 @@ import {TitleService} from './services/title-service.js';
 import {FileListPage} from './user-page/file-list-page.js';
 import {StateManager} from './services/state-management/state-manager.js';
 import {ActionFactory} from './services/state-management/action-factory.js';
-import {HashChanged} from './services/state-management/hash-changed-action/hash-changed.js';
+import {RouteChanged} from './services/state-management/hash-changed-action/route-changed.js';
 import {RoutingConfiguration} from './services/routing-configuration.js';
 import {mutator} from './services/state-management/mutator/mutator.js';
 import GetCurrentUser from './services/state-management/get-current-user-action/get-current-user.js';
@@ -41,14 +41,14 @@ export class Application extends Component {
         })
         .addRoute('index', () => {
           new FileListPage(this.rootElement, titleService, stateManager)
-              .onNavigate((folderId) => router.redirect(`index/${folderId}`));
+              .onLinkClick((folderId) => router.redirect(`index/${folderId}`));
           stateManager.dispatch(new GetCurrentUser());
         })
         .addRoute('404', () => new ErrorPage(this.rootElement))
         .notFoundRoute = '404';
 
-    router.onHashChanged((hash) => {
-      stateManager.dispatch(new HashChanged(hash));
+    router.onRouteChanged((route) => {
+      stateManager.dispatch(new RouteChanged(route));
     });
 
     stateManager.onStateChanged('location', ({location}) => {
@@ -56,8 +56,8 @@ export class Application extends Component {
       configuration.getPageCreatorByRoute(location)();
     });
 
-    const locationRoute = router.route.substring(1);
-    stateManager.dispatch(new HashChanged(locationRoute));
+    const locationRoute = router.route;
+    stateManager.dispatch(new RouteChanged(locationRoute));
   }
 
   /**

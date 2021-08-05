@@ -1,5 +1,5 @@
 /**
- * Configuration for {@link Router router}, which saved list of routes and page creator for each.
+ * Configuration that contains possible routes for user transitions.
  */
 export class RoutingConfiguration {
   /**
@@ -50,8 +50,8 @@ export class RoutingConfiguration {
 
     if (this._routes.has(route)) {
       return this._routes.get(route);
-    } else {
-      return this._routes.get(this._error404Hash);
     }
+
+    return this._routes.get(this._error404Hash);
   }
 }

@@ -13,22 +13,22 @@ module('RegistrationPage', (hooks) => {
     assert.expect(2);
     const done = assert.async();
 
-    const testDocument = {title: ''};
+    const documentMock = {title: ''};
 
-    const testApiService = {
+    const apiServiceMock = {
       register(email, password) {
         assert.ok(true, 'Should be called event on submit.');
         done();
       },
     };
 
-    const testTitleService = {
+    const titleServiceMock = {
       addTitleForPage() {
-        testDocument.title = 'Registration - FileHub';
+        documentMock.title = 'Registration - FileHub';
       },
     };
 
-    new RegistrationPage(fixture, testApiService, testTitleService);
+    new RegistrationPage(fixture, apiServiceMock, titleServiceMock);
 
     const emailField = searchElement('input-email-user', fixture);
     emailField.value = 'email@jajas';
@@ -44,6 +44,6 @@ module('RegistrationPage', (hooks) => {
 
     searchElement('form', fixture).dispatchEvent(new Event('submit'));
 
-    assert.equal(testDocument.title, 'Registration - FileHub', 'Should add title to page');
+    assert.equal(documentMock.title, 'Registration - FileHub', 'Should add title to page');
   });
 });

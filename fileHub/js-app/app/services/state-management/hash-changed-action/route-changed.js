@@ -3,7 +3,7 @@ import {ActionInfo} from '../action-info.js';
 /**
  * Contains data about url params.
  */
-export class HashChanged extends ActionInfo {
+export class RouteChanged extends ActionInfo {
   /** @inheritDoc */
   static typeName = 'hashChanged';
 
@@ -30,6 +30,6 @@ export class HashChanged extends ActionInfo {
 
   /** @inheritDoc */
   get typeName() {
-    return HashChanged.typeName;
+    return RouteChanged.typeName;
   }
 }

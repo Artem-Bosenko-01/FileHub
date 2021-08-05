@@ -6,21 +6,17 @@ const {module, test} = QUnit;
 export default () => module('Registration', () => {
   const email = 'login';
   const password = 'password';
-  const token = 'token';
 
   test('Should handle a response with code 200', async (assert) => {
-    assert.expect(2);
     const fetch = fetchMock.sandbox();
     fetch.mock({
       url: '/register',
       method: 'POST',
-    }, {token});
+    }, 200);
     const apiService = new ApiService({fetch});
 
-    const res = await apiService.register(email, password);
-
+    await apiService.register(email, password);
     assert.ok(fetch.called(), 'Should send a request');
-    assert.equal(res.token, token, 'Should return token after successful response');
   });
 
   test('Should handle a response with code 4**', async (assert) => {
@@ -38,7 +34,7 @@ export default () => module('Registration', () => {
     try {
       await apiService.register(email, password);
     } catch (error) {
-      assert.equal(error.message, '400: client error', 'Should return error with response status');
+      assert.equal(error.message, '404: client error', 'Should return error with response status');
     } finally {
       assert.ok(fetch.called(), 'Should send a request');
     }
@@ -69,10 +65,12 @@ export default () => module('Registration', () => {
       method: 'POST',
     }, {
       status: 422,
-      body: [{
-        field: 'email',
-        message: 'this is message',
-      }]});
+      body: {
+        errors: [{
+          field: 'email',
+          message: 'this is message',
+        }],
+      }});
     const apiService = new ApiService({fetch});
 
     try {

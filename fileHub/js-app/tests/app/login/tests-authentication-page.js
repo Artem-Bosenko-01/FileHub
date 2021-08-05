@@ -15,20 +15,20 @@ module('AuthenticationForm', (hooks) => {
 
     const testDocument = {title: ''};
 
-    const testApiService = {
+    const apiServiceMock = {
       logIn(email, password) {
         assert.ok(true, 'Should be called event on submit.');
         done();
       },
     };
 
-    const testTitleService = {
+    const titleServiceMock = {
       addTitleForPage() {
         testDocument.title = 'Authentication - FileHub';
       },
     };
 
-    new AuthenticationPage(fixture, testApiService, testTitleService);
+    new AuthenticationPage(fixture, apiServiceMock, titleServiceMock);
 
     const emailField = searchElement('input-email-user', fixture);
     emailField.value = 'email@jajas';

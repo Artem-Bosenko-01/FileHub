@@ -6,10 +6,10 @@ import {Component} from '../components/component.js';
 export class Breadcrumbs extends Component {
   /**
    * Event for navigation through folders.
-   * @param {function(folderId: string)} value
+   * @param {function(folderId: string)} event
    */
-  set navigateEvent(value) {
-    this._navigate = value;
+  onFolderNameClick(event) {
+    this._onFolderNameClickEvent = event;
     this._render();
   }
 
@@ -44,13 +44,13 @@ export class Breadcrumbs extends Component {
   _addEventListeners() {
     const rootFolderElement = this._getElement('root-folder');
     rootFolderElement && rootFolderElement.addEventListener('click', (event) => {
-      this._navigate('');
+      this._onFolderNameClickEvent('');
       event.preventDefault();
     });
 
     const previousFolderElement = this._getElement('previous-folder');
     previousFolderElement && previousFolderElement.addEventListener('click', (event) => {
-      this._navigate(this._currentDirectory.parentFolderId);
+      this._onFolderNameClickEvent(this._currentDirectory.parentFolderId);
       event.preventDefault();
     });
   }

@@ -16,10 +16,10 @@ import GetCurrentUser from '../services/state-management/get-current-user-action
 export class FileListPage extends Component {
   /**
    * Event for redirecting a user to folder.
-   * @param {function(folderId: string)} listener
+   * @param {function(folderId: string)} event
    */
-  onNavigate(listener) {
-    this._navigate = listener;
+  onLinkClick(event) {
+    this._onLinkClickedEvent = event;
     this._render();
   }
 
@@ -43,11 +43,11 @@ export class FileListPage extends Component {
 
     const fileListBodyElement = this._getElement('file-list-body');
     const breadcrumbs = new Breadcrumbs(fileListBodyElement);
-    breadcrumbs.navigateEvent = this._navigate;
+    breadcrumbs.onFolderNameClick(this._onLinkClickedEvent);
     new SearchBar(fileListBodyElement);
     new FolderControlButtons(fileListBodyElement);
     const fileList = new FileList(fileListBodyElement);
-    fileList.navigateEvent = this._navigate;
+    fileList.onFolderClick(this._onLinkClickedEvent);
 
     this._stateManager.onStateChanged('locationParams', (state) => {
       const currentFolderId = state.locationParams.currentFolderId;
@@ -62,34 +62,39 @@ export class FileListPage extends Component {
       }
     });
 
-    this._stateManager.onStateChanged('currentFolder',
-        (state) => breadcrumbs.currentDirectory = state.currentFolder);
+    this._stateManager.onStateChanged('currentFolder', (state) => {
+      breadcrumbs.currentDirectory = state.currentFolder;
+    });
 
-    this._stateManager.onStateChanged('isCurrentFolderFetching',
-        (state) => breadcrumbs.loadingCurrentFolderDataState = state.isCurrentFolderFetching);
+    this._stateManager.onStateChanged('isCurrentFolderFetching', (state) => {
+      breadcrumbs.loadingCurrentFolderDataState = state.isCurrentFolderFetching;
+    });
 
-    this._stateManager.onStateChanged('fetchingCurrentFolderErrorMessage',
-        (state) => {
-          breadcrumbs.currentDirectory = null;
-          breadcrumbs.errorMessage = state.fetchingCurrentFolderErrorMessage;
-        });
+    this._stateManager.onStateChanged('fetchingCurrentFolderErrorMessage', (state) => {
+      breadcrumbs.currentDirectory = null;
+      breadcrumbs.errorMessage = state.fetchingCurrentFolderErrorMessage;
+    });
 
-    this._stateManager.onStateChanged('currentFolderContent',
-        (state) => fileList.fileItems = state.currentFolderContent);
+    this._stateManager.onStateChanged('currentFolderContent', (state) => {
+      fileList.fileItems = state.currentFolderContent;
+    });
 
-    this._stateManager.onStateChanged('isCurrentFolderContentFetching',
-        (state) => fileList.loadingFolderContentState = state.isCurrentFolderContentFetching);
+    this._stateManager.onStateChanged('isCurrentFolderContentFetching', (state) => {
+      fileList.loadingFolderContentState = state.isCurrentFolderContentFetching;
+    });
 
-    this._stateManager.onStateChanged('fetchingCurrentFolderContentErrorMessage',
-        (state) => {
-          fileList.fileItems = null;
-          fileList.errorMessage = state.fetchingCurrentFolderContentErrorMessage;
-        });
+    this._stateManager.onStateChanged('fetchingCurrentFolderContentErrorMessage', (state) => {
+      fileList.fileItems = null;
+      fileList.errorMessage = state.fetchingCurrentFolderContentErrorMessage;
+    });
 
-    this._stateManager.onStateChanged('userData',
-        (state) => {
+    this._stateManager.onStateChanged('userData', (state) => {
           userDetails.userFullName = state.userData.name;
         });
+
+    this._stateManager.onStateChanged('rootFolder', (state) => {
+      this._onLinkClickedEvent(state.rootFolder.id);
+    });
 
     this._stateManager.onStateChanged('isCurrentUserInfoFetching',
         (state) => userDetails.loadingFetchingUserData = state.isCurrentUserInfoFetching);

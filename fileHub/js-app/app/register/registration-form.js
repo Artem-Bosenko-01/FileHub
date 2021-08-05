@@ -34,7 +34,7 @@ export class RegistrationForm extends Component {
     this._form.formHeader = 'Sign Up to FileHub';
     this._form.buttonTitle = 'Sign Up';
     this._form.linkMessage = 'Already have an account?';
-    this._form.linkEvent = this._navigateEvent;
+    this._form.onLinkClick(this._navigateEvent);
 
     this._form.initInputs((container) => {
       this._emailInputField = new FormInputField(container);
@@ -57,7 +57,7 @@ export class RegistrationForm extends Component {
       this._confirmPasswordInputField.onChange((value) => this._confipasswordInputValue = value);
     });
 
-    this._form.onSubmit = async () => {
+    this._form.onSubmit(async () => {
       this._emailInputField.cleanErrorMessage();
       this._passwordInputField.cleanErrorMessage();
       this._confirmPasswordInputField.cleanErrorMessage();
@@ -80,7 +80,7 @@ export class RegistrationForm extends Component {
         this._onSubmitAuthenticationEvent && this._onSubmitAuthenticationEvent(
             new UserData(this._emailInputValue, this._passwordInputValue));
       }
-    };
+    });
   }
 
   /**

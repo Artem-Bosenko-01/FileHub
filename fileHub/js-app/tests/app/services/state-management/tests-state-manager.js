@@ -17,25 +17,23 @@ module('State manager', () => {
   });
 
   test('Should add action on change field', (assert) => {
-    assert.expect(2);
     const fieldName = 'filed name';
     const changedField = 'field';
 
-    const mutatorMock = (mutatorName, details) => {
+    const mutatorSpy = (mutatorName, details) => {
       if (mutatorName === 'CHANGE_VALUE') {
         return {field: details.fieldName};
       }
     };
 
     const actions = new ActionsMock(assert);
-    const manager = new StateManager({}, {}, actions, mutatorMock);
+    const manager = new StateManager({}, {}, actions, mutatorSpy);
 
     manager.onStateChanged(changedField, (state) => {
-      assert.step(state.field);
+      assert.equal(state.field, fieldName, 'Should get mutated state with field');
     });
 
     manager.dispatch({typeName: changedField, fieldName});
-    assert.verifySteps([fieldName]);
   });
 });
 

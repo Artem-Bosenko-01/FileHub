@@ -49,7 +49,7 @@ test('Should add action on click link to form', (assert) => {
 
   assert.expect(2);
   const form = new Form(fixture);
-  form.onLinkClicked(() => assert.step(onClickedLinkStep));
+  form.onLinkClick(() => assert.step(onClickedLinkStep));
 
   const component = searchElement('link', fixture);
   component.dispatchEvent(new Event('click'));

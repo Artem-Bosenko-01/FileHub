@@ -8,8 +8,8 @@ export class Breadcrumbs extends Component {
    * Event for navigation through folders.
    * @param {function(folderId: string)} event
    */
-  onFolderNameClicked(event) {
-    this._onFolderNameClickedEvent = event;
+  onFolderNameClick(event) {
+    this._onFolderNameClickEvent = event;
     this._render();
   }
 
@@ -44,13 +44,13 @@ export class Breadcrumbs extends Component {
   _addEventListeners() {
     const rootFolderElement = this._getElement('root-folder');
     rootFolderElement && rootFolderElement.addEventListener('click', (event) => {
-      this._onFolderNameClickedEvent('');
+      this._onFolderNameClickEvent('');
       event.preventDefault();
     });
 
     const previousFolderElement = this._getElement('previous-folder');
     previousFolderElement && previousFolderElement.addEventListener('click', (event) => {
-      this._onFolderNameClickedEvent(this._currentDirectory.parentFolderId);
+      this._onFolderNameClickEvent(this._currentDirectory.parentFolderId);
       event.preventDefault();
     });
   }

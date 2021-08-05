@@ -40,13 +40,13 @@ export class Application extends Component {
         })
         .addRoute('index', () => {
           new FileListPage(this.rootElement, titleService, stateManager)
-              .onLinkClicked((folderId) => router.redirect(`index/${folderId}`));
+              .onLinkClick((folderId) => router.redirect(`index/${folderId}`));
         })
         .addRoute('404', () => new ErrorPage(this.rootElement))
         .notFoundRoute = '404';
 
-    router.onRouteChanged((hash) => {
-      stateManager.dispatch(new RouteChanged(hash));
+    router.onRouteChanged((route) => {
+      stateManager.dispatch(new RouteChanged(route));
     });
 
     stateManager.onStateChanged('location', ({location}) => {

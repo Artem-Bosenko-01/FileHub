@@ -18,6 +18,38 @@ export class StateManager {
   }
 
   /**
+   * Proxy of state.
+   * @returns {object}
+   */
+  get state() {
+    return new Proxy(this._state, {
+      set() {
+        throw new Error('This is readonly object. State may be changed only by state manager!');
+      },
+    });
+  }
+
+  /**
+   * Calls executor of some action from {@link ActionFactory actions list}.
+   * @param {ActionInfo} action
+   */
+  dispatch(action) {
+    const executor = this._actions.getActionExecutor(action.typeName);
+    executor.apply(action, this._services, this._state, (mutatorName, details) => {
+      this._mutate(mutatorName, details);
+    });
+  }
+
+  /**
+   * Adds some event for listeners on change state.
+   * @param {string} fieldName
+   * @param {function({CustomEventInit})} listener
+   */
+  onStateChanged(fieldName, listener) {
+    this._eventBus.addEventListener(`stateChanged-${fieldName}`, (e) => listener(e.detail.state));
+  }
+
+  /**
    * Changes application components states.
    * @param {string} mutatorName
    * @param {object} details
@@ -53,37 +85,5 @@ export class StateManager {
       },
     });
     Object.assign(changedState, newState);
-  }
-
-  /**
-   * Proxy of state.
-   * @returns {object}
-   */
-  get state() {
-    return new Proxy(this._state, {
-      set() {
-        throw new Error('This is readonly object. State may be changed only by state manager!');
-      },
-    });
-  }
-
-  /**
-   * Calls executor of some action from {@link ActionFactory actions list}.
-   * @param {ActionInfo} action
-   */
-  dispatch(action) {
-    const executor = this._actions.getActionExecutor(action.typeName);
-    executor.apply(action, this._services, this._state, (mutatorName, details) => {
-      this._mutate(mutatorName, details);
-    });
-  }
-
-  /**
-   * Adds some event for listeners on change state.
-   * @param {string} fieldName
-   * @param {function({CustomEventInit})} listener
-   */
-  onStateChanged(fieldName, listener) {
-    this._eventBus.addEventListener(`stateChanged-${fieldName}`, (e) => listener(e.detail.state));
   }
 }

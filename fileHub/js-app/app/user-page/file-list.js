@@ -9,7 +9,7 @@ export class FileList extends Component {
    * Event for navigation through folders.
    * @param {function(folderId: string)} event
    */
-  onFolderClicked(event) {
+  onFolderClick(event) {
     this._onFolderClickedEvent = event;
     this._render();
   }

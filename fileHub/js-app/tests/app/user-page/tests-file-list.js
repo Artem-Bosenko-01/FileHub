@@ -59,7 +59,7 @@ module('FileList', (hooks) => {
       type: 'folder',
       itemsAmount: 4,
     }];
-    list.onFolderClicked((folderId) => {
+    list.onFolderClick((folderId) => {
       assert.equal(folderId, id, 'Should get folder id to navigate event');
     });
 

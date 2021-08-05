@@ -94,24 +94,3 @@ fetchMock.get('/folder/:fold777/content', () => {
     items: [],
   };
 });
-
-/* fetchMock.post('/register', () => {
-  return {
-    status: 422,
-    body: [
-      {field: 'email', message: 'this is message'},
-      {field: 'password', message: 'this is password message'},
-    ],
-  };
-});*/
-
-/*
-fetchMock.post('/register', () => {
-  return {
-    status: 500,
-    body: {
-      message: 'This is server error',
-    },
-  };
-});
-*/

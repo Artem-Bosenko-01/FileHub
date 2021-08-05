@@ -45,7 +45,6 @@ module('Breadcrumbs', (hooks) => {
   });
 
   test('Should add navigate event to breadcrumbs', (assert) => {
-    assert.expect(2);
     const currentDirectoryName = 'Directory';
     const parentId = 'as54';
     const breadcrumbs = new Breadcrumbs(fixture);
@@ -54,10 +53,10 @@ module('Breadcrumbs', (hooks) => {
       parentFolderId: parentId,
       type: 'folder',
     };
-    breadcrumbs.onFolderNameClicked((folderId) => assert.step(folderId));
+    breadcrumbs.onFolderNameClick((folderId) => assert.strictEqual(folderId, parentId,
+        'Should get parent folder id'));
 
     const previousFolderLink = searchElement('previous-folder', fixture);
     previousFolderLink.dispatchEvent(new Event('click'));
-    assert.verifySteps([parentId]);
   });
 });

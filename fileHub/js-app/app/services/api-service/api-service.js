@@ -5,7 +5,7 @@ import {ValidationErrorCase} from './validation-error-case.js';
 import {FileListItem} from '../../file-list-item.js';
 
 /**
- * Allows you to interact with the main features of the application
+ * Allows you to interact with the main features of the application. Sends requests to backend.
  */
 export class ApiService {
   /**
@@ -59,7 +59,7 @@ export class ApiService {
   /**
    * Gets folder by folderId.
    * @param {string} folderId
-   * @returns {Promise<FileListItem|ClientServerError|ServerError>}
+   * @returns {Promise<FileListItem, ClientServerError|ServerError>}
    */
   async getFolder(folderId) {
     const response = await this._fetch(`/folder/:${folderId}`, {
@@ -74,7 +74,7 @@ export class ApiService {
 
   /**
    * Gets root folder.
-   * @returns {Promise<FileListItem|ClientServerError|ServerError>}
+   * @returns {Promise<FileListItem, ClientServerError|ServerError>}
    */
   async getRootFolder() {
     const response = await this._fetch(`/root-folder`, {
@@ -90,7 +90,7 @@ export class ApiService {
   /**
    * Gets folder content by folder id.
    * @param {string} folderId
-   * @returns {Promise<FileListItem[]|ClientServerError|ServerError>}
+   * @returns {Promise<FileListItem[], ClientServerError|ServerError>}
    */
   async getFolderContent(folderId) {
     const response = await this._fetch(`/folder/:${folderId}/content`, {

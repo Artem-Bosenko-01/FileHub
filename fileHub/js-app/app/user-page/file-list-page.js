@@ -18,7 +18,7 @@ export class FileListPage extends Component {
    * Event for redirecting a user to folder.
    * @param {function(folderId: string)} event
    */
-  onLinkClicked(event) {
+  onLinkClick(event) {
     this._onLinkClickedEvent = event;
     this._render();
   }
@@ -44,11 +44,11 @@ export class FileListPage extends Component {
 
     const fileListBodyElement = this._getElement('file-list-body');
     const breadcrumbs = new Breadcrumbs(fileListBodyElement);
-    breadcrumbs.onFolderNameClicked(this._onLinkClickedEvent);
+    breadcrumbs.onFolderNameClick(this._onLinkClickedEvent);
     new SearchBar(fileListBodyElement);
     new FolderControlButtons(fileListBodyElement);
     const fileList = new FileList(fileListBodyElement);
-    fileList.onFolderClicked(this._onLinkClickedEvent);
+    fileList.onFolderClick(this._onLinkClickedEvent);
 
     this._stateManager.onStateChanged('locationParams', ({locationParams}) => {
       const currentFolderId = locationParams.currentFolderId;

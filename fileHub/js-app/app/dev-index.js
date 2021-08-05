@@ -31,17 +31,15 @@ fetchMock.post('/login', (url, opts) => {
 fetchMock.post('/register', (url, opts) => {
   const body = JSON.parse(opts.body);
   const email = body.email;
-  const password = body.password;
 
   if (registeredUsers.has(email)) {
     return {
-      status: 400,
-      body: {message: `User with email: «${email}» already existed`},
+      status: 422,
+      body: {errors: [{field: 'email', message: `User with this email already existed`}]},
     };
   } else {
     return {
-      email: email,
-      password: password,
+      status: 200,
     };
   }
 });

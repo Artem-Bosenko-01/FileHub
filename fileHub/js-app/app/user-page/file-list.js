@@ -7,10 +7,10 @@ import {FileListItemView} from './file-list-item-view/file-list-item-view.js';
 export class FileList extends Component {
   /**
    * Event for navigation through folders.
-   * @param {function(folderId: string)} value
+   * @param {function(folderId: string)} event
    */
-  set navigateEvent(value) {
-    this._navigateEvent = value;
+  onFolderClicked(event) {
+    this._onFolderClickedEvent = event;
     this._render();
   }
 
@@ -52,7 +52,7 @@ export class FileList extends Component {
       const tableElement = this._getElement(this._fileListName);
       this._fileItems.forEach((fileItem) => {
         const itemView = new FileListItemView(tableElement, fileItem);
-        itemView.onNavigate = this._navigateEvent;
+        itemView.onFolderNameCLicked(this._onFolderClickedEvent);
       });
     }
   }

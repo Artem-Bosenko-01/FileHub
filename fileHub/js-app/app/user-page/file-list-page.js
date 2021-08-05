@@ -16,10 +16,10 @@ import {FetchCurrentFolderContent}
 export class FileListPage extends Component {
   /**
    * Event for redirecting a user to folder.
-   * @param {function(folderId: string)} listener
+   * @param {function(folderId: string)} event
    */
-  onNavigate(listener) {
-    this._navigate = listener;
+  onLinkClicked(event) {
+    this._onLinkClickedEvent = event;
     this._render();
   }
 
@@ -44,11 +44,11 @@ export class FileListPage extends Component {
 
     const fileListBodyElement = this._getElement('file-list-body');
     const breadcrumbs = new Breadcrumbs(fileListBodyElement);
-    breadcrumbs.navigateEvent = this._navigate;
+    breadcrumbs.onFolderNameClicked(this._onLinkClickedEvent);
     new SearchBar(fileListBodyElement);
     new FolderControlButtons(fileListBodyElement);
     const fileList = new FileList(fileListBodyElement);
-    fileList.navigateEvent = this._navigate;
+    fileList.onFolderClicked(this._onLinkClickedEvent);
 
     this._stateManager.onStateChanged('locationParams', ({locationParams}) => {
       const currentFolderId = locationParams.currentFolderId;
@@ -88,7 +88,7 @@ export class FileListPage extends Component {
 
 
     this._stateManager.onStateChanged('rootFolder', (state) => {
-      this._navigate(state.rootFolder.id);
+      this._onLinkClickedEvent(state.rootFolder.id);
     });
   }
 

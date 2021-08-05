@@ -30,4 +30,4 @@ import './app/services/state-management/tests-state-manager.js';
 import './app/services/state-management/get-root-folder-action/tetsts-get-root-folder-executor.js';
 import './app/services/state-management/fetch-current-directory-action/tetsts-fetch-current-folder-executor.js';
 import './app/services/state-management/fetch-current-folder-content-action/fetch-current-folder-content-executor.js';
-import './app/services/state-management/hash-changed-action/tetsts-hash-changed-executor.js';
+import './app/services/state-management/route-changed-action/tetsts-route-changed-executor.js';

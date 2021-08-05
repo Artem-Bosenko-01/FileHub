@@ -40,7 +40,7 @@ export default () => module('Authentication', () => {
     try {
       await apiService.logIn(email, password);
     } catch (error) {
-      assert.equal(error.message, '400: client error', 'Should return error with response status');
+      assert.equal(error.message, '404: client error', 'Should return error with response status');
     } finally {
       assert.ok(fetch.called(), 'Should send a request');
     }

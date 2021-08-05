@@ -60,7 +60,11 @@ export class StateManager {
    * @returns {object}
    */
   get state() {
-    return this._state;
+    return new Proxy(this._state, {
+      set() {
+        throw new Error('This is readonly object. State may be changed only by state manager!');
+      },
+    });
   }
 
   /**

@@ -4,10 +4,10 @@ import {HASH_CHANGED_MUTATOR} from '../mutator/hash-changed-mutator.js';
 /**
  * Execute saving about url params in state when url address changes.
  */
-export class HashChangedExecutor extends ActionExecutor {
+export class RouteChangedExecutor extends ActionExecutor {
   /**
    * @constructor
-   * @param {HashChanged} actionInfo
+   * @param {RouteChanged} actionInfo
    * @param {object} services
    * @param {object} state
    * @param {function} mutate

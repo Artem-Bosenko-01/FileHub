@@ -5,10 +5,8 @@ const {module, test} = QUnit;
 
 module('Fetch current folder action executor', () => {
   test('Should successfully apply executor', async (assert) => {
-    assert.expect(4);
-    const startFetching = 'Start fetching';
+    assert.expect(5);
     const getFolderStep = 'Get folder by id request';
-    const setFolderInStateStep = 'Set root folder';
     const id = 'folder';
     const folder = 'folderItem';
     const stateMock = {
@@ -17,7 +15,7 @@ module('Fetch current folder action executor', () => {
       },
     };
 
-    const mockServices = {
+    const servicesMock = {
       apiService: {
         getFolder(folderId) {
           if (folderId === id) {
@@ -28,25 +26,20 @@ module('Fetch current folder action executor', () => {
       },
     };
 
-    const mutateMock = (type, details) => {
-      if (type === 'CURRENT_FOLDER_FETCHING_STARTED') {
-        assert.step(startFetching);
+    const mutateSpy = (type, details) => {
+      assert.step(type);
+      if (type === 'CURRENT_FOLDER_FETCHING_COMPLETED') {
+        assert.strictEqual(details.folder, folder, 'Should get folder after successfully fetching');
       }
-
-      if (details && details.folder === folder) {
-        assert.step(setFolderInStateStep);
-      }
-      return true;
     };
     const executor = new FetchCurrentFolderExecutor();
-    await executor.apply({}, mockServices, stateMock, mutateMock);
+    await executor.apply({}, servicesMock, stateMock, mutateSpy);
 
-    assert.verifySteps([startFetching, getFolderStep, setFolderInStateStep]);
+    assert.verifySteps(['CURRENT_FOLDER_FETCHING_STARTED', getFolderStep, 'CURRENT_FOLDER_FETCHING_COMPLETED']);
   });
 
   test('Should fail apply executor', async (assert) => {
     assert.expect(4);
-    const startFetching = 'Start fetching';
     const errorMessage = 'Fetching was failed';
     const stateMock = {
       locationParams: {
@@ -54,7 +47,7 @@ module('Fetch current folder action executor', () => {
       },
     };
 
-    const mockServices = {
+    const servicesMock = {
       apiService: {
         getFolder(folderId) {
           throw new Error(errorMessage);
@@ -62,19 +55,15 @@ module('Fetch current folder action executor', () => {
       },
     };
 
-    const mutateMock = (type, details) => {
-      if (type === 'CURRENT_FOLDER_FETCHING_STARTED') {
-        assert.step(startFetching);
-      }
-
+    const mutateSpy = (type, details) => {
+      assert.step(type);
       if (type === 'CURRENT_FOLDER_FETCHING_FAILED') {
-        assert.step(details.error);
         assert.equal(details.error, errorMessage, 'Should get error message after fetching fail');
       }
     };
     const executor = new FetchCurrentFolderExecutor();
-    await executor.apply({}, mockServices, stateMock, mutateMock);
+    await executor.apply({}, servicesMock, stateMock, mutateSpy);
 
-    assert.verifySteps([startFetching, errorMessage]);
+    assert.verifySteps(['CURRENT_FOLDER_FETCHING_STARTED', 'CURRENT_FOLDER_FETCHING_FAILED']);
   });
 });

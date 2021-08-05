@@ -5,30 +5,24 @@ const DEFAULT_ROUTE = 'route';
 const REGISTER_ROUTE = 'register';
 
 module('Router', () => {
-  test('Should show default page when hash is correct', (assert) => {
-    const testWindow = new WindowMock('#register');
+  test('Should add and call event listener on route change', (assert) => {
+    const testWindow = new WindowMock(`#${REGISTER_ROUTE}`);
 
     const router = new Router(testWindow);
-    router.onHashChanged((url) => {
-      assert.step(url);
+    router.onRouteChanged((url) => {
+      assert.equal(url, REGISTER_ROUTE, 'Should route to register page.');
     });
     testWindow.dispatchEvent(new Event('hashchange'));
-    assert.verifySteps([REGISTER_ROUTE], 'Should route to register page.');
   });
 
-  test('Should router works correctly when hash is changed', (assert) => {
-    assert.expect(3);
-
-    const testWindow = new WindowMock('#route');
+  test('Should change location when redirect method is called', (assert) => {
+    assert.expect(2);
+    const testWindow = new WindowMock(DEFAULT_ROUTE);
+    assert.equal(DEFAULT_ROUTE, testWindow.location.hash, 'Should redirect to register page.');
 
     const router = new Router(testWindow);
-    router.onHashChanged((url) => {
-      assert.step(url);
-    });
-    testWindow.dispatchEvent(new Event('hashchange'));
-    router.redirect('register');
-    testWindow.dispatchEvent(new Event('hashchange'));
-    assert.verifySteps([DEFAULT_ROUTE, REGISTER_ROUTE], 'Should route to default page and after to register page.');
+    router.redirect(REGISTER_ROUTE);
+    assert.equal(REGISTER_ROUTE, testWindow.location.hash, 'Should redirect to register page.');
   });
 });
 
@@ -43,14 +37,6 @@ class WindowMock extends EventTarget {
   constructor(hash) {
     super();
     this._location = {hash: hash};
-  }
-
-  /**
-   * Hash for location.
-   * @param {string} value
-   */
-  set hash(value) {
-    this._location = {hash: value};
   }
 
   /**

@@ -7,9 +7,8 @@ module('Get root folder action executor', () => {
   test('Should successfully apply executor', async (assert) => {
     assert.expect(3);
     const getRootFolderStep = 'Get root folder request';
-    const setRootFolderInStateStep = 'Set root folder';
     const rootFolder = 'root folder';
-    const mockServices = {
+    const servicesMock = {
       apiService: {
         getRootFolder() {
           assert.step(getRootFolderStep);
@@ -18,20 +17,21 @@ module('Get root folder action executor', () => {
       },
     };
 
-    const mutateMock = (type, folder) => {
-      if (folder.rootFolder === rootFolder) {
-        assert.step(setRootFolderInStateStep);
+    const mutateSpy = (type, details) => {
+      assert.step(type);
+      if (type === 'GET_ROOT_FOLDER_MUTATOR_FAILED') {
+        assert.equal(details.folder, rootFolder, 'Should get root folder after successfully fetching');
       }
     };
     const executor = new GetRootFolderExecutor();
-    await executor.apply({}, mockServices, {}, mutateMock);
+    await executor.apply({}, servicesMock, {}, mutateSpy);
 
-    assert.verifySteps([getRootFolderStep, setRootFolderInStateStep]);
+    assert.verifySteps([getRootFolderStep, 'GET_ROOT_FOLDER_MUTATOR_COMPLETED']);
   });
 
   test('Should  fail apply executor', async (assert) => {
     const errorMessage = 'Fetching was failed';
-    const mockServices = {
+    const servicesMock = {
       apiService: {
         getRootFolder() {
           throw new Error(errorMessage);
@@ -39,12 +39,14 @@ module('Get root folder action executor', () => {
       },
     };
 
-    const mutateMock = (type, details) => {
+    const mutateSpy = (type, details) => {
+      assert.step(type);
       if (type === 'GET_ROOT_FOLDER_MUTATOR_FAILED') {
-        assert.equal(details.error, errorMessage, 'Should get error message after fetching fail');
+        assert.equal(details.error, errorMessage, 'Should get folder after successfully fetching');
       }
     };
     const executor = new GetRootFolderExecutor();
-    await executor.apply({}, mockServices, {}, mutateMock);
+    await executor.apply({}, servicesMock, {}, mutateSpy);
+    assert.verifySteps(['GET_ROOT_FOLDER_MUTATOR_FAILED']);
   });
 });

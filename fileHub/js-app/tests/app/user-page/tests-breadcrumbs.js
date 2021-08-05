@@ -54,7 +54,7 @@ module('Breadcrumbs', (hooks) => {
       parentFolderId: parentId,
       type: 'folder',
     };
-    breadcrumbs.navigateEvent = (url) => assert.step(url);
+    breadcrumbs.onFolderNameClicked((folderId) => assert.step(folderId));
 
     const previousFolderLink = searchElement('previous-folder', fixture);
     previousFolderLink.dispatchEvent(new Event('click'));

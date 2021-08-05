@@ -1,7 +1,7 @@
 import FetchCurrentFolder from './fetch-current-directory-action/fetch-current-folder.js';
 import FetchCurrentFolderExecutor from './fetch-current-directory-action/fetch-current-folder-executor.js';
-import {HashChanged} from './hash-changed-action/hash-changed.js';
-import {HashChangedExecutor} from './hash-changed-action/hash-changed-executor.js';
+import {RouteChanged} from './hash-changed-action/route-changed.js';
+import {RouteChangedExecutor} from './hash-changed-action/route-changed-executor.js';
 import {GetRootFolder} from './get-root-folder-action/get-root-folder.js';
 import {GetRootFolderExecutor} from './get-root-folder-action/get-root-folder-executor.js';
 import {FetchCurrentFolderContent} from './fetch-current-folder-content-action/fetch-current-folder-content.js';
@@ -18,7 +18,7 @@ export class ActionFactory {
   constructor() {
     this._actions = new Map()
         .set(FetchCurrentFolder.typeName, new FetchCurrentFolderExecutor())
-        .set(HashChanged.typeName, new HashChangedExecutor())
+        .set(RouteChanged.typeName, new RouteChangedExecutor())
         .set(GetRootFolder.typeName, new GetRootFolderExecutor())
         .set(FetchCurrentFolderContent.typeName, new FetchCurrentFolderContentExecutor());
   }

@@ -59,9 +59,9 @@ module('FileList', (hooks) => {
       type: 'folder',
       itemsAmount: 4,
     }];
-    list.navigateEvent = (url) => {
-      assert.equal(url, id, 'Should get folder id to navigate event');
-    };
+    list.onFolderClicked((folderId) => {
+      assert.equal(folderId, id, 'Should get folder id to navigate event');
+    });
 
     const folderName = searchElement('folder-name', fixture);
     folderName.dispatchEvent(new Event('click'));

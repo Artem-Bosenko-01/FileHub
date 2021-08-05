@@ -97,7 +97,9 @@ fetchMock.get('/folder/:fold777/content', () => {
 
 fetchMock.get('/user', () => {
   return {
-    name: 'Artem Bosenko',
-    id: '4521a4sca',
+    user: {
+      name: 'Artem Bosenko',
+      id: '4521a4sca',
+    },
   };
 });

@@ -3,6 +3,7 @@ import {ServerError} from './server-error.js';
 import {UnprocessableEntityError} from './unprocessable-entity-error.js';
 import {ValidationErrorCase} from './validation-error-case.js';
 import {FileListItem} from '../../file-list-item.js';
+import {UserModel} from '../../user-model.js';
 
 /**
  * Allows you to interact with the main features of the application. Sends requests to backend.
@@ -115,7 +116,7 @@ export class ApiService {
 
     this._checkResponseOnClientOrServerError(response);
     const body = await response.json();
-    return new UserModel(body);
+    return new UserModel(body.user);
   }
 
   /**

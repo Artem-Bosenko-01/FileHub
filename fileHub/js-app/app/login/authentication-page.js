@@ -24,7 +24,6 @@ export class AuthenticationPage extends Component {
   }
 
   /**
-   * @inheritDoc
    * Adds api and title services to page
    * @param {ApiService} apiService
    * @param {TitleService}titleService

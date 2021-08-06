@@ -6,7 +6,23 @@ const registeredUsers = new Map()
     .set('vasya@kakk', '123654')
     .set('email.jj@jash.com', '654123');
 
-fetchMock.post('/login', (url, opts) => {
+const mockPostRequest = (url, handler) => {
+  fetchMock.post(url, (...args) => {
+    const response = handler(...args);
+    console.log(...args, response);
+    return response;
+  });
+};
+
+const mockGetRequest = (url, handler) => {
+  fetchMock.get(url, (...args) => {
+    const response = handler(...args);
+    console.log(...args, response);
+    return response;
+  }, {delay: 2000});
+};
+
+mockPostRequest('/login', (url, opts) => {
   const body = opts.body;
   const email = JSON.parse(body).email;
   const password = JSON.parse(body).password;
@@ -28,7 +44,7 @@ fetchMock.post('/login', (url, opts) => {
   }
 });
 
-fetchMock.post('/register', (url, opts) => {
+mockPostRequest('/register', (url, opts) => {
   const body = JSON.parse(opts.body);
   const email = body.email;
 
@@ -44,7 +60,7 @@ fetchMock.post('/register', (url, opts) => {
   }
 });
 
-fetchMock.get('/folder/:root-folder', () => {
+mockGetRequest('/folder/root-folder', (url, opts) => {
   return {
     folder: {
       id: 'root-folder',
@@ -55,7 +71,7 @@ fetchMock.get('/folder/:root-folder', () => {
   };
 });
 
-fetchMock.get('/folder/:fold777', () => {
+mockGetRequest('/folder/fold777', (url, opts) => {
   return {
     folder: {
       id: 'fold777',
@@ -67,7 +83,7 @@ fetchMock.get('/folder/:fold777', () => {
   };
 });
 
-fetchMock.get('/root-folder', () => {
+mockGetRequest('/root-folder', (url, opts) => {
   return {
     folder: {
       id: 'root-folder',
@@ -78,7 +94,7 @@ fetchMock.get('/root-folder', () => {
   };
 });
 
-fetchMock.get('/folder/:root-folder/content', () => {
+mockGetRequest('/folder/root-folder/content', (url, opts) => {
   return {
     items: [{id: 'scas8988', name: 'folder-8988', type: 'folder', itemsAmount: 45, parentFolderId: 'root-folder'},
       {id: 'ac787s', name: 'file-pdf', type: 'file', mimeType: 'pdf', size: 984948, parentFolderId: 'root-folder'},
@@ -89,7 +105,7 @@ fetchMock.get('/folder/:root-folder/content', () => {
   };
 });
 
-fetchMock.get('/folder/:fold777/content', () => {
+mockGetRequest('/folder/fold777/content', (url, opts) => {
   return {
     items: [],
   };

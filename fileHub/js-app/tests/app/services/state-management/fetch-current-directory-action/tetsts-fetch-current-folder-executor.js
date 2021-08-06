@@ -4,10 +4,9 @@ import {getSpy} from '../../../get-spy.js';
 
 const {module, test} = QUnit;
 
-module('Fetch current folder action executor', () => {
-  test('Should successfully apply executor', async (assert) => {
-    assert.expect(5);
-    const getFolderStep = 'Get folder by id request';
+module('FetchCurrentFolderExecutor', () => {
+  test('Should call expected mutators when API Service returns 200 code status', async (assert) => {
+    assert.expect(3);
     const id = 'folder';
     const folder = 'folderItem';
     const stateMock = {
@@ -20,7 +19,6 @@ module('Fetch current folder action executor', () => {
       apiService: {
         getFolder(folderId) {
           if (folderId === id) {
-            assert.step(getFolderStep);
             return folder;
           }
         },
@@ -30,16 +28,20 @@ module('Fetch current folder action executor', () => {
     const mutateSpy = getSpy();
 
     const executor = new FetchCurrentFolderExecutor();
-    await executor.apply({}, servicesMock, stateMock, mutateSpy);
+    await executor.apply({}, servicesMock, stateMock, mutateSpy.getMethod);
 
-    debugger;
+    assert.equal(mutateSpy.calls.length, 2, 'Should be called twice');
 
-    mutateSpy.getCalls();
-    assert.verifySteps(['CURRENT_FOLDER_FETCHING_STARTED', getFolderStep, 'CURRENT_FOLDER_FETCHING_COMPLETED']);
+    const firstCalled = mutateSpy.calls[0];
+    assert.equal(firstCalled, 'CURRENT_FOLDER_FETCHING_STARTED', 'Should get message');
+
+    const secondCalled = mutateSpy.calls[1];
+    assert.deepEqual(secondCalled, ['CURRENT_FOLDER_FETCHING_COMPLETED', {folder: folder}],
+        'Should get folder');
   });
 
-  test('Should fail apply executor', async (assert) => {
-    assert.expect(4);
+  test('Should call expected mutators when API Service throws an exception', async (assert) => {
+    assert.expect(3);
     const errorMessage = 'Fetching was failed';
     const stateMock = {
       locationParams: {
@@ -49,21 +51,23 @@ module('Fetch current folder action executor', () => {
 
     const servicesMock = {
       apiService: {
-        getFolder(folderId) {
+        getFolder() {
           throw new Error(errorMessage);
         },
       },
     };
 
-    const mutateSpy = (type, details) => {
-      assert.step(type);
-      if (type === 'CURRENT_FOLDER_FETCHING_FAILED') {
-        assert.equal(details.error, errorMessage, 'Should get error message after fetching fail');
-      }
-    };
+    const mutateSpy = getSpy();
     const executor = new FetchCurrentFolderExecutor();
-    await executor.apply({}, servicesMock, stateMock, mutateSpy);
+    await executor.apply({}, servicesMock, stateMock, mutateSpy.getMethod);
 
-    assert.verifySteps(['CURRENT_FOLDER_FETCHING_STARTED', 'CURRENT_FOLDER_FETCHING_FAILED']);
+    assert.equal(mutateSpy.calls.length, 2, 'Should be called twice');
+
+    const firstCalled = mutateSpy.calls[0];
+    assert.equal(firstCalled, 'CURRENT_FOLDER_FETCHING_STARTED', 'Should get message');
+
+    const secondCalled = mutateSpy.calls[1];
+    assert.deepEqual(secondCalled, ['CURRENT_FOLDER_FETCHING_FAILED', {error: errorMessage}],
+        'Should get error message');
   });
 });

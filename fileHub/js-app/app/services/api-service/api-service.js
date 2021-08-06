@@ -28,7 +28,6 @@ export class ApiService {
       body: JSON.stringify({email, password}),
     });
 
-
     this._checkResponseOnClientOrServerError(response);
     const responseBody = await response.json();
 
@@ -62,7 +61,7 @@ export class ApiService {
    * @returns {Promise<FileListItem, ClientServerError|ServerError>}
    */
   async getFolder(folderId) {
-    const response = await this._fetch(`/folder/:${folderId}`, {
+    const response = await this._fetch(`/folder/${folderId}`, {
       method: 'GET',
     });
 
@@ -93,7 +92,7 @@ export class ApiService {
    * @returns {Promise<FileListItem[], ClientServerError|ServerError>}
    */
   async getFolderContent(folderId) {
-    const response = await this._fetch(`/folder/:${folderId}/content`, {
+    const response = await this._fetch(`/folder/${folderId}/content`, {
       method: 'GET',
     });
 
@@ -113,7 +112,7 @@ export class ApiService {
    */
   async _fetch(url, init) {
     return this._window.fetch(url, init)
-        .then(async (response) => {
+        .then((response) => {
           return response;
         })
         .catch((error) => {

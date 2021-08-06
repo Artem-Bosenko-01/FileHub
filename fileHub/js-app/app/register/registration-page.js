@@ -39,7 +39,7 @@ export class RegistrationPage extends Component {
   /** @inheritDoc */
   _initNestedComponents() {
     const form = new RegistrationForm(this.rootElement);
-    form.navigateEvent = this._onRedirectToAuthenticationPage;
+    form.onNavigateByLink(this._onRedirectToAuthenticationPage);
     form.onSubmit(async (credentials) => {
       const {email, password} = credentials;
       try {

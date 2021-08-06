@@ -1,5 +1,6 @@
 import FetchCurrentFolderExecutor
   from '../../../../../app/services/state-management/fetch-current-directory-action/fetch-current-folder-executor.js';
+import {getSpy} from '../../../get-spy.js';
 
 const {module, test} = QUnit;
 
@@ -26,15 +27,14 @@ module('Fetch current folder action executor', () => {
       },
     };
 
-    const mutateSpy = (type, details) => {
-      assert.step(type);
-      if (type === 'CURRENT_FOLDER_FETCHING_COMPLETED') {
-        assert.strictEqual(details.folder, folder, 'Should get folder after successfully fetching');
-      }
-    };
+    const mutateSpy = getSpy();
+
     const executor = new FetchCurrentFolderExecutor();
     await executor.apply({}, servicesMock, stateMock, mutateSpy);
 
+    debugger;
+
+    mutateSpy.getCalls();
     assert.verifySteps(['CURRENT_FOLDER_FETCHING_STARTED', getFolderStep, 'CURRENT_FOLDER_FETCHING_COMPLETED']);
   });
 

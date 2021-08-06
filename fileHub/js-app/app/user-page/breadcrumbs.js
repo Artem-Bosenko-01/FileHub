@@ -6,10 +6,10 @@ import {Component} from '../components/component.js';
 export class Breadcrumbs extends Component {
   /**
    * Event for navigation through folders.
-   * @param {function(folderId: string)} event
+   * @param {function(folderId: string)} listener
    */
-  onFolderNameClick(event) {
-    this._onFolderNameClickEvent = event;
+  onFolderNameClick(listener) {
+    this._onFolderNameClickEvent = listener;
     this._render();
   }
 

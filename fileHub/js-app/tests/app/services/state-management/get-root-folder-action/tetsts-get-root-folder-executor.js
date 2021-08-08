@@ -1,35 +1,37 @@
 import {GetRootFolderExecutor}
   from '../../../../../app/services/state-management/get-root-folder-action/get-root-folder-executor.js';
+import {getSpy} from '../../../get-spy.js';
 
 const {module, test} = QUnit;
 
-module('Get root folder action executor', () => {
-  test('Should successfully apply executor', async (assert) => {
+module('GetRootFolderExecutor', () => {
+  test('Should call expected mutators when API Service returns 200 code status', async (assert) => {
     assert.expect(3);
-    const getRootFolderStep = 'Get root folder request';
     const rootFolder = 'root folder';
     const servicesMock = {
       apiService: {
         getRootFolder() {
-          assert.step(getRootFolderStep);
           return rootFolder;
         },
       },
     };
 
-    const mutateSpy = (type, details) => {
-      assert.step(type);
-      if (type === 'GET_ROOT_FOLDER_MUTATOR_FAILED') {
-        assert.equal(details.folder, rootFolder, 'Should get root folder after successfully fetching');
-      }
-    };
-    const executor = new GetRootFolderExecutor();
-    await executor.apply({}, servicesMock, {}, mutateSpy);
+    const mutateSpy = getSpy();
 
-    assert.verifySteps([getRootFolderStep, 'GET_ROOT_FOLDER_MUTATOR_COMPLETED']);
+    const executor = new GetRootFolderExecutor();
+    await executor.apply({}, servicesMock, {}, mutateSpy.getMethod);
+
+    assert.equal(mutateSpy.calls.length, 2, 'Should be called twice');
+
+    const firstCalled = mutateSpy.calls[0];
+    assert.equal(firstCalled, 'GET_ROOT_FOLDER_MUTATOR_STARTED', 'Should get message');
+
+    const secondCalled = mutateSpy.calls[1];
+    assert.deepEqual(secondCalled, ['GET_ROOT_FOLDER_MUTATOR_COMPLETED', {rootFolder: rootFolder}],
+        'Should get root folder');
   });
 
-  test('Should  fail apply executor', async (assert) => {
+  test('Should call expected mutators when API Service throws an exception', async (assert) => {
     const errorMessage = 'Fetching was failed';
     const servicesMock = {
       apiService: {
@@ -39,14 +41,18 @@ module('Get root folder action executor', () => {
       },
     };
 
-    const mutateSpy = (type, details) => {
-      assert.step(type);
-      if (type === 'GET_ROOT_FOLDER_MUTATOR_FAILED') {
-        assert.equal(details.error, errorMessage, 'Should get folder after successfully fetching');
-      }
-    };
+    const mutateSpy = getSpy();
+
     const executor = new GetRootFolderExecutor();
-    await executor.apply({}, servicesMock, {}, mutateSpy);
-    assert.verifySteps(['GET_ROOT_FOLDER_MUTATOR_FAILED']);
+    await executor.apply({}, servicesMock, {}, mutateSpy.getMethod);
+
+    assert.equal(mutateSpy.calls.length, 2, 'Should be called twice');
+
+    const firstCalled = mutateSpy.calls[0];
+    assert.equal(firstCalled, 'GET_ROOT_FOLDER_MUTATOR_STARTED', 'Should get message');
+
+    const secondCalled = mutateSpy.calls[1];
+    assert.deepEqual(secondCalled, ['GET_ROOT_FOLDER_MUTATOR_FAILED', {error: errorMessage}],
+        'Should get error message');
   });
 });

@@ -7,10 +7,10 @@ import {FileListItemView} from './file-list-item-view/file-list-item-view.js';
 export class FileList extends Component {
   /**
    * Event for navigation through folders.
-   * @param {function(folderId: string)} event
+   * @param {function(folderId: string)} listener
    */
-  onFolderClick(event) {
-    this._onFolderClickedEvent = event;
+  onFolderClick(listener) {
+    this._onFolderClickedEvent = listener;
     this._render();
   }
 

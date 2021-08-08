@@ -7,10 +7,10 @@ import {typeFullName, typeIcon} from './file-mime-types-list.js';
 export class FileListItemView extends Component {
   /**
    * Event for navigation through folders.
-   * @param {function(folderId: string)} event
+   * @param {function(folderId: string)} listener
    */
-  onFolderNameCLicked(event) {
-    this._onFolderNameCLickedEvent = event;
+  onFolderNameCLicked(listener) {
+    this._onFolderNameCLickedEvent = listener;
     this._render();
   }
 

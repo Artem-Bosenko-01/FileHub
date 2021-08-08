@@ -41,7 +41,7 @@ export class Application extends Component {
         })
         .addRoute('index', () => {
           new FileListPage(this.rootElement, titleService, stateManager)
-              .onLinkClick((folderId) => router.redirect(`index/${folderId}`));
+              .onNavigateToFolder((folderId) => router.redirect(`index/${folderId}`));
           stateManager.dispatch(new GetCurrentUser());
         })
         .addRoute('404', () => new ErrorPage(this.rootElement))

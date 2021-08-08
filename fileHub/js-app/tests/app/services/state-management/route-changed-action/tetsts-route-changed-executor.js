@@ -1,28 +1,27 @@
-import {RouteChangedExecutor}
-  from '../../../../../app/services/state-management/hash-changed-action/route-changed-executor.js';
+import {RouteChangedExecutor} from '../../../../../app/services/state-management/hash-changed-action/route-changed-executor.js';
+import {getSpy} from '../../../get-spy.js';
 
 const {module, test} = QUnit;
 
-module('Route changed action executor', () => {
-  test('Should successfully apply executor', async (assert) => {
-    assert.expect(4);
+module('RouteChangedExecutor', () => {
+  test('Should call expected mutators when API Service returns 200 code status', async (assert) => {
+    assert.expect(2);
     const staticParam = 'static';
     const dynamicParam = 'dynamic';
 
-    const mutateSpy = (type, details) => {
-      assert.step(type);
-      if (type === 'HASH_CHANGED_MUTATOR_COMPLETED') {
-        assert.equal(details.pageRoute, staticParam, 'Should get static param of url');
-        assert.strictEqual(details.dynamicPart.currentFolderId, dynamicParam, 'Should get current folder id');
-      }
-    };
+    const mutateSpy = getSpy();
 
     const actionInfoMock = {
       staticParam, dynamicParam,
     };
 
     const executor = new RouteChangedExecutor();
-    executor.apply(actionInfoMock, {}, {}, mutateSpy);
-    assert.verifySteps(['HASH_CHANGED_MUTATOR_COMPLETED']);
+    executor.apply(actionInfoMock, {}, {}, mutateSpy.getMethod);
+
+    assert.equal(mutateSpy.calls.length, 1, 'Should be called once');
+
+    const firstCalled = mutateSpy.calls[0];
+    assert.deepEqual(firstCalled, ['HASH_CHANGED_MUTATOR_COMPLETED',
+      {dynamicPart: {currentFolderId: dynamicParam}, pageRoute: staticParam}], 'Should get message');
   });
 });

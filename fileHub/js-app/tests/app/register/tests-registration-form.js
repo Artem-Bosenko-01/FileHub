@@ -64,9 +64,9 @@ module('RegistrationForm', (hooks) => {
   test('Should call event redirect to register page', (assert) => {
     const onClickLinkStep = 'Link was clicked';
     const form = new RegistrationForm(fixture);
-    form.navigateEvent = () => {
+    form.onNavigateByLink(() => {
       assert.step(onClickLinkStep);
-    };
+    });
 
     const component = searchElement('link', fixture);
     component.dispatchEvent(new Event('click'));

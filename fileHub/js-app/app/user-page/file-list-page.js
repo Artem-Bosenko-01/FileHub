@@ -50,12 +50,14 @@ export class FileListPage extends Component {
     const fileList = new FileList(fileListBodyElement);
     fileList.onFolderClick(this._onNavigateToFolder);
 
-    this._stateManager.onStateChanged('locationParams', ({locationParams}) => {
-      const currentFolderId = locationParams.currentFolderId;
-      if (!currentFolderId) {
+    this._stateManager.onStateChanged('locationParams', async (state) => {
+      const currentFolderId = state.locationParams.currentFolderId;
+      if (!currentFolderId && !state.rootFolder) {
         this._stateManager.dispatch(new GetRootFolder());
+      } else if (!currentFolderId && state.rootFolder) {
+        this._onNavigateToFolder(state.rootFolder.id);
       } else {
-        this._stateManager.dispatch(new FetchCurrentFolder());
+        await this._stateManager.dispatch(new FetchCurrentFolder());
         this._stateManager.dispatch(new FetchCurrentFolderContent());
       }
     });
@@ -78,6 +80,7 @@ export class FileListPage extends Component {
     });
 
     this._stateManager.onStateChanged('isCurrentFolderContentFetching', (state) => {
+      fileList.fileItems = null;
       fileList.loadingFolderContentState = state.isCurrentFolderContentFetching;
     });
 
@@ -88,7 +91,11 @@ export class FileListPage extends Component {
 
 
     this._stateManager.onStateChanged('rootFolder', (state) => {
-      this._onNavigateToFolder(state.rootFolder.id);
+      const rootFolderId = state.rootFolder.id;
+      breadcrumbs.rootPage = rootFolderId;
+      if (!state.locationParams.currentFolderId) {
+        this._onNavigateToFolder(rootFolderId);
+      }
     });
   }
 

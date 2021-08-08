@@ -111,13 +111,11 @@ export class ApiService {
    * @private
    */
   async _fetch(url, init) {
-    return this._window.fetch(url, init)
-        .then((response) => {
-          return response;
-        })
-        .catch((error) => {
-          throw new Error(error.message);
-        });
+    try {
+      return await this._window.fetch(url, init);
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 
   /**

@@ -6,6 +6,29 @@ const registeredUsers = new Map()
     .set('vasya@kakk', '123654')
     .set('email.jj@jash.com', '654123');
 
+const itemDatabase = {
+  items: [
+    {id: 'root-folder', name: 'root-folder', type: 'folder', itemsAmount: 45},
+    {id: 'scas8988', name: 'folder-8988', type: 'folder', itemsAmount: 45, parentFolderId: 'root-folder'},
+    {id: 'ac787s', name: 'file-pdf', type: 'file', mimeType: 'pdf', size: 984948, parentFolderId: 'root-folder'},
+    {id: 'rer554', name: 'file-video', type: 'file', mimeType: 'video', size: 7447474, parentFolderId: 'root-folder'},
+    {id: 'fold777', name: 'folder-1011', type: 'folder', itemsAmount: 7, parentFolderId: 'root-folder'},
+    {id: '595cz', name: 'folder-595', type: 'folder', itemsAmount: 0, parentFolderId: 'root-folder'},
+    {id: 'fold777', name: 'Inner_folder', type: 'folder', itemsAmount: 77, parentFolderId: 'root-folder'},
+    {id: 'sdv66sa', name: 'ARMYANE', type: 'folder', itemsAmount: 949, parentFolderId: 'fold777'},
+    {id: '74kgf', name: 'KAZAHI', type: 'folder', itemsAmount: 1488, parentFolderId: 'fold777'},
+  ],
+  getFolderById: function(id) {
+    return this.items.find((item) => item.id === id);
+  },
+  getFolderByParentId: function(parentId) {
+    return this.items.filter((item) => item.parentFolderId === parentId);
+  },
+  getRootFolder: function() {
+    return this.items.find((item) => !item.parentFolderId && item.type === 'folder');
+  },
+};
+
 const mockPostRequest = (url, handler) => {
   fetchMock.post(url, (...args) => {
     const response = handler(...args);
@@ -60,53 +83,19 @@ mockPostRequest('/register', (url, opts) => {
   }
 });
 
-mockGetRequest('/folder/root-folder', (url, opts) => {
-  return {
-    folder: {
-      id: 'root-folder',
-      name: 'ROOT',
-      type: 'folder',
-      itemsAmount: 45,
-    },
-  };
-});
-
-mockGetRequest('/folder/fold777', (url, opts) => {
-  return {
-    folder: {
-      id: 'fold777',
-      name: 'Inner_folder',
-      type: 'folder',
-      itemsAmount: 77,
-      parentFolderId: 'root-folder',
-    },
-  };
-});
-
 mockGetRequest('/root-folder', (url, opts) => {
-  return {
-    folder: {
-      id: 'root-folder',
-      name: 'root-folder',
-      type: 'folder',
-      itemsAmount: 45,
-    },
-  };
+  const rootFolder = itemDatabase.getRootFolder();
+  return {folder: rootFolder};
 });
 
-mockGetRequest('/folder/root-folder/content', (url, opts) => {
-  return {
-    items: [{id: 'scas8988', name: 'folder-8988', type: 'folder', itemsAmount: 45, parentFolderId: 'root-folder'},
-      {id: 'ac787s', name: 'file-pdf', type: 'file', mimeType: 'pdf', size: 984948, parentFolderId: 'root-folder'},
-      {id: 'rer554', name: 'file-video', type: 'file', mimeType: 'video', size: 7447474, parentFolderId: 'root-folder'},
-      {id: 'fold777', name: 'folder-1011', type: 'folder', itemsAmount: 7, parentFolderId: 'root-folder'},
-      {id: '595cz', name: 'folder-595', type: 'folder', itemsAmount: 0, parentFolderId: 'root-folder'},
-    ],
-  };
+mockGetRequest('express:/folder/:id', (url, opts) => {
+  const id = url.split('/')[2];
+  const folder = itemDatabase.getFolderById(id);
+  return {folder};
 });
 
-mockGetRequest('/folder/fold777/content', (url, opts) => {
-  return {
-    items: [],
-  };
+mockGetRequest('express:/folder/:id/content', (url, opts) => {
+  const parentId = url.split('/')[2];
+  const content = itemDatabase.getFolderByParentId(parentId);
+  return {items: content};
 });

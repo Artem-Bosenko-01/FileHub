@@ -100,7 +100,7 @@ mockGetRequest('express:/folder/:id/content', (url, opts) => {
   return {items: content};
 });
 
-fetchMock.get('/user', () => {
+mockGetRequest('/user', (url, opts) => {
   return {
     user: {
       name: 'Artem Bosenko',

@@ -11,13 +11,11 @@ export class ModalsService {
   }
 
   /**
-   * @returns {(function(): void)}
+   * Close active modal window.
    */
-  closeModalEvent() {
-    return () => {
-      const closeModalButton = this._container.querySelector(`[data-fh="close-button"]`);
-      closeModalButton && closeModalButton.dispatchEvent(new Event('click'));
-    };
+  close() {
+    const closeModalButton = this._container.querySelector(`[data-fh="close-button"]`);
+    closeModalButton && closeModalButton.dispatchEvent(new Event('click'));
   }
 
   /**

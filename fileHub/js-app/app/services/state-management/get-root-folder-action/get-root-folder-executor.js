@@ -13,6 +13,7 @@ export class GetRootFolderExecutor extends ActionExecutor {
    * @param {function} mutate
    */
   async apply(actionInfo, services, state, mutate) {
+    mutate(GET_ROOT_FOLDER_MUTATOR.FETCHING_STARTED);
     try {
       const rootFolder = await services.apiService.getRootFolder();
       mutate(GET_ROOT_FOLDER_MUTATOR.FETCHING_COMPLETED, {rootFolder});

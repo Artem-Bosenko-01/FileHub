@@ -25,12 +25,18 @@ export const mutator = (mutatorName, details, state) => {
         location: details.pageRoute,
         locationParams: details.dynamicPart,
       });
+    case GET_ROOT_FOLDER_MUTATOR.FETCHING_STARTED:
+      return Object.assign({}, state, {
+        isCurrentFolderFetching: true,
+      });
     case GET_ROOT_FOLDER_MUTATOR.FETCHING_COMPLETED:
       return Object.assign({}, state, {
+        isCurrentFolderFetching: false,
         rootFolder: details.rootFolder,
       });
     case GET_ROOT_FOLDER_MUTATOR.FETCHING_FAILED:
       return Object.assign({}, state, {
+        isCurrentFolderFetching: false,
         fetchingRootFolderErrorMessage: details.error,
       });
     case FETCH_CURRENT_FOLDER_CONTENT_MUTATOR.FETCHING_STARTED:

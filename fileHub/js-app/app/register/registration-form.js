@@ -20,11 +20,11 @@ export class RegistrationForm extends Component {
   }
 
   /**
-   * Adds an event, event for navigation through pages.
-   * @param {function()} event
+   * Adds an event, listener for navigation through pages.
+   * @param {function()} listener
    */
-  set navigateEvent(event) {
-    this._navigateEvent = event;
+  onNavigateByLink(listener) {
+    this._onNavigateListener = listener;
     this._render();
   }
 
@@ -34,7 +34,7 @@ export class RegistrationForm extends Component {
     this._form.formHeader = 'Sign Up to FileHub';
     this._form.buttonTitle = 'Sign Up';
     this._form.linkMessage = 'Already have an account?';
-    this._form.onLinkClick(this._navigateEvent);
+    this._form.onLinkClick(this._onNavigateListener);
 
     this._form.initInputs((container) => {
       this._emailInputField = new FormInputField(container);

@@ -6,10 +6,19 @@ import {Component} from '../components/component.js';
 export class Breadcrumbs extends Component {
   /**
    * Event for navigation through folders.
-   * @param {function(folderId: string)} event
+   * @param {function(folderId: string)} listener
    */
-  onFolderNameClick(event) {
-    this._onFolderNameClickEvent = event;
+  onFolderNameClick(listener) {
+    this._onFolderNameClickEvent = listener;
+    this._render();
+  }
+
+  /**
+   * Event for navigation through folders.
+   * @param {string} id
+   */
+  set rootPage(id) {
+    this._rootFolderId = id;
     this._render();
   }
 
@@ -44,7 +53,11 @@ export class Breadcrumbs extends Component {
   _addEventListeners() {
     const rootFolderElement = this._getElement('root-folder');
     rootFolderElement && rootFolderElement.addEventListener('click', (event) => {
-      this._onFolderNameClickEvent('');
+      if (this._rootFolderId) {
+        this._onFolderNameClickEvent(this._rootFolderId);
+      } else {
+        this._onFolderNameClickEvent('');
+      }
       event.preventDefault();
     });
 

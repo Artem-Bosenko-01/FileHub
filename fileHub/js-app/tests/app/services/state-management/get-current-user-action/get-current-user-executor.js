@@ -1,38 +1,38 @@
 import GetCurrentUserExecutor
   from '../../../../../app/services/state-management/get-current-user-action/get-current-user-executor.js';
+import {getSpy} from '../../../get-spy.js';
 
 const {module, test} = QUnit;
 
 module('Get current user action executor', () => {
   test('Should successfully apply executor', async (assert) => {
-    assert.expect(5);
-    const getCurrentUserRequest = 'Get current user request';
+    assert.expect(3);
     const currentUser = 'current user data';
 
     const servicesMock = {
       apiService: {
         getCurrentUser() {
-          assert.step(getCurrentUserRequest);
           return currentUser;
         },
       },
     };
 
-    const mutateSpy = (type, details) => {
-      assert.step(type);
-      if (type === 'GET_CURRENT_USER_FETCHING_COMPLETED') {
-        assert.strictEqual(details.user, currentUser, 'Should get current user data');
-      }
-    };
+    const mutateSpy = getSpy();
     const executor = new GetCurrentUserExecutor();
-    await executor.apply({}, servicesMock, {}, mutateSpy);
+    await executor.apply({}, servicesMock, {}, mutateSpy.getMethod);
 
-    assert.verifySteps(['GET_CURRENT_USER_FETCHING_STARTED', getCurrentUserRequest,
-      'GET_CURRENT_USER_FETCHING_COMPLETED']);
+    assert.equal(mutateSpy.calls.length, 2, 'Should be called twice');
+
+    const firstCalled = mutateSpy.calls[0];
+    assert.equal(firstCalled, 'GET_CURRENT_USER_FETCHING_STARTED', 'Should get message');
+
+    const secondCalled = mutateSpy.calls[1];
+    assert.deepEqual(secondCalled, ['GET_CURRENT_USER_FETCHING_COMPLETED', {user: currentUser}],
+        'Should get user data');
   });
 
   test('Should fail apply executor', async (assert) => {
-    assert.expect(4);
+    assert.expect(3);
     const errorMessage = 'error message';
 
     const servicesMock = {
@@ -43,15 +43,17 @@ module('Get current user action executor', () => {
       },
     };
 
-    const mutateSpy = (type, details) => {
-      assert.step(type);
-      if (type === 'GET_CURRENT_USER_FETCHING_FAILED') {
-        assert.strictEqual(details.error, errorMessage, 'Should get error message after fetching fail');
-      }
-    };
+    const mutateSpy = getSpy();
     const executor = new GetCurrentUserExecutor();
-    await executor.apply({}, servicesMock, {}, mutateSpy);
+    await executor.apply({}, servicesMock, {}, mutateSpy.getMethod);
 
-    assert.verifySteps(['GET_CURRENT_USER_FETCHING_STARTED', 'GET_CURRENT_USER_FETCHING_FAILED']);
+    assert.equal(mutateSpy.calls.length, 2, 'Should be called twice');
+
+    const firstCalled = mutateSpy.calls[0];
+    assert.equal(firstCalled, 'GET_CURRENT_USER_FETCHING_STARTED', 'Should get message');
+
+    const secondCalled = mutateSpy.calls[1];
+    assert.deepEqual(secondCalled, ['GET_CURRENT_USER_FETCHING_FAILED', {error: errorMessage}],
+        'Should get error message');
   });
 });

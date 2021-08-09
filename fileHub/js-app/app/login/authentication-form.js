@@ -12,18 +12,18 @@ import {UserData} from '../user-data.js';
 export class AuthenticationForm extends Component {
   /**
    * Adds an event, which will be called on submitting form.
-   * @param {function} event
+   * @param {function} listener
    */
-  onSubmit(event) {
-    this._onSubmitAuthenticationEvent = event;
+  onSubmit(listener) {
+    this._onSubmitAuthenticationEvent = listener;
   }
 
   /**
    * Adds an event, event for navigation through pages.
-   * @param {function} event
+   * @param {function} listener
    */
-  set navigateEvent(event) {
-    this._navigateEvent = event;
+  onNavigateByLink(listener) {
+    this._onNavigateListener = listener;
     this._render();
   }
 
@@ -61,7 +61,7 @@ export class AuthenticationForm extends Component {
     this._form.formHeader = 'Sign In to FileHub';
     this._form.buttonTitle = 'Sign In';
     this._form.linkMessage = 'Didn\'t have an account yet?';
-    this._form.onLinkClick(this._navigateEvent);
+    this._form.onLinkClick(this._onNavigateListener);
 
     this._form.initInputs((container) => {
       this._emailInputField = new FormInputField(container);

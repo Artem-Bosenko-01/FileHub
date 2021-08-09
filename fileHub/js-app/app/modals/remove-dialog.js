@@ -47,12 +47,7 @@ export class RemoveDialogWindow extends Component {
       modalWindow.innerTextForBody = `Are you sure want to delete "${this._removingModel.name}" item?`;
     }
     modalWindow.isLoading = this._isLoadingState;
-    modalWindow.onCloseButtonCLick(() => {
-      const dialog = this._getElement('dialog');
-      const body = this._getElement('modal-body');
-      body.remove();
-      dialog.remove();
-    });
+    modalWindow.onCloseButtonCLick(() => this.rootElement.remove());
     modalWindow.initSubmitButton((parentElement) => {
       const button = new Button(parentElement);
       button.buttonName = 'delete-button';
@@ -71,6 +66,6 @@ export class RemoveDialogWindow extends Component {
 
   /** @inheritDoc */
   get _markup() {
-    return `<div><div data-fh="dialog" class="fade"></div></div>`;
+    return `<div data-fh="dialog" class="fade"></div>`;
   }
 }

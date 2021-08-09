@@ -69,7 +69,6 @@ export class FileListPage extends Component {
           modalWindow.deletingInProgress = true;
         } else {
           modalWindow.deletingInProgress = false;
-          debugger;
           modalsService.close();
         }
       });

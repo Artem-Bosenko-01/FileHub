@@ -7,8 +7,9 @@ import {SearchBar} from './search-bar.js';
 import {FileList} from './file-list.js';
 import {GetRootFolder} from '../services/state-management/get-root-folder-action/get-root-folder.js';
 import FetchCurrentFolder from '../services/state-management/fetch-current-directory-action/fetch-current-folder.js';
-import {FetchCurrentFolderContent} from '../services/state-management/fetch-current-folder-content-action/fetch-current-folder-content.js';
 import GetCurrentUser from '../services/state-management/get-current-user-action/get-current-user.js';
+import {FetchCurrentFolderContent}
+  from '../services/state-management/fetch-current-folder-content-action/fetch-current-folder-content.js';
 
 /**
  * Main page for authenticated user, that contains information about him and his saved files.
@@ -101,7 +102,6 @@ export class FileListPage extends Component {
 
     this._stateManager.onStateChanged('fetchingCurrentUserDetailsErrorMessage',
         (state) => {
-          userDetails.userFullName = '';
           userDetails.errorMessage = state.fetchingCurrentUserDetailsErrorMessage;
         });
 

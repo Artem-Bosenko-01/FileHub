@@ -39,15 +39,15 @@ export class UserDetails extends Component {
               </li>`;
     }
 
-    if (this._userFullName) {
-      return `<li data-fh="user-full-name"><span class="glyphicon glyphicon-user"></span> ${this._userFullName}</li>`;
-    }
-
     if (this._errorMessage) {
       return `<li data-fh="user-full-name">
                  <span class="error-message"><span class="glyphicon glyphicon-exclamation-sign">
                  </span> Can't load user data.</span>
               </li>`;
+    }
+
+    if (this._userFullName) {
+      return `<li data-fh="user-full-name"><span class="glyphicon glyphicon-user"></span> ${this._userFullName}</li>`;
     }
 
     return `<div></div>`;

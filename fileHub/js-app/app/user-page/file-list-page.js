@@ -126,7 +126,6 @@ export class FileListPage extends Component {
 
     this._stateManager.onStateChanged('fetchingCurrentUserDetailsErrorMessage',
         (state) => {
-          userDetails.userFullName = '';
           userDetails.errorMessage = state.fetchingCurrentUserDetailsErrorMessage;
         });
 

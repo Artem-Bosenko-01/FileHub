@@ -25,7 +25,7 @@ export class Application extends Component {
     const errorPageRoute = '404';
     const apiService = new ApiService(window);
     const titleService = new TitleService('FileHub', document);
-    const configuration = new RoutingConfiguration('login');
+    const configuration = new RoutingConfiguration(logInRoute);
     const router = new Router(window);
     const factory = new ActionFactory();
     const modalsService = new ModalsService(this.rootElement);

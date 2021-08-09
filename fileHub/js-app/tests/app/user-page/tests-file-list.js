@@ -49,7 +49,7 @@ module('FileList', (hooks) => {
     assert.ok(searchElement('loading-symbol', fixture), 'Should render loading state symbol');
   });
 
-  test('Should add navigate event to file list', (assert) => {
+  test('Should call navigate listener at file list', (assert) => {
     const currentDirectoryName = 'Directory';
     const id = 'id';
     const list = new FileList(fixture);

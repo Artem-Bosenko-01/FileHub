@@ -38,13 +38,13 @@ module('Breadcrumbs', (hooks) => {
   test('Should render breadcrumbs with loading state', (assert) => {
     assert.expect(2);
     const breadcrumbs = new Breadcrumbs(fixture);
-    breadcrumbs.loadingCurrentFolderDataState = true;
+    breadcrumbs.loading = true;
 
     assert.ok(searchElement('breadcrumbs', fixture), 'Should render breadcrumbs');
     assert.ok(searchElement('loading-symbol', fixture), 'Should render loading symbol at breadcrumbs');
   });
 
-  test('Should add navigate event to breadcrumbs', (assert) => {
+  test('Should call navigate listener at breadcrumbs', (assert) => {
     const currentDirectoryName = 'Directory';
     const parentId = 'as54';
     const breadcrumbs = new Breadcrumbs(fixture);

@@ -18,7 +18,7 @@ import {FetchCurrentFolderContent}
  */
 export class FileListPage extends Component {
   /**
-   * Event for redirecting a user to folder.
+   * Listener for redirecting a user to folder.
    * @param {function(folderId: string)} listener
    */
   onNavigateToFolder(listener) {
@@ -95,7 +95,7 @@ export class FileListPage extends Component {
     });
 
     this._stateManager.onStateChanged('isCurrentFolderFetching', (state) => {
-      breadcrumbs.loadingCurrentFolderDataState = state.isCurrentFolderFetching;
+      breadcrumbs.loading = state.isCurrentFolderFetching;
     });
 
     this._stateManager.onStateChanged('fetchingCurrentFolderErrorMessage', (state) => {
@@ -109,7 +109,7 @@ export class FileListPage extends Component {
 
     this._stateManager.onStateChanged('isCurrentFolderContentFetching', (state) => {
       fileList.fileItems = null;
-      fileList.loadingFolderContentState = state.isCurrentFolderContentFetching;
+      fileList.loading = state.isCurrentFolderContentFetching;
     });
 
     this._stateManager.onStateChanged('fetchingCurrentFolderContentErrorMessage', (state) => {
@@ -121,8 +121,9 @@ export class FileListPage extends Component {
       userDetails.userFullName = state.userData.name;
     });
 
-    this._stateManager.onStateChanged('isCurrentUserInfoFetching',
-        (state) => userDetails.loadingFetchingUserData = state.isCurrentUserInfoFetching);
+    this._stateManager.onStateChanged('isCurrentUserInfoFetching', (state) => {
+      userDetails.loading = state.isCurrentUserInfoFetching;
+    });
 
     this._stateManager.onStateChanged('fetchingCurrentUserDetailsErrorMessage',
         (state) => {

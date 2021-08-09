@@ -17,7 +17,7 @@ export class UserDetails extends Component {
    *
    * @param {boolean} value
    */
-  set loadingFetchingUserData(value) {
+  set loading(value) {
     this._loadingFetchingUserData = value;
     this._render();
   }

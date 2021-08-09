@@ -30,7 +30,7 @@ module('RegistrationForm', (hooks) => {
     assert.equal(inputs.length, 3, 'Should be 3 inputs field');
   });
 
-  test('Should call event after successful validation form', (assert) => {
+  test('Should call listener after successful validation form', (assert) => {
     assert.expect(3);
     const done = assert.async();
     const passwordValue = '123456';
@@ -61,7 +61,7 @@ module('RegistrationForm', (hooks) => {
     searchElement('form', fixture).dispatchEvent(new Event('submit'));
   });
 
-  test('Should call event redirect to register page', (assert) => {
+  test('Should call listener redirect to register page', (assert) => {
     const onClickLinkStep = 'Link was clicked';
     const form = new RegistrationForm(fixture);
     form.onNavigateByLink(() => {

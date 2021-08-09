@@ -7,20 +7,20 @@ import {RegistrationForm} from './registration-form.js';
  */
 export class RegistrationPage extends Component {
   /**
-   * The event that calls when a user successfully registered in the FileHub application.
-   * @param {function()} event
+   * The listener that calls when a user successfully registered in the FileHub application.
+   * @param {function()} listener
    */
-  onRegistered(event) {
-    this._onRegisteredEvent = event;
+  onRegistered(listener) {
+    this._onRegisteredEvent = listener;
     this._render();
   }
 
   /**
-   * Adds an event, event for navigation through pages.
-   * @param {function()} event
+   * Adds an listener, listener for navigation through pages.
+   * @param {function()} listener
    */
-  onRedirectToAuthenticationPage(event) {
-    this._onRedirectToAuthenticationPage = event;
+  onRedirectToAuthenticationPage(listener) {
+    this._onRedirectToAuthenticationPage = listener;
     this._render();
   }
 

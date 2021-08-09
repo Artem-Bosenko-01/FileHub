@@ -34,7 +34,7 @@ test('Should create form with input field', (assert) => {
   assert.ok(searchElement('input-id', fixture), 'Should create input field in form');
 });
 
-test('Should check event calls in form ', (assert) => {
+test('Should check listener calls in form ', (assert) => {
   const step = 'step';
   const form = new Form(fixture);
   form.onSubmit(() => assert.step(step));

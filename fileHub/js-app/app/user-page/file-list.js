@@ -36,7 +36,7 @@ export class FileList extends Component {
    *
    * @param {boolean} value
    */
-  set loadingFolderContentState(value) {
+  set loading(value) {
     this._isLoadingState = value;
     this._render();
   }

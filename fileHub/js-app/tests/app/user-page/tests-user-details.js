@@ -31,7 +31,7 @@ module('UserDetails', (hooks) => {
 
   test('Should render panel with loading symbol state', (assert) => {
     const details = new UserDetails(fixture);
-    details.loadingFetchingUserData = true;
+    details.loading = true;
 
     assert.ok(searchElement('loading-symbol', fixture), 'Should render loading symbol');
   });

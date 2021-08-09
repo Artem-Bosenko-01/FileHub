@@ -69,7 +69,7 @@ mockPostRequest('/login', (url, opts) => {
       return {token: 'AUTH_TOKEN'};
     } else {
       return {
-        status: 400,
+        status: 401,
         body: {message: 'Incorrect password'},
       };
     }
@@ -116,10 +116,8 @@ mockGetRequest('express:/folder/:id/content', (url, opts) => {
 
 mockGetRequest('/user', (url, opts) => {
   return {
-    user: {
-      name: 'Artem Bosenko',
-      id: '4521a4sca',
-    },
+    name: 'Artem Bosenko',
+    id: '4521a4sca',
   };
 });
 

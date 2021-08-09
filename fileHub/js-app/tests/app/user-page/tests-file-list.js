@@ -43,13 +43,13 @@ module('FileList', (hooks) => {
   test('Should render file list with loading state', (assert) => {
     assert.expect(2);
     const list = new FileList(fixture);
-    list.loadingFolderContentState = true;
+    list.loading = true;
 
     assert.ok(searchElement('fileListItems', fixture), 'Should create file list');
     assert.ok(searchElement('loading-symbol', fixture), 'Should render loading state symbol');
   });
 
-  test('Should add navigate event to file list', (assert) => {
+  test('Should call navigate listener at file list', (assert) => {
     const currentDirectoryName = 'Directory';
     const id = 'id';
     const list = new FileList(fixture);

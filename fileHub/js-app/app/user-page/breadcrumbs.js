@@ -5,7 +5,7 @@ import {Component} from '../components/component.js';
  */
 export class Breadcrumbs extends Component {
   /**
-   * Event for navigation through folders.
+   * Listener for navigation through folders.
    * @param {function(folderId: string)} listener
    */
   onFolderNameClick(listener) {
@@ -14,7 +14,7 @@ export class Breadcrumbs extends Component {
   }
 
   /**
-   * Event for navigation through folders.
+   * Id of root folder.
    * @param {string} id
    */
   set rootPage(id) {
@@ -35,7 +35,7 @@ export class Breadcrumbs extends Component {
    *
    * @param {boolean} value
    */
-  set loadingCurrentFolderDataState(value) {
+  set loading(value) {
     this._isLoadingState = value;
     this._render();
   }

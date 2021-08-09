@@ -31,7 +31,7 @@ module('AuthenticationForm', (hooks) => {
     assert.equal(inputs.length, 2, 'Should be 2 inputs field');
   });
 
-  test('Should call event after successful validation form', (assert) => {
+  test('Should call listener after successful validation form', (assert) => {
     assert.expect(3);
     const done = assert.async();
     const form = new AuthenticationForm(fixture);
@@ -56,7 +56,7 @@ module('AuthenticationForm', (hooks) => {
     component.dispatchEvent(new Event('submit'));
   });
 
-  test('Should call event redirect to register page', (assert) => {
+  test('Should call listener redirect to register page', (assert) => {
     const onClickLinkStep = 'Link was clicked';
     const form = new AuthenticationForm(fixture);
     form.onNavigateByLink(() => {

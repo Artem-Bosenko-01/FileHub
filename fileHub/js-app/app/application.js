@@ -2,11 +2,16 @@ import {Component} from './components/component.js';
 import {AuthenticationPage} from './login/authentication-page.js';
 import {ApiService} from './services/api-service/api-service.js';
 import {Router} from './services/router.js';
-import {RoutingConfiguration} from './services/routing-configuration.js';
 import {RegistrationPage} from './register/registration-page.js';
 import {ErrorPage} from './ErrorPage.js';
 import {TitleService} from './services/title-service.js';
 import {FileListPage} from './user-page/file-list-page.js';
+import {StateManager} from './services/state-management/state-manager.js';
+import {ActionFactory} from './services/state-management/action-factory.js';
+import {RouteChanged} from './services/state-management/hash-changed-action/route-changed.js';
+import {RoutingConfiguration} from './services/routing-configuration.js';
+import {mutator} from './services/state-management/mutator/mutator.js';
+import {GetRootFolder} from './services/state-management/get-root-folder-action/get-root-folder.js';
 
 /**
  * Entry point of FileHub application.
@@ -14,27 +19,49 @@ import {FileListPage} from './user-page/file-list-page.js';
 export class Application extends Component {
   /** @inheritDoc */
   _initNestedComponents() {
+    const indexRoute = 'index';
+    const logInRoute = 'login';
+    const registerRoute = 'register';
+    const errorPageRoute = '404';
     const apiService = new ApiService(window);
     const titleService = new TitleService('FileHub', document);
-    const configuration = new RoutingConfiguration('login')
-        .addRoute('login', () => {
-          this._clearContainer();
-          new AuthenticationPage(this.rootElement, apiService, titleService);
+    const configuration = new RoutingConfiguration('login');
+    const router = new Router(window);
+    const factory = new ActionFactory();
+    const stateManager = new StateManager({}, {apiService}, factory, mutator);
+
+    configuration.onRedirect((route) => router.redirect(route));
+
+    configuration
+        .addRoute(logInRoute, () => {
+          const page = new AuthenticationPage(this.rootElement, apiService, titleService);
+          page.onLoggedIn(() => router.redirect(indexRoute));
+          page.onRedirectToRegistrationPage(() => router.redirect(registerRoute));
         })
-        .addRoute('register', () => {
-          this._clearContainer();
-          new RegistrationPage(this.rootElement, apiService, titleService);
+        .addRoute(registerRoute, () => {
+          const page = new RegistrationPage(this.rootElement, apiService, titleService);
+          page.onRegistered(() => router.redirect(logInRoute));
+          page.onRedirectToAuthenticationPage(() => router.redirect(logInRoute));
         })
-        .addRoute('404', () => {
-          this._clearContainer();
-          new ErrorPage(this.rootElement);
+        .addRoute(indexRoute, () => {
+          new FileListPage(this.rootElement, titleService, stateManager)
+              .onNavigateToFolder((folderId) => router.redirect(`${indexRoute}/${folderId}`));
+          stateManager.dispatch(new GetRootFolder());
         })
-        .addRoute('index', () => {
-          this._clearContainer();
-          new FileListPage(this.rootElement, apiService, titleService);
-        });
-    configuration.notFoundRoute = '404';
-    new Router(configuration, window);
+        .addRoute(errorPageRoute, () => new ErrorPage(this.rootElement))
+        .notFoundRoute = errorPageRoute;
+
+    router.onRouteChanged((route) => {
+      stateManager.dispatch(new RouteChanged(route));
+    });
+
+    stateManager.onStateChanged('location', ({location}) => {
+      this._clearContainer();
+      configuration.getPageCreatorByRoute(location)();
+    });
+
+    const locationRoute = router.route;
+    stateManager.dispatch(new RouteChanged(locationRoute));
   }
 
   /**

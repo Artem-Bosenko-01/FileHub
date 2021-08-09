@@ -6,7 +6,46 @@ const registeredUsers = new Map()
     .set('vasya@kakk', '123654')
     .set('email.jj@jash.com', '654123');
 
-fetchMock.post('/login', (url, opts) => {
+const itemDatabase = {
+  items: [
+    {id: 'root-folder', name: 'root-folder', type: 'folder', itemsAmount: 45},
+    {id: 'scas8988', name: 'folder-8988', type: 'folder', itemsAmount: 45, parentFolderId: 'root-folder'},
+    {id: 'ac787s', name: 'file-pdf', type: 'file', mimeType: 'pdf', size: 984948, parentFolderId: 'root-folder'},
+    {id: 'rer554', name: 'file-video', type: 'file', mimeType: 'video', size: 7447474, parentFolderId: 'root-folder'},
+    {id: 'fold777', name: 'folder-1011', type: 'folder', itemsAmount: 7, parentFolderId: 'root-folder'},
+    {id: '595cz', name: 'folder-595', type: 'folder', itemsAmount: 0, parentFolderId: 'root-folder'},
+    {id: 'fold777', name: 'Inner_folder', type: 'folder', itemsAmount: 77, parentFolderId: 'root-folder'},
+    {id: 'sdv66sa', name: 'ARMYANE', type: 'folder', itemsAmount: 949, parentFolderId: 'fold777'},
+    {id: '74kgf', name: 'KAZAHI', type: 'folder', itemsAmount: 1488, parentFolderId: 'fold777'},
+  ],
+  getFolderById: function(id) {
+    return this.items.find((item) => item.id === id);
+  },
+  getFolderByParentId: function(parentId) {
+    return this.items.filter((item) => item.parentFolderId === parentId);
+  },
+  getRootFolder: function() {
+    return this.items.find((item) => !item.parentFolderId && item.type === 'folder');
+  },
+};
+
+const mockPostRequest = (url, handler) => {
+  fetchMock.post(url, (...args) => {
+    const response = handler(...args);
+    console.log(...args, response);
+    return response;
+  });
+};
+
+const mockGetRequest = (url, handler) => {
+  fetchMock.get(url, (...args) => {
+    const response = handler(...args);
+    console.log(...args, response);
+    return response;
+  }, {delay: 2000});
+};
+
+mockPostRequest('/login', (url, opts) => {
   const body = opts.body;
   const email = JSON.parse(body).email;
   const password = JSON.parse(body).password;
@@ -16,7 +55,7 @@ fetchMock.post('/login', (url, opts) => {
       return {token: 'AUTH_TOKEN'};
     } else {
       return {
-        status: 400,
+        status: 401,
         body: {message: 'Incorrect password'},
       };
     }
@@ -28,41 +67,35 @@ fetchMock.post('/login', (url, opts) => {
   }
 });
 
-fetchMock.post('/register', (url, opts) => {
-  const body = opts.body;
-  const email = JSON.parse(body).email;
-  const password = JSON.parse(body).password;
+mockPostRequest('/register', (url, opts) => {
+  const body = JSON.parse(opts.body);
+  const email = body.email;
 
   if (registeredUsers.has(email)) {
     return {
-      status: 400,
-      body: {message: `User with email: «${email}» already existed`},
+      status: 422,
+      body: {errors: [{field: 'email', message: `User with this email already existed`}]},
     };
   } else {
     return {
-      email: email,
-      password: password,
+      status: 200,
     };
   }
 });
 
-/* fetchMock.post('/register', () => {
-  return {
-    status: 422,
-    body: [
-      {field: 'email', message: 'this is message'},
-      {field: 'password', message: 'this is password message'},
-    ],
-  };
-});*/
-
-/*
-fetchMock.post('/register', () => {
-  return {
-    status: 500,
-    body: {
-      message: 'This is server error',
-    },
-  };
+mockGetRequest('/root-folder', (url, opts) => {
+  const rootFolder = itemDatabase.getRootFolder();
+  return {folder: rootFolder};
 });
-*/
+
+mockGetRequest('express:/folder/:id', (url, opts) => {
+  const id = url.split('/')[2];
+  const folder = itemDatabase.getFolderById(id);
+  return {folder};
+});
+
+mockGetRequest('express:/folder/:id/content', (url, opts) => {
+  const parentId = url.split('/')[2];
+  const content = itemDatabase.getFolderByParentId(parentId);
+  return {items: content};
+});

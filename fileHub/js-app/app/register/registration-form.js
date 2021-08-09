@@ -12,11 +12,20 @@ import {UserData} from '../user-data.js';
  */
 export class RegistrationForm extends Component {
   /**
-   * Adds some event, which will be called on submitting form.
-   * @param {function} event
+   * Adds some listener, which will be called on submitting form.
+   * @param {function(UserData)} listener
    */
-  onSubmit(event) {
-    this._onSubmitAuthenticationEvent = event;
+  onSubmit(listener) {
+    this._onSubmitAuthenticationEvent = listener;
+  }
+
+  /**
+   * Adds an event, listener for navigation through pages.
+   * @param {function()} listener
+   */
+  onNavigateByLink(listener) {
+    this._onNavigateListener = listener;
+    this._render();
   }
 
   /** @inheritDoc */
@@ -25,7 +34,7 @@ export class RegistrationForm extends Component {
     this._form.formHeader = 'Sign Up to FileHub';
     this._form.buttonTitle = 'Sign Up';
     this._form.linkMessage = 'Already have an account?';
-    this._form.linkReference = '#login';
+    this._form.onLinkClick(this._onNavigateListener);
 
     this._form.initInputs((container) => {
       this._emailInputField = new FormInputField(container);
@@ -48,7 +57,7 @@ export class RegistrationForm extends Component {
       this._confirmPasswordInputField.onChange((value) => this._confipasswordInputValue = value);
     });
 
-    this._form.onSubmit = async () => {
+    this._form.onSubmit(async () => {
       this._emailInputField.cleanErrorMessage();
       this._passwordInputField.cleanErrorMessage();
       this._confirmPasswordInputField.cleanErrorMessage();
@@ -71,7 +80,7 @@ export class RegistrationForm extends Component {
         this._onSubmitAuthenticationEvent && this._onSubmitAuthenticationEvent(
             new UserData(this._emailInputValue, this._passwordInputValue));
       }
-    };
+    });
   }
 
   /**

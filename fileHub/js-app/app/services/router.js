@@ -4,44 +4,36 @@
 export class Router {
   /**
    * @constructor
-   * @param {RoutingConfiguration} configuration
    * @param {any} window
    */
-  constructor(configuration, window) {
-    this._routingConfiguration = configuration;
+  constructor(window) {
     this._window = window;
-    const hash = this._window.location.hash;
-    this._window.addEventListener('hashchange', () => {
-      this._showPage(this._window.location.hash);
+  }
+
+  /**
+   * Action that calls when route in url changes.
+   * @param {function(route: string)} listener
+   */
+  onRouteChanged(listener) {
+    this._window.addEventListener('hashchange', (event) => {
+      const url = event.target.location.hash.substring(1);
+      listener(url);
     });
-
-    this._showPage(hash);
   }
 
   /**
-   * Calls page creator from configuration by hash.
-   * @param {string} hash
-   * @private
+   * Route that means where user located now.
+   * @returns {string}
    */
-  _showPage(hash) {
-    if (!hash || hash === '#') {
-      const defaultHash = this._routingConfiguration.defaultRoute;
-      hash = this._redirect(defaultHash);
-    }
-    const hashBody = hash.substring(1);
-    const pageCreator = this._routingConfiguration.getPageByHash(hashBody);
-    pageCreator();
+  get route() {
+    return this._window.location.hash.substring(1);
   }
 
   /**
-   * Sets necessary address to hash.
-   * @param {string} hash
-   * @returns {string} new route
-   * @private
+   * Sets necessary address to route.
+   * @param {string} route
    */
-  _redirect(hash) {
-    const newHash = `#${hash}`;
-    this._window.location.hash = newHash;
-    return newHash;
+  redirect(route) {
+    this._window.location.hash = route;
   }
 }

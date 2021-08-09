@@ -5,9 +5,27 @@ import {typeFullName, typeIcon} from './file-mime-types-list.js';
  * Line from {@link FileList folder content list}.
  */
 export class FileListItemView extends Component {
+  /**
+   * Listener for navigation through folders.
+   * @param {function(folderId: string)} listener
+   */
+  onFolderNameCLicked(listener) {
+    this._onFolderNameCLickedEvent = listener;
+    this._render();
+  }
+
   /** @inheritDoc */
   _init(itemDto) {
     this._item = itemDto;
+  }
+
+  /** @inheritDoc */
+  _addEventListeners() {
+    const folderNameElement = this._getElement('folder-name');
+    folderNameElement && folderNameElement.addEventListener('click', (event) => {
+      this._onFolderNameCLickedEvent(this._item.id);
+      event.preventDefault();
+    });
   }
 
   /**
@@ -16,7 +34,7 @@ export class FileListItemView extends Component {
    * @returns {string}
    */
   _getFolderMarker() {
-    if (this._item.itemType === 'folder') {
+    if (this._item.type === 'folder') {
       return '<span class="glyphicon glyphicon-chevron-right"></span>';
     }
     return '';
@@ -28,10 +46,10 @@ export class FileListItemView extends Component {
    * @returns {string}
    */
   _getItemName() {
-    if (this._item.itemType === 'folder') {
-      return `<a data-fh="folder-name" class="highlight" href="">${this._item.itemName}</a>`;
+    if (this._item.type === 'folder') {
+      return `<a data-fh="folder-name" class="highlight" href="">${this._item.name}</a>`;
     } else {
-      return this._item.itemName;
+      return this._item.name;
     }
   }
 
@@ -41,10 +59,10 @@ export class FileListItemView extends Component {
    * @returns {string}
    */
   _getItemIcon() {
-    if (this._item.itemType === 'folder') {
+    if (this._item.type === 'folder') {
       return 'glyphicon-folder-close';
     } else {
-      return typeIcon(this._item.itemMimeType);
+      return typeIcon(this._item.mimeType);
     }
   }
 
@@ -54,10 +72,10 @@ export class FileListItemView extends Component {
    * @returns {string}
    */
   _getItemType() {
-    if (this._item.itemType === 'folder') {
+    if (this._item.type === 'folder') {
       return 'Folder';
     } else {
-      return typeFullName(this._item.itemMimeType);
+      return typeFullName(this._item.mimeType);
     }
   }
 
@@ -67,10 +85,10 @@ export class FileListItemView extends Component {
    * @returns {string}
    */
   _getItemSize() {
-    if (this._item.itemType === 'folder') {
+    if (this._item.type === 'folder') {
       return this._item.itemsAmount.toString();
     } else {
-      return this._formatBytes(this._item.itemSize, 1);
+      return this._formatBytes(this._item.size, 1);
     }
   }
 
@@ -99,7 +117,7 @@ export class FileListItemView extends Component {
                                     class="element-control-button download-element-button">
                             <span class="glyphicon glyphicon-download"></span>
                         </button>`;
-    const uploadButton = `<button data-fh="upload-button" title="download" type="button" 
+    const uploadButton = `<button data-fh="upload-button" title="upload" type="button" 
 class="element-control-button upload-element-button"><span class="glyphicon glyphicon-upload"></span></button>`;
 
     return `<tr>
@@ -109,7 +127,7 @@ class="element-control-button upload-element-button"><span class="glyphicon glyp
                     <td data-fh="type" class="cell-type">${this._getItemType()}</td>
                     <td data-fh="size" class="cell-file-size">${this._getItemSize()}</td>
                     <td class="cell-file-action-buttons">
-                        ${this._item.itemType === 'folder' ? uploadButton : downloadButton}
+                        ${this._item.type === 'folder' ? uploadButton : downloadButton}
                         <button title="delete" type="button" class="element-control-button delete-element-button">
                             <span class="glyphicon glyphicon-remove-circle"></span>
                         </button>

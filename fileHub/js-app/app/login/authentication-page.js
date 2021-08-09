@@ -6,6 +6,24 @@ import {AuthenticationForm} from './authentication-form.js';
  */
 export class AuthenticationPage extends Component {
   /**
+   * The listener that calls when a user successfully authenticated in the FileHub application.
+   * @param {function()} listener
+   */
+  onLoggedIn(listener) {
+    this._onLoggedInEvent = listener;
+    this._render();
+  }
+
+  /**
+   * Adds an listener, listener for navigation through pages.
+   * @param {function()} listener
+   */
+  onRedirectToRegistrationPage(listener) {
+    this._onRedirectToRegistrationPage = listener;
+    this._render();
+  }
+
+  /**
    * @inheritDoc
    * Adds api and title services to page
    * @param {ApiService} apiService
@@ -19,14 +37,13 @@ export class AuthenticationPage extends Component {
 
   /** @inheritDoc */
   _initNestedComponents() {
-    debugger;
     const form = new AuthenticationForm(this.rootElement);
+    form.onNavigateByLink(this._onRedirectToRegistrationPage);
     form.onSubmit(async (credentials) => {
       const {email, password} = credentials;
       try {
-        const response = await this._apiService.logIn(email, password);
-        alert(`${response}`);
-        window.location.hash = 'index';
+        await this._apiService.logIn(email, password);
+        this._onLoggedInEvent();
       } catch (error) {
         this.clearErrorMessages();
         form.addServerError(error.message);
@@ -42,7 +59,7 @@ export class AuthenticationPage extends Component {
     const errors = this._getElements('server-error');
     if (errors) {
       [...errors].forEach(
-          (error)=> error.remove(),
+          (error) => error.remove(),
       );
     }
   }

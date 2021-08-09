@@ -6,18 +6,22 @@ module('FileListPage', () => {
   test('Should render component for page', (assert) => {
     const fixture = document.getElementById('qunit-fixture');
 
-    const testDocument = {title: ''};
+    const documentMock = {title: ''};
 
-    const testApiService = {};
-
-    const testTitleService = {
+    const titleServiceMock = {
       addTitleForPage() {
-        testDocument.title = 'Main page - FileHub';
+        documentMock.title = 'Main page - FileHub';
       },
     };
 
-    new FileListPage(fixture, testApiService, testTitleService);
+    const stateManagerMock = {
+      state: {currentFolder: 'folder'},
+      onStateChanged() {
+      },
+    };
 
-    assert.equal(testDocument.title, 'Main page - FileHub', 'Should add title to page');
+    new FileListPage(fixture, titleServiceMock, stateManagerMock);
+
+    assert.equal(documentMock.title, 'Main page - FileHub', 'Should add title to page');
   });
 });

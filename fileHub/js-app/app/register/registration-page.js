@@ -7,6 +7,24 @@ import {RegistrationForm} from './registration-form.js';
  */
 export class RegistrationPage extends Component {
   /**
+   * The listener that calls when a user successfully registered in the FileHub application.
+   * @param {function()} listener
+   */
+  onRegistered(listener) {
+    this._onRegisteredEvent = listener;
+    this._render();
+  }
+
+  /**
+   * Adds an listener, listener for navigation through pages.
+   * @param {function()} listener
+   */
+  onRedirectToAuthenticationPage(listener) {
+    this._onRedirectToAuthenticationPage = listener;
+    this._render();
+  }
+
+  /**
    * @inheritDoc
    * Adds api and title services to page
    * @param {ApiService} apiService
@@ -21,11 +39,12 @@ export class RegistrationPage extends Component {
   /** @inheritDoc */
   _initNestedComponents() {
     const form = new RegistrationForm(this.rootElement);
+    form.onNavigateByLink(this._onRedirectToAuthenticationPage);
     form.onSubmit(async (credentials) => {
       const {email, password} = credentials;
       try {
-        const response = await this._apiService.register(email, password);
-        alert(`${response.email}\n${response.password}`);
+        await this._apiService.register(email, password);
+        this._onRegisteredEvent();
       } catch (error) {
         this.clearErrorMessages();
         if (error instanceof UnprocessableEntityError) {

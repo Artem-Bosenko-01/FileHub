@@ -24,3 +24,10 @@ import './app/user-page/tests-file-list-item-view.js';
 import './app/user-page/tests-file-list.js';
 import './app/user-page/tests-file-list-page.js';
 import './app/user-page/tests-folder-control-buttons.js';
+
+import './app/services/state-management/tests-state-manager.js';
+
+import './app/services/state-management/get-root-folder-action/tetsts-get-root-folder-executor.js';
+import './app/services/state-management/fetch-current-directory-action/tetsts-fetch-current-folder-executor.js';
+import './app/services/state-management/fetch-current-folder-content-action/fetch-current-folder-content-executor.js';
+import './app/services/state-management/route-changed-action/tetsts-route-changed-executor.js';

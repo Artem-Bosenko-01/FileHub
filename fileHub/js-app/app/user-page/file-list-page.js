@@ -1,26 +1,38 @@
 import {Component} from '../components/component.js';
-import {FileListItem} from '../file-list-item.js';
+import {Breadcrumbs} from './breadcrumbs.js';
 import {UserDetails} from './user-details.js';
 import {LogOut} from './log-out.js';
-import {Breadcrumbs} from './breadcrumbs.js';
-import {SearchBar} from './search-bar.js';
 import {FolderControlButtons} from './folder-control-buttons.js';
+import {SearchBar} from './search-bar.js';
 import {FileList} from './file-list.js';
+import {GetRootFolder} from '../services/state-management/get-root-folder-action/get-root-folder.js';
+import FetchCurrentFolder from '../services/state-management/fetch-current-directory-action/fetch-current-folder.js';
+import {FetchCurrentFolderContent}
+  from '../services/state-management/fetch-current-folder-content-action/fetch-current-folder-content.js';
 
 /**
  * Main page for authenticated user, that contains information about him and his saved files.
  */
 export class FileListPage extends Component {
   /**
+   * Listener for redirecting a user to folder.
+   * @param {function(folderId: string)} listener
+   */
+  onNavigateToFolder(listener) {
+    this._onNavigateToFolder = listener;
+    this._render();
+  }
+
+  /**
    * @inheritDoc
    * Adds api and title services to page
-   * @param {ApiService} apiService
-   * @param {TitleService}titleService
+   * @param {TitleService} titleService
+   * @param {StateManager} stateManager
    */
-  _init(apiService, titleService) {
-    this._apiService = apiService;
+  _init(titleService, stateManager) {
     this._titleService = titleService;
     this._titleService.addTitleForPage('Main Page');
+    this._stateManager = stateManager;
   }
 
   /** @inheritDoc */
@@ -32,33 +44,59 @@ export class FileListPage extends Component {
 
     const fileListBodyElement = this._getElement('file-list-body');
     const breadcrumbs = new Breadcrumbs(fileListBodyElement);
+    breadcrumbs.onFolderNameClick(this._onNavigateToFolder);
     new SearchBar(fileListBodyElement);
     new FolderControlButtons(fileListBodyElement);
     const fileList = new FileList(fileListBodyElement);
+    fileList.onFolderClick(this._onNavigateToFolder);
 
-    const item1 = {
-      id: '1',
-      name: 'folder',
-      type: 'folder',
-      itemsAmount: 44,
-      parentFolderId: 'as',
-    };
+    this._stateManager.onStateChanged('locationParams', async (state) => {
+      const currentFolderId = state.locationParams.currentFolderId;
+      if (!currentFolderId && !state.rootFolder) {
+        this._stateManager.dispatch(new GetRootFolder());
+      } else if (!currentFolderId && state.rootFolder) {
+        this._onNavigateToFolder(state.rootFolder.id);
+      } else {
+        await this._stateManager.dispatch(new FetchCurrentFolder());
+        this._stateManager.dispatch(new FetchCurrentFolderContent());
+      }
+    });
 
-    const item2 = {
-      id: '2',
-      name: 'file',
-      type: 'file',
-      mimeType: 'pdf',
-      size: 7987864,
-      parentFolderId: '54',
-    };
+    this._stateManager.onStateChanged('currentFolder', (state) => {
+      breadcrumbs.currentDirectory = state.currentFolder;
+    });
 
-    const itemDto = new FileListItem(item1);
+    this._stateManager.onStateChanged('isCurrentFolderFetching', (state) => {
+      breadcrumbs.loadingCurrentFolderDataState = state.isCurrentFolderFetching;
+    });
 
-    const itemDto1 = new FileListItem(item2);
+    this._stateManager.onStateChanged('fetchingCurrentFolderErrorMessage', (state) => {
+      breadcrumbs.currentDirectory = null;
+      breadcrumbs.errorMessage = state.fetchingCurrentFolderErrorMessage;
+    });
 
-    breadcrumbs.currentDirectory = itemDto;
-    fileList.fileItems = [itemDto, itemDto1];
+    this._stateManager.onStateChanged('currentFolderContent', (state) => {
+      fileList.fileItems = state.currentFolderContent;
+    });
+
+    this._stateManager.onStateChanged('isCurrentFolderContentFetching', (state) => {
+      fileList.fileItems = null;
+      fileList.loadingFolderContentState = state.isCurrentFolderContentFetching;
+    });
+
+    this._stateManager.onStateChanged('fetchingCurrentFolderContentErrorMessage', (state) => {
+      fileList.fileItems = null;
+      fileList.errorMessage = state.fetchingCurrentFolderContentErrorMessage;
+    });
+
+
+    this._stateManager.onStateChanged('rootFolder', (state) => {
+      const rootFolderId = state.rootFolder.id;
+      breadcrumbs.rootPage = rootFolderId;
+      if (!state.locationParams.currentFolderId) {
+        this._onNavigateToFolder(rootFolderId);
+      }
+    });
   }
 
   /** @inheritDoc */

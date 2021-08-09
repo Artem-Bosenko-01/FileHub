@@ -26,32 +26,32 @@ export class FileListItem {
   }
 
   /** @returns {string} */
-  get itemId() {
+  get id() {
     return this._itemId;
   }
 
   /** @returns {string} */
-  get itemName() {
+  get name() {
     return this._itemName;
   }
 
   /** @returns {string} */
-  get itemType() {
+  get type() {
     return this._itemType;
   }
 
   /** @returns {string} */
-  get itemParentFolderId() {
+  get parentFolderId() {
     return this._parentFolderId;
   }
 
   /** @returns {number} */
-  get itemSize() {
+  get size() {
     return this._itemSize;
   }
 
   /** @returns {string} */
-  get itemMimeType() {
+  get mimeType() {
     return this._itemMimeType;
   }
 

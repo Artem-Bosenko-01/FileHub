@@ -11,11 +11,20 @@ import {UserData} from '../user-data.js';
  */
 export class AuthenticationForm extends Component {
   /**
-   * Adds some event, which will be called on submitting form.
-   * @param {function} event
+   * Adds an listener, which will be called on submitting form.
+   * @param {function(UserData)} listener
    */
-  onSubmit(event) {
-    this._onSubmitAuthenticationEvent = event;
+  onSubmit(listener) {
+    this._onSubmitAuthenticationEvent = listener;
+  }
+
+  /**
+   * Adds an event, event for navigation through pages.
+   * @param {function} listener
+   */
+  onNavigateByLink(listener) {
+    this._onNavigateListener = listener;
+    this._render();
   }
 
   /**
@@ -52,7 +61,7 @@ export class AuthenticationForm extends Component {
     this._form.formHeader = 'Sign In to FileHub';
     this._form.buttonTitle = 'Sign In';
     this._form.linkMessage = 'Didn\'t have an account yet?';
-    this._form.linkReference = '#register';
+    this._form.onLinkClick(this._onNavigateListener);
 
     this._form.initInputs((container) => {
       this._emailInputField = new FormInputField(container);
@@ -69,7 +78,7 @@ export class AuthenticationForm extends Component {
       this._passwordInputField.onChange((value) => this._passwordInputValue = value);
     });
 
-    this._form.onSubmit = async () => {
+    this._form.onSubmit(async () => {
       this._emailInputField.cleanErrorMessage();
       this._passwordInputField.cleanErrorMessage();
 
@@ -90,7 +99,7 @@ export class AuthenticationForm extends Component {
         this._onSubmitAuthenticationEvent && this._onSubmitAuthenticationEvent(
             new UserData(this._emailInputValue, this._passwordInputValue));
       }
-    };
+    });
   }
 
   /**

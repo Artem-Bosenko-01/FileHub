@@ -6,7 +6,16 @@ import {typeFullName, typeIcon} from './file-mime-types-list.js';
  */
 export class FileListItemView extends Component {
   /**
-   * Event for navigation through folders.
+   * Add listener on click delete button.
+   * @param {function(item: FileListItem)} listener
+   */
+  onDeleteButtonClick(listener) {
+    this._onDeleteButtonClickListener = listener;
+    this._render();
+  }
+
+  /**
+   * Listener for navigation through folders.
    * @param {function(folderId: string)} listener
    */
   onFolderNameCLicked(listener) {
@@ -25,6 +34,9 @@ export class FileListItemView extends Component {
     folderNameElement && folderNameElement.addEventListener('click', (event) => {
       this._onFolderNameCLickedEvent(this._item.id);
       event.preventDefault();
+    });
+    this._getElement('delete-button').addEventListener('click', () => {
+      this._onDeleteButtonClickListener(this._item);
     });
   }
 
@@ -128,7 +140,8 @@ class="element-control-button upload-element-button"><span class="glyphicon glyp
                     <td data-fh="size" class="cell-file-size">${this._getItemSize()}</td>
                     <td class="cell-file-action-buttons">
                         ${this._item.type === 'folder' ? uploadButton : downloadButton}
-                        <button title="delete" type="button" class="element-control-button delete-element-button">
+                        <button data-fh="delete-button"
+                         title="delete" type="button" class="element-control-button delete-element-button">
                             <span class="glyphicon glyphicon-remove-circle"></span>
                         </button>
                     </td>

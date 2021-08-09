@@ -30,14 +30,24 @@ export class StateManager {
   }
 
   /**
+   * All services in state manager.
+   * @returns {Object}
+   */
+  get services() {
+    return this._services;
+  }
+
+  /**
    * Calls executor of some action from {@link ActionFactory actions list}.
    * @param {ActionInfo} action
    */
   dispatch(action) {
     const executor = this._actions.getActionExecutor(action.typeName);
-    executor.apply(action, this._services, this._state, (mutatorName, details) => {
-      this._mutate(mutatorName, details);
-    });
+    executor.apply(action, this._services, this._state,
+        (mutatorName, details) => {
+          this._mutate(mutatorName, details);
+        },
+        (actionInfo) => this.dispatch(actionInfo));
   }
 
   /**

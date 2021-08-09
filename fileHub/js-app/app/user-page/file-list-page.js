@@ -7,8 +7,11 @@ import {SearchBar} from './search-bar.js';
 import {FileList} from './file-list.js';
 import {GetRootFolder} from '../services/state-management/get-root-folder-action/get-root-folder.js';
 import FetchCurrentFolder from '../services/state-management/fetch-current-directory-action/fetch-current-folder.js';
-import {FetchCurrentFolderContent} from '../services/state-management/fetch-current-folder-content-action/fetch-current-folder-content.js';
 import GetCurrentUser from '../services/state-management/get-current-user-action/get-current-user.js';
+import {RemoveDialogWindow} from '../modals/remove-dialog.js';
+import {DeleteItem} from '../services/state-management/delete-item-action/delete-item.js';
+import {FetchCurrentFolderContent}
+  from '../services/state-management/fetch-current-folder-content-action/fetch-current-folder-content.js';
 
 /**
  * Main page for authenticated user, that contains information about him and his saved files.
@@ -48,6 +51,28 @@ export class FileListPage extends Component {
     new FolderControlButtons(fileListBodyElement);
     const fileList = new FileList(fileListBodyElement);
     fileList.onFolderClick(this._onNavigateToFolder);
+    fileList.onDeleteButtonClick((item) => {
+      const modalsService = this._stateManager.services.modalsService;
+      const modalWindow = modalsService.open((container) => {
+        return new RemoveDialogWindow(container, item);
+      });
+
+      modalWindow.onSubmit(() => this._stateManager.dispatch(new DeleteItem(item)));
+
+      this._stateManager.onStateChanged('deletingFileErrorMessage', (state) => {
+        modalWindow.errorMessage = state.deletingFileErrorMessage;
+      });
+      this._stateManager.onStateChanged('removingFile', (state) => {
+        const isRemovingFile = state.removingFile === item;
+
+        if (isRemovingFile) {
+          modalWindow.deletingInProgress = true;
+        } else {
+          modalWindow.deletingInProgress = false;
+          modalsService.closeModalEvent();
+        }
+      });
+    });
 
     this._stateManager.onStateChanged('locationParams', async (state) => {
       const currentFolderId = state.locationParams.currentFolderId;
@@ -92,15 +117,7 @@ export class FileListPage extends Component {
     });
 
     this._stateManager.onStateChanged('userData', (state) => {
-          userDetails.userFullName = state.userData.name;
-        });
-
-    this._stateManager.onStateChanged('rootFolder', (state) => {
-      const rootFolderId = state.rootFolder.id;
-      breadcrumbs.rootPage = rootFolderId;
-      if (!state.locationParams.currentFolderId) {
-        this._onNavigateToFolder(rootFolderId);
-      }
+      userDetails.userFullName = state.userData.name;
     });
 
     this._stateManager.onStateChanged('isCurrentUserInfoFetching',
@@ -112,8 +129,13 @@ export class FileListPage extends Component {
           userDetails.errorMessage = state.fetchingCurrentUserDetailsErrorMessage;
         });
 
-    this._stateManager.onStateChanged('rootFolder',
-        (state) => this._navigate(state.rootFolder.id));
+    this._stateManager.onStateChanged('rootFolder', (state) => {
+      const rootFolderId = state.rootFolder.id;
+      breadcrumbs.rootPage = rootFolderId;
+      if (!state.locationParams.currentFolderId) {
+        this._onNavigateToFolder(rootFolderId);
+      }
+    });
   }
 
   /** @inheritDoc */

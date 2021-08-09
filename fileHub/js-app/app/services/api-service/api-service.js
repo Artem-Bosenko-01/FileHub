@@ -119,6 +119,32 @@ export class ApiService {
   }
 
   /**
+   * Deletes folder from database.
+   * @param {string} id
+   * @returns {Promise<void, ClientServerError|ServerError>}
+   */
+  async deleteFolder(id) {
+    const response = await this._fetch(`/folder/${id}`, {
+      method: 'DELETE',
+    });
+
+    this._checkResponseOnClientOrServerError(response);
+  }
+
+  /**
+   * Deletes file from database.
+   * @param {string} id
+   * @returns {Promise<void, ClientServerError|ServerError>}
+   */
+  async deleteFile(id) {
+    const response = await this._fetch(`/file/${id}`, {
+      method: 'DELETE',
+    });
+
+    this._checkResponseOnClientOrServerError(response);
+  }
+
+  /**
    * @param {RequestInfo} url
    * @param {RequestInit} init
    * @returns {Promise<Response>}

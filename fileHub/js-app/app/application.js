@@ -13,6 +13,7 @@ import {RoutingConfiguration} from './services/routing-configuration.js';
 import {mutator} from './services/state-management/mutator/mutator.js';
 import GetCurrentUser from './services/state-management/get-current-user-action/get-current-user.js';
 import {GetRootFolder} from './services/state-management/get-root-folder-action/get-root-folder.js';
+import {ModalsService} from './services/modals/modals-service.js';
 
 /**
  * Entry point of FileHub application.
@@ -25,7 +26,8 @@ export class Application extends Component {
     const configuration = new RoutingConfiguration('login');
     const router = new Router(window);
     const factory = new ActionFactory();
-    const stateManager = new StateManager({}, {apiService}, factory, mutator);
+    const modalsService = new ModalsService(this.rootElement);
+    const stateManager = new StateManager({}, {apiService, modalsService}, factory, mutator);
 
     configuration.onRedirect((route) => router.redirect(route));
 

@@ -7,7 +7,8 @@ export default class ActionExecutor {
    * @param {object} services
    * @param {object} state
    * @param {function} mutate
+   * @param {function(ActionInfo)} dispatch
    */
-  apply(actionInfo, services, state, mutate) {
+  apply(actionInfo, services, state, mutate, dispatch) {
   }
 }

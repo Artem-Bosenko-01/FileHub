@@ -27,6 +27,12 @@ const itemDatabase = {
   getRootFolder: function() {
     return this.items.find((item) => !item.parentFolderId && item.type === 'folder');
   },
+  deleteFolder: function(id) {
+    return this.items.filter((item) => !(item.id === id && item.type === 'folder'));
+  },
+  deleteFile: function(id) {
+    return this.items.filter((item) => !(item.id === id && item.type === 'file'));
+  },
 };
 
 const mockPostRequest = (url, handler) => {
@@ -39,6 +45,14 @@ const mockPostRequest = (url, handler) => {
 
 const mockGetRequest = (url, handler) => {
   fetchMock.get(url, (...args) => {
+    const response = handler(...args);
+    console.log(...args, response);
+    return response;
+  }, {delay: 2000});
+};
+
+const mockDeleteRequest = (url, handler) => {
+  fetchMock.delete(url, (...args) => {
     const response = handler(...args);
     console.log(...args, response);
     return response;
@@ -106,5 +120,21 @@ mockGetRequest('/user', (url, opts) => {
       name: 'Artem Bosenko',
       id: '4521a4sca',
     },
+  };
+});
+
+mockDeleteRequest('express:/folder/:id', (url, opts) => {
+  const id = url.split('/')[2];
+  itemDatabase.items = itemDatabase.deleteFolder(id);
+  return {
+    status: 200,
+  };
+});
+
+mockDeleteRequest('express:/file/:id', (url, opts) => {
+  const id = url.split('/')[2];
+  itemDatabase.items = itemDatabase.deleteFile(id);
+  return {
+    status: 200,
   };
 });

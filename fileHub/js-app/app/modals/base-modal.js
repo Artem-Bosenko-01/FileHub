@@ -6,6 +6,33 @@ import {Button} from '../components/button.js';
  */
 export class BaseModalWindow extends Component {
   /**
+   * Add listener on close button click.
+   * @param {function} listener
+   */
+  onCloseButtonCLick(listener) {
+    this._closeModalEvent = listener;
+    this._render();
+  }
+
+  /**
+   * Error message
+   * @param {string} value
+   */
+  set errorMessage(value) {
+    this._errorMessage = value;
+    this._render();
+  }
+
+  /**
+   * Status of loading.
+   * @param {boolean} value
+   */
+  set isLoading(value) {
+    this._isLoading = value;
+    this._render();
+  }
+
+  /**
    * Inner text for modal window.
    * @param {string} string
    */
@@ -30,7 +57,7 @@ export class BaseModalWindow extends Component {
       closeButton.buttonName = 'close-button';
       closeButton.buttonIcon = 'remove';
       closeButton.buttonClasses = ['button-shut-down'];
-      closeButton.onClick(() => alert('closed'));
+      closeButton.onClick(this._closeModalEvent);
       return closeButton;
     });
 
@@ -39,11 +66,12 @@ export class BaseModalWindow extends Component {
       cancelButton.buttonName = 'cancel-button';
       cancelButton.buttonTitle = 'Cancel';
       cancelButton.buttonClasses = ['button-cancel'];
+      cancelButton.onClick(this._closeModalEvent);
       return cancelButton;
     });
 
     this._submitButtonInitializer && this._mount('submit-button', (slotElement) => {
-      this._submitButtonInitializer(slotElement);
+      return this._submitButtonInitializer(slotElement);
     });
   }
 
@@ -54,7 +82,8 @@ export class BaseModalWindow extends Component {
 
   /** @inheritDoc */
   get _markup() {
-    return `<div class="modal-window">
+    if (this._errorMessage) {
+      return `<div data-fh="modal-body" class="modal-window">
         <div class="main">
             <div class="raw modal-raw">
                 <header class="header">
@@ -62,8 +91,8 @@ export class BaseModalWindow extends Component {
                     <slot data-fh="close-button"></slot>
                 </header>
                <div class="data">
-                ${this._innerTextForBody ? `<p>${this._innerTextForBody}</p>` : ''}
-                <div class="submit-box submit-modal-box">
+                <p class="error-message">${this._errorMessage}</p>
+                <div class="submit-box submit-modal-box ${this._isLoading && 'submit-loading-modal-box'}">
                     <slot data-fh="cancel-button"></slot>
                     <slot data-fh="submit-button"></slot>
                 </div>
@@ -72,5 +101,25 @@ export class BaseModalWindow extends Component {
         </div>
     </div>
     `;
+    } else {
+      return `<div data-fh="modal-body" class="modal-window">
+        <div class="main">
+            <div class="raw modal-raw">
+                <header class="header">
+                    <h2 class="modal-header">${this._header}</h2>
+                    <slot data-fh="close-button"></slot>
+                </header>
+               <div class="data">
+                ${this._innerTextForBody ? `<p>${this._innerTextForBody}</p>` : ''}
+                <div class="submit-box submit-modal-box ${this._isLoading && 'submit-loading-modal-box'}">
+                    <slot data-fh="cancel-button"></slot>
+                    <slot data-fh="submit-button"></slot>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    `;
+    }
   }
 }

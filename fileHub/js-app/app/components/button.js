@@ -89,7 +89,7 @@ export class Button extends Component {
     this._iconClasses.join(' ')}"></span>`;
     return `<div class="button-raw">
                 <button title="Submit" data-fh="${this._buttonName}" 
-                class="button ${this._buttonClasses ? this._buttonClasses : ''}"
+                class="button ${this._buttonClasses ? this._buttonClasses.join(' ') : ''}"
                >${this._buttonIcon ? icon : ''}${this._buttonTitle ? this._buttonTitle : ''}</button>
             </div>`;
   }

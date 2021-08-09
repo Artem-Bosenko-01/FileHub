@@ -15,7 +15,9 @@ export class RouteChanged extends ActionInfo {
     super();
     const urlParams = url.split('/');
     this._staticParam = urlParams[0];
-    this._dynamicParam = urlParams[1];
+    this._dynamicParam = {
+      currentFolderId: urlParams[1],
+    };
   }
 
   /** @returns {string} */

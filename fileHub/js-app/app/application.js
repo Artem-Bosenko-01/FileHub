@@ -19,6 +19,10 @@ import {GetRootFolder} from './services/state-management/get-root-folder-action/
 export class Application extends Component {
   /** @inheritDoc */
   _initNestedComponents() {
+    const indexRoute = 'index';
+    const logInRoute = 'login';
+    const registerRoute = 'register';
+    const errorPageRoute = '404';
     const apiService = new ApiService(window);
     const titleService = new TitleService('FileHub', document);
     const configuration = new RoutingConfiguration('login');
@@ -29,23 +33,23 @@ export class Application extends Component {
     configuration.onRedirect((route) => router.redirect(route));
 
     configuration
-        .addRoute('login', () => {
+        .addRoute(logInRoute, () => {
           const page = new AuthenticationPage(this.rootElement, apiService, titleService);
-          page.onLoggedIn(() => router.redirect('index'));
-          page.onRedirectToRegistrationPage(() => router.redirect('register'));
+          page.onLoggedIn(() => router.redirect(indexRoute));
+          page.onRedirectToRegistrationPage(() => router.redirect(registerRoute));
         })
-        .addRoute('register', () => {
+        .addRoute(registerRoute, () => {
           const page = new RegistrationPage(this.rootElement, apiService, titleService);
-          page.onRegistered(() => router.redirect('login'));
-          page.onRedirectToAuthenticationPage(() => router.redirect('login'));
+          page.onRegistered(() => router.redirect(logInRoute));
+          page.onRedirectToAuthenticationPage(() => router.redirect(logInRoute));
         })
-        .addRoute('index', () => {
+        .addRoute(indexRoute, () => {
           new FileListPage(this.rootElement, titleService, stateManager)
-              .onNavigateToFolder((folderId) => router.redirect(`index/${folderId}`));
+              .onNavigateToFolder((folderId) => router.redirect(`${indexRoute}/${folderId}`));
           stateManager.dispatch(new GetRootFolder());
         })
-        .addRoute('404', () => new ErrorPage(this.rootElement))
-        .notFoundRoute = '404';
+        .addRoute(errorPageRoute, () => new ErrorPage(this.rootElement))
+        .notFoundRoute = errorPageRoute;
 
     router.onRouteChanged((route) => {
       stateManager.dispatch(new RouteChanged(route));

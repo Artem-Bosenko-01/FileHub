@@ -6,20 +6,20 @@ import {AuthenticationForm} from './authentication-form.js';
  */
 export class AuthenticationPage extends Component {
   /**
-   * The event that calls when a user successfully authenticated in the FileHub application.
-   * @param {function()} event
+   * The listener that calls when a user successfully authenticated in the FileHub application.
+   * @param {function()} listener
    */
-  onLoggedIn(event) {
-    this._onLoggedInEvent = event;
+  onLoggedIn(listener) {
+    this._onLoggedInEvent = listener;
     this._render();
   }
 
   /**
-   * Adds an event, event for navigation through pages.
-   * @param {function()} event
+   * Adds an listener, listener for navigation through pages.
+   * @param {function()} listener
    */
-  onRedirectToRegistrationPage(event) {
-    this._onRedirectToRegistrationPage = event;
+  onRedirectToRegistrationPage(listener) {
+    this._onRedirectToRegistrationPage = listener;
     this._render();
   }
 

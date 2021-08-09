@@ -3,6 +3,7 @@ import {ServerError} from './server-error.js';
 import {UnprocessableEntityError} from './unprocessable-entity-error.js';
 import {ValidationErrorCase} from './validation-error-case.js';
 import {FileListItem} from '../../file-list-item.js';
+import {UnauthorizedError} from './unauthorized-error.js';
 
 /**
  * Allows you to interact with the main features of the application. Sends requests to backend.
@@ -20,14 +21,16 @@ export class ApiService {
    * Authenticates user in FileHub application.
    * @param {string} email
    * @param {string} password
-   * @returns {Promise<string, ClientServerError|ServerError>}>}
+   * @returns {Promise<string, UnauthorizedError|ClientServerError|ServerError>}>}
    */
   async logIn(email, password) {
     const response = await this._fetch('/login', {
       method: 'POST',
       body: JSON.stringify({email, password}),
     });
-
+    if (response.status === 401) {
+      throw new UnauthorizedError();
+    }
     this._checkResponseOnClientOrServerError(response);
     const responseBody = await response.json();
 

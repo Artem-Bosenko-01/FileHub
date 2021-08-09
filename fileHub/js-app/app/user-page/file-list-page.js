@@ -15,7 +15,7 @@ import {FetchCurrentFolderContent}
  */
 export class FileListPage extends Component {
   /**
-   * Event for redirecting a user to folder.
+   * Listener for redirecting a user to folder.
    * @param {function(folderId: string)} listener
    */
   onNavigateToFolder(listener) {

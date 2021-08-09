@@ -11,8 +11,8 @@ import {UserData} from '../user-data.js';
  */
 export class AuthenticationForm extends Component {
   /**
-   * Adds an event, which will be called on submitting form.
-   * @param {function} listener
+   * Adds an listener, which will be called on submitting form.
+   * @param {function(UserData)} listener
    */
   onSubmit(listener) {
     this._onSubmitAuthenticationEvent = listener;

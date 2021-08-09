@@ -14,10 +14,8 @@ export class RouteChangedExecutor extends ActionExecutor {
    */
   apply(actionInfo, services, state, mutate) {
     const pageRoute = actionInfo.staticParam;
-    const currentFolderId = actionInfo.dynamicParam;
-    mutate(HASH_CHANGED_MUTATOR.COMPLETED, {pageRoute: pageRoute, dynamicPart: {
-      currentFolderId: currentFolderId,
-    }},
+    const dynamicParam = actionInfo.dynamicParam;
+    mutate(HASH_CHANGED_MUTATOR.COMPLETED, {pageRoute: pageRoute, dynamicPart: dynamicParam},
     );
   }
 }

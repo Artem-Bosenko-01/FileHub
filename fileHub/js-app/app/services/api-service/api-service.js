@@ -118,7 +118,7 @@ export class ApiService {
 
     this._checkResponseOnClientOrServerError(response);
     const body = await response.json();
-    return new UserModel(body.user);
+    return new UserModel(body);
   }
 
   /**

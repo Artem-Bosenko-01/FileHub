@@ -35,7 +35,7 @@ export class Breadcrumbs extends Component {
    *
    * @param {boolean} value
    */
-  set loadingCurrentFolderDataState(value) {
+  set loading(value) {
     this._isLoadingState = value;
     this._render();
   }

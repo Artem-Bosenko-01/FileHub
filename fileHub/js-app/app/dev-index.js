@@ -102,9 +102,7 @@ mockGetRequest('express:/folder/:id/content', (url, opts) => {
 
 mockGetRequest('/user', (url, opts) => {
   return {
-    user: {
-      name: 'Artem Bosenko',
-      id: '4521a4sca',
-    },
+    name: 'Artem Bosenko',
+    id: '4521a4sca',
   };
 });

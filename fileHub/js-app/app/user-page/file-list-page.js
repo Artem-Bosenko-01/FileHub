@@ -69,7 +69,7 @@ export class FileListPage extends Component {
     });
 
     this._stateManager.onStateChanged('isCurrentFolderFetching', (state) => {
-      breadcrumbs.loadingCurrentFolderDataState = state.isCurrentFolderFetching;
+      breadcrumbs.loading = state.isCurrentFolderFetching;
     });
 
     this._stateManager.onStateChanged('fetchingCurrentFolderErrorMessage', (state) => {
@@ -83,7 +83,7 @@ export class FileListPage extends Component {
 
     this._stateManager.onStateChanged('isCurrentFolderContentFetching', (state) => {
       fileList.fileItems = null;
-      fileList.loadingFolderContentState = state.isCurrentFolderContentFetching;
+      fileList.loading = state.isCurrentFolderContentFetching;
     });
 
     this._stateManager.onStateChanged('fetchingCurrentFolderContentErrorMessage', (state) => {
@@ -92,7 +92,17 @@ export class FileListPage extends Component {
     });
 
     this._stateManager.onStateChanged('userData', (state) => {
-          userDetails.userFullName = state.userData.name;
+      userDetails.userFullName = state.userData.name;
+    });
+
+    this._stateManager.onStateChanged('isCurrentUserInfoFetching', (state) => {
+      userDetails.loading = state.isCurrentUserInfoFetching;
+    });
+
+    this._stateManager.onStateChanged('fetchingCurrentUserDetailsErrorMessage',
+        (state) => {
+          userDetails.userFullName = '';
+          userDetails.errorMessage = state.fetchingCurrentUserDetailsErrorMessage;
         });
 
     this._stateManager.onStateChanged('rootFolder', (state) => {
@@ -102,18 +112,6 @@ export class FileListPage extends Component {
         this._onNavigateToFolder(rootFolderId);
       }
     });
-
-    this._stateManager.onStateChanged('isCurrentUserInfoFetching',
-        (state) => userDetails.loadingFetchingUserData = state.isCurrentUserInfoFetching);
-
-    this._stateManager.onStateChanged('fetchingCurrentUserDetailsErrorMessage',
-        (state) => {
-          userDetails.userFullName = '';
-          userDetails.errorMessage = state.fetchingCurrentUserDetailsErrorMessage;
-        });
-
-    this._stateManager.onStateChanged('rootFolder',
-        (state) => this._navigate(state.rootFolder.id));
   }
 
   /** @inheritDoc */

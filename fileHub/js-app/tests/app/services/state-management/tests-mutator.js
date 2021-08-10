@@ -134,4 +134,31 @@ module('Mutator', () => {
       isCurrentUserInfoFetching: false,
     }, 'Should get error message');
   });
+
+  test('Should change state on DELETE_ITEM_FETCHING_STARTED mutator name', (assert) => {
+    const removingFileName = 'error';
+    const mockDetails = {
+      removingFile: removingFileName,
+    };
+    const mutatedState = mutator('DELETE_ITEM_FETCHING_STARTED', mockDetails, {});
+    assert.deepEqual(mutatedState, {removingFile: removingFileName},
+        'Should get current removing file');
+  });
+
+  test('Should change state on DELETE_ITEM_FETCHING_COMPLETED mutator name', (assert) => {
+    const mutatedState = mutator('DELETE_ITEM_FETCHING_COMPLETED', {}, {});
+    assert.deepEqual(mutatedState, {removingFile: null}, 'Should set removingFile null');
+  });
+
+  test('Should change state on DELETE_ITEM_FETCHING_FAILED mutator name', (assert) => {
+    const errorMessage = 'error';
+    const mockDetails = {
+      error: errorMessage,
+    };
+    const mutatedState = mutator('DELETE_ITEM_FETCHING_FAILED', mockDetails, {});
+    assert.deepEqual(mutatedState, {
+      deletingFileErrorMessage: errorMessage,
+      removingFile: null,
+    }, 'Should get error message');
+  });
 });

@@ -57,7 +57,7 @@ export class FileListPage extends Component {
       } else if (!currentFolderId && state.rootFolder) {
         this._onNavigateToFolder(state.rootFolder.id);
       } else {
-        await this._stateManager.dispatch(new FetchCurrentFolder());
+        this._stateManager.dispatch(new FetchCurrentFolder());
         this._stateManager.dispatch(new FetchCurrentFolderContent());
         if (!state.userData) {
           this._stateManager.dispatch(new GetCurrentUser());

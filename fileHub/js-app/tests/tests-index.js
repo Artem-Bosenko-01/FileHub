@@ -32,3 +32,5 @@ import './app/services/state-management/fetch-current-directory-action/tetsts-fe
 import './app/services/state-management/fetch-current-folder-content-action/fetch-current-folder-content-executor.js';
 import './app/services/state-management/route-changed-action/tetsts-route-changed-executor.js';
 import './app/services/state-management/get-current-user-action/get-current-user-executor.js';
+
+import './app/services/state-management/tests-mutator.js';

@@ -8,7 +8,7 @@ export class FetchCurrentFolderContentExecutor extends ActionExecutor {
   /**
    *
    * @param {FetchCurrentFolderContent} actionInfo
-   * @param {{ApiService}} services
+   * @param {{apiService: ApiService}} services
    * @param {object} state
    * @param {function} mutate
    */

@@ -56,7 +56,7 @@ export class StateManager {
    * @param {function({CustomEventInit})} listener
    */
   onStateChanged(fieldName, listener) {
-    this._eventBus.addEventListener(`stateChanged-${fieldName}`, (e) => listener(e.detail.state));
+    this._eventBus.addEventListener(`stateChanged-${fieldName}`, (e) => listener(this.state));
   }
 
   /**
@@ -68,6 +68,7 @@ export class StateManager {
   _mutate(mutatorName, details) {
     const mutatedState = this._mutator(mutatorName, details, this._state);
     const previousState = this._state;
+    this._state = mutatedState;
     this._dispatchStateChangedAction(previousState, mutatedState, this._eventBus);
   }
 
@@ -84,13 +85,7 @@ export class StateManager {
         if (target[key] === newValue) {
           return true;
         }
-
-        const updateTargetValue = Reflect.set(target, key, newValue);
-        if (updateTargetValue) {
-          eventBus.dispatchEvent(new CustomEvent(`stateChanged-${key}`, {
-            detail: {state: target},
-          }));
-        }
+        eventBus.dispatchEvent(new CustomEvent(`stateChanged-${key}`));
         return true;
       },
     });

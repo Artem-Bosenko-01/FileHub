@@ -34,3 +34,7 @@ import './app/services/state-management/route-changed-action/tetsts-route-change
 import './app/services/state-management/get-current-user-action/get-current-user-executor.js';
 
 import './app/services/state-management/tests-mutator.js';
+
+import './app/modals/tests-base-modal.js';
+import './app/modals/tests-remove-dialog.js';
+import './app/services/tests-modal-services.js';

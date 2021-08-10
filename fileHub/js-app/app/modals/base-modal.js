@@ -87,11 +87,11 @@ export class BaseModalWindow extends Component {
         <div class="main">
             <div class="raw modal-raw">
                 <header class="header">
-                    <h2 class="modal-header">${this._header}</h2>
+                    <h2 data-fh="modal-header" class="modal-header">${this._header}</h2>
                     <slot data-fh="close-button"></slot>
                 </header>
                <div class="data">
-                <p class="error-message">${this._errorMessage}</p>
+                <p data-fh="inner-text-body" class="error-message">${this._errorMessage}</p>
                 <div class="submit-box submit-modal-box ${this._isLoading && 'submit-loading-modal-box'}">
                     <slot data-fh="cancel-button"></slot>
                     <slot data-fh="submit-button"></slot>
@@ -106,11 +106,11 @@ export class BaseModalWindow extends Component {
         <div class="main">
             <div class="raw modal-raw">
                 <header class="header">
-                    <h2 class="modal-header">${this._header}</h2>
+                    <h2 data-fh="modal-header" class="modal-header">${this._header}</h2>
                     <slot data-fh="close-button"></slot>
                 </header>
                <div class="data">
-                ${this._innerTextForBody ? `<p>${this._innerTextForBody}</p>` : ''}
+                ${this._innerTextForBody ? `<p data-fh="inner-text-body">${this._innerTextForBody}</p>` : ''}
                 <div class="submit-box submit-modal-box ${this._isLoading && 'submit-loading-modal-box'}">
                     <slot data-fh="cancel-button"></slot>
                     <slot data-fh="submit-button"></slot>

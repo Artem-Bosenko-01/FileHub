@@ -69,7 +69,7 @@ export class FileListPage extends StateBasedComponent {
       this._stateManager.dispatch(new UploadFile(uploadedFile, item.id));
     });
 
-    this._stateManager.onStateChanged('locationParams', async () => {
+    this._onStateChangedListener('locationParams', async () => {
       const state = this._stateManager.state;
       const currentFolderId = state.locationParams.currentFolderId;
       if (!currentFolderId && !state.rootFolder) {
@@ -95,11 +95,11 @@ export class FileListPage extends StateBasedComponent {
       this._modalWindow.onClose(() => this._modalService.close());
     });
 
-    this._stateManager.onStateChanged('deletingFileErrorMessage', () => {
+    this._onStateChangedListener('deletingFileErrorMessage', () => {
       this._modalWindow.errorMessage = this._stateManager.state.deletingFileErrorMessage;
     });
 
-    this._stateManager.onStateChanged('removingFile', () => {
+    this._onStateChangedListener('removingFile', () => {
       const state = this._stateManager.state;
       this._modalWindow.deletingInProgress = state.removingFile === state.itemInModalWindow;
 

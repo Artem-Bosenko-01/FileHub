@@ -64,22 +64,13 @@ export class FileListPage extends StateBasedComponent {
       this._stateManager.dispatch(new OpenModalWindow(item));
     });
 
-    this._onStateChangedListener('locationParams', async () => {
-      const state = this._stateManager.state;
-        if (isRemovingFile) {
-          modalWindow.deletingInProgress = true;
-        } else {
-          modalWindow.deletingInProgress = false;
-          modalsService.close();
-        }
-      });
-    });
     fileList.onUploadButtonClick(async (item) => {
       const uploadedFile = await uploadFile(document);
       this._stateManager.dispatch(new UploadFile(uploadedFile, item.id));
     });
 
-    this._stateManager.onStateChanged('locationParams', async (state) => {
+    this._stateManager.onStateChanged('locationParams', async () => {
+      const state = this._stateManager.state;
       const currentFolderId = state.locationParams.currentFolderId;
       if (!currentFolderId && !state.rootFolder) {
         this._stateManager.dispatch(new GetRootFolder());

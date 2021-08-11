@@ -10,6 +10,8 @@ import FetchCurrentFolder from '../services/state-management/fetch-current-direc
 import GetCurrentUser from '../services/state-management/get-current-user-action/get-current-user.js';
 import {RemoveDialogWindow} from '../modals/remove-dialog.js';
 import {DeleteItem} from '../services/state-management/delete-item-action/delete-item.js';
+import {uploadFile} from '../services/upload-file-function.js';
+import {UploadFile} from '../services/state-management/upload-file-action/upload-file.js';
 import {FetchCurrentFolderContent}
   from '../services/state-management/fetch-current-folder-content-action/fetch-current-folder-content.js';
 
@@ -48,7 +50,12 @@ export class FileListPage extends Component {
     const breadcrumbs = new Breadcrumbs(fileListBodyElement);
     breadcrumbs.onFolderNameClick(this._onNavigateToFolder);
     new SearchBar(fileListBodyElement);
-    new FolderControlButtons(fileListBodyElement);
+    const controlButtons = new FolderControlButtons(fileListBodyElement);
+    controlButtons.onUploadButtonClick(async () => {
+      const uploadedFile = await uploadFile(document);
+      this._stateManager.dispatch(new UploadFile(uploadedFile, this._stateManager.state.currentFolder.id));
+    });
+
     const fileList = new FileList(fileListBodyElement);
     fileList.onFolderClick(this._onNavigateToFolder);
     fileList.onDeleteButtonClick((item) => {
@@ -72,6 +79,10 @@ export class FileListPage extends Component {
           modalsService.close();
         }
       });
+    });
+    fileList.onUploadButtonClick(async (item) => {
+      const uploadedFile = await uploadFile(document);
+      this._stateManager.dispatch(new UploadFile(uploadedFile, item.id));
     });
 
     this._stateManager.onStateChanged('locationParams', async (state) => {
@@ -128,6 +139,15 @@ export class FileListPage extends Component {
         (state) => {
           userDetails.errorMessage = state.fetchingCurrentUserDetailsErrorMessage;
         });
+
+    this._stateManager.onStateChanged('isUploadingFile', (state) => {
+      controlButtons.loadingUploadFile = state.isUploadingFile;
+      fileList.isLoadingUploadFile = state.isUploadingFile;
+    });
+
+    this._stateManager.onStateChanged('uploadingFileErrorMessage', (state) => {
+      fileList.errorMessageAfterUploading = state.uploadingFileErrorMessage;
+    });
 
     this._stateManager.onStateChanged('rootFolder', (state) => {
       const rootFolderId = state.rootFolder.id;

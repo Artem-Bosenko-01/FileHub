@@ -6,6 +6,33 @@ import {FileListItemView} from './file-list-item-view/file-list-item-view.js';
  */
 export class FileList extends Component {
   /**
+   * Loading status.
+   * @param {boolean} value
+   */
+  set errorMessageAfterUploading(value) {
+    this._errorMessageAfterUploadingFile = value;
+    this._render();
+  }
+
+  /**
+   * Loading status.
+   * @param {boolean} value
+   */
+  set isLoadingUploadFile(value) {
+    this._loadingUploadFile = value;
+    this._render();
+  }
+
+  /**
+   * Add listener on click delete button.
+   * @param {function(item: FileListItem)} listener
+   */
+  onUploadButtonClick(listener) {
+    this._onUploadButtonClickListener = listener;
+    this._render();
+  }
+
+  /**
    * Add listener on click delete button.
    * @param {function(item: FileListItem)} listener
    */
@@ -63,6 +90,8 @@ export class FileList extends Component {
         const itemView = new FileListItemView(tableElement, fileItem);
         itemView.onFolderNameCLicked(this._onFolderClickedEvent);
         itemView.onDeleteButtonClick(this._onDeleteButtonClick);
+        itemView.onUploadButtonClick(this._onUploadButtonClickListener);
+        itemView.isLoadingUploadFile = this._loadingUploadFile;
       });
     }
   }
@@ -97,6 +126,8 @@ export class FileList extends Component {
       return `<div class="table-box">
                 <table class="table">
                      <tbody data-fh="${this._fileListName}">
+                         ${this._errorMessageAfterUploadingFile ?
+                                  `<p class="error-message">${this._errorMessageAfterUploadingFile}</p>` : ''}
                         ${this._fileItems.length === 0 ? emptyState : ''}
                      </tbody>
                 </table>

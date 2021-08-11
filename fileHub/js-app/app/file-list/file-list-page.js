@@ -13,9 +13,10 @@ import {DeleteItem} from '../services/state-management/delete-item-action/delete
 import {OpenModalWindow} from '../services/state-management/open-modal-window/open-modal-window.js';
 import {uploadFile} from '../services/upload-file-function.js';
 import {UploadFile} from '../services/state-management/upload-file-action/upload-file.js';
-import {FetchCurrentFolderContent} from '../services/state-management/fetch-current-folder-content-action/fetch-current-folder-content.js';
 import {DownloadFile} from '../services/state-management/download-file-action/download-file.js';
 import {downloadFile} from '../services/download-file-function.js';
+import {FetchCurrentFolderContent}
+  from '../services/state-management/fetch-current-folder-content-action/fetch-current-folder-content.js';
 
 /**
  * Main page for authenticated user, that contains information about him and his saved files.
@@ -74,7 +75,7 @@ export class FileListPage extends StateBasedComponent {
       this._stateManager.dispatch(new DownloadFile(item.id));
     });
 
-    this._stateManager.onStateChanged('locationParams', async () => {
+    this._onStateChangedListener('locationParams', async () => {
       const state = this._stateManager.state;
       const currentFolderId = state.locationParams.currentFolderId;
       if (!currentFolderId && !state.rootFolder) {

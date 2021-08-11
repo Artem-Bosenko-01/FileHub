@@ -1,4 +1,4 @@
-import {FolderControlButtons} from '../../../app/user-page/folder-control-buttons.js';
+import {FolderControlButtons} from '../../../app/file-list/folder-control-buttons.js';
 import searchElement from '../search-element-function.js';
 
 const {module, test} = QUnit;

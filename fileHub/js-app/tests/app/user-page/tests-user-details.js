@@ -1,4 +1,4 @@
-import {UserDetails} from '../../../app/user-page/user-details.js';
+import {UserDetails} from '../../../app/file-list/user-details.js';
 import searchElement from '../search-element-function.js';
 
 const {module, test} = QUnit;

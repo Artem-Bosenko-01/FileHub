@@ -1,4 +1,4 @@
-import {FileListPage} from '../../../app/user-page/file-list-page.js';
+import {FileListPage} from '../../../app/file-list/file-list-page.js';
 
 const {module, test} = QUnit;
 

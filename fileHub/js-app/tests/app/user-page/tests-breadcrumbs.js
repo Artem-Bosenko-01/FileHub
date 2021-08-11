@@ -1,4 +1,4 @@
-import {Breadcrumbs} from '../../../app/user-page/breadcrumbs.js';
+import {Breadcrumbs} from '../../../app/file-list/breadcrumbs.js';
 import searchElement from '../search-element-function.js';
 
 const {module, test} = QUnit;

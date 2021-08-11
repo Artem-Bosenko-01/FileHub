@@ -1,11 +1,11 @@
 import {ActionInfo} from '../action-info.js';
 
 /**
- * Contains information about item that needs be deleted.
+ * Contains information for opening modal window.
  */
-export class DeleteItem extends ActionInfo {
+export class OpenModalWindow extends ActionInfo {
   /** @inheritDoc */
-  static typeName = 'deleteItemAction';
+  static typeName = 'openModalWindow'
 
   /**
    * @constructor
@@ -25,6 +25,6 @@ export class DeleteItem extends ActionInfo {
 
   /** @inheritDoc */
   get typeName() {
-    return DeleteItem.typeName;
+    return OpenModalWindow.typeName;
   }
 }

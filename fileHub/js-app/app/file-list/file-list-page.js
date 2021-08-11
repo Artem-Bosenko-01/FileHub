@@ -10,6 +10,7 @@ import FetchCurrentFolder from '../services/state-management/fetch-current-folde
 import GetCurrentUser from '../services/state-management/get-current-user-action/get-current-user.js';
 import {RemoveDialogWindow} from '../modals/remove-dialog.js';
 import {DeleteItem} from '../services/state-management/delete-item-action/delete-item.js';
+import {OpenModalWindow} from '../services/state-management/open-modal-window/open-modal-window.js';
 import {FetchCurrentFolderContent}
   from '../services/state-management/fetch-current-folder-content-action/fetch-current-folder-content.js';
 
@@ -53,26 +54,7 @@ export class FileListPage extends StateBasedComponent {
     const fileList = new FileList(fileListBodyElement);
     fileList.onFolderClick(this._onNavigateToFolder);
     fileList.onDeleteButtonClick((item) => {
-      const modalsService = this._modalService;
-      const modalWindow = modalsService.open((container) => {
-        return new RemoveDialogWindow(container, item);
-      });
-
-      modalWindow.onSubmit(() => this._stateManager.dispatch(new DeleteItem(item)));
-
-      this._stateManager.onStateChanged('deletingFileErrorMessage', () => {
-        modalWindow.errorMessage = this._stateManager.state.deletingFileErrorMessage;
-      });
-      this._stateManager.onStateChanged('removingFile', () => {
-        const isRemovingFile = this._stateManager.state.removingFile === item;
-
-        if (isRemovingFile) {
-          modalWindow.deletingInProgress = true;
-        } else {
-          modalWindow.deletingInProgress = false;
-          modalsService.close();
-        }
-      });
+      this._stateManager.dispatch(new OpenModalWindow(item));
     });
 
     this._onStateChangedListener('locationParams', async () => {
@@ -88,6 +70,29 @@ export class FileListPage extends StateBasedComponent {
         if (!state.userData) {
           this._stateManager.dispatch(new GetCurrentUser());
         }
+      }
+    });
+
+    this._onStateChangedListener('itemInModalWindow', () => {
+      const state = this._stateManager.state;
+      this._modalWindow = this._modalService.open((container) => {
+        return new RemoveDialogWindow(container, state.itemInModalWindow);
+      });
+
+      this._modalWindow.onSubmit(() => this._stateManager.dispatch(new DeleteItem(state.itemInModalWindow)));
+      this._modalWindow.onClose(() => this._modalService.close());
+    });
+
+    this._stateManager.onStateChanged('deletingFileErrorMessage', () => {
+      this._modalWindow.errorMessage = this._stateManager.state.deletingFileErrorMessage;
+    });
+
+    this._stateManager.onStateChanged('removingFile', () => {
+      const state = this._stateManager.state;
+      this._modalWindow.deletingInProgress = state.removingFile === state.itemInModalWindow;
+
+      if (!this._stateManager.state.removingFile) {
+        this._modalService.close();
       }
     });
 

@@ -3,7 +3,7 @@ import {DELETE_ITEM_MUTATOR} from '../mutator/delete-item-mutator.js';
 import {FetchCurrentFolderContent} from '../fetch-current-folder-content-action/fetch-current-folder-content.js';
 
 /**
- *
+ * Execute deleting file from folder content.
  */
 export class DeleteItemExecutor extends ActionExecutor {
   /**
@@ -16,8 +16,7 @@ export class DeleteItemExecutor extends ActionExecutor {
   async apply(actionInfo, services, state, mutate, dispatch) {
     mutate(DELETE_ITEM_MUTATOR.FETCHING_STARTED, {removingFile: actionInfo.item});
     try {
-      const type = actionInfo.item.type;
-      const id = actionInfo.item.id;
+      const {type, id} = actionInfo.item;
 
       if (type === 'folder') {
         await services.apiService.deleteFolder(id);

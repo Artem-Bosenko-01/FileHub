@@ -1,12 +1,14 @@
 import {DeleteItemExecutor}
   from '../../../../../app/services/state-management/delete-item-action/delete-item-executor.js';
 import {getSpy} from '../../../get-spy.js';
+import {FetchCurrentFolderContent}
+  from '../../../../../app/services/state-management/fetch-current-folder-content-action/fetch-current-folder-content.js';
 
 const {module, test} = QUnit;
 
 module('DeleteItemExecutor', ()=>{
   test('Should call expected mutators when API Service returns 200 code status', async (assert) => {
-    assert.expect(4);
+    assert.expect(5);
     const itemId = 'id';
     const itemType = 'folder';
 
@@ -40,6 +42,8 @@ module('DeleteItemExecutor', ()=>{
     assert.deepEqual(secondCalled, ['DELETE_ITEM_FETCHING_COMPLETED'], 'Should get message');
 
     assert.equal(dispatchSpy.calls.length, 1, 'Should be called once dispatch spy');
+    const firstCalledDispatchSpy = dispatchSpy.calls[0];
+    assert.deepEqual(firstCalledDispatchSpy, [new FetchCurrentFolderContent()], 'Should get message');
   });
 
   test('Should call expected mutators when API Service throws an exception', async (assert) => {

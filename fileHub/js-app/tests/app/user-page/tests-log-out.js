@@ -1,4 +1,4 @@
-import {LogOut} from '../../../app/user-page/log-out.js';
+import {LogOut} from '../../../app/file-list/log-out.js';
 import searchElement from '../search-element-function.js';
 
 const {module, test} = QUnit;

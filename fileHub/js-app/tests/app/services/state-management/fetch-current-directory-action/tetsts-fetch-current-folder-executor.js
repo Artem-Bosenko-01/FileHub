@@ -1,5 +1,5 @@
 import FetchCurrentFolderExecutor
-  from '../../../../../app/services/state-management/fetch-current-directory-action/fetch-current-folder-executor.js';
+  from '../../../../../app/services/state-management/fetch-current-folder-action/fetch-current-folder-executor.js';
 import {getSpy} from '../../../get-spy.js';
 
 const {module, test} = QUnit;

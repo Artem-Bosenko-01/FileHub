@@ -6,7 +6,7 @@ import {FolderControlButtons} from './folder-control-buttons.js';
 import {SearchBar} from './search-bar.js';
 import {FileList} from './file-list.js';
 import {GetRootFolder} from '../services/state-management/get-root-folder-action/get-root-folder.js';
-import FetchCurrentFolder from '../services/state-management/fetch-current-directory-action/fetch-current-folder.js';
+import FetchCurrentFolder from '../services/state-management/fetch-current-folder-action/fetch-current-folder.js';
 import GetCurrentUser from '../services/state-management/get-current-user-action/get-current-user.js';
 import {RemoveDialogWindow} from '../modals/remove-dialog.js';
 import {DeleteItem} from '../services/state-management/delete-item-action/delete-item.js';

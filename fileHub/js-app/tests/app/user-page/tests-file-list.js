@@ -1,4 +1,4 @@
-import {FileList} from '../../../app/user-page/file-list.js';
+import {FileList} from '../../../app/file-list/file-list.js';
 import searchElement from '../search-element-function.js';
 
 const {module, test} = QUnit;

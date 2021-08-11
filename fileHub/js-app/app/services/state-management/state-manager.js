@@ -30,14 +30,6 @@ export class StateManager {
   }
 
   /**
-   * All services in state manager.
-   * @returns {Object}
-   */
-  get services() {
-    return this._services;
-  }
-
-  /**
    * Calls executor of some action from {@link ActionFactory actions list}.
    * @param {ActionInfo} action
    */

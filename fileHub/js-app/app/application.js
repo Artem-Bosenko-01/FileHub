@@ -29,7 +29,7 @@ export class Application extends Component {
     const router = new Router(window);
     const factory = new ActionFactory();
     const modalsService = new ModalsService(this.rootElement);
-    const stateManager = new StateManager({}, {apiService, modalsService}, factory, mutator);
+    const stateManager = new StateManager({}, {apiService}, factory, mutator);
 
     configuration.onRedirect((route) => router.redirect(route));
 
@@ -45,7 +45,7 @@ export class Application extends Component {
           page.onRedirectToAuthenticationPage(() => router.redirect(logInRoute));
         })
         .addRoute(indexRoute, () => {
-          new FileListPage(this.rootElement, titleService, stateManager)
+          new FileListPage(this.rootElement, titleService, stateManager, modalsService)
               .onNavigateToFolder((folderId) => router.redirect(`${indexRoute}/${folderId}`));
         })
         .addRoute(errorPageRoute, () => new ErrorPage(this.rootElement))

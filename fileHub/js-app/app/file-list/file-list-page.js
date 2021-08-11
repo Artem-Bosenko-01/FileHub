@@ -31,10 +31,12 @@ export class FileListPage extends StateBasedComponent {
    * Adds api and title services to page
    * @param {TitleService} titleService
    * @param {StateManager} stateManager
+   * @param {ModalsService} modalService
    */
-  _init(titleService, stateManager) {
+  _init(titleService, stateManager, modalService) {
     super._init(titleService, stateManager);
     this._stateManager = stateManager;
+    this._modalService = modalService;
   }
 
   /** @inheritDoc */
@@ -51,18 +53,18 @@ export class FileListPage extends StateBasedComponent {
     const fileList = new FileList(fileListBodyElement);
     fileList.onFolderClick(this._onNavigateToFolder);
     fileList.onDeleteButtonClick((item) => {
-      const modalsService = this._stateManager.services.modalsService;
+      const modalsService = this._modalService;
       const modalWindow = modalsService.open((container) => {
         return new RemoveDialogWindow(container, item);
       });
 
       modalWindow.onSubmit(() => this._stateManager.dispatch(new DeleteItem(item)));
 
-      this._stateManager.onStateChanged('deletingFileErrorMessage', (state) => {
-        modalWindow.errorMessage = state.deletingFileErrorMessage;
+      this._stateManager.onStateChanged('deletingFileErrorMessage', () => {
+        modalWindow.errorMessage = this._stateManager.state.deletingFileErrorMessage;
       });
-      this._stateManager.onStateChanged('removingFile', (state) => {
-        const isRemovingFile = state.removingFile === item;
+      this._stateManager.onStateChanged('removingFile', () => {
+        const isRemovingFile = this._stateManager.state.removingFile === item;
 
         if (isRemovingFile) {
           modalWindow.deletingInProgress = true;

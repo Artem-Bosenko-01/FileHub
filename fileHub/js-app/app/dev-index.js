@@ -28,10 +28,10 @@ const itemDatabase = {
     return this.items.find((item) => !item.parentFolderId && item.type === 'folder');
   },
   deleteFolder: function(id) {
-    return this.items.filter((item) => !(item.id === id && item.type === 'folder'));
+    this.items = this.items.filter((item) => !(item.id === id && item.type === 'folder'));
   },
   deleteFile: function(id) {
-    return this.items.filter((item) => !(item.id === id && item.type === 'file'));
+    this.items = this.items.filter((item) => !(item.id === id && item.type === 'file'));
   },
   addFile: function(id, name, mimeType, size, parentFolderId) {
     if (this.items.find((item) => item.name === name && item.parentFolderId === parentFolderId)) {
@@ -130,7 +130,7 @@ mockGetRequest('/user', (url, opts) => {
 
 mockDeleteRequest('express:/folder/:id', (url, opts) => {
   const id = url.split('/')[2];
-  itemDatabase.items = itemDatabase.deleteFolder(id);
+  itemDatabase.deleteFolder(id);
   return {
     status: 200,
   };
@@ -138,7 +138,7 @@ mockDeleteRequest('express:/folder/:id', (url, opts) => {
 
 mockDeleteRequest('express:/file/:id', (url, opts) => {
   const id = url.split('/')[2];
-  itemDatabase.items = itemDatabase.deleteFile(id);
+  itemDatabase.deleteFile(id);
   return {
     status: 200,
   };

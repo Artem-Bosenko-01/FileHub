@@ -3,7 +3,7 @@ import {ModalsService} from '../../../app/services/modals/modals-service.js';
 const {module, test} = QUnit;
 
 module('ModalsService', () => {
-  test('Should be called the open method and get a base container', (assert) => {
+  test('Should return container for initializing window when open() is called.', (assert) => {
     const baseContainerMock = {
       default: 'default value',
     };
@@ -14,13 +14,13 @@ module('ModalsService', () => {
     });
   });
 
-  test('Should be called open method and get a base container', (assert) => {
+  test('Should return \'dialog\' element when close() is called.', (assert) => {
     const closeButtonMock ={
-      dispatchEvent: function(event) {},
+      remove: function() {},
     };
     const baseContainerMock = {
       querySelector: function(selector) {
-        assert.equal(selector, '[data-fh="close-button"]', 'Should get selector');
+        assert.equal(selector, '[data-fh="dialog"]', 'Should get selector');
         return closeButtonMock;
       },
     };

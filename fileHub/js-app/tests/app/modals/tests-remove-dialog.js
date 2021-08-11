@@ -55,4 +55,14 @@ module('RemoveDialogWindow', (hooks) => {
 
     assert.verifySteps([onSubmitStep]);
   });
+
+  test('Should call listener when remove dialog closed', (assert) => {
+    const onCLoseStep = 'on submit step';
+    const window = new RemoveDialogWindow(fixture, removingModel);
+    window.onClose(() => assert.step(onCLoseStep));
+    const closeButton = searchElement('close-button', fixture);
+    closeButton.dispatchEvent(new Event('click'));
+
+    assert.verifySteps([onCLoseStep]);
+  });
 });

@@ -1,4 +1,4 @@
-import {Component} from '../components/component.js';
+import {StateBasedComponent} from './state-based-component.js';
 import {Breadcrumbs} from './breadcrumbs.js';
 import {UserDetails} from './user-details.js';
 import {LogOut} from './log-out.js';
@@ -10,6 +10,7 @@ import FetchCurrentFolder from '../services/state-management/fetch-current-folde
 import GetCurrentUser from '../services/state-management/get-current-user-action/get-current-user.js';
 import {RemoveDialogWindow} from '../modals/remove-dialog.js';
 import {DeleteItem} from '../services/state-management/delete-item-action/delete-item.js';
+import {OpenModalWindow} from '../services/state-management/open-modal-window/open-modal-window.js';
 import {uploadFile} from '../services/upload-file-function.js';
 import {UploadFile} from '../services/state-management/upload-file-action/upload-file.js';
 import {FetchCurrentFolderContent}
@@ -18,26 +19,27 @@ import {FetchCurrentFolderContent}
 /**
  * Main page for authenticated user, that contains information about him and his saved files.
  */
-export class FileListPage extends Component {
+export class FileListPage extends StateBasedComponent {
   /**
    * Listener for redirecting a user to folder.
    * @param {function(folderId: string)} listener
    */
   onNavigateToFolder(listener) {
     this._onNavigateToFolder = listener;
+    this.deleteAllSubscribersOnChangedState();
     this._render();
   }
 
   /**
-   * @inheritDoc
    * Adds api and title services to page
    * @param {TitleService} titleService
    * @param {StateManager} stateManager
+   * @param {ModalsService} modalService
    */
-  _init(titleService, stateManager) {
-    this._titleService = titleService;
-    this._titleService.addTitleForPage('Main Page');
+  _init(titleService, stateManager, modalService) {
+    super._init(titleService, stateManager);
     this._stateManager = stateManager;
+    this._modalService = modalService;
   }
 
   /** @inheritDoc */
@@ -59,19 +61,11 @@ export class FileListPage extends Component {
     const fileList = new FileList(fileListBodyElement);
     fileList.onFolderClick(this._onNavigateToFolder);
     fileList.onDeleteButtonClick((item) => {
-      const modalsService = this._stateManager.services.modalsService;
-      const modalWindow = modalsService.open((container) => {
-        return new RemoveDialogWindow(container, item);
-      });
+      this._stateManager.dispatch(new OpenModalWindow(item));
+    });
 
-      modalWindow.onSubmit(() => this._stateManager.dispatch(new DeleteItem(item)));
-
-      this._stateManager.onStateChanged('deletingFileErrorMessage', (state) => {
-        modalWindow.errorMessage = state.deletingFileErrorMessage;
-      });
-      this._stateManager.onStateChanged('removingFile', (state) => {
-        const isRemovingFile = state.removingFile === item;
-
+    this._onStateChangedListener('locationParams', async () => {
+      const state = this._stateManager.state;
         if (isRemovingFile) {
           modalWindow.deletingInProgress = true;
         } else {
@@ -100,56 +94,79 @@ export class FileListPage extends Component {
       }
     });
 
-    this._stateManager.onStateChanged('currentFolder', (state) => {
-      breadcrumbs.currentDirectory = state.currentFolder;
+    this._onStateChangedListener('itemInModalWindow', () => {
+      const state = this._stateManager.state;
+      this._modalWindow = this._modalService.open((container) => {
+        return new RemoveDialogWindow(container, state.itemInModalWindow);
+      });
+
+      this._modalWindow.onSubmit(() => this._stateManager.dispatch(new DeleteItem(state.itemInModalWindow)));
+      this._modalWindow.onClose(() => this._modalService.close());
     });
 
-    this._stateManager.onStateChanged('isCurrentFolderFetching', (state) => {
-      breadcrumbs.loading = state.isCurrentFolderFetching;
+    this._stateManager.onStateChanged('deletingFileErrorMessage', () => {
+      this._modalWindow.errorMessage = this._stateManager.state.deletingFileErrorMessage;
     });
 
-    this._stateManager.onStateChanged('fetchingCurrentFolderErrorMessage', (state) => {
+    this._stateManager.onStateChanged('removingFile', () => {
+      const state = this._stateManager.state;
+      this._modalWindow.deletingInProgress = state.removingFile === state.itemInModalWindow;
+
+      if (!this._stateManager.state.removingFile) {
+        this._modalService.close();
+      }
+    });
+
+    this._onStateChangedListener('currentFolder', () => {
+      breadcrumbs.currentDirectory = this._stateManager.state.currentFolder;
+    });
+
+    this._onStateChangedListener('isCurrentFolderFetching', () => {
+      breadcrumbs.loading = this._stateManager.state.isCurrentFolderFetching;
+    });
+
+    this._onStateChangedListener('fetchingCurrentFolderErrorMessage', () => {
       breadcrumbs.currentDirectory = null;
-      breadcrumbs.errorMessage = state.fetchingCurrentFolderErrorMessage;
+      breadcrumbs.errorMessage = this._stateManager.state.fetchingCurrentFolderErrorMessage;
     });
 
-    this._stateManager.onStateChanged('currentFolderContent', (state) => {
-      fileList.fileItems = state.currentFolderContent;
+    this._onStateChangedListener('currentFolderContent', () => {
+      fileList.fileItems = this._stateManager.state.currentFolderContent;
     });
 
-    this._stateManager.onStateChanged('isCurrentFolderContentFetching', (state) => {
+    this._onStateChangedListener('isCurrentFolderContentFetching', () => {
       fileList.fileItems = null;
-      fileList.loading = state.isCurrentFolderContentFetching;
+      fileList.loading = this._stateManager.state.isCurrentFolderContentFetching;
     });
 
-    this._stateManager.onStateChanged('fetchingCurrentFolderContentErrorMessage', (state) => {
+    this._onStateChangedListener('fetchingCurrentFolderContentErrorMessage', () => {
       fileList.fileItems = null;
-      fileList.errorMessage = state.fetchingCurrentFolderContentErrorMessage;
+      fileList.errorMessage = this._stateManager.state.fetchingCurrentFolderContentErrorMessage;
     });
 
-    this._stateManager.onStateChanged('userData', (state) => {
-      userDetails.userFullName = state.userData.name;
+    this._onStateChangedListener('userData', () => {
+      userDetails.userFullName = this._stateManager.state.userData.name;
     });
 
-    this._stateManager.onStateChanged('isCurrentUserInfoFetching', (state) => {
-      userDetails.loading = state.isCurrentUserInfoFetching;
+    this._onStateChangedListener('isCurrentUserInfoFetching', () => {
+      userDetails.loading = this._stateManager.state.isCurrentUserInfoFetching;
     });
 
-    this._stateManager.onStateChanged('fetchingCurrentUserDetailsErrorMessage',
-        (state) => {
-          userDetails.errorMessage = state.fetchingCurrentUserDetailsErrorMessage;
-        });
-
-    this._stateManager.onStateChanged('isUploadingFile', (state) => {
-      controlButtons.loadingUploadFile = state.isUploadingFile;
-      fileList.isLoadingUploadFile = state.isUploadingFile;
+    this._onStateChangedListener('fetchingCurrentUserDetailsErrorMessage', () => {
+      userDetails.errorMessage = this._stateManager.state.fetchingCurrentUserDetailsErrorMessage;
     });
 
-    this._stateManager.onStateChanged('uploadingFileErrorMessage', (state) => {
-      fileList.errorMessageAfterUploading = state.uploadingFileErrorMessage;
+    this._onStateChangedListener('isUploadingFile', () => {
+      controlButtons.loadingUploadFile = this._stateManager.state.isUploadingFile;
+      fileList.isLoadingUploadFile = this._stateManager.state.isUploadingFile;
     });
 
-    this._stateManager.onStateChanged('rootFolder', (state) => {
+    this._onStateChangedListener('uploadingFileErrorMessage', () => {
+      fileList.errorMessageAfterUploading = this._stateManager.state.uploadingFileErrorMessage;
+    });
+
+    this._onStateChangedListener('rootFolder', () => {
+      const state = this._stateManager.state;
       const rootFolderId = state.rootFolder.id;
       breadcrumbs.rootPage = rootFolderId;
       if (!state.locationParams.currentFolderId) {
@@ -157,7 +174,6 @@ export class FileListPage extends Component {
       }
     });
   }
-
   /** @inheritDoc */
   get _markup() {
     return `<div>

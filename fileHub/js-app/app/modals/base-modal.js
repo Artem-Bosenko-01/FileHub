@@ -2,7 +2,7 @@ import {Component} from '../components/component.js';
 import {Button} from '../components/button.js';
 
 /**
- *
+ * Base component for modal window rendering.
  */
 export class BaseModalWindow extends Component {
   /**
@@ -82,8 +82,11 @@ export class BaseModalWindow extends Component {
 
   /** @inheritDoc */
   get _markup() {
-    if (this._errorMessage) {
-      return `<div data-fh="modal-body" class="modal-window">
+    let modalBody;
+    this._errorMessage ? modalBody = `<p data-fh="inner-text-body" class="error-message">${this._errorMessage}</p>` :
+        modalBody = `<p data-fh="inner-text-body">${this._innerTextForBody}</p>`;
+
+    return `<div data-fh="modal-body" class="modal-window">
         <div class="main">
             <div class="raw modal-raw">
                 <header class="header">
@@ -91,7 +94,7 @@ export class BaseModalWindow extends Component {
                     <slot data-fh="close-button"></slot>
                 </header>
                <div class="data">
-                <p data-fh="inner-text-body" class="error-message">${this._errorMessage}</p>
+                ${modalBody}
                 <div class="submit-box submit-modal-box ${this._isLoading && 'submit-loading-modal-box'}">
                     <slot data-fh="cancel-button"></slot>
                     <slot data-fh="submit-button"></slot>
@@ -101,25 +104,5 @@ export class BaseModalWindow extends Component {
         </div>
     </div>
     `;
-    } else {
-      return `<div data-fh="modal-body" class="modal-window">
-        <div class="main">
-            <div class="raw modal-raw">
-                <header class="header">
-                    <h2 data-fh="modal-header" class="modal-header">${this._header}</h2>
-                    <slot data-fh="close-button"></slot>
-                </header>
-               <div class="data">
-                ${this._innerTextForBody ? `<p data-fh="inner-text-body">${this._innerTextForBody}</p>` : ''}
-                <div class="submit-box submit-modal-box ${this._isLoading && 'submit-loading-modal-box'}">
-                    <slot data-fh="cancel-button"></slot>
-                    <slot data-fh="submit-button"></slot>
-                </div>
-            </div>
-            </div>
-        </div>
-    </div>
-    `;
-    }
   }
 }

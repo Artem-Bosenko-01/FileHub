@@ -14,8 +14,8 @@ export class ModalsService {
    * Close active modal window.
    */
   close() {
-    const closeModalButton = this._container.querySelector(`[data-fh="close-button"]`);
-    closeModalButton && closeModalButton.dispatchEvent(new Event('click'));
+    const dialog = this._container.querySelector(`[data-fh="dialog"]`);
+    dialog && dialog.remove();
   }
 
   /**

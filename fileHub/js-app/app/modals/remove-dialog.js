@@ -3,9 +3,18 @@ import {BaseModalWindow} from './base-modal.js';
 import {Button} from '../components/button.js';
 
 /**
- *
+ * Dialog window for approving delete the item from folder content.
  */
 export class RemoveDialogWindow extends Component {
+  /**
+   * Add listener on close button click.
+   * @param {function} listener
+   */
+  onClose(listener) {
+    this._onCloseListener = listener;
+    this._render();
+  }
+
   /**
    * Add listener on submit deleting.
    * @param {function} listener
@@ -47,7 +56,7 @@ export class RemoveDialogWindow extends Component {
       modalWindow.innerTextForBody = `Are you sure want to delete "${this._removingModel.name}" item?`;
     }
     modalWindow.isLoading = this._isLoadingState;
-    modalWindow.onCloseButtonCLick(() => this.rootElement.remove());
+    modalWindow.onCloseButtonCLick(this._onCloseListener);
     modalWindow.initSubmitButton((parentElement) => {
       const button = new Button(parentElement);
       button.buttonName = 'delete-button';

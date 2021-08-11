@@ -53,9 +53,9 @@ export class Application extends Component {
       stateManager.dispatch(new RouteChanged(route));
     });
 
-    stateManager.onStateChanged('location', ({location}) => {
+    stateManager.onStateChanged('location', () => {
       this._clearContainer();
-      configuration.getPageCreatorByRoute(location)();
+      configuration.getPageCreatorByRoute(stateManager.state.location)();
     });
 
     const locationRoute = router.route;

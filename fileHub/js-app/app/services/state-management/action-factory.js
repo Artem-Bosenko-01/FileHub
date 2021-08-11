@@ -11,6 +11,8 @@ import {FetchCurrentFolderContentExecutor}
   from './fetch-current-folder-content-action/fetch-current-folder-content-executor.js';
 import {DeleteItem} from './delete-item-action/delete-item.js';
 import {DeleteItemExecutor} from './delete-item-action/delete-item-executor.js';
+import {OpenModalWindow} from './open-modal-window/open-modal-window.js';
+import {OpenModalWindowExecutor} from './open-modal-window/open-modal-window-executor.js';
 import {UploadFile} from './upload-file-action/upload-file.js';
 import {UploadFileExecutor} from './upload-file-action/upload-file-executor.js';
 import {DownloadFile} from './download-file-action/download-file.js';
@@ -31,6 +33,7 @@ export class ActionFactory {
         .set(FetchCurrentFolderContent.typeName, new FetchCurrentFolderContentExecutor())
         .set(GetCurrentUser.typeName, new GetCurrentUserExecutor())
         .set(DeleteItem.typeName, new DeleteItemExecutor())
+        .set(OpenModalWindow.typeName, new OpenModalWindowExecutor())
         .set(UploadFile.typeName, new UploadFileExecutor())
         .set(DownloadFile.typeName, new DownloadFileExecutor());
   }

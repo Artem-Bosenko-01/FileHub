@@ -30,14 +30,6 @@ export class StateManager {
   }
 
   /**
-   * All services in state manager.
-   * @returns {Object}
-   */
-  get services() {
-    return this._services;
-  }
-
-  /**
    * Calls executor of some action from {@link ActionFactory actions list}.
    * @param {ActionInfo} action
    */
@@ -53,10 +45,19 @@ export class StateManager {
   /**
    * Adds some event for listeners on change state.
    * @param {string} fieldName
-   * @param {function({CustomEventInit})} listener
+   * @param {function()} listener
    */
   onStateChanged(fieldName, listener) {
-    this._eventBus.addEventListener(`stateChanged-${fieldName}`, (e) => listener(this.state));
+    this._eventBus.addEventListener(`stateChanged-${fieldName}`, listener);
+  }
+
+  /**
+   * Remove listener on change state.
+   * @param {string} fieldName
+   * @param {function(state: object)} listener
+   */
+  removeStateChangedListener(fieldName, listener) {
+    this._eventBus.removeEventListener(`stateChanged-${fieldName}`, listener);
   }
 
   /**

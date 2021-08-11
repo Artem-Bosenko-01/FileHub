@@ -5,7 +5,7 @@ const {module, test} = QUnit;
 module('Mutator', () => {
   test('Should change state on CURRENT_FOLDER_FETCHING_STARTED mutator name', (assert) => {
     const mutatedState = mutator('CURRENT_FOLDER_FETCHING_STARTED', {}, {});
-    assert.deepEqual(mutatedState, {isCurrentFolderFetching: true}, 'Should get current folder fetching flag true');
+    assert.deepEqual(mutatedState, {isCurrentFolderFetching: true}, 'Should set current folder fetching flag true');
   });
 
   test('Should change state on CURRENT_FOLDER_FETCHING_FAILED mutator name', (assert) => {
@@ -17,7 +17,7 @@ module('Mutator', () => {
     assert.deepEqual(mutatedState, {
       fetchingCurrentFolderErrorMessage: errorMessage,
       isCurrentFolderFetching: false,
-    }, 'Should get current folder');
+    }, 'Should set current folder');
   });
 
   test('Should change state on CURRENT_FOLDER_FETCHING_COMPLETED mutator name', (assert) => {
@@ -29,7 +29,7 @@ module('Mutator', () => {
     assert.deepEqual(mutatedState, {
       currentFolder: folderName,
       isCurrentFolderFetching: false,
-    }, 'Should get error message');
+    }, 'Should set error message');
   });
 
   test('Should change state on HASH_CHANGED_MUTATOR_COMPLETED mutator name', (assert) => {
@@ -43,12 +43,12 @@ module('Mutator', () => {
     assert.deepEqual(mutatedState, {
       location: pageRoute,
       locationParams: dynamicPart,
-    }, 'Should get route for page and also dynamic parameters');
+    }, 'Should set route for page and also dynamic parameters');
   });
 
   test('Should change state on GET_ROOT_FOLDER_MUTATOR_STARTED mutator name', (assert) => {
     const mutatedState = mutator('GET_ROOT_FOLDER_MUTATOR_STARTED', {}, {});
-    assert.deepEqual(mutatedState, {isCurrentFolderFetching: true}, 'Should get root folder fetching flag true');
+    assert.deepEqual(mutatedState, {isCurrentFolderFetching: true}, 'Should set root folder fetching flag true');
   });
 
   test('Should change state on GET_ROOT_FOLDER_MUTATOR_COMPLETED mutator name', (assert) => {
@@ -60,7 +60,7 @@ module('Mutator', () => {
     assert.deepEqual(mutatedState, {
       rootFolder: folderName,
       isCurrentFolderFetching: false,
-    }, 'Should get root folder');
+    }, 'Should set root folder');
   });
 
   test('Should change state on GET_ROOT_FOLDER_MUTATOR_FAILED mutator name', (assert) => {
@@ -72,13 +72,13 @@ module('Mutator', () => {
     assert.deepEqual(mutatedState, {
       fetchingRootFolderErrorMessage: errorMessage,
       isCurrentFolderFetching: false,
-    }, 'Should get error message');
+    }, 'Should set error message');
   });
 
   test('Should change state on CURRENT_FOLDER_CONTENT_FETCHING_STARTED mutator name', (assert) => {
     const mutatedState = mutator('CURRENT_FOLDER_CONTENT_FETCHING_STARTED', {}, {});
     assert.deepEqual(mutatedState, {isCurrentFolderContentFetching: true},
-        'Should get current folder content fetching flag true');
+        'Should set current folder content fetching flag true');
   });
 
   test('Should change state on CURRENT_FOLDER_CONTENT_FETCHING_COMPLETED mutator name', (assert) => {
@@ -90,7 +90,7 @@ module('Mutator', () => {
     assert.deepEqual(mutatedState, {
       currentFolderContent: folderContent,
       isCurrentFolderContentFetching: false,
-    }, 'Should get current folder content');
+    }, 'Should set current folder content');
   });
 
   test('Should change state on CURRENT_FOLDER_CONTENT_FETCHING_FAILED mutator name', (assert) => {
@@ -102,13 +102,13 @@ module('Mutator', () => {
     assert.deepEqual(mutatedState, {
       fetchingCurrentFolderContentErrorMessage: errorMessage,
       isCurrentFolderContentFetching: false,
-    }, 'Should get error message');
+    }, 'Should set error message');
   });
 
   test('Should change state on GET_CURRENT_USER_FETCHING_STARTED mutator name', (assert) => {
     const mutatedState = mutator('GET_CURRENT_USER_FETCHING_STARTED', {}, {});
     assert.deepEqual(mutatedState, {isCurrentUserInfoFetching: true},
-        'Should get current user data fetching flag true');
+        'Should set current user data fetching flag true');
   });
 
   test('Should change state on GET_CURRENT_USER_FETCHING_COMPLETED mutator name', (assert) => {
@@ -120,7 +120,7 @@ module('Mutator', () => {
     assert.deepEqual(mutatedState, {
       userData: userName,
       isCurrentUserInfoFetching: false,
-    }, 'Should get user data');
+    }, 'Should set user data');
   });
 
   test('Should change state on GET_CURRENT_USER_FETCHING_FAILED mutator name', (assert) => {
@@ -132,6 +132,6 @@ module('Mutator', () => {
     assert.deepEqual(mutatedState, {
       fetchingCurrentUserDetailsErrorMessage: errorMessage,
       isCurrentUserInfoFetching: false,
-    }, 'Should get error message');
+    }, 'Should set error message');
   });
 });

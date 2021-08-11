@@ -1,5 +1,5 @@
 import {RouteChangedExecutor}
-  from '../../../../../app/services/state-management/hash-changed-action/route-changed-executor.js';
+  from '../../../../../app/services/state-management/route-changed-action/route-changed-executor.js';
 import {getSpy} from '../../../get-spy.js';
 
 const {module, test} = QUnit;

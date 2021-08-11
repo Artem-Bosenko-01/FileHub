@@ -53,10 +53,19 @@ export class StateManager {
   /**
    * Adds some event for listeners on change state.
    * @param {string} fieldName
-   * @param {function({CustomEventInit})} listener
+   * @param {function()} listener
    */
   onStateChanged(fieldName, listener) {
-    this._eventBus.addEventListener(`stateChanged-${fieldName}`, (e) => listener(this.state));
+    this._eventBus.addEventListener(`stateChanged-${fieldName}`, listener);
+  }
+
+  /**
+   * Remove listener on change state.
+   * @param {string} fieldName
+   * @param {function(state: object)} listener
+   */
+  removeStateChangedListener(fieldName, listener) {
+    this._eventBus.removeEventListener(`stateChanged-${fieldName}`, listener);
   }
 
   /**

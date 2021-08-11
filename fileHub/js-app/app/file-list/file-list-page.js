@@ -12,8 +12,9 @@ import {RemoveDialogWindow} from '../modals/remove-dialog.js';
 import {DeleteItem} from '../services/state-management/delete-item-action/delete-item.js';
 import {uploadFile} from '../services/upload-file-function.js';
 import {UploadFile} from '../services/state-management/upload-file-action/upload-file.js';
-import {FetchCurrentFolderContent}
-  from '../services/state-management/fetch-current-folder-content-action/fetch-current-folder-content.js';
+import {FetchCurrentFolderContent} from '../services/state-management/fetch-current-folder-content-action/fetch-current-folder-content.js';
+import {DownloadFile} from '../services/state-management/download-file-action/download-file.js';
+import {downloadFile} from '../services/download-file-function.js';
 
 /**
  * Main page for authenticated user, that contains information about him and his saved files.
@@ -64,7 +65,10 @@ export class FileListPage extends Component {
         return new RemoveDialogWindow(container, item);
       });
 
-      modalWindow.onSubmit(() => this._stateManager.dispatch(new DeleteItem(item)));
+      modalWindow.onSubmit(() =>{
+        debugger;
+        this._stateManager.dispatch(new DeleteItem(item));
+      });
 
       this._stateManager.onStateChanged('deletingFileErrorMessage', (state) => {
         modalWindow.errorMessage = state.deletingFileErrorMessage;
@@ -83,6 +87,10 @@ export class FileListPage extends Component {
     fileList.onUploadButtonClick(async (item) => {
       const uploadedFile = await uploadFile(document);
       this._stateManager.dispatch(new UploadFile(uploadedFile, item.id));
+    });
+
+    fileList.onDownloadButtonClick((item) => {
+      this._stateManager.dispatch(new DownloadFile(item.id));
     });
 
     this._stateManager.onStateChanged('locationParams', async (state) => {
@@ -147,6 +155,10 @@ export class FileListPage extends Component {
 
     this._stateManager.onStateChanged('uploadingFileErrorMessage', (state) => {
       fileList.errorMessageAfterUploading = state.uploadingFileErrorMessage;
+    });
+
+    this._stateManager.onStateChanged('downloadedFileContent', (state) => {
+      downloadFile(document, state.downloadedFileContent);
     });
 
     this._stateManager.onStateChanged('rootFolder', (state) => {

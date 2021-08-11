@@ -15,6 +15,24 @@ export class FileList extends Component {
   }
 
   /**
+   * Loading status of download file.
+   * @param {boolean} value
+   */
+  set isLoadingDownloadFile(value) {
+    this._loadingDownloadFile = value;
+    this._render();
+  }
+
+  /**
+   * Add listener on click download button.
+   * @param {function(item: FileListItem)} listener
+   */
+  onDownloadButtonClick(listener) {
+    this._onDownloadButtonClickListener = listener;
+    this._render();
+  }
+
+  /**
    * Loading status.
    * @param {boolean} value
    */
@@ -92,6 +110,8 @@ export class FileList extends Component {
         itemView.onDeleteButtonClick(this._onDeleteButtonClick);
         itemView.onUploadButtonClick(this._onUploadButtonClickListener);
         itemView.isLoadingUploadFile = this._loadingUploadFile;
+        itemView.onDownloadButtonClick(this._onDownloadButtonClickListener);
+        itemView.isLoadingDownloadFile = this._loadingDownloadFile;
       });
     }
   }

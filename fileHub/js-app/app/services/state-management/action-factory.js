@@ -13,6 +13,8 @@ import {DeleteItem} from './delete-item-action/delete-item.js';
 import {DeleteItemExecutor} from './delete-item-action/delete-item-executor.js';
 import {UploadFile} from './upload-file-action/upload-file.js';
 import {UploadFileExecutor} from './upload-file-action/upload-file-executor.js';
+import {DownloadFile} from './download-file-action/download-file.js';
+import {DownloadFileExecutor} from './download-file-action/download-file-executor.js';
 
 /**
  * The factory contains a map of the action name and executor.
@@ -29,7 +31,8 @@ export class ActionFactory {
         .set(FetchCurrentFolderContent.typeName, new FetchCurrentFolderContentExecutor())
         .set(GetCurrentUser.typeName, new GetCurrentUserExecutor())
         .set(DeleteItem.typeName, new DeleteItemExecutor())
-        .set(UploadFile.typeName, new UploadFileExecutor());
+        .set(UploadFile.typeName, new UploadFileExecutor())
+        .set(DownloadFile.typeName, new DownloadFileExecutor());
   }
 
   /**

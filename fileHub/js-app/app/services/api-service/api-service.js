@@ -165,6 +165,22 @@ export class ApiService {
   }
 
   /**
+   * Downloads file to the application.
+   * @param {string} fileId
+   * @returns {Promise<Blob, ClientServerError|ServerError>}
+   */
+  async downloadFile(fileId) {
+    const response = await this._fetch(`/file/${fileId}`, {
+      method: 'GET',
+    });
+
+    this._checkResponseOnClientOrServerError(response);
+    const body = await response.blob();
+    debugger;
+    return body;
+  }
+
+  /**
    * @param {RequestInfo} url
    * @param {RequestInit} init
    * @returns {Promise<Response>}

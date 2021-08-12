@@ -10,8 +10,22 @@ const itemDatabase = {
   items: [
     {id: 'root-folder', name: 'root-folder', type: 'folder', itemsAmount: 45},
     {id: 'scas8988', name: 'folder-8988', type: 'folder', itemsAmount: 45, parentFolderId: 'root-folder'},
-    {id: 'ac787s', name: 'file-pdf', type: 'file', mimeType: 'application/pdf', size: 984948, parentFolderId: 'root-folder'},
-    {id: 'rer554', name: 'file-video', type: 'file', mimeType: 'video/x-msvideo', size: 7447474, parentFolderId: 'root-folder'},
+    {
+      id: 'ac787s',
+      name: 'file-pdf',
+      type: 'file',
+      mimeType: 'application/pdf',
+      size: 984948,
+      parentFolderId: 'root-folder',
+    },
+    {
+      id: 'rer554',
+      name: 'file-video',
+      type: 'file',
+      mimeType: 'video/x-msvideo',
+      size: 7447474,
+      parentFolderId: 'root-folder',
+    },
     {id: 'fold777', name: 'folder-1011', type: 'folder', itemsAmount: 7, parentFolderId: 'root-folder'},
     {id: '595cz', name: 'folder-595', type: 'folder', itemsAmount: 0, parentFolderId: 'root-folder'},
     {id: 'fold777', name: 'Inner_folder', type: 'folder', itemsAmount: 77, parentFolderId: 'root-folder'},
@@ -60,6 +74,14 @@ const itemDatabase = {
       throw new Error('This item\'s name also exist');
     } else {
       return file.content;
+    }
+  },
+  addDirectory: function(name, type, itemsAmount, parentFolderId) {
+    if (this.items.find((item) => item.name === name && item.parentFolderId === parentFolderId)) {
+      throw new Error('This item\'s name also exist');
+    } else {
+      const id = `${name}_${parentFolderId}`;
+      this.items.push({id, name, type, itemsAmount, parentFolderId});
     }
   },
 };
@@ -167,7 +189,6 @@ mockDeleteRequest('express:/file/:id', (url, opts) => {
 });
 
 mockPostRequest('express:/folder/:id/file', (url, opts) => {
-  return 450;
   const body = opts.body.get('file');
   const id = url.split('/')[2];
   try {
@@ -183,7 +204,6 @@ mockPostRequest('express:/folder/:id/file', (url, opts) => {
 });
 
 mockGetRequest(`express:/file/:id`, (url, opts) => {
-  return 500;
   const id = url.split('/')[2];
   try {
     const fileContent = itemDatabase.getFileContent(id);
@@ -192,6 +212,21 @@ mockGetRequest(`express:/file/:id`, (url, opts) => {
       name: file.name,
       mimeType: file.mimeType,
       content: fileContent,
+    };
+  } catch (error) {
+    return {
+      status: 400,
+    };
+  }
+});
+
+mockPostRequest(`express:/folder/:id/folder`, (url, opts) => {
+  const id = url.split('/')[2];
+  try {
+    const body = JSON.parse(opts.body);
+    itemDatabase.addDirectory(body.name, body.type, body.itemsAmount, id);
+    return {
+      file: body.name,
     };
   } catch (error) {
     return {

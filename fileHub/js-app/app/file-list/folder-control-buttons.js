@@ -9,6 +9,24 @@ export class FolderControlButtons extends Component {
    * Loading status.
    * @param {boolean} value
    */
+  set loadingCreateNewFolderFile(value) {
+    this._loadingCreateNewFolder = value;
+    this._render();
+  }
+
+  /**
+   * Add listener on click create new folder button.
+   * @param {function()} listener
+   */
+  onCreateNewFolderButtonClick(listener) {
+    this._onCreateNewFolderButtonClickListener = listener;
+    this._render();
+  }
+
+  /**
+   * Loading status.
+   * @param {boolean} value
+   */
   set loadingUploadFile(value) {
     this._loadingUploadFile = value;
     this._render();
@@ -43,9 +61,15 @@ export class FolderControlButtons extends Component {
     this._mount('createNewDirButton', (slotElement) => {
       const createNewDirButton = new Button(slotElement);
       createNewDirButton.buttonName = 'create-new-dir-button';
-      createNewDirButton.buttonIcon = 'plus';
+      if (this._loadingCreateNewFolder) {
+        createNewDirButton.buttonIcon = 'repeat';
+        createNewDirButton.iconClasses = ['loading'];
+      } else {
+        createNewDirButton.buttonIcon = 'plus';
+      }
+      createNewDirButton.disabled = this._loadingCreateNewFolder;
       createNewDirButton.buttonClasses = ['control-folder-button create-dir-button'];
-      createNewDirButton.onClick(() => alert('Create new directory'));
+      createNewDirButton.onClick(this._onCreateNewFolderButtonClickListener);
       return createNewDirButton;
     });
   }

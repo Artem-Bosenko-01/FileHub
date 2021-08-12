@@ -16,6 +16,8 @@ import {uploadFile} from '../services/upload-file-function.js';
 import {UploadFile} from '../services/state-management/upload-file-action/upload-file.js';
 import {DownloadFile} from '../services/state-management/download-file-action/download-file.js';
 import {downloadFile} from '../services/download-file-function.js';
+import {CreateFolderDialog} from '../modals/create-directory-dialog.js';
+import {CreateFolder} from '../services/state-management/create-folder-action/create-folder.js';
 import {FetchCurrentFolderContent}
   from '../services/state-management/fetch-current-folder-content-action/fetch-current-folder-content.js';
 
@@ -56,9 +58,14 @@ export class FileListPage extends StateBasedComponent {
     breadcrumbs.onFolderNameClick(this._onNavigateToFolder);
     new SearchBar(fileListBodyElement);
     const controlButtons = new FolderControlButtons(fileListBodyElement);
+
     controlButtons.onUploadButtonClick(async () => {
       const uploadedFile = await uploadFile(document);
       this._stateManager.dispatch(new UploadFile(uploadedFile, this._stateManager.state.currentFolder.id));
+    });
+
+    controlButtons.onCreateNewFolderButtonClick(() => {
+      this._stateManager.dispatch(new OpenModalWindow({createNewFolderWindow: true}));
     });
 
     const fileList = new FileList(fileListBodyElement);
@@ -97,11 +104,23 @@ export class FileListPage extends StateBasedComponent {
       if (!state.itemInModalWindow) {
         return;
       }
-      this._modalWindow = this._modalService.open((container) => {
-        return new RemoveDialogWindow(container, state.itemInModalWindow);
-      });
 
-      this._modalWindow.onSubmit(() => this._stateManager.dispatch(new DeleteItem(state.itemInModalWindow)));
+      if (state.itemInModalWindow.createNewFolderWindow) {
+        this._modalWindow = this._modalService.open((container) => {
+          return new CreateFolderDialog(container);
+        });
+
+        this._modalWindow.onSubmit((folderName) => {
+          this._stateManager.dispatch(new CreateFolder(folderName, state.currentFolder.id));
+        });
+      } else {
+        this._modalWindow = this._modalService.open((container) => {
+          return new RemoveDialogWindow(container, state.itemInModalWindow);
+        });
+
+        this._modalWindow.onSubmit(() => this._stateManager.dispatch(new DeleteItem(state.itemInModalWindow)));
+      }
+
       this._modalWindow.onClose(() => {
         this._stateManager.dispatch(new CloseModalWindow());
         this._modalService.close();
@@ -182,6 +201,22 @@ export class FileListPage extends StateBasedComponent {
 
     this._onStateChangedListener('downloadingFileErrorMessage', () => {
       fileList.errorMessageAfterFileManipulations = this._stateManager.state.downloadingFileErrorMessage;
+    });
+
+    this._onStateChangedListener('isCreatingNewFolder', () => {
+      const creatingStatus = this._stateManager.state.isCreatingNewFolder;
+      this._modalWindow.creatingInProgress = creatingStatus;
+      if (!creatingStatus && !this._stateManager.state.creatingDirectoryErrorMessage) {
+        this._modalService.close();
+      }
+    });
+
+    this._onStateChangedListener('creatingDirectoryErrorMessage', () => {
+      const errorMessage = this._stateManager.state.creatingDirectoryErrorMessage;
+      if (errorMessage) {
+        this._modalWindow.creatingInProgress = false;
+      }
+      this._modalWindow.errorMessage = errorMessage;
     });
 
     this._onStateChangedListener('rootFolder', () => {

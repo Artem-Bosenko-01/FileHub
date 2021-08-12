@@ -6,6 +6,15 @@ import {Button} from '../components/button.js';
  */
 export class BaseModalWindow extends Component {
   /**
+   *
+   * @param {function(parentElement: HTMLElement)} initializer
+   */
+  initFormInputField(initializer) {
+    this._initFormInputField = initializer;
+    this._render();
+  }
+
+  /**
    * Add listener on close button click.
    * @param {function} listener
    */
@@ -73,6 +82,12 @@ export class BaseModalWindow extends Component {
     this._submitButtonInitializer && this._mount('submit-button', (slotElement) => {
       return this._submitButtonInitializer(slotElement);
     });
+
+    if (this._getElement('modal-body-initializer')) {
+      this._initFormInputField && this._mount('modal-body-initializer', (slotElement) => {
+        return this._initFormInputField(slotElement);
+      });
+    }
   }
 
   /** @inheritDoc */
@@ -94,7 +109,7 @@ export class BaseModalWindow extends Component {
                     <slot data-fh="close-button"></slot>
                 </header>
                <div class="data">
-                ${modalBody}
+                ${this._initFormInputField ? `<slot data-fh="modal-body-initializer"></slot>` : modalBody}
                 <div class="submit-box submit-modal-box ${this._isLoading && 'submit-loading-modal-box'}">
                     <slot data-fh="cancel-button"></slot>
                     <slot data-fh="submit-button"></slot>

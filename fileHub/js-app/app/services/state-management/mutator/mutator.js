@@ -90,6 +90,10 @@ export const mutator = (mutatorName, details, state) => {
       return Object.assign({}, state, {
         itemInModalWindow: details.item,
       });
+    case MODAL_WINDOW_MUTATOR.CLOSE:
+      return Object.assign({}, state, {
+        itemInModalWindow: null,
+      });
     case UPLOAD_FILE_MUTATOR.FETCHING_STARTED:
       return Object.assign({}, state, {
         isUploadingFile: true,

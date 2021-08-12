@@ -150,7 +150,7 @@ module('Mutator', () => {
 
   test('Should change state on DELETE_ITEM_FETCHING_COMPLETED mutator name', (assert) => {
     const mutatedState = mutator('DELETE_ITEM_FETCHING_COMPLETED', {}, {});
-    assert.deepEqual(mutatedState, {removingFile: null}, 'Should set removingFile null');
+    assert.deepEqual(mutatedState, {itemInModalWindow: null, removingFile: null}, 'Should set removingFile null');
   });
 
   test('Should change state on DELETE_ITEM_FETCHING_FAILED mutator name', (assert) => {
@@ -159,7 +159,10 @@ module('Mutator', () => {
       error: errorMessage,
     };
     const mutatedState = mutator('DELETE_ITEM_FETCHING_FAILED', mockDetails, {});
-    assert.deepEqual(mutatedState, {deletingFileErrorMessage: errorMessage}, 'Should set error message');
+    assert.deepEqual(mutatedState, {
+      itemInModalWindow: null,
+      deletingFileErrorMessage: errorMessage,
+    }, 'Should set error message');
   });
 
   test('Should change state on OPEN_MODAL_WINDOW mutator name', (assert) => {

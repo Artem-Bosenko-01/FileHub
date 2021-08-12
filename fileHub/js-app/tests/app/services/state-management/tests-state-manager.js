@@ -29,8 +29,8 @@ module('State manager', () => {
     const actions = new ActionsMock(assert);
     const manager = new StateManager({}, {}, actions, mutatorSpy);
 
-    manager.onStateChanged(changedField, (state) => {
-      assert.equal(state.field, fieldName, 'Should get mutated state with field');
+    manager.onStateChanged(changedField, () => {
+      assert.equal(manager.state.field, fieldName, 'Should get mutated state with field');
     });
 
     manager.dispatch({typeName: changedField, fieldName});

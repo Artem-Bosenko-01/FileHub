@@ -168,11 +168,20 @@ export class FileListPage extends StateBasedComponent {
     });
 
     this._onStateChangedListener('uploadingFileErrorMessage', () => {
-      fileList.errorMessageAfterUploading = this._stateManager.state.uploadingFileErrorMessage;
+      fileList.errorMessageAfterFileManipulations = this._stateManager.state.uploadingFileErrorMessage;
     });
 
     this._onStateChangedListener('downloadedFileContent', () => {
       downloadFile(document, this._stateManager.state.downloadedFileContent);
+    });
+
+    this._onStateChangedListener('downloadedFile', () => {
+      const {fileId, isLoading} = this._stateManager.state.downloadedFile;
+      fileList.isLoadingDownloadFile(isLoading, fileId);
+    });
+
+    this._onStateChangedListener('downloadingFileErrorMessage', () => {
+      fileList.errorMessageAfterFileManipulations = this._stateManager.state.downloadingFileErrorMessage;
     });
 
     this._onStateChangedListener('rootFolder', () => {

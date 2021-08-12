@@ -175,9 +175,7 @@ export class ApiService {
     });
 
     this._checkResponseOnClientOrServerError(response);
-    const body = await response.blob();
-    debugger;
-    return body;
+    return await response.json();
   }
 
   /**

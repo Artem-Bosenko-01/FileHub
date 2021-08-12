@@ -60,6 +60,14 @@ export class FileListItemView extends Component {
     this._render();
   }
 
+  /**
+   * File list item id.
+   * @returns {string}
+   */
+  get id() {
+    return this._item.id;
+  }
+
   /** @inheritDoc */
   _init(itemDto) {
     this._item = itemDto;
@@ -111,7 +119,7 @@ export class FileListItemView extends Component {
         } else {
           button.buttonIcon = 'download';
         }
-        button.isButtonDisabled = this._loadingDownloadFile;
+        button.disabled = this._loadingDownloadFile;
         this._onDownloadButtonClickListener && button.onClick(() => this._onDownloadButtonClickListener(this._item));
         return button;
       });

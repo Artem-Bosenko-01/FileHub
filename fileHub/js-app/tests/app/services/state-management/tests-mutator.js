@@ -181,7 +181,8 @@ module('Mutator', () => {
 
   test('Should change state on UPLOAD_FILE_MUTATOR_FETCHING_STARTED mutator name', (assert) => {
     const mutatedState = mutator('UPLOAD_FILE_MUTATOR_FETCHING_STARTED', {}, {});
-    assert.deepEqual(mutatedState, {isUploadingFile: true}, 'Should set uploading file flag true');
+    assert.deepEqual(mutatedState, {uploadingFileErrorMessage: '', isUploadingFile: true},
+        'Should set uploading file flag true');
   });
 
   test('Should change state on UPLOAD_FILE_MUTATOR_FETCHING_COMPLETED mutator name', (assert) => {

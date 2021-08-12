@@ -20,8 +20,8 @@ const itemDatabase = {
   ],
 
   itemsContent: [
-    {id: 'ac787s', content: new Blob(['56489465scasq65'])},
-    {id: 'rer554', content: new Blob(['scsasc9s874sa6c'])},
+    {id: 'ac787s', content: '56489465scasq65'},
+    {id: 'rer554', content: 'scsasc9s874sa6c'},
   ],
 
   getFolderById: function(id) {
@@ -44,6 +44,14 @@ const itemDatabase = {
       throw new Error('This item\'s name also exist');
     } else {
       this.items.push({id, name, type: 'file', mimeType, size, parentFolderId});
+    }
+  },
+  getFileById: function(id) {
+    const file = this.items.find((item) => item.id === id && item.type === 'file');
+    if (!file) {
+      throw new Error('This item\'s name also exist');
+    } else {
+      return file;
     }
   },
   getFileContent: function(id) {
@@ -159,6 +167,7 @@ mockDeleteRequest('express:/file/:id', (url, opts) => {
 });
 
 mockPostRequest('express:/folder/:id/file', (url, opts) => {
+  return 450;
   const body = opts.body.get('file');
   const id = url.split('/')[2];
   try {
@@ -174,11 +183,16 @@ mockPostRequest('express:/folder/:id/file', (url, opts) => {
 });
 
 mockGetRequest(`express:/file/:id`, (url, opts) => {
+  return 500;
   const id = url.split('/')[2];
   try {
     const fileContent = itemDatabase.getFileContent(id);
-    debugger;
-    return fileContent;
+    const file = itemDatabase.getFileById(id);
+    return {
+      name: file.name,
+      mimeType: file.mimeType,
+      content: fileContent,
+    };
   } catch (error) {
     return {
       status: 400,

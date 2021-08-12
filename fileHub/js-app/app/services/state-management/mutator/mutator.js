@@ -97,6 +97,7 @@ export const mutator = (mutatorName, details, state) => {
     case UPLOAD_FILE_MUTATOR.FETCHING_STARTED:
       return Object.assign({}, state, {
         isUploadingFile: true,
+        uploadingFileErrorMessage: '',
       });
     case UPLOAD_FILE_MUTATOR.FETCHING_COMPLETED:
       return Object.assign({}, state, {
@@ -109,15 +110,16 @@ export const mutator = (mutatorName, details, state) => {
       });
     case DOWNLOAD_FILE_MUTATOR.FETCHING_STARTED:
       return Object.assign({}, state, {
+        downloadingFileErrorMessage: '',
         downloadedFile: {
-          file: details.downloadedFile,
+          fileId: details.downloadedFile,
           isLoading: true,
         },
       });
     case DOWNLOAD_FILE_MUTATOR.FETCHING_COMPLETED:
       return Object.assign({}, state, {
         downloadedFile: {
-          file: details.downloadedFile,
+          fileId: details.downloadedFile,
           isLoading: false,
         },
         downloadedFileContent: details.file,
@@ -125,7 +127,7 @@ export const mutator = (mutatorName, details, state) => {
     case DOWNLOAD_FILE_MUTATOR.FETCHING_FAILED:
       return Object.assign({}, state, {
         downloadedFile: {
-          file: details.downloadedFile,
+          fileId: details.downloadedFile,
           isLoading: false,
         },
         downloadingFileErrorMessage: details.error,

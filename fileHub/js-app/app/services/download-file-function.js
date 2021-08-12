@@ -1,13 +1,14 @@
 /**
  * Allows the user to download file.
  * @param {Document} document
- * @param {Blob} fileContent
+ * @param {{name: string, mimeType: string, content: string,}} fileContent
  */
 export function downloadFile(document, fileContent) {
   const link = document.createElement('a');
-  const objectURL = URL.createObjectURL(new Blob(['svdvdsvd']));
+  const blob = new Blob([fileContent.content], {type: fileContent.mimeType});
+  const objectURL = URL.createObjectURL(blob);
   link.href = objectURL;
-  link.download = 'true';
+  link.download = fileContent.name;
 
   link.click();
   URL.revokeObjectURL(objectURL);

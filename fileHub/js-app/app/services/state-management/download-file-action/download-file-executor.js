@@ -18,7 +18,7 @@ export class DownloadFileExecutor extends ActionExecutor {
       const fileContent = await services.apiService.downloadFile(actionInfo.fileId);
       mutate(DOWNLOAD_FILE_MUTATOR.FETCHING_COMPLETED, {file: fileContent});
     } catch (error) {
-      mutate(DOWNLOAD_FILE_MUTATOR.FETCHING_FAILED, {error: error.message});
+      mutate(DOWNLOAD_FILE_MUTATOR.FETCHING_FAILED, {downloadedFile: actionInfo.fileId, error: error.message});
     }
   }
 }

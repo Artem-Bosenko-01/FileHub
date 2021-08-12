@@ -11,7 +11,9 @@ import GetCurrentUser from '../services/state-management/get-current-user-action
 import {RemoveDialogWindow} from '../modals/remove-dialog.js';
 import {DeleteItem} from '../services/state-management/delete-item-action/delete-item.js';
 import {OpenModalWindow} from '../services/state-management/open-modal-window/open-modal-window.js';
-import {FetchCurrentFolderContent} from '../services/state-management/fetch-current-folder-content-action/fetch-current-folder-content.js';
+import {CloseModalWindow} from '../services/state-management/close-modal-window-action/close-modal-window.js';
+import {FetchCurrentFolderContent}
+  from '../services/state-management/fetch-current-folder-content-action/fetch-current-folder-content.js';
 
 /**
  * Main page for authenticated user, that contains information about him and his saved files.
@@ -82,7 +84,10 @@ export class FileListPage extends StateBasedComponent {
       });
 
       this._modalWindow.onSubmit(() => this._stateManager.dispatch(new DeleteItem(state.itemInModalWindow)));
-      this._modalWindow.onClose(() => this._modalService.close());
+      this._modalWindow.onClose(() => {
+        this._stateManager.dispatch(new CloseModalWindow());
+        this._modalService.close();
+      });
     });
 
     this._onStateChangedListener('deletingFileErrorMessage', () => {

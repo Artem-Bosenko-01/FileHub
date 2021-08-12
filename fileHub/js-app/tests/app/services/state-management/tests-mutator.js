@@ -171,6 +171,11 @@ module('Mutator', () => {
       item: fileName,
     };
     const mutatedState = mutator('OPEN_MODAL_WINDOW', mockDetails, {});
-    assert.deepEqual(mutatedState, {itemInModalWindow: fileName}, 'Should set removingFile null');
+    assert.deepEqual(mutatedState, {itemInModalWindow: fileName}, 'Should set removingFile');
+  });
+
+  test('Should change state on CLOSE_MODAL_WINDOW mutator name', (assert) => {
+    const mutatedState = mutator('CLOSE_MODAL_WINDOW', {}, {});
+    assert.deepEqual(mutatedState, {itemInModalWindow: null}, 'Should set removingFile null');
   });
 });

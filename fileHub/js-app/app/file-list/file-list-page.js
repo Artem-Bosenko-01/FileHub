@@ -87,6 +87,9 @@ export class FileListPage extends StateBasedComponent {
 
     this._onStateChangedListener('itemInModalWindow', () => {
       const state = this._stateManager.state;
+      if (!state.itemInModalWindow) {
+        return;
+      }
       this._modalWindow = this._modalService.open((container) => {
         return new RemoveDialogWindow(container, state.itemInModalWindow);
       });
@@ -96,6 +99,8 @@ export class FileListPage extends StateBasedComponent {
     });
 
     this._onStateChangedListener('deletingFileErrorMessage', () => {
+      this._modalWindow.deletingInProgress = !this._stateManager.state.deletingFileErrorMessage;
+
       this._modalWindow.errorMessage = this._stateManager.state.deletingFileErrorMessage;
     });
 
@@ -165,6 +170,7 @@ export class FileListPage extends StateBasedComponent {
       }
     });
   }
+
   /** @inheritDoc */
   get _markup() {
     return `<div>

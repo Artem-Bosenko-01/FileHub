@@ -10,7 +10,7 @@ const itemDatabase = {
   items: [
     {id: 'root-folder', name: 'root-folder', type: 'folder', itemsAmount: 45},
     {id: 'scas8988', name: 'folder-8988', type: 'folder', itemsAmount: 45, parentFolderId: 'root-folder'},
-    {id: 'ac787s', name: 'file-pdf', type: 'file', mimeType: 'pdf', size: 984948, parentFolderId: 'root-folder'},
+    {id: 'ac787s', name: 'file-pdf', type: 'file', mimeType: 'application/pdf', size: 984948, parentFolderId: 'root-folder'},
     {id: 'rer554', name: 'file-video', type: 'file', mimeType: 'video/x-msvideo', size: 7447474, parentFolderId: 'root-folder'},
     {id: 'fold777', name: 'folder-1011', type: 'folder', itemsAmount: 7, parentFolderId: 'root-folder'},
     {id: '595cz', name: 'folder-595', type: 'folder', itemsAmount: 0, parentFolderId: 'root-folder'},
@@ -147,9 +147,8 @@ mockDeleteRequest('express:/file/:id', (url, opts) => {
 mockPostRequest('express:/folder/:id/file', (url, opts) => {
   const body = opts.body.get('file');
   const id = url.split('/')[2];
-  const type = body.type.split('/')[1];
   try {
-    itemDatabase.addFile(body.name, body.name, type, body.size, id);
+    itemDatabase.addFile(body.name, body.name, body.type, body.size, id);
     return {
       status: 200,
     };

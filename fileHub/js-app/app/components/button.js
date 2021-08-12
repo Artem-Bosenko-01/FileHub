@@ -17,7 +17,7 @@ export class Button extends Component {
    * Button disabled status.
    * @param {boolean} value
    */
-  set isButtonDisabled(value) {
+  set disabled(value) {
     this._isButtonDisabled = value;
     this._render();
   }

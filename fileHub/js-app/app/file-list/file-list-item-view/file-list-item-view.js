@@ -81,7 +81,7 @@ export class FileListItemView extends Component {
       button.buttonName = 'delete-button';
       button.buttonClasses = ['element-control-button', 'delete-element-button'];
       button.buttonIcon = 'remove-circle';
-      this._onDeleteButtonClickListener && button.onClick(() => this._onDeleteButtonClickListener(this._item));
+      button.onClick(() => this._onDeleteButtonClickListener(this._item));
       return button;
     });
 
@@ -96,8 +96,8 @@ export class FileListItemView extends Component {
         } else {
           button.buttonIcon = 'upload';
         }
-        button.isButtonDisabled = this._loadingUploadFile;
-        this._onDeleteButtonClickListener && button.onClick(() => this._onUploadButtonClickListener(this._item));
+        button.disabled = this._loadingUploadFile;
+        button.onClick(() => this._onUploadButtonClickListener(this._item));
         return button;
       });
     } else {

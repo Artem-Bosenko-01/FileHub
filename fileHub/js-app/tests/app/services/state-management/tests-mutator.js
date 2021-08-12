@@ -170,4 +170,26 @@ module('Mutator', () => {
     const mutatedState = mutator('OPEN_MODAL_WINDOW', mockDetails, {});
     assert.deepEqual(mutatedState, {itemInModalWindow: fileName}, 'Should set removingFile null');
   });
+
+  test('Should change state on UPLOAD_FILE_MUTATOR_FETCHING_STARTED mutator name', (assert) => {
+    const mutatedState = mutator('UPLOAD_FILE_MUTATOR_FETCHING_STARTED', {}, {});
+    assert.deepEqual(mutatedState, {isUploadingFile: true}, 'Should set uploading file flag true');
+  });
+
+  test('Should change state on UPLOAD_FILE_MUTATOR_FETCHING_COMPLETED mutator name', (assert) => {
+    const mutatedState = mutator('UPLOAD_FILE_MUTATOR_FETCHING_COMPLETED', {}, {});
+    assert.deepEqual(mutatedState, {isUploadingFile: false}, 'Should set uploading file flag false');
+  });
+
+  test('Should change state on UPLOAD_FILE_MUTATOR_FETCHING_FAILED mutator name', (assert) => {
+    const errorMessage = 'error';
+    const mockDetails = {
+      error: errorMessage,
+    };
+    const mutatedState = mutator('UPLOAD_FILE_MUTATOR_FETCHING_FAILED', mockDetails, {});
+    assert.deepEqual(mutatedState, {
+      isUploadingFile: false,
+      uploadingFileErrorMessage: errorMessage,
+    }, 'Should set error message');
+  });
 });

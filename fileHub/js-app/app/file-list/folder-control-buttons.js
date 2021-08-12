@@ -16,7 +16,7 @@ export class FolderControlButtons extends Component {
 
   /**
    * Add listener on click delete button.
-   * @param {function(item: FileListItem)} listener
+   * @param {function()} listener
    */
   onUploadButtonClick(listener) {
     this._onUploadButtonClickListener = listener;
@@ -34,7 +34,7 @@ export class FolderControlButtons extends Component {
       } else {
         uploadButton.buttonIcon = 'upload';
       }
-      uploadButton.isButtonDisabled = this._loadingUploadFile;
+      uploadButton.disabled = this._loadingUploadFile;
       uploadButton.buttonClasses = ['control-folder-button upload-file-button'];
       uploadButton.onClick(this._onUploadButtonClickListener);
       return uploadButton;

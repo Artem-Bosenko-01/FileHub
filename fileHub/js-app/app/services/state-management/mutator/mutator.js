@@ -79,10 +79,12 @@ export const mutator = (mutatorName, details, state) => {
     case DELETE_ITEM_MUTATOR.FETCHING_COMPLETED:
       return Object.assign({}, state, {
         removingFile: null,
+        itemInModalWindow: null,
       });
     case DELETE_ITEM_MUTATOR.FETCHING_FAILED:
       return Object.assign({}, state, {
         deletingFileErrorMessage: details.error,
+        itemInModalWindow: null,
       });
     case MODAL_WINDOW_MUTATOR.OPEN:
       return Object.assign({}, state, {

@@ -39,7 +39,7 @@ module('FileListItemView', (hooks) => {
     const convertedMimeType = 'Pdf Document';
     const convertedSize = '64 KB';
     const size = 65489;
-    const mimeType = 'pdf';
+    const mimeType = 'application/pdf';
     const name = 'file';
 
     const itemJson = {

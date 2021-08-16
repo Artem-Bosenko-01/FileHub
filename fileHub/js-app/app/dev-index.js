@@ -167,7 +167,6 @@ mockDeleteRequest('express:/file/:id', (url, opts) => {
 });
 
 mockPostRequest('express:/folder/:id/file', (url, opts) => {
-  return 450;
   const body = opts.body.get('file');
   const id = url.split('/')[2];
   try {
@@ -183,7 +182,6 @@ mockPostRequest('express:/folder/:id/file', (url, opts) => {
 });
 
 mockGetRequest(`express:/file/:id`, (url, opts) => {
-  return 500;
   const id = url.split('/')[2];
   try {
     const fileContent = itemDatabase.getFileContent(id);

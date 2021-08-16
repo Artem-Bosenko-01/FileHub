@@ -1,7 +1,7 @@
 import {ActionInfo} from '../action-info.js';
 
 /**
- *
+ * Contains information about item that needs to download.
  */
 export class DownloadFile extends ActionInfo {
   /** @inheritDoc */

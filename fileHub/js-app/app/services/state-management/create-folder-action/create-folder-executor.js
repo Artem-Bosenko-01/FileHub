@@ -3,7 +3,7 @@ import {FetchCurrentFolderContent} from '../fetch-current-folder-content-action/
 import {CREATE_FOLDER_MUTATOR} from '../mutator/create-folder-mutator.js';
 
 /**
- *
+ * Contains information that is needed to creating a new folder.
  */
 export class CreateFolderExecutor extends ActionExecutor {
   /**

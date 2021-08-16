@@ -64,4 +64,33 @@ module('FileListItemView', (hooks) => {
         'Should render file size');
     assert.ok(searchElement('download-button', fixture), 'Should add download button for file item');
   });
+
+  test('Should add and call listener on delete button click', (assert) => {
+    const itemJson = {
+      id: 'id',
+      type: 'file',
+    };
+    const item = new FileListItem(itemJson);
+    const itemView = new FileListItemView(fixture, item);
+
+    itemView.onDeleteButtonClick((listItem)=> assert.deepEqual(item, listItem,
+        'Should get item on click'));
+    const deleteButton = searchElement('delete-button', fixture);
+    deleteButton.click();
+  });
+
+  test('Should add and call listener on folder name click click', (assert) => {
+    const itemJson = {
+      id: 'id',
+      type: 'folder',
+      itemsAmount: 54,
+    };
+    const item = new FileListItem(itemJson);
+    const itemView = new FileListItemView(fixture, item);
+
+    itemView.onFolderNameCLicked((itemId)=> assert.deepEqual(item.id, itemId,
+        'Should get item id on click'));
+    const deleteButton = searchElement('folder-name', fixture);
+    deleteButton.click();
+  });
 });

@@ -34,7 +34,7 @@ export class FileListItemView extends Component {
   }
 
   /**
-   * Add listener on click delete button.
+   * Add listener on click upload button.
    * @param {function(item: FileListItem)} listener
    */
   onUploadButtonClick(listener) {

@@ -2,7 +2,7 @@ import ActionExecutor from '../action-execution.js';
 import {DOWNLOAD_FILE_MUTATOR} from '../mutator/download-file-mutator.js';
 
 /**
- *
+ * Execute downloading file from folder content.
  */
 export class DownloadFileExecutor extends ActionExecutor {
   /**

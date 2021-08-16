@@ -9,7 +9,7 @@ export class UploadFile extends ActionInfo {
 
   /**
    * @constructor
-   * @param {FormData} file
+   * @param {File} file
    * @param {string} parentFolderId
    */
   constructor(file, parentFolderId) {

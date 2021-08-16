@@ -1,7 +1,7 @@
 /**
  * Allows the user to choose file for uploading into the application.
  * @param {Document} document
- * @returns {Promise<File, void>}
+ * @returns {Promise<File>}
  */
 export function uploadFile(document) {
   return new Promise((resolve) => {

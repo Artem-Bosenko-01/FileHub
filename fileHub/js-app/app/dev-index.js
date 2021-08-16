@@ -91,7 +91,7 @@ const mockPostRequest = (url, handler) => {
     const response = handler(...args);
     console.log(...args, response);
     return response;
-  }, {delay: 400});
+  }, {delay: 4000});
 };
 
 const mockGetRequest = (url, handler) => {
@@ -110,6 +110,12 @@ const mockDeleteRequest = (url, handler) => {
   }, {delay: 400});
 };
 
+function checkToken(token) {
+  if (!token || (token === 'null')) {
+    throw new Error();
+  }
+}
+
 mockPostRequest('/login', (url, opts) => {
   const body = opts.body;
   const email = JSON.parse(body).email;
@@ -117,7 +123,7 @@ mockPostRequest('/login', (url, opts) => {
 
   if (registeredUsers.has(email)) {
     if (registeredUsers.get(email) === password) {
-      return {token: 'AUTH_TOKEN'};
+      return {token: 'vsds'};
     } else {
       return {
         status: 401,
@@ -149,23 +155,48 @@ mockPostRequest('/register', (url, opts) => {
 });
 
 mockGetRequest('/root-folder', (url, opts) => {
+  const token = opts.headers.get('Authorization').split(' ')[1];
+  try {
+    checkToken(token);
+  } catch (error) {
+    return 401;
+  }
   const rootFolder = itemDatabase.getRootFolder();
   return {folder: rootFolder};
 });
 
 mockGetRequest('express:/folder/:id', (url, opts) => {
+  const token = opts.headers.get('Authorization').split(' ')[1];
+
+  try {
+    checkToken(token);
+  } catch (error) {
+    return 401;
+  }
   const id = url.split('/')[2];
   const folder = itemDatabase.getFolderById(id);
   return {folder};
 });
 
 mockGetRequest('express:/folder/:id/content', (url, opts) => {
+  const token = opts.headers.get('Authorization').split(' ')[1];
+  try {
+    checkToken(token);
+  } catch (error) {
+    return 401;
+  }
   const parentId = url.split('/')[2];
   const content = itemDatabase.getFolderByParentId(parentId);
   return {items: content};
 });
 
 mockGetRequest('/user', (url, opts) => {
+  const token = opts.headers.get('Authorization').split(' ')[1];
+  try {
+    checkToken(token);
+  } catch (error) {
+    return 401;
+  }
   return {
     name: 'Artem Bosenko',
     id: '4521a4sca',
@@ -173,6 +204,12 @@ mockGetRequest('/user', (url, opts) => {
 });
 
 mockDeleteRequest('express:/folder/:id', (url, opts) => {
+  const token = opts.headers.get('Authorization').split(' ')[1];
+  try {
+    checkToken(token);
+  } catch (error) {
+    return 401;
+  }
   const id = url.split('/')[2];
   itemDatabase.deleteFolder(id);
   return {
@@ -181,6 +218,12 @@ mockDeleteRequest('express:/folder/:id', (url, opts) => {
 });
 
 mockDeleteRequest('express:/file/:id', (url, opts) => {
+  const token = opts.headers.get('Authorization').split(' ')[1];
+  try {
+    checkToken(token);
+  } catch (error) {
+    return 401;
+  }
   const id = url.split('/')[2];
   itemDatabase.deleteFile(id);
   return {
@@ -189,6 +232,12 @@ mockDeleteRequest('express:/file/:id', (url, opts) => {
 });
 
 mockPostRequest('express:/folder/:id/file', (url, opts) => {
+  const token = opts.headers.get('Authorization').split(' ')[1];
+  try {
+    checkToken(token);
+  } catch (error) {
+    return 401;
+  }
   const body = opts.body.get('file');
   const id = url.split('/')[2];
   try {
@@ -204,6 +253,12 @@ mockPostRequest('express:/folder/:id/file', (url, opts) => {
 });
 
 mockGetRequest(`express:/file/:id`, (url, opts) => {
+  const token = opts.headers.get('Authorization').split(' ')[1];
+  try {
+    checkToken(token);
+  } catch (error) {
+    return 401;
+  }
   const id = url.split('/')[2];
   try {
     const fileContent = itemDatabase.getFileContent(id);
@@ -221,6 +276,12 @@ mockGetRequest(`express:/file/:id`, (url, opts) => {
 });
 
 mockPostRequest(`express:/folder/:id/folder`, (url, opts) => {
+  const token = opts.headers.get('Authorization').split(' ')[1];
+  try {
+    checkToken(token);
+  } catch (error) {
+    return 401;
+  }
   const id = url.split('/')[2];
   try {
     const body = JSON.parse(opts.body);
@@ -233,4 +294,8 @@ mockPostRequest(`express:/folder/:id/folder`, (url, opts) => {
       status: 400,
     };
   }
+});
+
+mockPostRequest('/logOut', (url, opts) => {
+  return 200;
 });

@@ -18,6 +18,7 @@ import {DownloadFile} from '../services/state-management/download-file-action/do
 import {downloadFile} from '../services/download-file-function.js';
 import {CreateFolderDialog} from '../modals/create-directory-dialog.js';
 import {CreateFolder} from '../services/state-management/create-folder-action/create-folder.js';
+import {LogOutUser} from '../services/state-management/log-out-user-action/log-out-user.js';
 import {FetchCurrentFolderContent}
   from '../services/state-management/fetch-current-folder-content-action/fetch-current-folder-content.js';
 
@@ -51,7 +52,11 @@ export class FileListPage extends StateBasedComponent {
   _initNestedComponents() {
     const userPanelElement = this._getElement('user-panel');
     const userDetails = new UserDetails(userPanelElement);
-    new LogOut(userPanelElement);
+    const logOut = new LogOut(userPanelElement);
+    logOut.onClick(() => {
+      this._stateManager.dispatch(new LogOutUser());
+      this.deleteAllSubscribersOnChangedState();
+    });
 
     const fileListBodyElement = this._getElement('file-list-body');
     const breadcrumbs = new Breadcrumbs(fileListBodyElement);
@@ -85,6 +90,10 @@ export class FileListPage extends StateBasedComponent {
 
     this._onStateChangedListener('locationParams', async () => {
       const state = this._stateManager.state;
+      if (state.location !== 'index') {
+        return;
+      }
+
       const currentFolderId = state.locationParams.currentFolderId;
       if (!currentFolderId && !state.rootFolder) {
         this._stateManager.dispatch(new GetRootFolder());
@@ -95,6 +104,8 @@ export class FileListPage extends StateBasedComponent {
         this._stateManager.dispatch(new FetchCurrentFolderContent());
         if (!state.userData) {
           this._stateManager.dispatch(new GetCurrentUser());
+        } else {
+          userDetails.userFullName = state.userData.name;
         }
       }
     });

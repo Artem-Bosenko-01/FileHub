@@ -4,7 +4,7 @@ import {FormInputField} from '../components/form-input-field.js';
 import {Button} from '../components/button.js';
 
 /**
- *
+ * Dialog window for getting the name of the folder and approving creating folder.
  */
 export class CreateFolderDialog extends Component {
   /**

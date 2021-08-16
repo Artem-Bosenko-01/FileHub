@@ -6,7 +6,7 @@ import {Button} from '../components/button.js';
  */
 export class BaseModalWindow extends Component {
   /**
-   *
+   * Gets callback for initialize input field at the modal body.
    * @param {function(parentElement: HTMLElement)} initializer
    */
   initFormInputField(initializer) {

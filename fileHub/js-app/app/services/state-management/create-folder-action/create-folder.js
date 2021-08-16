@@ -1,7 +1,7 @@
 import {ActionInfo} from '../action-info.js';
 
 /**
- *
+ * Execute creating a folder with inputted name.
  */
 export class CreateFolder extends ActionInfo {
   /** @inheritDoc */

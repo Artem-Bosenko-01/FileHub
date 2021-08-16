@@ -3,6 +3,7 @@ import {FileListItem} from '../../../app/file-list-item.js';
 import searchElement from '../search-element-function.js';
 
 const {module, test} = QUnit;
+const LOADING_SYMBOL = '<span class="glyphicon glyphicon-repeat loading"></span>';
 
 module('FileListItemView', (hooks) => {
   let fixture;
@@ -63,5 +64,34 @@ module('FileListItemView', (hooks) => {
     assert.equal(searchElement('size', fixture).innerText, convertedSize,
         'Should render file size');
     assert.ok(searchElement('download-button', fixture), 'Should add download button for file item');
+  });
+
+  test('Should add and call listener on upload button click', (assert) => {
+    const itemJson = {
+      id: 'id',
+      type: 'folder',
+      itemsAmount: 54,
+    };
+    const item = new FileListItem(itemJson);
+    const itemView = new FileListItemView(fixture, item);
+
+    itemView.onUploadButtonClick((listItem)=> assert.deepEqual(item, listItem,
+        'Should get item on click'));
+    const uploadButton = searchElement('upload-button', fixture);
+    uploadButton.click();
+  });
+
+  test('Should set loading status to upload button', (assert) => {
+    const itemJson = {
+      id: 'id',
+      type: 'folder',
+      itemsAmount: 54,
+    };
+    const item = new FileListItem(itemJson);
+    const itemView = new FileListItemView(fixture, item);
+
+    itemView.isLoadingUploadFile = true;
+    const uploadButton = searchElement('upload-button', fixture);
+    assert.equal(uploadButton.innerHTML, LOADING_SYMBOL, 'Should render loading symbol');
   });
 });

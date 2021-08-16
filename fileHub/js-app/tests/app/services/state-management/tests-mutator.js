@@ -201,4 +201,39 @@ module('Mutator', () => {
       uploadingFileErrorMessage: errorMessage,
     }, 'Should set error message');
   });
+
+  test('Should change state on DOWNLOAD_FILE_MUTATOR_FETCHING_STARTED mutator name', (assert) => {
+    const fileId = 'id';
+    const mutatedState = mutator('DOWNLOAD_FILE_MUTATOR_FETCHING_STARTED',
+        {downloadedFile: fileId}, {});
+    assert.deepEqual(mutatedState, {downloadedFile: {
+      fileId,
+      isLoading: true,
+    },
+    downloadingFileErrorMessage: ''}, 'Should set downloading file true');
+  });
+
+  test('Should change state on DOWNLOAD_FILE_MUTATOR_FETCHING_COMPLETED mutator name', (assert) => {
+    const fileId = 'id';
+    const fileContent = 'content';
+    const mutatedState = mutator('DOWNLOAD_FILE_MUTATOR_FETCHING_COMPLETED',
+        {downloadedFile: fileId, file: fileContent}, {});
+    assert.deepEqual(mutatedState, {downloadedFile: {
+      fileId,
+      isLoading: false,
+    },
+    downloadedFileContent: fileContent}, 'Should set file after downloading file');
+  });
+
+  test('Should change state on DOWNLOAD_FILE_MUTATOR_FETCHING_FAILED mutator name', (assert) => {
+    const errorMessage = 'error';
+    const fileId = 'id';
+    const mutatedState = mutator('DOWNLOAD_FILE_MUTATOR_FETCHING_FAILED',
+        {downloadedFile: fileId, error: errorMessage}, {});
+    assert.deepEqual(mutatedState, {downloadedFile: {
+      fileId,
+      isLoading: false,
+    },
+    downloadingFileErrorMessage: errorMessage}, 'Should set error message after downloading file');
+  });
 });

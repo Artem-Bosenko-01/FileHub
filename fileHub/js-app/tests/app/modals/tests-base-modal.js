@@ -57,4 +57,12 @@ module('BaseModalWindow', (hooks) => {
       return {rootElement: 'id'};
     });
   });
+
+  test('Should call initializer for input field in modal body', (assert) => {
+    const modalWindow = new BaseModalWindow(fixture, 'header');
+    modalWindow.initFormInputField((parentElement) => {
+      assert.equal(parentElement.getAttribute('data-fh'), 'modal-body-initializer');
+      return {rootElement: 'id'};
+    });
+  });
 });

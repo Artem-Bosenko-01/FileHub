@@ -70,6 +70,22 @@ const itemDatabase = {
       this.items.push({id, name, type, itemsAmount, parentFolderId});
     }
   },
+  renameFolder: function(id, newName) {
+    const item = this.items.find((item) => item.id === id && item.type === 'folder');
+    if (this.items.find((item) => item.name === newName && item.type === 'folder')) {
+      throw new Error('This folder name are exist');
+    } else {
+      item.name = newName;
+    }
+  },
+  renameFile: function(id, newName) {
+    const item = this.items.find((item) => item.id === id && item.type === 'file');
+    if (this.items.find((item) => item.name === newName && item.type === 'file')) {
+      throw new Error('This file name are exist');
+    } else {
+      item.name = newName;
+    }
+  },
 };
 
 const mockPostRequest = (url, handler) => {
@@ -90,6 +106,14 @@ const mockGetRequest = (url, handler) => {
 
 const mockDeleteRequest = (url, handler) => {
   fetchMock.delete(url, (...args) => {
+    const response = handler(...args);
+    console.log(...args, response);
+    return response;
+  }, {delay: 400});
+};
+
+const mockPutRequest = (url, handler) => {
+  fetchMock.put(url, (...args) => {
     const response = handler(...args);
     console.log(...args, response);
     return response;
@@ -284,4 +308,43 @@ mockPostRequest(`express:/folder/:id/folder`, (url, opts) => {
 
 mockPostRequest('/logOut', (url, opts) => {
   return 200;
+});
+
+mockPutRequest(`express:/folder/:id`, (url, opts) => {
+  const token = opts.headers.get('Authorization').split(' ')[1];
+  try {
+    checkToken(token);
+  } catch (error) {
+    return 401;
+  }
+
+  try {
+    const body = JSON.parse(opts.body);
+    itemDatabase.renameFolder(body.id, body.name);
+    return 200;
+  } catch (error) {
+    return {
+      status: 400,
+    };
+  }
+});
+
+
+mockPutRequest(`express:/file/:id`, (url, opts) => {
+  const token = opts.headers.get('Authorization').split(' ')[1];
+  try {
+    checkToken(token);
+  } catch (error) {
+    return 401;
+  }
+
+  try {
+    const body = JSON.parse(opts.body);
+    itemDatabase.renameFile(body.id, body.name);
+    return 200;
+  } catch (error) {
+    return {
+      status: 400,
+    };
+  }
 });

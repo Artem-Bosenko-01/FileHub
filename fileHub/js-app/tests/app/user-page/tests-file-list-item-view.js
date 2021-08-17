@@ -89,7 +89,7 @@ module('FileListItemView', (hooks) => {
     const item = new FileListItem(itemJson);
     const itemView = new FileListItemView(fixture, item);
 
-    itemView.onFolderNameCLicked((itemId)=> assert.deepEqual(item.id, itemId,
+    itemView.onFolderNameDoubleCLicked((itemId)=> assert.deepEqual(item.id, itemId,
         'Should get item id on click'));
     const deleteButton = searchElement('folder-name', fixture);
     deleteButton.click();

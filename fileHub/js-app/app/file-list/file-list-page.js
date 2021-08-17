@@ -19,6 +19,8 @@ import {downloadFile} from '../services/download-file-function.js';
 import {CreateFolderDialog} from '../modals/create-directory-dialog.js';
 import {CreateFolder} from '../services/state-management/create-folder-action/create-folder.js';
 import {LogOutUser} from '../services/state-management/log-out-user-action/log-out-user.js';
+import {SelectItem} from '../services/state-management/select-item-action/select-item.js';
+import {RenameItem} from '../services/state-management/rename-item/rename-item.js';
 import {FetchCurrentFolderContent}
   from '../services/state-management/fetch-current-folder-content-action/fetch-current-folder-content.js';
 
@@ -74,7 +76,7 @@ export class FileListPage extends StateBasedComponent {
     });
 
     const fileList = new FileList(fileListBodyElement);
-    fileList.onFolderClick(this._onNavigateToFolder);
+    fileList.onFolderDoubleCLicked(this._onNavigateToFolder);
     fileList.onDeleteButtonClick((item) => {
       this._stateManager.dispatch(new OpenModalWindow(item));
     });
@@ -86,6 +88,24 @@ export class FileListPage extends StateBasedComponent {
 
     fileList.onDownloadButtonClick((item) => {
       this._stateManager.dispatch(new DownloadFile(item.id));
+    });
+
+    fileList.onClickLine((itemId) => {
+      fileList.renameItem(null);
+      this._stateManager.dispatch(new SelectItem(itemId));
+      fileList.selectedFileListItem = itemId;
+    });
+
+    fileList.onItemNameClick((item) => {
+      const selectedLine = this._stateManager.state.selectedLine;
+      this._renamedItem = item;
+      if (selectedLine === item.id) {
+        setTimeout(() => fileList.renameItem(selectedLine));
+      }
+    });
+
+    fileList.onRenameItemSubmit((newName) => {
+      this._stateManager.dispatch(new RenameItem(this._renamedItem, newName));
     });
 
     this._onStateChangedListener('locationParams', async () => {
@@ -167,6 +187,8 @@ export class FileListPage extends StateBasedComponent {
     });
 
     this._onStateChangedListener('currentFolderContent', () => {
+      fileList.renameItem(null);
+      fileList.selectedFileListItem = null;
       fileList.fileItems = this._stateManager.state.currentFolderContent;
     });
 
@@ -228,6 +250,14 @@ export class FileListPage extends StateBasedComponent {
         this._modalWindow.creatingInProgress = false;
       }
       this._modalWindow.errorMessage = errorMessage;
+    });
+
+    this._onStateChangedListener('isRenamingLoadingStatus', () => {
+      fileList.isRenameItemLoading = this._stateManager.state.isRenamingLoadingStatus;
+    });
+
+    this._onStateChangedListener('renamingItemErrorMessage', () => {
+      fileList.errorMessageRenamingItem = this._stateManager.state.renamingItemErrorMessage;
     });
 
     this._onStateChangedListener('rootFolder', () => {

@@ -1,7 +1,7 @@
 import {ActionInfo} from '../action-info.js';
 
 /**
- *
+ * Contains data for logging out users.
  */
 export class LogOutUser extends ActionInfo {
   /** @inheritDoc */

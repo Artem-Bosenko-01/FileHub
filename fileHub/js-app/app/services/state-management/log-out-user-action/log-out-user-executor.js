@@ -2,7 +2,7 @@ import ActionExecutor from '../action-execution.js';
 import {LOG_OUT_USER_MUTATOR} from '../mutator/log-out-user-mutator.js';
 
 /**
- *
+ * Execute logging out user and stopping current user session.
  */
 export class LogOutUserExecutor extends ActionExecutor {
   /**

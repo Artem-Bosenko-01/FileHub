@@ -21,6 +21,7 @@ import {CreateFolder} from '../services/state-management/create-folder-action/cr
 import {LogOutUser} from '../services/state-management/log-out-user-action/log-out-user.js';
 import {SelectItem} from '../services/state-management/select-item-action/select-item.js';
 import {RenameItem} from '../services/state-management/rename-item/rename-item.js';
+import {SearchInfo} from '../services/state-management/search-info-action/search-info.js';
 import {FetchCurrentFolderContent}
   from '../services/state-management/fetch-current-folder-content-action/fetch-current-folder-content.js';
 
@@ -63,7 +64,11 @@ export class FileListPage extends StateBasedComponent {
     const fileListBodyElement = this._getElement('file-list-body');
     const breadcrumbs = new Breadcrumbs(fileListBodyElement);
     breadcrumbs.onFolderNameClick(this._onNavigateToFolder);
-    new SearchBar(fileListBodyElement);
+    const searchBar = new SearchBar(fileListBodyElement);
+    searchBar.onSearchSubmit((searchLine) => {
+      this._stateManager.dispatch(new SearchInfo(searchLine));
+    });
+
     const controlButtons = new FolderControlButtons(fileListBodyElement);
 
     controlButtons.onUploadButtonClick(async () => {
@@ -258,6 +263,10 @@ export class FileListPage extends StateBasedComponent {
 
     this._onStateChangedListener('renamingItemErrorMessage', () => {
       fileList.errorMessageRenamingItem = this._stateManager.state.renamingItemErrorMessage;
+    });
+
+    this._onStateChangedListener('isSearching', () => {
+      searchBar.isSearchingLoading = this._stateManager.state.isSearching;
     });
 
     this._onStateChangedListener('rootFolder', () => {

@@ -5,6 +5,10 @@ import {Button} from '../components/button.js';
  * Component for searching necessary files at folder content list.
  */
 export class SearchBar extends Component {
+  /**
+   * Loading status of searching.
+   * @param {boolean} value
+   */
   set isSearchingLoading(value) {
     this._isSearchingLoading = value;
     this._render();

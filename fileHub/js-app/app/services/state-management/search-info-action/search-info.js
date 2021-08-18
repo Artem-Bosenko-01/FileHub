@@ -1,7 +1,7 @@
 import {ActionInfo} from '../action-info.js';
 
 /**
- *
+ * Contains data for filtering items.
  */
 export class SearchInfo extends ActionInfo {
   /** @inheritDoc */

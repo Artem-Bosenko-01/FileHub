@@ -3,7 +3,7 @@ import {SEARCHING_MUTATOR} from '../mutator/searching-mutator.js';
 import {search} from '../../search-by-substring.js';
 
 /**
- *
+ * Executes the filtering of elements by the substring.
  */
 export class SearchInfoExecutor extends ActionExecutor {
   /**

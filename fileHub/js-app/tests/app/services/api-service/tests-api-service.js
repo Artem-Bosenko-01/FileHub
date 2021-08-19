@@ -9,6 +9,7 @@ import testsFetchCurrentFolderContentApiService
   from '../state-management/fetch-current-folder-content/tests-fetch-current-folder-content-api-service.js';
 import testsDeleteFileApiService from '../state-management/delete-item/tests-delete-file-api-service.js';
 import testsDeleteFolderApiService from '../state-management/delete-item/tests-delete-folder-api-service.js';
+import testsUploadFileApiService from '../state-management/upload-file/tests-upload-file-api-service.js';
 const {module} = QUnit;
 
 module('APIService', () => {
@@ -20,4 +21,5 @@ module('APIService', () => {
   testsFetchCurrentUserApiService();
   testsDeleteFileApiService();
   testsDeleteFolderApiService();
+  testsUploadFileApiService();
 });

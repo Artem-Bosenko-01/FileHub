@@ -1,7 +1,8 @@
 import {Component} from '../components/component.js';
 
 /**
- *
+ * Component for {@link FileListPage page} that contains information about all subscribers on state change at
+ * {@link StateManager state manager}.
  */
 export class StateBasedComponent extends Component {
   /** @inheritDoc */

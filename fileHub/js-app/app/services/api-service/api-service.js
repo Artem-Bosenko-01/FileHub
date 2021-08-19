@@ -162,6 +162,7 @@ export class ApiService {
     });
 
     this._checkResponseOnClientOrServerError(response);
+    return await response.json();
   }
 
   /**

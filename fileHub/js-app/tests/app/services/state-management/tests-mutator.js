@@ -259,4 +259,9 @@ module('Mutator', () => {
       creatingDirectoryErrorMessage: errorMessage,
     }, 'Should set error message after creating directory file');
   });
+
+  test('Should change state on LOG_OUT_USER_COMPLETED mutator name', (assert) => {
+    const mutatedState = mutator('LOG_OUT_USER_COMPLETED', {}, {});
+    assert.deepEqual(mutatedState, {location: ''}, 'Should set empty location when user ends session');
+  });
 });

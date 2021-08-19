@@ -36,6 +36,7 @@ import './app/services/state-management/delete-item-action/delete-item-executor.
 import './app/services/state-management/upload-file-action/tests-upload-file-action-executor.js';
 import './app/services/state-management/download-file-action/download-file-executor.js';
 import './app/services/state-management/create-folder-action/tests-create-folder-executor.js';
+import './app/services/state-management/log-out-user-action/tests-log-out-user-executor.js';
 
 import './app/services/state-management/tests-mutator.js';
 

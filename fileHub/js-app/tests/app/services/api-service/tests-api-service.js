@@ -11,6 +11,7 @@ import testsDeleteFileApiService from '../state-management/delete-item/tests-del
 import testsDeleteFolderApiService from '../state-management/delete-item/tests-delete-folder-api-service.js';
 import testsUploadFileApiService from '../state-management/upload-file/tests-upload-file-api-service.js';
 import testsDownloadFileApiService from '../state-management/download-file/tests-download-file-api-service.js';
+import testsCreateFolderApiService from '../state-management/create-folder/tests-create-folder-api-service.js';
 const {module} = QUnit;
 
 module('APIService', () => {
@@ -24,4 +25,5 @@ module('APIService', () => {
   testsDeleteFolderApiService();
   testsUploadFileApiService();
   testsDownloadFileApiService();
+  testsCreateFolderApiService();
 });

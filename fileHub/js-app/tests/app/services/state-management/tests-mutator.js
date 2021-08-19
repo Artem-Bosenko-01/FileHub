@@ -295,4 +295,29 @@ module('Mutator', () => {
       renamingItemErrorMessage: errorMessage,
     }, 'Should set error message after renaming item');
   });
+
+  test('Should change state on SEARCHING_STARTED mutator name', (assert) => {
+    const mutatedState = mutator('SEARCHING_STARTED', {}, {});
+    assert.deepEqual(mutatedState, {
+      isSearching: true,
+    }, 'Should set searching flag true');
+  });
+
+  test('Should change state on SEARCHING_COMPLETED mutator name', (assert) => {
+    const content = 'filtered content';
+    const mutatedState = mutator('SEARCHING_COMPLETED', {content}, {});
+    assert.deepEqual(mutatedState, {
+      isSearching: false,
+      currentFolderContent: content,
+    }, 'Should set searching flag false');
+  });
+
+  test('Should change state on SEARCHING_FAILED mutator name', (assert) => {
+    const errorMessage = 'error';
+    const mutatedState = mutator('SEARCHING_FAILED', {error: errorMessage}, {});
+    assert.deepEqual(mutatedState, {
+      isSearching: false,
+      searchingItemsErrorMessage: errorMessage,
+    }, 'Should set error message after searching');
+  });
 });

@@ -5,6 +5,10 @@
  * @returns {FileListItem[]}
  */
 export function search(searchLine, innerMassive) {
+  if (!innerMassive || innerMassive.length === 0) {
+    throw new Error('You try to filter empty massive');
+  }
+
   if (searchLine === '') {
     return innerMassive;
   }

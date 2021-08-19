@@ -51,3 +51,4 @@ import './app/services/tests-modal-services.js';
 
 import './app/services/tests-upload-file-function.js';
 import './app/services/tests-download-file-function.js';
+import './app/services/tests-search-by-substring-function.js';

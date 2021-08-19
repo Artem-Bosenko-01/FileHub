@@ -1,3 +1,4 @@
+
 @font-face {
     font-family: Roboto;
     src: url("../fonts/roboto-regular.woff2") format("woff2"),
@@ -99,6 +100,9 @@ body {
     margin-bottom: 15px;
 }
 
+.get-user-data{
+    margin-bottom: 15px;
+}
 
 
 .input-value {
@@ -153,7 +157,6 @@ body {
         margin-top: 15px;
     }
 
-
     .get-user-data{
         margin-bottom: 10px;
         display: flex;
@@ -179,6 +182,13 @@ body {
         margin-left: 5px;
     }
 
+    .invalid-input-value input{
+        margin: 5px 0;
+    }
+
+    .error-label{
+        margin-top: -20px;
+    }
 
     .invalid-input-value input{
         margin: 5px 0;
@@ -191,7 +201,6 @@ body {
     }
 
 
-}
 
 @media screen and (min-width: 520px) and (max-width: 767px) {
     .data{
@@ -344,6 +353,9 @@ body {
     float: none;
 }
 
+    .get-user-data{
+        margin: 15px 0 0;
+    }
 .search-button-box {
     margin-left: -4px;
     display: inline-block;
@@ -380,6 +392,9 @@ body {
     border-top-right-radius: 3px;
 }
 
+    .invalid-input-value input{
+        margin-bottom: 5px;
+    }
 
 .rename-element {
     margin-left: -10px;
@@ -391,6 +406,8 @@ body {
     margin: 0;
 }
 
+    .submit-box{
+        margin-top: 15px;
 .error-rename-massage{
     font-size: 12px;
     margin-bottom: 0;

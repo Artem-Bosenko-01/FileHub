@@ -84,7 +84,7 @@ body {
     margin: 0;
 }
 
-.data{
+.data {
     margin-top: 20px;
 }
 
@@ -149,7 +149,7 @@ body {
         width: 555px;
     }
 
-    .data{
+    .data {
         margin-top: 15px;
     }
 
@@ -160,7 +160,7 @@ body {
         align-items: center;
     }
 
-    .label-name {
+    .name-label {
         width: 34%;
         float: left;
     }
@@ -189,12 +189,10 @@ body {
         float: right;
         margin-top: 5px;
     }
-
-
 }
 
 @media screen and (min-width: 520px) and (max-width: 767px) {
-    .data{
+    .data {
         margin-top: 20px;
     }
 
@@ -202,7 +200,7 @@ body {
         min-width: 560px;
     }
 
-    .get-user-data{
+    .get-user-data {
         margin: 15px 0 0;
     }
 
@@ -211,11 +209,11 @@ body {
         margin: 0;
     }
 
-    .invalid-input-value input{
+    .invalid-input-value input {
         margin-bottom: 5px;
     }
 
-    .submit-box{
+    .submit-box {
         margin-top: 15px;
     }
 }

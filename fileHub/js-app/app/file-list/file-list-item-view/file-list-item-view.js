@@ -155,7 +155,7 @@ export class FileListItemView extends Component {
     });
 
     this.rootElement.addEventListener('click', (event) => {
-      this._onClickLineListener(this._item.id);
+      this._onClickLineListener && this._onClickLineListener(this._item.id);
       event.preventDefault();
     });
   }

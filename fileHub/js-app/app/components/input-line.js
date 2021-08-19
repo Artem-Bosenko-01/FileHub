@@ -55,14 +55,14 @@ export class InputLine extends Component {
 
   /** @inheritDoc */
   get _markup() {
-    const loadingSymbol = `<span class="glyphicon glyphicon-repeat loading" aria-hidden="true"></span>`;
+    const loadingSymbol = `<span data-fh="loading-symbol" class="glyphicon glyphicon-repeat loading" aria-hidden="true"></span>`;
     return `<div class="input-value rename-element ${this._errorMessage && 'invalid-input-value'} ">
                  <input autofocus data-fh="input-line"
                   title="Input ${this._value}" type="email" placeholder="Input value..."
                  ${this._value && `value="${this._value}"`}>
                  ${this._loadingState ? loadingSymbol : ''}
                  ${this._errorMessage ?
-        `<p class="error-message error-rename-message" title="Error massage">${this._errorMessage}</p>` : ''}
+        `<p data-fh="error-message" class="error-message error-rename-message" title="Error massage">${this._errorMessage}</p>` : ''}
             </div>`;
   }
 }

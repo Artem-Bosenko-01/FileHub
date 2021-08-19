@@ -64,7 +64,7 @@ module('FileList', (hooks) => {
     });
 
     const folderName = searchElement('folder-name', fixture);
-    folderName.dispatchEvent(new Event('click'));
+    folderName.dispatchEvent(new Event('dblclick'));
   });
 });
 

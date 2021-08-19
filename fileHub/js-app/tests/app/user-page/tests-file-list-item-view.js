@@ -80,7 +80,7 @@ module('FileListItemView', (hooks) => {
     deleteButton.click();
   });
 
-  test('Should add and call listener on folder name click click', (assert) => {
+  test('Should add and call listener on folder name click', (assert) => {
     const itemJson = {
       id: 'id',
       type: 'folder',
@@ -91,8 +91,8 @@ module('FileListItemView', (hooks) => {
 
     itemView.onFolderNameDoubleCLicked((itemId)=> assert.deepEqual(item.id, itemId,
         'Should get item id on click'));
-    const deleteButton = searchElement('folder-name', fixture);
-    deleteButton.click();
+    const folderNameLink = searchElement('folder-name', fixture);
+    folderNameLink.dispatchEvent(new Event('dblclick'));
   });
 
   test('Should add and call listener on upload button click', (assert) => {

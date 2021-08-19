@@ -77,7 +77,7 @@ module('Mutator', () => {
 
   test('Should change state on CURRENT_FOLDER_CONTENT_FETCHING_STARTED mutator name', (assert) => {
     const mutatedState = mutator('CURRENT_FOLDER_CONTENT_FETCHING_STARTED', {}, {});
-    assert.deepEqual(mutatedState, {isCurrentFolderContentFetching: true},
+    assert.deepEqual(mutatedState, {isCurrentFolderContentFetching: true, selectedLine: null},
         'Should set current folder content fetching flag true');
   });
 

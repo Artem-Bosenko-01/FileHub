@@ -95,11 +95,9 @@ body {
     clear: both;
 }
 
-.get-user-data{
+.get-user-data {
     margin-bottom: 15px;
 }
-
-
 
 .input-value {
     width: 100%;
@@ -153,8 +151,7 @@ body {
         margin-top: 15px;
     }
 
-
-    .get-user-data{
+    .get-user-data {
         margin-bottom: 10px;
         display: flex;
         align-items: center;
@@ -165,7 +162,7 @@ body {
         float: left;
     }
 
-    .error-label{
+    .error-label {
         margin-top: -20px;
     }
 
@@ -179,8 +176,7 @@ body {
         margin-left: 5px;
     }
 
-
-    .invalid-input-value input{
+    .invalid-input-value input {
         margin: 5px 0;
     }
 
@@ -508,9 +504,10 @@ td {
     margin-bottom: 0;
 }
 
-.social-icons li{
+.social-icons li {
     display: inline-block;
 }
+
 @media screen and (min-width: 1200px) {
     .page-raw {
         width: 1140px;

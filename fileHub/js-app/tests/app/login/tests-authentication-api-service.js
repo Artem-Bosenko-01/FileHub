@@ -11,16 +11,25 @@ export default () => module('Authentication', () => {
   test('Should handle a response with code 200', async (assert) => {
     assert.expect(2);
     const fetch = fetchMock.sandbox();
+    const mockWindow = {
+      fetch, localStorage: {
+        setItem: function(token) {
+          this.token = token;
+        },
+        getItem: function() {
+          return this.token;
+        },
+      },
+    };
     fetch.mock({
       url: '/login',
       method: 'POST',
     }, {token});
-    const apiService = new ApiService({fetch});
-
-    const res = await apiService.logIn(email, password);
+    const apiService = new ApiService(mockWindow);
+    await apiService.logIn(email, password);
 
     assert.ok(fetch.called(), 'Should send a request');
-    assert.equal(res, token, 'Should return token after successful response');
+    assert.equal(mockWindow.localStorage.getItem(), token, 'Should return token after successful response');
   });
 
   test('Should handle a response with code 4**', async (assert) => {

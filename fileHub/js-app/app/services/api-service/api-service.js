@@ -19,7 +19,7 @@ export class ApiService {
   }
 
   /**
-   *
+   * Adds listener on enevt, when response code status equal 401.
    * @param {function()} callback
    */
   onNavigateAfterError(callback) {

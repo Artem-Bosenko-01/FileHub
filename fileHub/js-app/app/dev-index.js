@@ -28,6 +28,9 @@ const itemDatabase = {
     return this.items.find((item) => item.id === id);
   },
   getFolderByParentId: function(parentId) {
+    if (!this.items.find((item) => item.id === parentId)) {
+      throw new Error();
+    }
     return this.items.filter((item) => item.parentFolderId === parentId);
   },
   getRootFolder: function() {
@@ -196,8 +199,12 @@ mockGetRequest('express:/folder/:id/content', (url, opts) => {
     return 401;
   }
   const parentId = url.split('/')[2];
-  const content = itemDatabase.getFolderByParentId(parentId);
-  return {items: content};
+  try {
+    const content = itemDatabase.getFolderByParentId(parentId);
+    return {items: content};
+  } catch (error) {
+    return 404;
+  }
 });
 
 mockGetRequest('/user', (url, opts) => {

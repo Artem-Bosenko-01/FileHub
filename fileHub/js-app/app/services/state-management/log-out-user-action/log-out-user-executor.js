@@ -13,10 +13,7 @@ export class LogOutUserExecutor extends ActionExecutor {
    * @param {function} dispatch
    */
   async apply(actionInfo, services, state, mutate, dispatch) {
-    try {
-      await services.apiService.logOut();
-      mutate(LOG_OUT_USER_MUTATOR.COMPLETED);
-    } catch (error) {
-    }
+    await services.apiService.logOut();
+    mutate(LOG_OUT_USER_MUTATOR.COMPLETED);
   }
 }

@@ -25,8 +25,8 @@ import {LogOutUser} from './log-out-user-action/log-out-user.js';
 import {LogOutUserExecutor} from './log-out-user-action/log-out-user-executor.js';
 import {SelectItem} from './select-item-action/select-item.js';
 import {SelectItemExecutor} from './select-item-action/select-item-executor.js';
-import {RenameItem} from './rename-item/rename-item.js';
-import {RenameItemExecutor} from './rename-item/rename-item-executor.js';
+import {RenameItem} from './rename-item-action/rename-item.js';
+import {RenameItemExecutor} from './rename-item-action/rename-item-executor.js';
 import {SearchInfo} from './search-info-action/search-info.js';
 import {SearchInfoExecutor} from './search-info-action/search-info-executor.js';
 

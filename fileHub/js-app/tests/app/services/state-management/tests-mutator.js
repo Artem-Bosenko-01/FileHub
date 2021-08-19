@@ -264,4 +264,35 @@ module('Mutator', () => {
     const mutatedState = mutator('LOG_OUT_USER_COMPLETED', {}, {});
     assert.deepEqual(mutatedState, {location: ''}, 'Should set empty location when user ends session');
   });
+
+  test('Should change state on SET_SELECTED_ITEM mutator name', (assert) => {
+    const id = 'id';
+    const mutatedState = mutator('SET_SELECTED_ITEM', {itemId: id}, {});
+    assert.deepEqual(mutatedState, {
+      selectedLine: id,
+      renamingItemErrorMessage: '',
+    }, 'Should set selected item id');
+  });
+
+  test('Should change state on RENAME_ITEM_STARTED mutator name', (assert) => {
+    const mutatedState = mutator('RENAME_ITEM_STARTED', {}, {});
+    assert.deepEqual(mutatedState, {
+      renamingItemErrorMessage: '',
+      isRenamingLoadingStatus: true,
+    }, 'Should set renaming item flag true');
+  });
+
+  test('Should change state on RENAME_ITEM_COMPLETED mutator name', (assert) => {
+    const mutatedState = mutator('RENAME_ITEM_COMPLETED', {}, {});
+    assert.deepEqual(mutatedState, {isRenamingLoadingStatus: false}, 'Should set renaming item flag false');
+  });
+
+  test('Should change state on RENAME_ITEM_FAILED mutator name', (assert) => {
+    const errorMessage = 'error';
+    const mutatedState = mutator('RENAME_ITEM_FAILED', {error: errorMessage}, {});
+    assert.deepEqual(mutatedState, {
+      isRenamingLoadingStatus: false,
+      renamingItemErrorMessage: errorMessage,
+    }, 'Should set error message after renaming item');
+  });
 });

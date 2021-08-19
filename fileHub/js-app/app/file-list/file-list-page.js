@@ -20,7 +20,7 @@ import {CreateFolderDialog} from '../modals/create-directory-dialog.js';
 import {CreateFolder} from '../services/state-management/create-folder-action/create-folder.js';
 import {LogOutUser} from '../services/state-management/log-out-user-action/log-out-user.js';
 import {SelectItem} from '../services/state-management/select-item-action/select-item.js';
-import {RenameItem} from '../services/state-management/rename-item/rename-item.js';
+import {RenameItem} from '../services/state-management/rename-item-action/rename-item.js';
 import {FetchCurrentFolderContent}
   from '../services/state-management/fetch-current-folder-content-action/fetch-current-folder-content.js';
 

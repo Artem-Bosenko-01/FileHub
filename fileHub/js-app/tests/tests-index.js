@@ -27,15 +27,15 @@ import './app/user-page/tests-folder-control-buttons.js';
 
 import './app/services/state-management/tests-state-manager.js';
 
-import './app/services/state-management/get-root-folder-action/tetsts-get-root-folder-executor.js';
-import './app/services/state-management/fetch-current-directory-action/tetsts-fetch-current-folder-executor.js';
-import './app/services/state-management/fetch-current-folder-content-action/fetch-current-folder-content-executor.js';
+import './app/services/state-management/get-root-folder/tetsts-get-root-folder-executor.js';
+import './app/services/state-management/fetch-current-directory/tetsts-fetch-current-folder-executor.js';
+import './app/services/state-management/fetch-current-folder-content/fetch-current-folder-content-executor.js';
 import './app/services/state-management/route-changed-action/tetsts-route-changed-executor.js';
-import './app/services/state-management/get-current-user-action/get-current-user-executor.js';
-import './app/services/state-management/delete-item-action/delete-item-executor.js';
-import './app/services/state-management/upload-file-action/tests-upload-file-action-executor.js';
-import './app/services/state-management/download-file-action/download-file-executor.js';
-import './app/services/state-management/create-folder-action/tests-create-folder-executor.js';
+import './app/services/state-management/get-current-user/get-current-user-executor.js';
+import './app/services/state-management/delete-item/delete-item-executor.js';
+import './app/services/state-management/upload-file/tests-upload-file-action-executor.js';
+import './app/services/state-management/download-file/download-file-executor.js';
+import './app/services/state-management/create-folder/tests-create-folder-executor.js';
 import './app/services/state-management/log-out-user-action/tests-log-out-user-executor.js';
 
 import './app/services/state-management/tests-mutator.js';

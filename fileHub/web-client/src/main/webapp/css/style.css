@@ -1,4 +1,3 @@
-
 @font-face {
     font-family: Roboto;
     src: url("../fonts/roboto-regular.woff2") format("woff2"),
@@ -85,7 +84,7 @@ body {
     margin: 0;
 }
 
-.data{
+.data {
     margin-top: 20px;
 }
 
@@ -96,11 +95,11 @@ body {
     clear: both;
 }
 
-.get-user-data{
+.get-user-data {
     margin-bottom: 15px;
 }
 
-.get-user-data{
+.get-user-data {
     margin-bottom: 15px;
 }
 
@@ -153,11 +152,11 @@ body {
         width: 555px;
     }
 
-    .data{
+    .data {
         margin-top: 15px;
     }
 
-    .get-user-data{
+    .get-user-data {
         margin-bottom: 10px;
         display: flex;
         align-items: center;
@@ -168,7 +167,7 @@ body {
         float: left;
     }
 
-    .error-label{
+    .error-label {
         margin-top: -20px;
     }
 
@@ -182,15 +181,15 @@ body {
         margin-left: 5px;
     }
 
-    .invalid-input-value input{
+    .invalid-input-value input {
         margin: 5px 0;
     }
 
-    .error-label{
+    .error-label {
         margin-top: -20px;
     }
 
-    .invalid-input-value input{
+    .invalid-input-value input {
         margin: 5px 0;
     }
 
@@ -199,11 +198,10 @@ body {
         float: right;
         margin-top: 5px;
     }
-
-
+}
 
 @media screen and (min-width: 520px) and (max-width: 767px) {
-    .data{
+    .data {
         margin-top: 20px;
     }
 
@@ -211,7 +209,7 @@ body {
         min-width: 560px;
     }
 
-    .get-user-data{
+    .get-user-data {
         margin: 15px 0 0;
     }
 
@@ -220,18 +218,17 @@ body {
         margin: 0;
     }
 
-    .invalid-input-value input{
+    .invalid-input-value input {
         margin-bottom: 5px;
     }
 
-    .submit-box{
+    .submit-box {
         margin-top: 15px;
     }
 }
 
 
 /*********************************************Styles for user view pages*********************************************/
-
 .header {
     position: relative;
 }
@@ -335,7 +332,7 @@ body {
     width: 75%;
 }
 
-.invalid-input-value input{
+.invalid-input-value input {
     float: none;
 }
 
@@ -353,9 +350,10 @@ body {
     float: none;
 }
 
-    .get-user-data{
-        margin: 15px 0 0;
-    }
+.get-user-data {
+    margin: 15px 0 0;
+}
+
 .search-button-box {
     margin-left: -4px;
     display: inline-block;
@@ -392,9 +390,9 @@ body {
     border-top-right-radius: 3px;
 }
 
-    .invalid-input-value input{
-        margin-bottom: 5px;
-    }
+.invalid-input-value input {
+    margin-bottom: 5px;
+}
 
 .rename-element {
     margin-left: -10px;
@@ -406,14 +404,12 @@ body {
     margin: 0;
 }
 
-    .submit-box{
-        margin-top: 15px;
-.error-rename-massage{
+.error-rename-massage {
     font-size: 12px;
     margin-bottom: 0;
 }
 
-.error-rename-massage label{
+.error-rename-massage label {
     margin-left: 0;
 }
 
@@ -506,12 +502,12 @@ td {
     padding: 9px 10px;
 }
 
-.social-icons{
+.social-icons {
     padding-left: 0;
     margin-bottom: 0;
 }
 
-.social-icons li{
+.social-icons li {
     display: inline-block;
 }
 
@@ -520,7 +516,7 @@ td {
         width: 1140px;
     }
 
-    .search-panel{
+    .search-panel {
         width: 65%;
     }
 
@@ -540,7 +536,7 @@ td {
         width: 940px;
     }
 
-    .search-panel{
+    .search-panel {
         width: 63%;
     }
 
@@ -559,7 +555,7 @@ td {
         width: 720px;
     }
 
-    .search-panel{
+    .search-panel {
         width: 58%;
     }
 
@@ -575,7 +571,7 @@ td {
         width: 735px;
     }
 
-    .search-panel{
+    .search-panel {
         width: 85%;
     }
 

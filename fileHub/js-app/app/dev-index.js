@@ -180,7 +180,10 @@ mockPostRequest('express:/folder/:id/file', (url, opts) => {
   try {
     itemDatabase.addFile(body.name, body.name, body.type, body.size, id);
     return {
-      status: 200,
+      id: body.name,
+      name: body.name,
+      type: body.type,
+      parentId: id,
     };
   } catch (error) {
     return {

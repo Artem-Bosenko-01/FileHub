@@ -1,5 +1,6 @@
 import fetchMock from '../../../../../node_modules/fetch-mock/esm/client.js';
 import {ApiService} from '../../../../../app/services/api-service/api-service.js';
+import {getWindowMock} from '../../../mock-window-api-service.js';
 
 const {module, test} = QUnit;
 
@@ -11,8 +12,11 @@ export default () => module('uploadFile', () => {
       url: '/folder/5/file',
       method: 'POST',
     }, {id});
-    const apiService = new ApiService({fetch});
+    const mockWindow = getWindowMock(fetch);
+    const apiService = new ApiService(mockWindow);
+
     const result = await apiService.uploadFile({file: 'file'}, '5');
+
     assert.ok(fetch.called(), 'Should send a request');
     assert.equal(result.id, id, 'Should get id of uploaded file');
   });
@@ -24,7 +28,8 @@ export default () => module('uploadFile', () => {
       url: '/folder/5/file',
       method: 'POST',
     }, 400);
-    const apiService = new ApiService({fetch});
+    const mockWindow = getWindowMock(fetch);
+    const apiService = new ApiService(mockWindow);
 
     try {
       await apiService.uploadFile({file: 'file'}, '5');
@@ -42,7 +47,8 @@ export default () => module('uploadFile', () => {
       url: '/folder/5/file',
       method: 'POST',
     }, 500);
-    const apiService = new ApiService({fetch});
+    const mockWindow = getWindowMock(fetch);
+    const apiService = new ApiService(mockWindow);
 
     try {
       await apiService.uploadFile({file: 'file'}, '5');

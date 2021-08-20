@@ -4,35 +4,32 @@ import {getWindowMock} from '../../../mock-window-api-service.js';
 
 const {module, test} = QUnit;
 
-export default () => module('createFolder', () => {
+export default () => module('logOut', () => {
   test('Should handle a response with code 200', async (assert) => {
-    const name = 'folder';
-    const parentId = 'id';
     const fetch = fetchMock.sandbox();
     fetch.mock({
-      url: `/folder/${parentId}/folder`,
+      url: '/logOut',
       method: 'POST',
-    }, {name});
+    }, 200);
     const mockWindow = getWindowMock(fetch);
     const apiService = new ApiService(mockWindow);
-    const result = await apiService.createFolder(name, parentId);
+    await apiService.logOut();
+
     assert.ok(fetch.called(), 'Should send a request');
-    assert.equal(result.name, name, 'Should get name of created folder');
   });
 
   test('Should handle a response with code 4**', async (assert) => {
     assert.expect(2);
-    const parentId = '8';
     const fetch = fetchMock.sandbox();
     fetch.mock({
-      url: `/folder/${parentId}/folder`,
+      url: '/logOut',
       method: 'POST',
     }, 400);
     const mockWindow = getWindowMock(fetch);
     const apiService = new ApiService(mockWindow);
 
     try {
-      await apiService.createFolder( '5', parentId);
+      await apiService.logOut();
     } catch (error) {
       assert.equal(error.message, '400: client error', 'Should return error with response status');
     } finally {
@@ -42,17 +39,16 @@ export default () => module('createFolder', () => {
 
   test('Should handle a response with code 500', async (assert) => {
     assert.expect(2);
-    const parentId = '8';
     const fetch = fetchMock.sandbox();
     fetch.mock({
-      url: `/folder/${parentId}/folder`,
+      url: '/logOut',
       method: 'POST',
     }, 500);
     const mockWindow = getWindowMock(fetch);
     const apiService = new ApiService(mockWindow);
 
     try {
-      await apiService.createFolder( '5', parentId);
+      await apiService.logOut();
     } catch (error) {
       assert.equal(error.message, '500: Server Error', 'Should return error with response status');
     } finally {

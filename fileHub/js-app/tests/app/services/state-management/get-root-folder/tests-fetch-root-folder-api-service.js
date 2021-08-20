@@ -1,5 +1,6 @@
 import fetchMock from '../../../../../node_modules/fetch-mock/esm/client.js';
 import {ApiService} from '../../../../../app/services/api-service/api-service.js';
+import {getWindowMock} from '../../../mock-window-api-service.js';
 
 const {module, test} = QUnit;
 
@@ -11,8 +12,11 @@ export default () => module('getRootFolder', () => {
       url: '/root-folder',
       method: 'GET',
     }, {folder: rootFolder});
-    const apiService = new ApiService({fetch});
+    const mockWindow = getWindowMock(fetch);
+    const apiService = new ApiService(mockWindow);
+
     const result = await apiService.getRootFolder();
+
     assert.ok(fetch.called(), 'Should send a request');
     assert.equal(result.id, rootFolder.id, 'Should get root item with id');
   });
@@ -24,7 +28,8 @@ export default () => module('getRootFolder', () => {
       url: '/root-folder',
       method: 'GET',
     }, 400);
-    const apiService = new ApiService({fetch});
+    const mockWindow = getWindowMock(fetch);
+    const apiService = new ApiService(mockWindow);
 
     try {
       await apiService.getRootFolder();
@@ -42,7 +47,8 @@ export default () => module('getRootFolder', () => {
       url: '/root-folder',
       method: 'GET',
     }, 500);
-    const apiService = new ApiService({fetch});
+    const mockWindow = getWindowMock(fetch);
+    const apiService = new ApiService(mockWindow);
 
     try {
       await apiService.getRootFolder();

@@ -1,5 +1,6 @@
 import fetchMock from '../../../../../node_modules/fetch-mock/esm/client.js';
 import {ApiService} from '../../../../../app/services/api-service/api-service.js';
+import {getWindowMock} from '../../../mock-window-api-service.js';
 
 const {module, test} = QUnit;
 
@@ -11,7 +12,9 @@ export default () => module('getCurrentUser', () => {
       url: '/user',
       method: 'GET',
     }, {id: 'id', name: 'name'});
-    const apiService = new ApiService({fetch});
+    const mockWindow = getWindowMock(fetch);
+    const apiService = new ApiService(mockWindow);
+
     const result = await apiService.getCurrentUser();
 
     assert.ok(fetch.called(), 'Should send a request');
@@ -26,7 +29,8 @@ export default () => module('getCurrentUser', () => {
       url: '/user',
       method: 'GET',
     }, 400);
-    const apiService = new ApiService({fetch});
+    const mockWindow = getWindowMock(fetch);
+    const apiService = new ApiService(mockWindow);
 
     try {
       await apiService.getCurrentUser();
@@ -44,7 +48,8 @@ export default () => module('getCurrentUser', () => {
       url: '/user',
       method: 'GET',
     }, 500);
-    const apiService = new ApiService({fetch});
+    const mockWindow = getWindowMock(fetch);
+    const apiService = new ApiService(mockWindow);
 
     try {
       await apiService.getCurrentUser();

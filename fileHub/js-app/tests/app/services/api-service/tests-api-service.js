@@ -13,6 +13,9 @@ import testsUploadFileApiService from '../state-management/upload-file/tests-upl
 import testsDownloadFileApiService from '../state-management/download-file/tests-download-file-api-service.js';
 import testsCreateFolderApiService from '../state-management/create-folder/tests-create-folder-api-service.js';
 import testsLogOutApiService from '../state-management/log-out-user/tests-log-out-api-service.js';
+import testsRenameFileApiService from '../state-management/rename-item/tests-rename-file-api-service.js';
+import testsRenameFolderApiService from '../state-management/rename-item/tests-rename-folder-api-service.js';
+
 import {ApiService} from '../../../../app/services/api-service/api-service.js';
 
 const {module, test} = QUnit;
@@ -30,6 +33,8 @@ module('APIService', () => {
   testsDownloadFileApiService();
   testsCreateFolderApiService();
   testsLogOutApiService();
+  testsRenameFileApiService();
+  testsRenameFolderApiService();
 
   test('Should add and call listener on 401 response code status.', (assert) => {
     const get401ResponseStatusStep = '401 response status';

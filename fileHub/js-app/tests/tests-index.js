@@ -39,7 +39,7 @@ import './app/services/state-management/download-file/download-file-executor.js'
 import './app/services/state-management/create-folder/tests-create-folder-executor.js';
 import './app/services/state-management/log-out-user/tests-log-out-user-executor.js';
 import './app/services/state-management/select-item-action/tests-select-item-executor.js';
-import './app/services/state-management/rename-item-action/tests-rename-item-executor.js';
+import './app/services/state-management/rename-item/tests-rename-item-executor.js';
 
 import './app/services/state-management/tests-mutator.js';
 

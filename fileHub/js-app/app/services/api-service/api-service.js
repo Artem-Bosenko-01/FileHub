@@ -176,6 +176,7 @@ export class ApiService {
     });
 
     this._checkResponseOnClientOrServerError(response);
+    return await response.json();
   }
 
   /**
@@ -233,7 +234,7 @@ export class ApiService {
    * Renames folder.
    * @param {FileListItem} item
    * @param {string} newName
-   * @returns {Promise<void, ClientServerError|ServerError>}
+   * @returns {Promise<FileListItem, ClientServerError|ServerError>}
    */
   async renameFolder(item, newName) {
     const response = await this._fetch(`/folder/${item.id}`, {
@@ -249,13 +250,16 @@ export class ApiService {
     });
 
     this._checkResponseOnClientOrServerError(response);
+
+    const responseBody = await response.json();
+    return new FileListItem(responseBody);
   }
 
   /**
    * Renames file.
    * @param {FileListItem} item
    * @param {string} newName
-   * @returns {Promise<void, ClientServerError|ServerError>}
+   * @returns {Promise<FileListItem, ClientServerError|ServerError>}
    */
   async renameFile(item, newName) {
     const response = await this._fetch(`/file/${item.id}`, {
@@ -272,6 +276,9 @@ export class ApiService {
     });
 
     this._checkResponseOnClientOrServerError(response);
+
+    const responseBody = await response.json();
+    return new FileListItem(responseBody);
   }
 
   /**

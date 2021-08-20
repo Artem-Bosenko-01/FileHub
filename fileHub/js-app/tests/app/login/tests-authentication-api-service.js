@@ -1,5 +1,6 @@
 import fetchMock from '../../../node_modules/fetch-mock/esm/client.js';
 import {ApiService} from '../../../app/services/api-service/api-service.js';
+import {getWindowMock} from '../mock-window-api-service.js';
 
 const {module, test} = QUnit;
 
@@ -11,16 +12,7 @@ export default () => module('Authentication', () => {
   test('Should handle a response with code 200', async (assert) => {
     assert.expect(2);
     const fetch = fetchMock.sandbox();
-    const mockWindow = {
-      fetch, localStorage: {
-        setItem: function(token) {
-          this.token = token;
-        },
-        getItem: function() {
-          return this.token;
-        },
-      },
-    };
+    const mockWindow = getWindowMock(fetch);
     fetch.mock({
       url: '/login',
       method: 'POST',

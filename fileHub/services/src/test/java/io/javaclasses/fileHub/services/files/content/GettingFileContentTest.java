@@ -13,6 +13,8 @@ import io.javaclasses.fileHub.services.files.FileSystemTestData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 
 class GettingFileContentTest {
 
@@ -54,7 +56,7 @@ class GettingFileContentTest {
 
         Assertions.assertNotNull(getFileContentDTO);
 
-        Assertions.assertEquals(getFileContentDTO.content(), createFileContent);
+        Assertions.assertArrayEquals(getFileContentDTO.content(), createFileContent);
 
     }
 

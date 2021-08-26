@@ -4,6 +4,9 @@ import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.webservices.JsonResponse;
 
+/**
+ * Allows serializing token after successful user authentication.
+ */
 public class AuthenticationSuccessfulResponse extends JsonResponse {
 
     private final String token;

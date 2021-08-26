@@ -4,9 +4,10 @@ import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
 import io.javaclasses.fileHub.services.users.AuthenticationUserCommand;
 
-import java.io.Serializable;
-
-public class UserCredentials implements Serializable {
+/**
+ * User personal data that deserialized from json object.
+ */
+public class UserCredentials {
 
     private static final Gson converter = new Gson();
 

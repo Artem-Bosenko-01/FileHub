@@ -7,6 +7,9 @@ import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemo
 import io.javaclasses.fileHub.services.users.AuthenticationUser;
 import io.javaclasses.fileHub.services.users.RegistrationUser;
 
+/**
+ * The entry point that allows using all server's services of FileHub application.
+ */
 public class ServiceAdapter {
     private final UserStorage userStorage = new UserStorageInMemory();
     private final AuthorizationStorage authorizationStorage = new AuthorizationStorageInMemory();

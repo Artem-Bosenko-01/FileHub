@@ -1,17 +1,20 @@
 package io.javaclasses.fileHub.webservices;
 
 import io.javaclasses.fileHub.services.ServiceAdapter;
-import io.javaclasses.fileHub.webservices.authorization.AuthorizationRoute;
+import io.javaclasses.fileHub.webservices.authorization.AuthenticationRoute;
 
 import static spark.Spark.post;
 
+/**
+ * Initializer that configure main existed paths af FileHub application.
+ */
 public class EntryPointOfRestApplication {
 
     public static void main(String[] args) {
 
         ServiceAdapter adapter = new ServiceAdapter();
 
-        post("/login", new AuthorizationRoute(adapter));
+        post("/login", new AuthenticationRoute(adapter));
 
     }
 }

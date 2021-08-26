@@ -4,16 +4,19 @@ import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
 import io.javaclasses.fileHub.services.ServiceAdapter;
 import io.javaclasses.fileHub.services.users.AuthenticationUserCommand;
-import io.javaclasses.fileHub.webservices.ResponseError;
+import io.javaclasses.fileHub.webservices.ErrorResponse;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 
-public class AuthorizationRoute implements Route {
+/**
+ * Gets request and executes authentication user in FileHub application.
+ */
+public class AuthenticationRoute implements Route {
 
     private final ServiceAdapter adapter;
 
-    public AuthorizationRoute(ServiceAdapter adapter) {
+    public AuthenticationRoute(ServiceAdapter adapter) {
 
         this.adapter = adapter;
     }
@@ -40,13 +43,13 @@ public class AuthorizationRoute implements Route {
 
             response.status(403);
 
-            return new ResponseError(e.getMessage()).serialize();
+            return new ErrorResponse(e.getMessage()).serialize();
 
         } catch (Exception e) {
 
             response.status(500);
 
-            return new ResponseError(e.getMessage()).serialize();
+            return new ErrorResponse(e.getMessage()).serialize();
         }
     }
 }

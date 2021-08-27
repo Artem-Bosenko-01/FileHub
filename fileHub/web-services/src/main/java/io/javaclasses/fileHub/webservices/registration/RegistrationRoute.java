@@ -36,7 +36,9 @@ public class RegistrationRoute implements Route {
         } catch (InvalidHandleCommandException e) {
 
             response.status(422);
-            return new ErrorResponse(e.getMessage()).serialize();
+            ValidationErrorResponse errorResponse = new ValidationErrorResponse();
+            errorResponse.addError("email", e.getMessage());
+            return errorResponse.serialize();
 
         } catch (Exception e) {
 

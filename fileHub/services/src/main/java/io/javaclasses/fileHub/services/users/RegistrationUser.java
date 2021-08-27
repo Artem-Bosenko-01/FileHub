@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 /**
  * This is service for first registration user in Filehub application.
  */
-public class RegistrationUser implements OpenUserProcess<RegistrationUserCommand, UserId> {
+public class RegistrationUser implements OpenUserProcess<RegistrationUserCommand, Boolean> {
 
     private static final Logger logger = LoggerFactory.getLogger(RegistrationUser.class);
 
@@ -24,7 +24,7 @@ public class RegistrationUser implements OpenUserProcess<RegistrationUserCommand
     }
 
     @Override
-    public UserId handle(RegistrationUserCommand inputCommand) throws InvalidHandleCommandException {
+    public Boolean handle(RegistrationUserCommand inputCommand) throws InvalidHandleCommandException {
 
         if (logger.isInfoEnabled()) {
             logger.info("Start registration user process with id: " + inputCommand.loginName());
@@ -48,7 +48,7 @@ public class RegistrationUser implements OpenUserProcess<RegistrationUserCommand
                 logger.info("Registration was successful :" + user.id());
             }
 
-            return user.id();
+            return true;
 
         } catch (DuplicatedUserIdException e) {
 

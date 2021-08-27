@@ -7,14 +7,14 @@ import io.javaclasses.fileHub.services.users.AuthenticationUserCommand;
 /**
  * User personal data that deserialized from json object.
  */
-public class UserCredentials {
+public class UserAuthenticationCredentials {
 
     private static final Gson converter = new Gson();
 
     private final String credentials;
 
 
-    public UserCredentials(String lineForParsing) {
+    public UserAuthenticationCredentials(String lineForParsing) {
         this.credentials = Preconditions.checkNotNull(lineForParsing);
     }
 

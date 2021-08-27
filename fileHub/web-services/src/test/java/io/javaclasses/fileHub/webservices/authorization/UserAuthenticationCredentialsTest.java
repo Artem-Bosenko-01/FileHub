@@ -2,16 +2,16 @@ package io.javaclasses.fileHub.webservices.authorization;
 
 import com.google.common.testing.NullPointerTester;
 import io.javaclasses.fileHub.services.users.AuthenticationUserCommand;
-import io.javaclasses.fileHub.webservices.authentication.UserCredentials;
+import io.javaclasses.fileHub.webservices.authentication.UserAuthenticationCredentials;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class UserCredentialsTest {
+class UserAuthenticationCredentialsTest {
     @Test
     public void checkForNullPointerInConstructor() {
 
         NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicConstructors(UserCredentials.class);
+        tester.testAllPublicConstructors(UserAuthenticationCredentials.class);
 
     }
 
@@ -21,9 +21,9 @@ class UserCredentialsTest {
         String loginName = "login";
         String password = "password";
         String inputJsonLine = "{\nloginName:" + loginName + ",\npassword:" + password + "\n}";
-        UserCredentials userCredentials = new UserCredentials(inputJsonLine);
+        UserAuthenticationCredentials userAuthenticationCredentials = new UserAuthenticationCredentials(inputJsonLine);
 
-        AuthenticationUserCommand command = userCredentials.deserialize();
+        AuthenticationUserCommand command = userAuthenticationCredentials.deserialize();
 
         Assertions.assertEquals(command.loginName(), loginName);
         Assertions.assertEquals(command.password(), password);

@@ -26,7 +26,7 @@ public class AuthenticationRoute implements Route {
 
         String body = request.body();
 
-        UserCredentials credentials = new UserCredentials(body);
+        UserAuthenticationCredentials credentials = new UserAuthenticationCredentials(body);
 
         AuthenticationUserCommand command = credentials.deserialize();
 

@@ -18,7 +18,7 @@ public class RegistrationRoute implements Route {
     }
 
     @Override
-    public Object handle(Request request, Response response) throws Exception {
+    public Object handle(Request request, Response response) {
 
         String body = request.body();
 

@@ -13,7 +13,7 @@ class RegistrationUserCommandTest {
         tester.setDefault(String.class, "");
 
         tester.testConstructor(RegistrationUserCommand.class.getConstructor(
-                String.class, String.class, String.class, String.class));
+                String.class, String.class));
 
     }
 
@@ -21,7 +21,7 @@ class RegistrationUserCommandTest {
     public void checkForNullPointerInSetters() {
 
         NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicInstanceMethods(new RegistrationUserCommand("","", "", ""));
+        tester.testAllPublicInstanceMethods(new RegistrationUserCommand("", ""));
 
     }
 

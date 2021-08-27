@@ -23,8 +23,7 @@ class ProfileUpdateManagementUserProcessTest {
 
         AuthToken authToken = UserTestData.authenticateJohnUser(userStorageInMemory, authorizationStorage);
 
-        UpdatingProfileCommand command = new UpdatingProfileCommand(authToken, id, "aaa@h.com",
-                "newName", "newLastName", "casascac");
+        UpdatingProfileCommand command = new UpdatingProfileCommand(authToken, id, "aaa@h.com", "casascac");
 
         UpdatingProfile process = new UpdatingProfile(userStorageInMemory, authorizationStorage);
 

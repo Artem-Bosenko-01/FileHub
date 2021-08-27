@@ -44,9 +44,7 @@ public class ReadingInfoAboutUser extends View<ReadUserProfileQuery, InfoAboutUs
             return new InfoAboutUserDto(
                     findUser.get().id(),
                     findUser.get().login(),
-                    findUser.get().password(),
-                    findUser.get().firstName(),
-                    findUser.get().lastName()
+                    findUser.get().password()
             );
 
         }else {

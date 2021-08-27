@@ -3,7 +3,6 @@ package io.javaclasses.fileHub.services.users;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.persistent.users.UserStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
-import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
 
@@ -22,7 +21,8 @@ public final class UserTestData {
 
         RegistrationUser registrationUser = new RegistrationUser(userStorage);
 
-        return registrationUser.handle(registrationUserCommand);
+        registrationUser.handle(registrationUserCommand);
+        return new UserId(registrationUserCommand.loginName());
     }
 
     public static AuthToken authenticateKevinUser(UserStorage userStorage, AuthorizationStorage authorizationStorage)
@@ -44,7 +44,8 @@ public final class UserTestData {
 
         RegistrationUser registrationUser = new RegistrationUser(userStorage);
 
-        return registrationUser.handle(registrationUserCommand);
+        registrationUser.handle(registrationUserCommand);
+        return new UserId(registrationUserCommand.loginName());
     }
 
     public static AuthToken authenticateJohnUser(UserStorage userStorage, AuthorizationStorage authorizationStorage)

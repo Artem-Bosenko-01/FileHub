@@ -1,4 +1,4 @@
-package io.javaclasses.fileHub.webservices.authorization;
+package io.javaclasses.fileHub.webservices.authentication;
 
 import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
@@ -49,7 +49,7 @@ public class AuthenticationRoute implements Route {
 
             response.status(500);
 
-            return new ErrorResponse(e.getMessage()).serialize();
+            return new ErrorResponse("Internal server error.").serialize();
         }
     }
 }

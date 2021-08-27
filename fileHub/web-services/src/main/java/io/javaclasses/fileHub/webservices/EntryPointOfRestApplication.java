@@ -1,7 +1,7 @@
 package io.javaclasses.fileHub.webservices;
 
 import io.javaclasses.fileHub.services.ServiceAdapter;
-import io.javaclasses.fileHub.webservices.authorization.AuthenticationRoute;
+import io.javaclasses.fileHub.webservices.authentication.AuthenticationRoute;
 
 import static spark.Spark.post;
 

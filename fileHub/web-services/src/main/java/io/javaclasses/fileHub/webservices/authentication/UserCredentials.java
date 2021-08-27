@@ -1,4 +1,4 @@
-package io.javaclasses.fileHub.webservices.authorization;
+package io.javaclasses.fileHub.webservices.authentication;
 
 import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
@@ -14,7 +14,7 @@ public class UserCredentials {
     private final String credentials;
 
 
-    UserCredentials(String lineForParsing) {
+    public UserCredentials(String lineForParsing) {
         this.credentials = Preconditions.checkNotNull(lineForParsing);
     }
 

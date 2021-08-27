@@ -1,4 +1,4 @@
-package io.javaclasses.fileHub.webservices.authorization;
+package io.javaclasses.fileHub.webservices.authentication;
 
 import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.services.AuthToken;

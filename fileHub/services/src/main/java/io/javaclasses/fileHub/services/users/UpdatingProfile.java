@@ -44,8 +44,6 @@ public class UpdatingProfile extends SecuredUserProcess<UpdatingProfileCommand, 
             if (user.isPresent()) {
 
                 user.get().setLogin(inputCommand.newLoginName());
-                user.get().setFirstName(inputCommand.firstName());
-                user.get().setLastName(inputCommand.lastName());
                 user.get().setPassword(PasswordEncoder.encode(inputCommand.password()));
 
 

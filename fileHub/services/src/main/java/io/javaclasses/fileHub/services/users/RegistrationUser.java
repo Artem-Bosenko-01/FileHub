@@ -35,8 +35,6 @@ public class RegistrationUser implements OpenUserProcess<RegistrationUserCommand
         String password = PasswordEncoder.encode(inputCommand.password());
 
         User user = new User(id);
-        user.setFirstName(inputCommand.firstName());
-        user.setLastName(inputCommand.lastName());
         user.setLogin(inputCommand.loginName());
         user.setPassword(password);
 

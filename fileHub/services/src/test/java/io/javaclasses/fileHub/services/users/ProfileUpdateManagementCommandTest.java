@@ -19,7 +19,7 @@ class ProfileUpdateManagementCommandTest {
                 setDefault(String.class, "");
 
         tester.testConstructor(UpdatingProfileCommand.class.getConstructor(AuthToken.class, UserId.class,
-                String.class, String.class, String.class, String.class));
+                String.class, String.class));
 
     }
 
@@ -28,7 +28,7 @@ class ProfileUpdateManagementCommandTest {
 
         NullPointerTester tester = new NullPointerTester();
         tester.testAllPublicInstanceMethods(new UpdatingProfileCommand(new AuthToken("sv"),
-                new UserId("va"), "acs", "ca", "ca", "vs"));
+                new UserId("va"), "acs", "vs"));
 
     }
 }

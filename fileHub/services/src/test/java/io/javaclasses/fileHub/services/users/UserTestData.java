@@ -16,8 +16,7 @@ public final class UserTestData {
 
     public static UserId registerKevinUser(UserStorage userStorage) throws InvalidHandleCommandException {
 
-        RegistrationUserCommand registrationUserCommand = new RegistrationUserCommand(KevinLoginName,
-                "Kevin", "Kevin", KevinPassword);
+        RegistrationUserCommand registrationUserCommand = new RegistrationUserCommand(KevinLoginName, KevinPassword);
 
         RegistrationUser registrationUser = new RegistrationUser(userStorage);
 
@@ -39,8 +38,7 @@ public final class UserTestData {
 
     public static UserId registerJohnUser(UserStorage userStorage) throws InvalidHandleCommandException {
 
-        RegistrationUserCommand registrationUserCommand = new RegistrationUserCommand(JohnLoginName,
-                "John", "John", JohnPassword);
+        RegistrationUserCommand registrationUserCommand = new RegistrationUserCommand(JohnLoginName, JohnPassword);
 
         RegistrationUser registrationUser = new RegistrationUser(userStorage);
 

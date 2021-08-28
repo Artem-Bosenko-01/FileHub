@@ -3,7 +3,9 @@ package io.javaclasses.fileHub.webservices.authentication;
 import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
 import io.javaclasses.fileHub.services.ServiceAdapter;
+import io.javaclasses.fileHub.services.users.AuthenticationUser;
 import io.javaclasses.fileHub.services.users.AuthenticationUserCommand;
+import io.javaclasses.fileHub.services.users.RegistrationUser;
 import io.javaclasses.fileHub.webservices.ErrorResponse;
 import spark.Request;
 import spark.Response;
@@ -14,11 +16,11 @@ import spark.Route;
  */
 public class AuthenticationRoute implements Route {
 
-    private final ServiceAdapter adapter;
+    private final AuthenticationUser authentication;
 
-    public AuthenticationRoute(ServiceAdapter adapter) {
+    public AuthenticationRoute(AuthenticationUser process) {
 
-        this.adapter = adapter;
+        this.authentication = process;
     }
 
     @Override
@@ -32,7 +34,7 @@ public class AuthenticationRoute implements Route {
 
         try {
 
-            AuthToken token = adapter.authenticateUser().handle(command);
+            AuthToken token = authentication.handle(command);
 
             AuthenticationSuccessfulResponse successfulResponse = new AuthenticationSuccessfulResponse(token);
 

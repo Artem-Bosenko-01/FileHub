@@ -1,6 +1,6 @@
 package io.javaclasses.fileHub.webservices.authorization;
 
-import io.javaclasses.fileHub.webservices.EntryPointOfRestApplication;
+import io.javaclasses.fileHub.webservices.WebApplication;
 import io.javaclasses.fileHub.webservices.MockRequest;
 import io.javaclasses.fileHub.webservices.TestResponse;
 import org.junit.jupiter.api.AfterAll;
@@ -14,7 +14,7 @@ import java.util.HashMap;
 class AuthenticationRouteTest {
     @BeforeAll
     public static void beforeClass() {
-        EntryPointOfRestApplication.main(null);
+        WebApplication.main(null);
     }
 
     @AfterAll

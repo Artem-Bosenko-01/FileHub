@@ -9,14 +9,14 @@ import static spark.Spark.post;
 /**
  * Initializer that configure main existed paths af FileHub application.
  */
-public class EntryPointOfRestApplication {
+public class WebApplication {
 
     public static void main(String[] args) {
 
         ServiceAdapter adapter = new ServiceAdapter();
 
-        post("/login", new AuthenticationRoute(adapter));
-        post("/register", new RegistrationRoute(adapter));
+        post("/login", new AuthenticationRoute(adapter.authenticateUser()));
+        post("/register", new RegistrationRoute(adapter.registerUser()));
 
     }
 }

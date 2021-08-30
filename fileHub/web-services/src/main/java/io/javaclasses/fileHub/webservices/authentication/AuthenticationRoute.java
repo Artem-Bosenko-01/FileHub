@@ -2,7 +2,7 @@ package io.javaclasses.fileHub.webservices.authentication;
 
 import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
-import io.javaclasses.fileHub.services.users.AuthenticationUser;
+import io.javaclasses.fileHub.services.users.AuthenticateUser;
 import io.javaclasses.fileHub.services.users.AuthenticationUserCommand;
 import io.javaclasses.fileHub.webservices.Deserializer;
 import io.javaclasses.fileHub.webservices.ErrorResponse;
@@ -17,9 +17,9 @@ import spark.Route;
  */
 public class AuthenticationRoute implements Route {
 
-    private final AuthenticationUser authentication;
+    private final AuthenticateUser authentication;
 
-    public AuthenticationRoute(AuthenticationUser process) {
+    public AuthenticationRoute(AuthenticateUser process) {
 
         this.authentication = process;
     }

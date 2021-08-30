@@ -1,7 +1,7 @@
 package io.javaclasses.fileHub.webservices.registration;
 
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
-import io.javaclasses.fileHub.services.users.RegistrationUser;
+import io.javaclasses.fileHub.services.users.RegisterUser;
 import io.javaclasses.fileHub.services.users.RegistrationUserCommand;
 import io.javaclasses.fileHub.webservices.Deserializer;
 import io.javaclasses.fileHub.webservices.ErrorResponse;
@@ -13,9 +13,9 @@ import spark.Route;
 
 public class RegistrationRoute implements Route {
 
-    private final RegistrationUser registration;
+    private final RegisterUser registration;
 
-    public RegistrationRoute(RegistrationUser process) {
+    public RegistrationRoute(RegisterUser process) {
 
         this.registration = process;
     }

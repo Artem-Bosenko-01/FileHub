@@ -18,9 +18,9 @@ public final class UserTestData {
 
         RegistrationUserCommand registrationUserCommand = new RegistrationUserCommand(KevinLoginName, KevinPassword);
 
-        RegistrationUser registrationUser = new RegistrationUser(userStorage);
+        RegisterUser registerUser = new RegisterUser(userStorage);
 
-        registrationUser.handle(registrationUserCommand);
+        registerUser.handle(registrationUserCommand);
         return new UserId(registrationUserCommand.loginName());
     }
 
@@ -29,9 +29,9 @@ public final class UserTestData {
 
         AuthenticationUserCommand authenticationUserCommand = new AuthenticationUserCommand(KevinLoginName, KevinPassword);
 
-        AuthenticationUser authenticationUser = new AuthenticationUser(userStorage, authorizationStorage);
+        AuthenticateUser authenticateUser = new AuthenticateUser(userStorage, authorizationStorage);
 
-        return authenticationUser.handle(authenticationUserCommand);
+        return authenticateUser.handle(authenticationUserCommand);
 
     }
 
@@ -40,9 +40,9 @@ public final class UserTestData {
 
         RegistrationUserCommand registrationUserCommand = new RegistrationUserCommand(JohnLoginName, JohnPassword);
 
-        RegistrationUser registrationUser = new RegistrationUser(userStorage);
+        RegisterUser registerUser = new RegisterUser(userStorage);
 
-        registrationUser.handle(registrationUserCommand);
+        registerUser.handle(registrationUserCommand);
         return new UserId(registrationUserCommand.loginName());
     }
 
@@ -51,9 +51,9 @@ public final class UserTestData {
 
         AuthenticationUserCommand authenticationUserCommand = new AuthenticationUserCommand(JohnLoginName, JohnPassword);
 
-        AuthenticationUser authenticationUser = new AuthenticationUser(userStorage, authorizationStorage);
+        AuthenticateUser authenticateUser = new AuthenticateUser(userStorage, authorizationStorage);
 
-        return authenticationUser.handle(authenticationUserCommand);
+        return authenticateUser.handle(authenticationUserCommand);
 
     }
 }

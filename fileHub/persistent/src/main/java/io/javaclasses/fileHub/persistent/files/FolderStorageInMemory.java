@@ -38,10 +38,10 @@ public class FolderStorageInMemory extends AbstractInMemoryStorage<FolderId, Fol
     }
 
     @Override
-    public Optional<Folder> findFolderByName(String name, UserId owner) {
+    public Optional<Folder> findFolderById(FolderId id, UserId owner) {
 
         return records().values().stream().
-                filter(folder -> folder.name().equals(name) && folder.owner().equals(owner)).
+                filter(folder -> folder.id().equals(id) && folder.owner().equals(owner)).
                 findFirst();
     }
 

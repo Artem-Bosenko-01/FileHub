@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 
 /**
  * This is object, that contains data after successful
- * execution {@link GettingFileContent get file's content process}.
+ * execution {@link GetFileContent get file's content process}.
  */
 public final class GetFileContentDTO {
 

@@ -13,7 +13,7 @@ public interface FolderStorage extends Storage<FolderId, Folder> {
 
     Optional<FolderId> findParentFolderByChildId(FolderId childId) throws NotExistUserIdException;
 
-    Optional<Folder> findFolderByName(String name, UserId owner);
+    Optional<Folder> findFolderById(FolderId id, UserId owner);
 
     int getSizeRecordsList();
 

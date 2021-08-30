@@ -23,9 +23,9 @@ class ProfileReadManagementViewTest {
 
         AuthToken token = UserTestData.authenticateJohnUser(userStorageInMemory, authorizationStorage);
 
-        ReadUserProfileQuery command = new ReadUserProfileQuery(token, id);
+        GetUserQuery command = new GetUserQuery(token, id);
 
-        ReadingInfoAboutUser profileReadManagementProcess = new ReadingInfoAboutUser(userStorageInMemory,
+        GetUserInfo profileReadManagementProcess = new GetUserInfo(userStorageInMemory,
                 authorizationStorage);
 
         InfoAboutUserDto infoAboutUserDto = profileReadManagementProcess.handle(command);
@@ -46,9 +46,9 @@ class ProfileReadManagementViewTest {
 
         AuthToken token = UserTestData.authenticateJohnUser(userStorageInMemory, authorizationStorage);
 
-        ReadUserProfileQuery command = new ReadUserProfileQuery(token, new UserId("asas@h.com"));
+        GetUserQuery command = new GetUserQuery(token, new UserId("asas@h.com"));
 
-        ReadingInfoAboutUser profileReadManagementProcess = new ReadingInfoAboutUser(userStorageInMemory,
+        GetUserInfo profileReadManagementProcess = new GetUserInfo(userStorageInMemory,
                 authorizationStorage);
 
         Assertions.assertThrows(InvalidHandleCommandException.class,

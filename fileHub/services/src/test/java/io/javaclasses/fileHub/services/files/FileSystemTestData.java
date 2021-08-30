@@ -38,18 +38,18 @@ public final class FileSystemTestData {
         CreateFileCommand createFileCommand = new CreateFileCommand(token, "folder", MimeType.TEXT, id,
                 new FolderId("folder", id));
 
-        CreatingFile creatingFile = new CreatingFile(fileStorage, authorizationStorage);
+        CreateFile createFile = new CreateFile(fileStorage, authorizationStorage);
 
-        return creatingFile.doHandle(createFileCommand);
+        return createFile.doHandle(createFileCommand);
     }
 
     public FileId createFile(FileStorage fileStorage, FolderId parent) throws InvalidHandleCommandException {
 
         CreateFileCommand createFileCommand = new CreateFileCommand(token, "folder", MimeType.TEXT, id, parent);
 
-        CreatingFile creatingFile = new CreatingFile(fileStorage, authorizationStorage);
+        CreateFile createFile = new CreateFile(fileStorage, authorizationStorage);
 
-        return creatingFile.doHandle(createFileCommand);
+        return createFile.doHandle(createFileCommand);
     }
 
     public DeleteFileCommand deleteFile(String name) {
@@ -80,7 +80,7 @@ public final class FileSystemTestData {
 
         CreateFolderCommand createFolderCommand = new CreateFolderCommand(token, "folder", id, null);
 
-        CreatingFolder creatingFile = new CreatingFolder(folderStorage, authorizationStorage);
+        CreateFolder creatingFile = new CreateFolder(folderStorage, authorizationStorage);
 
         return creatingFile.doHandle(createFolderCommand);
     }
@@ -90,7 +90,7 @@ public final class FileSystemTestData {
 
         CreateFolderCommand createFolderCommand = new CreateFolderCommand(token, name, id, null);
 
-        CreatingFolder creatingFile = new CreatingFolder(folderStorage, authorizationStorage);
+        CreateFolder creatingFile = new CreateFolder(folderStorage, authorizationStorage);
 
         return creatingFile.doHandle(createFolderCommand);
     }

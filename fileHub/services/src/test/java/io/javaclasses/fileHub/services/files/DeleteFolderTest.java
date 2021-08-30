@@ -3,63 +3,66 @@ package io.javaclasses.fileHub.services.files;
 import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.files.FolderStorage;
 import io.javaclasses.fileHub.persistent.files.FolderStorageInMemory;
-import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.persistent.users.UserStorage;
 import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
+import io.javaclasses.fileHub.persistent.users.UserId;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 
-class GetFolderByNameViewTest {
+class DeleteFolderTest {
+
 
     @Test
-    public void readInfoAboutFolderByIdTest() throws InvalidHandleCommandException {
+    public void deleteFolderByIdTest() throws InvalidHandleCommandException {
 
         FolderStorage folderStorage = new FolderStorageInMemory();
 
-        UserStorage userStorage = new UserStorageInMemory();
-
         AuthorizationStorage authorizationStorage = new AuthorizationStorageInMemory();
+
+        UserStorage userStorage = new UserStorageInMemory();
 
         FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
 
         FolderId id = fileSystemTestData.createFolder(folderStorage, null);
 
-        GetFolderByIdQuery query = new GetFolderByIdQuery(fileSystemTestData.token(),
-                id, fileSystemTestData.id());
+        Assertions.assertEquals(folderStorage.getSizeRecordsList(), 1);
 
-        GetFolderById view = new GetFolderById(folderStorage, authorizationStorage);
+        DeleteFolderCommand deleteFileCommand = new DeleteFolderCommand(fileSystemTestData.token(), id);
 
-        GetFolderByIdDto folderByNameDTO = view.handle(query);
+        DeleteFolder deleteFileProcess = new DeleteFolder(folderStorage, authorizationStorage);
 
-        Assertions.assertEquals(folderByNameDTO.folderID(), id);
+        deleteFileProcess.handle(deleteFileCommand);
+
+        Assertions.assertEquals(folderStorage.getSizeRecordsList(), 0);
 
     }
 
 
     @Test
-    public void failedReadFolderInfoByNotExistIdTest() throws InvalidHandleCommandException {
+    public void deleteFolderWithNotExistedIdTest() throws InvalidHandleCommandException {
+
 
         FolderStorage folderStorage = new FolderStorageInMemory();
 
-        UserStorage userStorage = new UserStorageInMemory();
-
         AuthorizationStorage authorizationStorage = new AuthorizationStorageInMemory();
+
+        UserStorage userStorage = new UserStorageInMemory();
 
         FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
 
         fileSystemTestData.createFolder(folderStorage, null);
 
-        Assertions.assertEquals(folderStorage.getSizeRecordsList(), 1);
+        DeleteFolderCommand deleteFolderCommand = new DeleteFolderCommand(fileSystemTestData.token(),
+                new FolderId("name", new UserId("vadvdva")));
 
-        GetFolderByIdQuery query = new GetFolderByIdQuery(fileSystemTestData.token(),
-                new FolderId("JHGF", new UserId("vdsv")), fileSystemTestData.id());
+        DeleteFolder deleteFileProcess = new DeleteFolder(folderStorage, authorizationStorage);
 
-        GetFolderById view = new GetFolderById(folderStorage, authorizationStorage);
+        Assertions.assertThrows(InvalidHandleCommandException.class,
+                () -> deleteFileProcess.handle(deleteFolderCommand));
 
-        Assertions.assertThrows(InvalidHandleCommandException.class, () -> view.handle(query));
     }
 }

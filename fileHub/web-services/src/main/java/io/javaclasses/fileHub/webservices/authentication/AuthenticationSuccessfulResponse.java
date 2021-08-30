@@ -12,6 +12,7 @@ public class AuthenticationSuccessfulResponse extends JsonResponse {
     private final String token;
 
     public AuthenticationSuccessfulResponse(AuthToken token) {
+
         this.token = Preconditions.checkNotNull(token.value());
     }
 }

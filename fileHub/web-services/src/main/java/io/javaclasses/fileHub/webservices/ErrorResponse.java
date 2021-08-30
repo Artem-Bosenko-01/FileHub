@@ -11,6 +11,7 @@ public class ErrorResponse extends JsonResponse {
     private final String message;
 
     public ErrorResponse(String message) {
+
         this.message = Preconditions.checkNotNull(message);
     }
 }

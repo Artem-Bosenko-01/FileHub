@@ -3,7 +3,10 @@ package io.javaclasses.fileHub.webservices.registration;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
 import io.javaclasses.fileHub.services.users.RegistrationUser;
 import io.javaclasses.fileHub.services.users.RegistrationUserCommand;
+import io.javaclasses.fileHub.webservices.Deserializer;
 import io.javaclasses.fileHub.webservices.ErrorResponse;
+import io.javaclasses.fileHub.webservices.InvalidInputDataForDeserializing;
+import io.javaclasses.fileHub.webservices.RESPONSE_STATUS;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -22,27 +25,41 @@ public class RegistrationRoute implements Route {
 
         String body = request.body();
 
-        UserRegistrationCredentials credentials = new UserRegistrationCredentials(body);
-
-        RegistrationUserCommand command = credentials.deserialize();
+        Deserializer<RegistrationUserCommand> registrationCommandDeserializer = new Deserializer<>();
 
         try {
 
+            RegistrationUserCommand command = registrationCommandDeserializer.
+                    deserialize(body, RegistrationUserCommand.class);
+
             registration.handle(command);
 
-            response.status(200);
+            response.status(RESPONSE_STATUS.OK.code());
+
             return true;
+
+        } catch (InvalidInputDataForDeserializing invalidInputDataForDeserializing) {
+
+            response.status(RESPONSE_STATUS.BAD_REQUEST.code());
+
+            invalidInputDataForDeserializing.printStackTrace();
+
+            return new ErrorResponse(invalidInputDataForDeserializing.getMessage()).serialize();
 
         } catch (InvalidHandleCommandException e) {
 
-            response.status(422);
+            response.status(RESPONSE_STATUS.VALIDATION_ERROR.code());
+
             ValidationErrorResponse errorResponse = new ValidationErrorResponse();
+
             errorResponse.addError("email", e.getMessage());
+
             return errorResponse.serialize();
 
         } catch (Exception e) {
 
-            response.status(500);
+            response.status(RESPONSE_STATUS.SERVER_ERROR.code());
+
             return new ErrorResponse("Internal server error.").serialize();
         }
     }

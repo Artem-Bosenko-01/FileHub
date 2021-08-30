@@ -9,7 +9,8 @@ public class JsonResponse {
 
     private static final Gson converter = new Gson();
 
-    public String serialize(){
+    public String serialize() {
+
         return converter.toJson(this);
     }
 }

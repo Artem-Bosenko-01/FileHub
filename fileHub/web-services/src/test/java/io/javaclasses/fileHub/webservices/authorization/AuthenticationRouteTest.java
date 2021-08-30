@@ -40,7 +40,7 @@ class AuthenticationRouteTest {
         TestResponse res = request.send("POST", "/login", body);
         HashMap<String, String> responseBody = res.json();
 
-        Assertions.assertEquals(403, res.status);
+        Assertions.assertEquals(401, res.status);
         Assertions.assertNotNull(responseBody.get("message"));
     }
 
@@ -51,7 +51,7 @@ class AuthenticationRouteTest {
         TestResponse res = request.send("POST", "/login", body);
         HashMap<String, String> responseBody = res.json();
 
-        Assertions.assertEquals(500, res.status);
+        Assertions.assertEquals(400, res.status);
         Assertions.assertNotNull(responseBody.get("message"));
     }
 }

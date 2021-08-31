@@ -1,21 +1,17 @@
 package io.javaclasses.fileHub.services.files.content;
 
+import io.javaclasses.fileHub.persistent.NotExistUserIdException;
+import io.javaclasses.fileHub.persistent.files.*;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
-import io.javaclasses.fileHub.persistent.NotExistUserIdException;
 import io.javaclasses.fileHub.services.View;
-import io.javaclasses.fileHub.persistent.files.File;
-import io.javaclasses.fileHub.persistent.files.FileStorage;
-import io.javaclasses.fileHub.persistent.files.Folder;
-import io.javaclasses.fileHub.persistent.files.FolderId;
-import io.javaclasses.fileHub.persistent.files.FolderStorage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 /**
- * This is service to get folder's content for existed {@link FolderId folder}.
+ * Service to get folder's content for existed {@link FolderId folder}.
  */
 public class GetFolderContent extends View<GetFolderContentQuery, GetFolderContentDTO> {
 
@@ -28,7 +24,9 @@ public class GetFolderContent extends View<GetFolderContentQuery, GetFolderConte
                             AuthorizationStorage authorizationStorage) {
 
         super(authorizationStorage);
+
         this.folderStorage = folderStorage;
+
         this.fileStorage = fileStorage;
 
     }
@@ -58,6 +56,7 @@ public class GetFolderContent extends View<GetFolderContentQuery, GetFolderConte
             if (logger.isErrorEnabled()) {
                 logger.error(e.getMessage());
             }
+
             throw new InvalidHandleCommandException(e.getMessage());
         }
 

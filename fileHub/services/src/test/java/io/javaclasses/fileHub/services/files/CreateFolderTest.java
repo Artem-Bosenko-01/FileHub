@@ -26,7 +26,7 @@ class CreateFolderTest {
         FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
 
         CreateFolderCommand createFolderCommand = new CreateFolderCommand(fileSystemTestData.token(),
-                "folder", fileSystemTestData.id(), null);
+                "folder", fileSystemTestData.id(), 9, null);
 
         CreateFolder createFileManagementProcess = new CreateFolder(folderStorage, authorizationStorage);
 
@@ -48,10 +48,10 @@ class CreateFolderTest {
         FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
 
         CreateFolderCommand createFolderCommand = new CreateFolderCommand(fileSystemTestData.token(),
-                "folder", fileSystemTestData.id(), null);
+                "folder", fileSystemTestData.id(), 7, null);
 
         CreateFolderCommand createFolderCommandERROR = new CreateFolderCommand(fileSystemTestData.token(),
-                "folder", fileSystemTestData.id(), null);
+                "folder", fileSystemTestData.id(), 8, null);
 
         CreateFolder createFileManagementProcess = new CreateFolder(folderStorage, authorizationStorage);
 

@@ -1,17 +1,17 @@
 package io.javaclasses.fileHub.services.files;
 
 import com.google.common.base.Preconditions;
+import io.javaclasses.fileHub.persistent.NotExistUserIdException;
 import io.javaclasses.fileHub.persistent.files.FileId;
+import io.javaclasses.fileHub.persistent.files.FileStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
-import io.javaclasses.fileHub.persistent.NotExistUserIdException;
 import io.javaclasses.fileHub.services.SecuredUserProcess;
-import io.javaclasses.fileHub.persistent.files.FileStorageInMemory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This is service to delete existed file in authenticated user's directory.
+ * Service to delete an existed file in authenticated user's directory.
  */
 public class DeleteFile extends SecuredUserProcess<DeleteFileCommand, FileId> {
 
@@ -21,7 +21,9 @@ public class DeleteFile extends SecuredUserProcess<DeleteFileCommand, FileId> {
     private final FileStorageInMemory fileStorage;
 
     public DeleteFile(FileStorageInMemory fileStorage, AuthorizationStorage authorizationStorage) {
+
         super(Preconditions.checkNotNull(authorizationStorage));
+
         this.fileStorage = Preconditions.checkNotNull(fileStorage);
     }
 

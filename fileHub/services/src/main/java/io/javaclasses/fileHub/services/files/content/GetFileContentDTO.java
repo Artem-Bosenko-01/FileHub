@@ -3,14 +3,14 @@ package io.javaclasses.fileHub.services.files.content;
 import com.google.common.base.Preconditions;
 
 /**
- * This is object, that contains data after successful
- * execution {@link GetFileContent get file's content process}.
+ * Result data after successful execution {@link GetFileContent get file's content process}.
  */
 public final class GetFileContentDTO {
 
     private final byte[] content;
 
     public GetFileContentDTO(byte[] content) {
+
         this.content = Preconditions.checkNotNull(content);
     }
 

@@ -16,20 +16,23 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 
-import static com.google.common.base.Preconditions.*;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * This is service for authentication user in Filehub application if he is been in {@link UserStorage user storage}.
+ * Service to authenticate user in the Filehub application if he exist at {@link UserStorage user storage}.
  */
 public class AuthenticateUser implements OpenUserProcess<AuthenticationUserCommand, AuthToken> {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthenticateUser.class);
 
     private final UserStorage userStorage;
+
     private final AuthorizationStorage authorizationStorage;
 
     public AuthenticateUser(UserStorage userStorage, AuthorizationStorage authorizationStorage) {
+
         this.userStorage = checkNotNull(userStorage);
+
         this.authorizationStorage = checkNotNull(authorizationStorage);
     }
 
@@ -57,15 +60,15 @@ public class AuthenticateUser implements OpenUserProcess<AuthenticationUserComma
                 authorizationStorage.create(new AuthorizationUsers(new UserAuthToken(token.value()),
                         user.get().id(), ZonedDateTime.now(ZoneId.of("America/Los_Angeles")).plusHours(6)));
 
-                if(logger.isInfoEnabled()){
-                    logger.info("Token for user " + user.get().login() +" was created. Value = " + token.value());
+                if (logger.isInfoEnabled()) {
+                    logger.info("Token for user " + user.get().login() + " was created. Value = " + token.value());
                 }
 
                 return token;
 
             } catch (DuplicatedUserIdException e) {
 
-                if(logger.isErrorEnabled()){
+                if (logger.isErrorEnabled()) {
                     logger.error(e.getMessage());
                 }
 

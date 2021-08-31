@@ -1,7 +1,7 @@
 package io.javaclasses.fileHub.services;
 
 /**
- * This is base, that carries information from client, that didn't authenticate in FileHub application.
+ * The base that contains data from not authenticated clients in the FileHub application yet.
  **/
 public class AnonymousUserCommand implements Command{
 
@@ -9,6 +9,7 @@ public class AnonymousUserCommand implements Command{
 
     @Override
     public AuthToken token() {
+
         return NULLABLE_USER_TOKEN;
     }
 }

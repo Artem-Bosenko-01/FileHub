@@ -2,17 +2,17 @@ package io.javaclasses.fileHub.services.files;
 
 import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.DuplicatedUserIdException;
-import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
-import io.javaclasses.fileHub.services.InvalidHandleCommandException;
-import io.javaclasses.fileHub.services.SecuredUserProcess;
 import io.javaclasses.fileHub.persistent.files.Folder;
 import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.files.FolderStorage;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
+import io.javaclasses.fileHub.services.InvalidHandleCommandException;
+import io.javaclasses.fileHub.services.SecuredUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This is service to create new empty folder by authenticated user.
+ * Service to create a new empty folder by authenticated user.
  */
 public class CreateFolder extends SecuredUserProcess<CreateFolderCommand, FolderId> {
 
@@ -21,7 +21,9 @@ public class CreateFolder extends SecuredUserProcess<CreateFolderCommand, Folder
     private final FolderStorage folderStorageInMemory;
 
     public CreateFolder(FolderStorage userStorage, AuthorizationStorage authorizationStorage) {
+
         super(authorizationStorage);
+
         this.folderStorageInMemory = Preconditions.checkNotNull(userStorage);
     }
 
@@ -36,6 +38,7 @@ public class CreateFolder extends SecuredUserProcess<CreateFolderCommand, Folder
         Folder folder = new Folder(id);
         folder.setParentFolder(inputCommand.parentFolder());
         folder.setName(inputCommand.name());
+        folder.setItemsAmount(inputCommand.itemsAmount());
         folder.setOwner(inputCommand.owner());
 
         try {

@@ -9,7 +9,7 @@ import java.util.Objects;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * This is object, that contains data, that needs to get full information about user by his {@link UserId id}.
+ * Data that needed to get information about user by his {@link UserId id}.
  */
 public final class GetUserQuery extends Query {
 
@@ -18,6 +18,7 @@ public final class GetUserQuery extends Query {
     public GetUserQuery(AuthToken token, UserId id) {
 
         super(checkNotNull(token));
+
         this.id = checkNotNull(id);
 
     }

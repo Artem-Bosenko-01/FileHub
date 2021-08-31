@@ -46,6 +46,13 @@ public class FolderStorageInMemory extends AbstractInMemoryStorage<FolderId, Fol
     }
 
     @Override
+    public Optional<Folder> findRootFolderByUserId(UserId id) {
+        return records().values().stream().
+                filter(folder -> folder.parentFolder() == null && folder.owner().equals(id)).
+                findFirst();
+    }
+
+    @Override
     public int getSizeRecordsList() {
         return records().size();
     }

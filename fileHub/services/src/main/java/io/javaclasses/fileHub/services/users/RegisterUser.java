@@ -2,16 +2,16 @@ package io.javaclasses.fileHub.services.users;
 
 import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.DuplicatedUserIdException;
-import io.javaclasses.fileHub.services.InvalidHandleCommandException;
-import io.javaclasses.fileHub.services.OpenUserProcess;
 import io.javaclasses.fileHub.persistent.users.User;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.persistent.users.UserStorage;
+import io.javaclasses.fileHub.services.InvalidHandleCommandException;
+import io.javaclasses.fileHub.services.OpenUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This is service for first registration user in Filehub application.
+ * Service for first user registration in Filehub application.
  */
 public class RegisterUser implements OpenUserProcess<RegistrationUserCommand, Boolean> {
 
@@ -19,7 +19,8 @@ public class RegisterUser implements OpenUserProcess<RegistrationUserCommand, Bo
 
     private final UserStorage userStorage;
 
-    public RegisterUser(UserStorage userStorage){
+    public RegisterUser(UserStorage userStorage) {
+
         this.userStorage = Preconditions.checkNotNull(userStorage);
     }
 
@@ -50,7 +51,7 @@ public class RegisterUser implements OpenUserProcess<RegistrationUserCommand, Bo
 
         } catch (DuplicatedUserIdException e) {
 
-            if(logger.isErrorEnabled()){
+            if (logger.isErrorEnabled()) {
                 logger.error(e.getMessage());
             }
 

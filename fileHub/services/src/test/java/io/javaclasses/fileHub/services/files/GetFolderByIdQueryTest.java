@@ -14,8 +14,7 @@ class GetFolderByIdQueryTest {
         NullPointerTester tester = new NullPointerTester();
 
         tester.setDefault(AuthToken.class, new AuthToken(""))
-                .setDefault(FolderId.class, new FolderId("", new UserId("")))
-                .setDefault(UserId.class, new UserId(""));
+                .setDefault(FolderId.class, new FolderId("", new UserId("")));
 
         tester.testAllPublicConstructors(GetFolderByIdQuery.class);
 
@@ -26,7 +25,7 @@ class GetFolderByIdQueryTest {
 
         NullPointerTester tester = new NullPointerTester();
         tester.testAllPublicInstanceMethods(new GetFolderByIdQuery(new AuthToken(""),
-                new FolderId("", new UserId("")), new UserId("")));
+                new FolderId("", new UserId(""))));
 
     }
 }

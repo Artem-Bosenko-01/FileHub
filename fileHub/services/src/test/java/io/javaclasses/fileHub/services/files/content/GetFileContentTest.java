@@ -5,7 +5,7 @@ import io.javaclasses.fileHub.persistent.users.UserStorage;
 import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
-import io.javaclasses.fileHub.services.InvalidHandleCommandException;
+import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.persistent.files.*;
 import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.services.AuthToken;
@@ -18,7 +18,7 @@ class GetFileContentTest {
 
     private byte[] createFileContent(AuthorizationStorage authorizationStorage,
                                      FileContentStorageInMemory fileStorageInMemory,AuthToken token,
-                                     FileId id, byte[] content) throws InvalidHandleCommandException {
+                                     FileId id, byte[] content) throws InvalidCommandHandlingException {
 
         CreateFileContentCommand contentCommand = new CreateFileContentCommand(token,id, content);
 
@@ -29,7 +29,7 @@ class GetFileContentTest {
     }
 
     @Test
-    public void readInfoAboutFileByUserIdTest() throws InvalidHandleCommandException {
+    public void readInfoAboutFileByUserIdTest() throws InvalidCommandHandlingException {
 
         FileContentStorageInMemory contentStorageInMemory = new FileContentStorageInMemory();
 
@@ -60,7 +60,7 @@ class GetFileContentTest {
 
 
     @Test
-    public void failedReadInfoByNotExistIdTest() throws InvalidHandleCommandException {
+    public void failedReadInfoByNotExistIdTest() throws InvalidCommandHandlingException {
 
         FileContentStorageInMemory contentStorageInMemory = new FileContentStorageInMemory();
 
@@ -84,7 +84,7 @@ class GetFileContentTest {
 
         GetFileContent viewByUser = new GetFileContent(contentStorageInMemory, authorizationStorage);
 
-        Assertions.assertThrows(InvalidHandleCommandException.class, () -> viewByUser.handle(command));
+        Assertions.assertThrows(InvalidCommandHandlingException.class, () -> viewByUser.handle(command));
 
     }
 }

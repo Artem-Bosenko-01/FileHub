@@ -1,15 +1,15 @@
 package io.javaclasses.fileHub.services.files;
 
 import io.javaclasses.fileHub.persistent.users.UserId;
-import io.javaclasses.fileHub.services.InvalidHandleCommandException;
+import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 
 /**
  * The exception that throws when root folder doesn't exist at
  * {@link io.javaclasses.fileHub.persistent.files.FolderStorage storage}.
  */
-public final class RootFolderNotFoundException extends InvalidHandleCommandException {
+public final class RootFolderNotFoundHandlingException extends InvalidCommandHandlingException {
 
-    public RootFolderNotFoundException(UserId id) {
+    public RootFolderNotFoundHandlingException(UserId id) {
 
         super("Root folder doesn't exist for user: " + id.toString());
     }

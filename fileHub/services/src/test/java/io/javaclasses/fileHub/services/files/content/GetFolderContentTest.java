@@ -4,7 +4,7 @@ import io.javaclasses.fileHub.persistent.users.UserStorage;
 import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
-import io.javaclasses.fileHub.services.InvalidHandleCommandException;
+import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.persistent.files.*;
 import io.javaclasses.fileHub.services.files.*;
 import org.junit.jupiter.api.Assertions;
@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 class GetFolderContentTest {
 
     @Test
-    public void readFolderContentByIdTest() throws InvalidHandleCommandException {
+    public void readFolderContentByIdTest() throws InvalidCommandHandlingException {
 
         FolderStorage folderStorage = new FolderStorageInMemory();
 

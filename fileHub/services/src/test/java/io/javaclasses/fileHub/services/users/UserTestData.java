@@ -4,7 +4,7 @@ import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.persistent.users.UserStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.services.AuthToken;
-import io.javaclasses.fileHub.services.InvalidHandleCommandException;
+import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 
 public final class UserTestData {
 
@@ -14,7 +14,7 @@ public final class UserTestData {
     private static final String JohnPassword = "56498";
 
 
-    public static UserId registerKevinUser(UserStorage userStorage) throws InvalidHandleCommandException {
+    public static UserId registerKevinUser(UserStorage userStorage) throws InvalidCommandHandlingException {
 
         RegistrationUserCommand registrationUserCommand = new RegistrationUserCommand(KevinLoginName, KevinPassword);
 
@@ -25,7 +25,7 @@ public final class UserTestData {
     }
 
     public static AuthToken authenticateKevinUser(UserStorage userStorage, AuthorizationStorage authorizationStorage)
-            throws InvalidHandleCommandException {
+            throws InvalidCommandHandlingException {
 
         AuthenticationUserCommand authenticationUserCommand = new AuthenticationUserCommand(KevinLoginName, KevinPassword);
 
@@ -36,7 +36,7 @@ public final class UserTestData {
     }
 
 
-    public static UserId registerJohnUser(UserStorage userStorage) throws InvalidHandleCommandException {
+    public static UserId registerJohnUser(UserStorage userStorage) throws InvalidCommandHandlingException {
 
         RegistrationUserCommand registrationUserCommand = new RegistrationUserCommand(JohnLoginName, JohnPassword);
 
@@ -47,7 +47,7 @@ public final class UserTestData {
     }
 
     public static AuthToken authenticateJohnUser(UserStorage userStorage, AuthorizationStorage authorizationStorage)
-            throws InvalidHandleCommandException {
+            throws InvalidCommandHandlingException {
 
         AuthenticationUserCommand authenticationUserCommand = new AuthenticationUserCommand(JohnLoginName, JohnPassword);
 

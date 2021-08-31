@@ -1,17 +1,12 @@
 package io.javaclasses.fileHub.services.users;
 
-import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
-import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
-import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
-import io.javaclasses.fileHub.services.AuthToken;
-import io.javaclasses.fileHub.services.InvalidHandleCommandException;
-import org.junit.jupiter.api.Assertions;
+import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import org.junit.jupiter.api.Test;
 
 class AuthenticateUserTest {
 
     @Test
-    public void authenticateTest() throws InvalidHandleCommandException {
+    public void authenticateTest() throws InvalidCommandHandlingException {
 
        /*
         UserStorageInMemory userStorageInMemory = new UserStorageInMemory();

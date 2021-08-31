@@ -5,7 +5,7 @@ import io.javaclasses.fileHub.persistent.files.FileId;
 import io.javaclasses.fileHub.persistent.files.content.FIleContentStorage;
 import io.javaclasses.fileHub.persistent.files.content.FileContent;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
-import io.javaclasses.fileHub.services.InvalidHandleCommandException;
+import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.View;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +28,7 @@ public class GetFileContent extends View<GetFileContentQuery, GetFileContentDTO>
 
 
     @Override
-    protected GetFileContentDTO doHandle(GetFileContentQuery inputCommand) throws InvalidHandleCommandException {
+    protected GetFileContentDTO doHandle(GetFileContentQuery inputCommand) throws InvalidCommandHandlingException {
 
         if (logger.isInfoEnabled()) {
             logger.info("Start get file's content by id " + inputCommand.fileID());
@@ -50,7 +50,7 @@ public class GetFileContent extends View<GetFileContentQuery, GetFileContentDTO>
                 logger.error("File with id doesn't exist " + inputCommand.fileID());
             }
 
-            throw new InvalidHandleCommandException("File with id doesn't exist " + inputCommand.fileID());
+            throw new InvalidCommandHandlingException("File with id doesn't exist " + inputCommand.fileID());
         }
 
     }

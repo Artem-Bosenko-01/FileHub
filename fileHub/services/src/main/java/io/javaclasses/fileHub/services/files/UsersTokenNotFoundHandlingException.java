@@ -1,15 +1,15 @@
 package io.javaclasses.fileHub.services.files;
 
 import io.javaclasses.fileHub.services.AuthToken;
-import io.javaclasses.fileHub.services.InvalidHandleCommandException;
+import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 
 /**
  * The exception that throws when {@link io.javaclasses.fileHub.persistent.users.tokens.UserAuthToken user's token}
  * doesn't exist at {@link io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage storage}.
  */
-public final class UsersTokenNotFoundException extends InvalidHandleCommandException {
+public final class UsersTokenNotFoundHandlingException extends InvalidCommandHandlingException {
 
-    public UsersTokenNotFoundException(AuthToken token) {
+    public UsersTokenNotFoundHandlingException(AuthToken token) {
 
         super("Cannot find user by token: " + token);
     }

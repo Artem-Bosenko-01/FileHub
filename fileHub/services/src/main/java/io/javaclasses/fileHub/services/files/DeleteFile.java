@@ -5,7 +5,7 @@ import io.javaclasses.fileHub.persistent.NotExistUserIdException;
 import io.javaclasses.fileHub.persistent.files.FileId;
 import io.javaclasses.fileHub.persistent.files.FileStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
-import io.javaclasses.fileHub.services.InvalidHandleCommandException;
+import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.SecuredUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +29,7 @@ public class DeleteFile extends SecuredUserProcess<DeleteFileCommand, FileId> {
 
 
     @Override
-    protected FileId doHandle(DeleteFileCommand inputCommand) throws InvalidHandleCommandException {
+    protected FileId doHandle(DeleteFileCommand inputCommand) throws InvalidCommandHandlingException {
 
         if (logger.isInfoEnabled()) {
             logger.info("Start delete file " + inputCommand.id());
@@ -51,7 +51,7 @@ public class DeleteFile extends SecuredUserProcess<DeleteFileCommand, FileId> {
                 logger.error(e.getMessage());
             }
 
-            throw new InvalidHandleCommandException(e.getMessage());
+            throw new InvalidCommandHandlingException(e.getMessage());
         }
 
     }

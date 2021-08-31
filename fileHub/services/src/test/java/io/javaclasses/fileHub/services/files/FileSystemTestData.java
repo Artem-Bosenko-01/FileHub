@@ -5,7 +5,7 @@ import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.persistent.users.UserStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.services.AuthToken;
-import io.javaclasses.fileHub.services.InvalidHandleCommandException;
+import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.users.UserTestData;
 
 import javax.annotation.Nullable;
@@ -17,7 +17,7 @@ public final class FileSystemTestData {
     private final AuthToken token;
 
     public FileSystemTestData(UserStorage userStorage, AuthorizationStorage authorizationStorage)
-            throws InvalidHandleCommandException {
+            throws InvalidCommandHandlingException {
 
         this.authorizationStorage = authorizationStorage;
 
@@ -33,7 +33,7 @@ public final class FileSystemTestData {
         return token;
     }
 
-    public FileId createFile(FileStorage fileStorage) throws InvalidHandleCommandException {
+    public FileId createFile(FileStorage fileStorage) throws InvalidCommandHandlingException {
 
         CreateFileCommand createFileCommand = new CreateFileCommand(token, "folder", MimeType.TEXT, id,
                 new FolderId("folder", id));
@@ -43,7 +43,7 @@ public final class FileSystemTestData {
         return createFile.doHandle(createFileCommand);
     }
 
-    public FileId createFile(FileStorage fileStorage, FolderId parent) throws InvalidHandleCommandException {
+    public FileId createFile(FileStorage fileStorage, FolderId parent) throws InvalidCommandHandlingException {
 
         CreateFileCommand createFileCommand = new CreateFileCommand(token, "folder", MimeType.TEXT, id, parent);
 
@@ -76,7 +76,7 @@ public final class FileSystemTestData {
     }
 
     public FolderId createFolder(FolderStorage folderStorage, @Nullable FolderId parent)
-            throws InvalidHandleCommandException {
+            throws InvalidCommandHandlingException {
 
         CreateFolderCommand createFolderCommand = new CreateFolderCommand(token, "folder", id, 8, null);
 
@@ -86,7 +86,7 @@ public final class FileSystemTestData {
     }
 
     public FolderId createFolder(FolderStorage folderStorage, String name, @Nullable FolderId parent)
-            throws InvalidHandleCommandException {
+            throws InvalidCommandHandlingException {
 
         CreateFolderCommand createFolderCommand = new CreateFolderCommand(token, name, id, 8, null);
 

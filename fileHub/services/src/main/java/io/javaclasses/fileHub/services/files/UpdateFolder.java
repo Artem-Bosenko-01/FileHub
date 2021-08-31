@@ -1,16 +1,19 @@
 package io.javaclasses.fileHub.services.files;
 
 import com.google.common.base.Preconditions;
+import io.javaclasses.fileHub.persistent.NotExistUserIdException;
+import io.javaclasses.fileHub.persistent.files.Folder;
 import io.javaclasses.fileHub.persistent.files.FolderId;
+import io.javaclasses.fileHub.persistent.files.FolderStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.services.InvalidHandleCommandException;
-import io.javaclasses.fileHub.persistent.NotExistUserIdException;
 import io.javaclasses.fileHub.services.SecuredUserProcess;
-import io.javaclasses.fileHub.persistent.files.Folder;
-import io.javaclasses.fileHub.persistent.files.FolderStorage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * This is service to updating information about existed file in authenticated user's folder by {@link FolderId id}.
+ */
 public class UpdateFolder extends SecuredUserProcess<UpdateFolderCommand, FolderId> {
 
     private static final Logger logger = LoggerFactory.getLogger(UpdateFolder.class);
@@ -50,6 +53,7 @@ public class UpdateFolder extends SecuredUserProcess<UpdateFolderCommand, Folder
             if (logger.isErrorEnabled()) {
                 logger.error(e.getMessage());
             }
+
             throw new InvalidHandleCommandException(e.getMessage());
         }
 

@@ -78,7 +78,7 @@ public final class FileSystemTestData {
     public FolderId createFolder(FolderStorage folderStorage, @Nullable FolderId parent)
             throws InvalidHandleCommandException {
 
-        CreateFolderCommand createFolderCommand = new CreateFolderCommand(token, "folder", id, null);
+        CreateFolderCommand createFolderCommand = new CreateFolderCommand(token, "folder", id, 8, null);
 
         CreateFolder creatingFile = new CreateFolder(folderStorage, authorizationStorage);
 
@@ -88,7 +88,7 @@ public final class FileSystemTestData {
     public FolderId createFolder(FolderStorage folderStorage, String name, @Nullable FolderId parent)
             throws InvalidHandleCommandException {
 
-        CreateFolderCommand createFolderCommand = new CreateFolderCommand(token, name, id, null);
+        CreateFolderCommand createFolderCommand = new CreateFolderCommand(token, name, id, 8, null);
 
         CreateFolder creatingFile = new CreateFolder(folderStorage, authorizationStorage);
 

@@ -7,7 +7,7 @@ import java.util.Objects;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * This is object, that contains data, that was inputted by user in the process of authentication in Filehub application.
+ * Data that is needed to authenticate the user in the Filehub application.
  */
 public final class AuthenticationUserCommand extends AnonymousUserCommand {
 

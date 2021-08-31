@@ -11,6 +11,9 @@ import io.javaclasses.fileHub.services.SecuredUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * This is service to updating information about existed file in authenticated user's file by {@link FileId id}.
+ */
 public class UpdateFile extends SecuredUserProcess<UpdateFileCommand, FileId> {
 
     private static final Logger logger = LoggerFactory.getLogger(UpdateFile.class);
@@ -20,6 +23,7 @@ public class UpdateFile extends SecuredUserProcess<UpdateFileCommand, FileId> {
     public UpdateFile(FileStorageInMemory fileStorage, AuthorizationStorage authorizationStorage) {
 
         super(Preconditions.checkNotNull(authorizationStorage));
+
         this.fileStorage = Preconditions.checkNotNull(fileStorage);
     }
 
@@ -44,6 +48,7 @@ public class UpdateFile extends SecuredUserProcess<UpdateFileCommand, FileId> {
             if (logger.isInfoEnabled()) {
                 logger.info("Updating file was successful. id: " + file.id());
             }
+
             return file.id();
 
         } catch (NotExistUserIdException e) {
@@ -51,6 +56,7 @@ public class UpdateFile extends SecuredUserProcess<UpdateFileCommand, FileId> {
             if (logger.isErrorEnabled()) {
                 logger.error(e.getMessage());
             }
+
             throw new InvalidHandleCommandException(e.getMessage());
         }
 

@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Optional;
 
 /**
- * This is service for getting information about authenticated user in Filehub application.
+ * Service to get information about the authenticated user.
  */
 public class GetUserInfo extends View<GetUserQuery, InfoAboutUserDto> {
 
@@ -21,7 +21,9 @@ public class GetUserInfo extends View<GetUserQuery, InfoAboutUserDto> {
     private final UserStorage userStorage;
 
     public GetUserInfo(UserStorage userStorage, AuthorizationStorage authorizationStorage) {
+
         super(Preconditions.checkNotNull(authorizationStorage));
+
         this.userStorage = Preconditions.checkNotNull(userStorage);
     }
 
@@ -45,9 +47,9 @@ public class GetUserInfo extends View<GetUserQuery, InfoAboutUserDto> {
                     findUser.get().id(),
                     findUser.get().login());
 
-        }else {
+        } else {
 
-            if(logger.isErrorEnabled()){
+            if (logger.isErrorEnabled()) {
                 logger.error("User with id doesn't exist " + query.id());
             }
 

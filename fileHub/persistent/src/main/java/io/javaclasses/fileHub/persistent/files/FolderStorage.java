@@ -15,6 +15,8 @@ public interface FolderStorage extends Storage<FolderId, Folder> {
 
     Optional<Folder> findFolderById(FolderId id, UserId owner);
 
+    Optional<Folder> findRootFolderByUserId(UserId id);
+
     int getSizeRecordsList();
 
 }

@@ -7,26 +7,30 @@ import java.util.Objects;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * This is object, that contains data, that was inputted by user in the process of registration.
+ * Data that needed to register user in the FileHub application.
  */
 public final class RegistrationUserCommand extends AnonymousUserCommand {
 
 
     private final String loginName;
+
     private final String password;
 
     public RegistrationUserCommand(String loginName, String password) {
 
         this.loginName = checkNotNull(loginName);
+
         this.password = checkNotNull(password);
 
     }
 
     public String loginName() {
+
         return loginName;
     }
 
     public String password() {
+
         return password;
     }
 
@@ -43,6 +47,7 @@ public final class RegistrationUserCommand extends AnonymousUserCommand {
 
     @Override
     public int hashCode() {
+
         return Objects.hash(loginName, password);
     }
 }

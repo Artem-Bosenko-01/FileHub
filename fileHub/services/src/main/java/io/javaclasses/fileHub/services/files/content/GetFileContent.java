@@ -1,19 +1,19 @@
 package io.javaclasses.fileHub.services.files.content;
 
 import com.google.common.base.Preconditions;
-import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
-import io.javaclasses.fileHub.services.InvalidHandleCommandException;
-import io.javaclasses.fileHub.services.View;
 import io.javaclasses.fileHub.persistent.files.FileId;
 import io.javaclasses.fileHub.persistent.files.content.FIleContentStorage;
 import io.javaclasses.fileHub.persistent.files.content.FileContent;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
+import io.javaclasses.fileHub.services.InvalidHandleCommandException;
+import io.javaclasses.fileHub.services.View;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
 /**
- * This is service to get file's content for existed {@link FileId file}.
+ * Service to get file's content for exist {@link FileId file}.
  */
 public class GetFileContent extends View<GetFileContentQuery, GetFileContentDTO> {
 
@@ -36,7 +36,7 @@ public class GetFileContent extends View<GetFileContentQuery, GetFileContentDTO>
 
         Optional<FileContent> content = contentStorage.findByID(inputCommand.fileID());
 
-        if(content.isPresent()){
+        if (content.isPresent()) {
 
             if (logger.isInfoEnabled()) {
                 logger.info("Getting file's content was successful by id " + content.get().id());
@@ -44,7 +44,7 @@ public class GetFileContent extends View<GetFileContentQuery, GetFileContentDTO>
 
             return new GetFileContentDTO(content.get().content());
 
-        }else {
+        } else {
 
             if (logger.isErrorEnabled()) {
                 logger.error("File with id doesn't exist " + inputCommand.fileID());

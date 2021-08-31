@@ -5,7 +5,7 @@ import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.AuthToken;
-import io.javaclasses.fileHub.services.InvalidHandleCommandException;
+import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,7 @@ class ProfileReadManagementViewTest {
 
 
     @Test
-    public void readInfoAboutUserByIdTest() throws InvalidHandleCommandException {
+    public void readInfoAboutUserByIdTest() throws InvalidCommandHandlingException {
 
         UserStorageInMemory userStorageInMemory = new UserStorageInMemory();
 
@@ -36,7 +36,7 @@ class ProfileReadManagementViewTest {
 
 
     @Test
-    public void failedReadInfoByNotExistIdTest() throws InvalidHandleCommandException {
+    public void failedReadInfoByNotExistIdTest() throws InvalidCommandHandlingException {
 
         UserStorageInMemory userStorageInMemory = new UserStorageInMemory();
 
@@ -51,7 +51,7 @@ class ProfileReadManagementViewTest {
         GetUserInfo profileReadManagementProcess = new GetUserInfo(userStorageInMemory,
                 authorizationStorage);
 
-        Assertions.assertThrows(InvalidHandleCommandException.class,
+        Assertions.assertThrows(InvalidCommandHandlingException.class,
                 () -> profileReadManagementProcess.handle(command));
     }
 

@@ -6,7 +6,7 @@ import io.javaclasses.fileHub.persistent.files.Folder;
 import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.files.FolderStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
-import io.javaclasses.fileHub.services.InvalidHandleCommandException;
+import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.SecuredUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +28,7 @@ public class CreateFolder extends SecuredUserProcess<CreateFolderCommand, Folder
     }
 
     @Override
-    protected FolderId doHandle(CreateFolderCommand inputCommand) throws InvalidHandleCommandException {
+    protected FolderId doHandle(CreateFolderCommand inputCommand) throws InvalidCommandHandlingException {
 
         if (logger.isInfoEnabled()) {
             logger.info("Start create folder " + inputCommand.name());
@@ -57,7 +57,7 @@ public class CreateFolder extends SecuredUserProcess<CreateFolderCommand, Folder
                 logger.error(e.getMessage());
             }
 
-            throw new InvalidHandleCommandException(e.getMessage());
+            throw new InvalidCommandHandlingException(e.getMessage());
         }
 
     }

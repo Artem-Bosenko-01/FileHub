@@ -3,7 +3,7 @@ package io.javaclasses.fileHub.services.files.content;
 import io.javaclasses.fileHub.persistent.NotExistUserIdException;
 import io.javaclasses.fileHub.persistent.files.*;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
-import io.javaclasses.fileHub.services.InvalidHandleCommandException;
+import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.View;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +33,7 @@ public class GetFolderContent extends View<GetFolderContentQuery, GetFolderConte
 
 
     @Override
-    protected GetFolderContentDTO doHandle(GetFolderContentQuery inputCommand) throws InvalidHandleCommandException {
+    protected GetFolderContentDTO doHandle(GetFolderContentQuery inputCommand) throws InvalidCommandHandlingException {
 
         if (logger.isInfoEnabled()) {
             logger.info("Start get folder's content by id " + inputCommand.id());
@@ -57,7 +57,7 @@ public class GetFolderContent extends View<GetFolderContentQuery, GetFolderConte
                 logger.error(e.getMessage());
             }
 
-            throw new InvalidHandleCommandException(e.getMessage());
+            throw new InvalidCommandHandlingException(e.getMessage());
         }
 
     }

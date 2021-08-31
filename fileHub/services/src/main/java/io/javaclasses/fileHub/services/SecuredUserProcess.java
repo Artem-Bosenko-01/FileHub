@@ -26,7 +26,7 @@ public abstract class SecuredUserProcess<C extends  AuthenticatedUserCommand, E>
 
 
     @Override
-    public E handle(C inputCommand) throws InvalidHandleCommandException {
+    public E handle(C inputCommand) throws InvalidCommandHandlingException {
 
         if(verifyPermission(inputCommand)) {
 
@@ -35,13 +35,13 @@ public abstract class SecuredUserProcess<C extends  AuthenticatedUserCommand, E>
         }
         else {
 
-            throw new InvalidHandleCommandException(
+            throw new InvalidCommandHandlingException(
                     "User with token: " + inputCommand.token() + " doesn't have any permission");
         }
 
     }
 
-    protected abstract E doHandle(C inputCommand) throws InvalidHandleCommandException;
+    protected abstract E doHandle(C inputCommand) throws InvalidCommandHandlingException;
 
     private boolean verifyPermission(C command){
 

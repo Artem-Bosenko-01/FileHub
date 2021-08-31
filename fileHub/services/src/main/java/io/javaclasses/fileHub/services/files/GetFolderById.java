@@ -7,7 +7,7 @@ import io.javaclasses.fileHub.persistent.files.FolderStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationUsers;
 import io.javaclasses.fileHub.persistent.users.tokens.UserAuthToken;
-import io.javaclasses.fileHub.services.InvalidHandleCommandException;
+import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.View;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +35,7 @@ public class GetFolderById extends View<GetFolderByIdQuery, GetFolderDto> {
     }
 
     @Override
-    protected GetFolderDto doHandle(GetFolderByIdQuery query) throws InvalidHandleCommandException {
+    protected GetFolderDto doHandle(GetFolderByIdQuery query) throws InvalidCommandHandlingException {
 
         Optional<AuthorizationUsers> owner = authorizationStorage.findByID(new UserAuthToken(query.token().value()));
 
@@ -69,7 +69,7 @@ public class GetFolderById extends View<GetFolderByIdQuery, GetFolderDto> {
                     logger.error("Cannot find folder by id: " + query.id());
                 }
 
-                throw new FolderByIdNotFoundException(query.id());
+                throw new FolderByIdNotFoundHandlingException(query.id());
 
             }
 
@@ -80,7 +80,7 @@ public class GetFolderById extends View<GetFolderByIdQuery, GetFolderDto> {
                 logger.error("Cannot find user by token: " + query.token());
             }
 
-            throw new UsersTokenNotFoundException(query.token());
+            throw new UsersTokenNotFoundHandlingException(query.token());
         }
 
     }

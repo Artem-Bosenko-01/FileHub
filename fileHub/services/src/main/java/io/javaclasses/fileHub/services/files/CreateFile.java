@@ -6,7 +6,7 @@ import io.javaclasses.fileHub.persistent.files.File;
 import io.javaclasses.fileHub.persistent.files.FileId;
 import io.javaclasses.fileHub.persistent.files.FileStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
-import io.javaclasses.fileHub.services.InvalidHandleCommandException;
+import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.SecuredUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +32,7 @@ public class CreateFile extends SecuredUserProcess<CreateFileCommand, FileId> {
 
 
     @Override
-    protected FileId doHandle(CreateFileCommand inputCommand) throws InvalidHandleCommandException {
+    protected FileId doHandle(CreateFileCommand inputCommand) throws InvalidCommandHandlingException {
 
         if (logger.isInfoEnabled()) {
             logger.info("Start create file " + inputCommand.name());
@@ -61,7 +61,7 @@ public class CreateFile extends SecuredUserProcess<CreateFileCommand, FileId> {
                 logger.error(e.getMessage());
             }
 
-            throw new InvalidHandleCommandException(e.getMessage());
+            throw new InvalidCommandHandlingException(e.getMessage());
 
         }
 

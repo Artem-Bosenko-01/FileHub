@@ -8,7 +8,7 @@ import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.AuthToken;
-import io.javaclasses.fileHub.services.InvalidHandleCommandException;
+import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import org.junit.jupiter.api.Assertions;
@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 class UpdateFileTest {
 
     @Test
-    public void updateInfoAboutFileByTest() throws InvalidHandleCommandException {
+    public void updateInfoAboutFileByTest() throws InvalidCommandHandlingException {
 
         FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
 
@@ -44,7 +44,7 @@ class UpdateFileTest {
 
 
     @Test
-    public void failedUpdateInfoAboutFileByNotExistIdTest() throws InvalidHandleCommandException {
+    public void failedUpdateInfoAboutFileByNotExistIdTest() throws InvalidCommandHandlingException {
 
         FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
 
@@ -66,7 +66,7 @@ class UpdateFileTest {
 
         UpdateFile process = new UpdateFile(fileStorageInMemory, authorizationStorage);
 
-        Assertions.assertThrows(InvalidHandleCommandException.class, () -> process.handle(command));
+        Assertions.assertThrows(InvalidCommandHandlingException.class, () -> process.handle(command));
 
     }
 }

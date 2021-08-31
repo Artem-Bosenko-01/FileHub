@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.users.User;
 import io.javaclasses.fileHub.persistent.users.UserStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
-import io.javaclasses.fileHub.services.InvalidHandleCommandException;
+import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.View;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +28,7 @@ public class GetUserInfo extends View<GetUserQuery, InfoAboutUserDto> {
     }
 
     @Override
-    protected InfoAboutUserDto doHandle(GetUserQuery query) throws InvalidHandleCommandException {
+    protected InfoAboutUserDto doHandle(GetUserQuery query) throws InvalidCommandHandlingException {
 
         if (logger.isInfoEnabled()) {
             logger.info("Start read user process with id: " + query.id());
@@ -53,7 +53,7 @@ public class GetUserInfo extends View<GetUserQuery, InfoAboutUserDto> {
                 logger.error("User with id doesn't exist " + query.id());
             }
 
-            throw new InvalidHandleCommandException("User with id doesn't exist " + query.id());
+            throw new InvalidCommandHandlingException("User with id doesn't exist " + query.id());
         }
 
     }

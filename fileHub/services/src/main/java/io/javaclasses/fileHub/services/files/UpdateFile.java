@@ -6,7 +6,7 @@ import io.javaclasses.fileHub.persistent.files.File;
 import io.javaclasses.fileHub.persistent.files.FileId;
 import io.javaclasses.fileHub.persistent.files.FileStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
-import io.javaclasses.fileHub.services.InvalidHandleCommandException;
+import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.SecuredUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +28,7 @@ public class UpdateFile extends SecuredUserProcess<UpdateFileCommand, FileId> {
     }
 
     @Override
-    protected FileId doHandle(UpdateFileCommand inputCommand) throws InvalidHandleCommandException {
+    protected FileId doHandle(UpdateFileCommand inputCommand) throws InvalidCommandHandlingException {
 
         if (logger.isInfoEnabled()) {
             logger.info("Start update information for file " + inputCommand.id());
@@ -57,7 +57,7 @@ public class UpdateFile extends SecuredUserProcess<UpdateFileCommand, FileId> {
                 logger.error(e.getMessage());
             }
 
-            throw new InvalidHandleCommandException(e.getMessage());
+            throw new InvalidCommandHandlingException(e.getMessage());
         }
 
     }

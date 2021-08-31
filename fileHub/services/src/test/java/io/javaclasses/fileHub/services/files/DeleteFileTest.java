@@ -6,7 +6,7 @@ import io.javaclasses.fileHub.persistent.users.UserStorage;
 import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
-import io.javaclasses.fileHub.services.InvalidHandleCommandException;
+import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.persistent.files.FolderId;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ class DeleteFileTest {
 
 
     @Test
-    public void deleteFileByIdTest() throws InvalidHandleCommandException {
+    public void deleteFileByIdTest() throws InvalidCommandHandlingException {
 
         FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
 
@@ -40,7 +40,7 @@ class DeleteFileTest {
 
 
     @Test
-    public void deleteFileWithNotExistedIdTest() throws InvalidHandleCommandException {
+    public void deleteFileWithNotExistedIdTest() throws InvalidCommandHandlingException {
 
         FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
 
@@ -58,7 +58,7 @@ class DeleteFileTest {
         DeleteFile deleteFile = new DeleteFile(fileStorageInMemory, authorizationStorage);
 
 
-        Assertions.assertThrows(InvalidHandleCommandException.class, () -> deleteFile.handle(deleteFileCommand));
+        Assertions.assertThrows(InvalidCommandHandlingException.class, () -> deleteFile.handle(deleteFileCommand));
 
     }
 }

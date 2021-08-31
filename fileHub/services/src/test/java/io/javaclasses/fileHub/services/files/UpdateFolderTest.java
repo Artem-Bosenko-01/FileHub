@@ -7,20 +7,16 @@ import io.javaclasses.fileHub.persistent.users.UserStorage;
 import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
-import io.javaclasses.fileHub.services.InvalidHandleCommandException;
-import io.javaclasses.fileHub.persistent.users.UserId;
+import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.AuthToken;
-import io.javaclasses.fileHub.services.files.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.util.UUID;
 
 
 class UpdateFolderTest {
 
     @Test
-    public void updateInfoAboutFolderByTest() throws InvalidHandleCommandException {
+    public void updateInfoAboutFolderByTest() throws InvalidCommandHandlingException {
 
         FolderStorage folderStorage = new FolderStorageInMemory();
 
@@ -45,7 +41,7 @@ class UpdateFolderTest {
 
 
     @Test
-    public void failedUpdateInfoAboutFolderByNotExistIdTest() throws InvalidHandleCommandException {
+    public void failedUpdateInfoAboutFolderByNotExistIdTest() throws InvalidCommandHandlingException {
 
         FolderStorage folderStorage = new FolderStorageInMemory();
 
@@ -67,7 +63,7 @@ class UpdateFolderTest {
 
         UpdateFolder process = new UpdateFolder(folderStorage, authorizationStorage);
 
-        Assertions.assertThrows(InvalidHandleCommandException.class, () -> process.handle(command));
+        Assertions.assertThrows(InvalidCommandHandlingException.class, () -> process.handle(command));
     }
 
 }

@@ -5,14 +5,14 @@ import io.javaclasses.fileHub.persistent.users.UserStorage;
 import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
-import io.javaclasses.fileHub.services.InvalidHandleCommandException;
+import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class CreateFileTest {
 
     @Test
-    public void createFileTest() throws InvalidHandleCommandException {
+    public void createFileTest() throws InvalidCommandHandlingException {
 
         UserStorage userStorage = new UserStorageInMemory();
 
@@ -34,7 +34,7 @@ class CreateFileTest {
     }
 
     @Test
-    public void createFileWithExistIdTest() throws InvalidHandleCommandException {
+    public void createFileWithExistIdTest() throws InvalidCommandHandlingException {
 
         UserStorage userStorage = new UserStorageInMemory();
 
@@ -54,7 +54,7 @@ class CreateFileTest {
 
         createFileManagementProcess.handle(createFileCommand);
 
-        Assertions.assertThrows(InvalidHandleCommandException.class,
+        Assertions.assertThrows(InvalidCommandHandlingException.class,
                 () -> createFileManagementProcess.handle(createFileCommandERROR));
 
     }

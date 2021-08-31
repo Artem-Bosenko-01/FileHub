@@ -5,7 +5,7 @@ import io.javaclasses.fileHub.persistent.files.FileId;
 import io.javaclasses.fileHub.persistent.files.FileStorage;
 import io.javaclasses.fileHub.persistent.files.content.FIleContentStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
-import io.javaclasses.fileHub.services.InvalidHandleCommandException;
+import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.SecuredUserProcess;
 import io.javaclasses.fileHub.services.files.content.CreateFileContent;
 import io.javaclasses.fileHub.services.files.content.CreateFileContentCommand;
@@ -39,7 +39,7 @@ public class UploadFile extends SecuredUserProcess<UploadFileCommand, FileId> {
 
 
     @Override
-    protected FileId doHandle(UploadFileCommand inputCommand) throws InvalidHandleCommandException {
+    protected FileId doHandle(UploadFileCommand inputCommand) throws InvalidCommandHandlingException {
 
         if (logger.isInfoEnabled()) {
             logger.info("Start upload new file to user's " + inputCommand.owner()

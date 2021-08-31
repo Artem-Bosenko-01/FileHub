@@ -8,7 +8,7 @@ import io.javaclasses.fileHub.persistent.users.UserStorage;
 import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
-import io.javaclasses.fileHub.services.InvalidHandleCommandException;
+import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 class GetFolderByNameViewTest {
 
     @Test
-    public void readInfoAboutFolderByIdTest() throws InvalidHandleCommandException {
+    public void readInfoAboutFolderByIdTest() throws InvalidCommandHandlingException {
 
         FolderStorage folderStorage = new FolderStorageInMemory();
 
@@ -40,7 +40,7 @@ class GetFolderByNameViewTest {
 
 
     @Test
-    public void failedReadFolderInfoByNotExistIdTest() throws InvalidHandleCommandException {
+    public void failedReadFolderInfoByNotExistIdTest() throws InvalidCommandHandlingException {
 
         FolderStorage folderStorage = new FolderStorageInMemory();
 
@@ -59,6 +59,6 @@ class GetFolderByNameViewTest {
 
         GetFolderById view = new GetFolderById(folderStorage, authorizationStorage);
 
-        Assertions.assertThrows(InvalidHandleCommandException.class, () -> view.handle(query));
+        Assertions.assertThrows(InvalidCommandHandlingException.class, () -> view.handle(query));
     }
 }

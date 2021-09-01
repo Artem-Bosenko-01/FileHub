@@ -80,7 +80,7 @@ public class GetFolderById extends View<GetFolderByIdQuery, GetFolderDto> {
                 logger.error("Cannot find user by token: " + query.token());
             }
 
-            throw new UsersTokenNotFoundHandlingException(query.token());
+            throw new UsersTokenNotFoundException(query.token());
         }
 
     }

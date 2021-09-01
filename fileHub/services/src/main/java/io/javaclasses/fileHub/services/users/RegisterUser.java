@@ -5,7 +5,6 @@ import io.javaclasses.fileHub.persistent.DuplicatedUserIdException;
 import io.javaclasses.fileHub.persistent.users.User;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.persistent.users.UserStorage;
-import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.OpenUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +24,7 @@ public class RegisterUser implements OpenUserProcess<RegistrationUserCommand, Bo
     }
 
     @Override
-    public Boolean handle(RegistrationUserCommand inputCommand) throws InvalidCommandHandlingException {
+    public Boolean handle(RegistrationUserCommand inputCommand) throws DuplicatedUserException {
 
         if (logger.isInfoEnabled()) {
             logger.info("Start registration user process with id: " + inputCommand.loginName());
@@ -55,7 +54,7 @@ public class RegisterUser implements OpenUserProcess<RegistrationUserCommand, Bo
                 logger.error(e.getMessage());
             }
 
-            throw new InvalidCommandHandlingException(e.getMessage());
+            throw new DuplicatedUserException("email", e.getMessage());
         }
     }
 }

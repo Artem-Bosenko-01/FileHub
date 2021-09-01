@@ -1,9 +1,10 @@
 package io.javaclasses.fileHub.webservices.authentication;
 
 import io.javaclasses.fileHub.services.AuthToken;
-import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.users.AuthenticateUser;
 import io.javaclasses.fileHub.services.users.AuthenticationUserCommand;
+import io.javaclasses.fileHub.services.users.DuplicatedUserException;
+import io.javaclasses.fileHub.services.users.UserNotFoundException;
 import io.javaclasses.fileHub.webservices.Deserializer;
 import io.javaclasses.fileHub.webservices.ErrorResponse;
 import io.javaclasses.fileHub.webservices.InvalidDeserialization;
@@ -51,11 +52,17 @@ public class AuthenticationRoute implements Route {
 
             return new ErrorResponse(invalidDeserialization.getMessage()).serialize();
 
-        } catch (InvalidCommandHandlingException e) {
+        } catch (UserNotFoundException e) {
 
-            response.status(SC_UNAUTHORIZED);
+            response.status(SC_NOT_FOUND);
 
             return new ErrorResponse(e.getMessage()).serialize();
+
+        } catch (DuplicatedUserException e) {
+
+            response.status(SC_CONFLICT);
+
+            return new ErrorResponse(e.message()).serialize();
 
         } catch (Exception e) {
 

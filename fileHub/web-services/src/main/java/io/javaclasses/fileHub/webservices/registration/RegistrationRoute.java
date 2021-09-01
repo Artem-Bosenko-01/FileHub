@@ -1,6 +1,6 @@
 package io.javaclasses.fileHub.webservices.registration;
 
-import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
+import io.javaclasses.fileHub.services.users.DuplicatedUserException;
 import io.javaclasses.fileHub.services.users.RegisterUser;
 import io.javaclasses.fileHub.services.users.RegistrationUserCommand;
 import io.javaclasses.fileHub.webservices.Deserializer;
@@ -37,7 +37,7 @@ public class RegistrationRoute implements Route {
 
             response.status(SC_OK);
 
-            return true;
+            return "User was successfully registered";
 
         } catch (InvalidDeserialization invalidDeserialization) {
 
@@ -45,13 +45,13 @@ public class RegistrationRoute implements Route {
 
             return new ErrorResponse(invalidDeserialization.getMessage()).serialize();
 
-        } catch (InvalidCommandHandlingException e) {
+        } catch (DuplicatedUserException e) {
 
             response.status(422);
 
             ValidationErrorResponse errorResponse = new ValidationErrorResponse();
 
-            errorResponse.addError("email", e.getMessage());
+            errorResponse.addError(e.field(), e.message());
 
             return errorResponse.serialize();
 

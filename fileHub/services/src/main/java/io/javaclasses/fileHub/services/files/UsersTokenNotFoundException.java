@@ -7,9 +7,9 @@ import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
  * The exception that throws when {@link io.javaclasses.fileHub.persistent.users.tokens.UserAuthToken user's token}
  * doesn't exist at {@link io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage storage}.
  */
-public final class UsersTokenNotFoundHandlingException extends InvalidCommandHandlingException {
+public final class UsersTokenNotFoundException extends InvalidCommandHandlingException {
 
-    public UsersTokenNotFoundHandlingException(AuthToken token) {
+    public UsersTokenNotFoundException(AuthToken token) {
 
         super("Cannot find user by token: " + token);
     }

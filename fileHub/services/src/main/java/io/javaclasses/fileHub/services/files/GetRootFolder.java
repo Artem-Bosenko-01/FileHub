@@ -33,7 +33,7 @@ public class GetRootFolder extends View<GetRootFolderQuery, GetFolderDto> {
 
     @Override
     protected GetFolderDto doHandle(GetRootFolderQuery query)
-            throws RootFolderNotFoundHandlingException, UsersTokenNotFoundHandlingException {
+            throws RootFolderNotFoundHandlingException, UsersTokenNotFoundException {
 
         Optional<AuthorizationUsers> owner = authorizationStorage.findByID(new UserAuthToken(query.token().value()));
 
@@ -76,7 +76,7 @@ public class GetRootFolder extends View<GetRootFolderQuery, GetFolderDto> {
                 logger.error("Cannot find user by token: " + query.token());
             }
 
-            throw new UsersTokenNotFoundHandlingException(query.token());
+            throw new UsersTokenNotFoundException(query.token());
 
         }
 

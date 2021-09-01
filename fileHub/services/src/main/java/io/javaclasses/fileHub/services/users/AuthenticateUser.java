@@ -7,7 +7,6 @@ import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationUsers;
 import io.javaclasses.fileHub.persistent.users.tokens.UserAuthToken;
 import io.javaclasses.fileHub.services.AuthToken;
-import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.OpenUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +36,8 @@ public class AuthenticateUser implements OpenUserProcess<AuthenticationUserComma
     }
 
     @Override
-    public AuthToken handle(AuthenticationUserCommand inputCommand) throws InvalidCommandHandlingException {
+    public AuthToken handle(AuthenticationUserCommand inputCommand)
+            throws DuplicatedUserException, UserNotFoundException {
 
         if (logger.isInfoEnabled()) {
             logger.info("Start authenticated process for user: " + inputCommand.loginName());
@@ -72,7 +72,7 @@ public class AuthenticateUser implements OpenUserProcess<AuthenticationUserComma
                     logger.error(e.getMessage());
                 }
 
-                throw new InvalidCommandHandlingException(e.getMessage());
+                throw new DuplicatedUserException("email", e.getMessage());
 
             }
 
@@ -82,7 +82,7 @@ public class AuthenticateUser implements OpenUserProcess<AuthenticationUserComma
                 logger.error("User with " + inputCommand.loginName() + " not exist");
             }
 
-            throw new InvalidCommandHandlingException("User with " + inputCommand.loginName() + " not exist");
+            throw new UserNotFoundException(inputCommand.loginName());
         }
     }
 }

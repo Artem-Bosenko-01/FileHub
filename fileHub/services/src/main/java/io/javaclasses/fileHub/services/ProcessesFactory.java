@@ -8,7 +8,7 @@ import io.javaclasses.fileHub.services.users.AuthenticateUser;
 import io.javaclasses.fileHub.services.users.RegisterUser;
 
 /**
- * The entry point that allows using all server's services of FileHub application.
+ * Set of processes that allows manages file and user systems of FileHub application.
  */
 public class ProcessesFactory {
 

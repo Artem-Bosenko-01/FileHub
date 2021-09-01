@@ -7,15 +7,15 @@ public class Deserializer<Result extends Command> {
 
     private static final Gson converter = new Gson();
 
-    public Result deserialize(String requestBody, Class<Result> resultClass) throws InvalidInputDataForDeserializing {
+    public Result deserialize(String requestBody, Class<Result> resultClass) throws InvalidDeserialization {
 
         if (requestBody.isEmpty()) {
-            throw new InvalidInputDataForDeserializing("Request body cannot be null");
+            throw new InvalidDeserialization("Request body cannot be null");
         }
 
 
         if (isJsonBodyEmpty(requestBody)) {
-            throw new InvalidInputDataForDeserializing("Request body cannot be empty");
+            throw new InvalidDeserialization("Request body cannot be empty");
         }
 
         return converter.fromJson(requestBody, resultClass);

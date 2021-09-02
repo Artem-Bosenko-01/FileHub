@@ -1,12 +1,15 @@
 package io.javaclasses.fileHub.services.files.content;
 
+import io.javaclasses.fileHub.persistent.files.*;
+import io.javaclasses.fileHub.persistent.files.content.FIleContentStorage;
+import io.javaclasses.fileHub.persistent.files.content.FileContentStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.UserStorage;
 import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
-import io.javaclasses.fileHub.persistent.files.*;
-import io.javaclasses.fileHub.services.files.*;
+import io.javaclasses.fileHub.services.ValidationCommandDataException;
+import io.javaclasses.fileHub.services.files.FileSystemTestData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -14,9 +17,11 @@ import org.junit.jupiter.api.Test;
 class GetFolderContentTest {
 
     @Test
-    public void readFolderContentByIdTest() throws InvalidCommandHandlingException {
+    public void readFolderContentByIdTest() throws InvalidCommandHandlingException, ValidationCommandDataException {
 
         FolderStorage folderStorage = new FolderStorageInMemory();
+
+        FIleContentStorage fIleContentStorage = new FileContentStorageInMemory();
 
         AuthorizationStorage authorizationStorage = new AuthorizationStorageInMemory();
 
@@ -28,7 +33,7 @@ class GetFolderContentTest {
 
         FolderId parent = fileSystemTestData.createFolder(folderStorage, null);
 
-        fileSystemTestData.createFile(fileStorage, parent);
+        fileSystemTestData.uploadFile(fileStorage, fIleContentStorage, parent);
 
         fileSystemTestData.createFolder(folderStorage, "folder1", parent);
 
@@ -46,20 +51,4 @@ class GetFolderContentTest {
 
     }
 
-
-    /*@Test
-    public void failedReadFolderInfoByNotExistIdTest(){
-        FileContentStorageInMemory contentStorageInMemory  = new FileContentStorageInMemory();
-        UserID userID = new UserID("Artem");
-        FolderID folderID = new FolderID("folder", userID);
-        FileID fileID = new FileID("fil", userID,folderID);
-        createFile(contentStorageInMemory, fileID, new byte[]{5,6,55,2});
-
-        fileID = new FileID("JHGF", userID, folderID);
-        GetFileContentQuery command = new GetFileContentQuery(new AuthToken("1"),
-                fileID);
-        GetFileContentView viewByUser = new GetFileContentView(contentStorageInMemory);
-
-        Assertions.assertThrows(InvalidHandleCommandException.class, () -> viewByUser.handle(command));
-    }*/
 }

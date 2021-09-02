@@ -10,6 +10,7 @@ public class AuthenticatedUserCommand implements Command {
     private final AuthToken token;
 
     public AuthenticatedUserCommand(AuthToken token) {
+
         this.token = Preconditions.checkNotNull(token);
     }
 

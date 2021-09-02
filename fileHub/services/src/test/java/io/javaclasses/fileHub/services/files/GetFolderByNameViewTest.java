@@ -9,6 +9,7 @@ import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
+import io.javaclasses.fileHub.services.ValidationCommandDataException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +17,7 @@ import org.junit.jupiter.api.Test;
 class GetFolderByNameViewTest {
 
     @Test
-    public void readInfoAboutFolderByIdTest() throws InvalidCommandHandlingException {
+    public void readInfoAboutFolderByIdTest() throws InvalidCommandHandlingException, ValidationCommandDataException {
 
         FolderStorage folderStorage = new FolderStorageInMemory();
 
@@ -40,7 +41,7 @@ class GetFolderByNameViewTest {
 
 
     @Test
-    public void failedReadFolderInfoByNotExistIdTest() throws InvalidCommandHandlingException {
+    public void failedReadFolderInfoByNotExistIdTest() throws InvalidCommandHandlingException, ValidationCommandDataException {
 
         FolderStorage folderStorage = new FolderStorageInMemory();
 

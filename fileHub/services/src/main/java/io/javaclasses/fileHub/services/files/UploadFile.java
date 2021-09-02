@@ -1,14 +1,15 @@
 package io.javaclasses.fileHub.services.files;
 
 import com.google.common.base.Preconditions;
+import io.javaclasses.fileHub.persistent.DuplicatedUserIdException;
+import io.javaclasses.fileHub.persistent.files.File;
 import io.javaclasses.fileHub.persistent.files.FileId;
 import io.javaclasses.fileHub.persistent.files.FileStorage;
 import io.javaclasses.fileHub.persistent.files.content.FIleContentStorage;
+import io.javaclasses.fileHub.persistent.files.content.FileContent;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.SecuredUserProcess;
-import io.javaclasses.fileHub.services.files.content.CreateFileContent;
-import io.javaclasses.fileHub.services.files.content.CreateFileContentCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,8 +24,6 @@ public class UploadFile extends SecuredUserProcess<UploadFileCommand, FileId> {
 
     private final FileStorage fileStorage;
 
-    private final AuthorizationStorage authorizationStorage;
-
     public UploadFile(FIleContentStorage contentStorage, FileStorage fileStorage,
                       AuthorizationStorage authorizationStorage) {
 
@@ -34,7 +33,6 @@ public class UploadFile extends SecuredUserProcess<UploadFileCommand, FileId> {
 
         this.fileStorage = Preconditions.checkNotNull(fileStorage);
 
-        this.authorizationStorage = Preconditions.checkNotNull(authorizationStorage);
     }
 
 
@@ -46,28 +44,42 @@ public class UploadFile extends SecuredUserProcess<UploadFileCommand, FileId> {
                     + " directory: " + inputCommand.folder());
         }
 
-        CreateFileCommand createFileCommand = new CreateFileCommand(inputCommand.token(),
-                inputCommand.name(), inputCommand.mimeType(), inputCommand.owner(), inputCommand.folder());
+        FileId fileId = new FileId(inputCommand.name(), inputCommand.owner(), inputCommand.folder());
 
-        CreateFile createFile = new CreateFile(fileStorage, authorizationStorage);
+        File file = new File(fileId);
 
-        FileId id = createFile.handle(createFileCommand);
+        file.setUserID(inputCommand.owner());
+        file.setMimeType(inputCommand.mimeType());
+        file.setName(inputCommand.name());
+        file.setFolder(inputCommand.folder());
+        file.setSize(0);
 
-        CreateFileContentCommand contentCommand = new CreateFileContentCommand(
-                inputCommand.token(),
-                id,
-                inputCommand.content()
-        );
+        FileContent content = new FileContent(fileId);
 
-        CreateFileContent createFileContent = new CreateFileContent(contentStorage, authorizationStorage);
+        content.setContent(inputCommand.content());
 
-        createFileContent.handle(contentCommand);
+        try {
 
-        if (logger.isInfoEnabled()) {
-            logger.info("Uploading new file was successful " + id);
+            fileStorage.create(file);
+
+            contentStorage.create(content);
+
+            if (logger.isInfoEnabled()) {
+                logger.info("Uploading new file was successful: " + content.id());
+            }
+
+            return fileId;
+
+        } catch (DuplicatedUserIdException e) {
+
+            if (logger.isErrorEnabled()) {
+                logger.error(e.getMessage());
+            }
+
+            throw new InvalidCommandHandlingException(e.getMessage());
+
         }
 
-        return id;
 
     }
 }

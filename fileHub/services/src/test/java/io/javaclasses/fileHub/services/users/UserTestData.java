@@ -5,16 +5,17 @@ import io.javaclasses.fileHub.persistent.users.UserStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
+import io.javaclasses.fileHub.services.ValidationCommandDataException;
 
 public final class UserTestData {
 
     private static final String KevinLoginName = "kevin@gmail.com";
     private static final String KevinPassword = "acsa7csa4";
     private static final String JohnLoginName = "john@gmail.com";
-    private static final String JohnPassword = "56498";
+    private static final String JohnPassword = "564988";
 
 
-    public static UserId registerKevinUser(UserStorage userStorage) throws InvalidCommandHandlingException {
+    public static UserId registerKevinUser(UserStorage userStorage) throws InvalidCommandHandlingException, ValidationCommandDataException {
 
         RegistrationUserCommand registrationUserCommand = new RegistrationUserCommand(KevinLoginName, KevinPassword);
 
@@ -25,7 +26,7 @@ public final class UserTestData {
     }
 
     public static AuthToken authenticateKevinUser(UserStorage userStorage, AuthorizationStorage authorizationStorage)
-            throws InvalidCommandHandlingException {
+            throws InvalidCommandHandlingException, ValidationCommandDataException {
 
         AuthenticationUserCommand authenticationUserCommand = new AuthenticationUserCommand(KevinLoginName, KevinPassword);
 
@@ -36,7 +37,7 @@ public final class UserTestData {
     }
 
 
-    public static UserId registerJohnUser(UserStorage userStorage) throws InvalidCommandHandlingException {
+    public static UserId registerJohnUser(UserStorage userStorage) throws InvalidCommandHandlingException, ValidationCommandDataException {
 
         RegistrationUserCommand registrationUserCommand = new RegistrationUserCommand(JohnLoginName, JohnPassword);
 
@@ -47,7 +48,7 @@ public final class UserTestData {
     }
 
     public static AuthToken authenticateJohnUser(UserStorage userStorage, AuthorizationStorage authorizationStorage)
-            throws InvalidCommandHandlingException {
+            throws InvalidCommandHandlingException, ValidationCommandDataException {
 
         AuthenticationUserCommand authenticationUserCommand = new AuthenticationUserCommand(JohnLoginName, JohnPassword);
 

@@ -3,12 +3,13 @@ package io.javaclasses.fileHub.services.files;
 import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.files.FolderStorage;
 import io.javaclasses.fileHub.persistent.files.FolderStorageInMemory;
+import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.persistent.users.UserStorage;
 import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
-import io.javaclasses.fileHub.persistent.users.UserId;
+import io.javaclasses.fileHub.services.ValidationCommandDataException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,7 @@ class DeleteFolderTest {
 
 
     @Test
-    public void deleteFolderByIdTest() throws InvalidCommandHandlingException {
+    public void deleteFolderByIdTest() throws InvalidCommandHandlingException, ValidationCommandDataException {
 
         FolderStorage folderStorage = new FolderStorageInMemory();
 
@@ -43,7 +44,7 @@ class DeleteFolderTest {
 
 
     @Test
-    public void deleteFolderWithNotExistedIdTest() throws InvalidCommandHandlingException {
+    public void deleteFolderWithNotExistedIdTest() throws InvalidCommandHandlingException, ValidationCommandDataException {
 
 
         FolderStorage folderStorage = new FolderStorageInMemory();

@@ -1,5 +1,6 @@
 package io.javaclasses.fileHub.webservices.registration;
 
+import io.javaclasses.fileHub.services.CommandValidationError;
 import io.javaclasses.fileHub.webservices.JsonResponse;
 
 import java.util.ArrayList;
@@ -15,5 +16,10 @@ public class ValidationErrorResponse extends JsonResponse {
     public void addError(String fieldName, String errorMessage) {
 
         errors.add(new ValidationError(fieldName, errorMessage));
+    }
+
+    public void addErrors(List<CommandValidationError> errors) {
+
+        errors.forEach(exception -> this.errors.add(new ValidationError(exception.field(), exception.message())));
     }
 }

@@ -3,6 +3,7 @@ package io.javaclasses.fileHub.webservices;
 import io.javaclasses.fileHub.services.ServiceLocator;
 import io.javaclasses.fileHub.webservices.authentication.AuthenticationRoute;
 import io.javaclasses.fileHub.webservices.registration.RegistrationRoute;
+import spark.Spark;
 
 import static spark.Spark.post;
 
@@ -25,5 +26,10 @@ public class WebApplication {
 
         post(APPLICATION_NAME + API_VERSION_1_0 + "/login", new AuthenticationRoute(service.authenticateUser()));
         post(APPLICATION_NAME + API_VERSION_1_0 + "/register", new RegistrationRoute(service.registerUser()));
+    }
+
+    public void stop() {
+
+        Spark.stop();
     }
 }

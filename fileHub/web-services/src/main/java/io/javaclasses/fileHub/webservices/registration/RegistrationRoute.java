@@ -1,11 +1,13 @@
 package io.javaclasses.fileHub.webservices.registration;
 
+import com.google.gson.JsonObject;
+import io.javaclasses.fileHub.services.ValidationCommandDataException;
 import io.javaclasses.fileHub.services.users.DuplicatedUserException;
 import io.javaclasses.fileHub.services.users.RegisterUser;
 import io.javaclasses.fileHub.services.users.RegistrationUserCommand;
-import io.javaclasses.fileHub.webservices.Deserializer;
 import io.javaclasses.fileHub.webservices.ErrorResponse;
-import io.javaclasses.fileHub.webservices.InvalidDeserialization;
+import io.javaclasses.fileHub.webservices.InvalidParsingToJsonObject;
+import io.javaclasses.fileHub.webservices.Parser;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -26,12 +28,15 @@ public class RegistrationRoute implements Route {
 
         String body = request.body();
 
-        Deserializer<RegistrationUserCommand> registrationCommandDeserializer = new Deserializer<>();
-
         try {
 
-            RegistrationUserCommand command = registrationCommandDeserializer.
-                    deserialize(body, RegistrationUserCommand.class);
+            JsonObject jsonObject = Parser.parse(body);
+
+            String login = jsonObject.get("loginName").getAsString();
+            String password = jsonObject.get("password").getAsString();
+
+
+            RegistrationUserCommand command = new RegistrationUserCommand(login, password);
 
             registration.handle(command);
 
@@ -39,11 +44,11 @@ public class RegistrationRoute implements Route {
 
             return "User was successfully registered";
 
-        } catch (InvalidDeserialization invalidDeserialization) {
+        } catch (InvalidParsingToJsonObject invalidParsingToJsonObject) {
 
             response.status(SC_BAD_REQUEST);
 
-            return new ErrorResponse(invalidDeserialization.getMessage()).serialize();
+            return new ErrorResponse(invalidParsingToJsonObject.getMessage()).serialize();
 
         } catch (DuplicatedUserException e) {
 
@@ -52,6 +57,14 @@ public class RegistrationRoute implements Route {
             ValidationErrorResponse errorResponse = new ValidationErrorResponse();
 
             errorResponse.addError(e.field(), e.message());
+
+            return errorResponse.serialize();
+
+        } catch (ValidationCommandDataException e) {
+
+            ValidationErrorResponse errorResponse = new ValidationErrorResponse();
+
+            errorResponse.addErrors(e.errors());
 
             return errorResponse.serialize();
 

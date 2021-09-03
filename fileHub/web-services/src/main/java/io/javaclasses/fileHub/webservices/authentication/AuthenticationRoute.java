@@ -1,13 +1,15 @@
 package io.javaclasses.fileHub.webservices.authentication;
 
+import com.google.gson.JsonObject;
 import io.javaclasses.fileHub.services.AuthToken;
+import io.javaclasses.fileHub.services.ValidationCommandDataException;
 import io.javaclasses.fileHub.services.users.AuthenticateUser;
 import io.javaclasses.fileHub.services.users.AuthenticationUserCommand;
 import io.javaclasses.fileHub.services.users.DuplicatedUserException;
 import io.javaclasses.fileHub.services.users.UserNotFoundException;
-import io.javaclasses.fileHub.webservices.Deserializer;
 import io.javaclasses.fileHub.webservices.ErrorResponse;
-import io.javaclasses.fileHub.webservices.InvalidDeserialization;
+import io.javaclasses.fileHub.webservices.InvalidParsingToJsonObject;
+import io.javaclasses.fileHub.webservices.Parser;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -31,12 +33,15 @@ public class AuthenticationRoute implements Route {
 
         String body = request.body();
 
-        Deserializer<AuthenticationUserCommand> authenticationCommandDeserializer = new Deserializer<>();
-
         try {
 
-            AuthenticationUserCommand command = authenticationCommandDeserializer.
-                    deserialize(body, AuthenticationUserCommand.class);
+            JsonObject jsonObject = Parser.parse(body);
+
+            String login = jsonObject.get("loginName").getAsString();
+            String password = jsonObject.get("password").getAsString();
+
+
+            AuthenticationUserCommand command = new AuthenticationUserCommand(login, password);
 
             AuthToken token = authentication.handle(command);
 
@@ -46,11 +51,11 @@ public class AuthenticationRoute implements Route {
 
             return successfulResponse.serialize();
 
-        } catch (InvalidDeserialization invalidDeserialization) {
+        } catch (InvalidParsingToJsonObject invalidParsingToJsonObject) {
 
             response.status(SC_BAD_REQUEST);
 
-            return new ErrorResponse(invalidDeserialization.getMessage()).serialize();
+            return new ErrorResponse(invalidParsingToJsonObject.getMessage()).serialize();
 
         } catch (UserNotFoundException e) {
 
@@ -63,6 +68,12 @@ public class AuthenticationRoute implements Route {
             response.status(SC_CONFLICT);
 
             return new ErrorResponse(e.message()).serialize();
+
+        } catch (ValidationCommandDataException e) {
+
+            response.status(422);
+
+            return new ErrorResponse(e.getMessage()).serialize();
 
         } catch (Exception e) {
 

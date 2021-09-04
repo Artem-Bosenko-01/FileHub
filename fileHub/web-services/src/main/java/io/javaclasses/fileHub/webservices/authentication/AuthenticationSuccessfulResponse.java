@@ -7,7 +7,7 @@ import io.javaclasses.fileHub.webservices.JsonResponse;
 /**
  * Allows serializing token after successful user authentication.
  */
-public class AuthenticationSuccessfulResponse extends JsonResponse {
+public final class AuthenticationSuccessfulResponse extends JsonResponse {
 
     private final String token;
 

@@ -7,20 +7,22 @@ import io.javaclasses.fileHub.services.users.RegisterUser;
 import io.javaclasses.fileHub.services.users.RegistrationUserCommand;
 import io.javaclasses.fileHub.webservices.ErrorResponse;
 import io.javaclasses.fileHub.webservices.InvalidParsingToJsonObject;
-import io.javaclasses.fileHub.webservices.Parser;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+import static io.javaclasses.fileHub.webservices.ParserToJsonObject.parse;
 import static javax.servlet.http.HttpServletResponse.*;
 
-public class RegistrationRoute implements Route {
+public final class RegistrationRoute implements Route {
 
     private final RegisterUser registration;
+    private final int INVALID_ENTITY_VALIDATION = 422;
 
     public RegistrationRoute(RegisterUser process) {
 
-        this.registration = process;
+        this.registration = checkNotNull(process);
     }
 
     @Override
@@ -30,11 +32,10 @@ public class RegistrationRoute implements Route {
 
         try {
 
-            JsonObject jsonObject = Parser.parse(body);
+            JsonObject jsonObject = parse(body);
 
             String login = jsonObject.get("loginName").getAsString();
             String password = jsonObject.get("password").getAsString();
-
 
             RegistrationUserCommand command = new RegistrationUserCommand(login, password);
 
@@ -52,7 +53,7 @@ public class RegistrationRoute implements Route {
 
         } catch (DuplicatedUserException e) {
 
-            response.status(422);
+            response.status(INVALID_ENTITY_VALIDATION);
 
             ValidationErrorResponse errorResponse = new ValidationErrorResponse();
 
@@ -61,6 +62,8 @@ public class RegistrationRoute implements Route {
             return errorResponse.serialize();
 
         } catch (ValidationCommandDataException e) {
+
+            response.status(INVALID_ENTITY_VALIDATION);
 
             ValidationErrorResponse errorResponse = new ValidationErrorResponse();
 

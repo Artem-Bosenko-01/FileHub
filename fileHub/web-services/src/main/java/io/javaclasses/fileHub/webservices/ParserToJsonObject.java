@@ -1,8 +1,9 @@
 package io.javaclasses.fileHub.webservices;
 
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
-public class Parser {
+public class ParserToJsonObject {
 
     public static JsonObject parse(String requestBody) throws InvalidParsingToJsonObject {
 
@@ -15,7 +16,7 @@ public class Parser {
             throw new InvalidParsingToJsonObject("Request body cannot be empty");
         }
 
-        return new com.google.gson.JsonParser().parse(requestBody).getAsJsonObject();
+        return new JsonParser().parse(requestBody).getAsJsonObject();
     }
 
     private static Boolean isJsonBodyEmpty(String requestLine) {

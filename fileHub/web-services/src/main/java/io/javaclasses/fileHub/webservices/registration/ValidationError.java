@@ -3,7 +3,7 @@ package io.javaclasses.fileHub.webservices.registration;
 /**
  * Type of error in the registration user process.
  */
-public class ValidationError {
+public final class ValidationError {
 
     private final String field;
 

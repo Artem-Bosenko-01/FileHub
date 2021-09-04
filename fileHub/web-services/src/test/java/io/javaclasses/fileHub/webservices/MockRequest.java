@@ -8,45 +8,42 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
-public class MockRequest {
-    public TestResponse send(String method, String path, String jsonInputString) {
-        try {
+public final class MockRequest {
 
-            URL url = new URL("http://localhost:4567" + path);
+    public TestResponse send(String method, String path, String jsonInputString) throws IOException {
 
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        URL url = new URL("http://localhost:4567" + path);
 
-            connection.setRequestMethod(method);
-            connection.setDoOutput(true);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
-            try (OutputStream os = connection.getOutputStream()) {
-                byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
-                os.write(input, 0, input.length);
-            }
+        connection.setRequestMethod(method);
+        connection.setDoOutput(true);
 
-            int responseStatus = connection.getResponseCode();
-            StringBuilder body = new StringBuilder();
-
-            if (responseStatus >= 400) {
-                try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getErrorStream()))) {
-                    String responseLine = null;
-                    while ((responseLine = br.readLine()) != null) {
-                        body.append(responseLine.trim());
-                    }
-                }
-            } else {
-                try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
-                    String responseLine = null;
-                    while ((responseLine = br.readLine()) != null) {
-                        body.append(responseLine.trim());
-                    }
-                }
-            }
-
-            return new TestResponse(responseStatus, body.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+        try (OutputStream os = connection.getOutputStream()) {
+            byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
+            os.write(input, 0, input.length);
         }
+
+        int responseStatus = connection.getResponseCode();
+        StringBuilder body = new StringBuilder();
+
+        if (responseStatus >= 400) {
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getErrorStream()))) {
+                String responseLine;
+                while ((responseLine = br.readLine()) != null) {
+                    body.append(responseLine.trim());
+                }
+            }
+        } else {
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                String responseLine;
+                while ((responseLine = br.readLine()) != null) {
+                    body.append(responseLine.trim());
+                }
+            }
+        }
+
+        return new TestResponse(responseStatus, body.toString());
+
     }
 }

@@ -8,9 +8,9 @@ import spark.Spark;
 import static spark.Spark.post;
 
 /**
- * Initializer that configure main existed paths af FileHub application.
+ * Configures and starts server for FileHub application. Sets main existed paths for routing at FileHub application.
  */
-public class WebApplication {
+public final class WebApplication {
 
     public static void main(String[] args) {
 

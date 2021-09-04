@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * List of validation errors for response with 422 code status.
  */
-public class ValidationErrorResponse extends JsonResponse {
+public final class ValidationErrorResponse extends JsonResponse {
 
     List<ValidationError> errors = new ArrayList<>();
 

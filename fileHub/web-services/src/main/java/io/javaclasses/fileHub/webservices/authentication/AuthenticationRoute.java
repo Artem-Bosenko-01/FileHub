@@ -9,23 +9,25 @@ import io.javaclasses.fileHub.services.users.DuplicatedUserException;
 import io.javaclasses.fileHub.services.users.UserNotFoundException;
 import io.javaclasses.fileHub.webservices.ErrorResponse;
 import io.javaclasses.fileHub.webservices.InvalidParsingToJsonObject;
-import io.javaclasses.fileHub.webservices.Parser;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+import static io.javaclasses.fileHub.webservices.ParserToJsonObject.parse;
 import static javax.servlet.http.HttpServletResponse.*;
 
 /**
  * Gets request and executes authentication user in FileHub application.
  */
-public class AuthenticationRoute implements Route {
+public final class AuthenticationRoute implements Route {
 
     private final AuthenticateUser authentication;
+    private final int INVALID_ENTITY_VALIDATION = 422;
 
     public AuthenticationRoute(AuthenticateUser process) {
 
-        this.authentication = process;
+        this.authentication = checkNotNull(process);
     }
 
     @Override
@@ -35,11 +37,10 @@ public class AuthenticationRoute implements Route {
 
         try {
 
-            JsonObject jsonObject = Parser.parse(body);
+            JsonObject jsonObject = parse(body);
 
             String login = jsonObject.get("loginName").getAsString();
             String password = jsonObject.get("password").getAsString();
-
 
             AuthenticationUserCommand command = new AuthenticationUserCommand(login, password);
 
@@ -71,9 +72,9 @@ public class AuthenticationRoute implements Route {
 
         } catch (ValidationCommandDataException e) {
 
-            response.status(422);
+            response.status(INVALID_ENTITY_VALIDATION);
 
-            return new ErrorResponse(e.getMessage()).serialize();
+            return new ErrorResponse("Error: Invalid user credentials.").serialize();
 
         } catch (Exception e) {
 

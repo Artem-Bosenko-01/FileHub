@@ -55,7 +55,6 @@ public final class File implements DataRecord<FileId> {
     }
 
     public void setFolder(@Nullable FolderId folder) {
-        assert folder != null;
         this.folder = folder;
     }
 

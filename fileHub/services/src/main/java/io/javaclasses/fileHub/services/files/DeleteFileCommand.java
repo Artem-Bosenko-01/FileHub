@@ -8,7 +8,7 @@ import io.javaclasses.fileHub.services.AuthenticatedUserCommand;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * This is object, that contains data, that needs to delete file from {@link FileStorage file catalog} by
+ * Data that needs to delete file from {@link FileStorage file catalog} by
  * {@link FileId}.
  */
 public final class DeleteFileCommand extends AuthenticatedUserCommand {
@@ -23,6 +23,7 @@ public final class DeleteFileCommand extends AuthenticatedUserCommand {
     }
 
     public FileId id() {
+
         return id;
     }
 }

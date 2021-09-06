@@ -12,6 +12,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public final class GetUserQuery extends Query {
 
     public GetUserQuery(AuthToken token) {
+    public GetUserQuery(AuthToken token) {
 
         super(checkNotNull(token));
 

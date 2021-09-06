@@ -32,8 +32,7 @@ public class FolderStorageInMemory extends AbstractInMemoryStorage<FolderId, Fol
         if (findFolder.isPresent()) {
             if (findFolder.get().parentFolder() != null) {
                 return Optional.of(findFolder.get().parentFolder());
-            }
-            else return Optional.empty();
+            } else return Optional.empty();
         } else throw new NotExistUserIdException("Folder id: " + childId + " doesn't exist");
     }
 

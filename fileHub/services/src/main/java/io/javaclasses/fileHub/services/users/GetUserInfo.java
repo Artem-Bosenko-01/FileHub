@@ -44,7 +44,7 @@ public class GetUserInfo extends View<GetUserQuery, InfoAboutUserDto> {
             UserId userId = authenticatedUser.get().userID();
 
             if (logger.isInfoEnabled()) {
-                logger.info("Start read user process with id: " + query.token());
+                logger.info("Start read user process with id: " + userId);
             }
 
 
@@ -72,7 +72,6 @@ public class GetUserInfo extends View<GetUserQuery, InfoAboutUserDto> {
         } else {
 
             if (logger.isErrorEnabled()) {
-
                 logger.error("Cannot find user by token: " + query.token());
             }
 

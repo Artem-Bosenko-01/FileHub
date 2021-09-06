@@ -30,6 +30,7 @@ export class Application extends Component {
     const factory = new ActionFactory();
     const modalsService = new ModalsService(this.rootElement);
     const stateManager = new StateManager({}, {apiService}, factory, mutator);
+    apiService.onNavigateAfterError(() => router.redirect(logInRoute));
 
     configuration.onRedirect((route) => router.redirect(route));
 

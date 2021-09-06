@@ -8,6 +8,7 @@ import {MODAL_WINDOW_MUTATOR} from './modal-window-mutator.js';
 import {UPLOAD_FILE_MUTATOR} from './upload-file-mutator.js';
 import {DOWNLOAD_FILE_MUTATOR} from './download-file-mutator.js';
 import {CREATE_FOLDER_MUTATOR} from './create-folder-mutator.js';
+import {LOG_OUT_USER_MUTATOR} from './log-out-user-mutator.js';
 
 export const mutator = (mutatorName, details, state) => {
   switch (mutatorName) {
@@ -148,6 +149,10 @@ export const mutator = (mutatorName, details, state) => {
         creatingDirectoryErrorMessage: details.error,
         itemInModalWindow: null,
         isCreatingNewFolder: false,
+      });
+    case LOG_OUT_USER_MUTATOR.COMPLETED:
+      return Object.assign({}, state, {
+        location: '',
       });
   }
 };

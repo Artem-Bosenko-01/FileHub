@@ -21,6 +21,8 @@ import {DownloadFile} from './download-file-action/download-file.js';
 import {DownloadFileExecutor} from './download-file-action/download-file-executor.js';
 import {CreateFolder} from './create-folder-action/create-folder.js';
 import {CreateFolderExecutor} from './create-folder-action/create-folder-executor.js';
+import {LogOutUser} from './log-out-user-action/log-out-user.js';
+import {LogOutUserExecutor} from './log-out-user-action/log-out-user-executor.js';
 
 /**
  * The factory contains a map of the action name and executor.
@@ -41,7 +43,8 @@ export class ActionFactory {
         .set(CloseModalWindow.typeName, new CloseModalWindowExecutor())
         .set(UploadFile.typeName, new UploadFileExecutor())
         .set(DownloadFile.typeName, new DownloadFileExecutor())
-        .set(CreateFolder.typeName, new CreateFolderExecutor());
+        .set(CreateFolder.typeName, new CreateFolderExecutor())
+        .set(LogOutUser.typeName, new LogOutUserExecutor());
   }
 
   /**

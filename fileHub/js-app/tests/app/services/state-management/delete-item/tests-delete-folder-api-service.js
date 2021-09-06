@@ -1,5 +1,6 @@
 import fetchMock from '../../../../../node_modules/fetch-mock/esm/client.js';
 import {ApiService} from '../../../../../app/services/api-service/api-service.js';
+import {getWindowMock} from '../../../mock-window-api-service.js';
 
 const {module, test} = QUnit;
 
@@ -10,7 +11,8 @@ export default () => module('deleteFolder', () => {
       url: '/folder/5',
       method: 'DELETE',
     }, 200);
-    const apiService = new ApiService({fetch});
+    const mockWindow = getWindowMock(fetch);
+    const apiService = new ApiService(mockWindow);
     await apiService.deleteFolder('5');
     assert.ok(fetch.called(), 'Should send a request');
   });
@@ -22,7 +24,8 @@ export default () => module('deleteFolder', () => {
       url: '/folder/5',
       method: 'DELETE',
     }, 400);
-    const apiService = new ApiService({fetch});
+    const mockWindow = getWindowMock(fetch);
+    const apiService = new ApiService(mockWindow);
 
     try {
       await apiService.deleteFolder('5');
@@ -40,7 +43,8 @@ export default () => module('deleteFolder', () => {
       url: '/folder/5',
       method: 'DELETE',
     }, 500);
-    const apiService = new ApiService({fetch});
+    const mockWindow = getWindowMock(fetch);
+    const apiService = new ApiService(mockWindow);
 
     try {
       await apiService.deleteFolder('5');

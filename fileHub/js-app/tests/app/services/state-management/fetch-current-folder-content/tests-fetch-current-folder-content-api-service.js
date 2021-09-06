@@ -1,5 +1,6 @@
 import fetchMock from '../../../../../node_modules/fetch-mock/esm/client.js';
 import {ApiService} from '../../../../../app/services/api-service/api-service.js';
+import {getWindowMock} from '../../../mock-window-api-service.js';
 
 const {module, test} = QUnit;
 
@@ -11,8 +12,11 @@ export default () => module('getFolderContent', () => {
       url: '/folder/5/content',
       method: 'GET',
     }, {items: folderContent});
-    const apiService = new ApiService({fetch});
+    const mockWindow = getWindowMock(fetch);
+    const apiService = new ApiService(mockWindow);
+
     const result = await apiService.getFolderContent('5');
+
     assert.ok(fetch.called(), 'Should send a request');
     assert.equal(result.length, 2, 'Should get massive with 2 items');
     assert.equal(result[0].id, folderContent[0].id, 'Should get item with id');
@@ -26,7 +30,8 @@ export default () => module('getFolderContent', () => {
       url: '/folder/5/content',
       method: 'GET',
     }, 400);
-    const apiService = new ApiService({fetch});
+    const mockWindow = getWindowMock(fetch);
+    const apiService = new ApiService(mockWindow);
 
     try {
       await apiService.getFolderContent('5');
@@ -44,7 +49,8 @@ export default () => module('getFolderContent', () => {
       url: '/folder/5/content',
       method: 'GET',
     }, 500);
-    const apiService = new ApiService({fetch});
+    const mockWindow = getWindowMock(fetch);
+    const apiService = new ApiService(mockWindow);
 
     try {
       await apiService.getFolderContent('5');

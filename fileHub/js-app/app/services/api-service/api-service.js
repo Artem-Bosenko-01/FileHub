@@ -19,10 +19,18 @@ export class ApiService {
   }
 
   /**
+   * Adds listener on enevt, when response code status equal 401.
+   * @param {function()} callback
+   */
+  onNavigateAfterError(callback) {
+    this._window.addEventListener('unauthorizedUserError', callback);
+  }
+
+  /**
    * Authenticates user in FileHub application.
    * @param {string} email
    * @param {string} password
-   * @returns {Promise<string, UnauthorizedError|ClientServerError|ServerError>}>}
+   * @returns {Promise<void, UnauthorizedError|ClientServerError|ServerError>}>}
    */
   async logIn(email, password) {
     const response = await this._fetch('/login', {
@@ -34,8 +42,7 @@ export class ApiService {
     }
     this._checkResponseOnClientOrServerError(response);
     const responseBody = await response.json();
-
-    return responseBody.token;
+    this._window.localStorage.setItem('token', responseBody.token);
   }
 
   /**
@@ -67,6 +74,7 @@ export class ApiService {
   async getFolder(folderId) {
     const response = await this._fetch(`/folder/${folderId}`, {
       method: 'GET',
+      headers: new Headers({'Authorization': `Bearer ${this._getToken()}`}),
     });
 
     this._checkResponseOnClientOrServerError(response);
@@ -82,6 +90,7 @@ export class ApiService {
   async getRootFolder() {
     const response = await this._fetch(`/root-folder`, {
       method: 'GET',
+      headers: new Headers({'Authorization': `Bearer ${this._getToken()}`}),
     });
 
     this._checkResponseOnClientOrServerError(response);
@@ -98,6 +107,7 @@ export class ApiService {
   async getFolderContent(folderId) {
     const response = await this._fetch(`/folder/${folderId}/content`, {
       method: 'GET',
+      headers: new Headers({'Authorization': `Bearer ${this._getToken()}`}),
     });
 
     this._checkResponseOnClientOrServerError(response);
@@ -114,6 +124,7 @@ export class ApiService {
   async getCurrentUser() {
     const response = await this._fetch('/user', {
       method: 'GET',
+      headers: new Headers({'Authorization': `Bearer ${this._getToken()}`}),
     });
 
     this._checkResponseOnClientOrServerError(response);
@@ -129,6 +140,7 @@ export class ApiService {
   async deleteFolder(id) {
     const response = await this._fetch(`/folder/${id}`, {
       method: 'DELETE',
+      headers: new Headers({'Authorization': `Bearer ${this._getToken()}`}),
     });
 
     this._checkResponseOnClientOrServerError(response);
@@ -142,6 +154,7 @@ export class ApiService {
   async deleteFile(id) {
     const response = await this._fetch(`/file/${id}`, {
       method: 'DELETE',
+      headers: new Headers({'Authorization': `Bearer ${this._getToken()}`}),
     });
 
     this._checkResponseOnClientOrServerError(response);
@@ -158,6 +171,7 @@ export class ApiService {
     uploadedFile.append('file', file);
     const response = await this._fetch(`/folder/${parentFolderId}/file`, {
       method: 'POST',
+      headers: new Headers({'Authorization': `Bearer ${this._getToken()}`}),
       body: uploadedFile,
     });
 
@@ -173,6 +187,7 @@ export class ApiService {
   async downloadFile(fileId) {
     const response = await this._fetch(`/file/${fileId}`, {
       method: 'GET',
+      headers: new Headers({'Authorization': `Bearer ${this._getToken()}`}),
     });
 
     this._checkResponseOnClientOrServerError(response);
@@ -188,6 +203,7 @@ export class ApiService {
   async createFolder(folderName, parentFolderId) {
     const response = await this._fetch(`/folder/${parentFolderId}/folder`, {
       method: 'POST',
+      headers: new Headers({'Authorization': `Bearer ${this._getToken()}`}),
       body: JSON.stringify({
         name: folderName,
         itemsAmount: 0,
@@ -197,6 +213,21 @@ export class ApiService {
 
     this._checkResponseOnClientOrServerError(response);
     return await response.json();
+  }
+
+  /**
+   * Stopped user active session.
+   * @returns {Promise<void, ClientServerError|ServerError>}
+   */
+  async logOut() {
+    const token = this._getToken();
+    this._removeToken();
+    const response = await this._fetch(`/logOut`, {
+      method: 'POST',
+      headers: new Headers({'Authorization': `Bearer ${token}`}),
+    });
+
+    this._checkResponseOnClientOrServerError(response);
   }
 
   /**
@@ -222,6 +253,10 @@ export class ApiService {
    * @private
    */
   _checkResponseOnClientOrServerError(response) {
+    if (response.status === 401) {
+      this._window.dispatchEvent(new CustomEvent('unauthorizedUserError'));
+    }
+
     if (response.status === 500) {
       throw new ServerError();
     }
@@ -229,5 +264,13 @@ export class ApiService {
     if ((response.status >= 400 && response.status < 500)) {
       throw new ClientServerError(response.status);
     }
+  }
+
+  _getToken() {
+    return this._window.localStorage.getItem('token');
+  }
+
+  _removeToken() {
+    this._window.localStorage.removeItem('token');
   }
 }

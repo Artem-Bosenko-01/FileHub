@@ -12,10 +12,12 @@ import {RemoveDialogWindow} from '../modals/remove-dialog.js';
 import {DeleteItem} from '../services/state-management/delete-item-action/delete-item.js';
 import {OpenModalWindow} from '../services/state-management/open-modal-window/open-modal-window.js';
 import {CloseModalWindow} from '../services/state-management/close-modal-window-action/close-modal-window.js';
-import {FetchCurrentFolderContent}
-  from '../services/state-management/fetch-current-folder-content-action/fetch-current-folder-content.js';
 import {uploadFile} from '../services/upload-file-function.js';
 import {UploadFile} from '../services/state-management/upload-file-action/upload-file.js';
+import {DownloadFile} from '../services/state-management/download-file-action/download-file.js';
+import {downloadFile} from '../services/download-file-function.js';
+import {FetchCurrentFolderContent}
+  from '../services/state-management/fetch-current-folder-content-action/fetch-current-folder-content.js';
 
 /**
  * Main page for authenticated user, that contains information about him and his saved files.
@@ -68,6 +70,10 @@ export class FileListPage extends StateBasedComponent {
     fileList.onUploadButtonClick(async (item) => {
       const uploadedFile = await uploadFile(document);
       this._stateManager.dispatch(new UploadFile(uploadedFile, item.id));
+    });
+
+    fileList.onDownloadButtonClick((item) => {
+      this._stateManager.dispatch(new DownloadFile(item.id));
     });
 
     this._onStateChangedListener('locationParams', async () => {
@@ -162,7 +168,20 @@ export class FileListPage extends StateBasedComponent {
     });
 
     this._onStateChangedListener('uploadingFileErrorMessage', () => {
-      fileList.errorMessageAfterUploading = this._stateManager.state.uploadingFileErrorMessage;
+      fileList.errorMessageAfterFileManipulations = this._stateManager.state.uploadingFileErrorMessage;
+    });
+
+    this._onStateChangedListener('downloadedFileContent', () => {
+      downloadFile(document, this._stateManager.state.downloadedFileContent);
+    });
+
+    this._onStateChangedListener('downloadedFile', () => {
+      const {fileId, isLoading} = this._stateManager.state.downloadedFile;
+      fileList.isLoadingDownloadFile(isLoading, fileId);
+    });
+
+    this._onStateChangedListener('downloadingFileErrorMessage', () => {
+      fileList.errorMessageAfterFileManipulations = this._stateManager.state.downloadingFileErrorMessage;
     });
 
     this._onStateChangedListener('rootFolder', () => {

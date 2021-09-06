@@ -34,6 +34,7 @@ import './app/services/state-management/route-changed-action/tetsts-route-change
 import './app/services/state-management/get-current-user/get-current-user-executor.js';
 import './app/services/state-management/delete-item/delete-item-executor.js';
 import './app/services/state-management/upload-file/tests-upload-file-action-executor.js';
+import './app/services/state-management/download-file/download-file-executor.js';
 
 import './app/services/state-management/tests-mutator.js';
 
@@ -42,3 +43,4 @@ import './app/modals/tests-remove-dialog.js';
 import './app/services/tests-modal-services.js';
 
 import './app/services/tests-upload-file-function.js';
+import './app/services/tests-download-file-function.js';

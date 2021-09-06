@@ -18,6 +18,12 @@ const itemDatabase = {
     {id: 'sdv66sa', name: 'ARMYANE', type: 'folder', itemsAmount: 949, parentFolderId: 'fold777'},
     {id: '74kgf', name: 'KAZAHI', type: 'folder', itemsAmount: 1488, parentFolderId: 'fold777'},
   ],
+
+  itemsContent: [
+    {id: 'ac787s', content: '56489465scasq65'},
+    {id: 'rer554', content: 'scsasc9s874sa6c'},
+  ],
+
   getFolderById: function(id) {
     return this.items.find((item) => item.id === id);
   },
@@ -38,6 +44,22 @@ const itemDatabase = {
       throw new Error('This item\'s name also exist');
     } else {
       this.items.push({id, name, type: 'file', mimeType, size, parentFolderId});
+    }
+  },
+  getFileById: function(id) {
+    const file = this.items.find((item) => item.id === id && item.type === 'file');
+    if (!file) {
+      throw new Error('This item\'s name also exist');
+    } else {
+      return file;
+    }
+  },
+  getFileContent: function(id) {
+    const file = this.itemsContent.find((item) => item.id === id);
+    if (!file) {
+      throw new Error('This item\'s name also exist');
+    } else {
+      return file.content;
     }
   },
 };
@@ -154,6 +176,23 @@ mockPostRequest('express:/folder/:id/file', (url, opts) => {
       name: body.name,
       type: body.type,
       parentId: id,
+    };
+  } catch (error) {
+    return {
+      status: 400,
+    };
+  }
+});
+
+mockGetRequest(`express:/file/:id`, (url, opts) => {
+  const id = url.split('/')[2];
+  try {
+    const fileContent = itemDatabase.getFileContent(id);
+    const file = itemDatabase.getFileById(id);
+    return {
+      name: file.name,
+      mimeType: file.mimeType,
+      content: fileContent,
     };
   } catch (error) {
     return {

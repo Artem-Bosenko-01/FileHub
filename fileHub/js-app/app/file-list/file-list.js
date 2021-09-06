@@ -9,8 +9,28 @@ export class FileList extends Component {
    * Loading status.
    * @param {boolean} value
    */
-  set errorMessageAfterUploading(value) {
+  set errorMessageAfterFileManipulations(value) {
     this._errorMessageAfterUploadingFile = value;
+    this._render();
+  }
+
+  /**
+   * Loading status of download file.
+   * @param {boolean} value
+   * @param {string} downloadedFile
+   */
+  isLoadingDownloadFile(value, downloadedFile) {
+    this._loadingDownloadFile = value;
+    this._downloadedFileId = downloadedFile;
+    this._render();
+  }
+
+  /**
+   * Add listener on click download button.
+   * @param {function(item: FileListItem)} listener
+   */
+  onDownloadButtonClick(listener) {
+    this._onDownloadButtonClickListener = listener;
     this._render();
   }
 
@@ -92,6 +112,10 @@ export class FileList extends Component {
         itemView.onDeleteButtonClick(this._onDeleteButtonClick);
         itemView.onUploadButtonClick(this._onUploadButtonClickListener);
         itemView.isLoadingUploadFile = this._loadingUploadFile;
+        itemView.onDownloadButtonClick(this._onDownloadButtonClickListener);
+        if (itemView.id === this._downloadedFileId) {
+          itemView.isLoadingDownloadFile = this._loadingDownloadFile;
+        }
       });
     }
   }

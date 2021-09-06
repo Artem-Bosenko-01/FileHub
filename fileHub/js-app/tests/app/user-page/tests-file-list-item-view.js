@@ -123,4 +123,31 @@ module('FileListItemView', (hooks) => {
     const uploadButton = searchElement('upload-button', fixture);
     assert.equal(uploadButton.innerHTML, LOADING_SYMBOL, 'Should render loading symbol');
   });
+
+  test('Should add and call listener on download button click', (assert) => {
+    const itemJson = {
+      id: 'id',
+      type: 'file',
+    };
+    const item = new FileListItem(itemJson);
+    const itemView = new FileListItemView(fixture, item);
+
+    itemView.onDownloadButtonClick((listItem)=> assert.deepEqual(item, listItem,
+        'Should get item on click'));
+    const downloadButton = searchElement('download-button', fixture);
+    downloadButton.click();
+  });
+
+  test('Should set loading status to download button', (assert) => {
+    const itemJson = {
+      id: 'id',
+      type: 'file',
+    };
+    const item = new FileListItem(itemJson);
+    const itemView = new FileListItemView(fixture, item);
+
+    itemView.isLoadingDownloadFile = true;
+    const downloadButton = searchElement('download-button', fixture);
+    assert.equal(downloadButton.innerHTML, LOADING_SYMBOL, 'Should render loading symbol');
+  });
 });

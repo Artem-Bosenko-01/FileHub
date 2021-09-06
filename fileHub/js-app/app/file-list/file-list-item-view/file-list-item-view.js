@@ -7,6 +7,24 @@ import {Button} from '../../components/button.js';
  */
 export class FileListItemView extends Component {
   /**
+   * Loading status of download file.
+   * @param {boolean} value
+   */
+  set isLoadingDownloadFile(value) {
+    this._loadingDownloadFile = value;
+    this._render();
+  }
+
+  /**
+   * Add listener on click download button.
+   * @param {function(item: FileListItem)} listener
+   */
+  onDownloadButtonClick(listener) {
+    this._onDownloadButtonClickListener = listener;
+    this._render();
+  }
+
+  /**
    * Loading status.
    * @param {boolean} value
    */
@@ -16,7 +34,7 @@ export class FileListItemView extends Component {
   }
 
   /**
-   * Add listener on click delete button.
+   * Add listener on click upload button.
    * @param {function(item: FileListItem)} listener
    */
   onUploadButtonClick(listener) {
@@ -40,6 +58,14 @@ export class FileListItemView extends Component {
   onFolderNameCLicked(listener) {
     this._onFolderNameCLickedEvent = listener;
     this._render();
+  }
+
+  /**
+   * File list item id.
+   * @returns {string}
+   */
+  get id() {
+    return this._item.id;
   }
 
   /** @inheritDoc */
@@ -80,6 +106,21 @@ export class FileListItemView extends Component {
         }
         button.disabled = this._loadingUploadFile;
         button.onClick(() => this._onUploadButtonClickListener(this._item));
+        return button;
+      });
+    } else {
+      this._mount('download-button', (slotElement) => {
+        const button = new Button(slotElement);
+        button.buttonName = 'download-button';
+        button.buttonClasses = ['element-control-button', 'download-element-button'];
+        if (this._loadingDownloadFile) {
+          button.buttonIcon = 'repeat';
+          button.iconClasses = ['loading'];
+        } else {
+          button.buttonIcon = 'download';
+        }
+        button.disabled = this._loadingDownloadFile;
+        this._onDownloadButtonClickListener && button.onClick(() => this._onDownloadButtonClickListener(this._item));
         return button;
       });
     }
@@ -170,10 +211,7 @@ export class FileListItemView extends Component {
 
   /** @inheritDoc */
   get _markup() {
-    const downloadButton = `<button data-fh="download-button" title="download" type="button" 
-                                    class="element-control-button download-element-button">
-                            <span class="glyphicon glyphicon-download"></span>
-                        </button>`;
+    const downloadButton = `<slot data-fh="download-button"></slot>`;
     const uploadButton = `<slot data-fh="upload-button"></slot>`;
 
     return `<tr>

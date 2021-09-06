@@ -17,6 +17,8 @@ import {CloseModalWindow} from './close-modal-window-action/close-modal-window.j
 import {CloseModalWindowExecutor} from './close-modal-window-action/close-modal-window-executor.js';
 import {UploadFile} from './upload-file-action/upload-file.js';
 import {UploadFileExecutor} from './upload-file-action/upload-file-executor.js';
+import {DownloadFile} from './download-file-action/download-file.js';
+import {DownloadFileExecutor} from './download-file-action/download-file-executor.js';
 
 /**
  * The factory contains a map of the action name and executor.
@@ -35,7 +37,8 @@ export class ActionFactory {
         .set(DeleteItem.typeName, new DeleteItemExecutor())
         .set(OpenModalWindow.typeName, new OpenModalWindowExecutor())
         .set(CloseModalWindow.typeName, new CloseModalWindowExecutor())
-        .set(UploadFile.typeName, new UploadFileExecutor());
+        .set(UploadFile.typeName, new UploadFileExecutor())
+        .set(DownloadFile.typeName, new DownloadFileExecutor());
   }
 
   /**

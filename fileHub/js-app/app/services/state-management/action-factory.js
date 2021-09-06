@@ -1,10 +1,12 @@
-import FetchCurrentFolder from './fetch-current-directory-action/fetch-current-folder.js';
-import FetchCurrentFolderExecutor from './fetch-current-directory-action/fetch-current-folder-executor.js';
-import {RouteChanged} from './hash-changed-action/route-changed.js';
-import {RouteChangedExecutor} from './hash-changed-action/route-changed-executor.js';
+import FetchCurrentFolder from './fetch-current-folder-action/fetch-current-folder.js';
+import FetchCurrentFolderExecutor from './fetch-current-folder-action/fetch-current-folder-executor.js';
+import {RouteChanged} from './route-changed-action/route-changed.js';
+import {RouteChangedExecutor} from './route-changed-action/route-changed-executor.js';
 import {GetRootFolder} from './get-root-folder-action/get-root-folder.js';
 import {GetRootFolderExecutor} from './get-root-folder-action/get-root-folder-executor.js';
 import {FetchCurrentFolderContent} from './fetch-current-folder-content-action/fetch-current-folder-content.js';
+import GetCurrentUser from './get-current-user-action/get-current-user.js';
+import GetCurrentUserExecutor from './get-current-user-action/get-current-user-executor.js';
 import {FetchCurrentFolderContentExecutor}
   from './fetch-current-folder-content-action/fetch-current-folder-content-executor.js';
 
@@ -20,7 +22,8 @@ export class ActionFactory {
         .set(FetchCurrentFolder.typeName, new FetchCurrentFolderExecutor())
         .set(RouteChanged.typeName, new RouteChangedExecutor())
         .set(GetRootFolder.typeName, new GetRootFolderExecutor())
-        .set(FetchCurrentFolderContent.typeName, new FetchCurrentFolderContentExecutor());
+        .set(FetchCurrentFolderContent.typeName, new FetchCurrentFolderContentExecutor())
+        .set(GetCurrentUser.typeName, new GetCurrentUserExecutor());
   }
 
   /**

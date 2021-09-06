@@ -1,4 +1,4 @@
-import {Component} from '../components/component.js';
+import {StateBasedComponent} from './state-based-component.js';
 import {Breadcrumbs} from './breadcrumbs.js';
 import {UserDetails} from './user-details.js';
 import {LogOut} from './log-out.js';
@@ -6,32 +6,32 @@ import {FolderControlButtons} from './folder-control-buttons.js';
 import {SearchBar} from './search-bar.js';
 import {FileList} from './file-list.js';
 import {GetRootFolder} from '../services/state-management/get-root-folder-action/get-root-folder.js';
-import FetchCurrentFolder from '../services/state-management/fetch-current-directory-action/fetch-current-folder.js';
+import FetchCurrentFolder from '../services/state-management/fetch-current-folder-action/fetch-current-folder.js';
+import GetCurrentUser from '../services/state-management/get-current-user-action/get-current-user.js';
 import {FetchCurrentFolderContent}
   from '../services/state-management/fetch-current-folder-content-action/fetch-current-folder-content.js';
 
 /**
  * Main page for authenticated user, that contains information about him and his saved files.
  */
-export class FileListPage extends Component {
+export class FileListPage extends StateBasedComponent {
   /**
    * Listener for redirecting a user to folder.
    * @param {function(folderId: string)} listener
    */
   onNavigateToFolder(listener) {
     this._onNavigateToFolder = listener;
+    this.deleteAllSubscribersOnChangedState();
     this._render();
   }
 
   /**
-   * @inheritDoc
    * Adds api and title services to page
    * @param {TitleService} titleService
    * @param {StateManager} stateManager
    */
   _init(titleService, stateManager) {
-    this._titleService = titleService;
-    this._titleService.addTitleForPage('Main Page');
+    super._init(titleService, stateManager);
     this._stateManager = stateManager;
   }
 
@@ -39,7 +39,6 @@ export class FileListPage extends Component {
   _initNestedComponents() {
     const userPanelElement = this._getElement('user-panel');
     const userDetails = new UserDetails(userPanelElement);
-    userDetails.userFullName = 'Oxxxymiron';
     new LogOut(userPanelElement);
 
     const fileListBodyElement = this._getElement('file-list-body');
@@ -50,47 +49,63 @@ export class FileListPage extends Component {
     const fileList = new FileList(fileListBodyElement);
     fileList.onFolderClick(this._onNavigateToFolder);
 
-    this._stateManager.onStateChanged('locationParams', async (state) => {
+    this._onStateChangedListener('locationParams', async () => {
+      const state = this._stateManager.state;
       const currentFolderId = state.locationParams.currentFolderId;
       if (!currentFolderId && !state.rootFolder) {
         this._stateManager.dispatch(new GetRootFolder());
       } else if (!currentFolderId && state.rootFolder) {
         this._onNavigateToFolder(state.rootFolder.id);
       } else {
-        await this._stateManager.dispatch(new FetchCurrentFolder());
+        this._stateManager.dispatch(new FetchCurrentFolder());
         this._stateManager.dispatch(new FetchCurrentFolderContent());
+        if (!state.userData) {
+          this._stateManager.dispatch(new GetCurrentUser());
+        }
       }
     });
 
-    this._stateManager.onStateChanged('currentFolder', (state) => {
-      breadcrumbs.currentDirectory = state.currentFolder;
+    this._onStateChangedListener('currentFolder', () => {
+      breadcrumbs.currentDirectory = this._stateManager.state.currentFolder;
     });
 
-    this._stateManager.onStateChanged('isCurrentFolderFetching', (state) => {
-      breadcrumbs.loadingCurrentFolderDataState = state.isCurrentFolderFetching;
+    this._onStateChangedListener('isCurrentFolderFetching', () => {
+      breadcrumbs.loading = this._stateManager.state.isCurrentFolderFetching;
     });
 
-    this._stateManager.onStateChanged('fetchingCurrentFolderErrorMessage', (state) => {
+    this._onStateChangedListener('fetchingCurrentFolderErrorMessage', () => {
       breadcrumbs.currentDirectory = null;
-      breadcrumbs.errorMessage = state.fetchingCurrentFolderErrorMessage;
+      breadcrumbs.errorMessage = this._stateManager.state.fetchingCurrentFolderErrorMessage;
     });
 
-    this._stateManager.onStateChanged('currentFolderContent', (state) => {
-      fileList.fileItems = state.currentFolderContent;
+    this._onStateChangedListener('currentFolderContent', () => {
+      fileList.fileItems = this._stateManager.state.currentFolderContent;
     });
 
-    this._stateManager.onStateChanged('isCurrentFolderContentFetching', (state) => {
+    this._onStateChangedListener('isCurrentFolderContentFetching', () => {
       fileList.fileItems = null;
-      fileList.loadingFolderContentState = state.isCurrentFolderContentFetching;
+      fileList.loading = this._stateManager.state.isCurrentFolderContentFetching;
     });
 
-    this._stateManager.onStateChanged('fetchingCurrentFolderContentErrorMessage', (state) => {
+    this._onStateChangedListener('fetchingCurrentFolderContentErrorMessage', () => {
       fileList.fileItems = null;
-      fileList.errorMessage = state.fetchingCurrentFolderContentErrorMessage;
+      fileList.errorMessage = this._stateManager.state.fetchingCurrentFolderContentErrorMessage;
     });
 
+    this._onStateChangedListener('userData', () => {
+      userDetails.userFullName = this._stateManager.state.userData.name;
+    });
 
-    this._stateManager.onStateChanged('rootFolder', (state) => {
+    this._onStateChangedListener('isCurrentUserInfoFetching', () => {
+      userDetails.loading = this._stateManager.state.isCurrentUserInfoFetching;
+    });
+
+    this._onStateChangedListener('fetchingCurrentUserDetailsErrorMessage', () => {
+      userDetails.errorMessage = this._stateManager.state.fetchingCurrentUserDetailsErrorMessage;
+    });
+
+    this._onStateChangedListener('rootFolder', () => {
+      const state = this._stateManager.state;
       const rootFolderId = state.rootFolder.id;
       breadcrumbs.rootPage = rootFolderId;
       if (!state.locationParams.currentFolderId) {

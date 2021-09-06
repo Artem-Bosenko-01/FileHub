@@ -5,13 +5,12 @@ import {Router} from './services/router.js';
 import {RegistrationPage} from './register/registration-page.js';
 import {ErrorPage} from './ErrorPage.js';
 import {TitleService} from './services/title-service.js';
-import {FileListPage} from './user-page/file-list-page.js';
+import {FileListPage} from './file-list/file-list-page.js';
 import {StateManager} from './services/state-management/state-manager.js';
 import {ActionFactory} from './services/state-management/action-factory.js';
-import {RouteChanged} from './services/state-management/hash-changed-action/route-changed.js';
+import {RouteChanged} from './services/state-management/route-changed-action/route-changed.js';
 import {RoutingConfiguration} from './services/routing-configuration.js';
 import {mutator} from './services/state-management/mutator/mutator.js';
-import {GetRootFolder} from './services/state-management/get-root-folder-action/get-root-folder.js';
 
 /**
  * Entry point of FileHub application.
@@ -25,7 +24,7 @@ export class Application extends Component {
     const errorPageRoute = '404';
     const apiService = new ApiService(window);
     const titleService = new TitleService('FileHub', document);
-    const configuration = new RoutingConfiguration('login');
+    const configuration = new RoutingConfiguration(logInRoute);
     const router = new Router(window);
     const factory = new ActionFactory();
     const stateManager = new StateManager({}, {apiService}, factory, mutator);
@@ -46,7 +45,6 @@ export class Application extends Component {
         .addRoute(indexRoute, () => {
           new FileListPage(this.rootElement, titleService, stateManager)
               .onNavigateToFolder((folderId) => router.redirect(`${indexRoute}/${folderId}`));
-          stateManager.dispatch(new GetRootFolder());
         })
         .addRoute(errorPageRoute, () => new ErrorPage(this.rootElement))
         .notFoundRoute = errorPageRoute;
@@ -55,9 +53,9 @@ export class Application extends Component {
       stateManager.dispatch(new RouteChanged(route));
     });
 
-    stateManager.onStateChanged('location', ({location}) => {
+    stateManager.onStateChanged('location', () => {
       this._clearContainer();
-      configuration.getPageCreatorByRoute(location)();
+      configuration.getPageCreatorByRoute(stateManager.state.location)();
     });
 
     const locationRoute = router.route;

@@ -4,6 +4,7 @@ import {UnprocessableEntityError} from './unprocessable-entity-error.js';
 import {ValidationErrorCase} from './validation-error-case.js';
 import {FileListItem} from '../../file-list-item.js';
 import {UnauthorizedError} from './unauthorized-error.js';
+import {UserModel} from '../../user-model.js';
 
 /**
  * Allows you to interact with the main features of the application. Sends requests to backend.
@@ -104,6 +105,20 @@ export class ApiService {
 
     const deserializedItems = responseBody.items.map((item) => new FileListItem(item));
     return deserializedItems;
+  }
+
+  /**
+   * Gets info about current user.
+   * @returns {Promise<UserModel, ClientServerError|ServerError>}
+   */
+  async getCurrentUser() {
+    const response = await this._fetch('/user', {
+      method: 'GET',
+    });
+
+    this._checkResponseOnClientOrServerError(response);
+    const body = await response.json();
+    return new UserModel(body);
   }
 
   /**

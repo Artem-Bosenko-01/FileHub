@@ -1,4 +1,4 @@
-import {Breadcrumbs} from '../../../app/user-page/breadcrumbs.js';
+import {Breadcrumbs} from '../../../app/file-list/breadcrumbs.js';
 import searchElement from '../search-element-function.js';
 
 const {module, test} = QUnit;
@@ -38,7 +38,7 @@ module('Breadcrumbs', (hooks) => {
   test('Should render breadcrumbs with loading state', (assert) => {
     assert.expect(2);
     const breadcrumbs = new Breadcrumbs(fixture);
-    breadcrumbs.loadingCurrentFolderDataState = true;
+    breadcrumbs.loading = true;
 
     assert.ok(searchElement('breadcrumbs', fixture), 'Should render breadcrumbs');
     assert.ok(searchElement('loading-symbol', fixture), 'Should render loading symbol at breadcrumbs');

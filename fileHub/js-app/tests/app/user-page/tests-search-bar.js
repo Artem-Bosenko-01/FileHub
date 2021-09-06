@@ -1,4 +1,4 @@
-import {SearchBar} from '../../../app/user-page/search-bar.js';
+import {SearchBar} from '../../../app/file-list/search-bar.js';
 import searchElement from '../search-element-function.js';
 
 const {module, test} = QUnit;

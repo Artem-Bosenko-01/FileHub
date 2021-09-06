@@ -1,4 +1,4 @@
-import {FileList} from '../../../app/user-page/file-list.js';
+import {FileList} from '../../../app/file-list/file-list.js';
 import searchElement from '../search-element-function.js';
 
 const {module, test} = QUnit;
@@ -43,7 +43,7 @@ module('FileList', (hooks) => {
   test('Should render file list with loading state', (assert) => {
     assert.expect(2);
     const list = new FileList(fixture);
-    list.loadingFolderContentState = true;
+    list.loading = true;
 
     assert.ok(searchElement('fileListItems', fixture), 'Should create file list');
     assert.ok(searchElement('loading-symbol', fixture), 'Should render loading state symbol');

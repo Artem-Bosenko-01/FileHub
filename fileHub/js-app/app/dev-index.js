@@ -99,3 +99,10 @@ mockGetRequest('express:/folder/:id/content', (url, opts) => {
   const content = itemDatabase.getFolderByParentId(parentId);
   return {items: content};
 });
+
+mockGetRequest('/user', (url, opts) => {
+  return {
+    name: 'Artem Bosenko',
+    id: '4521a4sca',
+  };
+});

@@ -1,4 +1,5 @@
-import {RouteChangedExecutor} from '../../../../../app/services/state-management/hash-changed-action/route-changed-executor.js';
+import {RouteChangedExecutor}
+  from '../../../../../app/services/state-management/route-changed-action/route-changed-executor.js';
 import {getSpy} from '../../../get-spy.js';
 
 const {module, test} = QUnit;
@@ -22,6 +23,6 @@ module('RouteChangedExecutor', () => {
 
     const firstCalled = mutateSpy.calls[0];
     assert.deepEqual(firstCalled, ['HASH_CHANGED_MUTATOR_COMPLETED',
-      {dynamicPart: {currentFolderId: dynamicParam}, pageRoute: staticParam}], 'Should get message');
+      {dynamicPart: dynamicParam, pageRoute: staticParam}], 'Should get message');
   });
 });

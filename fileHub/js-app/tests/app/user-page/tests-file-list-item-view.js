@@ -1,4 +1,4 @@
-import {FileListItemView} from '../../../app/user-page/file-list-item-view/file-list-item-view.js';
+import {FileListItemView} from '../../../app/file-list/file-list-item-view/file-list-item-view.js';
 import {FileListItem} from '../../../app/file-list-item.js';
 import searchElement from '../search-element-function.js';
 

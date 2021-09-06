@@ -9,16 +9,16 @@ import java.util.List;
 /**
  * List of validation errors for response with 422 code status.
  */
-public final class ValidationErrorResponse extends JsonResponse {
+final class ValidationErrorResponse extends JsonResponse {
 
-    List<ValidationError> errors = new ArrayList<>();
+    private final List<ValidationError> errors = new ArrayList<>();
 
     public void addError(String fieldName, String errorMessage) {
 
         errors.add(new ValidationError(fieldName, errorMessage));
     }
 
-    public void addErrors(List<CommandValidationError> errors) {
+    public void addErrors(Iterable<CommandValidationError> errors) {
 
         errors.forEach(exception -> this.errors.add(new ValidationError(exception.field(), exception.message())));
     }

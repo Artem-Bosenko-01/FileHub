@@ -14,8 +14,8 @@ import java.util.Optional;
  *
  * @param <E> result entity.
  * @param <C> one of {@link AuthenticatedUserCommand command} from client.
- * */
-public abstract class SecuredUserProcess<C extends  AuthenticatedUserCommand, E> implements UserProcess<C,E> {
+ */
+public abstract class SecuredUserProcess<C extends AuthenticatedUserCommand, E> implements UserProcess<C, E> {
 
     private final AuthorizationStorage storage;
 
@@ -28,12 +28,11 @@ public abstract class SecuredUserProcess<C extends  AuthenticatedUserCommand, E>
     @Override
     public E handle(C inputCommand) throws NotAuthorizedUserException, InvalidCommandHandlingException {
 
-        if(verifyPermission(inputCommand)) {
+        if (verifyPermission(inputCommand)) {
 
             return doHandle(inputCommand);
 
-        }
-        else {
+        } else {
 
             throw new NotAuthorizedUserException(
                     "User with token: " + inputCommand.token() + " doesn't have any permission");
@@ -43,14 +42,14 @@ public abstract class SecuredUserProcess<C extends  AuthenticatedUserCommand, E>
 
     protected abstract E doHandle(C inputCommand) throws InvalidCommandHandlingException;
 
-    private boolean verifyPermission(C command){
+    private boolean verifyPermission(C command) {
 
         Optional<AuthorizationUsers> token = storage.findByID(new UserAuthToken(command.token().value()));
         return token.filter(this::isTokenNotExpire).isPresent();
 
     }
 
-    private boolean isTokenNotExpire(AuthorizationUsers token){
+    private boolean isTokenNotExpire(AuthorizationUsers token) {
 
         return token.expirationTime().isAfter(ZonedDateTime.now(ZoneId.of("America/Los_Angeles")));
 

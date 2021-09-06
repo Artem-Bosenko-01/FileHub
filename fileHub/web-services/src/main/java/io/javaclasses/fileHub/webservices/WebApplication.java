@@ -5,6 +5,7 @@ import io.javaclasses.fileHub.webservices.authentication.AuthenticationRoute;
 import io.javaclasses.fileHub.webservices.folder.GetFolderByIdRoute;
 import io.javaclasses.fileHub.webservices.registration.RegistrationRoute;
 import io.javaclasses.fileHub.webservices.rootfolder.GetRootFolderRoute;
+import io.javaclasses.fileHub.webservices.user.GetUserInfoRoute;
 import spark.Spark;
 
 import static spark.Spark.get;
@@ -31,6 +32,7 @@ public final class WebApplication {
         post(APPLICATION_NAME + API_VERSION_1_0 + "/register", new RegistrationRoute(service.registerUser()));
         get(APPLICATION_NAME + API_VERSION_1_0 + "/root-folder", new GetRootFolderRoute(service.getRootFolder()));
         get(APPLICATION_NAME + API_VERSION_1_0 + "/folder/:id", new GetFolderByIdRoute(service.getFolderById()));
+        get(APPLICATION_NAME + API_VERSION_1_0 + "/user", new GetUserInfoRoute(service.getUser()));
     }
 
     public void stop() {

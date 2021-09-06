@@ -5,6 +5,7 @@ import io.javaclasses.fileHub.persistent.files.Folder;
 import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.files.FolderStorage;
 import io.javaclasses.fileHub.persistent.files.FolderStorageInMemory;
+import io.javaclasses.fileHub.persistent.users.User;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.persistent.users.UserStorage;
 import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
@@ -15,6 +16,7 @@ import io.javaclasses.fileHub.persistent.users.tokens.UserAuthToken;
 import io.javaclasses.fileHub.services.files.GetFolderById;
 import io.javaclasses.fileHub.services.files.GetRootFolder;
 import io.javaclasses.fileHub.services.users.AuthenticateUser;
+import io.javaclasses.fileHub.services.users.GetUserInfo;
 import io.javaclasses.fileHub.services.users.RegisterUser;
 
 import java.time.ZoneId;
@@ -29,6 +31,7 @@ public class ServiceLocator {
     private final RegisterUser registerUser;
     private final GetRootFolder getRootFolder;
     private final GetFolderById getFolderById;
+    private final GetUserInfo getUserInfo;
 
     public ServiceLocator() {
 
@@ -42,6 +45,7 @@ public class ServiceLocator {
         authenticateUser = new AuthenticateUser(userStorage, authorizationStorage);
         getRootFolder = new GetRootFolder(authorizationStorage, folderStorage);
         getFolderById = new GetFolderById(folderStorage, authorizationStorage);
+        getUserInfo = new GetUserInfo(userStorage, authorizationStorage);
     }
 
     public AuthenticateUser authenticateUser() {
@@ -60,9 +64,17 @@ public class ServiceLocator {
         return getFolderById;
     }
 
+    public GetUserInfo getUser() {
+        return getUserInfo;
+    }
+
     private void initDataForDB(AuthorizationStorage authorizationStorage, UserStorage userStorage, FolderStorage folderStorage) {
 
         UserId id = new UserId("id");
+
+        User user = new User(id);
+        user.setLogin("artrms@kasc.com");
+        user.setPassword("sdvdds");
 
         AuthorizationUsers authorizedUser = new AuthorizationUsers(new UserAuthToken("token"), id, ZonedDateTime.now(ZoneId.of("America/Los_Angeles")).plusHours(6));
 
@@ -80,6 +92,7 @@ public class ServiceLocator {
 
         try {
             authorizationStorage.create(authorizedUser);
+            userStorage.create(user);
             folderStorage.create(folder);
             folderStorage.create(folder2);
         } catch (DuplicatedUserIdException e) {

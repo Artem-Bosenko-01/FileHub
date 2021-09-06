@@ -1,5 +1,7 @@
 package io.javaclasses.fileHub.webservices.authorization;
 
+import com.google.common.testing.NullPointerTester;
+import io.javaclasses.fileHub.services.users.AuthenticateUser;
 import io.javaclasses.fileHub.webservices.*;
 import io.javaclasses.fileHub.webservices.authentication.AuthenticationRoute;
 import org.junit.jupiter.api.AfterAll;
@@ -14,7 +16,7 @@ import java.util.HashMap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class AuthenticationRouteFunctionalTest {
+class AuthenticationRouteTest {
 
     private static final WebApplication application = new WebApplication();
 
@@ -31,8 +33,16 @@ class AuthenticationRouteFunctionalTest {
     }
 
     @Test
-    public void shouldCheckNullPointerSafetyOnConstructor() {
+    public void shouldCheckNullPointerSafetyOnConstructor() throws NoSuchMethodException {
 
+        UserStorageBaseStub userStorageStub = new UserStorageBaseStub();
+
+        AuthenticationStorageBaseStub authenticationStorageStub = new AuthenticationStorageBaseStub();
+
+        NullPointerTester tester = new NullPointerTester();
+        tester.setDefault(AuthenticateUser.class, new AuthenticateUser(userStorageStub, authenticationStorageStub));
+
+        tester.testConstructor(AuthenticationRoute.class.getConstructor(AuthenticateUser.class));
     }
 
     @Test

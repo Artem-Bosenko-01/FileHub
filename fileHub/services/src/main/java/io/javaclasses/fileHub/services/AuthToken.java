@@ -4,8 +4,7 @@ package io.javaclasses.fileHub.services;
 import com.google.common.base.Preconditions;
 
 /**
- * This is key, that authenticated user in application and gives him some permissions.
- * This token may uses in services.
+ * It is the key that identifies authenticated users in the application and gives them some permissions.
  * */
 public final class AuthToken {
 

@@ -4,7 +4,6 @@ import com.google.common.testing.NullPointerTester;
 import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.services.AuthToken;
-import io.javaclasses.fileHub.services.files.CreateFolderCommand;
 import org.junit.jupiter.api.Test;
 
 
@@ -19,10 +18,11 @@ CreateFolderCommandTest {
         tester.setDefault(AuthToken.class, new AuthToken("ac")).
                 setDefault(String.class, "").
                 setDefault(UserId.class, new UserId("vds")).
-                setDefault(FolderId.class, new FolderId("vs", new UserId("ssvs")));
+                setDefault(FolderId.class, new FolderId("vs", new UserId("ssvs"))).
+                setDefault(Integer.class, 0);
 
         tester.testConstructor(CreateFolderCommand.class.getConstructor(AuthToken.class, String.class, UserId.class,
-                FolderId.class));
+                Integer.class, FolderId.class));
 
     }
 
@@ -31,7 +31,7 @@ CreateFolderCommandTest {
 
         NullPointerTester tester = new NullPointerTester();
         tester.testAllPublicInstanceMethods(new CreateFolderCommand(new AuthToken(""),
-                "cadva", new UserId("sv"), null));
+                "cadva", new UserId("sv"), 9, null));
 
     }
 }

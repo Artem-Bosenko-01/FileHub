@@ -12,6 +12,7 @@ public final class Folder implements DataRecord<FolderId> {
     private final FolderId id;
     private String name;
     private UserId owner;
+    private Integer itemsAmount;
     @Nullable
     private FolderId parentFolder;
 
@@ -46,6 +47,14 @@ public final class Folder implements DataRecord<FolderId> {
 
     public void setParentFolder(@Nullable FolderId parentFolder) {
         this.parentFolder = parentFolder;
+    }
+
+    public Integer itemsAmount() {
+        return itemsAmount;
+    }
+
+    public void setItemsAmount(Integer itemsAmount) {
+        this.itemsAmount = Preconditions.checkNotNull(itemsAmount);
     }
 
     @Override

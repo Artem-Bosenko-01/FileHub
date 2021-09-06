@@ -7,5 +7,6 @@ package io.javaclasses.fileHub.services;
  * @param <E> type of output entity, that generated as a result handling command.
  * */
 public interface UserProcess<C extends Command, E>{
-    E handle(C inputCommand) throws InvalidHandleCommandException;
+
+    E handle(C inputCommand) throws InvalidCommandHandlingException, NotAuthorizedUserException;
 }

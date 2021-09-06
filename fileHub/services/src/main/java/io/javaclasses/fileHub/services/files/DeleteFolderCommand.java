@@ -8,7 +8,7 @@ import io.javaclasses.fileHub.services.AuthenticatedUserCommand;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * This is object, that contains data, that needs to delete existed folder by {@link FolderId id}
+ * Data that needs to delete existed folder by {@link FolderId id}
  * in Filehub application by {@link UserId authenticated user} .
  */
 public final class DeleteFolderCommand extends AuthenticatedUserCommand {
@@ -18,11 +18,13 @@ public final class DeleteFolderCommand extends AuthenticatedUserCommand {
     public DeleteFolderCommand(AuthToken token, FolderId folderID) {
 
         super(checkNotNull(token));
+
         this.folderID = checkNotNull(folderID);
 
     }
 
     public FolderId folderID() {
+
         return folderID;
     }
 

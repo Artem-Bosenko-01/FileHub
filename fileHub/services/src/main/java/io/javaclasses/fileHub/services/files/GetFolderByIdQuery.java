@@ -1,6 +1,5 @@
 package io.javaclasses.fileHub.services.files;
 
-import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.Query;
@@ -13,9 +12,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public final class GetFolderByIdQuery extends Query {
 
-    private final FolderId id;
+    private final String id;
 
-    public GetFolderByIdQuery(AuthToken token, FolderId id) {
+    public GetFolderByIdQuery(AuthToken token, String id) {
 
         super(checkNotNull(token));
 
@@ -23,7 +22,7 @@ public final class GetFolderByIdQuery extends Query {
 
     }
 
-    public FolderId id() {
+    public String id() {
 
         return id;
     }

@@ -1,6 +1,5 @@
 package io.javaclasses.fileHub.services.files;
 
-import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 
 /**
@@ -9,8 +8,8 @@ import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
  */
 public final class FolderByIdNotFoundHandlingException extends InvalidCommandHandlingException {
 
-    public FolderByIdNotFoundHandlingException(FolderId id) {
+    public FolderByIdNotFoundHandlingException(String id) {
 
-        super("Cannot find folder by id: " + id.toString());
+        super("Cannot find folder by id: " + id);
     }
 }

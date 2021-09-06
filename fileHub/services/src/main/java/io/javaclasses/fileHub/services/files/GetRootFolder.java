@@ -22,7 +22,7 @@ public class GetRootFolder extends View<GetRootFolderQuery, GetFolderDto> {
 
     private final AuthorizationStorage authorizationStorage;
 
-    protected GetRootFolder(AuthorizationStorage authorizationStorage, FolderStorage folderStorage) {
+    public GetRootFolder(AuthorizationStorage authorizationStorage, FolderStorage folderStorage) {
 
         super(authorizationStorage);
 

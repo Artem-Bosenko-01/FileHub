@@ -24,8 +24,7 @@ class GetFolderByIdQueryTest {
     public void checkForNullPointerInSetters() {
 
         NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicInstanceMethods(new GetFolderByIdQuery(new AuthToken(""),
-                new FolderId("", new UserId(""))));
+        tester.testAllPublicInstanceMethods(new GetFolderByIdQuery(new AuthToken(""), ""));
 
     }
 }

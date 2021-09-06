@@ -8,5 +8,5 @@ package io.javaclasses.fileHub.services;
  * */
 public interface UserProcess<C extends Command, E>{
 
-    E handle(C inputCommand) throws InvalidCommandHandlingException;
+    E handle(C inputCommand) throws InvalidCommandHandlingException, NotAuthorizedUserException;
 }

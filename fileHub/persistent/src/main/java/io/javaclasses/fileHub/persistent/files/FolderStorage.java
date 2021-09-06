@@ -13,7 +13,9 @@ public interface FolderStorage extends Storage<FolderId, Folder> {
 
     Optional<FolderId> findParentFolderByChildId(FolderId childId) throws NotExistUserIdException;
 
-    Optional<Folder> findFolderByName(String name, UserId owner);
+    Optional<Folder> findFolderById(String id, UserId owner);
+
+    Optional<Folder> findRootFolderByUserId(UserId id);
 
     int getSizeRecordsList();
 

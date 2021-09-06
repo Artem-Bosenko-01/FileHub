@@ -10,8 +10,6 @@ public final class User implements DataRecord<UserId> {
     private final UserId userID;
     private String login;
     private String password;
-    private String firstName;
-    private String lastName;
 
     public User(UserId userID) {
         this.userID = Preconditions.checkNotNull(userID);
@@ -36,22 +34,6 @@ public final class User implements DataRecord<UserId> {
 
     public void setPassword(String password) {
         this.password = Preconditions.checkNotNull(password);
-    }
-
-    public String firstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = Preconditions.checkNotNull(firstName);
-    }
-
-    public String lastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = Preconditions.checkNotNull(lastName);
     }
 
     @Override

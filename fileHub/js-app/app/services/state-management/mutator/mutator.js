@@ -9,6 +9,8 @@ import {UPLOAD_FILE_MUTATOR} from './upload-file-mutator.js';
 import {DOWNLOAD_FILE_MUTATOR} from './download-file-mutator.js';
 import {CREATE_FOLDER_MUTATOR} from './create-folder-mutator.js';
 import {LOG_OUT_USER_MUTATOR} from './log-out-user-mutator.js';
+import {SELECT_ITEM_MUTATOR} from './select-item-mutator.js';
+import {RENAME_ITEM_MUTATOR} from './rename-item-mutator.js';
 
 export const mutator = (mutatorName, details, state) => {
   switch (mutatorName) {
@@ -47,6 +49,7 @@ export const mutator = (mutatorName, details, state) => {
       });
     case FETCH_CURRENT_FOLDER_CONTENT_MUTATOR.FETCHING_STARTED:
       return Object.assign({}, state, {
+        selectedLine: null,
         isCurrentFolderContentFetching: true,
       });
     case FETCH_CURRENT_FOLDER_CONTENT_MUTATOR.FETCHING_COMPLETED:
@@ -153,6 +156,25 @@ export const mutator = (mutatorName, details, state) => {
     case LOG_OUT_USER_MUTATOR.COMPLETED:
       return Object.assign({}, state, {
         location: '',
+      });
+    case SELECT_ITEM_MUTATOR.SET:
+      return Object.assign({}, state, {
+        selectedLine: details.itemId,
+        renamingItemErrorMessage: '',
+      });
+    case RENAME_ITEM_MUTATOR.STARTED:
+      return Object.assign({}, state, {
+        isRenamingLoadingStatus: true,
+        renamingItemErrorMessage: '',
+      });
+    case RENAME_ITEM_MUTATOR.COMPLETED:
+      return Object.assign({}, state, {
+        isRenamingLoadingStatus: false,
+      });
+    case RENAME_ITEM_MUTATOR.FAILED:
+      return Object.assign({}, state, {
+        renamingItemErrorMessage: details.error,
+        isRenamingLoadingStatus: false,
       });
   }
 };

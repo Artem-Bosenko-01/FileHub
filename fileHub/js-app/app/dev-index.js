@@ -10,8 +10,22 @@ const itemDatabase = {
   items: [
     {id: 'root-folder', name: 'root-folder', type: 'folder', itemsAmount: 45},
     {id: 'scas8988', name: 'folder-8988', type: 'folder', itemsAmount: 45, parentFolderId: 'root-folder'},
-    {id: 'ac787s', name: 'file-pdf', type: 'file', mimeType: 'application/pdf', size: 984948, parentFolderId: 'root-folder'},
-    {id: 'rer554', name: 'file-video', type: 'file', mimeType: 'video/x-msvideo', size: 7447474, parentFolderId: 'root-folder'},
+    {
+      id: 'ac787s',
+      name: 'file-pdf',
+      type: 'file',
+      mimeType: 'application/pdf',
+      size: 984948,
+      parentFolderId: 'root-folder',
+    },
+    {
+      id: 'rer554',
+      name: 'file-video',
+      type: 'file',
+      mimeType: 'video/x-msvideo',
+      size: 7447474,
+      parentFolderId: 'root-folder',
+    },
     {id: 'fold777', name: 'folder-1011', type: 'folder', itemsAmount: 7, parentFolderId: 'root-folder'},
     {id: '595cz', name: 'folder-595', type: 'folder', itemsAmount: 0, parentFolderId: 'root-folder'},
     {id: 'fold777', name: 'Inner_folder', type: 'folder', itemsAmount: 77, parentFolderId: 'root-folder'},
@@ -70,6 +84,22 @@ const itemDatabase = {
       this.items.push({id, name, type, itemsAmount, parentFolderId});
     }
   },
+  renameFolder: function(id, newName) {
+    const item = this.items.find((item) => item.id === id && item.type === 'folder');
+    if (this.items.find((item) => item.name === newName && item.type === 'folder')) {
+      throw new Error('This folder name are exist');
+    } else {
+      item.name = newName;
+    }
+  },
+  renameFile: function(id, newName) {
+    const item = this.items.find((item) => item.id === id && item.type === 'file');
+    if (this.items.find((item) => item.name === newName && item.type === 'file')) {
+      throw new Error('This file name are exist');
+    } else {
+      item.name = newName;
+    }
+  },
 };
 
 const mockPostRequest = (url, handler) => {
@@ -90,6 +120,14 @@ const mockGetRequest = (url, handler) => {
 
 const mockDeleteRequest = (url, handler) => {
   fetchMock.delete(url, (...args) => {
+    const response = handler(...args);
+    console.log(...args, response);
+    return response;
+  }, {delay: 400});
+};
+
+const mockPutRequest = (url, handler) => {
+  fetchMock.put(url, (...args) => {
     const response = handler(...args);
     console.log(...args, response);
     return response;
@@ -287,4 +325,49 @@ mockPostRequest(`express:/folder/:id/folder`, (url, opts) => {
 
 mockPostRequest('/logOut', (url, opts) => {
   return 200;
+});
+
+mockPutRequest(`express:/folder/:id`, (url, opts) => {
+  const token = opts.headers.get('Authorization').split(' ')[1];
+  try {
+    checkToken(token);
+  } catch (error) {
+    return 401;
+  }
+
+  try {
+    const body = JSON.parse(opts.body);
+    itemDatabase.renameFolder(body.id, body.name);
+    return {
+      id: body.id,
+      name: body.name,
+    };
+  } catch (error) {
+    return {
+      status: 400,
+    };
+  }
+});
+
+
+mockPutRequest(`express:/file/:id`, (url, opts) => {
+  const token = opts.headers.get('Authorization').split(' ')[1];
+  try {
+    checkToken(token);
+  } catch (error) {
+    return 401;
+  }
+
+  try {
+    const body = JSON.parse(opts.body);
+    itemDatabase.renameFile(body.id, body.name);
+    return {
+      id: body.id,
+      name: body.name,
+    };
+  } catch (error) {
+    return {
+      status: 400,
+    };
+  }
 });

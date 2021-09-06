@@ -23,6 +23,10 @@ import {CreateFolder} from './create-folder-action/create-folder.js';
 import {CreateFolderExecutor} from './create-folder-action/create-folder-executor.js';
 import {LogOutUser} from './log-out-user-action/log-out-user.js';
 import {LogOutUserExecutor} from './log-out-user-action/log-out-user-executor.js';
+import {SelectItem} from './select-item-action/select-item.js';
+import {SelectItemExecutor} from './select-item-action/select-item-executor.js';
+import {RenameItem} from './rename-item-action/rename-item.js';
+import {RenameItemExecutor} from './rename-item-action/rename-item-executor.js';
 
 /**
  * The factory contains a map of the action name and executor.
@@ -44,7 +48,9 @@ export class ActionFactory {
         .set(UploadFile.typeName, new UploadFileExecutor())
         .set(DownloadFile.typeName, new DownloadFileExecutor())
         .set(CreateFolder.typeName, new CreateFolderExecutor())
-        .set(LogOutUser.typeName, new LogOutUserExecutor());
+        .set(LogOutUser.typeName, new LogOutUserExecutor())
+        .set(SelectItem.typeName, new SelectItemExecutor())
+        .set(RenameItem.typeName, new RenameItemExecutor());
   }
 
   /**

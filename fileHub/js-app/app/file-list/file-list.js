@@ -6,6 +6,69 @@ import {FileListItemView} from './file-list-item-view/file-list-item-view.js';
  */
 export class FileList extends Component {
   /**
+   * Error message after renaming item.
+   * @param {string} value
+   */
+  set errorMessageRenamingItem(value) {
+    this._errorRenameItemMessage = value;
+    this._render();
+  }
+
+  /**
+   * Loading renaming item status.
+   * @param {boolean} value
+   */
+  set isRenameItemLoading(value) {
+    this._isRenameItemLoading = value;
+    this._render();
+  }
+
+  /**
+   * Listener on submit renaming item.
+   * @param {function(newName: string)} listener
+   */
+  onRenameItemSubmit(listener) {
+    this._onRenameItemSubmitListener = listener;
+    this._render();
+  }
+
+  /**
+   * Sets id of renamed item.
+   * @param {string} itemId
+   */
+  renameItem(itemId) {
+    this._renamedItemId = itemId;
+    this._render();
+  }
+
+  /**
+   * Selected item id.
+   * @param {string} value
+   */
+  set selectedFileListItem(value) {
+    this.selectedItemId = value;
+    this._render();
+  }
+
+  /**
+   * Listener on item name click.
+   * @param {function(item: FileListItem)} listener
+   */
+  onItemNameClick(listener) {
+    this._onItemNameClickListener = listener;
+    this._render();
+  }
+
+  /**
+   * Listener on line click.
+   * @param {function(item: string)} listener
+   */
+  onClickLine(listener) {
+    this._onClickLineListener = listener;
+    this._render();
+  }
+
+  /**
    * Loading status.
    * @param {boolean} value
    */
@@ -65,7 +128,7 @@ export class FileList extends Component {
    * Listener for navigation through folders.
    * @param {function(folderId: string)} listener
    */
-  onFolderClick(listener) {
+  onFolderDoubleCLicked(listener) {
     this._onFolderClickedEvent = listener;
     this._render();
   }
@@ -108,7 +171,7 @@ export class FileList extends Component {
       const tableElement = this._getElement(this._fileListName);
       this._fileItems.forEach((fileItem) => {
         const itemView = new FileListItemView(tableElement, fileItem);
-        itemView.onFolderNameCLicked(this._onFolderClickedEvent);
+        itemView.onFolderNameDoubleCLicked(this._onFolderClickedEvent);
         itemView.onDeleteButtonClick(this._onDeleteButtonClick);
         itemView.onUploadButtonClick(this._onUploadButtonClickListener);
         itemView.isLoadingUploadFile = this._loadingUploadFile;
@@ -116,6 +179,21 @@ export class FileList extends Component {
         if (itemView.id === this._downloadedFileId) {
           itemView.isLoadingDownloadFile = this._loadingDownloadFile;
         }
+
+        if (itemView.id === this.selectedItemId) {
+          itemView.rootElementClassList = ['clicked-line'];
+        } else {
+          itemView.rootElementClassList = null;
+        }
+
+        if (itemView.id === this._renamedItemId) {
+          itemView.renamedStatus = true;
+          itemView.errorMessageRenamingItem = this._errorRenameItemMessage;
+          itemView.isRenameItemLoading = this._isRenameItemLoading;
+        }
+        itemView.onLineClick(this._onClickLineListener);
+        itemView.onItemNameClick(this._onItemNameClickListener);
+        itemView.onRenameItemSubmit(this._onRenameItemSubmitListener);
       });
     }
   }
@@ -151,7 +229,7 @@ export class FileList extends Component {
                 <table class="table">
                      <tbody data-fh="${this._fileListName}">
                          ${this._errorMessageAfterUploadingFile ?
-                                  `<p class="error-message">${this._errorMessageAfterUploadingFile}</p>` : ''}
+          `<p class="error-message">${this._errorMessageAfterUploadingFile}</p>` : ''}
                         ${this._fileItems.length === 0 ? emptyState : ''}
                      </tbody>
                 </table>

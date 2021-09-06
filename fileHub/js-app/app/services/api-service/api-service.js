@@ -231,6 +231,57 @@ export class ApiService {
   }
 
   /**
+   * Renames folder.
+   * @param {FileListItem} item
+   * @param {string} newName
+   * @returns {Promise<FileListItem, ClientServerError|ServerError>}
+   */
+  async renameFolder(item, newName) {
+    const response = await this._fetch(`/folder/${item.id}`, {
+      method: 'PUT',
+      headers: new Headers({'Authorization': `Bearer ${this._getToken()}`}),
+      body: JSON.stringify({
+        name: newName,
+        id: item.id,
+        type: item.type,
+        itemsAmount: item.itemsAmount,
+        parentFolderId: item.parentFolderId,
+      }),
+    });
+
+    this._checkResponseOnClientOrServerError(response);
+
+    const responseBody = await response.json();
+    return new FileListItem(responseBody);
+  }
+
+  /**
+   * Renames file.
+   * @param {FileListItem} item
+   * @param {string} newName
+   * @returns {Promise<FileListItem, ClientServerError|ServerError>}
+   */
+  async renameFile(item, newName) {
+    const response = await this._fetch(`/file/${item.id}`, {
+      method: 'PUT',
+      headers: new Headers({'Authorization': `Bearer ${this._getToken()}`}),
+      body: JSON.stringify({
+        name: newName,
+        id: item.id,
+        type: item.type,
+        mimeType: item.mimeType,
+        size: item.size,
+        parentFolderId: item.parentFolderId,
+      }),
+    });
+
+    this._checkResponseOnClientOrServerError(response);
+
+    const responseBody = await response.json();
+    return new FileListItem(responseBody);
+  }
+
+  /**
    * @param {RequestInfo} url
    * @param {RequestInit} init
    * @returns {Promise<Response>}

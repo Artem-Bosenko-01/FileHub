@@ -59,12 +59,12 @@ module('FileList', (hooks) => {
       type: 'folder',
       itemsAmount: 4,
     }];
-    list.onFolderClick((folderId) => {
+    list.onFolderDoubleCLicked((folderId) => {
       assert.equal(folderId, id, 'Should get folder id to navigate event');
     });
 
     const folderName = searchElement('folder-name', fixture);
-    folderName.dispatchEvent(new Event('click'));
+    folderName.dispatchEvent(new Event('dblclick'));
   });
 });
 

@@ -74,13 +74,13 @@ module('FileListItemView', (hooks) => {
     const item = new FileListItem(itemJson);
     const itemView = new FileListItemView(fixture, item);
 
-    itemView.onDeleteButtonClick((listItem)=> assert.deepEqual(item, listItem,
+    itemView.onDeleteButtonClick((listItem) => assert.deepEqual(item, listItem,
         'Should get item on click'));
     const deleteButton = searchElement('delete-button', fixture);
     deleteButton.click();
   });
 
-  test('Should add and call listener on folder name click click', (assert) => {
+  test('Should add and call listener on folder name click', (assert) => {
     const itemJson = {
       id: 'id',
       type: 'folder',
@@ -89,10 +89,10 @@ module('FileListItemView', (hooks) => {
     const item = new FileListItem(itemJson);
     const itemView = new FileListItemView(fixture, item);
 
-    itemView.onFolderNameCLicked((itemId)=> assert.deepEqual(item.id, itemId,
+    itemView.onFolderNameDoubleCLicked((itemId) => assert.deepEqual(item.id, itemId,
         'Should get item id on click'));
-    const deleteButton = searchElement('folder-name', fixture);
-    deleteButton.click();
+    const folderNameLink = searchElement('folder-name', fixture);
+    folderNameLink.dispatchEvent(new Event('dblclick'));
   });
 
   test('Should add and call listener on upload button click', (assert) => {
@@ -104,7 +104,7 @@ module('FileListItemView', (hooks) => {
     const item = new FileListItem(itemJson);
     const itemView = new FileListItemView(fixture, item);
 
-    itemView.onUploadButtonClick((listItem)=> assert.deepEqual(item, listItem,
+    itemView.onUploadButtonClick((listItem) => assert.deepEqual(item, listItem,
         'Should get item on click'));
     const uploadButton = searchElement('upload-button', fixture);
     uploadButton.click();
@@ -132,7 +132,7 @@ module('FileListItemView', (hooks) => {
     const item = new FileListItem(itemJson);
     const itemView = new FileListItemView(fixture, item);
 
-    itemView.onDownloadButtonClick((listItem)=> assert.deepEqual(item, listItem,
+    itemView.onDownloadButtonClick((listItem) => assert.deepEqual(item, listItem,
         'Should get item on click'));
     const downloadButton = searchElement('download-button', fixture);
     downloadButton.click();
@@ -149,5 +149,108 @@ module('FileListItemView', (hooks) => {
     itemView.isLoadingDownloadFile = true;
     const downloadButton = searchElement('download-button', fixture);
     assert.equal(downloadButton.innerHTML, LOADING_SYMBOL, 'Should render loading symbol');
+  });
+
+  test('Should set status of renaming element', (assert) => {
+    const itemJson = {
+      id: 'id',
+      type: 'file',
+    };
+    const item = new FileListItem(itemJson);
+    const itemView = new FileListItemView(fixture, item);
+    itemView.renamedStatus = true;
+
+    const inputLine = searchElement('input-line', fixture);
+    assert.ok(inputLine, 'Should render input line for renaming item');
+  });
+
+
+  test('Should set error message after renaming element', (assert) => {
+    const errorMessage = 'error message';
+    const itemJson = {
+      id: 'id',
+      type: 'file',
+    };
+    const item = new FileListItem(itemJson);
+    const itemView = new FileListItemView(fixture, item);
+    itemView.renamedStatus = true;
+
+    itemView.errorMessageRenamingItem = errorMessage;
+    const errorMessageElement = searchElement('error-message', fixture);
+    assert.equal(errorMessageElement.innerText, errorMessage, 'Should render error message');
+  });
+
+  test('Should set loading renaming element status to input line', (assert) => {
+    const itemJson = {
+      id: 'id',
+      type: 'file',
+    };
+    const item = new FileListItem(itemJson);
+    const itemView = new FileListItemView(fixture, item);
+    itemView.renamedStatus = true;
+
+    itemView.isRenameItemLoading = true;
+    const loadingElement = searchElement('loading-symbol', fixture);
+    assert.ok(loadingElement, 'Should render loading symbol');
+  });
+
+  test('Should add list of classes to item view root element', (assert) => {
+    const classList = ['test1', 'test2'];
+    const itemJson = {
+      id: 'id',
+      type: 'file',
+    };
+    const item = new FileListItem(itemJson);
+    const itemView = new FileListItemView(fixture, item);
+
+    itemView.rootElementClassList = classList;
+    const rootElement = searchElement('item-line', fixture);
+    assert.deepEqual([...rootElement.classList], classList, 'Should add class list to item line element');
+  });
+
+  test('Should add and call listener on item line click', (assert) => {
+    const itemJson = {
+      id: 'id',
+      type: 'file',
+    };
+    const item = new FileListItem(itemJson);
+    const itemView = new FileListItemView(fixture, item);
+
+    itemView.onLineClick((id) => assert.equal(id, itemJson.id,
+        'Should get id of selected item'));
+    const rootElement = searchElement('item-line', fixture);
+    rootElement.click();
+  });
+
+  test('Should add and call listener on item name click', (assert) => {
+    const itemJson = {
+      id: 'id',
+      type: 'file',
+    };
+    const item = new FileListItem(itemJson);
+    const itemView = new FileListItemView(fixture, item);
+
+    itemView.onItemNameClick((item) => assert.equal(item.id, itemJson.id,
+        'Should get item that name was clicked'));
+    const nameElement = searchElement('name', fixture);
+    nameElement.click();
+  });
+
+  test('Should add and call listener on rename item submit', (assert) => {
+    const onSubmitStep = 'submitted!';
+    const itemJson = {
+      id: 'id',
+      type: 'file',
+    };
+    const item = new FileListItem(itemJson);
+    const itemView = new FileListItemView(fixture, item);
+    itemView.renamedStatus = true;
+
+    itemView.onRenameItemSubmit(() => assert.step(onSubmitStep));
+
+    const inputLineElement = searchElement('input-line', fixture);
+    inputLineElement.dispatchEvent(new KeyboardEvent('keyup', {key: 'Enter'}));
+
+    assert.verifySteps([onSubmitStep]);
   });
 });

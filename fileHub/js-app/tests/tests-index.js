@@ -4,6 +4,7 @@ import './app/validation/tests-validator.js';
 import './app/components/tests-form-input-field.js';
 import './app/components/tests-button.js';
 import './app/components/tests-form.js';
+import './app/components/tests-input-line.js';
 
 import './app/login/tests-authentication-form.js';
 import './app/login/tests-authentication-page.js';
@@ -37,6 +38,8 @@ import './app/services/state-management/upload-file/tests-upload-file-action-exe
 import './app/services/state-management/download-file/download-file-executor.js';
 import './app/services/state-management/create-folder/tests-create-folder-executor.js';
 import './app/services/state-management/log-out-user/tests-log-out-user-executor.js';
+import './app/services/state-management/select-item-action/tests-select-item-executor.js';
+import './app/services/state-management/rename-item/tests-rename-item-executor.js';
 
 import './app/services/state-management/tests-mutator.js';
 

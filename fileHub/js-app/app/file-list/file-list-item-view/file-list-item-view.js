@@ -1,11 +1,75 @@
 import {Component} from '../../components/component.js';
 import {typeFullName, typeIcon} from './file-mime-types-list.js';
 import {Button} from '../../components/button.js';
+import {InputLine} from '../../components/input-line.js';
 
 /**
  * Line from {@link FileList folder content list}.
  */
 export class FileListItemView extends Component {
+  /**
+   * Error message after renaming item.
+   * @param {string} value
+   */
+  set errorMessageRenamingItem(value) {
+    this._errorRenameItemMessage = value;
+    this._render();
+  }
+
+  /**
+   * Loading renaming item status.
+   * @param {boolean} value
+   */
+  set isRenameItemLoading(value) {
+    this._isRenameItemLoading = value;
+    this._render();
+  }
+
+  /**
+   * Listener on submit renaming item.
+   * @param {function(newName: string)} listener
+   */
+  onRenameItemSubmit(listener) {
+    this._onRenameItemSubmitListener = listener;
+    this._render();
+  }
+
+  /**
+   * Renaming item status.
+   * @param {boolean} value
+   */
+  set renamedStatus(value) {
+    this._renamedStatus = value;
+    this._render();
+  }
+
+  /**
+   * Class list when item in renaming status.
+   * @param {string[]} value
+   */
+  set rootElementClassList(value) {
+    this._rootElementClassList = value;
+    this._render();
+  }
+
+  /**
+   * Listener on item name click.
+   * @param {function(item: FileListItem)} listener
+   */
+  onItemNameClick(listener) {
+    this._onItemNameClickListener = listener;
+    this._render();
+  }
+
+  /**
+   * Listener on line click.
+   * @param {function(item: string)} listener
+   */
+  onLineClick(listener) {
+    this._onClickLineListener = listener;
+    this._render();
+  }
+
   /**
    * Loading status of download file.
    * @param {boolean} value
@@ -55,7 +119,7 @@ export class FileListItemView extends Component {
    * Listener for navigation through folders.
    * @param {function(folderId: string)} listener
    */
-  onFolderNameCLicked(listener) {
+  onFolderNameDoubleCLicked(listener) {
     this._onFolderNameCLickedEvent = listener;
     this._render();
   }
@@ -76,8 +140,22 @@ export class FileListItemView extends Component {
   /** @inheritDoc */
   _addEventListeners() {
     const folderNameElement = this._getElement('folder-name');
-    folderNameElement && folderNameElement.addEventListener('click', (event) => {
+    folderNameElement && folderNameElement.addEventListener('dblclick', (event) => {
       this._onFolderNameCLickedEvent(this._item.id);
+      event.preventDefault();
+    });
+
+    folderNameElement && folderNameElement.addEventListener('click', (event) => {
+      event.preventDefault();
+    });
+
+    const itemName = this._getElement('name');
+    itemName && itemName.addEventListener('click', () => {
+      this._onItemNameClickListener(this._item);
+    });
+
+    this.rootElement.addEventListener('click', (event) => {
+      this._onClickLineListener && this._onClickLineListener(this._item.id);
       event.preventDefault();
     });
   }
@@ -122,6 +200,17 @@ export class FileListItemView extends Component {
         button.disabled = this._loadingDownloadFile;
         this._onDownloadButtonClickListener && button.onClick(() => this._onDownloadButtonClickListener(this._item));
         return button;
+      });
+    }
+    const renameItemSlot = this._getElement('rename-item');
+    if (renameItemSlot) {
+      this._mount('rename-item', (slotElement) => {
+        const renameLine = new InputLine(slotElement);
+        renameLine.value = this._item.name;
+        renameLine.errorMessage = this._errorRenameItemMessage;
+        renameLine.isLoading = this._isRenameItemLoading;
+        renameLine.onSubmit(this._onRenameItemSubmitListener);
+        return renameLine;
       });
     }
   }
@@ -213,11 +302,14 @@ export class FileListItemView extends Component {
   get _markup() {
     const downloadButton = `<slot data-fh="download-button"></slot>`;
     const uploadButton = `<slot data-fh="upload-button"></slot>`;
+    const renameItemElement = `<slot data-fh="rename-item"></slot>`;
+    let itemName;
+    this._renamedStatus ? itemName = renameItemElement : itemName = this._getItemName();
 
-    return `<tr>
+    return `<tr data-fh="item-line" ${this._rootElementClassList && `class="${this._rootElementClassList.join(' ')}"`}>
                     <td data-fh="folder-marker" class="cell-folder-marker">${this._getFolderMarker()}</td>
                     <td data-fh="icon" class="cell-icon"><span class="glyphicon ${this._getItemIcon()}"></span></td>
-                    <td data-fh="name" class="cell-name">${this._getItemName()}</td>
+                    <td data-fh="name" class="cell-name">${itemName}</td>
                     <td data-fh="type" class="cell-type">${this._getItemType()}</td>
                     <td data-fh="size" class="cell-file-size">${this._getItemSize()}</td>
                     <td class="cell-file-action-buttons">

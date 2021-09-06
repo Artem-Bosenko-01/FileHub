@@ -27,6 +27,8 @@ import {SelectItem} from './select-item-action/select-item.js';
 import {SelectItemExecutor} from './select-item-action/select-item-executor.js';
 import {RenameItem} from './rename-item-action/rename-item.js';
 import {RenameItemExecutor} from './rename-item-action/rename-item-executor.js';
+import {SearchInfo} from './search-info-action/search-info.js';
+import {SearchInfoExecutor} from './search-info-action/search-info-executor.js';
 
 /**
  * The factory contains a map of the action name and executor.
@@ -50,7 +52,8 @@ export class ActionFactory {
         .set(CreateFolder.typeName, new CreateFolderExecutor())
         .set(LogOutUser.typeName, new LogOutUserExecutor())
         .set(SelectItem.typeName, new SelectItemExecutor())
-        .set(RenameItem.typeName, new RenameItemExecutor());
+        .set(RenameItem.typeName, new RenameItemExecutor())
+        .set(SearchInfo.typeName, new SearchInfoExecutor());
   }
 
   /**

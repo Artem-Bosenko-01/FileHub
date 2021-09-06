@@ -11,6 +11,7 @@ import {CREATE_FOLDER_MUTATOR} from './create-folder-mutator.js';
 import {LOG_OUT_USER_MUTATOR} from './log-out-user-mutator.js';
 import {SELECT_ITEM_MUTATOR} from './select-item-mutator.js';
 import {RENAME_ITEM_MUTATOR} from './rename-item-mutator.js';
+import {SEARCHING_MUTATOR} from './searching-mutator.js';
 
 export const mutator = (mutatorName, details, state) => {
   switch (mutatorName) {
@@ -175,6 +176,20 @@ export const mutator = (mutatorName, details, state) => {
       return Object.assign({}, state, {
         renamingItemErrorMessage: details.error,
         isRenamingLoadingStatus: false,
+      });
+    case SEARCHING_MUTATOR.STARTED:
+      return Object.assign({}, state, {
+        isSearching: true,
+      });
+    case SEARCHING_MUTATOR.COMPLETED:
+      return Object.assign({}, state, {
+        isSearching: false,
+        currentFolderContent: details.content,
+      });
+    case SEARCHING_MUTATOR.FAILED:
+      return Object.assign({}, state, {
+        searchingItemsErrorMessage: details.error,
+        isSearching: false,
       });
   }
 };

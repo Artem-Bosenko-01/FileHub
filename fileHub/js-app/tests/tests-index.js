@@ -40,6 +40,7 @@ import './app/services/state-management/create-folder/tests-create-folder-execut
 import './app/services/state-management/log-out-user/tests-log-out-user-executor.js';
 import './app/services/state-management/select-item-action/tests-select-item-executor.js';
 import './app/services/state-management/rename-item/tests-rename-item-executor.js';
+import './app/services/state-management/search-info-action/tests-search-info-executor.js';
 
 import './app/services/state-management/tests-mutator.js';
 
@@ -50,3 +51,4 @@ import './app/services/tests-modal-services.js';
 
 import './app/services/tests-upload-file-function.js';
 import './app/services/tests-download-file-function.js';
+import './app/services/tests-search-by-substring-function.js';

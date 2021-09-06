@@ -3,12 +3,12 @@ package io.javaclasses.fileHub.services.files;
 import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.files.FolderStorage;
 import io.javaclasses.fileHub.persistent.files.FolderStorageInMemory;
-import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.persistent.users.UserStorage;
 import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
+import io.javaclasses.fileHub.services.NotAuthorizedUserException;
 import io.javaclasses.fileHub.services.ValidationCommandDataException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 class GetFolderByNameViewTest {
 
     @Test
-    public void readInfoAboutFolderByIdTest() throws InvalidCommandHandlingException, ValidationCommandDataException {
+    public void readInfoAboutFolderByIdTest() throws InvalidCommandHandlingException, ValidationCommandDataException, NotAuthorizedUserException {
 
         FolderStorage folderStorage = new FolderStorageInMemory();
 
@@ -29,7 +29,7 @@ class GetFolderByNameViewTest {
 
         FolderId id = fileSystemTestData.createFolder(folderStorage, null);
 
-        GetFolderByIdQuery query = new GetFolderByIdQuery(fileSystemTestData.token(), id);
+        GetFolderByIdQuery query = new GetFolderByIdQuery(fileSystemTestData.token(), id.toString());
 
         GetFolderById view = new GetFolderById(folderStorage, authorizationStorage);
 
@@ -55,8 +55,7 @@ class GetFolderByNameViewTest {
 
         Assertions.assertEquals(folderStorage.getSizeRecordsList(), 1);
 
-        GetFolderByIdQuery query = new GetFolderByIdQuery(fileSystemTestData.token(),
-                new FolderId("JHGF", new UserId("vdsv")));
+        GetFolderByIdQuery query = new GetFolderByIdQuery(fileSystemTestData.token(), "id");
 
         GetFolderById view = new GetFolderById(folderStorage, authorizationStorage);
 

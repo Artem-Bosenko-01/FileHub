@@ -32,16 +32,15 @@ public class FolderStorageInMemory extends AbstractInMemoryStorage<FolderId, Fol
         if (findFolder.isPresent()) {
             if (findFolder.get().parentFolder() != null) {
                 return Optional.of(findFolder.get().parentFolder());
-            }
-            else return Optional.empty();
+            } else return Optional.empty();
         } else throw new NotExistUserIdException("Folder id: " + childId + " doesn't exist");
     }
 
     @Override
-    public Optional<Folder> findFolderById(FolderId id, UserId owner) {
+    public Optional<Folder> findFolderById(String id, UserId owner) {
 
         return records().values().stream().
-                filter(folder -> folder.id().equals(id) && folder.owner().equals(owner)).
+                filter(folder -> folder.id().toString().equals(id) && folder.owner().equals(owner)).
                 findFirst();
     }
 

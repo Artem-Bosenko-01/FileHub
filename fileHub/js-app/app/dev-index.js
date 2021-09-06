@@ -62,6 +62,14 @@ const itemDatabase = {
       return file.content;
     }
   },
+  addDirectory: function(name, type, itemsAmount, parentFolderId) {
+    if (this.items.find((item) => item.name === name && item.parentFolderId === parentFolderId)) {
+      throw new Error('This item\'s name also exist');
+    } else {
+      const id = `${name}_${parentFolderId}`;
+      this.items.push({id, name, type, itemsAmount, parentFolderId});
+    }
+  },
 };
 
 const mockPostRequest = (url, handler) => {
@@ -193,6 +201,21 @@ mockGetRequest(`express:/file/:id`, (url, opts) => {
       name: file.name,
       mimeType: file.mimeType,
       content: fileContent,
+    };
+  } catch (error) {
+    return {
+      status: 400,
+    };
+  }
+});
+
+mockPostRequest(`express:/folder/:id/folder`, (url, opts) => {
+  const id = url.split('/')[2];
+  try {
+    const body = JSON.parse(opts.body);
+    itemDatabase.addDirectory(body.name, body.type, body.itemsAmount, id);
+    return {
+      file: body.name,
     };
   } catch (error) {
     return {

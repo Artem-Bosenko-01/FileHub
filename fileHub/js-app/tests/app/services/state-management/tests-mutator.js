@@ -236,4 +236,27 @@ module('Mutator', () => {
     },
     downloadingFileErrorMessage: errorMessage}, 'Should set error message after downloading file');
   });
+
+  test('Should change state on CREATE_FOLDER_STARTED mutator name', (assert) => {
+    const mutatedState = mutator('CREATE_FOLDER_STARTED', {}, {});
+    assert.deepEqual(mutatedState, {
+      creatingDirectoryErrorMessage: '',
+      isCreatingNewFolder: true,
+    }, 'Should set creating new folder flag true');
+  });
+
+  test('Should change state on CREATE_FOLDER_COMPLETED mutator name', (assert) => {
+    const mutatedState = mutator('CREATE_FOLDER_COMPLETED', {}, {});
+    assert.deepEqual(mutatedState, {isCreatingNewFolder: false}, 'Should set creating new folder flag false');
+  });
+
+  test('Should change state on CREATE_FOLDER_FAILED mutator name', (assert) => {
+    const errorMessage = 'error';
+    const mutatedState = mutator('CREATE_FOLDER_FAILED', {error: errorMessage}, {});
+    assert.deepEqual(mutatedState, {
+      itemInModalWindow: null,
+      isCreatingNewFolder: false,
+      creatingDirectoryErrorMessage: errorMessage,
+    }, 'Should set error message after creating directory file');
+  });
 });

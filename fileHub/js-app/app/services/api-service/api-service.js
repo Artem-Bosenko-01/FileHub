@@ -180,6 +180,26 @@ export class ApiService {
   }
 
   /**
+   * Creates new folder.
+   * @param {string} folderName
+   * @param {string} parentFolderId
+   * @returns {Promise<object, ClientServerError|ServerError>}
+   */
+  async createFolder(folderName, parentFolderId) {
+    const response = await this._fetch(`/folder/${parentFolderId}/folder`, {
+      method: 'POST',
+      body: JSON.stringify({
+        name: folderName,
+        itemsAmount: 0,
+        type: 'folder',
+      }),
+    });
+
+    this._checkResponseOnClientOrServerError(response);
+    return await response.json();
+  }
+
+  /**
    * @param {RequestInfo} url
    * @param {RequestInit} init
    * @returns {Promise<Response>}

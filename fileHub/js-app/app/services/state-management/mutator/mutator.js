@@ -7,6 +7,7 @@ import {DELETE_ITEM_MUTATOR} from './delete-item-mutator.js';
 import {MODAL_WINDOW_MUTATOR} from './modal-window-mutator.js';
 import {UPLOAD_FILE_MUTATOR} from './upload-file-mutator.js';
 import {DOWNLOAD_FILE_MUTATOR} from './download-file-mutator.js';
+import {CREATE_FOLDER_MUTATOR} from './create-folder-mutator.js';
 
 export const mutator = (mutatorName, details, state) => {
   switch (mutatorName) {
@@ -131,6 +132,22 @@ export const mutator = (mutatorName, details, state) => {
           isLoading: false,
         },
         downloadingFileErrorMessage: details.error,
+      });
+
+    case CREATE_FOLDER_MUTATOR.STARTED:
+      return Object.assign({}, state, {
+        isCreatingNewFolder: true,
+        creatingDirectoryErrorMessage: '',
+      });
+    case CREATE_FOLDER_MUTATOR.COMPLETED:
+      return Object.assign({}, state, {
+        isCreatingNewFolder: false,
+      });
+    case CREATE_FOLDER_MUTATOR.FAILED:
+      return Object.assign({}, state, {
+        creatingDirectoryErrorMessage: details.error,
+        itemInModalWindow: null,
+        isCreatingNewFolder: false,
       });
   }
 };

@@ -11,7 +11,7 @@ public class FileStorageInMemory extends AbstractInMemoryStorage<FileId, File>
         implements FileStorage {
 
     @Override
-    public List<File> findAllFilesByFolderIDAndUserID(FolderId folderID, UserId userID) throws NotExistUserIdException {
+    public List<File> findAllFilesByFolderIdAndUserId(FolderId folderID, UserId userID) throws NotExistUserIdException {
 
         if (records().values().stream().noneMatch(file -> file.folder().equals(folderID))){
 

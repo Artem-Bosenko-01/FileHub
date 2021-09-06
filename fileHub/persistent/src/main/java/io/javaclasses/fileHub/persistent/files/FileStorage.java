@@ -7,5 +7,5 @@ import io.javaclasses.fileHub.persistent.users.UserId;
 import java.util.List;
 
 public interface FileStorage extends Storage<FileId, File> {
-    List<File> findAllFilesByFolderIDAndUserID(FolderId folderID, UserId userID) throws NotExistUserIdException;
+    List<File> findAllFilesByFolderIdAndUserId(FolderId folderID, UserId userID) throws NotExistUserIdException;
 }

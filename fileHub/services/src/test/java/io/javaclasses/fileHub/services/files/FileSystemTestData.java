@@ -1,11 +1,13 @@
 package io.javaclasses.fileHub.services.files;
 
 import io.javaclasses.fileHub.persistent.files.*;
+import io.javaclasses.fileHub.persistent.files.content.FIleContentStorage;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.persistent.users.UserStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.services.AuthToken;
-import io.javaclasses.fileHub.services.InvalidHandleCommandException;
+import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
+import io.javaclasses.fileHub.services.ValidationCommandDataException;
 import io.javaclasses.fileHub.services.users.UserTestData;
 
 import javax.annotation.Nullable;
@@ -15,9 +17,10 @@ public final class FileSystemTestData {
     private final AuthorizationStorage authorizationStorage;
     private final UserId id;
     private final AuthToken token;
+    private final byte[] content = new byte[]{5, 6, 8, 4, 5};
 
     public FileSystemTestData(UserStorage userStorage, AuthorizationStorage authorizationStorage)
-            throws InvalidHandleCommandException {
+            throws InvalidCommandHandlingException, ValidationCommandDataException {
 
         this.authorizationStorage = authorizationStorage;
 
@@ -33,26 +36,33 @@ public final class FileSystemTestData {
         return token;
     }
 
-    public FileId createFile(FileStorage fileStorage) throws InvalidHandleCommandException {
-
-        CreateFileCommand createFileCommand = new CreateFileCommand(token, "folder", MimeType.TEXT, id,
-                new FolderId("folder", id));
-
-        CreatingFile creatingFile = new CreatingFile(fileStorage, authorizationStorage);
-
-        return creatingFile.doHandle(createFileCommand);
+    public byte[] content() {
+        return content;
     }
 
-    public FileId createFile(FileStorage fileStorage, FolderId parent) throws InvalidHandleCommandException {
+    public FileId uploadFile(FileStorage fileStorage, FIleContentStorage fIleContentStorage)
+            throws InvalidCommandHandlingException {
 
-        CreateFileCommand createFileCommand = new CreateFileCommand(token, "folder", MimeType.TEXT, id, parent);
+        UploadFileCommand command = new UploadFileCommand(token, "folder", MimeType.TEXT, id,
+                new FolderId("folder", id), content);
 
-        CreatingFile creatingFile = new CreatingFile(fileStorage, authorizationStorage);
+        UploadFile createFile = new UploadFile(fIleContentStorage, fileStorage, authorizationStorage);
 
-        return creatingFile.doHandle(createFileCommand);
+        return createFile.doHandle(command);
     }
 
-    public DeleteFileCommand deleteFile(String name) {
+    public FileId uploadFile(FileStorage fileStorage, FIleContentStorage fIleContentStorage, FolderId parent)
+            throws InvalidCommandHandlingException {
+
+        UploadFileCommand command = new UploadFileCommand(token, "folder", MimeType.TEXT, id, parent,
+                content);
+
+        UploadFile createFile = new UploadFile(fIleContentStorage, fileStorage, authorizationStorage);
+
+        return createFile.doHandle(command);
+    }
+
+    public DeleteFileCommand deleteFileCommand(String name) {
 
         UserId userID = new UserId("artem@gmail.com");
 
@@ -63,7 +73,7 @@ public final class FileSystemTestData {
         );
     }
 
-    public UploadFileCommand uploadFile() {
+    public UploadFileCommand uploadFileCommand() {
 
         return new UploadFileCommand(
                 token,
@@ -71,26 +81,26 @@ public final class FileSystemTestData {
                 MimeType.TEXT,
                 id,
                 new FolderId("folder", id),
-                new byte[]{1, 5, 8, 7, 5}
+                content
         );
     }
 
     public FolderId createFolder(FolderStorage folderStorage, @Nullable FolderId parent)
-            throws InvalidHandleCommandException {
+            throws InvalidCommandHandlingException {
 
-        CreateFolderCommand createFolderCommand = new CreateFolderCommand(token, "folder", id, null);
+        CreateFolderCommand createFolderCommand = new CreateFolderCommand(token, "folder", id, 8, null);
 
-        CreatingFolder creatingFile = new CreatingFolder(folderStorage, authorizationStorage);
+        CreateFolder creatingFile = new CreateFolder(folderStorage, authorizationStorage);
 
         return creatingFile.doHandle(createFolderCommand);
     }
 
     public FolderId createFolder(FolderStorage folderStorage, String name, @Nullable FolderId parent)
-            throws InvalidHandleCommandException {
+            throws InvalidCommandHandlingException {
 
-        CreateFolderCommand createFolderCommand = new CreateFolderCommand(token, name, id, null);
+        CreateFolderCommand createFolderCommand = new CreateFolderCommand(token, name, id, 8, null);
 
-        CreatingFolder creatingFile = new CreatingFolder(folderStorage, authorizationStorage);
+        CreateFolder creatingFile = new CreateFolder(folderStorage, authorizationStorage);
 
         return creatingFile.doHandle(createFolderCommand);
     }

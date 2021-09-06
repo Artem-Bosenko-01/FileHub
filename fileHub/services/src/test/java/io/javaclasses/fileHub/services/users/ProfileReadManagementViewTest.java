@@ -5,7 +5,9 @@ import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.AuthToken;
-import io.javaclasses.fileHub.services.InvalidHandleCommandException;
+import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
+import io.javaclasses.fileHub.services.NotAuthorizedUserException;
+import io.javaclasses.fileHub.services.ValidationCommandDataException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +15,7 @@ class ProfileReadManagementViewTest {
 
 
     @Test
-    public void readInfoAboutUserByIdTest() throws InvalidHandleCommandException {
+    public void readInfoAboutUserByIdTest() throws InvalidCommandHandlingException, ValidationCommandDataException, NotAuthorizedUserException {
 
         UserStorageInMemory userStorageInMemory = new UserStorageInMemory();
 
@@ -23,9 +25,9 @@ class ProfileReadManagementViewTest {
 
         AuthToken token = UserTestData.authenticateJohnUser(userStorageInMemory, authorizationStorage);
 
-        ReadUserProfileQuery command = new ReadUserProfileQuery(token, id);
+        GetUserQuery command = new GetUserQuery(token);
 
-        ReadingInfoAboutUser profileReadManagementProcess = new ReadingInfoAboutUser(userStorageInMemory,
+        GetUserInfo profileReadManagementProcess = new GetUserInfo(userStorageInMemory,
                 authorizationStorage);
 
         InfoAboutUserDto infoAboutUserDto = profileReadManagementProcess.handle(command);
@@ -36,7 +38,7 @@ class ProfileReadManagementViewTest {
 
 
     @Test
-    public void failedReadInfoByNotExistIdTest() throws InvalidHandleCommandException {
+    public void failedReadInfoByNotExistIdTest() throws InvalidCommandHandlingException, ValidationCommandDataException {
 
         UserStorageInMemory userStorageInMemory = new UserStorageInMemory();
 
@@ -46,12 +48,12 @@ class ProfileReadManagementViewTest {
 
         AuthToken token = UserTestData.authenticateJohnUser(userStorageInMemory, authorizationStorage);
 
-        ReadUserProfileQuery command = new ReadUserProfileQuery(token, new UserId("asas@h.com"));
+        GetUserQuery command = new GetUserQuery(token);
 
-        ReadingInfoAboutUser profileReadManagementProcess = new ReadingInfoAboutUser(userStorageInMemory,
+        GetUserInfo profileReadManagementProcess = new GetUserInfo(userStorageInMemory,
                 authorizationStorage);
 
-        Assertions.assertThrows(InvalidHandleCommandException.class,
+        Assertions.assertThrows(InvalidCommandHandlingException.class,
                 () -> profileReadManagementProcess.handle(command));
     }
 

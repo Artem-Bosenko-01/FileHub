@@ -84,7 +84,7 @@ body {
     margin: 0;
 }
 
-.data{
+.data {
     margin-top: 20px;
 }
 
@@ -95,7 +95,7 @@ body {
     clear: both;
 }
 
-.get-user-data{
+.get-user-data {
     margin-bottom: 15px;
 }
 
@@ -147,23 +147,22 @@ body {
         width: 555px;
     }
 
-    .data{
+    .data {
         margin-top: 15px;
     }
 
-
-    .get-user-data{
+    .get-user-data {
         margin-bottom: 10px;
         display: flex;
         align-items: center;
     }
 
-    .label-name {
+    .name-label {
         width: 34%;
         float: left;
     }
 
-    .errorLabel{
+    .error-label {
         margin-top: -20px;
     }
 
@@ -177,8 +176,7 @@ body {
         margin-left: 5px;
     }
 
-
-    .invalid-input-value input{
+    .invalid-input-value input {
         margin: 5px 0;
     }
 
@@ -187,12 +185,10 @@ body {
         float: right;
         margin-top: 5px;
     }
-
-
 }
 
 @media screen and (min-width: 520px) and (max-width: 767px) {
-    .data{
+    .data {
         margin-top: 20px;
     }
 
@@ -200,20 +196,20 @@ body {
         min-width: 560px;
     }
 
-    .get-user-data{
+    .get-user-data {
         margin: 15px 0 0;
     }
 
 
-    .errorLabel {
+    .error-label {
         margin: 0;
     }
 
-    .invalid-input-value input{
+    .invalid-input-value input {
         margin-bottom: 5px;
     }
 
-    .submit-box{
+    .submit-box {
         margin-top: 15px;
     }
 }
@@ -235,7 +231,7 @@ body {
     top: 25px;
 }
 
-.panel ul li {
+.panel li {
     font-size: 14px;
     display: inline;
     padding: 2px 6px 2px 4px;
@@ -332,8 +328,6 @@ body {
     width: 65%;
     margin-left: 0;
 }
-
-
 
 .input-search-query input {
     padding: 8px 10px;
@@ -517,7 +511,7 @@ td {
     margin-bottom: 0;
 }
 
-.social-icons li{
+.social-icons li {
     display: inline-block;
 }
 
@@ -537,8 +531,6 @@ td {
     .table .cell-file-size {
         display: table-cell;
     }
-
-
 
     .modal-window{
         left: 37.4%;

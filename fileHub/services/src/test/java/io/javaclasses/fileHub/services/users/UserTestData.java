@@ -3,58 +3,58 @@ package io.javaclasses.fileHub.services.users;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.persistent.users.UserStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
-import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.AuthToken;
-import io.javaclasses.fileHub.services.InvalidHandleCommandException;
+import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
+import io.javaclasses.fileHub.services.ValidationCommandDataException;
 
 public final class UserTestData {
 
     private static final String KevinLoginName = "kevin@gmail.com";
     private static final String KevinPassword = "acsa7csa4";
     private static final String JohnLoginName = "john@gmail.com";
-    private static final String JohnPassword = "56498";
+    private static final String JohnPassword = "564988";
 
 
-    public static UserId registerKevinUser(UserStorage userStorage) throws InvalidHandleCommandException {
+    public static UserId registerKevinUser(UserStorage userStorage) throws InvalidCommandHandlingException, ValidationCommandDataException {
 
-        RegistrationUserCommand registrationUserCommand = new RegistrationUserCommand(KevinLoginName,
-                "Kevin", "Kevin", KevinPassword);
+        RegistrationUserCommand registrationUserCommand = new RegistrationUserCommand(KevinLoginName, KevinPassword);
 
-        RegistrationUser registrationUser = new RegistrationUser(userStorage);
+        RegisterUser registerUser = new RegisterUser(userStorage);
 
-        return registrationUser.handle(registrationUserCommand);
+        registerUser.handle(registrationUserCommand);
+        return new UserId(registrationUserCommand.loginName());
     }
 
     public static AuthToken authenticateKevinUser(UserStorage userStorage, AuthorizationStorage authorizationStorage)
-            throws InvalidHandleCommandException {
+            throws InvalidCommandHandlingException, ValidationCommandDataException {
 
         AuthenticationUserCommand authenticationUserCommand = new AuthenticationUserCommand(KevinLoginName, KevinPassword);
 
-        AuthenticationUser authenticationUser = new AuthenticationUser(userStorage, authorizationStorage);
+        AuthenticateUser authenticateUser = new AuthenticateUser(userStorage, authorizationStorage);
 
-        return authenticationUser.handle(authenticationUserCommand);
+        return authenticateUser.handle(authenticationUserCommand);
 
     }
 
 
-    public static UserId registerJohnUser(UserStorage userStorage) throws InvalidHandleCommandException {
+    public static UserId registerJohnUser(UserStorage userStorage) throws InvalidCommandHandlingException, ValidationCommandDataException {
 
-        RegistrationUserCommand registrationUserCommand = new RegistrationUserCommand(JohnLoginName,
-                "John", "John", JohnPassword);
+        RegistrationUserCommand registrationUserCommand = new RegistrationUserCommand(JohnLoginName, JohnPassword);
 
-        RegistrationUser registrationUser = new RegistrationUser(userStorage);
+        RegisterUser registerUser = new RegisterUser(userStorage);
 
-        return registrationUser.handle(registrationUserCommand);
+        registerUser.handle(registrationUserCommand);
+        return new UserId(registrationUserCommand.loginName());
     }
 
     public static AuthToken authenticateJohnUser(UserStorage userStorage, AuthorizationStorage authorizationStorage)
-            throws InvalidHandleCommandException {
+            throws InvalidCommandHandlingException, ValidationCommandDataException {
 
         AuthenticationUserCommand authenticationUserCommand = new AuthenticationUserCommand(JohnLoginName, JohnPassword);
 
-        AuthenticationUser authenticationUser = new AuthenticationUser(userStorage, authorizationStorage);
+        AuthenticateUser authenticateUser = new AuthenticateUser(userStorage, authorizationStorage);
 
-        return authenticationUser.handle(authenticationUserCommand);
+        return authenticateUser.handle(authenticationUserCommand);
 
     }
 }

@@ -10,12 +10,12 @@ import java.time.ZonedDateTime;
 import java.util.Optional;
 
 /**
- * This is abstract base, that makes it possible to handle command by authenticated user.
+ * This is an abstract base, that makes it possible to handle commands from the authenticated user.
  *
  * @param <E> result entity.
  * @param <C> one of {@link AuthenticatedUserCommand command} from client.
- * */
-public abstract class SecuredUserProcess<C extends  AuthenticatedUserCommand, E> implements UserProcess<C,E> {
+ */
+public abstract class SecuredUserProcess<C extends AuthenticatedUserCommand, E> implements UserProcess<C, E> {
 
     private final AuthorizationStorage storage;
 
@@ -26,31 +26,30 @@ public abstract class SecuredUserProcess<C extends  AuthenticatedUserCommand, E>
 
 
     @Override
-    public E handle(C inputCommand) throws InvalidHandleCommandException {
+    public E handle(C inputCommand) throws NotAuthorizedUserException, InvalidCommandHandlingException {
 
-        if(verifyPermission(inputCommand)) {
+        if (verifyPermission(inputCommand)) {
 
             return doHandle(inputCommand);
 
-        }
-        else {
+        } else {
 
-            throw new InvalidHandleCommandException(
+            throw new NotAuthorizedUserException(
                     "User with token: " + inputCommand.token() + " doesn't have any permission");
         }
 
     }
 
-    protected abstract E doHandle(C inputCommand) throws InvalidHandleCommandException;
+    protected abstract E doHandle(C inputCommand) throws InvalidCommandHandlingException;
 
-    private boolean verifyPermission(C command){
+    private boolean verifyPermission(C command) {
 
         Optional<AuthorizationUsers> token = storage.findByID(new UserAuthToken(command.token().value()));
         return token.filter(this::isTokenNotExpire).isPresent();
 
     }
 
-    private boolean isTokenNotExpire(AuthorizationUsers token){
+    private boolean isTokenNotExpire(AuthorizationUsers token) {
 
         return token.expirationTime().isAfter(ZonedDateTime.now(ZoneId.of("America/Los_Angeles")));
 

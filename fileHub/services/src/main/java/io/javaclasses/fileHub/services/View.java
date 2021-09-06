@@ -8,9 +8,11 @@ import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
  *
  * @param <E> result entity.
  * @param <C> one of query from client.
- * */
-public abstract class View<C extends Query, E> extends SecuredUserProcess<C,E> {
+ */
+public abstract class View<C extends Query, E> extends SecuredUserProcess<C, E> {
+
     protected View(AuthorizationStorage storage) {
+
         super(storage);
     }
 }

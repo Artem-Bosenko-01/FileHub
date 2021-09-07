@@ -8,7 +8,7 @@ export class UserModel {
    */
   constructor(jsonObject) {
     this._userId = jsonObject.id;
-    this._userFullName = jsonObject.name;
+    this._userFullName = jsonObject.loginName;
   }
 
   /** @returns {string} */

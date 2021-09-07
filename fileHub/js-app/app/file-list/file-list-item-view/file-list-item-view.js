@@ -273,7 +273,7 @@ export class FileListItemView extends Component {
    */
   _getItemSize() {
     if (this._item.type === 'folder') {
-      return this._item.itemsAmount.toString();
+      return this._item.size.toString();
     } else {
       return this._formatBytes(this._item.size, 1);
     }

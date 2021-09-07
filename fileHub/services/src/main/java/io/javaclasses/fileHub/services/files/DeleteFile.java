@@ -1,7 +1,7 @@
 package io.javaclasses.fileHub.services.files;
 
 import com.google.common.base.Preconditions;
-import io.javaclasses.fileHub.persistent.NotExistUserIdException;
+import io.javaclasses.fileHub.persistent.NotExistedItem;
 import io.javaclasses.fileHub.persistent.files.FileId;
 import io.javaclasses.fileHub.persistent.files.FileStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
@@ -45,7 +45,7 @@ public class DeleteFile extends SecuredUserProcess<DeleteFileCommand, FileId> {
 
             return inputCommand.id();
 
-        } catch (NotExistUserIdException e) {
+        } catch (NotExistedItem e) {
 
             if (logger.isErrorEnabled()) {
                 logger.error(e.getMessage());

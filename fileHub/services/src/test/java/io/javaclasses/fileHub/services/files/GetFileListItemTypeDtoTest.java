@@ -1,12 +1,11 @@
 package io.javaclasses.fileHub.services.files;
 
 import com.google.common.testing.NullPointerTester;
-import io.javaclasses.fileHub.persistent.files.Folder;
 import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import org.junit.jupiter.api.Test;
 
-class GetFolderDtoTest {
+class GetFileListItemTypeDtoTest {
 
     @Test
     public void checkForNullPointerInConstructor() throws NoSuchMethodException {
@@ -16,7 +15,7 @@ class GetFolderDtoTest {
         tester.setDefault(String.class, "");
         tester.setDefault(FolderId.class, new FolderId("", new UserId("")));
 
-        tester.testConstructor(GetFolderDto.class.getConstructor(String.class, String.class, Integer.class, FolderId.class));
+        tester.testConstructor(FileSystemItemDto.class.getConstructor(String.class, String.class, Integer.class, FolderId.class));
 
 
     }

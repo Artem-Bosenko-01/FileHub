@@ -1,5 +1,6 @@
 package io.javaclasses.fileHub.services.files;
 
+import com.google.common.net.MediaType;
 import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.files.MimeType;
 import io.javaclasses.fileHub.persistent.users.UserId;
@@ -15,7 +16,7 @@ public final class UploadFileCommand extends AuthenticatedUserCommand {
 
     private final String name;
 
-    private final MimeType mimeType;
+    private final MediaType mimeType;
 
     private final UserId owner;
 
@@ -23,7 +24,7 @@ public final class UploadFileCommand extends AuthenticatedUserCommand {
 
     private final byte[] content;
 
-    public UploadFileCommand(AuthToken token, String name, MimeType mimeType, UserId owner, FolderId folder,
+    public UploadFileCommand(AuthToken token, String name, MediaType mimeType, UserId owner, FolderId folder,
                              byte[] content) {
 
         super(checkNotNull(token));
@@ -45,7 +46,7 @@ public final class UploadFileCommand extends AuthenticatedUserCommand {
         return name;
     }
 
-    public MimeType mimeType() {
+    public MediaType mimeType() {
 
         return mimeType;
     }

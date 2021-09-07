@@ -1,10 +1,8 @@
 package io.javaclasses.fileHub.services;
 
+import com.google.common.net.MediaType;
 import io.javaclasses.fileHub.persistent.DuplicatedUserIdException;
-import io.javaclasses.fileHub.persistent.files.Folder;
-import io.javaclasses.fileHub.persistent.files.FolderId;
-import io.javaclasses.fileHub.persistent.files.FolderStorage;
-import io.javaclasses.fileHub.persistent.files.FolderStorageInMemory;
+import io.javaclasses.fileHub.persistent.files.*;
 import io.javaclasses.fileHub.persistent.users.User;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.persistent.users.UserStorage;
@@ -15,6 +13,7 @@ import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationUsers;
 import io.javaclasses.fileHub.persistent.users.tokens.UserAuthToken;
 import io.javaclasses.fileHub.services.files.GetFolderById;
 import io.javaclasses.fileHub.services.files.GetRootFolder;
+import io.javaclasses.fileHub.services.files.content.GetFolderContent;
 import io.javaclasses.fileHub.services.users.AuthenticateUser;
 import io.javaclasses.fileHub.services.users.GetUserInfo;
 import io.javaclasses.fileHub.services.users.RegisterUser;
@@ -32,20 +31,23 @@ public class ServiceLocator {
     private final GetRootFolder getRootFolder;
     private final GetFolderById getFolderById;
     private final GetUserInfo getUserInfo;
+    private final GetFolderContent getFolderContent;
 
     public ServiceLocator() {
 
         AuthorizationStorage authorizationStorage = new AuthorizationStorageInMemory();
         UserStorage userStorage = new UserStorageInMemory();
         FolderStorage folderStorage = new FolderStorageInMemory();
+        FileStorage fileStorage = new FileStorageInMemory();
 
-        initDataForDB(authorizationStorage, userStorage, folderStorage);
+        initDataForDB(authorizationStorage, userStorage, folderStorage, fileStorage);
 
         registerUser = new RegisterUser(userStorage);
         authenticateUser = new AuthenticateUser(userStorage, authorizationStorage);
         getRootFolder = new GetRootFolder(authorizationStorage, folderStorage);
         getFolderById = new GetFolderById(folderStorage, authorizationStorage);
         getUserInfo = new GetUserInfo(userStorage, authorizationStorage);
+        getFolderContent = new GetFolderContent(folderStorage, fileStorage, authorizationStorage);
     }
 
     public AuthenticateUser authenticateUser() {
@@ -68,13 +70,17 @@ public class ServiceLocator {
         return getUserInfo;
     }
 
-    private void initDataForDB(AuthorizationStorage authorizationStorage, UserStorage userStorage, FolderStorage folderStorage) {
+    public GetFolderContent getFolderContent() {
+        return getFolderContent;
+    }
+
+    private void initDataForDB(AuthorizationStorage authorizationStorage, UserStorage userStorage, FolderStorage folderStorage, FileStorage fileStorage) {
 
         UserId id = new UserId("id");
 
         User user = new User(id);
         user.setLogin("artrms@kasc.com");
-        user.setPassword("sdvdds");
+        user.setPassword("41b0af881656217cc2fa99a55a07c61fc4c9d855bd837695b19c5bf2e4f46d38");
 
         AuthorizationUsers authorizedUser = new AuthorizationUsers(new UserAuthToken("token"), id, ZonedDateTime.now(ZoneId.of("America/Los_Angeles")).plusHours(6));
 
@@ -90,11 +96,19 @@ public class ServiceLocator {
         folder2.setOwner(id);
         folder2.setParentFolder(folder.id());
 
+        File file = new File(new FileId("test_file.txt", id, folder.id()));
+        file.setName("test_file.txt");
+        file.setFolder(folder.id());
+        file.setMimeType(MediaType.GIF);
+        file.setSize(564651894);
+        file.setUserID(id);
+
         try {
             authorizationStorage.create(authorizedUser);
             userStorage.create(user);
             folderStorage.create(folder);
             folderStorage.create(folder2);
+            fileStorage.create(file);
         } catch (DuplicatedUserIdException e) {
             e.printStackTrace();
         }

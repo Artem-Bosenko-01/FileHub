@@ -1,9 +1,9 @@
 package io.javaclasses.fileHub.services.files;
 
+import com.google.common.net.MediaType;
 import io.javaclasses.fileHub.persistent.files.FileId;
 import io.javaclasses.fileHub.persistent.files.FileStorageInMemory;
 import io.javaclasses.fileHub.persistent.files.FolderId;
-import io.javaclasses.fileHub.persistent.files.MimeType;
 import io.javaclasses.fileHub.persistent.files.content.FIleContentStorage;
 import io.javaclasses.fileHub.persistent.files.content.FileContentStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.UserId;
@@ -13,6 +13,7 @@ import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
+import io.javaclasses.fileHub.services.NotAuthorizedUserException;
 import io.javaclasses.fileHub.services.ValidationCommandDataException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,7 @@ import org.junit.jupiter.api.Test;
 class UpdateFileTest {
 
     @Test
-    public void updateInfoAboutFileByTest() throws InvalidCommandHandlingException, ValidationCommandDataException {
+    public void updateInfoAboutFileByTest() throws InvalidCommandHandlingException, ValidationCommandDataException, NotAuthorizedUserException {
 
         FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
 
@@ -37,7 +38,7 @@ class UpdateFileTest {
         FileId creteFileId = fileSystemTestData.uploadFile(fileStorageInMemory, fIleContentStorage);
 
         UpdateFileCommand command = new UpdateFileCommand(fileSystemTestData.token(), creteFileId, "lkijij",
-                MimeType.GIF, 65, fileSystemTestData.id(), folderID);
+                MediaType.GIF, 65, fileSystemTestData.id(), folderID);
 
         UpdateFile process = new UpdateFile(fileStorageInMemory, authorizationStorage);
 
@@ -69,7 +70,7 @@ class UpdateFileTest {
 
         UpdateFileCommand command = new UpdateFileCommand(new AuthToken("1"), new FileId("csac",
                 userID, folderID), "lkijij",
-                MimeType.GIF, 65, new UserId("abc"), folderID);
+                MediaType.GIF, 65, new UserId("abc"), folderID);
 
         UpdateFile process = new UpdateFile(fileStorageInMemory, authorizationStorage);
 

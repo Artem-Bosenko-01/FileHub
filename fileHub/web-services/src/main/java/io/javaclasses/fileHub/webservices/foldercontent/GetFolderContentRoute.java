@@ -1,25 +1,27 @@
-package io.javaclasses.fileHub.webservices.folder;
+package io.javaclasses.fileHub.webservices.foldercontent;
 
 import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.NotAuthorizedUserException;
-import io.javaclasses.fileHub.services.files.*;
+import io.javaclasses.fileHub.services.files.UsersTokenNotFoundException;
+import io.javaclasses.fileHub.services.files.content.GetFolderContent;
+import io.javaclasses.fileHub.services.files.content.GetFolderContentDTO;
+import io.javaclasses.fileHub.services.files.content.GetFolderContentQuery;
+import io.javaclasses.fileHub.services.files.content.InvalidFolderContentGetting;
 import io.javaclasses.fileHub.webservices.ErrorResponse;
-import io.javaclasses.fileHub.webservices.GetFolderSuccessfulResponse;
 import io.javaclasses.fileHub.webservices.RequestParser;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 import static javax.servlet.http.HttpServletResponse.*;
 
-public class GetFolderByIdRoute implements Route {
+public class GetFolderContentRoute implements Route {
 
-    private final GetFolderById getFolderById;
+    private final GetFolderContent getFolderContent;
 
-    public GetFolderByIdRoute(GetFolderById getFolderById) {
+    public GetFolderContentRoute(GetFolderContent getFolderContent) {
 
-        this.getFolderById = checkNotNull(getFolderById);
+        this.getFolderContent = getFolderContent;
     }
 
     @Override
@@ -31,17 +33,17 @@ public class GetFolderByIdRoute implements Route {
 
         String folderId = parser.getId();
 
-        GetFolderByIdQuery getFolderByIdQuery = new GetFolderByIdQuery(new AuthToken(token), folderId);
+        GetFolderContentQuery getFolderContentQuery = new GetFolderContentQuery(new AuthToken(token), folderId);
 
         try {
 
-            FileSystemItemDto rootFolder = getFolderById.handle(getFolderByIdQuery);
+            GetFolderContentDTO folderContent = getFolderContent.handle(getFolderContentQuery);
 
             response.status(SC_OK);
 
-            return new GetFolderSuccessfulResponse(rootFolder).serialize();
+            return new GetFolderContentSuccessfulResponse(folderContent.content()).serialize();
 
-        } catch (FolderByIdNotFoundHandlingException | UsersTokenNotFoundException e) {
+        } catch (InvalidFolderContentGetting | UsersTokenNotFoundException e) {
 
             response.status(SC_NOT_FOUND);
             return new ErrorResponse(e.getMessage()).serialize();
@@ -57,4 +59,5 @@ public class GetFolderByIdRoute implements Route {
             return new ErrorResponse("Internal server error.").serialize();
         }
     }
+
 }

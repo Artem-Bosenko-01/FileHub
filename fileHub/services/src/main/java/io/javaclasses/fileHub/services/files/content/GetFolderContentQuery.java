@@ -12,26 +12,18 @@ import io.javaclasses.fileHub.services.Query;
  */
 public final class GetFolderContentQuery extends Query {
 
-    private final FolderId id;
-    private final UserId owner;
+    private final String id;
 
-    public GetFolderContentQuery(AuthToken token, FolderId id, UserId owner) {
+    public GetFolderContentQuery(AuthToken token, String id) {
 
         super(Preconditions.checkNotNull(token));
 
         this.id = Preconditions.checkNotNull(id);
 
-        this.owner = Preconditions.checkNotNull(owner);
-
     }
 
-    public FolderId id() {
+    public String id() {
 
         return id;
-    }
-
-    public UserId owner() {
-
-        return owner;
     }
 }

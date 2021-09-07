@@ -1,7 +1,6 @@
 package io.javaclasses.fileHub.services.files.content;
 
-import io.javaclasses.fileHub.persistent.files.File;
-import io.javaclasses.fileHub.persistent.files.Folder;
+import io.javaclasses.fileHub.services.files.FileSystemItemDto;
 
 import java.util.Collections;
 import java.util.List;
@@ -13,24 +12,16 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public final class GetFolderContentDTO {
 
-    private final List<Folder> folders;
-    private final List<File> files;
+    private final List<FileSystemItemDto> folderContent;
 
-    public GetFolderContentDTO(List<Folder> folders, List<File> files) {
+    public GetFolderContentDTO(List<FileSystemItemDto> folders) {
 
-        this.folders = checkNotNull(folders);
-
-        this.files = checkNotNull(files);
+        this.folderContent = checkNotNull(folders);
 
     }
 
-    public List<Folder> folders() {
+    public List<FileSystemItemDto> content() {
 
-        return Collections.unmodifiableList(folders);
-    }
-
-    public List<File> files() {
-
-        return Collections.unmodifiableList(files);
+        return Collections.unmodifiableList(folderContent);
     }
 }

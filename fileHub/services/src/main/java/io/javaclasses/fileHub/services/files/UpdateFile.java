@@ -1,7 +1,7 @@
 package io.javaclasses.fileHub.services.files;
 
 import com.google.common.base.Preconditions;
-import io.javaclasses.fileHub.persistent.NotExistUserIdException;
+import io.javaclasses.fileHub.persistent.NotExistedItem;
 import io.javaclasses.fileHub.persistent.files.File;
 import io.javaclasses.fileHub.persistent.files.FileId;
 import io.javaclasses.fileHub.persistent.files.FileStorageInMemory;
@@ -51,7 +51,7 @@ public class UpdateFile extends SecuredUserProcess<UpdateFileCommand, FileId> {
 
             return file.id();
 
-        } catch (NotExistUserIdException e) {
+        } catch (NotExistedItem e) {
 
             if (logger.isErrorEnabled()) {
                 logger.error(e.getMessage());

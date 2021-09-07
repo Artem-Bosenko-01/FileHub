@@ -5,6 +5,7 @@ import io.javaclasses.fileHub.services.NotAuthorizedUserException;
 import io.javaclasses.fileHub.services.files.*;
 import io.javaclasses.fileHub.webservices.ErrorResponse;
 import io.javaclasses.fileHub.webservices.GetFolderSuccessfulResponse;
+import io.javaclasses.fileHub.webservices.RequestParser;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -24,13 +25,15 @@ public class GetRootFolderRoute implements Route {
     @Override
     public Object handle(Request request, Response response) {
 
-        String token = request.headers("Authorization").split(" ")[1];
+        RequestParser parser = new RequestParser(request);
+
+        String token = parser.getToken();
 
         GetRootFolderQuery getRootFolderQuery = new GetRootFolderQuery(new AuthToken(token));
 
         try {
 
-            GetFolderDto rootFolder = getRootFolder.handle(getRootFolderQuery);
+            FileSystemItemDto rootFolder = getRootFolder.handle(getRootFolderQuery);
 
             response.status(SC_OK);
 

@@ -32,20 +32,20 @@ public abstract class AbstractInMemoryStorage<I extends RecordId, E extends Data
     }
 
     @Override
-    public void update(E inputDataObject) throws NotExistUserIdException {
+    public void update(E inputDataObject) throws NotExistedItem {
 
         if (!records.containsKey(inputDataObject.id())) {
-            throw new NotExistUserIdException("Id doesn't exist " + inputDataObject.id());
+            throw new NotExistedItem("Id doesn't exist " + inputDataObject.id());
         }
 
         records.put(inputDataObject.id(), inputDataObject);
     }
 
     @Override
-    public void delete(I dataRecordID) throws NotExistUserIdException {
+    public void delete(I dataRecordID) throws NotExistedItem {
 
         if (!records.containsKey(dataRecordID)) {
-            throw new NotExistUserIdException("Id doesn't exist " + dataRecordID);
+            throw new NotExistedItem("Id doesn't exist " + dataRecordID);
         }
 
         records.remove(dataRecordID);

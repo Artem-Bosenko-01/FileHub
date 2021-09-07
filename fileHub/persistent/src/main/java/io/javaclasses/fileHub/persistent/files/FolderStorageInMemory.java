@@ -1,7 +1,7 @@
 package io.javaclasses.fileHub.persistent.files;
 
 import io.javaclasses.fileHub.persistent.AbstractInMemoryStorage;
-import io.javaclasses.fileHub.persistent.NotExistUserIdException;
+import io.javaclasses.fileHub.persistent.NotExistedItem;
 import io.javaclasses.fileHub.persistent.users.UserId;
 
 import java.util.List;
@@ -11,19 +11,19 @@ import java.util.stream.Collectors;
 public class FolderStorageInMemory extends AbstractInMemoryStorage<FolderId, Folder> implements FolderStorage {
 
     @Override
-    public List<Folder> findAllFoldersByParentFolderId(FolderId parentId) throws NotExistUserIdException {
-        if (records().values().stream().noneMatch(folder -> folder.id().equals(parentId))) {
-            throw new NotExistUserIdException("Parent folder doesn't exist: " + parentId);
+    public List<Folder> findAllFoldersByParentFolderId(String parentId, String owner) throws NotExistedItem {
+        if (records().values().stream().noneMatch(folder -> folder.id().toString().equals(parentId))) {
+            throw new NotExistedItem("Parent folder doesn't exist: " + parentId);
         }
 
         return records().values().stream().
-                filter(folder -> folder.parentFolder() != null && folder.parentFolder().equals(parentId)).
+                filter(folder -> folder.parentFolder() != null && folder.parentFolder().toString().equals(parentId)).
                 collect(Collectors.toList());
 
     }
 
     @Override
-    public Optional<FolderId> findParentFolderByChildId(FolderId childId) throws NotExistUserIdException {
+    public Optional<FolderId> findParentFolderByChildId(FolderId childId) throws NotExistedItem {
 
         Optional<Folder> findFolder = records().values().stream().
                 filter(folder -> folder.id().equals(childId)).
@@ -33,7 +33,7 @@ public class FolderStorageInMemory extends AbstractInMemoryStorage<FolderId, Fol
             if (findFolder.get().parentFolder() != null) {
                 return Optional.of(findFolder.get().parentFolder());
             } else return Optional.empty();
-        } else throw new NotExistUserIdException("Folder id: " + childId + " doesn't exist");
+        } else throw new NotExistedItem("Folder id: " + childId + " doesn't exist");
     }
 
     @Override

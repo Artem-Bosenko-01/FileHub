@@ -1,6 +1,7 @@
 package io.javaclasses.fileHub.persistent.files;
 
 import com.google.common.base.Preconditions;
+import com.google.common.net.MediaType;
 import io.javaclasses.fileHub.persistent.DataRecord;
 import io.javaclasses.fileHub.persistent.users.UserId;
 
@@ -13,7 +14,7 @@ public final class File implements DataRecord<FileId> {
     private String name;
     private UserId userID;
     private Integer size;
-    private MimeType mimeType;
+    private MediaType mimeType;
     @Nullable
     private FolderId folder;
 
@@ -42,11 +43,11 @@ public final class File implements DataRecord<FileId> {
         this.size = Preconditions.checkNotNull(size);
     }
 
-    public MimeType mimeType() {
+    public MediaType mimeType() {
         return mimeType;
     }
 
-    public void setMimeType(MimeType mimeType) {
+    public void setMimeType(MediaType mimeType) {
         this.mimeType = Preconditions.checkNotNull(mimeType);
     }
 

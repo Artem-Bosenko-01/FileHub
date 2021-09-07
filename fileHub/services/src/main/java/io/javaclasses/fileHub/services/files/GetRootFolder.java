@@ -14,7 +14,7 @@ import java.util.Optional;
 /**
  * Service to get the root folder for authenticated user.
  */
-public class GetRootFolder extends View<GetRootFolderQuery, GetFolderDto> {
+public class GetRootFolder extends View<GetRootFolderQuery, FileSystemItemDto> {
 
     private static final Logger logger = LoggerFactory.getLogger(GetFolderById.class);
 
@@ -32,7 +32,7 @@ public class GetRootFolder extends View<GetRootFolderQuery, GetFolderDto> {
     }
 
     @Override
-    protected GetFolderDto doHandle(GetRootFolderQuery query)
+    protected FileSystemItemDto doHandle(GetRootFolderQuery query)
             throws RootFolderNotFoundHandlingException, UsersTokenNotFoundException {
 
         Optional<AuthorizationUsers> owner = authorizationStorage.findByID(new UserAuthToken(query.token().value()));
@@ -53,9 +53,10 @@ public class GetRootFolder extends View<GetRootFolderQuery, GetFolderDto> {
                             + rootFolder.get().owner().toString() + ". Was successful");
                 }
 
-                return new GetFolderDto(rootFolder.get().id().toString(),
+                return new FileSystemItemDto(rootFolder.get().id().toString(),
                         rootFolder.get().name(),
                         rootFolder.get().itemsAmount(),
+                        ItemType.FOLDER,
                         rootFolder.get().parentFolder());
 
             } else {

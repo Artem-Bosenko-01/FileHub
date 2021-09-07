@@ -35,7 +35,7 @@ export class ApiService {
   async logIn(email, password) {
     const response = await this._fetch('/login', {
       method: 'POST',
-      body: JSON.stringify({email, password}),
+      body: JSON.stringify({loginName: email, password}),
     });
     if (response.status === 401) {
       throw new UnauthorizedError();
@@ -54,7 +54,7 @@ export class ApiService {
   async register(email, password) {
     const response = await this._fetch('/register', {
       method: 'POST',
-      body: JSON.stringify({email, password}),
+      body: JSON.stringify({loginName: email, password}),
     });
 
     if (response.status === 422) {
@@ -290,7 +290,7 @@ export class ApiService {
    */
   async _fetch(url, init) {
     try {
-      return await this._window.fetch(url, init);
+      return await this._window.fetch('/FileHub/server/api/1.0' + url, init);
     } catch (error) {
       throw new Error(error.message);
     }

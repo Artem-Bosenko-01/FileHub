@@ -12,9 +12,9 @@ public interface Storage<I extends RecordId, E extends DataRecord<I>> {
 
     void create(E inputDataObject) throws DuplicatedUserIdException;
 
-    void update(E inputDataObject) throws NotExistUserIdException;
+    void update(E inputDataObject) throws NotExistedItem;
 
-    void delete(I dataRecordID) throws NotExistUserIdException;
+    void delete(I dataRecordID) throws NotExistedItem;
 
     Optional<E> findByID(I dataRecordID);
 

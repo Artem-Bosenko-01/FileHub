@@ -1,7 +1,5 @@
 package io.javaclasses.fileHub.webservices;
 
-import io.javaclasses.fileHub.persistent.DuplicatedUserIdException;
-import io.javaclasses.fileHub.persistent.NotExistUserIdException;
 import io.javaclasses.fileHub.persistent.users.User;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.persistent.users.UserStorage;

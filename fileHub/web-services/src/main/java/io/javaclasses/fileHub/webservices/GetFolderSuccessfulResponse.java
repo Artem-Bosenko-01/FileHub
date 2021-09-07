@@ -1,12 +1,12 @@
 package io.javaclasses.fileHub.webservices;
 
-import io.javaclasses.fileHub.services.files.GetFolderDto;
+import io.javaclasses.fileHub.services.files.FileSystemItemDto;
 
 public class GetFolderSuccessfulResponse extends JsonResponse {
 
-    private final GetFolderDto folder;
+    private final FileSystemItemDto folder;
 
-    public GetFolderSuccessfulResponse(GetFolderDto folder) {
+    public GetFolderSuccessfulResponse(FileSystemItemDto folder) {
         this.folder = folder;
     }
 }

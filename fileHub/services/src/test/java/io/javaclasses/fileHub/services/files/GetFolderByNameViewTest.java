@@ -33,7 +33,7 @@ class GetFolderByNameViewTest {
 
         GetFolderById view = new GetFolderById(folderStorage, authorizationStorage);
 
-        GetFolderDto folderByNameDTO = view.handle(query);
+        FileSystemItemDto folderByNameDTO = view.handle(query);
 
         Assertions.assertEquals(folderByNameDTO.id(), id.toString());
 

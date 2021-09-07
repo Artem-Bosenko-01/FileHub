@@ -48,7 +48,7 @@ class AuthenticationRouteTest {
     @Test
     public void shouldGetTokenAfterSuccessfullyUserAuthentication() throws IOException {
         MockRequest request = new MockRequest();
-        String body = "{\"loginName\": \"cas\",\"password\": \"dcsdcs\"}";
+        String body = "{\"loginName\": \"artrms@kasc.com\",\"password\": \"sdvdds\"}";
         TestResponse res = request.send("POST", "/FileHub/server/api/1.0/login", body);
         HashMap<String, String> responseBody = res.json();
 

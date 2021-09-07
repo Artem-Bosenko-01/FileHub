@@ -1,6 +1,10 @@
 package io.javaclasses.fileHub.services.files;
 
-import io.javaclasses.fileHub.persistent.files.*;
+import com.google.common.net.MediaType;
+import io.javaclasses.fileHub.persistent.files.FileId;
+import io.javaclasses.fileHub.persistent.files.FileStorage;
+import io.javaclasses.fileHub.persistent.files.FolderId;
+import io.javaclasses.fileHub.persistent.files.FolderStorage;
 import io.javaclasses.fileHub.persistent.files.content.FIleContentStorage;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.persistent.users.UserStorage;
@@ -43,7 +47,7 @@ public final class FileSystemTestData {
     public FileId uploadFile(FileStorage fileStorage, FIleContentStorage fIleContentStorage)
             throws InvalidCommandHandlingException {
 
-        UploadFileCommand command = new UploadFileCommand(token, "folder", MimeType.TEXT, id,
+        UploadFileCommand command = new UploadFileCommand(token, "folder", MediaType.PLAIN_TEXT_UTF_8, id,
                 new FolderId("folder", id), content);
 
         UploadFile createFile = new UploadFile(fIleContentStorage, fileStorage, authorizationStorage);
@@ -54,7 +58,7 @@ public final class FileSystemTestData {
     public FileId uploadFile(FileStorage fileStorage, FIleContentStorage fIleContentStorage, FolderId parent)
             throws InvalidCommandHandlingException {
 
-        UploadFileCommand command = new UploadFileCommand(token, "folder", MimeType.TEXT, id, parent,
+        UploadFileCommand command = new UploadFileCommand(token, "folder", MediaType.PLAIN_TEXT_UTF_8, id, parent,
                 content);
 
         UploadFile createFile = new UploadFile(fIleContentStorage, fileStorage, authorizationStorage);
@@ -78,7 +82,7 @@ public final class FileSystemTestData {
         return new UploadFileCommand(
                 token,
                 "file.txt",
-                MimeType.TEXT,
+                MediaType.PLAIN_TEXT_UTF_8,
                 id,
                 new FolderId("folder", id),
                 content

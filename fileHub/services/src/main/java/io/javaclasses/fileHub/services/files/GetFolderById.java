@@ -17,7 +17,7 @@ import java.util.Optional;
 /**
  * Service to get an existed folder in authenticated user's directory by {@link FolderId id}.
  */
-public class GetFolderById extends View<GetFolderByIdQuery, GetFolderDto> {
+public class GetFolderById extends View<GetFolderByIdQuery, FileSystemItemDto> {
 
     private static final Logger logger = LoggerFactory.getLogger(GetFolderById.class);
 
@@ -35,7 +35,7 @@ public class GetFolderById extends View<GetFolderByIdQuery, GetFolderDto> {
     }
 
     @Override
-    protected GetFolderDto doHandle(GetFolderByIdQuery query) throws InvalidCommandHandlingException {
+    protected FileSystemItemDto doHandle(GetFolderByIdQuery query) throws InvalidCommandHandlingException {
 
         Optional<AuthorizationUsers> owner = authorizationStorage.findByID(new UserAuthToken(query.token().value()));
 
@@ -56,10 +56,11 @@ public class GetFolderById extends View<GetFolderByIdQuery, GetFolderDto> {
                             ". And name: " + folder.name() + ". Was successful");
                 }
 
-                return new GetFolderDto(
+                return new FileSystemItemDto(
                         folder.id().toString(),
                         folder.name(),
                         folder.itemsAmount(),
+                        ItemType.FOLDER,
                         folder.parentFolder());
 
             } else {

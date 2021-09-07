@@ -1,5 +1,6 @@
 package io.javaclasses.fileHub.services.files;
 
+import com.google.common.net.MediaType;
 import com.google.common.testing.NullPointerTester;
 import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.files.MimeType;
@@ -22,7 +23,7 @@ class UploadFileCommandTest {
                 setDefault(byte[].class, new byte[]{});
 
         tester.testConstructor(UploadFileCommand.class.getConstructor(AuthToken.class, String.class,
-                MimeType.class, UserId.class, FolderId.class, byte[].class));
+                MediaType.class, UserId.class, FolderId.class, byte[].class));
 
     }
 
@@ -31,7 +32,7 @@ class UploadFileCommandTest {
 
         NullPointerTester tester = new NullPointerTester();
         tester.testAllPublicInstanceMethods(new UploadFileCommand(new AuthToken(""),
-                "", MimeType.TEXT, new UserId(""), new FolderId("", new UserId("")),
+                "", MediaType.PLAIN_TEXT_UTF_8, new UserId(""), new FolderId("", new UserId("")),
                 new byte[]{}));
 
     }

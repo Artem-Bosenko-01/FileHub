@@ -1,4 +1,4 @@
-package io.javaclasses.fileHub.webservices.registration;
+package io.javaclasses.fileHub.webservices.user;
 
 import com.google.gson.JsonObject;
 import io.javaclasses.fileHub.services.ValidationCommandDataException;

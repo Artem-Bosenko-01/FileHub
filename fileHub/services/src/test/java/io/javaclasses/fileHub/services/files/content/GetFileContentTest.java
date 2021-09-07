@@ -10,6 +10,7 @@ import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
+import io.javaclasses.fileHub.services.NotAuthorizedUserException;
 import io.javaclasses.fileHub.services.ValidationCommandDataException;
 import io.javaclasses.fileHub.services.files.FileSystemTestData;
 import org.junit.jupiter.api.Assertions;
@@ -19,7 +20,7 @@ import org.junit.jupiter.api.Test;
 class GetFileContentTest {
 
     @Test
-    public void readInfoAboutFileByUserIdTest() throws InvalidCommandHandlingException, ValidationCommandDataException {
+    public void readInfoAboutFileByUserIdTest() throws InvalidCommandHandlingException, ValidationCommandDataException, NotAuthorizedUserException {
 
         FileContentStorageInMemory contentStorageInMemory = new FileContentStorageInMemory();
 

@@ -9,6 +9,7 @@ import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
+import io.javaclasses.fileHub.services.NotAuthorizedUserException;
 import io.javaclasses.fileHub.services.ValidationCommandDataException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,7 @@ import org.junit.jupiter.api.Test;
 class UpdateFolderTest {
 
     @Test
-    public void updateInfoAboutFolderByTest() throws InvalidCommandHandlingException, ValidationCommandDataException {
+    public void updateInfoAboutFolderByTest() throws InvalidCommandHandlingException, ValidationCommandDataException, NotAuthorizedUserException {
 
         FolderStorage folderStorage = new FolderStorageInMemory();
 

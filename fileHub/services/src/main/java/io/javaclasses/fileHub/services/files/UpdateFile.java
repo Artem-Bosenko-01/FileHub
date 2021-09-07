@@ -38,7 +38,7 @@ public class UpdateFile extends SecuredUserProcess<UpdateFileCommand, FileId> {
         file.setName(inputCommand.name());
         file.setSize(inputCommand.size());
         file.setMimeType(inputCommand.mimeType());
-        file.setFolder(inputCommand.folder());
+        file.setFolder(inputCommand.folder().toString());
         file.setUserID(inputCommand.owner());
 
         try {

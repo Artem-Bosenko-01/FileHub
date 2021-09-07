@@ -1,4 +1,4 @@
-package io.javaclasses.fileHub.webservices.registration;
+package io.javaclasses.fileHub.webservices.user;
 
 import io.javaclasses.fileHub.services.CommandValidationError;
 import io.javaclasses.fileHub.webservices.JsonResponse;

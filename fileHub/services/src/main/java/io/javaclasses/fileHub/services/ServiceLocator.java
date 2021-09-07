@@ -11,8 +11,7 @@ import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationUsers;
 import io.javaclasses.fileHub.persistent.users.tokens.UserAuthToken;
-import io.javaclasses.fileHub.services.files.GetFolderById;
-import io.javaclasses.fileHub.services.files.GetRootFolder;
+import io.javaclasses.fileHub.services.files.*;
 import io.javaclasses.fileHub.services.files.content.GetFolderContent;
 import io.javaclasses.fileHub.services.users.AuthenticateUser;
 import io.javaclasses.fileHub.services.users.GetUserInfo;
@@ -32,6 +31,9 @@ public class ServiceLocator {
     private final GetFolderById getFolderById;
     private final GetUserInfo getUserInfo;
     private final GetFolderContent getFolderContent;
+    private final DeleteFolder deleteFolder;
+    private final DeleteFile deleteFile;
+    private final CreateFolder createFolder;
 
     public ServiceLocator() {
 
@@ -48,6 +50,9 @@ public class ServiceLocator {
         getFolderById = new GetFolderById(folderStorage, authorizationStorage);
         getUserInfo = new GetUserInfo(userStorage, authorizationStorage);
         getFolderContent = new GetFolderContent(folderStorage, fileStorage, authorizationStorage);
+        deleteFolder = new DeleteFolder(folderStorage, authorizationStorage);
+        deleteFile = new DeleteFile(fileStorage, authorizationStorage);
+        createFolder = new CreateFolder(folderStorage, authorizationStorage);
     }
 
     public AuthenticateUser authenticateUser() {
@@ -74,6 +79,18 @@ public class ServiceLocator {
         return getFolderContent;
     }
 
+    public DeleteFolder deleteFolder() {
+        return deleteFolder;
+    }
+
+    public DeleteFile deleteFile() {
+        return deleteFile;
+    }
+
+    public CreateFolder createFolder() {
+        return createFolder;
+    }
+
     private void initDataForDB(AuthorizationStorage authorizationStorage, UserStorage userStorage, FolderStorage folderStorage, FileStorage fileStorage) {
 
         UserId id = new UserId("id");
@@ -94,11 +111,11 @@ public class ServiceLocator {
         folder2.setName("dcsdcsdv");
         folder2.setItemsAmount(666);
         folder2.setOwner(id);
-        folder2.setParentFolder(folder.id());
+        folder2.setParentFolder(folder.id().toString());
 
         File file = new File(new FileId("test_file.txt", id, folder.id()));
         file.setName("test_file.txt");
-        file.setFolder(folder.id());
+        file.setFolder(folder.id().toString());
         file.setMimeType(MediaType.GIF);
         file.setSize(564651894);
         file.setUserID(id);

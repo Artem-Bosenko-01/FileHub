@@ -13,9 +13,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public final class DeleteFolderCommand extends AuthenticatedUserCommand {
 
-    private final FolderId folderID;
+    private final String folderID;
 
-    public DeleteFolderCommand(AuthToken token, FolderId folderID) {
+    public DeleteFolderCommand(AuthToken token, String folderID) {
 
         super(checkNotNull(token));
 
@@ -23,7 +23,7 @@ public final class DeleteFolderCommand extends AuthenticatedUserCommand {
 
     }
 
-    public FolderId folderID() {
+    public String folderID() {
 
         return folderID;
     }

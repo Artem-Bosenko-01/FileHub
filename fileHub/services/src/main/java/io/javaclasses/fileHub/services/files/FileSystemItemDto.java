@@ -9,8 +9,8 @@ import javax.annotation.Nullable;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Data about folder after successful execution {@link GetFolderById get folder} or
- * {@link GetRootFolder get root folder} processes.
+ * Data for transferring information about {@link io.javaclasses.fileHub.persistent.files.Folder folder}
+ * or {@link io.javaclasses.fileHub.persistent.files.File file} after successful handling processes
  */
 public final class FileSystemItemDto {
 
@@ -27,7 +27,7 @@ public final class FileSystemItemDto {
     @Nullable
     private String parentFolderId;
 
-    public FileSystemItemDto(String id, String name, Integer itemSize, ItemType type, @Nullable FolderId parentFolderId) {
+    public FileSystemItemDto(String id, String name, Integer itemSize, ItemType type, @Nullable String parentFolderId) {
 
         this.id = checkNotNull(id);
 
@@ -39,7 +39,7 @@ public final class FileSystemItemDto {
 
         if (parentFolderId != null) {
 
-            this.parentFolderId = parentFolderId.toString();
+            this.parentFolderId = parentFolderId;
         }
 
     }

@@ -27,7 +27,7 @@ public class UserStorageBaseStub implements UserStorage {
     }
 
     @Override
-    public void delete(UserId dataRecordID) {
+    public void delete(String dataRecordID) {
     }
 
     @Override

@@ -14,7 +14,7 @@ public final class Folder implements DataRecord<FolderId> {
     private UserId owner;
     private Integer itemsAmount;
     @Nullable
-    private FolderId parentFolder;
+    private String parentFolder;
 
     public Folder(FolderId id) {
         this.id = Preconditions.checkNotNull(id);
@@ -41,11 +41,11 @@ public final class Folder implements DataRecord<FolderId> {
         this.owner = Preconditions.checkNotNull(owner);
     }
 
-    public FolderId parentFolder() {
+    public String parentFolder() {
         return parentFolder;
     }
 
-    public void setParentFolder(@Nullable FolderId parentFolder) {
+    public void setParentFolder(@Nullable String parentFolder) {
         this.parentFolder = parentFolder;
     }
 

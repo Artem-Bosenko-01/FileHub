@@ -1,4 +1,4 @@
-package io.javaclasses.fileHub.webservices.rootfolder;
+package io.javaclasses.fileHub.webservices.filesystem;
 
 import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.NotAuthorizedUserException;
@@ -13,13 +13,13 @@ import spark.Route;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static javax.servlet.http.HttpServletResponse.*;
 
-public class GetRootFolderRoute implements Route {
+public class GetFolderByIdRoute implements Route {
 
-    private final GetRootFolder getRootFolder;
+    private final GetFolderById getFolderById;
 
-    public GetRootFolderRoute(GetRootFolder getRootFolder) {
+    public GetFolderByIdRoute(GetFolderById getFolderById) {
 
-        this.getRootFolder = checkNotNull(getRootFolder);
+        this.getFolderById = checkNotNull(getFolderById);
     }
 
     @Override
@@ -29,17 +29,19 @@ public class GetRootFolderRoute implements Route {
 
         String token = parser.getToken();
 
-        GetRootFolderQuery getRootFolderQuery = new GetRootFolderQuery(new AuthToken(token));
+        String folderId = parser.getId();
+
+        GetFolderByIdQuery getFolderByIdQuery = new GetFolderByIdQuery(new AuthToken(token), folderId);
 
         try {
 
-            FileSystemItemDto rootFolder = getRootFolder.handle(getRootFolderQuery);
+            FileSystemItemDto rootFolder = getFolderById.handle(getFolderByIdQuery);
 
             response.status(SC_OK);
 
             return new GetFolderSuccessfulResponse(rootFolder).serialize();
 
-        } catch (RootFolderNotFoundHandlingException | UsersTokenNotFoundException e) {
+        } catch (FolderByIdNotFoundHandlingException | UsersTokenNotFoundException e) {
 
             response.status(SC_NOT_FOUND);
             return new ErrorResponse(e.getMessage()).serialize();

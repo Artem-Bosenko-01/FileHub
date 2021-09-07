@@ -10,6 +10,7 @@ import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
+import io.javaclasses.fileHub.services.NotAuthorizedUserException;
 import io.javaclasses.fileHub.services.ValidationCommandDataException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -19,7 +20,7 @@ class DeleteFileTest {
 
 
     @Test
-    public void deleteFileByIdTest() throws InvalidCommandHandlingException, ValidationCommandDataException {
+    public void deleteFileByIdTest() throws InvalidCommandHandlingException, ValidationCommandDataException, NotAuthorizedUserException {
 
         FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
 
@@ -33,7 +34,7 @@ class DeleteFileTest {
 
         FileId id = fileSystemTestData.uploadFile(fileStorageInMemory, fIleContentStorage);
 
-        DeleteFileCommand deleteFileCommand = new DeleteFileCommand(fileSystemTestData.token(), id);
+        DeleteFileCommand deleteFileCommand = new DeleteFileCommand(fileSystemTestData.token(), id.toString());
 
         DeleteFile deleteFile = new DeleteFile(fileStorageInMemory, authorizationStorage);
 
@@ -59,8 +60,7 @@ class DeleteFileTest {
 
         fileSystemTestData.uploadFile(fileStorageInMemory, fIleContentStorage);
 
-        DeleteFileCommand deleteFileCommand = new DeleteFileCommand(fileSystemTestData.token(), new FileId("name",
-                fileSystemTestData.id(), new FolderId("name", fileSystemTestData.id())));
+        DeleteFileCommand deleteFileCommand = new DeleteFileCommand(fileSystemTestData.token(), "fileIdacacsa");
 
         DeleteFile deleteFile = new DeleteFile(fileStorageInMemory, authorizationStorage);
 

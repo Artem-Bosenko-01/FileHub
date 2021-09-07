@@ -14,7 +14,7 @@ public interface Storage<I extends RecordId, E extends DataRecord<I>> {
 
     void update(E inputDataObject) throws NotExistedItem;
 
-    void delete(I dataRecordID) throws NotExistedItem;
+    void delete(String dataRecordID) throws NotExistedItem;
 
     Optional<E> findByID(I dataRecordID);
 

@@ -24,4 +24,9 @@ public final class RequestParser {
 
         return request.uri().split("/")[6];
     }
+
+    public String body() {
+
+        return request.body();
+    }
 }

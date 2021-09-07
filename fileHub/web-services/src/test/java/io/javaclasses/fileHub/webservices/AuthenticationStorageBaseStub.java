@@ -17,7 +17,7 @@ public class AuthenticationStorageBaseStub implements AuthorizationStorage {
     }
 
     @Override
-    public void delete(UserAuthToken dataRecordID) {
+    public void delete(String dataRecordID) {
     }
 
     @Override

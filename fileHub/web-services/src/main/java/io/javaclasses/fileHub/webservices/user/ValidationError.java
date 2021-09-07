@@ -1,4 +1,4 @@
-package io.javaclasses.fileHub.webservices.registration;
+package io.javaclasses.fileHub.webservices.user;
 
 /**
  * Type of error in the registration user process.

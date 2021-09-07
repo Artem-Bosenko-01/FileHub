@@ -13,16 +13,16 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public final class DeleteFileCommand extends AuthenticatedUserCommand {
 
-    private final FileId id;
+    private final String id;
 
-    public DeleteFileCommand(AuthToken token, FileId id) {
+    public DeleteFileCommand(AuthToken token, String id) {
 
         super(checkNotNull(token));
         this.id = checkNotNull(id);
 
     }
 
-    public FileId id() {
+    public String id() {
 
         return id;
     }

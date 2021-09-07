@@ -34,7 +34,7 @@ public class UpdateFolder extends SecuredUserProcess<UpdateFolderCommand, Folder
         }
 
         Folder folder = new Folder(inputCommand.id());
-        folder.setParentFolder(inputCommand.parentFolder());
+        folder.setParentFolder(inputCommand.parentFolder().toString());
         folder.setOwner(inputCommand.owner());
         folder.setName(inputCommand.name());
 

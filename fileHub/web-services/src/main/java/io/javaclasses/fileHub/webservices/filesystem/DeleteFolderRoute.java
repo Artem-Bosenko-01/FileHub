@@ -1,10 +1,11 @@
-package io.javaclasses.fileHub.webservices.folder;
+package io.javaclasses.fileHub.webservices.filesystem;
 
 import io.javaclasses.fileHub.services.AuthToken;
+import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.NotAuthorizedUserException;
-import io.javaclasses.fileHub.services.files.*;
+import io.javaclasses.fileHub.services.files.DeleteFolder;
+import io.javaclasses.fileHub.services.files.DeleteFolderCommand;
 import io.javaclasses.fileHub.webservices.ErrorResponse;
-import io.javaclasses.fileHub.webservices.GetFolderSuccessfulResponse;
 import io.javaclasses.fileHub.webservices.RequestParser;
 import spark.Request;
 import spark.Response;
@@ -13,13 +14,13 @@ import spark.Route;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static javax.servlet.http.HttpServletResponse.*;
 
-public class GetFolderByIdRoute implements Route {
+public class DeleteFolderRoute implements Route {
 
-    private final GetFolderById getFolderById;
+    private final DeleteFolder deleteFolder;
 
-    public GetFolderByIdRoute(GetFolderById getFolderById) {
+    public DeleteFolderRoute(DeleteFolder deleteFolder) {
 
-        this.getFolderById = checkNotNull(getFolderById);
+        this.deleteFolder = checkNotNull(deleteFolder);
     }
 
     @Override
@@ -31,29 +32,28 @@ public class GetFolderByIdRoute implements Route {
 
         String folderId = parser.getId();
 
-        GetFolderByIdQuery getFolderByIdQuery = new GetFolderByIdQuery(new AuthToken(token), folderId);
-
         try {
 
-            FileSystemItemDto rootFolder = getFolderById.handle(getFolderByIdQuery);
+            DeleteFolderCommand deleteFolderCommand = new DeleteFolderCommand(new AuthToken(token), folderId);
 
-            response.status(SC_OK);
+            String deletedFolderId = deleteFolder.handle(deleteFolderCommand);
 
-            return new GetFolderSuccessfulResponse(rootFolder).serialize();
-
-        } catch (FolderByIdNotFoundHandlingException | UsersTokenNotFoundException e) {
-
-            response.status(SC_NOT_FOUND);
-            return new ErrorResponse(e.getMessage()).serialize();
+            return "Folder with id: " + deletedFolderId + " was successfully deleted";
 
         } catch (NotAuthorizedUserException e) {
 
             response.status(SC_UNAUTHORIZED);
             return new ErrorResponse(e.getMessage()).serialize();
 
+        } catch (InvalidCommandHandlingException e) {
+
+            response.status(SC_BAD_REQUEST);
+            return new ErrorResponse(e.getMessage()).serialize();
+
         } catch (Exception e) {
 
             response.status(SC_INTERNAL_SERVER_ERROR);
+
             return new ErrorResponse("Internal server error.").serialize();
         }
     }

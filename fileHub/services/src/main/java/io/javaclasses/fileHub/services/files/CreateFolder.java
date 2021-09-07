@@ -1,15 +1,21 @@
 package io.javaclasses.fileHub.services.files;
 
-import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.DuplicatedUserIdException;
 import io.javaclasses.fileHub.persistent.files.Folder;
 import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.files.FolderStorage;
+import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationUsers;
+import io.javaclasses.fileHub.persistent.users.tokens.UserAuthToken;
 import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.SecuredUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Optional;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Service to create a new empty folder by authenticated user.
@@ -20,45 +26,63 @@ public class CreateFolder extends SecuredUserProcess<CreateFolderCommand, Folder
 
     private final FolderStorage folderStorageInMemory;
 
+    private final AuthorizationStorage authorizationStorage;
+
     public CreateFolder(FolderStorage userStorage, AuthorizationStorage authorizationStorage) {
 
         super(authorizationStorage);
 
-        this.folderStorageInMemory = Preconditions.checkNotNull(userStorage);
+        this.folderStorageInMemory = checkNotNull(userStorage);
+        this.authorizationStorage = checkNotNull(authorizationStorage);
     }
 
     @Override
-    protected FolderId doHandle(CreateFolderCommand inputCommand) throws InvalidCommandHandlingException {
+    protected FolderId doHandle(CreateFolderCommand query) throws InvalidCommandHandlingException {
 
-        if (logger.isInfoEnabled()) {
-            logger.info("Start create folder " + inputCommand.name());
-        }
+        Optional<AuthorizationUsers> owner = authorizationStorage.findByID(new UserAuthToken(query.token().value()));
 
-        FolderId id = new FolderId(inputCommand.name(), inputCommand.owner());
-        Folder folder = new Folder(id);
-        folder.setParentFolder(inputCommand.parentFolder());
-        folder.setName(inputCommand.name());
-        folder.setItemsAmount(inputCommand.itemsAmount());
-        folder.setOwner(inputCommand.owner());
+        if (owner.isPresent()) {
 
-        try {
-
-            folderStorageInMemory.create(folder);
+            UserId userId = owner.get().userID();
 
             if (logger.isInfoEnabled()) {
-                logger.info("Created folder was successful. id: " + folder.id());
+                logger.info("Start create folder " + query.name());
             }
 
-            return folder.id();
+            FolderId id = new FolderId(query.name(), userId);
+            Folder folder = new Folder(id);
+            folder.setParentFolder(query.parentFolder());
+            folder.setName(query.name());
+            folder.setItemsAmount(query.itemsAmount());
+            folder.setOwner(userId);
 
-        } catch (DuplicatedUserIdException e) {
+            try {
+
+                folderStorageInMemory.create(folder);
+
+                if (logger.isInfoEnabled()) {
+                    logger.info("Created folder was successful. id: " + folder.id());
+                }
+
+                return folder.id();
+
+            } catch (DuplicatedUserIdException e) {
+
+                if (logger.isErrorEnabled()) {
+                    logger.error(e.getMessage());
+                }
+
+                throw new InvalidCommandHandlingException(e.getMessage());
+            }
+
+        } else {
 
             if (logger.isErrorEnabled()) {
-                logger.error(e.getMessage());
+
+                logger.error("Cannot find user by token: " + query.token());
             }
 
-            throw new InvalidCommandHandlingException(e.getMessage());
+            throw new UsersTokenNotFoundException(query.token());
         }
-
     }
 }

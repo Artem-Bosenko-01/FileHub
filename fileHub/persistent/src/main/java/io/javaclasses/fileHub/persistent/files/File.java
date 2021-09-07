@@ -16,7 +16,7 @@ public final class File implements DataRecord<FileId> {
     private Integer size;
     private MediaType mimeType;
     @Nullable
-    private FolderId folder;
+    private String folder;
 
     public File(FileId fileID) {
         this.fileID = Preconditions.checkNotNull(fileID);
@@ -51,11 +51,11 @@ public final class File implements DataRecord<FileId> {
         this.mimeType = Preconditions.checkNotNull(mimeType);
     }
 
-    public FolderId folder() {
+    public String folder() {
         return folder;
     }
 
-    public void setFolder(@Nullable FolderId folder) {
+    public void setFolder(@Nullable String folder) {
         this.folder = folder;
     }
 

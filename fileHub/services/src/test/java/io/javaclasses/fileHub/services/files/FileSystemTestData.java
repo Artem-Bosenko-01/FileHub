@@ -72,9 +72,7 @@ public final class FileSystemTestData {
 
         return new DeleteFileCommand(
                 new AuthToken("6956"),
-                new FileId(name, userID, new FolderId("folder", userID))
-
-        );
+                name + userID);
     }
 
     public UploadFileCommand uploadFileCommand() {
@@ -92,7 +90,7 @@ public final class FileSystemTestData {
     public FolderId createFolder(FolderStorage folderStorage, @Nullable FolderId parent)
             throws InvalidCommandHandlingException {
 
-        CreateFolderCommand createFolderCommand = new CreateFolderCommand(token, "folder", id, 8, null);
+        CreateFolderCommand createFolderCommand = new CreateFolderCommand(token, "folder", 8, null);
 
         CreateFolder creatingFile = new CreateFolder(folderStorage, authorizationStorage);
 
@@ -102,7 +100,7 @@ public final class FileSystemTestData {
     public FolderId createFolder(FolderStorage folderStorage, String name, @Nullable FolderId parent)
             throws InvalidCommandHandlingException {
 
-        CreateFolderCommand createFolderCommand = new CreateFolderCommand(token, name, id, 8, null);
+        CreateFolderCommand createFolderCommand = new CreateFolderCommand(token, name, 8, null);
 
         CreateFolder creatingFile = new CreateFolder(folderStorage, authorizationStorage);
 

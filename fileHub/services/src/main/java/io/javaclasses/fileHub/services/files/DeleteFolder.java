@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Service to delete an existed folder in Filehub application by authenticated user.
  */
-public class DeleteFolder extends SecuredUserProcess<DeleteFolderCommand, FolderId> {
+public class DeleteFolder extends SecuredUserProcess<DeleteFolderCommand, String> {
 
     private static final Logger logger = LoggerFactory.getLogger(DeleteFolder.class);
 
@@ -27,7 +27,7 @@ public class DeleteFolder extends SecuredUserProcess<DeleteFolderCommand, Folder
     }
 
     @Override
-    protected FolderId doHandle(DeleteFolderCommand inputCommand) throws InvalidCommandHandlingException {
+    protected String doHandle(DeleteFolderCommand inputCommand) throws InvalidCommandHandlingException {
 
         if (logger.isInfoEnabled()) {
             logger.info("Start delete folder " + inputCommand.folderID());

@@ -1,4 +1,4 @@
-package io.javaclasses.fileHub.webservices.foldercontent;
+package io.javaclasses.fileHub.webservices.filesystem;
 
 import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.NotAuthorizedUserException;

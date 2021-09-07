@@ -3,7 +3,7 @@ package io.javaclasses.fileHub.webservices.authorization;
 import com.google.common.testing.NullPointerTester;
 import io.javaclasses.fileHub.services.users.AuthenticateUser;
 import io.javaclasses.fileHub.webservices.*;
-import io.javaclasses.fileHub.webservices.authentication.AuthenticationRoute;
+import io.javaclasses.fileHub.webservices.user.AuthenticationRoute;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

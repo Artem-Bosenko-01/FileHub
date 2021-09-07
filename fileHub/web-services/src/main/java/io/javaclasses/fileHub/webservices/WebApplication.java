@@ -1,12 +1,10 @@
 package io.javaclasses.fileHub.webservices;
 
 import io.javaclasses.fileHub.services.ServiceLocator;
-import io.javaclasses.fileHub.webservices.authentication.AuthenticationRoute;
-import io.javaclasses.fileHub.webservices.folder.GetFolderByIdRoute;
-import io.javaclasses.fileHub.webservices.foldercontent.GetFolderContentRoute;
-import io.javaclasses.fileHub.webservices.registration.RegistrationRoute;
-import io.javaclasses.fileHub.webservices.rootfolder.GetRootFolderRoute;
+import io.javaclasses.fileHub.webservices.filesystem.*;
+import io.javaclasses.fileHub.webservices.user.AuthenticationRoute;
 import io.javaclasses.fileHub.webservices.user.GetUserInfoRoute;
+import io.javaclasses.fileHub.webservices.user.RegistrationRoute;
 import spark.Spark;
 
 import static spark.Spark.*;
@@ -36,6 +34,9 @@ public final class WebApplication {
         get(APPLICATION_NAME + API_VERSION_1_0 + "/folder/:id", new GetFolderByIdRoute(service.getFolderById()));
         get(APPLICATION_NAME + API_VERSION_1_0 + "/user", new GetUserInfoRoute(service.getUser()));
         get(APPLICATION_NAME + API_VERSION_1_0 + "/folder/:id/content", new GetFolderContentRoute(service.getFolderContent()));
+        delete(APPLICATION_NAME + API_VERSION_1_0 + "/folder/:id", new DeleteFolderRoute(service.deleteFolder()));
+        delete(APPLICATION_NAME + API_VERSION_1_0 + "/file/:id", new DeleteFileRoute(service.deleteFile()));
+        post(APPLICATION_NAME + API_VERSION_1_0 + "/folder/:id/folder", new CreateFolderRoute(service.createFolder()));
     }
 
     public void stop() {

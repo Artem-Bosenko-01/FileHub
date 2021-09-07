@@ -17,7 +17,7 @@ public abstract class AbstractInMemoryStorage<I extends RecordId, E extends Data
     @Override
     public void create(E inputDataObject) throws DuplicatedUserIdException {
 
-        if (records.containsKey(inputDataObject.id())){
+        if (records.containsKey(inputDataObject.id())) {
             throw new DuplicatedUserIdException("Duplicate id " + inputDataObject.id());
         }
 
@@ -25,7 +25,7 @@ public abstract class AbstractInMemoryStorage<I extends RecordId, E extends Data
     }
 
     @Override
-    public Optional<E> findByID(I dataRecordID){
+    public Optional<E> findByID(I dataRecordID) {
 
         return records.values().stream().filter(e -> e.id().equals(dataRecordID)).findFirst();
 
@@ -42,13 +42,18 @@ public abstract class AbstractInMemoryStorage<I extends RecordId, E extends Data
     }
 
     @Override
-    public void delete(I dataRecordID) throws NotExistedItem {
+    public void delete(String dataRecordID) throws NotExistedItem {
 
-        if (!records.containsKey(dataRecordID)) {
+        Optional<I> foundKey = records.keySet().stream().filter(key -> key.toString().equals(dataRecordID)).findFirst();
+
+        if (foundKey.isPresent()) {
+
+            records.remove(foundKey.get());
+
+        } else {
+
             throw new NotExistedItem("Id doesn't exist " + dataRecordID);
         }
-
-        records.remove(dataRecordID);
     }
 
     protected Map<I, E> records() {

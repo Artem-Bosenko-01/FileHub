@@ -1,12 +1,9 @@
 package io.javaclasses.fileHub.services.files;
 
-import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.files.FolderStorage;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.AuthenticatedUserCommand;
-
-import javax.annotation.Nullable;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -18,24 +15,20 @@ public final class CreateFolderCommand extends AuthenticatedUserCommand {
 
     private final String name;
 
-    private final UserId owner;
-
     private final Integer itemsAmount;
 
-    private final FolderId parentFolder;
+    private final String parentFolder;
 
-    public CreateFolderCommand(AuthToken token, String name, UserId owner, Integer itemsAmount,
-                               @Nullable FolderId parentFolder) {
+    public CreateFolderCommand(AuthToken token, String name, Integer itemsAmount, String parentFolder) {
 
         super(checkNotNull(token));
 
         this.name = checkNotNull(name);
 
-        this.owner = checkNotNull(owner);
 
         this.itemsAmount = checkNotNull(itemsAmount);
 
-        this.parentFolder = parentFolder;
+        this.parentFolder = checkNotNull(parentFolder);
 
     }
 
@@ -44,17 +37,12 @@ public final class CreateFolderCommand extends AuthenticatedUserCommand {
         return name;
     }
 
-    public UserId owner() {
-
-        return owner;
-    }
-
     public Integer itemsAmount() {
 
         return itemsAmount;
     }
 
-    public FolderId parentFolder() {
+    public String parentFolder() {
 
         return parentFolder;
     }

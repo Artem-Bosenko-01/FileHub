@@ -20,14 +20,14 @@ public final class FileSystemItemDto {
 
     private final String type;
 
-    private final Integer size;
+    private final Long size;
 
     private String mimeType;
 
     @Nullable
     private String parentFolderId;
 
-    public FileSystemItemDto(String id, String name, Integer itemSize, ItemType type, @Nullable String parentFolderId) {
+    public FileSystemItemDto(String id, String name, Long itemSize, ItemType type, @Nullable String parentFolderId) {
 
         this.id = checkNotNull(id);
 
@@ -65,7 +65,7 @@ public final class FileSystemItemDto {
         return type;
     }
 
-    public Integer itemsAmount() {
+    public Long itemsAmount() {
 
         return size;
     }

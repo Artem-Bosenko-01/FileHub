@@ -13,7 +13,7 @@ public final class File implements DataRecord<FileId> {
     private final FileId fileID;
     private String name;
     private UserId userID;
-    private Integer size;
+    private Long size;
     private MediaType mimeType;
     @Nullable
     private String folder;
@@ -35,11 +35,11 @@ public final class File implements DataRecord<FileId> {
         this.name = Preconditions.checkNotNull(name);
     }
 
-    public Integer size() {
+    public Long size() {
         return size;
     }
 
-    public void setSize(Integer size) {
+    public void setSize(Long size) {
         this.size = Preconditions.checkNotNull(size);
     }
 

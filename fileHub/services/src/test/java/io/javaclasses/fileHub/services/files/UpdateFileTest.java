@@ -38,7 +38,7 @@ class UpdateFileTest {
         FileId creteFileId = fileSystemTestData.uploadFile(fileStorageInMemory, fIleContentStorage);
 
         UpdateFileCommand command = new UpdateFileCommand(fileSystemTestData.token(), creteFileId, "lkijij",
-                MediaType.GIF, 65, fileSystemTestData.id(), folderID);
+                MediaType.GIF, 65L, fileSystemTestData.id(), folderID);
 
         UpdateFile process = new UpdateFile(fileStorageInMemory, authorizationStorage);
 
@@ -70,7 +70,7 @@ class UpdateFileTest {
 
         UpdateFileCommand command = new UpdateFileCommand(new AuthToken("1"), new FileId("csac",
                 userID, folderID), "lkijij",
-                MediaType.GIF, 65, new UserId("abc"), folderID);
+                MediaType.GIF, 65L, new UserId("abc"), folderID);
 
         UpdateFile process = new UpdateFile(fileStorageInMemory, authorizationStorage);
 

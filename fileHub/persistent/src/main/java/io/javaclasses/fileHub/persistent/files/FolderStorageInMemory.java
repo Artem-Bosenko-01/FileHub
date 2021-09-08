@@ -35,7 +35,7 @@ public class FolderStorageInMemory extends AbstractInMemoryStorage<FolderId, Fol
 
                 return Optional.of(findFolder.get().parentFolder());
 
-            } else{
+            } else {
 
                 return Optional.empty();
             }

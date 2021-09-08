@@ -15,7 +15,7 @@ public final class CreateFolderCommand extends AuthenticatedUserCommand {
 
     private final String name;
 
-    private final Integer itemsAmount;
+    private final Long itemsAmount;
 
     private final String parentFolder;
 
@@ -26,7 +26,7 @@ public final class CreateFolderCommand extends AuthenticatedUserCommand {
         this.name = checkNotNull(name);
 
 
-        this.itemsAmount = checkNotNull(itemsAmount);
+        this.itemsAmount = Long.valueOf(checkNotNull(itemsAmount));
 
         this.parentFolder = checkNotNull(parentFolder);
 
@@ -37,7 +37,7 @@ public final class CreateFolderCommand extends AuthenticatedUserCommand {
         return name;
     }
 
-    public Integer itemsAmount() {
+    public Long itemsAmount() {
 
         return itemsAmount;
     }

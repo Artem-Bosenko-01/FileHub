@@ -4,6 +4,7 @@ import io.javaclasses.fileHub.services.ServiceLocator;
 import io.javaclasses.fileHub.webservices.filesystem.*;
 import io.javaclasses.fileHub.webservices.user.AuthenticationRoute;
 import io.javaclasses.fileHub.webservices.user.GetUserInfoRoute;
+import io.javaclasses.fileHub.webservices.user.LogOutRoute;
 import io.javaclasses.fileHub.webservices.user.RegistrationRoute;
 import spark.Spark;
 
@@ -37,6 +38,7 @@ public final class WebApplication {
         delete(APPLICATION_NAME + API_VERSION_1_0 + "/folder/:id", new DeleteFolderRoute(service.deleteFolder()));
         delete(APPLICATION_NAME + API_VERSION_1_0 + "/file/:id", new DeleteFileRoute(service.deleteFile()));
         post(APPLICATION_NAME + API_VERSION_1_0 + "/folder/:id/folder", new CreateFolderRoute(service.createFolder()));
+        post(APPLICATION_NAME + API_VERSION_1_0 + "/logOut", new LogOutRoute(service.logOut()));
     }
 
     public void stop() {

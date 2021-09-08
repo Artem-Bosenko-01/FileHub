@@ -2,7 +2,6 @@ package io.javaclasses.fileHub.services.files;
 
 import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.NotExistedItem;
-import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.files.FolderStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
@@ -17,13 +16,13 @@ public class DeleteFolder extends SecuredUserProcess<DeleteFolderCommand, String
 
     private static final Logger logger = LoggerFactory.getLogger(DeleteFolder.class);
 
-    private final FolderStorage folderStorageInMemory;
+    private final FolderStorage folderStorage;
 
     public DeleteFolder(FolderStorage folderStorage, AuthorizationStorage authorizationStorage) {
 
         super(authorizationStorage);
 
-        this.folderStorageInMemory = Preconditions.checkNotNull(folderStorage);
+        this.folderStorage = Preconditions.checkNotNull(folderStorage);
     }
 
     @Override
@@ -35,7 +34,7 @@ public class DeleteFolder extends SecuredUserProcess<DeleteFolderCommand, String
 
         try {
 
-            folderStorageInMemory.delete(inputCommand.folderID());
+            folderStorage.delete(inputCommand.folderID());
 
             if (logger.isInfoEnabled()) {
                 logger.info("Deleted " + inputCommand.folderID() + " was successful");

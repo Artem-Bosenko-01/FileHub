@@ -7,8 +7,7 @@ import java.util.Objects;
 
 /**
  * This is value object, that define user session and gives some permission for user by value.
- *
- * */
+ */
 public final class UserAuthToken implements RecordId {
 
     private final String value;
@@ -32,5 +31,10 @@ public final class UserAuthToken implements RecordId {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return value;
     }
 }

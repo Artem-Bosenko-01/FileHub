@@ -52,7 +52,7 @@ public class UploadFile extends SecuredUserProcess<UploadFileCommand, FileId> {
         file.setMimeType(inputCommand.mimeType());
         file.setName(inputCommand.name());
         file.setFolder(inputCommand.folder().toString());
-        file.setSize(0);
+        file.setSize(inputCommand.size());
 
         FileContent content = new FileContent(fileId);
 

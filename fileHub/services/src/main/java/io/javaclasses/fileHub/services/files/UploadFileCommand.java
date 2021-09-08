@@ -65,4 +65,8 @@ public final class UploadFileCommand extends AuthenticatedUserCommand {
 
         return content.clone();
     }
+
+    public Long size(){
+        return (long) content.length;
+    }
 }

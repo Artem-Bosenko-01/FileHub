@@ -15,6 +15,7 @@ import io.javaclasses.fileHub.services.files.*;
 import io.javaclasses.fileHub.services.files.content.GetFolderContent;
 import io.javaclasses.fileHub.services.users.AuthenticateUser;
 import io.javaclasses.fileHub.services.users.GetUserInfo;
+import io.javaclasses.fileHub.services.users.LogOut;
 import io.javaclasses.fileHub.services.users.RegisterUser;
 
 import java.time.ZoneId;
@@ -34,6 +35,7 @@ public class ServiceLocator {
     private final DeleteFolder deleteFolder;
     private final DeleteFile deleteFile;
     private final CreateFolder createFolder;
+    private final LogOut logOut;
 
     public ServiceLocator() {
 
@@ -53,6 +55,7 @@ public class ServiceLocator {
         deleteFolder = new DeleteFolder(folderStorage, authorizationStorage);
         deleteFile = new DeleteFile(fileStorage, authorizationStorage);
         createFolder = new CreateFolder(folderStorage, authorizationStorage);
+        logOut = new LogOut(authorizationStorage);
     }
 
     public AuthenticateUser authenticateUser() {
@@ -91,6 +94,10 @@ public class ServiceLocator {
         return createFolder;
     }
 
+    public LogOut logOut() {
+        return logOut;
+    }
+
     private void initDataForDB(AuthorizationStorage authorizationStorage, UserStorage userStorage, FolderStorage folderStorage, FileStorage fileStorage) {
 
         UserId id = new UserId("id");
@@ -103,13 +110,13 @@ public class ServiceLocator {
 
         Folder folder = new Folder(new FolderId("folder", id));
         folder.setName("folder");
-        folder.setItemsAmount(5);
+        folder.setItemsAmount(5L);
         folder.setOwner(id);
         folder.setParentFolder(null);
 
         Folder folder2 = new Folder(new FolderId("dcsdcsdv", id));
         folder2.setName("dcsdcsdv");
-        folder2.setItemsAmount(666);
+        folder2.setItemsAmount(666L);
         folder2.setOwner(id);
         folder2.setParentFolder(folder.id().toString());
 
@@ -117,7 +124,7 @@ public class ServiceLocator {
         file.setName("test_file.txt");
         file.setFolder(folder.id().toString());
         file.setMimeType(MediaType.GIF);
-        file.setSize(564651894);
+        file.setSize(564651894L);
         file.setUserID(id);
 
         try {

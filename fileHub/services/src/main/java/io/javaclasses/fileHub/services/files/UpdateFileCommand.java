@@ -21,14 +21,14 @@ public final class UpdateFileCommand extends AuthenticatedUserCommand {
 
     private final MediaType mimeType;
 
-    private final Integer size;
+    private final Long size;
 
     private final UserId owner;
 
     private final FolderId folder;
 
     public UpdateFileCommand(AuthToken token, FileId id, String name, MediaType mimeType,
-                             Integer size, UserId owner, FolderId folder) {
+                             Long size, UserId owner, FolderId folder) {
 
         super(checkNotNull(token));
 
@@ -61,7 +61,7 @@ public final class UpdateFileCommand extends AuthenticatedUserCommand {
         return mimeType;
     }
 
-    public Integer size() {
+    public Long size() {
 
         return size;
     }

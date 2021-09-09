@@ -14,14 +14,14 @@ import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemo
 import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.NotAuthorizedUserException;
-import io.javaclasses.fileHub.services.ValidationCommandDataException;
+import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class UpdateFileTest {
 
     @Test
-    public void updateInfoAboutFileByTest() throws InvalidCommandHandlingException, ValidationCommandDataException, NotAuthorizedUserException {
+    public void updateInfoAboutFileByTest() throws InvalidCommandHandlingException, InvalidValidationCommandDataException, NotAuthorizedUserException {
 
         FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
 
@@ -33,12 +33,12 @@ class UpdateFileTest {
 
         FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
 
-        FolderId folderID = new FolderId("folder", fileSystemTestData.id());
+        FolderId folderID = new FolderId("folder" + fileSystemTestData.id());
 
-        FileId creteFileId = fileSystemTestData.uploadFile(fileStorageInMemory, fIleContentStorage);
+        FileId creteFileId = new FileId(fileSystemTestData.uploadFile(fileStorageInMemory, fIleContentStorage));
 
-        UpdateFileCommand command = new UpdateFileCommand(fileSystemTestData.token(), creteFileId, "lkijij",
-                MediaType.GIF, 65L, fileSystemTestData.id(), folderID);
+        UpdateFileCommand command = new UpdateFileCommand(fileSystemTestData.token(), creteFileId.toString(),
+                "lkijij", MediaType.GIF.toString(), 65L, folderID.toString());
 
         UpdateFile process = new UpdateFile(fileStorageInMemory, authorizationStorage);
 
@@ -50,7 +50,7 @@ class UpdateFileTest {
 
 
     @Test
-    public void failedUpdateInfoAboutFileByNotExistIdTest() throws InvalidCommandHandlingException, ValidationCommandDataException {
+    public void failedUpdateInfoAboutFileByNotExistIdTest() throws InvalidCommandHandlingException, InvalidValidationCommandDataException {
 
         FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
 
@@ -66,11 +66,10 @@ class UpdateFileTest {
 
         fileSystemTestData.uploadFile(fileStorageInMemory, fIleContentStorage);
 
-        FolderId folderID = new FolderId("JHGF", userID);
+        FolderId folderID = new FolderId("JHGF" + userID);
 
-        UpdateFileCommand command = new UpdateFileCommand(new AuthToken("1"), new FileId("csac",
-                userID, folderID), "lkijij",
-                MediaType.GIF, 65L, new UserId("abc"), folderID);
+        UpdateFileCommand command = new UpdateFileCommand(new AuthToken("1"), new FileId("csac").toString(),
+                "lkijij", MediaType.GIF.toString(), 65L, folderID.toString());
 
         UpdateFile process = new UpdateFile(fileStorageInMemory, authorizationStorage);
 

@@ -6,14 +6,14 @@ import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
-import io.javaclasses.fileHub.services.ValidationCommandDataException;
+import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class AuthenticateUserTest {
 
     @Test
-    public void authenticateTest() throws InvalidCommandHandlingException, ValidationCommandDataException {
+    public void authenticateTest() throws InvalidCommandHandlingException, InvalidValidationCommandDataException {
 
         UserStorage userStorage = new UserStorageInMemory();
 

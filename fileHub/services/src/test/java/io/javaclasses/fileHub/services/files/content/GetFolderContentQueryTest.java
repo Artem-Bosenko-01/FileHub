@@ -2,7 +2,7 @@ package io.javaclasses.fileHub.services.files.content;
 
 import com.google.common.testing.NullPointerTester;
 import io.javaclasses.fileHub.services.AuthToken;
-import io.javaclasses.fileHub.services.ValidationCommandDataException;
+import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
 import org.junit.jupiter.api.Test;
 
 class GetFolderContentQueryTest {
@@ -20,7 +20,7 @@ class GetFolderContentQueryTest {
     }
 
     @Test
-    public void checkForNullPointerInSetters() throws ValidationCommandDataException {
+    public void checkForNullPointerInSetters() throws InvalidValidationCommandDataException {
 
         NullPointerTester tester = new NullPointerTester();
 

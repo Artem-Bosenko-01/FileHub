@@ -7,7 +7,7 @@ import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemo
 import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.NotAuthorizedUserException;
-import io.javaclasses.fileHub.services.ValidationCommandDataException;
+import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +15,7 @@ class ProfileReadManagementViewTest {
 
 
     @Test
-    public void readInfoAboutUserByIdTest() throws InvalidCommandHandlingException, ValidationCommandDataException, NotAuthorizedUserException {
+    public void readInfoAboutUserByIdTest() throws InvalidCommandHandlingException, InvalidValidationCommandDataException, NotAuthorizedUserException {
 
         UserStorageInMemory userStorageInMemory = new UserStorageInMemory();
 
@@ -38,7 +38,7 @@ class ProfileReadManagementViewTest {
 
 
     @Test
-    public void failedReadInfoByNotExistIdTest() throws InvalidCommandHandlingException, ValidationCommandDataException {
+    public void failedReadInfoByNotExistIdTest() throws InvalidCommandHandlingException, InvalidValidationCommandDataException {
 
         UserStorageInMemory userStorageInMemory = new UserStorageInMemory();
 

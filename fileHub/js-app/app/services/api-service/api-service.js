@@ -244,7 +244,7 @@ export class ApiService {
         name: newName,
         id: item.id,
         type: item.type,
-        itemsAmount: item.itemsAmount,
+        itemsAmount: item.size,
         parentFolderId: item.parentFolderId,
       }),
     });

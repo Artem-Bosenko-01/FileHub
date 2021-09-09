@@ -1,15 +1,19 @@
 package io.javaclasses.fileHub.services.files;
 
-import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.NotExistedItem;
 import io.javaclasses.fileHub.persistent.files.Folder;
 import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.files.FolderStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
-import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationUsers;
+import io.javaclasses.fileHub.persistent.users.tokens.UserAuthToken;
 import io.javaclasses.fileHub.services.SecuredUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Optional;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * This is service to updating information about existed file in authenticated user's folder by {@link FolderId id}.
@@ -18,44 +22,73 @@ public class UpdateFolder extends SecuredUserProcess<UpdateFolderCommand, Folder
 
     private static final Logger logger = LoggerFactory.getLogger(UpdateFolder.class);
 
-    private final FolderStorage folderStorageInMemory;
+    private final FolderStorage folderStorage;
+
+    private final AuthorizationStorage authorizationStorage;
 
     public UpdateFolder(FolderStorage userStorage, AuthorizationStorage authorizationStorage) {
 
-        super(Preconditions.checkNotNull(authorizationStorage));
-        this.folderStorageInMemory = Preconditions.checkNotNull(userStorage);
+        super(checkNotNull(authorizationStorage));
+
+        this.folderStorage = checkNotNull(userStorage);
+
+        this.authorizationStorage = checkNotNull(authorizationStorage);
     }
 
     @Override
-    protected FolderId doHandle(UpdateFolderCommand inputCommand) throws InvalidCommandHandlingException {
+    protected FolderId doHandle(UpdateFolderCommand inputCommand)
+            throws FolderNotFoundException, UsersTokenNotFoundException, FolderNameAlreadyUsed {
 
-        if (logger.isInfoEnabled()) {
-            logger.info("Start update information for folder " + inputCommand.id());
-        }
-
-        Folder folder = new Folder(inputCommand.id());
-        folder.setParentFolder(inputCommand.parentFolder().toString());
-        folder.setOwner(inputCommand.owner());
-        folder.setName(inputCommand.name());
-
-        try {
-
-            folderStorageInMemory.update(folder);
-
-            if (logger.isInfoEnabled()) {
-                logger.info("Updating folder was successful. id: " + folder.id());
-            }
-
-            return folder.id();
-
-        } catch (NotExistedItem e) {
+        if (folderStorage.isFolderNameAlreadyExist(inputCommand.name())) {
 
             if (logger.isErrorEnabled()) {
-                logger.error(e.getMessage());
+                logger.error("Folder name: " + inputCommand.name() + " already used.");
             }
 
-            throw new InvalidCommandHandlingException(e.getMessage());
+            throw new FolderNameAlreadyUsed(inputCommand.name());
         }
 
+        Optional<AuthorizationUsers> owner = authorizationStorage.
+                findByID(new UserAuthToken(inputCommand.token().value()));
+
+        if (owner.isPresent()) {
+            if (logger.isInfoEnabled()) {
+                logger.info("Start update information for folder " + inputCommand.id());
+            }
+
+            Folder folder = new Folder(inputCommand.id());
+            folder.setParentFolder(inputCommand.parentFolder());
+            folder.setOwner(owner.get().userID());
+            folder.setItemsAmount(inputCommand.itemsAmount());
+            folder.setName(inputCommand.name());
+
+            try {
+
+                folderStorage.update(folder);
+
+                if (logger.isInfoEnabled()) {
+                    logger.info("Updating folder was successful. id: " + folder.id());
+                }
+
+                return folder.id();
+
+            } catch (NotExistedItem e) {
+
+                if (logger.isErrorEnabled()) {
+                    logger.error(e.getMessage());
+                }
+
+                throw new FolderNotFoundException(inputCommand.id());
+            }
+
+        } else {
+
+            if (logger.isErrorEnabled()) {
+
+                logger.error("Cannot find user by token: " + inputCommand.token());
+            }
+
+            throw new UsersTokenNotFoundException(inputCommand.token());
+        }
     }
 }

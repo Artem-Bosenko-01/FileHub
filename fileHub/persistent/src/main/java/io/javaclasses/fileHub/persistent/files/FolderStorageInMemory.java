@@ -65,4 +65,26 @@ public class FolderStorageInMemory extends AbstractInMemoryStorage<FolderId, Fol
     public int getSizeRecordsList() {
         return records().size();
     }
+
+    @Override
+    public boolean isFolderNameAlreadyExist(String name) {
+        return records().values().stream().anyMatch(file -> file.name().equals(name));
+    }
+
+    @Override
+    public void decreaseItemsAmount(String id) {
+
+        Optional<Folder> folder = records().values().stream().
+                filter(fold -> fold.id().toString().equals(id)).findFirst();
+
+        folder.ifPresent(value -> value.setItemsAmount(value.itemsAmount() - 1));
+    }
+
+    @Override
+    public void increaseItemsAmount(String id) {
+        Optional<Folder> folder = records().values().stream().
+                filter(fold -> fold.id().toString().equals(id)).findFirst();
+
+        folder.ifPresent(value -> value.setItemsAmount(value.itemsAmount() + 1));
+    }
 }

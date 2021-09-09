@@ -24,4 +24,9 @@ public class FileStorageInMemory extends AbstractInMemoryStorage<FileId, File>
 
     }
 
+    @Override
+    public boolean isFIleNameAlreadyExist(String name) {
+        return records().values().stream().anyMatch(file -> file.name().equals(name));
+    }
+
 }

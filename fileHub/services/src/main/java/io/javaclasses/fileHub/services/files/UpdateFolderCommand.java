@@ -1,43 +1,45 @@
 package io.javaclasses.fileHub.services.files;
 
-import io.javaclasses.fileHub.persistent.files.FolderId;
-import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.AuthenticatedUserCommand;
+import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
 
 import javax.annotation.Nullable;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static io.javaclasses.fileHub.services.ValidationRules.validateItemName;
 
 /**
  * Data that needs to update an existed folder.
  */
 public final class UpdateFolderCommand extends AuthenticatedUserCommand {
 
-    private final FolderId id;
+    private final String id;
 
     private final String name;
 
-    private final UserId owner;
+    private final Long itemsAmount;
 
-    private final FolderId parentFolder;
+    private final String parentFolder;
 
-    public UpdateFolderCommand(AuthToken token, FolderId id, String name, UserId owner,
-                               @Nullable FolderId parentFolder) {
+    public UpdateFolderCommand(AuthToken token, String id, String name, Long itemsAmount, @Nullable String parentFolder)
+            throws InvalidValidationCommandDataException {
 
         super(checkNotNull(token));
+
+        validateItemName(name);
 
         this.id = checkNotNull(id);
 
         this.name = checkNotNull(name);
 
-        this.owner = checkNotNull(owner);
+        this.itemsAmount = checkNotNull(itemsAmount);
 
         this.parentFolder = parentFolder;
 
     }
 
-    public FolderId id() {
+    public String id() {
 
         return id;
     }
@@ -47,13 +49,12 @@ public final class UpdateFolderCommand extends AuthenticatedUserCommand {
         return name;
     }
 
-    public UserId owner() {
-
-        return owner;
-    }
-
-    public FolderId parentFolder() {
+    public String parentFolder() {
 
         return parentFolder;
+    }
+
+    public Long itemsAmount() {
+        return itemsAmount;
     }
 }

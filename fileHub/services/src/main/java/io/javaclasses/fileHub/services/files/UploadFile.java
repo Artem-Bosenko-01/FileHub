@@ -1,9 +1,8 @@
 package io.javaclasses.fileHub.services.files;
 
 import com.google.common.base.Preconditions;
-import io.javaclasses.fileHub.persistent.DuplicatedUserIdException;
+import io.javaclasses.fileHub.persistent.DuplicatedIdException;
 import io.javaclasses.fileHub.persistent.files.File;
-import io.javaclasses.fileHub.persistent.files.FileId;
 import io.javaclasses.fileHub.persistent.files.FileStorage;
 import io.javaclasses.fileHub.persistent.files.content.FIleContentStorage;
 import io.javaclasses.fileHub.persistent.files.content.FileContent;
@@ -16,7 +15,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Service to uploading new file in authenticated user's directory.
  */
-public class UploadFile extends SecuredUserProcess<UploadFileCommand, FileId> {
+public class UploadFile extends SecuredUserProcess<UploadFileCommand, String> {
 
     private static final Logger logger = LoggerFactory.getLogger(UploadFile.class);
 
@@ -37,14 +36,14 @@ public class UploadFile extends SecuredUserProcess<UploadFileCommand, FileId> {
 
 
     @Override
-    protected FileId doHandle(UploadFileCommand inputCommand) throws InvalidCommandHandlingException {
+    protected String doHandle(UploadFileCommand inputCommand) throws InvalidCommandHandlingException {
 
         if (logger.isInfoEnabled()) {
             logger.info("Start upload new file to user's " + inputCommand.owner()
                     + " directory: " + inputCommand.folder());
         }
 
-        FileId fileId = new FileId(inputCommand.name(), inputCommand.owner(), inputCommand.folder());
+        String fileId = inputCommand.name() + inputCommand.owner() + inputCommand.folder();
 
         File file = new File(fileId);
 
@@ -70,7 +69,7 @@ public class UploadFile extends SecuredUserProcess<UploadFileCommand, FileId> {
 
             return fileId;
 
-        } catch (DuplicatedUserIdException e) {
+        } catch (DuplicatedIdException e) {
 
             if (logger.isErrorEnabled()) {
                 logger.error(e.getMessage());

@@ -1,6 +1,5 @@
 package io.javaclasses.fileHub.services.files;
 
-import io.javaclasses.fileHub.persistent.files.FileId;
 import io.javaclasses.fileHub.persistent.files.FileStorageInMemory;
 import io.javaclasses.fileHub.persistent.files.content.FIleContentStorage;
 import io.javaclasses.fileHub.persistent.files.content.FileContentStorageInMemory;
@@ -10,7 +9,7 @@ import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.NotAuthorizedUserException;
-import io.javaclasses.fileHub.services.ValidationCommandDataException;
+import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +17,7 @@ import org.junit.jupiter.api.Test;
 class UploadFileTest {
 
     @Test
-    public void uploadFileTest() throws InvalidCommandHandlingException, ValidationCommandDataException, NotAuthorizedUserException {
+    public void uploadFileTest() throws InvalidCommandHandlingException, InvalidValidationCommandDataException, NotAuthorizedUserException {
 
         AuthorizationStorage authorizationStorage = new AuthorizationStorageInMemory();
 
@@ -34,14 +33,14 @@ class UploadFileTest {
 
         UploadFile uploadFile = new UploadFile(contentStorageInMemory, fileStorageInMemory, authorizationStorage);
 
-        FileId id = uploadFile.handle(uploadFileCommand);
+        String id = uploadFile.handle(uploadFileCommand);
 
         Assertions.assertNotNull(id);
 
     }
 
     @Test
-    public void uploadFileWithExistIdTest() throws InvalidCommandHandlingException, ValidationCommandDataException, NotAuthorizedUserException {
+    public void uploadFileWithExistIdTest() throws InvalidCommandHandlingException, InvalidValidationCommandDataException, NotAuthorizedUserException {
 
         AuthorizationStorage authorizationStorage = new AuthorizationStorageInMemory();
 

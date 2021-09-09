@@ -1,13 +1,18 @@
 package io.javaclasses.fileHub.services.files;
 
-import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.NotExistedItem;
+import io.javaclasses.fileHub.persistent.files.File;
+import io.javaclasses.fileHub.persistent.files.FileId;
 import io.javaclasses.fileHub.persistent.files.FileStorage;
+import io.javaclasses.fileHub.persistent.files.FolderStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
-import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.SecuredUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Optional;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Service to delete an existed file in authenticated user's directory.
@@ -16,19 +21,22 @@ public class DeleteFile extends SecuredUserProcess<DeleteFileCommand, String> {
 
     private static final Logger logger = LoggerFactory.getLogger(DeleteFile.class);
 
-
     private final FileStorage fileStorage;
 
-    public DeleteFile(FileStorage fileStorage, AuthorizationStorage authorizationStorage) {
+    private final FolderStorage folderStorage;
 
-        super(Preconditions.checkNotNull(authorizationStorage));
+    public DeleteFile(FileStorage fileStorage, FolderStorage folderStorage, AuthorizationStorage authorizationStorage) {
 
-        this.fileStorage = Preconditions.checkNotNull(fileStorage);
+        super(checkNotNull(authorizationStorage));
+
+        this.fileStorage = checkNotNull(fileStorage);
+
+        this.folderStorage = checkNotNull(folderStorage);
     }
 
 
     @Override
-    protected String doHandle(DeleteFileCommand inputCommand) throws InvalidCommandHandlingException {
+    protected String doHandle(DeleteFileCommand inputCommand) throws FileNotFoundException {
 
         if (logger.isInfoEnabled()) {
             logger.info("Start delete file " + inputCommand.id());
@@ -36,11 +44,15 @@ public class DeleteFile extends SecuredUserProcess<DeleteFileCommand, String> {
 
         try {
 
+            Optional<File> file = fileStorage.findByID(new FileId(inputCommand.id()));
+
             fileStorage.delete(inputCommand.id());
 
             if (logger.isInfoEnabled()) {
                 logger.info("Deleted " + inputCommand.id() + " was successful");
             }
+
+            file.ifPresent(value -> folderStorage.decreaseItemsAmount(value.folder()));
 
             return inputCommand.id();
 
@@ -50,7 +62,7 @@ public class DeleteFile extends SecuredUserProcess<DeleteFileCommand, String> {
                 logger.error(e.getMessage());
             }
 
-            throw new InvalidCommandHandlingException(e.getMessage());
+            throw new FileNotFoundException(inputCommand.id());
         }
 
     }

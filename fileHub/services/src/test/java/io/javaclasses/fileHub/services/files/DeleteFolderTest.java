@@ -9,7 +9,7 @@ import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.NotAuthorizedUserException;
-import io.javaclasses.fileHub.services.ValidationCommandDataException;
+import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +18,7 @@ class DeleteFolderTest {
 
 
     @Test
-    public void deleteFolderByIdTest() throws InvalidCommandHandlingException, ValidationCommandDataException, NotAuthorizedUserException {
+    public void deleteFolderByIdTest() throws InvalidCommandHandlingException, InvalidValidationCommandDataException, NotAuthorizedUserException {
 
         FolderStorage folderStorage = new FolderStorageInMemory();
 
@@ -44,7 +44,7 @@ class DeleteFolderTest {
 
 
     @Test
-    public void deleteFolderWithNotExistedIdTest() throws InvalidCommandHandlingException, ValidationCommandDataException {
+    public void deleteFolderWithNotExistedIdTest() throws InvalidCommandHandlingException, InvalidValidationCommandDataException {
 
 
         FolderStorage folderStorage = new FolderStorageInMemory();

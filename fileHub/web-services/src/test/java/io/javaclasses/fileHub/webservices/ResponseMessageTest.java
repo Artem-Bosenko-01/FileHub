@@ -3,12 +3,12 @@ package io.javaclasses.fileHub.webservices;
 import com.google.common.testing.NullPointerTester;
 import org.junit.jupiter.api.Test;
 
-class ErrorResponseTest {
+class ResponseMessageTest {
     @Test
     public void checkForNullPointerInConstructor() {
 
         NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicConstructors(ErrorResponse.class);
+        tester.testAllPublicConstructors(ResponseMessage.class);
 
     }
 }

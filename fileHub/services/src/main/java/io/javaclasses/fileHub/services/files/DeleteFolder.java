@@ -2,12 +2,15 @@ package io.javaclasses.fileHub.services.files;
 
 import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.NotExistedItem;
+import io.javaclasses.fileHub.persistent.files.Folder;
+import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.files.FolderStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
-import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.SecuredUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Optional;
 
 /**
  * Service to delete an existed folder in Filehub application by authenticated user.
@@ -26,7 +29,7 @@ public class DeleteFolder extends SecuredUserProcess<DeleteFolderCommand, String
     }
 
     @Override
-    protected String doHandle(DeleteFolderCommand inputCommand) throws InvalidCommandHandlingException {
+    protected String doHandle(DeleteFolderCommand inputCommand) throws FolderNotFoundException {
 
         if (logger.isInfoEnabled()) {
             logger.info("Start delete folder " + inputCommand.folderID());
@@ -34,11 +37,15 @@ public class DeleteFolder extends SecuredUserProcess<DeleteFolderCommand, String
 
         try {
 
+            Optional<Folder> folder = folderStorage.findByID(new FolderId(inputCommand.folderID()));
+
             folderStorage.delete(inputCommand.folderID());
 
             if (logger.isInfoEnabled()) {
                 logger.info("Deleted " + inputCommand.folderID() + " was successful");
             }
+
+            folder.ifPresent(value -> folderStorage.decreaseItemsAmount(value.parentFolder()));
 
             return inputCommand.folderID();
 
@@ -48,7 +55,7 @@ public class DeleteFolder extends SecuredUserProcess<DeleteFolderCommand, String
                 logger.error(e.getMessage());
             }
 
-            throw new InvalidCommandHandlingException(e.getMessage());
+            throw new FolderNotFoundException(inputCommand.folderID());
         }
 
     }

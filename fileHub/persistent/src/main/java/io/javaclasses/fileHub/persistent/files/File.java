@@ -18,8 +18,8 @@ public final class File implements DataRecord<FileId> {
     @Nullable
     private String folder;
 
-    public File(FileId fileID) {
-        this.fileID = Preconditions.checkNotNull(fileID);
+    public File(String fileID) {
+        this.fileID = new FileId(Preconditions.checkNotNull(fileID));
     }
 
     @Override

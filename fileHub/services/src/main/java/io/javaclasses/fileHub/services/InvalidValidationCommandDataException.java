@@ -7,13 +7,13 @@ import java.util.List;
  * Throws if the validation of {@link Command command} input parameters fails.
  * Exception contains list of {@link CommandValidationError errors},
  * that that defines the field where the error occurred and a special error message.
- * Fields validate by the specific {@link io.javaclasses.fileHub.services.users.ValidationRules rules}.
+ * Fields validate by the specific {@link ValidationRules rules}.
  */
-public class ValidationCommandDataException extends Exception {
+public class InvalidValidationCommandDataException extends Exception {
 
     private final List<CommandValidationError> errors;
 
-    public ValidationCommandDataException() {
+    public InvalidValidationCommandDataException() {
 
         this.errors = new ArrayList<>();
     }

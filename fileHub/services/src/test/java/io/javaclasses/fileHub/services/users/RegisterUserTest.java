@@ -2,14 +2,14 @@ package io.javaclasses.fileHub.services.users;
 
 import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
 import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
-import io.javaclasses.fileHub.services.ValidationCommandDataException;
+import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class RegisterUserTest {
 
     @Test
-    public void registerUserTest() throws InvalidCommandHandlingException, ValidationCommandDataException {
+    public void registerUserTest() throws InvalidCommandHandlingException, InvalidValidationCommandDataException {
 
         RegistrationUserCommand command = new RegistrationUserCommand("badk@h.com", "scascsa");
 
@@ -24,7 +24,7 @@ class RegisterUserTest {
     }
 
     @Test
-    public void registerUsersWithEqualsIdTest() throws InvalidCommandHandlingException, ValidationCommandDataException {
+    public void registerUsersWithEqualsIdTest() throws InvalidCommandHandlingException, InvalidValidationCommandDataException {
 
         RegistrationUserCommand command = new RegistrationUserCommand("badk@h.com", "scascsa");
 

@@ -1,7 +1,7 @@
 package io.javaclasses.fileHub.services.users;
 
 import com.google.common.base.Preconditions;
-import io.javaclasses.fileHub.persistent.DuplicatedUserIdException;
+import io.javaclasses.fileHub.persistent.DuplicatedIdException;
 import io.javaclasses.fileHub.persistent.users.User;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.persistent.users.UserStorage;
@@ -48,7 +48,7 @@ public class RegisterUser implements OpenUserProcess<RegistrationUserCommand, Bo
 
             return true;
 
-        } catch (DuplicatedUserIdException e) {
+        } catch (DuplicatedIdException e) {
 
             if (logger.isErrorEnabled()) {
                 logger.error(e.getMessage());

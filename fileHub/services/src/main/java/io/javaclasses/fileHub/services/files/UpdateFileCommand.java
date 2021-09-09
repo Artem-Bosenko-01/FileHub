@@ -1,21 +1,19 @@
 package io.javaclasses.fileHub.services.files;
 
 import com.google.common.net.MediaType;
-import io.javaclasses.fileHub.persistent.files.FileId;
-import io.javaclasses.fileHub.persistent.files.FolderId;
-import io.javaclasses.fileHub.persistent.files.MimeType;
-import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.AuthenticatedUserCommand;
+import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static io.javaclasses.fileHub.services.ValidationRules.validateItemName;
 
 /**
  * Data that needs to update an existed file.
  */
 public final class UpdateFileCommand extends AuthenticatedUserCommand {
 
-    private final FileId id;
+    private final String id;
 
     private final String name;
 
@@ -23,30 +21,28 @@ public final class UpdateFileCommand extends AuthenticatedUserCommand {
 
     private final Long size;
 
-    private final UserId owner;
+    private final String folder;
 
-    private final FolderId folder;
-
-    public UpdateFileCommand(AuthToken token, FileId id, String name, MediaType mimeType,
-                             Long size, UserId owner, FolderId folder) {
+    public UpdateFileCommand(AuthToken token, String id, String name, String mimeType,
+                             Long size, String folder) throws InvalidValidationCommandDataException {
 
         super(checkNotNull(token));
+
+        validateItemName(name);
 
         this.id = checkNotNull(id);
 
         this.name = checkNotNull(name);
 
-        this.mimeType = checkNotNull(mimeType);
+        this.mimeType = MediaType.parse(checkNotNull(mimeType));
 
         this.size = checkNotNull(size);
-
-        this.owner = checkNotNull(owner);
 
         this.folder = checkNotNull(folder);
 
     }
 
-    public FileId id() {
+    public String id() {
 
         return id;
     }
@@ -66,12 +62,7 @@ public final class UpdateFileCommand extends AuthenticatedUserCommand {
         return size;
     }
 
-    public UserId owner() {
-
-        return owner;
-    }
-
-    public FolderId folder() {
+    public String folder() {
 
         return folder;
     }

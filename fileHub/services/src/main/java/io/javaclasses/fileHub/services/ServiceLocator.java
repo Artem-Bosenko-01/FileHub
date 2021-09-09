@@ -1,7 +1,7 @@
 package io.javaclasses.fileHub.services;
 
 import com.google.common.net.MediaType;
-import io.javaclasses.fileHub.persistent.DuplicatedUserIdException;
+import io.javaclasses.fileHub.persistent.DuplicatedIdException;
 import io.javaclasses.fileHub.persistent.files.*;
 import io.javaclasses.fileHub.persistent.users.User;
 import io.javaclasses.fileHub.persistent.users.UserId;
@@ -36,6 +36,8 @@ public class ServiceLocator {
     private final DeleteFile deleteFile;
     private final CreateFolder createFolder;
     private final LogOut logOut;
+    private final UpdateFile updateFile;
+    private final UpdateFolder updateFolder;
 
     public ServiceLocator() {
 
@@ -53,9 +55,11 @@ public class ServiceLocator {
         getUserInfo = new GetUserInfo(userStorage, authorizationStorage);
         getFolderContent = new GetFolderContent(folderStorage, fileStorage, authorizationStorage);
         deleteFolder = new DeleteFolder(folderStorage, authorizationStorage);
-        deleteFile = new DeleteFile(fileStorage, authorizationStorage);
+        deleteFile = new DeleteFile(fileStorage,folderStorage, authorizationStorage);
         createFolder = new CreateFolder(folderStorage, authorizationStorage);
         logOut = new LogOut(authorizationStorage);
+        updateFile = new UpdateFile(fileStorage, authorizationStorage);
+        updateFolder = new UpdateFolder(folderStorage, authorizationStorage);
     }
 
     public AuthenticateUser authenticateUser() {
@@ -98,6 +102,14 @@ public class ServiceLocator {
         return logOut;
     }
 
+    public UpdateFile updateFile() {
+        return updateFile;
+    }
+
+    public UpdateFolder updateFolder() {
+        return updateFolder;
+    }
+
     private void initDataForDB(AuthorizationStorage authorizationStorage, UserStorage userStorage, FolderStorage folderStorage, FileStorage fileStorage) {
 
         UserId id = new UserId("id");
@@ -108,19 +120,19 @@ public class ServiceLocator {
 
         AuthorizationUsers authorizedUser = new AuthorizationUsers(new UserAuthToken("token"), id, ZonedDateTime.now(ZoneId.of("America/Los_Angeles")).plusHours(6));
 
-        Folder folder = new Folder(new FolderId("folder", id));
+        Folder folder = new Folder("folder" + id);
         folder.setName("folder");
         folder.setItemsAmount(5L);
         folder.setOwner(id);
         folder.setParentFolder(null);
 
-        Folder folder2 = new Folder(new FolderId("dcsdcsdv", id));
+        Folder folder2 = new Folder("dcsdcsdv" + id);
         folder2.setName("dcsdcsdv");
         folder2.setItemsAmount(666L);
         folder2.setOwner(id);
         folder2.setParentFolder(folder.id().toString());
 
-        File file = new File(new FileId("test_file.txt", id, folder.id()));
+        File file = new File("test_file.txt" + id + folder.id());
         file.setName("test_file.txt");
         file.setFolder(folder.id().toString());
         file.setMimeType(MediaType.GIF);
@@ -133,7 +145,7 @@ public class ServiceLocator {
             folderStorage.create(folder);
             folderStorage.create(folder2);
             fileStorage.create(file);
-        } catch (DuplicatedUserIdException e) {
+        } catch (DuplicatedIdException e) {
             e.printStackTrace();
         }
 

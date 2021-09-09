@@ -1,11 +1,11 @@
 package io.javaclasses.fileHub.webservices.user;
 
 import com.google.gson.JsonObject;
-import io.javaclasses.fileHub.services.ValidationCommandDataException;
+import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
 import io.javaclasses.fileHub.services.users.DuplicatedUserException;
 import io.javaclasses.fileHub.services.users.RegisterUser;
 import io.javaclasses.fileHub.services.users.RegistrationUserCommand;
-import io.javaclasses.fileHub.webservices.ErrorResponse;
+import io.javaclasses.fileHub.webservices.ResponseMessage;
 import io.javaclasses.fileHub.webservices.InvalidParsingToJsonObject;
 import spark.Request;
 import spark.Response;
@@ -49,7 +49,7 @@ public final class RegistrationRoute implements Route {
 
             response.status(SC_BAD_REQUEST);
 
-            return new ErrorResponse(invalidParsingToJsonObject.getMessage()).serialize();
+            return new ResponseMessage(invalidParsingToJsonObject.getMessage()).serialize();
 
         } catch (DuplicatedUserException e) {
 
@@ -61,7 +61,7 @@ public final class RegistrationRoute implements Route {
 
             return errorResponse.serialize();
 
-        } catch (ValidationCommandDataException e) {
+        } catch (InvalidValidationCommandDataException e) {
 
             response.status(INVALID_ENTITY_VALIDATION);
 
@@ -75,7 +75,7 @@ public final class RegistrationRoute implements Route {
 
             response.status(SC_INTERNAL_SERVER_ERROR);
 
-            return new ErrorResponse("Internal server error.").serialize();
+            return new ResponseMessage("Internal server error.").serialize();
         }
     }
 }

@@ -9,7 +9,7 @@ import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.NotAuthorizedUserException;
-import io.javaclasses.fileHub.services.ValidationCommandDataException;
+import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
 import io.javaclasses.fileHub.services.files.FileSystemTestData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 class GetFolderContentTest {
 
     @Test
-    public void readFolderContentByIdTest() throws InvalidCommandHandlingException, ValidationCommandDataException, NotAuthorizedUserException {
+    public void readFolderContentByIdTest() throws InvalidCommandHandlingException, InvalidValidationCommandDataException, NotAuthorizedUserException {
 
         FolderStorage folderStorage = new FolderStorageInMemory();
 
@@ -32,7 +32,7 @@ class GetFolderContentTest {
 
         FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
 
-        FolderId parent = fileSystemTestData.createFolder(folderStorage, new FolderId("name", fileSystemTestData.id()));
+        FolderId parent = fileSystemTestData.createFolder(folderStorage, new FolderId("name" + fileSystemTestData.id()));
 
         fileSystemTestData.uploadFile(fileStorage, fIleContentStorage, parent);
 

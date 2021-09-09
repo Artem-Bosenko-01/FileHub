@@ -1,11 +1,11 @@
 package io.javaclasses.fileHub.webservices.filesystem;
 
 import io.javaclasses.fileHub.services.AuthToken;
-import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.NotAuthorizedUserException;
 import io.javaclasses.fileHub.services.files.DeleteFile;
 import io.javaclasses.fileHub.services.files.DeleteFileCommand;
-import io.javaclasses.fileHub.webservices.ErrorResponse;
+import io.javaclasses.fileHub.services.files.FileNotFoundException;
+import io.javaclasses.fileHub.webservices.ResponseMessage;
 import io.javaclasses.fileHub.webservices.RequestParser;
 import spark.Request;
 import spark.Response;
@@ -43,18 +43,18 @@ public class DeleteFileRoute implements Route {
         } catch (NotAuthorizedUserException e) {
 
             response.status(SC_UNAUTHORIZED);
-            return new ErrorResponse(e.getMessage()).serialize();
+            return new ResponseMessage(e.getMessage()).serialize();
 
-        } catch (InvalidCommandHandlingException e) {
+        } catch (FileNotFoundException e) {
 
             response.status(SC_BAD_REQUEST);
-            return new ErrorResponse(e.getMessage()).serialize();
+            return new ResponseMessage(e.getMessage()).serialize();
 
         } catch (Exception e) {
 
             response.status(SC_INTERNAL_SERVER_ERROR);
 
-            return new ErrorResponse("Internal server error.").serialize();
+            return new ResponseMessage("Internal server error.").serialize();
         }
     }
 }

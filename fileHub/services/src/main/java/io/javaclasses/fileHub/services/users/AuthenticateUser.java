@@ -1,6 +1,6 @@
 package io.javaclasses.fileHub.services.users;
 
-import io.javaclasses.fileHub.persistent.DuplicatedUserIdException;
+import io.javaclasses.fileHub.persistent.DuplicatedIdException;
 import io.javaclasses.fileHub.persistent.users.User;
 import io.javaclasses.fileHub.persistent.users.UserStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
@@ -66,7 +66,7 @@ public class AuthenticateUser implements OpenUserProcess<AuthenticationUserComma
 
                 return token;
 
-            } catch (DuplicatedUserIdException e) {
+            } catch (DuplicatedIdException e) {
 
                 if (logger.isErrorEnabled()) {
                     logger.error(e.getMessage());

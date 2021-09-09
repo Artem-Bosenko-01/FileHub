@@ -1,11 +1,12 @@
 package io.javaclasses.fileHub.persistent.files;
 
-import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.DataRecord;
 import io.javaclasses.fileHub.persistent.users.UserId;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public final class Folder implements DataRecord<FolderId> {
 
@@ -16,8 +17,8 @@ public final class Folder implements DataRecord<FolderId> {
     @Nullable
     private String parentFolder;
 
-    public Folder(FolderId id) {
-        this.id = Preconditions.checkNotNull(id);
+    public Folder(String id) {
+        this.id = new FolderId(checkNotNull(id));
     }
 
     @Override
@@ -30,7 +31,7 @@ public final class Folder implements DataRecord<FolderId> {
     }
 
     public void setName(String name) {
-        this.name = Preconditions.checkNotNull(name);
+        this.name = checkNotNull(name);
     }
 
     public UserId owner() {
@@ -38,7 +39,7 @@ public final class Folder implements DataRecord<FolderId> {
     }
 
     public void setOwner(UserId owner) {
-        this.owner = Preconditions.checkNotNull(owner);
+        this.owner = checkNotNull(owner);
     }
 
     public String parentFolder() {
@@ -54,7 +55,7 @@ public final class Folder implements DataRecord<FolderId> {
     }
 
     public void setItemsAmount(Long itemsAmount) {
-        this.itemsAmount = Preconditions.checkNotNull(itemsAmount);
+        this.itemsAmount = checkNotNull(itemsAmount);
     }
 
     @Override

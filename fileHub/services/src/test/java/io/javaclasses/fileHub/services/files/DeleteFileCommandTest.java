@@ -14,9 +14,8 @@ class DeleteFileCommandTest {
         NullPointerTester tester = new NullPointerTester();
 
         tester.setDefault(AuthToken.class, new AuthToken("")).
-                setDefault(FileId.class, new FileId("", new UserId("vsv"),
-                        new FolderId("svd", new UserId("vsv"))));
+                setDefault(FileId.class, new FileId(""));
 
-        tester.testConstructor(DeleteFileCommand.class.getConstructor(AuthToken.class, FileId.class));
+        tester.testConstructor(DeleteFileCommand.class.getConstructor(AuthToken.class, String.class));
     }
 }

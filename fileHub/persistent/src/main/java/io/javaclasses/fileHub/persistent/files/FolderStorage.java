@@ -19,4 +19,10 @@ public interface FolderStorage extends Storage<FolderId, Folder> {
 
     int getSizeRecordsList();
 
+    boolean isFolderNameAlreadyExist(String name);
+
+    void decreaseItemsAmount(String id);
+
+    void increaseItemsAmount(String id);
+
 }

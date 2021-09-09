@@ -2,7 +2,6 @@ package io.javaclasses.fileHub.persistent.files;
 
 import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.RecordId;
-import io.javaclasses.fileHub.persistent.users.UserId;
 
 import java.util.Objects;
 
@@ -10,8 +9,8 @@ public final class FolderId implements RecordId {
 
     private final String id;
 
-    public FolderId(String name, UserId userID) {
-        this.id = Preconditions.checkNotNull(name) + Preconditions.checkNotNull(userID);
+    public FolderId(String id) {
+        this.id = Preconditions.checkNotNull(id);
     }
 
     @Override

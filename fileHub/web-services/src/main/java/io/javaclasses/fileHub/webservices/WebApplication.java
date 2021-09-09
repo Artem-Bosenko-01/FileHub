@@ -39,6 +39,8 @@ public final class WebApplication {
         delete(APPLICATION_NAME + API_VERSION_1_0 + "/file/:id", new DeleteFileRoute(service.deleteFile()));
         post(APPLICATION_NAME + API_VERSION_1_0 + "/folder/:id/folder", new CreateFolderRoute(service.createFolder()));
         post(APPLICATION_NAME + API_VERSION_1_0 + "/logOut", new LogOutRoute(service.logOut()));
+        put(APPLICATION_NAME + API_VERSION_1_0 + "/folder/:id", new UpdateFolderRoute(service.updateFolder()));
+        put(APPLICATION_NAME + API_VERSION_1_0 + "/file/:id", new UpdateFileRoute(service.updateFile()));
     }
 
     public void stop() {

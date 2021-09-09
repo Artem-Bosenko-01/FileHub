@@ -2,12 +2,12 @@ package io.javaclasses.fileHub.webservices.user;
 
 import com.google.gson.JsonObject;
 import io.javaclasses.fileHub.services.AuthToken;
-import io.javaclasses.fileHub.services.ValidationCommandDataException;
+import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
 import io.javaclasses.fileHub.services.users.AuthenticateUser;
 import io.javaclasses.fileHub.services.users.AuthenticationUserCommand;
 import io.javaclasses.fileHub.services.users.DuplicatedUserException;
 import io.javaclasses.fileHub.services.users.UserNotFoundException;
-import io.javaclasses.fileHub.webservices.ErrorResponse;
+import io.javaclasses.fileHub.webservices.ResponseMessage;
 import io.javaclasses.fileHub.webservices.InvalidParsingToJsonObject;
 import spark.Request;
 import spark.Response;
@@ -56,31 +56,31 @@ public final class AuthenticationRoute implements Route {
 
             response.status(SC_BAD_REQUEST);
 
-            return new ErrorResponse(invalidParsingToJsonObject.getMessage()).serialize();
+            return new ResponseMessage(invalidParsingToJsonObject.getMessage()).serialize();
 
         } catch (UserNotFoundException e) {
 
             response.status(SC_NOT_FOUND);
 
-            return new ErrorResponse(e.getMessage()).serialize();
+            return new ResponseMessage(e.getMessage()).serialize();
 
         } catch (DuplicatedUserException e) {
 
             response.status(SC_CONFLICT);
 
-            return new ErrorResponse(e.message()).serialize();
+            return new ResponseMessage(e.message()).serialize();
 
-        } catch (ValidationCommandDataException e) {
+        } catch (InvalidValidationCommandDataException e) {
 
             response.status(INVALID_ENTITY_VALIDATION);
 
-            return new ErrorResponse("Error: Invalid user credentials.").serialize();
+            return new ResponseMessage("Error: Invalid user credentials.").serialize();
 
         } catch (Exception e) {
 
             response.status(SC_INTERNAL_SERVER_ERROR);
 
-            return new ErrorResponse("Internal server error.").serialize();
+            return new ResponseMessage("Internal server error.").serialize();
         }
     }
 }

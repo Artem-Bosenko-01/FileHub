@@ -9,8 +9,8 @@ public final class FileContent implements DataRecord<FileId> {
     private final FileId id;
     private byte[] content;
 
-    public FileContent(FileId id) {
-        this.id = Preconditions.checkNotNull(id);
+    public FileContent(String id) {
+        this.id = new FileId(Preconditions.checkNotNull(id));
     }
 
     @Override

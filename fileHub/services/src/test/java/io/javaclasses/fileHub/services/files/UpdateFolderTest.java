@@ -10,7 +10,7 @@ import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemo
 import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.NotAuthorizedUserException;
-import io.javaclasses.fileHub.services.ValidationCommandDataException;
+import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 class UpdateFolderTest {
 
     @Test
-    public void updateInfoAboutFolderByTest() throws InvalidCommandHandlingException, ValidationCommandDataException, NotAuthorizedUserException {
+    public void updateInfoAboutFolderByTest() throws InvalidCommandHandlingException, InvalidValidationCommandDataException, NotAuthorizedUserException {
 
         FolderStorage folderStorage = new FolderStorageInMemory();
 
@@ -30,8 +30,8 @@ class UpdateFolderTest {
 
         FolderId id = fileSystemTestData.createFolder(folderStorage, null);
 
-        UpdateFolderCommand command = new UpdateFolderCommand(fileSystemTestData.token(), id,
-                "lkijij", fileSystemTestData.id(), null);
+        UpdateFolderCommand command = new UpdateFolderCommand(fileSystemTestData.token(), id.toString(),
+                "lkijij", 0L, null);
 
         UpdateFolder process = new UpdateFolder(folderStorage, authorizationStorage);
 
@@ -43,7 +43,7 @@ class UpdateFolderTest {
 
 
     @Test
-    public void failedUpdateInfoAboutFolderByNotExistIdTest() throws InvalidCommandHandlingException, ValidationCommandDataException {
+    public void failedUpdateInfoAboutFolderByNotExistIdTest() throws InvalidCommandHandlingException, InvalidValidationCommandDataException {
 
         FolderStorage folderStorage = new FolderStorageInMemory();
 
@@ -55,13 +55,11 @@ class UpdateFolderTest {
 
         fileSystemTestData.createFolder(folderStorage, null);
 
-        FolderId folderID = new FolderId("parent", fileSystemTestData.id());
+        FolderId folderID = new FolderId("parent" + fileSystemTestData.id());
 
 
         UpdateFolderCommand command = new UpdateFolderCommand(new AuthToken("1"),
-                new FolderId("newFolder",
-                        fileSystemTestData.id()),
-                "lkijij", fileSystemTestData.id(), folderID);
+                "newFolder", "lkijij", 0L, folderID.toString());
 
         UpdateFolder process = new UpdateFolder(folderStorage, authorizationStorage);
 

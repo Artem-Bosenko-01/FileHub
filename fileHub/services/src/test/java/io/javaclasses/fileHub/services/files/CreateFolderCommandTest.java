@@ -2,6 +2,7 @@ package io.javaclasses.fileHub.services.files;
 
 import com.google.common.testing.NullPointerTester;
 import io.javaclasses.fileHub.services.AuthToken;
+import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
 import org.junit.jupiter.api.Test;
 
 
@@ -23,7 +24,7 @@ CreateFolderCommandTest {
     }
 
     @Test
-    public void checkForNullPointerInSetters() {
+    public void checkForNullPointerInSetters() throws InvalidValidationCommandDataException {
 
         NullPointerTester tester = new NullPointerTester();
         tester.testAllPublicInstanceMethods(new CreateFolderCommand(new AuthToken(""),

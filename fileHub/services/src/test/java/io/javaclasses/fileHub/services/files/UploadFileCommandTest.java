@@ -19,7 +19,7 @@ class UploadFileCommandTest {
                 setDefault(String.class, "").
                 setDefault(MimeType.class, MimeType.TEXT).
                 setDefault(UserId.class, new UserId("")).
-                setDefault(FolderId.class, new FolderId("v", new UserId(""))).
+                setDefault(FolderId.class, new FolderId("v")).
                 setDefault(byte[].class, new byte[]{});
 
         tester.testConstructor(UploadFileCommand.class.getConstructor(AuthToken.class, String.class,
@@ -32,7 +32,7 @@ class UploadFileCommandTest {
 
         NullPointerTester tester = new NullPointerTester();
         tester.testAllPublicInstanceMethods(new UploadFileCommand(new AuthToken(""),
-                "", MediaType.PLAIN_TEXT_UTF_8, new UserId(""), new FolderId("", new UserId("")),
+                "", MediaType.PLAIN_TEXT_UTF_8, new UserId(""), new FolderId(""),
                 new byte[]{}));
 
     }

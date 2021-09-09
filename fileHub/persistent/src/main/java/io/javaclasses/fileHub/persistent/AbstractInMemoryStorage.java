@@ -15,10 +15,10 @@ public abstract class AbstractInMemoryStorage<I extends RecordId, E extends Data
     private final Map<I, E> records = new HashMap<>();
 
     @Override
-    public void create(E inputDataObject) throws DuplicatedUserIdException {
+    public void create(E inputDataObject) throws DuplicatedIdException {
 
         if (records.containsKey(inputDataObject.id())) {
-            throw new DuplicatedUserIdException("Duplicate id " + inputDataObject.id());
+            throw new DuplicatedIdException("Duplicate id " + inputDataObject.id());
         }
 
         records.put(inputDataObject.id(), inputDataObject);

@@ -1,6 +1,6 @@
 package io.javaclasses.fileHub.services.files;
 
-import io.javaclasses.fileHub.persistent.DuplicatedUserIdException;
+import io.javaclasses.fileHub.persistent.DuplicatedIdException;
 import io.javaclasses.fileHub.persistent.files.Folder;
 import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.files.FolderStorage;
@@ -24,7 +24,7 @@ public class CreateFolder extends SecuredUserProcess<CreateFolderCommand, Folder
 
     private static final Logger logger = LoggerFactory.getLogger(CreateFolder.class);
 
-    private final FolderStorage folderStorageInMemory;
+    private final FolderStorage folderStorage;
 
     private final AuthorizationStorage authorizationStorage;
 
@@ -32,7 +32,7 @@ public class CreateFolder extends SecuredUserProcess<CreateFolderCommand, Folder
 
         super(authorizationStorage);
 
-        this.folderStorageInMemory = checkNotNull(userStorage);
+        this.folderStorage = checkNotNull(userStorage);
         this.authorizationStorage = checkNotNull(authorizationStorage);
     }
 
@@ -49,7 +49,8 @@ public class CreateFolder extends SecuredUserProcess<CreateFolderCommand, Folder
                 logger.info("Start create folder " + query.name());
             }
 
-            FolderId id = new FolderId(query.name(), userId);
+            String id = query.name() + userId;
+
             Folder folder = new Folder(id);
             folder.setParentFolder(query.parentFolder());
             folder.setName(query.name());
@@ -58,15 +59,17 @@ public class CreateFolder extends SecuredUserProcess<CreateFolderCommand, Folder
 
             try {
 
-                folderStorageInMemory.create(folder);
+                folderStorage.create(folder);
 
                 if (logger.isInfoEnabled()) {
                     logger.info("Created folder was successful. id: " + folder.id());
                 }
 
+                folderStorage.increaseItemsAmount(folder.parentFolder());
+
                 return folder.id();
 
-            } catch (DuplicatedUserIdException e) {
+            } catch (DuplicatedIdException e) {
 
                 if (logger.isErrorEnabled()) {
                     logger.error(e.getMessage());

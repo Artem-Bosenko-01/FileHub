@@ -54,7 +54,7 @@ public class ServiceLocator {
         getFolderById = new GetFolderById(folderStorage, authorizationStorage);
         getUserInfo = new GetUserInfo(userStorage, authorizationStorage);
         getFolderContent = new GetFolderContent(folderStorage, fileStorage, authorizationStorage);
-        deleteFolder = new DeleteFolder(folderStorage, authorizationStorage);
+        deleteFolder = new DeleteFolder(folderStorage,fileStorage, authorizationStorage);
         deleteFile = new DeleteFile(fileStorage,folderStorage, authorizationStorage);
         createFolder = new CreateFolder(folderStorage, authorizationStorage);
         logOut = new LogOut(authorizationStorage);

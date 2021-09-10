@@ -13,7 +13,8 @@ class UpdateFolderCommandTest {
         NullPointerTester tester = new NullPointerTester();
 
         tester.setDefault(AuthToken.class, new AuthToken("")).
-                setDefault(String.class, "");
+                setDefault(Long.class, 0L).
+                setDefault(String.class, "folder");
 
         tester.testConstructor(UpdateFolderCommand.class.getConstructor(AuthToken.class, String.class,
                 String.class, Long.class, String.class));
@@ -25,7 +26,7 @@ class UpdateFolderCommandTest {
 
         NullPointerTester tester = new NullPointerTester();
         tester.testAllPublicInstanceMethods(new UpdateFolderCommand(new AuthToken(""), "",
-                "", 0L, ""));
+                "folder", 0L, ""));
 
     }
 }

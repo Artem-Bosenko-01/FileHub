@@ -23,7 +23,7 @@ public final class UpdateFileCommand extends AuthenticatedUserCommand {
 
     private final String folder;
 
-    public UpdateFileCommand(AuthToken token, String id, String name, String mimeType,
+    public UpdateFileCommand(AuthToken token, String id, String name, MediaType mimeType,
                              Long size, String folder) throws InvalidValidationCommandDataException {
 
         super(checkNotNull(token));
@@ -34,7 +34,7 @@ public final class UpdateFileCommand extends AuthenticatedUserCommand {
 
         this.name = checkNotNull(name);
 
-        this.mimeType = MediaType.parse(checkNotNull(mimeType));
+        this.mimeType = checkNotNull(mimeType);
 
         this.size = checkNotNull(size);
 

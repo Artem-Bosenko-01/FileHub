@@ -1,15 +1,13 @@
 package io.javaclasses.fileHub.services.files;
 
-import io.javaclasses.fileHub.persistent.files.FolderId;
-import io.javaclasses.fileHub.persistent.files.FolderStorage;
-import io.javaclasses.fileHub.persistent.files.FolderStorageInMemory;
+import io.javaclasses.fileHub.persistent.files.*;
 import io.javaclasses.fileHub.persistent.users.UserStorage;
 import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
-import io.javaclasses.fileHub.services.NotAuthorizedUserException;
 import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
+import io.javaclasses.fileHub.services.NotAuthorizedUserException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -21,6 +19,8 @@ class DeleteFolderTest {
     public void deleteFolderByIdTest() throws InvalidCommandHandlingException, InvalidValidationCommandDataException, NotAuthorizedUserException {
 
         FolderStorage folderStorage = new FolderStorageInMemory();
+
+        FileStorage fileStorage = new FileStorageInMemory();
 
         AuthorizationStorage authorizationStorage = new AuthorizationStorageInMemory();
 
@@ -34,7 +34,7 @@ class DeleteFolderTest {
 
         DeleteFolderCommand deleteFileCommand = new DeleteFolderCommand(fileSystemTestData.token(), id.toString());
 
-        DeleteFolder deleteFileProcess = new DeleteFolder(folderStorage, authorizationStorage);
+        DeleteFolder deleteFileProcess = new DeleteFolder(folderStorage, fileStorage, authorizationStorage);
 
         deleteFileProcess.handle(deleteFileCommand);
 
@@ -49,6 +49,8 @@ class DeleteFolderTest {
 
         FolderStorage folderStorage = new FolderStorageInMemory();
 
+        FileStorage fileStorage = new FileStorageInMemory();
+
         AuthorizationStorage authorizationStorage = new AuthorizationStorageInMemory();
 
         UserStorage userStorage = new UserStorageInMemory();
@@ -59,7 +61,7 @@ class DeleteFolderTest {
 
         DeleteFolderCommand deleteFolderCommand = new DeleteFolderCommand(fileSystemTestData.token(), "foldId");
 
-        DeleteFolder deleteFileProcess = new DeleteFolder(folderStorage, authorizationStorage);
+        DeleteFolder deleteFileProcess = new DeleteFolder(folderStorage, fileStorage, authorizationStorage);
 
         Assertions.assertThrows(InvalidCommandHandlingException.class,
                 () -> deleteFileProcess.handle(deleteFolderCommand));

@@ -25,4 +25,6 @@ public interface FolderStorage extends Storage<FolderId, Folder> {
 
     void increaseItemsAmount(String id);
 
+    List<Folder> getNestedFolders(String parentFolderId);
+
 }

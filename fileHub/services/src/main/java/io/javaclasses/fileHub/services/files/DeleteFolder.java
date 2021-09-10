@@ -2,6 +2,7 @@ package io.javaclasses.fileHub.services.files;
 
 import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.NotExistedItem;
+import io.javaclasses.fileHub.persistent.files.FileStorage;
 import io.javaclasses.fileHub.persistent.files.Folder;
 import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.files.FolderStorage;
@@ -10,6 +11,7 @@ import io.javaclasses.fileHub.services.SecuredUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -21,11 +23,15 @@ public class DeleteFolder extends SecuredUserProcess<DeleteFolderCommand, String
 
     private final FolderStorage folderStorage;
 
-    public DeleteFolder(FolderStorage folderStorage, AuthorizationStorage authorizationStorage) {
+    private final FileStorage fileStorage;
+
+    public DeleteFolder(FolderStorage folderStorage, FileStorage fileStorage, AuthorizationStorage authorizationStorage) {
 
         super(authorizationStorage);
 
         this.folderStorage = Preconditions.checkNotNull(folderStorage);
+
+        this.fileStorage = Preconditions.checkNotNull(fileStorage);
     }
 
     @Override
@@ -39,7 +45,7 @@ public class DeleteFolder extends SecuredUserProcess<DeleteFolderCommand, String
 
             Optional<Folder> folder = folderStorage.findByID(new FolderId(inputCommand.folderID()));
 
-            folderStorage.delete(inputCommand.folderID());
+            removeNestedItems(inputCommand.folderID());
 
             if (logger.isInfoEnabled()) {
                 logger.info("Deleted " + inputCommand.folderID() + " was successful");
@@ -58,5 +64,27 @@ public class DeleteFolder extends SecuredUserProcess<DeleteFolderCommand, String
             throw new FolderNotFoundException(inputCommand.folderID());
         }
 
+    }
+
+    private void removeNestedItems(String id) throws NotExistedItem {
+
+        fileStorage.deleteFilesByParentFolderId(id);
+
+        folderStorage.delete(id);
+
+        List<Folder> nestedFolders = folderStorage.getNestedFolders(id);
+
+        nestedFolders.forEach(folder -> {
+
+            try {
+
+                removeNestedItems(folder.id().toString());
+
+            } catch (NotExistedItem notExistedItem) {
+
+                throw new RuntimeException("Something go wrong!");
+            }
+
+        });
     }
 }

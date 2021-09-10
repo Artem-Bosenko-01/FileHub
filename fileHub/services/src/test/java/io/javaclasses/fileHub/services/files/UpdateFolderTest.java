@@ -11,6 +11,7 @@ import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.NotAuthorizedUserException;
 import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
+import io.javaclasses.fileHub.services.users.UserTestData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -57,8 +58,9 @@ class UpdateFolderTest {
 
         FolderId folderID = new FolderId("parent" + fileSystemTestData.id());
 
+        AuthToken token = UserTestData.authenticateJohnUser(userStorage, authorizationStorage);
 
-        UpdateFolderCommand command = new UpdateFolderCommand(new AuthToken("1"),
+        UpdateFolderCommand command = new UpdateFolderCommand(token,
                 "newFolder", "lkijij", 0L, folderID.toString());
 
         UpdateFolder process = new UpdateFolder(folderStorage, authorizationStorage);

@@ -12,6 +12,7 @@ class GetFolderByIdQueryTest {
         NullPointerTester tester = new NullPointerTester();
 
         tester.setDefault(AuthToken.class, new AuthToken(""));
+        tester.setDefault(String.class, "");
         tester.testAllPublicConstructors(GetFolderByIdQuery.class);
 
     }

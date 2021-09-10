@@ -13,8 +13,9 @@ import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
-import io.javaclasses.fileHub.services.NotAuthorizedUserException;
 import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
+import io.javaclasses.fileHub.services.NotAuthorizedUserException;
+import io.javaclasses.fileHub.services.users.UserTestData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -38,7 +39,7 @@ class UpdateFileTest {
         FileId creteFileId = new FileId(fileSystemTestData.uploadFile(fileStorageInMemory, fIleContentStorage));
 
         UpdateFileCommand command = new UpdateFileCommand(fileSystemTestData.token(), creteFileId.toString(),
-                "lkijij", MediaType.GIF.toString(), 65L, folderID.toString());
+                "lkijij", MediaType.GIF, 65L, folderID.toString());
 
         UpdateFile process = new UpdateFile(fileStorageInMemory, authorizationStorage);
 
@@ -64,16 +65,18 @@ class UpdateFileTest {
 
         UserId userID = new UserId("artem@gmail.com");
 
+        AuthToken token = UserTestData.authenticateJohnUser(userStorage, authorizationStorage);
+
         fileSystemTestData.uploadFile(fileStorageInMemory, fIleContentStorage);
 
         FolderId folderID = new FolderId("JHGF" + userID);
 
-        UpdateFileCommand command = new UpdateFileCommand(new AuthToken("1"), new FileId("csac").toString(),
-                "lkijij", MediaType.GIF.toString(), 65L, folderID.toString());
+        UpdateFileCommand command = new UpdateFileCommand(token, new FileId("csac").toString(),
+                "lkijij", MediaType.GIF, 65L, folderID.toString());
 
         UpdateFile process = new UpdateFile(fileStorageInMemory, authorizationStorage);
 
-        Assertions.assertThrows(InvalidCommandHandlingException.class, () -> process.handle(command));
+        Assertions.assertThrows(FileNotFoundException.class, () -> process.handle(command));
 
     }
 }

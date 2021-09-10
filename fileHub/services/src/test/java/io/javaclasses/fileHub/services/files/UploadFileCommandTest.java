@@ -19,6 +19,7 @@ class UploadFileCommandTest {
                 setDefault(String.class, "").
                 setDefault(MimeType.class, MimeType.TEXT).
                 setDefault(UserId.class, new UserId("")).
+                setDefault(MediaType.class, MediaType.GIF).
                 setDefault(FolderId.class, new FolderId("v")).
                 setDefault(byte[].class, new byte[]{});
 

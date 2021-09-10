@@ -6,6 +6,8 @@ import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.AuthenticatedUserCommand;
 import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
 
+import javax.annotation.Nullable;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 import static io.javaclasses.fileHub.services.ValidationRules.validateItemName;
 
@@ -19,9 +21,10 @@ public final class CreateFolderCommand extends AuthenticatedUserCommand {
 
     private final Long itemsAmount;
 
+    @Nullable
     private final String parentFolder;
 
-    public CreateFolderCommand(AuthToken token, String name, Integer itemsAmount, String parentFolder)
+    public CreateFolderCommand(AuthToken token, String name, Integer itemsAmount, @Nullable String parentFolder)
             throws InvalidValidationCommandDataException {
 
         super(checkNotNull(token));
@@ -32,7 +35,7 @@ public final class CreateFolderCommand extends AuthenticatedUserCommand {
 
         this.itemsAmount = Long.valueOf(checkNotNull(itemsAmount));
 
-        this.parentFolder = checkNotNull(parentFolder);
+        this.parentFolder = parentFolder;
 
     }
 

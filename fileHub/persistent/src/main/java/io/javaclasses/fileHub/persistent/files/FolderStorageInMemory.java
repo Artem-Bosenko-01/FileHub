@@ -87,4 +87,12 @@ public class FolderStorageInMemory extends AbstractInMemoryStorage<FolderId, Fol
 
         folder.ifPresent(value -> value.setItemsAmount(value.itemsAmount() + 1));
     }
+
+    @Override
+    public List<Folder> getNestedFolders(String parentFolderId) {
+
+        return records().values().stream().
+                filter(folder -> folder.parentFolder() != null && folder.parentFolder().equals(parentFolderId)).
+                collect(Collectors.toList());
+    }
 }

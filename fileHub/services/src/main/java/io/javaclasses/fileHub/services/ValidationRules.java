@@ -53,7 +53,7 @@ public class ValidationRules {
         String[] array = str.split("");
 
         for (String c : array) {
-            if (!c.matches("[0-9a-zA-Z @]")) {
+            if (!c.matches("[0-9a-zA-Z @.*]")) {
                 return false;
             }
         }

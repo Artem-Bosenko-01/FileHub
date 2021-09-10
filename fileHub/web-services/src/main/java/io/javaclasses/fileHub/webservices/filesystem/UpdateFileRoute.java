@@ -1,5 +1,6 @@
 package io.javaclasses.fileHub.webservices.filesystem;
 
+import com.google.common.net.MediaType;
 import com.google.gson.JsonObject;
 import io.javaclasses.fileHub.persistent.files.FileId;
 import io.javaclasses.fileHub.services.AuthToken;
@@ -82,6 +83,6 @@ public class UpdateFileRoute implements Route {
         long size = jsonObject.get("size").getAsLong();
         String parentFolderId = jsonObject.get("parentFolderId").getAsString();
 
-        return new UpdateFileCommand(new AuthToken(token), id, name, mimeType, size, parentFolderId);
+        return new UpdateFileCommand(new AuthToken(token), id, name, MediaType.parse(mimeType), size, parentFolderId);
     }
 }

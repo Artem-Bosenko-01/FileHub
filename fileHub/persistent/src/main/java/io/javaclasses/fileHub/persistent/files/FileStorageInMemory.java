@@ -29,4 +29,14 @@ public class FileStorageInMemory extends AbstractInMemoryStorage<FileId, File>
         return records().values().stream().anyMatch(file -> file.name().equals(name));
     }
 
+    @Override
+    public void deleteFilesByParentFolderId(String parentFolderId) {
+
+        List<File> removedFiles = records().values().stream().
+                filter(file -> file.folder().equals(parentFolderId)).collect(Collectors.toList());
+
+        removedFiles.forEach(removedFile -> records().remove(removedFile.id()));
+
+    }
+
 }

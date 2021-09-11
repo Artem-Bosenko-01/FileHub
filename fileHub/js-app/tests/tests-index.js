@@ -32,5 +32,10 @@ import './app/services/state-management/fetch-current-directory/tetsts-fetch-cur
 import './app/services/state-management/fetch-current-folder-content/fetch-current-folder-content-executor.js';
 import './app/services/state-management/route-changed-action/tetsts-route-changed-executor.js';
 import './app/services/state-management/get-current-user/get-current-user-executor.js';
+import './app/services/state-management/delete-item/delete-item-executor.js';
 
 import './app/services/state-management/tests-mutator.js';
+
+import './app/modals/tests-base-modal.js';
+import './app/modals/tests-remove-dialog.js';
+import './app/services/tests-modal-services.js';

@@ -3,6 +3,8 @@ import {HASH_CHANGED_MUTATOR} from './hash-changed-mutator.js';
 import {GET_ROOT_FOLDER_MUTATOR} from './get-root-folder-mutator.js';
 import {FETCH_CURRENT_FOLDER_CONTENT_MUTATOR} from './fetch-current-folder-content-mutator.js';
 import {GET_CURRENT_USER_MUTATOR} from './get-current-user-mutator.js';
+import {DELETE_ITEM_MUTATOR} from './delete-item-mutator.js';
+import {MODAL_WINDOW_MUTATOR} from './modal-window-mutator.js';
 
 export const mutator = (mutatorName, details, state) => {
   switch (mutatorName) {
@@ -66,6 +68,29 @@ export const mutator = (mutatorName, details, state) => {
       return Object.assign({}, state, {
         isCurrentUserInfoFetching: false,
         fetchingCurrentUserDetailsErrorMessage: details.error,
+      });
+    case DELETE_ITEM_MUTATOR.FETCHING_STARTED:
+      return Object.assign({}, state, {
+        removingFile: details.removingFile,
+        deletingFileErrorMessage: '',
+      });
+    case DELETE_ITEM_MUTATOR.FETCHING_COMPLETED:
+      return Object.assign({}, state, {
+        removingFile: null,
+        itemInModalWindow: null,
+      });
+    case DELETE_ITEM_MUTATOR.FETCHING_FAILED:
+      return Object.assign({}, state, {
+        deletingFileErrorMessage: details.error,
+        itemInModalWindow: null,
+      });
+    case MODAL_WINDOW_MUTATOR.OPEN:
+      return Object.assign({}, state, {
+        itemInModalWindow: details.item,
+      });
+    case MODAL_WINDOW_MUTATOR.CLOSE:
+      return Object.assign({}, state, {
+        itemInModalWindow: null,
       });
   }
 };

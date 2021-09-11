@@ -11,6 +11,7 @@ import {ActionFactory} from './services/state-management/action-factory.js';
 import {RouteChanged} from './services/state-management/route-changed-action/route-changed.js';
 import {RoutingConfiguration} from './services/routing-configuration.js';
 import {mutator} from './services/state-management/mutator/mutator.js';
+import {ModalsService} from './services/modals/modals-service.js';
 
 /**
  * Entry point of FileHub application.
@@ -27,6 +28,7 @@ export class Application extends Component {
     const configuration = new RoutingConfiguration(logInRoute);
     const router = new Router(window);
     const factory = new ActionFactory();
+    const modalsService = new ModalsService(this.rootElement);
     const stateManager = new StateManager({}, {apiService}, factory, mutator);
 
     configuration.onRedirect((route) => router.redirect(route));
@@ -43,7 +45,7 @@ export class Application extends Component {
           page.onRedirectToAuthenticationPage(() => router.redirect(logInRoute));
         })
         .addRoute(indexRoute, () => {
-          new FileListPage(this.rootElement, titleService, stateManager)
+          new FileListPage(this.rootElement, titleService, stateManager, modalsService)
               .onNavigateToFolder((folderId) => router.redirect(`${indexRoute}/${folderId}`));
         })
         .addRoute(errorPageRoute, () => new ErrorPage(this.rootElement))

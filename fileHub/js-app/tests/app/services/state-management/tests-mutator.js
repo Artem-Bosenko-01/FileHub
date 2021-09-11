@@ -134,4 +134,48 @@ module('Mutator', () => {
       isCurrentUserInfoFetching: false,
     }, 'Should set error message');
   });
+
+  test('Should change state on DELETE_ITEM_FETCHING_STARTED mutator name', (assert) => {
+    const removingFileName = 'error';
+    const mockDetails = {
+      removingFile: removingFileName,
+    };
+    const mutatedState = mutator('DELETE_ITEM_FETCHING_STARTED', mockDetails, {});
+    assert.deepEqual(mutatedState, {
+      removingFile: removingFileName,
+      deletingFileErrorMessage: '',
+    },
+    'Should set current removing file');
+  });
+
+  test('Should change state on DELETE_ITEM_FETCHING_COMPLETED mutator name', (assert) => {
+    const mutatedState = mutator('DELETE_ITEM_FETCHING_COMPLETED', {}, {});
+    assert.deepEqual(mutatedState, {itemInModalWindow: null, removingFile: null}, 'Should set removingFile null');
+  });
+
+  test('Should change state on DELETE_ITEM_FETCHING_FAILED mutator name', (assert) => {
+    const errorMessage = 'error';
+    const mockDetails = {
+      error: errorMessage,
+    };
+    const mutatedState = mutator('DELETE_ITEM_FETCHING_FAILED', mockDetails, {});
+    assert.deepEqual(mutatedState, {
+      itemInModalWindow: null,
+      deletingFileErrorMessage: errorMessage,
+    }, 'Should set error message');
+  });
+
+  test('Should change state on OPEN_MODAL_WINDOW mutator name', (assert) => {
+    const fileName = 'file name';
+    const mockDetails = {
+      item: fileName,
+    };
+    const mutatedState = mutator('OPEN_MODAL_WINDOW', mockDetails, {});
+    assert.deepEqual(mutatedState, {itemInModalWindow: fileName}, 'Should set removingFile');
+  });
+
+  test('Should change state on CLOSE_MODAL_WINDOW mutator name', (assert) => {
+    const mutatedState = mutator('CLOSE_MODAL_WINDOW', {}, {});
+    assert.deepEqual(mutatedState, {itemInModalWindow: null}, 'Should set removingFile null');
+  });
 });

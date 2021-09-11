@@ -6,7 +6,16 @@ import {FileListItemView} from './file-list-item-view/file-list-item-view.js';
  */
 export class FileList extends Component {
   /**
-   * Event for navigation through folders.
+   * Add listener on click delete button.
+   * @param {function(item: FileListItem)} listener
+   */
+  onDeleteButtonClick(listener) {
+    this._onDeleteButtonClick = listener;
+    this._render();
+  }
+
+  /**
+   * Listener for navigation through folders.
    * @param {function(folderId: string)} listener
    */
   onFolderClick(listener) {
@@ -53,6 +62,7 @@ export class FileList extends Component {
       this._fileItems.forEach((fileItem) => {
         const itemView = new FileListItemView(tableElement, fileItem);
         itemView.onFolderNameCLicked(this._onFolderClickedEvent);
+        itemView.onDeleteButtonClick(this._onDeleteButtonClick);
       });
     }
   }

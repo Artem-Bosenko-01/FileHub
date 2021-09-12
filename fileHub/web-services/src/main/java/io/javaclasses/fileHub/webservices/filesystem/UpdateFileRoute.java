@@ -47,7 +47,7 @@ public class UpdateFileRoute implements Route {
 
             return new ResponseMessage("File with id: " + updatedFileId + " was successfully updated").serialize();
 
-        } catch (FileNameAlreadyUsed | InvalidParsingToJsonObject exception) {
+        } catch (FileNameAlreadyUsedException | InvalidParsingToJsonObject exception) {
 
             response.status(SC_BAD_REQUEST);
             return new ResponseMessage(exception.getMessage()).serialize();

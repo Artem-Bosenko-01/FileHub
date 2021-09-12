@@ -2,7 +2,10 @@ package io.javaclasses.fileHub.services;
 
 import com.google.common.net.MediaType;
 import io.javaclasses.fileHub.persistent.DuplicatedIdException;
+import io.javaclasses.fileHub.persistent.Storage;
 import io.javaclasses.fileHub.persistent.files.*;
+import io.javaclasses.fileHub.persistent.files.content.FIleContentStorage;
+import io.javaclasses.fileHub.persistent.files.content.FileContentStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.User;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.persistent.users.UserStorage;
@@ -12,6 +15,7 @@ import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemo
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationUsers;
 import io.javaclasses.fileHub.persistent.users.tokens.UserAuthToken;
 import io.javaclasses.fileHub.services.files.*;
+import io.javaclasses.fileHub.services.files.content.GetFileContent;
 import io.javaclasses.fileHub.services.files.content.GetFolderContent;
 import io.javaclasses.fileHub.services.users.AuthenticateUser;
 import io.javaclasses.fileHub.services.users.GetUserInfo;
@@ -38,6 +42,8 @@ public class ServiceLocator {
     private final LogOut logOut;
     private final UpdateFile updateFile;
     private final UpdateFolder updateFolder;
+    private final UploadFile uploadFile;
+    private final GetFileContent getFileContent;
 
     public ServiceLocator() {
 
@@ -45,6 +51,7 @@ public class ServiceLocator {
         UserStorage userStorage = new UserStorageInMemory();
         FolderStorage folderStorage = new FolderStorageInMemory();
         FileStorage fileStorage = new FileStorageInMemory();
+        FIleContentStorage fIleContentStorage = new FileContentStorageInMemory();
 
         initDataForDB(authorizationStorage, userStorage, folderStorage, fileStorage);
 
@@ -54,12 +61,14 @@ public class ServiceLocator {
         getFolderById = new GetFolderById(folderStorage, authorizationStorage);
         getUserInfo = new GetUserInfo(userStorage, authorizationStorage);
         getFolderContent = new GetFolderContent(folderStorage, fileStorage, authorizationStorage);
-        deleteFolder = new DeleteFolder(folderStorage,fileStorage, authorizationStorage);
-        deleteFile = new DeleteFile(fileStorage,folderStorage, authorizationStorage);
+        deleteFolder = new DeleteFolder(folderStorage, fileStorage, authorizationStorage);
+        deleteFile = new DeleteFile(fileStorage, folderStorage, authorizationStorage);
         createFolder = new CreateFolder(folderStorage, authorizationStorage);
         logOut = new LogOut(authorizationStorage);
         updateFile = new UpdateFile(fileStorage, authorizationStorage);
         updateFolder = new UpdateFolder(folderStorage, authorizationStorage);
+        uploadFile = new UploadFile(fIleContentStorage, fileStorage, folderStorage, authorizationStorage);
+        getFileContent = new GetFileContent(fIleContentStorage, authorizationStorage);
     }
 
     public AuthenticateUser authenticateUser() {
@@ -110,7 +119,15 @@ public class ServiceLocator {
         return updateFolder;
     }
 
-    private void initDataForDB(AuthorizationStorage authorizationStorage, UserStorage userStorage, FolderStorage folderStorage, FileStorage fileStorage) {
+    public UploadFile uploadFile() {
+        return uploadFile;
+    }
+
+    public GetFileContent getFileContent() {
+        return getFileContent;
+    }
+
+    private static void initDataForDB(Storage<UserAuthToken, AuthorizationUsers> authorizationStorage, Storage<UserId, User> userStorage, Storage<FolderId, Folder> folderStorage, Storage<FileId, File> fileStorage) {
 
         UserId id = new UserId("id");
 

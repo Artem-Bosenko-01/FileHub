@@ -4,7 +4,9 @@ import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 
 public class FileNotFoundException extends InvalidCommandHandlingException {
 
-    public FileNotFoundException(String fileId) {
+    private static final long serialVersionUID = -5290288324879605630L;
+
+    FileNotFoundException(String fileId) {
 
         super("Cannot find file with id: " + fileId);
     }

@@ -19,10 +19,10 @@ public final class FileContent implements DataRecord<FileId> {
     }
 
     public byte[] content() {
-        return content;
+        return content.clone();
     }
 
     public void setContent(byte[] content) {
-        this.content = content;
+        this.content = content.clone();
     }
 }

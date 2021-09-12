@@ -1,9 +1,7 @@
 package io.javaclasses.fileHub.services.files;
 
 import com.google.common.net.MediaType;
-import io.javaclasses.fileHub.persistent.files.FileId;
-import io.javaclasses.fileHub.persistent.files.FileStorageInMemory;
-import io.javaclasses.fileHub.persistent.files.FolderId;
+import io.javaclasses.fileHub.persistent.files.*;
 import io.javaclasses.fileHub.persistent.files.content.FIleContentStorage;
 import io.javaclasses.fileHub.persistent.files.content.FileContentStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.UserId;
@@ -24,6 +22,8 @@ class UpdateFileTest {
     @Test
     public void updateInfoAboutFileByTest() throws InvalidCommandHandlingException, InvalidValidationCommandDataException, NotAuthorizedUserException {
 
+        FolderStorage folderStorage = new FolderStorageInMemory();
+
         FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
 
         FIleContentStorage fIleContentStorage = new FileContentStorageInMemory();
@@ -36,7 +36,7 @@ class UpdateFileTest {
 
         FolderId folderID = new FolderId("folder" + fileSystemTestData.id());
 
-        FileId creteFileId = new FileId(fileSystemTestData.uploadFile(fileStorageInMemory, fIleContentStorage));
+        FileId creteFileId = new FileId(fileSystemTestData.uploadFile(fileStorageInMemory, fIleContentStorage, folderStorage));
 
         UpdateFileCommand command = new UpdateFileCommand(fileSystemTestData.token(), creteFileId.toString(),
                 "lkijij", MediaType.GIF, 65L, folderID.toString());
@@ -53,6 +53,8 @@ class UpdateFileTest {
     @Test
     public void failedUpdateInfoAboutFileByNotExistIdTest() throws InvalidCommandHandlingException, InvalidValidationCommandDataException {
 
+        FolderStorage folderStorage = new FolderStorageInMemory();
+
         FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
 
         FIleContentStorage fIleContentStorage = new FileContentStorageInMemory();
@@ -67,7 +69,7 @@ class UpdateFileTest {
 
         AuthToken token = UserTestData.authenticateJohnUser(userStorage, authorizationStorage);
 
-        fileSystemTestData.uploadFile(fileStorageInMemory, fIleContentStorage);
+        fileSystemTestData.uploadFile(fileStorageInMemory, fIleContentStorage, folderStorage);
 
         FolderId folderID = new FolderId("JHGF" + userID);
 

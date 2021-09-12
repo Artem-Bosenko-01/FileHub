@@ -47,7 +47,7 @@ public class UpdateFolderRoute implements Route {
 
             return new ResponseMessage("Folder with id: " + updatedFolderId + " was successfully updated").serialize();
 
-        } catch (FolderNameAlreadyUsed | InvalidParsingToJsonObject exception) {
+        } catch (FolderNameAlreadyUsedException | InvalidParsingToJsonObject exception) {
 
             response.status(SC_BAD_REQUEST);
             return new ResponseMessage(exception.getMessage()).serialize();
@@ -60,8 +60,7 @@ public class UpdateFolderRoute implements Route {
         } catch (InvalidValidationCommandDataException e) {
 
             response.status(INVALID_ENTITY_VALIDATION);
-
-            return new ResponseMessage("Error: Invalid user credentials.").serialize();
+            return new ResponseMessage("Error: Invalid name of folder.").serialize();
 
         } catch (NotAuthorizedUserException e) {
 

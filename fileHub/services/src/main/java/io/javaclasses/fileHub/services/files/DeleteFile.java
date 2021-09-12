@@ -1,6 +1,6 @@
 package io.javaclasses.fileHub.services.files;
 
-import io.javaclasses.fileHub.persistent.NotExistedItem;
+import io.javaclasses.fileHub.persistent.NotExistedItemException;
 import io.javaclasses.fileHub.persistent.files.File;
 import io.javaclasses.fileHub.persistent.files.FileId;
 import io.javaclasses.fileHub.persistent.files.FileStorage;
@@ -10,6 +10,7 @@ import io.javaclasses.fileHub.services.SecuredUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -52,11 +53,11 @@ public class DeleteFile extends SecuredUserProcess<DeleteFileCommand, String> {
                 logger.info("Deleted " + inputCommand.id() + " was successful");
             }
 
-            file.ifPresent(value -> folderStorage.decreaseItemsAmount(value.folder()));
+            file.ifPresent(value -> folderStorage.decreaseItemsAmount(Objects.requireNonNull(value.folder())));
 
             return inputCommand.id();
 
-        } catch (NotExistedItem e) {
+        } catch (NotExistedItemException e) {
 
             if (logger.isErrorEnabled()) {
                 logger.error(e.getMessage());

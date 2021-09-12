@@ -7,6 +7,7 @@ import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
  */
 public class DuplicatedUserException extends InvalidCommandHandlingException {
 
+    private static final long serialVersionUID = 6950440625513627262L;
     private final String field;
     private final String message;
 

@@ -42,6 +42,7 @@ public final class Folder implements DataRecord<FolderId> {
         this.owner = checkNotNull(owner);
     }
 
+    @Nullable
     public String parentFolder() {
         return parentFolder;
     }

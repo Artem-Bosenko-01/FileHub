@@ -13,10 +13,12 @@ export class DownloadFileExecutor extends ActionExecutor {
    * @param {function} dispatch
    */
   async apply(actionInfo, services, state, mutate, dispatch) {
-    mutate(DOWNLOAD_FILE_MUTATOR.FETCHING_STARTED, {downloadedFile: actionInfo.fileId});
+
+
+    mutate(DOWNLOAD_FILE_MUTATOR.FETCHING_STARTED, {downloadedFile: actionInfo.file.id});
     try {
-      const fileContent = await services.apiService.downloadFile(actionInfo.fileId);
-      mutate(DOWNLOAD_FILE_MUTATOR.FETCHING_COMPLETED, {file: fileContent});
+      const file = await services.apiService.downloadFile(actionInfo.file);
+      mutate(DOWNLOAD_FILE_MUTATOR.FETCHING_COMPLETED, {file});
     } catch (error) {
       mutate(DOWNLOAD_FILE_MUTATOR.FETCHING_FAILED, {downloadedFile: actionInfo.fileId, error: error.message});
     }

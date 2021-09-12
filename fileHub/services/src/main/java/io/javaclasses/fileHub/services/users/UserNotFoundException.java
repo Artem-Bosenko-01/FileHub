@@ -7,6 +7,8 @@ import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
  */
 public class UserNotFoundException extends InvalidCommandHandlingException {
 
+    private static final long serialVersionUID = 8175924901843712702L;
+
     public UserNotFoundException(String loginName) {
 
         super("Cannot find user by login: " + loginName);

@@ -1,7 +1,7 @@
 package io.javaclasses.fileHub.services.files;
 
 import com.google.common.base.Preconditions;
-import io.javaclasses.fileHub.persistent.NotExistedItem;
+import io.javaclasses.fileHub.persistent.NotExistedItemException;
 import io.javaclasses.fileHub.persistent.files.FileStorage;
 import io.javaclasses.fileHub.persistent.files.Folder;
 import io.javaclasses.fileHub.persistent.files.FolderId;
@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -48,14 +49,14 @@ public class DeleteFolder extends SecuredUserProcess<DeleteFolderCommand, String
             removeNestedItems(inputCommand.folderID());
 
             if (logger.isInfoEnabled()) {
-                logger.info("Deleted " + inputCommand.folderID() + " was successful");
+                logger.info("Deleted folder" + inputCommand.folderID() + " was successful");
             }
 
-            folder.ifPresent(value -> folderStorage.decreaseItemsAmount(value.parentFolder()));
+            folder.ifPresent(value -> folderStorage.decreaseItemsAmount(Objects.requireNonNull(value.parentFolder())));
 
             return inputCommand.folderID();
 
-        } catch (NotExistedItem e) {
+        } catch (NotExistedItemException e) {
 
             if (logger.isErrorEnabled()) {
                 logger.error(e.getMessage());
@@ -66,7 +67,7 @@ public class DeleteFolder extends SecuredUserProcess<DeleteFolderCommand, String
 
     }
 
-    private void removeNestedItems(String id) throws NotExistedItem {
+    private void removeNestedItems(String id) throws NotExistedItemException {
 
         fileStorage.deleteFilesByParentFolderId(id);
 
@@ -80,7 +81,7 @@ public class DeleteFolder extends SecuredUserProcess<DeleteFolderCommand, String
 
                 removeNestedItems(folder.id().toString());
 
-            } catch (NotExistedItem notExistedItem) {
+            } catch (NotExistedItemException notExistedItemException) {
 
                 throw new RuntimeException("Something go wrong!");
             }

@@ -9,7 +9,10 @@ import java.nio.charset.StandardCharsets;
 /**
  * Util to encode input password in hashed string.
  */
-public final class PasswordEncoder {
+final class PasswordEncoder {
+
+    private PasswordEncoder() {
+    }
 
     public static String encode(String password) {
 

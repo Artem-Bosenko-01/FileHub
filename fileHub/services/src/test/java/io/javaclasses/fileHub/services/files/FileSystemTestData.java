@@ -43,24 +43,25 @@ public final class FileSystemTestData {
         return content;
     }
 
-    public String uploadFile(FileStorage fileStorage, FIleContentStorage fIleContentStorage)
-            throws InvalidCommandHandlingException {
+    public String uploadFile(FileStorage fileStorage, FIleContentStorage fIleContentStorage, FolderStorage folderStorage)
+            throws InvalidCommandHandlingException, InvalidValidationCommandDataException {
 
-        UploadFileCommand command = new UploadFileCommand(token, "folder", MediaType.PLAIN_TEXT_UTF_8, id,
-                new FolderId("folder" + id), content);
+        UploadFileCommand command = new UploadFileCommand(token, "folder", MediaType.PLAIN_TEXT_UTF_8,
+                "folder" + id, content);
 
-        UploadFile createFile = new UploadFile(fIleContentStorage, fileStorage, authorizationStorage);
+        UploadFile createFile = new UploadFile(fIleContentStorage, fileStorage, folderStorage, authorizationStorage);
 
         return createFile.doHandle(command);
     }
 
-    public String uploadFile(FileStorage fileStorage, FIleContentStorage fIleContentStorage, FolderId parent)
-            throws InvalidCommandHandlingException {
+    public String uploadFile(FileStorage fileStorage, FIleContentStorage fIleContentStorage, FolderStorage folderStorage,
+                             FolderId parent)
+            throws InvalidCommandHandlingException, InvalidValidationCommandDataException {
 
-        UploadFileCommand command = new UploadFileCommand(token, "folder", MediaType.PLAIN_TEXT_UTF_8, id, parent,
+        UploadFileCommand command = new UploadFileCommand(token, "folder", MediaType.PLAIN_TEXT_UTF_8, parent.toString(),
                 content);
 
-        UploadFile createFile = new UploadFile(fIleContentStorage, fileStorage, authorizationStorage);
+        UploadFile createFile = new UploadFile(fIleContentStorage, fileStorage, folderStorage, authorizationStorage);
 
         return createFile.doHandle(command);
     }
@@ -74,14 +75,13 @@ public final class FileSystemTestData {
                 name + userID);
     }
 
-    public UploadFileCommand uploadFileCommand() {
+    public UploadFileCommand uploadFileCommand() throws InvalidValidationCommandDataException {
 
         return new UploadFileCommand(
                 token,
                 "file.txt",
                 MediaType.PLAIN_TEXT_UTF_8,
-                id,
-                new FolderId("folder" + id),
+                "folder" + id,
                 content
         );
     }

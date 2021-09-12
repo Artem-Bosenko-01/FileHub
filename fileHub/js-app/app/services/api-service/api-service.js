@@ -60,7 +60,7 @@ export class ApiService {
     if (response.status === 422) {
       const errorMessages = await response.json();
       const errors = errorMessages.errors.map((responseError) =>
-        new ValidationErrorCase(responseError.field, responseError.message));
+          new ValidationErrorCase(responseError.field, responseError.message));
       throw new UnprocessableEntityError(errors);
     }
     this._checkResponseOnClientOrServerError(response);
@@ -181,17 +181,19 @@ export class ApiService {
 
   /**
    * Downloads file to the application.
-   * @param {string} fileId
-   * @returns {Promise<Blob, ClientServerError|ServerError>}
+   * @param {FileListItem} file
+   * @returns {Promise<File>}
    */
-  async downloadFile(fileId) {
-    const response = await this._fetch(`/file/${fileId}`, {
+  async downloadFile(file) {
+    const response = await this._fetch(`/file/${file.id}`, {
       method: 'GET',
       headers: new Headers({'Authorization': `Bearer ${this._getToken()}`}),
     });
 
     this._checkResponseOnClientOrServerError(response);
-    return await response.json();
+    const content = await response.blob();
+
+    return new File([content], file.name, {type: file.mimeType});
   }
 
   /**

@@ -16,15 +16,4 @@ public class UserStorageInMemory extends AbstractInMemoryStorage<UserId, User> i
                 findFirst();
 
     }
-
-    @Override
-    public Optional<User> findByLogin(String login) {
-
-        return records().
-                values().
-                stream().
-                filter((user) -> user.login().equals(login)).
-                findFirst();
-
-    }
 }

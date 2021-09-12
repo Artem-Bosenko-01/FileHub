@@ -1,5 +1,6 @@
 package io.javaclasses.fileHub.persistent;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -32,17 +33,17 @@ public abstract class AbstractInMemoryStorage<I extends RecordId, E extends Data
     }
 
     @Override
-    public void update(E inputDataObject) throws NotExistedItem {
+    public void update(E inputDataObject) throws NotExistedItemException {
 
         if (!records.containsKey(inputDataObject.id())) {
-            throw new NotExistedItem("Id doesn't exist " + inputDataObject.id());
+            throw new NotExistedItemException("Id doesn't exist " + inputDataObject.id());
         }
 
         records.put(inputDataObject.id(), inputDataObject);
     }
 
     @Override
-    public void delete(String dataRecordID) throws NotExistedItem {
+    public void delete(String dataRecordID) throws NotExistedItemException {
 
         Optional<I> foundKey = records.keySet().stream().filter(key -> key.toString().equals(dataRecordID)).findFirst();
 
@@ -52,7 +53,7 @@ public abstract class AbstractInMemoryStorage<I extends RecordId, E extends Data
 
         } else {
 
-            throw new NotExistedItem("Id doesn't exist " + dataRecordID);
+            throw new NotExistedItemException("Id doesn't exist " + dataRecordID);
         }
     }
 

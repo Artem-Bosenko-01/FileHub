@@ -1,6 +1,7 @@
 package io.javaclasses.fileHub.services;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -11,6 +12,7 @@ import java.util.List;
  */
 public class InvalidValidationCommandDataException extends Exception {
 
+    private static final long serialVersionUID = 8127868269959231547L;
     private final List<CommandValidationError> errors;
 
     public InvalidValidationCommandDataException() {
@@ -24,6 +26,6 @@ public class InvalidValidationCommandDataException extends Exception {
     }
 
     public List<CommandValidationError> errors() {
-        return errors;
+        return Collections.unmodifiableList(errors);
     }
 }

@@ -1,6 +1,6 @@
 package io.javaclasses.fileHub.services.files;
 
-import io.javaclasses.fileHub.persistent.NotExistedItem;
+import io.javaclasses.fileHub.persistent.NotExistedItemException;
 import io.javaclasses.fileHub.persistent.files.File;
 import io.javaclasses.fileHub.persistent.files.FileId;
 import io.javaclasses.fileHub.persistent.files.FileStorage;
@@ -37,7 +37,7 @@ public class UpdateFile extends SecuredUserProcess<UpdateFileCommand, FileId> {
 
     @Override
     protected FileId doHandle(UpdateFileCommand inputCommand)
-            throws FileNotFoundException, UsersTokenNotFoundException, FileNameAlreadyUsed {
+            throws FileNotFoundException, UsersTokenNotFoundException, FileNameAlreadyUsedException {
 
         if (fileStorage.isFIleNameAlreadyExist(inputCommand.name())) {
 
@@ -45,7 +45,7 @@ public class UpdateFile extends SecuredUserProcess<UpdateFileCommand, FileId> {
                 logger.error("File name: " + inputCommand.name() + " already used.");
             }
 
-            throw new FileNameAlreadyUsed(inputCommand.name());
+            throw new FileNameAlreadyUsedException(inputCommand.name());
         }
 
         Optional<AuthorizationUsers> owner = authorizationStorage.
@@ -74,7 +74,7 @@ public class UpdateFile extends SecuredUserProcess<UpdateFileCommand, FileId> {
 
                 return file.id();
 
-            } catch (NotExistedItem e) {
+            } catch (NotExistedItemException e) {
 
                 if (logger.isErrorEnabled()) {
                     logger.error(e.getMessage());

@@ -10,9 +10,9 @@ import io.javaclasses.fileHub.services.Query;
  */
 public final class GetFileContentQuery extends Query {
 
-    private final FileId fileID;
+    private final String fileID;
 
-    public GetFileContentQuery(AuthToken token, FileId fileID) {
+    public GetFileContentQuery(AuthToken token, String fileID) {
 
         super(Preconditions.checkNotNull(token));
 
@@ -20,7 +20,7 @@ public final class GetFileContentQuery extends Query {
 
     }
 
-    public FileId fileID() {
+    public String fileID() {
 
         return fileID;
     }

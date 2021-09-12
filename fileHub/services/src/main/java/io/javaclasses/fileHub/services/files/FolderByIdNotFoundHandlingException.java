@@ -8,6 +8,8 @@ import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
  */
 public final class FolderByIdNotFoundHandlingException extends InvalidCommandHandlingException {
 
+    private static final long serialVersionUID = 7878152519027008140L;
+
     public FolderByIdNotFoundHandlingException(String id) {
 
         super("Cannot find folder by id: " + id);

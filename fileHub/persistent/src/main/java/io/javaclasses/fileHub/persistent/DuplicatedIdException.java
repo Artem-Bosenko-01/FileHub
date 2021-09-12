@@ -6,7 +6,9 @@ package io.javaclasses.fileHub.persistent;
  */
 public class DuplicatedIdException extends Exception {
 
-    public DuplicatedIdException(String message) {
+    private static final long serialVersionUID = 1001153994850736816L;
+
+    DuplicatedIdException(String message) {
         super(message);
     }
 

@@ -6,7 +6,7 @@ import io.javaclasses.fileHub.services.files.UsersTokenNotFoundException;
 import io.javaclasses.fileHub.services.files.content.GetFolderContent;
 import io.javaclasses.fileHub.services.files.content.GetFolderContentDTO;
 import io.javaclasses.fileHub.services.files.content.GetFolderContentQuery;
-import io.javaclasses.fileHub.services.files.content.InvalidFolderContentGetting;
+import io.javaclasses.fileHub.services.files.content.InvalidFolderContentGettingException;
 import io.javaclasses.fileHub.webservices.ResponseMessage;
 import io.javaclasses.fileHub.webservices.RequestParser;
 import spark.Request;
@@ -43,7 +43,7 @@ public class GetFolderContentRoute implements Route {
 
             return new GetFolderContentSuccessfulResponse(folderContent.content()).serialize();
 
-        } catch (InvalidFolderContentGetting | UsersTokenNotFoundException e) {
+        } catch (InvalidFolderContentGettingException | UsersTokenNotFoundException e) {
 
             response.status(SC_NOT_FOUND);
             return new ResponseMessage(e.getMessage()).serialize();

@@ -51,6 +51,7 @@ public final class File implements DataRecord<FileId> {
         this.mimeType = Preconditions.checkNotNull(mimeType);
     }
 
+    @Nullable
     public String folder() {
         return folder;
     }

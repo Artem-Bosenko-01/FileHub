@@ -38,7 +38,7 @@ public class DeleteFolderRoute implements Route {
 
             String deletedFolderId = deleteFolder.handle(deleteFolderCommand);
 
-            return "Folder with id: " + deletedFolderId + " was successfully deleted";
+            return new ResponseMessage("Folder with id: " + deletedFolderId + " was successfully deleted").serialize();
 
         } catch (NotAuthorizedUserException e) {
 

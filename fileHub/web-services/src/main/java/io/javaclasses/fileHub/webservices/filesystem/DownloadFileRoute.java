@@ -1,26 +1,29 @@
 package io.javaclasses.fileHub.webservices.filesystem;
 
 import io.javaclasses.fileHub.services.AuthToken;
+import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.NotAuthorizedUserException;
-import io.javaclasses.fileHub.services.files.DeleteFile;
-import io.javaclasses.fileHub.services.files.DeleteFileCommand;
-import io.javaclasses.fileHub.services.files.FileNotFoundException;
+import io.javaclasses.fileHub.services.files.content.GetFileContent;
+import io.javaclasses.fileHub.services.files.content.GetFileContentDTO;
+import io.javaclasses.fileHub.services.files.content.GetFileContentQuery;
 import io.javaclasses.fileHub.webservices.RequestParser;
 import io.javaclasses.fileHub.webservices.ResponseMessage;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 
+import javax.servlet.ServletOutputStream;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 import static javax.servlet.http.HttpServletResponse.*;
 
-public class DeleteFileRoute implements Route {
+public class DownloadFileRoute implements Route {
 
-    private final DeleteFile deleteFile;
+    private final GetFileContent downloadFile;
 
-    public DeleteFileRoute(DeleteFile deleteFile) {
+    public DownloadFileRoute(GetFileContent downloadFile) {
 
-        this.deleteFile = checkNotNull(deleteFile);
+        this.downloadFile = checkNotNull(downloadFile);
     }
 
     @Override
@@ -32,20 +35,25 @@ public class DeleteFileRoute implements Route {
 
         String fileId = parser.getId();
 
+        GetFileContentQuery getFileContentQuery = new GetFileContentQuery(new AuthToken(token), fileId);
+
         try {
 
-            DeleteFileCommand deleteFileCommand = new DeleteFileCommand(new AuthToken(token), fileId);
+            GetFileContentDTO fileContent = downloadFile.handle(getFileContentQuery);
 
-            String deletedFileId = deleteFile.handle(deleteFileCommand);
+            try (ServletOutputStream outputStream = response.raw().getOutputStream();) {
+                outputStream.write(fileContent.content());
+            }
 
-            return new ResponseMessage("File with id: " + deletedFileId + " was successfully deleted").serialize();
+            response.status(SC_OK);
+            return response;
 
         } catch (NotAuthorizedUserException e) {
 
             response.status(SC_UNAUTHORIZED);
             return new ResponseMessage(e.getMessage()).serialize();
 
-        } catch (FileNotFoundException e) {
+        } catch (InvalidCommandHandlingException e) {
 
             response.status(SC_BAD_REQUEST);
             return new ResponseMessage(e.getMessage()).serialize();
@@ -53,8 +61,9 @@ public class DeleteFileRoute implements Route {
         } catch (Exception e) {
 
             response.status(SC_INTERNAL_SERVER_ERROR);
-
             return new ResponseMessage("Internal server error.").serialize();
         }
+
+
     }
 }

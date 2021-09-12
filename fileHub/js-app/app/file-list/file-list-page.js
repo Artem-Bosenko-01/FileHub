@@ -22,8 +22,7 @@ import {LogOutUser} from '../services/state-management/log-out-user-action/log-o
 import {SelectItem} from '../services/state-management/select-item-action/select-item.js';
 import {RenameItem} from '../services/state-management/rename-item-action/rename-item.js';
 import {SearchInfo} from '../services/state-management/search-info-action/search-info.js';
-import {FetchCurrentFolderContent}
-  from '../services/state-management/fetch-current-folder-content-action/fetch-current-folder-content.js';
+import {FetchCurrentFolderContent} from '../services/state-management/fetch-current-folder-content-action/fetch-current-folder-content.js';
 
 /**
  * Main page for authenticated user, that contains information about him and his saved files.
@@ -92,7 +91,7 @@ export class FileListPage extends StateBasedComponent {
     });
 
     fileList.onDownloadButtonClick((item) => {
-      this._stateManager.dispatch(new DownloadFile(item.id));
+      this._stateManager.dispatch(new DownloadFile(item));
     });
 
     fileList.onClickLine((itemId) => {

@@ -2,7 +2,6 @@ package io.javaclasses.fileHub.services.files;
 
 import com.google.common.base.Preconditions;
 import com.google.common.net.MediaType;
-import io.javaclasses.fileHub.persistent.files.FolderId;
 
 import javax.annotation.Nullable;
 
@@ -70,6 +69,7 @@ public final class FileSystemItemDto {
         return size;
     }
 
+    @Nullable
     public String parentFolderId() {
 
         return parentFolderId;

@@ -41,6 +41,8 @@ public final class WebApplication {
         post(APPLICATION_NAME + API_VERSION_1_0 + "/logOut", new LogOutRoute(service.logOut()));
         put(APPLICATION_NAME + API_VERSION_1_0 + "/folder/:id", new UpdateFolderRoute(service.updateFolder()));
         put(APPLICATION_NAME + API_VERSION_1_0 + "/file/:id", new UpdateFileRoute(service.updateFile()));
+        post(APPLICATION_NAME + API_VERSION_1_0 + "/folder/:id/file", new UploadFileRoute(service.uploadFile()));
+        get(APPLICATION_NAME + API_VERSION_1_0 + "/file/:id", new DownloadFileRoute(service.getFileContent()));
     }
 
     public void stop() {

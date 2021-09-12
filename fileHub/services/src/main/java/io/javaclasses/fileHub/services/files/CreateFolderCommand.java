@@ -49,7 +49,8 @@ public final class CreateFolderCommand extends AuthenticatedUserCommand {
         return itemsAmount;
     }
 
-    public String parentFolder() {
+    @Nullable
+    String parentFolder() {
 
         return parentFolder;
     }

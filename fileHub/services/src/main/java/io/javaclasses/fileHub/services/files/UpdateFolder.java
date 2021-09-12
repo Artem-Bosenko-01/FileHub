@@ -1,6 +1,6 @@
 package io.javaclasses.fileHub.services.files;
 
-import io.javaclasses.fileHub.persistent.NotExistedItem;
+import io.javaclasses.fileHub.persistent.NotExistedItemException;
 import io.javaclasses.fileHub.persistent.files.Folder;
 import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.files.FolderStorage;
@@ -37,7 +37,7 @@ public class UpdateFolder extends SecuredUserProcess<UpdateFolderCommand, Folder
 
     @Override
     protected FolderId doHandle(UpdateFolderCommand inputCommand)
-            throws FolderNotFoundException, UsersTokenNotFoundException, FolderNameAlreadyUsed {
+            throws FolderNotFoundException, UsersTokenNotFoundException, FolderNameAlreadyUsedException {
 
         if (folderStorage.isFolderNameAlreadyExist(inputCommand.name())) {
 
@@ -45,7 +45,7 @@ public class UpdateFolder extends SecuredUserProcess<UpdateFolderCommand, Folder
                 logger.error("Folder name: " + inputCommand.name() + " already used.");
             }
 
-            throw new FolderNameAlreadyUsed(inputCommand.name());
+            throw new FolderNameAlreadyUsedException(inputCommand.name());
         }
 
         Optional<AuthorizationUsers> owner = authorizationStorage.
@@ -72,7 +72,7 @@ public class UpdateFolder extends SecuredUserProcess<UpdateFolderCommand, Folder
 
                 return folder.id();
 
-            } catch (NotExistedItem e) {
+            } catch (NotExistedItemException e) {
 
                 if (logger.isErrorEnabled()) {
                     logger.error(e.getMessage());

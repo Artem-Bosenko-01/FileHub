@@ -1,7 +1,11 @@
 package io.javaclasses.fileHub.services.files.content;
 
-import io.javaclasses.fileHub.persistent.NotExistedItem;
-import io.javaclasses.fileHub.persistent.files.*;
+import io.javaclasses.fileHub.persistent.NotExistedItemException;
+import io.javaclasses.fileHub.persistent.files.File;
+import io.javaclasses.fileHub.persistent.files.FolderId;
+import io.javaclasses.fileHub.persistent.files.FolderStorage;
+import io.javaclasses.fileHub.persistent.files.FileStorage;
+import io.javaclasses.fileHub.persistent.files.Folder;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationUsers;
 import io.javaclasses.fileHub.persistent.users.tokens.UserAuthToken;
@@ -13,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,7 +46,7 @@ public class GetFolderContent extends View<GetFolderContentQuery, GetFolderConte
 
     @Override
     protected GetFolderContentDTO doHandle(GetFolderContentQuery query)
-            throws UsersTokenNotFoundException, InvalidFolderContentGetting {
+            throws UsersTokenNotFoundException, InvalidFolderContentGettingException {
 
         Optional<AuthorizationUsers> owner = authorizationStorage.findByID(new UserAuthToken(query.token().value()));
 
@@ -65,13 +70,13 @@ public class GetFolderContent extends View<GetFolderContentQuery, GetFolderConte
                 return new GetFolderContentDTO(convertToResultDto(folders, files));
 
 
-            } catch (NotExistedItem e) {
+            } catch (NotExistedItemException e) {
 
                 if (logger.isErrorEnabled()) {
                     logger.error(e.getMessage());
                 }
 
-                throw new InvalidFolderContentGetting(e.getMessage());
+                throw new InvalidFolderContentGettingException(e.getMessage());
             }
         } else {
 
@@ -84,7 +89,7 @@ public class GetFolderContent extends View<GetFolderContentQuery, GetFolderConte
         }
     }
 
-    private List<FileSystemItemDto> convertToResultDto(List<Folder> folders, List<File> files) {
+    private static List<FileSystemItemDto> convertToResultDto(Collection<Folder> folders, Collection<File> files) {
 
         List<FileSystemItemDto> convertedContent = new ArrayList<>();
 

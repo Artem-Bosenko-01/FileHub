@@ -9,6 +9,8 @@ import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
  */
 public final class UsersTokenNotFoundException extends InvalidCommandHandlingException {
 
+    private static final long serialVersionUID = 422187322798822968L;
+
     public UsersTokenNotFoundException(AuthToken token) {
 
         super("Cannot find user by token: " + token);

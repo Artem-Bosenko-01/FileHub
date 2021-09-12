@@ -13,6 +13,7 @@ import io.javaclasses.fileHub.services.SecuredUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -65,7 +66,7 @@ public class CreateFolder extends SecuredUserProcess<CreateFolderCommand, Folder
                     logger.info("Created folder was successful. id: " + folder.id());
                 }
 
-                folderStorage.increaseItemsAmount(folder.parentFolder());
+                folderStorage.increaseItemsAmount(Objects.requireNonNull(folder.parentFolder()));
 
                 return folder.id();
 

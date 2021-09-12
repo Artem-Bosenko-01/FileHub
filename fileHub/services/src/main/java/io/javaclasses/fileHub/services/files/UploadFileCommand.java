@@ -1,13 +1,12 @@
 package io.javaclasses.fileHub.services.files;
 
 import com.google.common.net.MediaType;
-import io.javaclasses.fileHub.persistent.files.FolderId;
-import io.javaclasses.fileHub.persistent.files.MimeType;
-import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.AuthenticatedUserCommand;
+import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static io.javaclasses.fileHub.services.ValidationRules.validateItemName;
 
 /**
  * Data that needs to upload new file to Filehub application by authenticated user.
@@ -18,22 +17,20 @@ public final class UploadFileCommand extends AuthenticatedUserCommand {
 
     private final MediaType mimeType;
 
-    private final UserId owner;
-
-    private final FolderId folder;
+    private final String folder;
 
     private final byte[] content;
 
-    public UploadFileCommand(AuthToken token, String name, MediaType mimeType, UserId owner, FolderId folder,
-                             byte[] content) {
+    public UploadFileCommand(AuthToken token, String name, MediaType mimeType, String folder, byte[] content)
+            throws InvalidValidationCommandDataException {
 
         super(checkNotNull(token));
+
+        validateItemName(name);
 
         this.name = checkNotNull(name);
 
         this.mimeType = checkNotNull(mimeType);
-
-        this.owner = checkNotNull(owner);
 
         this.folder = checkNotNull(folder);
 
@@ -51,12 +48,7 @@ public final class UploadFileCommand extends AuthenticatedUserCommand {
         return mimeType;
     }
 
-    public UserId owner() {
-
-        return owner;
-    }
-
-    public FolderId folder() {
+    public String folder() {
 
         return folder;
     }
@@ -66,7 +58,7 @@ public final class UploadFileCommand extends AuthenticatedUserCommand {
         return content.clone();
     }
 
-    public Long size(){
+    public Long size() {
         return (long) content.length;
     }
 }

@@ -1,9 +1,14 @@
 package io.javaclasses.fileHub.services;
 
+import java.util.regex.Pattern;
+
 /**
  * Set of value limits for a necessary {@link io.javaclasses.fileHub.services.Command command}.
  */
 public class ValidationRules {
+
+    private ValidationRules() {
+    }
 
     public static void validateUsersCredentials(String loginName, String password)
             throws InvalidValidationCommandDataException {
@@ -53,7 +58,7 @@ public class ValidationRules {
         String[] array = str.split("");
 
         for (String c : array) {
-            if (!c.matches("[0-9a-zA-Z @.*]")) {
+            if (!Pattern.matches("[0-9a-zA-Z-_@.*,&]", c)) {
                 return false;
             }
         }

@@ -34,7 +34,7 @@ public class GetFileContent extends View<GetFileContentQuery, GetFileContentDTO>
             logger.info("Start get file's content by id " + inputCommand.fileID());
         }
 
-        Optional<FileContent> content = contentStorage.findByID(inputCommand.fileID());
+        Optional<FileContent> content = contentStorage.findByID(new FileId(inputCommand.fileID()));
 
         if (content.isPresent()) {
 

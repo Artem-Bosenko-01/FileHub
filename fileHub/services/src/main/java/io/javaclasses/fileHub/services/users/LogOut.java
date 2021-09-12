@@ -1,6 +1,6 @@
 package io.javaclasses.fileHub.services.users;
 
-import io.javaclasses.fileHub.persistent.NotExistedItem;
+import io.javaclasses.fileHub.persistent.NotExistedItemException;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.services.SecuredUserProcess;
 import io.javaclasses.fileHub.services.files.UsersTokenNotFoundException;
@@ -42,10 +42,10 @@ public class LogOut extends SecuredUserProcess<LogOutCommand, String> {
 
             return inputCommand.token().value();
 
-        } catch (NotExistedItem notExistedItem) {
+        } catch (NotExistedItemException notExistedItemException) {
 
             if (logger.isErrorEnabled()) {
-                logger.error(notExistedItem.getMessage());
+                logger.error(notExistedItemException.getMessage());
             }
 
             throw new UsersTokenNotFoundException(inputCommand.token());

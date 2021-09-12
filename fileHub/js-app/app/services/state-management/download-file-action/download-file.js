@@ -9,7 +9,7 @@ export class DownloadFile extends ActionInfo {
 
   /**
    * @constructor
-   * @param {string} fileId
+   * @param {FileListItem} fileId
    */
   constructor(fileId) {
     super();
@@ -19,7 +19,7 @@ export class DownloadFile extends ActionInfo {
   /**
    * @returns {FileListItem}
    */
-  get fileId() {
+  get file() {
     return this._fileId;
   }
 

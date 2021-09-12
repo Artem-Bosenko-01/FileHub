@@ -45,11 +45,11 @@ public abstract class SecuredUserProcess<C extends AuthenticatedUserCommand, E> 
     private boolean verifyPermission(C command) {
 
         Optional<AuthorizationUsers> token = storage.findByID(new UserAuthToken(command.token().value()));
-        return token.filter(this::isTokenNotExpire).isPresent();
+        return token.filter(SecuredUserProcess::isTokenNotExpire).isPresent();
 
     }
 
-    private boolean isTokenNotExpire(AuthorizationUsers token) {
+    private static boolean isTokenNotExpire(AuthorizationUsers token) {
 
         return token.expirationTime().isAfter(ZonedDateTime.now(ZoneId.of("America/Los_Angeles")));
 

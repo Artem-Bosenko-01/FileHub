@@ -1,4 +1,4 @@
-package io.javaclasses.fileHub.webservices.authorization;
+package io.javaclasses.fileHub.webservices.user;
 
 import io.javaclasses.fileHub.persistent.users.UserStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;

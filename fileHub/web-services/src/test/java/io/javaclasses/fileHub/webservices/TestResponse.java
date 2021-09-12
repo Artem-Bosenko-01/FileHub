@@ -13,7 +13,12 @@ public class TestResponse {
         this.body = body;
     }
 
-    public HashMap<String, String> json() {
+    public HashMap json() {
         return new Gson().fromJson(body, HashMap.class);
+    }
+
+    @Override
+    public String toString() {
+        return body;
     }
 }

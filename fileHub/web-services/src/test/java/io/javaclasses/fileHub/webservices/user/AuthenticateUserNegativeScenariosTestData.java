@@ -1,4 +1,4 @@
-package io.javaclasses.fileHub.webservices.authorization;
+package io.javaclasses.fileHub.webservices.user;
 
 import io.javaclasses.fileHub.persistent.users.UserStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
@@ -14,7 +14,7 @@ import org.junit.jupiter.params.provider.ArgumentsProvider;
 
 import java.util.stream.Stream;
 
-public class AuthenticateUserTestData implements ArgumentsProvider {
+public final class AuthenticateUserNegativeScenariosTestData implements ArgumentsProvider {
 
     @Override
     public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
@@ -67,7 +67,8 @@ public class AuthenticateUserTestData implements ArgumentsProvider {
 
     private static class AuthenticateNotRegisterUserStub extends AuthenticateUserBaseStub {
 
-        public AuthenticateNotRegisterUserStub(UserStorage userStorage, AuthorizationStorage authorizationStorage) {
+        public AuthenticateNotRegisterUserStub(UserStorage userStorage,
+                                               AuthorizationStorage authorizationStorage) {
             super(userStorage, authorizationStorage);
         }
 
@@ -83,7 +84,8 @@ public class AuthenticateUserTestData implements ArgumentsProvider {
 
         private final String message;
 
-        public AuthenticationProcessThrowDuplicateTokenStub(UserStorage userStorage, AuthorizationStorage authorizationStorage, String message) {
+        public AuthenticationProcessThrowDuplicateTokenStub(UserStorage userStorage,
+                                                            AuthorizationStorage authorizationStorage, String message) {
             super(userStorage, authorizationStorage);
 
             this.message = message;
@@ -99,7 +101,8 @@ public class AuthenticateUserTestData implements ArgumentsProvider {
 
     private static class AuthenticationProcessThrowNullPointerStub extends AuthenticateUserBaseStub {
 
-        public AuthenticationProcessThrowNullPointerStub(UserStorage userStorage, AuthorizationStorage authorizationStorage) {
+        public AuthenticationProcessThrowNullPointerStub(UserStorage userStorage,
+                                                         AuthorizationStorage authorizationStorage) {
             super(userStorage, authorizationStorage);
         }
 

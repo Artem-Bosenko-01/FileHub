@@ -9,29 +9,27 @@ import java.util.Optional;
 public class UserStorageBaseStub implements UserStorage {
 
     @Override
-    public Optional<User> findByLoginAndPassword(String login, String password) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<User> findByLogin(String login) {
-        return Optional.empty();
-    }
-
-    @Override
     public void create(User inputDataObject) {
+
     }
 
     @Override
     public void update(User inputDataObject) {
+
     }
 
     @Override
     public void delete(String dataRecordID) {
+
     }
 
     @Override
     public Optional<User> findByID(UserId dataRecordID) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<User> findByLoginAndPassword(String login, String password) {
         return Optional.empty();
     }
 }

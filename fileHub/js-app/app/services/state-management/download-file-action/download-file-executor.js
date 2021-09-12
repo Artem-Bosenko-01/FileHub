@@ -14,7 +14,6 @@ export class DownloadFileExecutor extends ActionExecutor {
    */
   async apply(actionInfo, services, state, mutate, dispatch) {
 
-
     mutate(DOWNLOAD_FILE_MUTATOR.FETCHING_STARTED, {downloadedFile: actionInfo.file.id});
     try {
       const file = await services.apiService.downloadFile(actionInfo.file);

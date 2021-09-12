@@ -1,4 +1,4 @@
-package io.javaclasses.fileHub.webservices.authorization;
+package io.javaclasses.fileHub.webservices.user;
 
 import com.google.common.testing.NullPointerTester;
 import io.javaclasses.fileHub.webservices.user.AuthenticationSuccessfulResponse;

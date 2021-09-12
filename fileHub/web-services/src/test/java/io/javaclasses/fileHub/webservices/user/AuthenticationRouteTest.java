@@ -1,9 +1,8 @@
-package io.javaclasses.fileHub.webservices.authorization;
+package io.javaclasses.fileHub.webservices.user;
 
 import com.google.common.testing.NullPointerTester;
 import io.javaclasses.fileHub.services.users.AuthenticateUser;
 import io.javaclasses.fileHub.webservices.*;
-import io.javaclasses.fileHub.webservices.user.AuthenticationRoute;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -105,7 +104,7 @@ class AuthenticationRouteTest {
 
 
     @ParameterizedTest
-    @ArgumentsSource(AuthenticateUserTestData.class)
+    @ArgumentsSource(AuthenticateUserNegativeScenariosTestData.class)
     public void shouldThrowsException(String requestBody, String expectedMessage, int expectedStatusCode,
                                       AuthenticateUserBaseStub authenticateUserStub) {
 

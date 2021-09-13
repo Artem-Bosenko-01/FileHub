@@ -22,7 +22,7 @@ public final class RequestParser {
 
     public String getId() {
 
-        return request.uri().split("/")[6];
+        return request.params(":id");
     }
 
     public String body() {

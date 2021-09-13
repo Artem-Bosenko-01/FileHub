@@ -62,7 +62,7 @@ public class CreateFolderRoute implements Route {
 
             response.status(INVALID_ENTITY_VALIDATION);
 
-            return new ResponseMessage("Error: Invalid user credentials.").serialize();
+            return new ResponseMessage("Error: Invalid name of folder.").serialize();
 
         } catch (InvalidCommandHandlingException | InvalidParsingToJsonObject e) {
 

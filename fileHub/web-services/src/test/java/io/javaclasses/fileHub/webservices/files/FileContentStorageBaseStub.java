@@ -24,6 +24,11 @@ public class FileContentStorageBaseStub implements FIleContentStorage {
 
     @Override
     public Optional<FileContent> findByID(FileId dataRecordID) {
-        return Optional.empty();
+
+        FileContent fileContent = new FileContent(dataRecordID.toString());
+
+        fileContent.setContent(new byte[]{1, 2, 3});
+
+        return Optional.of(fileContent);
     }
 }

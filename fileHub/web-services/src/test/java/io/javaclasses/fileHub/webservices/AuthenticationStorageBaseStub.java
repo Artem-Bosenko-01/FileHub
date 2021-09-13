@@ -1,9 +1,11 @@
 package io.javaclasses.fileHub.webservices;
 
+import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationUsers;
 import io.javaclasses.fileHub.persistent.users.tokens.UserAuthToken;
 
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 public class AuthenticationStorageBaseStub implements AuthorizationStorage {
@@ -22,7 +24,12 @@ public class AuthenticationStorageBaseStub implements AuthorizationStorage {
 
     @Override
     public Optional<AuthorizationUsers> findByID(UserAuthToken dataRecordID) {
-        return Optional.empty();
+
+        return Optional.of(
+                new AuthorizationUsers(
+                        new UserAuthToken("token"),
+                        new UserId("id"),
+                        ZonedDateTime.now().plusHours(6)));
     }
 
     @Override

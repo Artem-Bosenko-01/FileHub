@@ -60,7 +60,7 @@ public class UploadFileRoute implements Route {
         } catch (InvalidValidationCommandDataException e) {
 
             response.status(INVALID_ENTITY_VALIDATION);
-            return new ResponseMessage("Error: Invalid name of folder.").serialize();
+            return new ResponseMessage("Error: Invalid name of file.").serialize();
 
         } catch (UsersTokenNotFoundException | DuplicatedFileNameException e) {
 

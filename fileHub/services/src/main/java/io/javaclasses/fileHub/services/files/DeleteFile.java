@@ -16,7 +16,7 @@ import java.util.Optional;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Service to delete an existed file in authenticated user's directory.
+ * Service to delete an existed file from authenticated user's directory.
  */
 public class DeleteFile extends SecuredUserProcess<DeleteFileCommand, String> {
 

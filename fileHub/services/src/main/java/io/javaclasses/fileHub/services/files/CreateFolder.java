@@ -50,9 +50,9 @@ public class CreateFolder extends SecuredUserProcess<CreateFolderCommand, Folder
                 logger.info("Start create folder " + query.name());
             }
 
-            String id = query.name() + userId;
+            String folderId = query.name() + userId;
 
-            Folder folder = new Folder(id);
+            Folder folder = new Folder(folderId);
             folder.setParentFolder(query.parentFolder());
             folder.setName(query.name());
             folder.setItemsAmount(query.itemsAmount());

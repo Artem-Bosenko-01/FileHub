@@ -19,7 +19,7 @@ import java.util.Optional;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Service to uploading new file in authenticated user's directory.
+ * Service to upload new file in authenticated user's directory.
  */
 public class UploadFile extends SecuredUserProcess<UploadFileCommand, String> {
 

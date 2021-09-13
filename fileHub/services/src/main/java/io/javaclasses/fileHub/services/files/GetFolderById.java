@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.files.Folder;
 import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.files.FolderStorage;
+import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationUsers;
 import io.javaclasses.fileHub.persistent.users.tokens.UserAuthToken;
@@ -41,11 +42,13 @@ public class GetFolderById extends View<GetFolderByIdQuery, FileSystemItemDto> {
 
         if (owner.isPresent()) {
 
+            UserId userId = owner.get().userID();
+
             if (logger.isInfoEnabled()) {
-                logger.info("Start get directory for user: " + owner.get().userID() + " and name: " + query.id());
+                logger.info("Start get directory for user: " + userId + " and name: " + query.id());
             }
 
-            Optional<Folder> optionalFolder = folderStorageInMemory.findFolderById(query.id(), owner.get().userID());
+            Optional<Folder> optionalFolder = folderStorageInMemory.findFolderById(query.id(), userId);
 
             if (optionalFolder.isPresent()) {
 

@@ -1,11 +1,7 @@
 package io.javaclasses.fileHub.services.files.content;
 
 import io.javaclasses.fileHub.persistent.NotExistedItemException;
-import io.javaclasses.fileHub.persistent.files.File;
-import io.javaclasses.fileHub.persistent.files.FolderId;
-import io.javaclasses.fileHub.persistent.files.FolderStorage;
-import io.javaclasses.fileHub.persistent.files.FileStorage;
-import io.javaclasses.fileHub.persistent.files.Folder;
+import io.javaclasses.fileHub.persistent.files.*;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationUsers;
 import io.javaclasses.fileHub.persistent.users.tokens.UserAuthToken;
@@ -21,6 +17,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * Service to get folder's content for existed {@link FolderId folder}.
  */
@@ -35,10 +33,10 @@ public class GetFolderContent extends View<GetFolderContentQuery, GetFolderConte
     public GetFolderContent(FolderStorage folderStorage, FileStorage fileStorage,
                             AuthorizationStorage authorizationStorage) {
 
-        super(authorizationStorage);
+        super(checkNotNull(authorizationStorage));
 
-        this.folderStorage = folderStorage;
-        this.fileStorage = fileStorage;
+        this.folderStorage = checkNotNull(folderStorage);
+        this.fileStorage = checkNotNull(fileStorage);
         this.authorizationStorage = authorizationStorage;
 
     }

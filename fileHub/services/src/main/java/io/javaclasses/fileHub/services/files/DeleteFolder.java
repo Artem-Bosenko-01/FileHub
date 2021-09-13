@@ -46,7 +46,7 @@ public class DeleteFolder extends SecuredUserProcess<DeleteFolderCommand, String
 
             Optional<Folder> folder = folderStorage.findByID(new FolderId(inputCommand.folderID()));
 
-            removeNestedItems(inputCommand.folderID());
+            removeFolderAndNestedItems(inputCommand.folderID());
 
             if (logger.isInfoEnabled()) {
                 logger.info("Deleted folder" + inputCommand.folderID() + " was successful");
@@ -67,7 +67,7 @@ public class DeleteFolder extends SecuredUserProcess<DeleteFolderCommand, String
 
     }
 
-    private void removeNestedItems(String id) throws NotExistedItemException {
+    private void removeFolderAndNestedItems(String id) throws NotExistedItemException {
 
         fileStorage.deleteFilesByParentFolderId(id);
 
@@ -79,7 +79,7 @@ public class DeleteFolder extends SecuredUserProcess<DeleteFolderCommand, String
 
             try {
 
-                removeNestedItems(folder.id().toString());
+                removeFolderAndNestedItems(folder.id().toString());
 
             } catch (NotExistedItemException notExistedItemException) {
 

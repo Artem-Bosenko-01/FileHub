@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Optional;
 
 /**
- * Service to get the root folder for authenticated user.
+ * Service to get the authenticated user's root folder.
  */
 public class GetRootFolder extends View<GetRootFolderQuery, FileSystemItemDto> {
 
@@ -48,16 +48,18 @@ public class GetRootFolder extends View<GetRootFolderQuery, FileSystemItemDto> {
 
             if (rootFolder.isPresent()) {
 
+                Folder folder = rootFolder.get();
+
                 if (logger.isInfoEnabled()) {
-                    logger.info("Read root folder: " + rootFolder.get().name() + ". For user: "
-                            + rootFolder.get().owner().toString() + ". Was successful");
+                    logger.info("Read root folder: " + folder.name() + ". For user: "
+                            + folder.owner().toString() + ". Was successful");
                 }
 
-                return new FileSystemItemDto(rootFolder.get().id().toString(),
-                        rootFolder.get().name(),
-                        rootFolder.get().itemsAmount(),
+                return new FileSystemItemDto(folder.id().toString(),
+                        folder.name(),
+                        folder.itemsAmount(),
                         ItemType.FOLDER,
-                        rootFolder.get().parentFolder());
+                        folder.parentFolder());
 
             } else {
 

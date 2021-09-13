@@ -9,7 +9,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static io.javaclasses.fileHub.services.ValidationRules.validateUsersCredentials;
 
 /**
- * Data that is needed to authenticate the user in the Filehub application.
+ * User's credentials to authenticate the user in the Filehub application.
  */
 public final class AuthenticationUserCommand extends AnonymousUserCommand {
 

@@ -2,6 +2,9 @@ package io.javaclasses.fileHub.services.files;
 
 import com.google.common.base.Preconditions;
 
+/**
+ *
+ */
 public enum ItemType {
 
     FILE("file"),

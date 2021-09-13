@@ -16,7 +16,7 @@ import java.util.Optional;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * This is service to updating information about existed file in authenticated user's file by {@link FileId id}.
+ * Updates information about existed file in authenticated user's folder by {@link FileId id}.
  */
 public class UpdateFile extends SecuredUserProcess<UpdateFileCommand, FileId> {
 

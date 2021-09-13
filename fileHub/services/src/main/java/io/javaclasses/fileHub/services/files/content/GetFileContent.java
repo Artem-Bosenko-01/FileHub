@@ -1,6 +1,5 @@
 package io.javaclasses.fileHub.services.files.content;
 
-import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.files.FileId;
 import io.javaclasses.fileHub.persistent.files.content.FIleContentStorage;
 import io.javaclasses.fileHub.persistent.files.content.FileContent;
@@ -12,8 +11,10 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
- * Service to get file's content for exist {@link FileId file}.
+ * Service to get file's content from existed {@link FileId file}.
  */
 public class GetFileContent extends View<GetFileContentQuery, GetFileContentDTO> {
 
@@ -22,8 +23,10 @@ public class GetFileContent extends View<GetFileContentQuery, GetFileContentDTO>
     private final FIleContentStorage contentStorage;
 
     public GetFileContent(FIleContentStorage contentStorage, AuthorizationStorage authorizationStorage) {
-        super(Preconditions.checkNotNull(authorizationStorage));
-        this.contentStorage = Preconditions.checkNotNull(contentStorage);
+
+        super(checkNotNull(authorizationStorage));
+
+        this.contentStorage = checkNotNull(contentStorage);
     }
 
 

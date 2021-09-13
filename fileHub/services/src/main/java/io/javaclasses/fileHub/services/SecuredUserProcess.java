@@ -10,7 +10,7 @@ import java.time.ZonedDateTime;
 import java.util.Optional;
 
 /**
- * This is an abstract base, that makes it possible to handle commands from the authenticated user.
+ * Abstract base that handles commands from the authenticated user.
  *
  * @param <E> result entity.
  * @param <C> one of {@link AuthenticatedUserCommand command} from client.

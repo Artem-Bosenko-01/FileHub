@@ -1,12 +1,11 @@
 package io.javaclasses.fileHub.persistent;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
 /**
- * This is abstract storage, that saved some records in runtime memory.
+ * Abstract storage, that saved {@link DataRecord records} in random-access memory.
  *
  * @param <E> type of {@link DataRecord record}.
  * @param <I> identifier {@link RecordId id} for record.

@@ -3,7 +3,7 @@ package io.javaclasses.fileHub.persistent;
 import java.util.Optional;
 
 /**
- * This is abstract base of CRUD operations for data manipulations.
+ * Abstract base of CRUD operations for manages {@link DataRecord records}.
  *
  * @param <E> type of {@link DataRecord record}.
  * @param <I> identifier key for record.

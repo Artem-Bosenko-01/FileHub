@@ -6,7 +6,7 @@ import io.javaclasses.fileHub.persistent.RecordId;
 import java.util.Objects;
 
 /**
- * This is value object, that define user session and gives some permission for user by value.
+ * Abstract key that gives some permission for authenticated user in the FileHub application.
  */
 public final class UserAuthToken implements RecordId {
 

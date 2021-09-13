@@ -1,7 +1,7 @@
 package io.javaclasses.fileHub.persistent;
 
 /**
- * This is abstract base for entity, that saved in {@link Storage storage}.
+ * Abstract base for entity. Represents main persistent object that contains some data about entity.
  *
  * @param <I> type of {@link RecordId id}.
  */

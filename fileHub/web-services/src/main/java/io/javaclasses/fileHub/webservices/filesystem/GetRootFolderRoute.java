@@ -4,7 +4,6 @@ import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.NotAuthorizedUserException;
 import io.javaclasses.fileHub.services.files.*;
 import io.javaclasses.fileHub.webservices.ResponseMessage;
-import io.javaclasses.fileHub.webservices.GetFolderSuccessfulResponse;
 import io.javaclasses.fileHub.webservices.RequestParser;
 import spark.Request;
 import spark.Response;

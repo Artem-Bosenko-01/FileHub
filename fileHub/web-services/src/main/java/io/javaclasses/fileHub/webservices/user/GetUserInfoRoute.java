@@ -7,8 +7,8 @@ import io.javaclasses.fileHub.services.users.GetUserInfo;
 import io.javaclasses.fileHub.services.users.GetUserQuery;
 import io.javaclasses.fileHub.services.users.InfoAboutUserDto;
 import io.javaclasses.fileHub.services.users.UserNotFoundException;
-import io.javaclasses.fileHub.webservices.ResponseMessage;
 import io.javaclasses.fileHub.webservices.RequestParser;
+import io.javaclasses.fileHub.webservices.ResponseMessage;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -16,6 +16,9 @@ import spark.Route;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static javax.servlet.http.HttpServletResponse.*;
 
+/**
+ * Gets {@link Request request} from client side and executes getting user data by his token.
+ */
 public class GetUserInfoRoute implements Route {
 
     private final GetUserInfo getUserInfo;

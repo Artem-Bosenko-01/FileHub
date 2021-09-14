@@ -14,6 +14,9 @@ import spark.Route;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static javax.servlet.http.HttpServletResponse.*;
 
+/**
+ * Gets {@link Request request} from client side and executes completing user active session by deleting token from storage.
+ */
 public class LogOutRoute implements Route {
 
     private final LogOut logOut;

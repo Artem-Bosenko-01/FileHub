@@ -7,8 +7,8 @@ import io.javaclasses.fileHub.services.users.AuthenticateUser;
 import io.javaclasses.fileHub.services.users.AuthenticationUserCommand;
 import io.javaclasses.fileHub.services.users.DuplicatedUserException;
 import io.javaclasses.fileHub.services.users.UserNotFoundException;
-import io.javaclasses.fileHub.webservices.ResponseMessage;
 import io.javaclasses.fileHub.webservices.InvalidParsingToJsonObject;
+import io.javaclasses.fileHub.webservices.ResponseMessage;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -18,7 +18,7 @@ import static io.javaclasses.fileHub.webservices.ParserToJsonObject.parse;
 import static javax.servlet.http.HttpServletResponse.*;
 
 /**
- * Gets request and executes authentication user in FileHub application.
+ * Gets {@link Request request} from client side and executes authentication user in the FileHub application.
  */
 public final class AuthenticationRoute implements Route {
 

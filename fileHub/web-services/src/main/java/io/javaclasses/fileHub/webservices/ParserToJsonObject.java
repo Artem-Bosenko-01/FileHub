@@ -3,6 +3,13 @@ package io.javaclasses.fileHub.webservices;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+/**
+ * Utils for parsing JSON format string to {@link JsonObject JSON object}.
+ *
+ * <code>
+ *     {"message":"This is example of JSON format string"}
+ * </code>
+ */
 public class ParserToJsonObject {
 
     public static JsonObject parse(String requestBody) throws InvalidParsingToJsonObject {

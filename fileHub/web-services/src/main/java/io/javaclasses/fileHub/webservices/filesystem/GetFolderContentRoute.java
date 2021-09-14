@@ -7,14 +7,17 @@ import io.javaclasses.fileHub.services.files.content.GetFolderContent;
 import io.javaclasses.fileHub.services.files.content.GetFolderContentDTO;
 import io.javaclasses.fileHub.services.files.content.GetFolderContentQuery;
 import io.javaclasses.fileHub.services.files.content.InvalidFolderContentGettingException;
-import io.javaclasses.fileHub.webservices.ResponseMessage;
 import io.javaclasses.fileHub.webservices.RequestParser;
+import io.javaclasses.fileHub.webservices.ResponseMessage;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 
 import static javax.servlet.http.HttpServletResponse.*;
 
+/**
+ * Gets the {@link Request request} and fetches {@link GetFolderContentDTO folder content dto} by folderId.
+ */
 public class GetFolderContentRoute implements Route {
 
     private final GetFolderContent getFolderContent;

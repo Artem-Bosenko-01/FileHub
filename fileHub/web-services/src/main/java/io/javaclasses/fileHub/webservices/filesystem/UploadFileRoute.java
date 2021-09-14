@@ -8,6 +8,7 @@ import io.javaclasses.fileHub.services.files.DuplicatedFileNameException;
 import io.javaclasses.fileHub.services.files.UploadFile;
 import io.javaclasses.fileHub.services.files.UploadFileCommand;
 import io.javaclasses.fileHub.services.files.UsersTokenNotFoundException;
+import io.javaclasses.fileHub.services.files.content.GetFolderContentDTO;
 import io.javaclasses.fileHub.webservices.RequestParser;
 import io.javaclasses.fileHub.webservices.ResponseMessage;
 import spark.Request;
@@ -21,6 +22,10 @@ import javax.servlet.http.Part;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static javax.servlet.http.HttpServletResponse.*;
 
+/**
+ * Receives the {@link Request request} and gets file from form data. As a result saves file data and
+ * file content.
+ */
 public class UploadFileRoute implements Route {
 
     private final UploadFile uploadFile;

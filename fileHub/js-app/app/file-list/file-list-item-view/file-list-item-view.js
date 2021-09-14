@@ -1,10 +1,29 @@
 import {Component} from '../../components/component.js';
 import {typeFullName, typeIcon} from './file-mime-types-list.js';
+import {Button} from '../../components/button.js';
 
 /**
  * Line from {@link FileList folder content list}.
  */
 export class FileListItemView extends Component {
+  /**
+   * Loading status.
+   * @param {boolean} value
+   */
+  set isLoadingUploadFile(value) {
+    this._loadingUploadFile = value;
+    this._render();
+  }
+
+  /**
+   * Add listener on click delete button.
+   * @param {function(item: FileListItem)} listener
+   */
+  onUploadButtonClick(listener) {
+    this._onUploadButtonClickListener = listener;
+    this._render();
+  }
+
   /**
    * Add listener on click delete button.
    * @param {function(item: FileListItem)} listener
@@ -35,9 +54,35 @@ export class FileListItemView extends Component {
       this._onFolderNameCLickedEvent(this._item.id);
       event.preventDefault();
     });
-    this._getElement('delete-button').addEventListener('click', () => {
-      this._onDeleteButtonClickListener(this._item);
+  }
+
+  /** @inheritDoc */
+  _initNestedComponents() {
+    this._mount('delete-button', (slotElement) => {
+      const button = new Button(slotElement);
+      button.buttonName = 'delete-button';
+      button.buttonClasses = ['element-control-button', 'delete-element-button'];
+      button.buttonIcon = 'remove-circle';
+      button.onClick(() => this._onDeleteButtonClickListener(this._item));
+      return button;
     });
+
+    if (this._item.type === 'folder') {
+      this._mount('upload-button', (slotElement) => {
+        const button = new Button(slotElement);
+        button.buttonName = 'upload-button';
+        button.buttonClasses = ['element-control-button', 'upload-element-button'];
+        if (this._loadingUploadFile) {
+          button.buttonIcon = 'repeat';
+          button.iconClasses = ['loading'];
+        } else {
+          button.buttonIcon = 'upload';
+        }
+        button.disabled = this._loadingUploadFile;
+        button.onClick(() => this._onUploadButtonClickListener(this._item));
+        return button;
+      });
+    }
   }
 
   /**
@@ -129,8 +174,7 @@ export class FileListItemView extends Component {
                                     class="element-control-button download-element-button">
                             <span class="glyphicon glyphicon-download"></span>
                         </button>`;
-    const uploadButton = `<button data-fh="upload-button" title="upload" type="button" 
-class="element-control-button upload-element-button"><span class="glyphicon glyphicon-upload"></span></button>`;
+    const uploadButton = `<slot data-fh="upload-button"></slot>`;
 
     return `<tr>
                     <td data-fh="folder-marker" class="cell-folder-marker">${this._getFolderMarker()}</td>
@@ -140,10 +184,7 @@ class="element-control-button upload-element-button"><span class="glyphicon glyp
                     <td data-fh="size" class="cell-file-size">${this._getItemSize()}</td>
                     <td class="cell-file-action-buttons">
                         ${this._item.type === 'folder' ? uploadButton : downloadButton}
-                        <button data-fh="delete-button"
-                         title="delete" type="button" class="element-control-button delete-element-button">
-                            <span class="glyphicon glyphicon-remove-circle"></span>
-                        </button>
+                        <slot data-fh="delete-button"></slot>
                     </td>
                 </tr>`;
   }

@@ -14,6 +14,8 @@ import {OpenModalWindow} from '../services/state-management/open-modal-window/op
 import {CloseModalWindow} from '../services/state-management/close-modal-window-action/close-modal-window.js';
 import {FetchCurrentFolderContent}
   from '../services/state-management/fetch-current-folder-content-action/fetch-current-folder-content.js';
+import {uploadFile} from '../services/upload-file-function.js';
+import {UploadFile} from '../services/state-management/upload-file-action/upload-file.js';
 
 /**
  * Main page for authenticated user, that contains information about him and his saved files.
@@ -51,11 +53,21 @@ export class FileListPage extends StateBasedComponent {
     const breadcrumbs = new Breadcrumbs(fileListBodyElement);
     breadcrumbs.onFolderNameClick(this._onNavigateToFolder);
     new SearchBar(fileListBodyElement);
-    new FolderControlButtons(fileListBodyElement);
+    const controlButtons = new FolderControlButtons(fileListBodyElement);
+    controlButtons.onUploadButtonClick(async () => {
+      const uploadedFile = await uploadFile(document);
+      this._stateManager.dispatch(new UploadFile(uploadedFile, this._stateManager.state.currentFolder.id));
+    });
+
     const fileList = new FileList(fileListBodyElement);
     fileList.onFolderClick(this._onNavigateToFolder);
     fileList.onDeleteButtonClick((item) => {
       this._stateManager.dispatch(new OpenModalWindow(item));
+    });
+
+    fileList.onUploadButtonClick(async (item) => {
+      const uploadedFile = await uploadFile(document);
+      this._stateManager.dispatch(new UploadFile(uploadedFile, item.id));
     });
 
     this._onStateChangedListener('locationParams', async () => {
@@ -142,6 +154,15 @@ export class FileListPage extends StateBasedComponent {
 
     this._onStateChangedListener('fetchingCurrentUserDetailsErrorMessage', () => {
       userDetails.errorMessage = this._stateManager.state.fetchingCurrentUserDetailsErrorMessage;
+    });
+
+    this._onStateChangedListener('isUploadingFile', () => {
+      controlButtons.loadingUploadFile = this._stateManager.state.isUploadingFile;
+      fileList.isLoadingUploadFile = this._stateManager.state.isUploadingFile;
+    });
+
+    this._onStateChangedListener('uploadingFileErrorMessage', () => {
+      fileList.errorMessageAfterUploading = this._stateManager.state.uploadingFileErrorMessage;
     });
 
     this._onStateChangedListener('rootFolder', () => {

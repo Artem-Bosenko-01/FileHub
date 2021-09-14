@@ -10,8 +10,8 @@ const itemDatabase = {
   items: [
     {id: 'root-folder', name: 'root-folder', type: 'folder', itemsAmount: 45},
     {id: 'scas8988', name: 'folder-8988', type: 'folder', itemsAmount: 45, parentFolderId: 'root-folder'},
-    {id: 'ac787s', name: 'file-pdf', type: 'file', mimeType: 'pdf', size: 984948, parentFolderId: 'root-folder'},
-    {id: 'rer554', name: 'file-video', type: 'file', mimeType: 'video', size: 7447474, parentFolderId: 'root-folder'},
+    {id: 'ac787s', name: 'file-pdf', type: 'file', mimeType: 'application/pdf', size: 984948, parentFolderId: 'root-folder'},
+    {id: 'rer554', name: 'file-video', type: 'file', mimeType: 'video/x-msvideo', size: 7447474, parentFolderId: 'root-folder'},
     {id: 'fold777', name: 'folder-1011', type: 'folder', itemsAmount: 7, parentFolderId: 'root-folder'},
     {id: '595cz', name: 'folder-595', type: 'folder', itemsAmount: 0, parentFolderId: 'root-folder'},
     {id: 'fold777', name: 'Inner_folder', type: 'folder', itemsAmount: 77, parentFolderId: 'root-folder'},
@@ -33,6 +33,13 @@ const itemDatabase = {
   deleteFile: function(id) {
     this.items = this.items.filter((item) => !(item.id === id && item.type === 'file'));
   },
+  addFile: function(id, name, mimeType, size, parentFolderId) {
+    if (this.items.find((item) => item.name === name && item.parentFolderId === parentFolderId)) {
+      throw new Error('This item\'s name also exist');
+    } else {
+      this.items.push({id, name, type: 'file', mimeType, size, parentFolderId});
+    }
+  },
 };
 
 const mockPostRequest = (url, handler) => {
@@ -40,7 +47,7 @@ const mockPostRequest = (url, handler) => {
     const response = handler(...args);
     console.log(...args, response);
     return response;
-  });
+  }, {delay: 400});
 };
 
 const mockGetRequest = (url, handler) => {
@@ -48,7 +55,7 @@ const mockGetRequest = (url, handler) => {
     const response = handler(...args);
     console.log(...args, response);
     return response;
-  }, {delay: 2000});
+  }, {delay: 400});
 };
 
 const mockDeleteRequest = (url, handler) => {
@@ -56,7 +63,7 @@ const mockDeleteRequest = (url, handler) => {
     const response = handler(...args);
     console.log(...args, response);
     return response;
-  }, {delay: 2000});
+  }, {delay: 400});
 };
 
 mockPostRequest('/login', (url, opts) => {
@@ -135,4 +142,22 @@ mockDeleteRequest('express:/file/:id', (url, opts) => {
   return {
     status: 200,
   };
+});
+
+mockPostRequest('express:/folder/:id/file', (url, opts) => {
+  const body = opts.body.get('file');
+  const id = url.split('/')[2];
+  try {
+    itemDatabase.addFile(body.name, body.name, body.type, body.size, id);
+    return {
+      id: body.name,
+      name: body.name,
+      type: body.type,
+      parentId: id,
+    };
+  } catch (error) {
+    return {
+      status: 400,
+    };
+  }
 });

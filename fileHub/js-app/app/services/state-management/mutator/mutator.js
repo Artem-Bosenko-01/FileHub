@@ -5,6 +5,7 @@ import {FETCH_CURRENT_FOLDER_CONTENT_MUTATOR} from './fetch-current-folder-conte
 import {GET_CURRENT_USER_MUTATOR} from './get-current-user-mutator.js';
 import {DELETE_ITEM_MUTATOR} from './delete-item-mutator.js';
 import {MODAL_WINDOW_MUTATOR} from './modal-window-mutator.js';
+import {UPLOAD_FILE_MUTATOR} from './upload-file-mutator.js';
 
 export const mutator = (mutatorName, details, state) => {
   switch (mutatorName) {
@@ -91,6 +92,19 @@ export const mutator = (mutatorName, details, state) => {
     case MODAL_WINDOW_MUTATOR.CLOSE:
       return Object.assign({}, state, {
         itemInModalWindow: null,
+      });
+    case UPLOAD_FILE_MUTATOR.FETCHING_STARTED:
+      return Object.assign({}, state, {
+        isUploadingFile: true,
+      });
+    case UPLOAD_FILE_MUTATOR.FETCHING_COMPLETED:
+      return Object.assign({}, state, {
+        isUploadingFile: false,
+      });
+    case UPLOAD_FILE_MUTATOR.FETCHING_FAILED:
+      return Object.assign({}, state, {
+        isUploadingFile: false,
+        uploadingFileErrorMessage: details.error,
       });
   }
 };

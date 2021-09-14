@@ -5,14 +5,38 @@ import {Button} from '../components/button.js';
  * List of buttons that are responsible for managing files at folder content.
  */
 export class FolderControlButtons extends Component {
+  /**
+   * Loading status.
+   * @param {boolean} value
+   */
+  set loadingUploadFile(value) {
+    this._loadingUploadFile = value;
+    this._render();
+  }
+
+  /**
+   * Add listener on click delete button.
+   * @param {function()} listener
+   */
+  onUploadButtonClick(listener) {
+    this._onUploadButtonClickListener = listener;
+    this._render();
+  }
+
   /** @inheritDoc */
   _initNestedComponents() {
     this._mount('uploadButton', (slotElement) => {
       const uploadButton = new Button(slotElement);
       uploadButton.buttonName = 'upload-button';
-      uploadButton.buttonIcon = 'upload';
+      if (this._loadingUploadFile) {
+        uploadButton.buttonIcon = 'repeat';
+        uploadButton.iconClasses = ['loading'];
+      } else {
+        uploadButton.buttonIcon = 'upload';
+      }
+      uploadButton.disabled = this._loadingUploadFile;
       uploadButton.buttonClasses = ['control-folder-button upload-file-button'];
-      uploadButton.onClick(() => alert('Upload new file into directory'));
+      uploadButton.onClick(this._onUploadButtonClickListener);
       return uploadButton;
     });
 

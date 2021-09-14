@@ -148,6 +148,24 @@ export class ApiService {
   }
 
   /**
+   * Uploads file to the application.
+   * @param {File} file
+   * @param {string} parentFolderId
+   * @returns {Promise<void, ClientServerError|ServerError>}
+   */
+  async uploadFile(file, parentFolderId) {
+    const uploadedFile = new FormData();
+    uploadedFile.append('file', file);
+    const response = await this._fetch(`/folder/${parentFolderId}/file`, {
+      method: 'POST',
+      body: uploadedFile,
+    });
+
+    this._checkResponseOnClientOrServerError(response);
+    return await response.json();
+  }
+
+  /**
    * @param {RequestInfo} url
    * @param {RequestInit} init
    * @returns {Promise<Response>}

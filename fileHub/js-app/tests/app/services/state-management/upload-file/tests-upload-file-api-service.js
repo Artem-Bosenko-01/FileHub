@@ -3,29 +3,31 @@ import {ApiService} from '../../../../../app/services/api-service/api-service.js
 
 const {module, test} = QUnit;
 
-export default () => module('deleteFolder', () => {
+export default () => module('uploadFile', () => {
   test('Should handle a response with code 200', async (assert) => {
+    const id = 'folder';
     const fetch = fetchMock.sandbox();
     fetch.mock({
-      url: '/folder/5',
-      method: 'DELETE',
-    }, 200);
+      url: '/folder/5/file',
+      method: 'POST',
+    }, {id});
     const apiService = new ApiService({fetch});
-    await apiService.deleteFolder('5');
+    const result = await apiService.uploadFile({file: 'file'}, '5');
     assert.ok(fetch.called(), 'Should send a request');
+    assert.equal(result.id, id, 'Should get id of uploaded file');
   });
 
   test('Should handle a response with code 4**', async (assert) => {
     assert.expect(2);
     const fetch = fetchMock.sandbox();
     fetch.mock({
-      url: '/folder/5',
-      method: 'DELETE',
+      url: '/folder/5/file',
+      method: 'POST',
     }, 400);
     const apiService = new ApiService({fetch});
 
     try {
-      await apiService.deleteFolder('5');
+      await apiService.uploadFile({file: 'file'}, '5');
     } catch (error) {
       assert.equal(error.message, '400: client error', 'Should return error with response status');
     } finally {
@@ -37,13 +39,13 @@ export default () => module('deleteFolder', () => {
     assert.expect(2);
     const fetch = fetchMock.sandbox();
     fetch.mock({
-      url: '/folder/5',
-      method: 'DELETE',
+      url: '/folder/5/file',
+      method: 'POST',
     }, 500);
     const apiService = new ApiService({fetch});
 
     try {
-      await apiService.deleteFolder('5');
+      await apiService.uploadFile({file: 'file'}, '5');
     } catch (error) {
       assert.equal(error.message, '500: Server Error', 'Should return error with response status');
     } finally {

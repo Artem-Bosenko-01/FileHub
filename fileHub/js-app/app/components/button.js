@@ -14,6 +14,15 @@ export class Button extends Component {
   }
 
   /**
+   * Button disabled status.
+   * @param {boolean} value
+   */
+  set disabled(value) {
+    this._isButtonDisabled = value;
+    this._render();
+  }
+
+  /**
    * @param {string} value
    */
   set buttonName(value) {
@@ -88,7 +97,7 @@ export class Button extends Component {
     const icon = `<span class="glyphicon glyphicon-${this._buttonIcon} ${expression &&
     this._iconClasses.join(' ')}"></span>`;
     return `<div class="button-raw">
-                <button title="Submit" data-fh="${this._buttonName}" 
+                <button ${this._isButtonDisabled && 'disabled'} title="Submit" data-fh="${this._buttonName}"
                 class="button ${this._buttonClasses ? this._buttonClasses.join(' ') : ''}"
                >${this._buttonIcon ? icon : ''}${this._buttonTitle ? this._buttonTitle : ''}</button>
             </div>`;

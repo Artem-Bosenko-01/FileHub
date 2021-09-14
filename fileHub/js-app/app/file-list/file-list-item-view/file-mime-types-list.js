@@ -1,11 +1,24 @@
 import {FileMimeType} from './file-mime-type.js';
 
 export const FILE_MIME_TYPES_LIST = [
-  new FileMimeType('image', 'JPEG Image', 'glyphicon-picture'),
-  new FileMimeType('pdf', 'Pdf Document', 'glyphicon-book'),
-  new FileMimeType('text', 'Text Document', 'glyphicon-list-alt'),
-  new FileMimeType('video', 'Movie', 'glyphicon-film'),
-  new FileMimeType('audio', 'Audio', 'glyphicon-music'),
+  new FileMimeType('image/jpeg', 'JPEG Image', 'glyphicon-picture'),
+  new FileMimeType('application/pdf', 'Pdf Document', 'glyphicon-book'),
+  new FileMimeType('text/plain', 'Text Document', 'glyphicon-list-alt'),
+  new FileMimeType('video/x-msvideo', 'Movie', 'glyphicon-film'),
+  new FileMimeType('application/x-zip-compressed', 'Archive', 'glyphicon-inbox'),
+  new FileMimeType('application/zip', 'Archive', 'glyphicon-inbox'),
+  new FileMimeType('application/vnd.rar', 'Archive', 'glyphicon-inbox'),
+  new FileMimeType('audio/mpeg', 'Music', 'glyphicon-music'),
+  new FileMimeType('video/mpeg', 'Video', 'glyphicon-film'),
+  new FileMimeType('application/vnd.ms-powerpoint', 'Presentation', 'glyphicon-file'),
+  new FileMimeType('image/png', 'Png Image', 'glyphicon-picture'),
+  new FileMimeType('image/gif', 'Gif Image', 'glyphicon-picture'),
+  new FileMimeType('application/msword', 'Msword Document', 'glyphicon-list-alt'),
+  new FileMimeType('image/bmp', 'Bmp Image', 'glyphicon-picture'),
+  new FileMimeType('application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      'Msword Document', 'glyphicon-list-alt'),
+  new FileMimeType('application/vnd.openxmlformats-officedocument.presentationml.presentation',
+      'Presentation', 'glyphicon-file'),
 ];
 
 /**

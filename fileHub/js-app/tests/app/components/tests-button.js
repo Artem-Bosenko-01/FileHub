@@ -46,3 +46,13 @@ test('Should create button with icon and icon\'s classes', (assert) => {
 
   assert.true(isExistIconClasses, 'Should add 3 custom icon classes to span');
 });
+
+test('Should add disabled status to button', (assert) => {
+  const buttonName = 'button';
+  button.buttonName = buttonName;
+  button.disabled = true;
+
+  const buttonElement = searchElement(buttonName, fixture);
+  const attrName = buttonElement.attributes.item(0).name;
+  assert.equal(attrName, 'disabled', 'Should add disabled attribute to button: ');
+});

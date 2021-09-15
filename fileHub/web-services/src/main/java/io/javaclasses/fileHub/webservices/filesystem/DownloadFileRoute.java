@@ -17,6 +17,10 @@ import javax.servlet.ServletOutputStream;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static javax.servlet.http.HttpServletResponse.*;
 
+/**
+ * Gets the {@link Request request} and fetches {@link GetFileContentDTO fileContent} by fileId.
+ * After that it writes fileContent to {@link Response response} as binary data.
+ */
 public class DownloadFileRoute implements Route {
 
     private final GetFileContent downloadFile;
@@ -48,17 +52,17 @@ public class DownloadFileRoute implements Route {
             response.status(SC_OK);
             return response;
 
-        } catch (NotAuthorizedUserException e) {
+        } catch (NotAuthorizedUserException notAuthorizedUserException) {
 
             response.status(SC_UNAUTHORIZED);
-            return new ResponseMessage(e.getMessage()).serialize();
+            return new ResponseMessage(notAuthorizedUserException.getMessage()).serialize();
 
-        } catch (InvalidCommandHandlingException e) {
+        } catch (InvalidCommandHandlingException invalidCommandHandlingException) {
 
             response.status(SC_BAD_REQUEST);
-            return new ResponseMessage(e.getMessage()).serialize();
+            return new ResponseMessage(invalidCommandHandlingException.getMessage()).serialize();
 
-        } catch (Exception e) {
+        } catch (Exception exception) {
 
             response.status(SC_INTERNAL_SERVER_ERROR);
             return new ResponseMessage("Internal server error.").serialize();

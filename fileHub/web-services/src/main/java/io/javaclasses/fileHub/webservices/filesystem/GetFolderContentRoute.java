@@ -46,17 +46,17 @@ public class GetFolderContentRoute implements Route {
 
             return new GetFolderContentSuccessfulResponse(folderContent.content()).serialize();
 
-        } catch (InvalidFolderContentGettingException | UsersTokenNotFoundException e) {
+        } catch (InvalidFolderContentGettingException | UsersTokenNotFoundException handlingException) {
 
             response.status(SC_NOT_FOUND);
-            return new ResponseMessage(e.getMessage()).serialize();
+            return new ResponseMessage(handlingException.getMessage()).serialize();
 
-        } catch (NotAuthorizedUserException e) {
+        } catch (NotAuthorizedUserException notAuthorizedUserException) {
 
             response.status(SC_UNAUTHORIZED);
-            return new ResponseMessage(e.getMessage()).serialize();
+            return new ResponseMessage(notAuthorizedUserException.getMessage()).serialize();
 
-        } catch (Exception e) {
+        } catch (Exception exception) {
 
             response.status(SC_INTERNAL_SERVER_ERROR);
             return new ResponseMessage("Internal server error.").serialize();

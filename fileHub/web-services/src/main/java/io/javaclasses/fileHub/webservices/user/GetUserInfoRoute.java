@@ -45,17 +45,17 @@ public class GetUserInfoRoute implements Route {
 
             return new GetUserSuccessfulResponse(userInfo.id().toString(), userInfo.loginName()).serialize();
 
-        } catch (NotAuthorizedUserException e) {
+        } catch (NotAuthorizedUserException notAuthorizedUserException) {
 
             response.status(SC_UNAUTHORIZED);
-            return new ResponseMessage(e.getMessage()).serialize();
+            return new ResponseMessage(notAuthorizedUserException.getMessage()).serialize();
 
-        } catch (UserNotFoundException | UsersTokenNotFoundException e) {
+        } catch (UserNotFoundException | UsersTokenNotFoundException commandHandlingException) {
 
             response.status(SC_NOT_FOUND);
-            return new ResponseMessage(e.getMessage()).serialize();
+            return new ResponseMessage(commandHandlingException.getMessage()).serialize();
 
-        } catch (Exception e) {
+        } catch (Exception exception) {
 
             response.status(SC_INTERNAL_SERVER_ERROR);
             return new ResponseMessage("Internal server error.").serialize();

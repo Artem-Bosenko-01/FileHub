@@ -14,6 +14,9 @@ import spark.Route;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static javax.servlet.http.HttpServletResponse.*;
 
+/**
+ * Gets the {@link Request request} and executes {@link DeleteFile deleting existed file} by fileId.
+ */
 public class DeleteFileRoute implements Route {
 
     private final DeleteFile deleteFile;
@@ -40,17 +43,17 @@ public class DeleteFileRoute implements Route {
 
             return new ResponseMessage("File with id: " + deletedFileId + " was successfully deleted").serialize();
 
-        } catch (NotAuthorizedUserException e) {
+        } catch (NotAuthorizedUserException notAuthorizedUserException) {
 
             response.status(SC_UNAUTHORIZED);
-            return new ResponseMessage(e.getMessage()).serialize();
+            return new ResponseMessage(notAuthorizedUserException.getMessage()).serialize();
 
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException fileNotFoundException) {
 
             response.status(SC_BAD_REQUEST);
-            return new ResponseMessage(e.getMessage()).serialize();
+            return new ResponseMessage(fileNotFoundException.getMessage()).serialize();
 
-        } catch (Exception e) {
+        } catch (Exception exception) {
 
             response.status(SC_INTERNAL_SERVER_ERROR);
 

@@ -5,8 +5,8 @@ import io.javaclasses.fileHub.services.NotAuthorizedUserException;
 import io.javaclasses.fileHub.services.files.UsersTokenNotFoundException;
 import io.javaclasses.fileHub.services.users.LogOut;
 import io.javaclasses.fileHub.services.users.LogOutCommand;
-import io.javaclasses.fileHub.webservices.ResponseMessage;
 import io.javaclasses.fileHub.webservices.RequestParser;
+import io.javaclasses.fileHub.webservices.ResponseMessage;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -41,17 +41,17 @@ public class LogOutRoute implements Route {
 
             return "User with token: " + deletedToken + " was logged out from FileHub application.";
 
-        } catch (NotAuthorizedUserException e) {
+        } catch (NotAuthorizedUserException notAuthorizedUserException) {
 
             response.status(SC_UNAUTHORIZED);
-            return new ResponseMessage(e.getMessage()).serialize();
+            return new ResponseMessage(notAuthorizedUserException.getMessage()).serialize();
 
-        } catch (UsersTokenNotFoundException e) {
+        } catch (UsersTokenNotFoundException usersTokenNotFoundException) {
 
             response.status(SC_BAD_REQUEST);
-            return new ResponseMessage(e.getMessage()).serialize();
+            return new ResponseMessage(usersTokenNotFoundException.getMessage()).serialize();
 
-        } catch (Exception e) {
+        } catch (Exception exception) {
 
             response.status(SC_INTERNAL_SERVER_ERROR);
             return new ResponseMessage("Internal server error.").serialize();

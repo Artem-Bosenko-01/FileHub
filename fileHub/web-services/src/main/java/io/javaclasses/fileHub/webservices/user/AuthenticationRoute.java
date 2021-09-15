@@ -58,25 +58,25 @@ public final class AuthenticationRoute implements Route {
 
             return new ResponseMessage(invalidParsingToJsonObject.getMessage()).serialize();
 
-        } catch (UserNotFoundException e) {
+        } catch (UserNotFoundException userNotFoundException) {
 
             response.status(SC_NOT_FOUND);
 
-            return new ResponseMessage(e.getMessage()).serialize();
+            return new ResponseMessage(userNotFoundException.getMessage()).serialize();
 
-        } catch (DuplicatedUserException e) {
+        } catch (DuplicatedUserException duplicatedUserException) {
 
             response.status(SC_CONFLICT);
 
-            return new ResponseMessage(e.message()).serialize();
+            return new ResponseMessage(duplicatedUserException.message()).serialize();
 
-        } catch (InvalidValidationCommandDataException e) {
+        } catch (InvalidValidationCommandDataException invalidValidationCommandDataException) {
 
             response.status(INVALID_ENTITY_VALIDATION);
 
             return new ResponseMessage("Error: Invalid user credentials.").serialize();
 
-        } catch (Exception e) {
+        } catch (Exception exception) {
 
             response.status(SC_INTERNAL_SERVER_ERROR);
 

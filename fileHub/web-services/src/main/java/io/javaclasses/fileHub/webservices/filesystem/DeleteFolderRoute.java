@@ -5,8 +5,8 @@ import io.javaclasses.fileHub.services.NotAuthorizedUserException;
 import io.javaclasses.fileHub.services.files.DeleteFolder;
 import io.javaclasses.fileHub.services.files.DeleteFolderCommand;
 import io.javaclasses.fileHub.services.files.FolderNotFoundException;
-import io.javaclasses.fileHub.webservices.ResponseMessage;
 import io.javaclasses.fileHub.webservices.RequestParser;
+import io.javaclasses.fileHub.webservices.ResponseMessage;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -14,6 +14,9 @@ import spark.Route;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static javax.servlet.http.HttpServletResponse.*;
 
+/**
+ * Gets the {@link Request request} and executes {@link DeleteFolder deleting existed folder} by folderId.
+ */
 public class DeleteFolderRoute implements Route {
 
     private final DeleteFolder deleteFolder;
@@ -40,17 +43,17 @@ public class DeleteFolderRoute implements Route {
 
             return new ResponseMessage("Folder with id: " + deletedFolderId + " was successfully deleted").serialize();
 
-        } catch (NotAuthorizedUserException e) {
+        } catch (NotAuthorizedUserException notAuthorizedUserException) {
 
             response.status(SC_UNAUTHORIZED);
-            return new ResponseMessage(e.getMessage()).serialize();
+            return new ResponseMessage(notAuthorizedUserException.getMessage()).serialize();
 
-        } catch (FolderNotFoundException e) {
+        } catch (FolderNotFoundException folderNotFoundException) {
 
             response.status(SC_BAD_REQUEST);
-            return new ResponseMessage(e.getMessage()).serialize();
+            return new ResponseMessage(folderNotFoundException.getMessage()).serialize();
 
-        } catch (Exception e) {
+        } catch (Exception exception) {
 
             response.status(SC_INTERNAL_SERVER_ERROR);
 

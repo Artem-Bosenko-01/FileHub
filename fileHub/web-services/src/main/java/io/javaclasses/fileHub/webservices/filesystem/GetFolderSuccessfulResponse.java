@@ -4,7 +4,7 @@ import io.javaclasses.fileHub.services.files.FileSystemItemDto;
 import io.javaclasses.fileHub.webservices.JsonResponse;
 
 /**
- *
+ * Contains {@link FileSystemItemDto folder data} that comes after a successful get folder info query handling.
  */
 public class GetFolderSuccessfulResponse extends JsonResponse {
 

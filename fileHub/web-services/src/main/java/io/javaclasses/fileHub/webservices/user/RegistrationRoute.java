@@ -55,27 +55,27 @@ public final class RegistrationRoute implements Route {
 
             return new ResponseMessage(invalidParsingToJsonObject.getMessage()).serialize();
 
-        } catch (DuplicatedUserException e) {
+        } catch (DuplicatedUserException duplicatedUserException) {
 
             response.status(INVALID_ENTITY_VALIDATION);
 
             ValidationErrorResponse errorResponse = new ValidationErrorResponse();
 
-            errorResponse.addError(e.field(), e.message());
+            errorResponse.addError(duplicatedUserException.field(), duplicatedUserException.message());
 
             return errorResponse.serialize();
 
-        } catch (InvalidValidationCommandDataException e) {
+        } catch (InvalidValidationCommandDataException validationCommandDataException) {
 
             response.status(INVALID_ENTITY_VALIDATION);
 
             ValidationErrorResponse errorResponse = new ValidationErrorResponse();
 
-            errorResponse.addErrors(e.errors());
+            errorResponse.addErrors(validationCommandDataException.errors());
 
             return errorResponse.serialize();
 
-        } catch (Exception e) {
+        } catch (Exception exception) {
 
             response.status(SC_INTERNAL_SERVER_ERROR);
 

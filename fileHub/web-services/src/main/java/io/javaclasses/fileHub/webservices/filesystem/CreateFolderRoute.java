@@ -18,6 +18,10 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static io.javaclasses.fileHub.webservices.ParserToJsonObject.parse;
 import static javax.servlet.http.HttpServletResponse.*;
 
+/**
+ * Gets the {@link Request request} and parses request body to {@link CreateFolderCommand command}
+ * and executes {@link CreateFolder creating new folder}.
+ */
 public class CreateFolderRoute implements Route {
 
     private final CreateFolder createFolder;
@@ -53,23 +57,23 @@ public class CreateFolderRoute implements Route {
 
             return new ResponseMessage("Folder with id: " + createdFolderId + " was successfully created").serialize();
 
-        } catch (NotAuthorizedUserException e) {
+        } catch (NotAuthorizedUserException notAuthorizedUserException) {
 
             response.status(SC_UNAUTHORIZED);
-            return new ResponseMessage(e.getMessage()).serialize();
+            return new ResponseMessage(notAuthorizedUserException.getMessage()).serialize();
 
-        } catch (InvalidValidationCommandDataException e) {
+        } catch (InvalidValidationCommandDataException invalidValidationCommandDataException) {
 
             response.status(INVALID_ENTITY_VALIDATION);
 
             return new ResponseMessage("Error: Invalid name of folder.").serialize();
 
-        } catch (InvalidCommandHandlingException | InvalidParsingToJsonObject e) {
+        } catch (InvalidCommandHandlingException | InvalidParsingToJsonObject exception) {
 
             response.status(SC_BAD_REQUEST);
-            return new ResponseMessage(e.getMessage()).serialize();
+            return new ResponseMessage(exception.getMessage()).serialize();
 
-        } catch (Exception e) {
+        } catch (Exception exception) {
 
             response.status(SC_INTERNAL_SERVER_ERROR);
             return new ResponseMessage("Internal server error.").serialize();

@@ -8,7 +8,6 @@ import io.javaclasses.fileHub.services.files.DuplicatedFileNameException;
 import io.javaclasses.fileHub.services.files.UploadFile;
 import io.javaclasses.fileHub.services.files.UploadFileCommand;
 import io.javaclasses.fileHub.services.files.UsersTokenNotFoundException;
-import io.javaclasses.fileHub.services.files.content.GetFolderContentDTO;
 import io.javaclasses.fileHub.webservices.RequestParser;
 import io.javaclasses.fileHub.webservices.ResponseMessage;
 import spark.Request;
@@ -23,8 +22,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static javax.servlet.http.HttpServletResponse.*;
 
 /**
- * Receives the {@link Request request} and gets file from form data. As a result saves file data and
- * file content.
+ * Receives the {@link Request request} and gets file from form data.
+ * As a result of handling {@link UploadFile uploading file process} saves file data and file content.
  */
 public class UploadFileRoute implements Route {
 
@@ -62,22 +61,22 @@ public class UploadFileRoute implements Route {
 
             return new ResponseMessage("File with id: " + uploadedFileId + " was successfully uploaded").serialize();
 
-        } catch (InvalidValidationCommandDataException e) {
+        } catch (InvalidValidationCommandDataException invalidValidationCommandDataException) {
 
             response.status(INVALID_ENTITY_VALIDATION);
             return new ResponseMessage("Error: Invalid name of file.").serialize();
 
-        } catch (UsersTokenNotFoundException | DuplicatedFileNameException e) {
+        } catch (UsersTokenNotFoundException | DuplicatedFileNameException handlingException) {
 
             response.status(SC_BAD_REQUEST);
-            return new ResponseMessage(e.getMessage()).serialize();
+            return new ResponseMessage(handlingException.getMessage()).serialize();
 
-        } catch (NotAuthorizedUserException e) {
+        } catch (NotAuthorizedUserException notAuthorizedUserException) {
 
             response.status(SC_UNAUTHORIZED);
-            return new ResponseMessage(e.getMessage()).serialize();
+            return new ResponseMessage(notAuthorizedUserException.getMessage()).serialize();
 
-        } catch (Exception e) {
+        } catch (Exception exception) {
 
             response.status(SC_INTERNAL_SERVER_ERROR);
             return new ResponseMessage("Internal server error.").serialize();

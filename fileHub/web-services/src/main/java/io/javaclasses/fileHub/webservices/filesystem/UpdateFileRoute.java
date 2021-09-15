@@ -18,6 +18,10 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static io.javaclasses.fileHub.webservices.ParserToJsonObject.parse;
 import static javax.servlet.http.HttpServletResponse.*;
 
+/**
+ * Gets the {@link Request request}, parses the necessary data for the {@link UpdateFileCommand command} and
+ * executes {@link UpdateFile updating existed file} by fileId.
+ */
 public class UpdateFileRoute implements Route {
 
     private final UpdateFile updateFile;
@@ -52,30 +56,31 @@ public class UpdateFileRoute implements Route {
             response.status(SC_BAD_REQUEST);
             return new ResponseMessage(exception.getMessage()).serialize();
 
-        } catch (InvalidValidationCommandDataException e) {
+        } catch (InvalidValidationCommandDataException invalidValidationCommandDataException) {
 
             response.status(INVALID_ENTITY_VALIDATION);
 
             return new ResponseMessage("Error: Invalid user credentials.").serialize();
 
-        } catch (UsersTokenNotFoundException | FileNotFoundException e) {
+        } catch (UsersTokenNotFoundException | FileNotFoundException handlingException) {
 
             response.status(SC_NOT_FOUND);
-            return new ResponseMessage(e.getMessage()).serialize();
+            return new ResponseMessage(handlingException.getMessage()).serialize();
 
-        } catch (NotAuthorizedUserException e) {
+        } catch (NotAuthorizedUserException notAuthorizedUserException) {
 
             response.status(SC_UNAUTHORIZED);
-            return new ResponseMessage(e.getMessage()).serialize();
+            return new ResponseMessage(notAuthorizedUserException.getMessage()).serialize();
 
-        } catch (Exception e) {
+        } catch (Exception exception) {
 
             response.status(SC_INTERNAL_SERVER_ERROR);
             return new ResponseMessage("Internal server error.").serialize();
         }
     }
 
-    private UpdateFileCommand convertToCommand(String token, JsonObject jsonObject) throws InvalidValidationCommandDataException {
+    private UpdateFileCommand convertToCommand(String token, JsonObject jsonObject)
+            throws InvalidValidationCommandDataException {
 
         String id = jsonObject.get("id").getAsString();
         String name = jsonObject.get("name").getAsString();

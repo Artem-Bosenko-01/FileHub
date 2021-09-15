@@ -13,6 +13,10 @@ import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * Overrides necessary methods of {@link Request HTTP request object} for unit testing {@link spark.Route routes}.
+ * Returns constants value that needed for tests.
+ */
 public class RequestStub extends Request {
 
     private final String requestBody;

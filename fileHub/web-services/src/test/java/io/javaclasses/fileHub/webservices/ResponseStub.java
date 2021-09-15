@@ -11,6 +11,10 @@ import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.Locale;
 
+/**
+ * Overrides necessary methods of {@link Response HTTP response object} for unit testing {@link spark.Route routes}.
+ * Returns constants value that needed for tests.
+ */
 public class ResponseStub extends Response {
 
     private int statusCode;

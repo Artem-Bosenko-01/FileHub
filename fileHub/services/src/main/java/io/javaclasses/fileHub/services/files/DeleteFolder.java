@@ -10,6 +10,8 @@ import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.services.SecuredUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Objects;
@@ -18,6 +20,7 @@ import java.util.Optional;
 /**
  * Service to delete an existed folder in Filehub application by authenticated user.
  */
+@Component
 public class DeleteFolder extends SecuredUserProcess<DeleteFolderCommand, String> {
 
     private static final Logger logger = LoggerFactory.getLogger(DeleteFolder.class);
@@ -26,6 +29,7 @@ public class DeleteFolder extends SecuredUserProcess<DeleteFolderCommand, String
 
     private final FileStorage fileStorage;
 
+    @Autowired
     public DeleteFolder(FolderStorage folderStorage, FileStorage fileStorage, AuthorizationStorage authorizationStorage) {
 
         super(authorizationStorage);

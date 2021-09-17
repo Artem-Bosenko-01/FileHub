@@ -13,6 +13,8 @@ import io.javaclasses.fileHub.persistent.users.tokens.UserAuthToken;
 import io.javaclasses.fileHub.services.SecuredUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
@@ -21,6 +23,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Service to upload new file in authenticated user's directory.
  */
+@Component
 public class UploadFile extends SecuredUserProcess<UploadFileCommand, String> {
 
     private static final Logger logger = LoggerFactory.getLogger(UploadFile.class);
@@ -33,6 +36,7 @@ public class UploadFile extends SecuredUserProcess<UploadFileCommand, String> {
 
     private final FileStorage fileStorage;
 
+    @Autowired
     public UploadFile(FIleContentStorage contentStorage, FileStorage fileStorage, FolderStorage folderStorage,
                       AuthorizationStorage authorizationStorage) {
 

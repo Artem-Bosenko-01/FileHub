@@ -11,6 +11,8 @@ import io.javaclasses.fileHub.services.files.ItemType;
 import io.javaclasses.fileHub.services.files.UsersTokenNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,6 +24,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Service to get folder's content for existed {@link FolderId folder}.
  */
+@Component
 public class GetFolderContent extends View<GetFolderContentQuery, GetFolderContentDTO> {
 
     private static final Logger logger = LoggerFactory.getLogger(GetFolderContent.class);
@@ -30,6 +33,7 @@ public class GetFolderContent extends View<GetFolderContentQuery, GetFolderConte
     private final FileStorage fileStorage;
     private final AuthorizationStorage authorizationStorage;
 
+    @Autowired
     public GetFolderContent(FolderStorage folderStorage, FileStorage fileStorage,
                             AuthorizationStorage authorizationStorage) {
 

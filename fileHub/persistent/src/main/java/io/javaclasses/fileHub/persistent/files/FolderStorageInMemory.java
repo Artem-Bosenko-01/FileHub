@@ -3,11 +3,13 @@ package io.javaclasses.fileHub.persistent.files;
 import io.javaclasses.fileHub.persistent.AbstractInMemoryStorage;
 import io.javaclasses.fileHub.persistent.NotExistedItemException;
 import io.javaclasses.fileHub.persistent.users.UserId;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Component
 public class FolderStorageInMemory extends AbstractInMemoryStorage<FolderId, Folder> implements FolderStorage {
 
     @Override

@@ -12,12 +12,15 @@ import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.View;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 /**
  * Service to get an existed folder in authenticated user's directory by {@link FolderId id}.
  */
+@Component
 public class GetFolderById extends View<GetFolderByIdQuery, FileSystemItemDto> {
 
     private static final Logger logger = LoggerFactory.getLogger(GetFolderById.class);
@@ -26,6 +29,7 @@ public class GetFolderById extends View<GetFolderByIdQuery, FileSystemItemDto> {
 
     private final AuthorizationStorage authorizationStorage;
 
+    @Autowired
     public GetFolderById(FolderStorage userStorage, AuthorizationStorage authorizationStorage) {
 
         super(Preconditions.checkNotNull(authorizationStorage));

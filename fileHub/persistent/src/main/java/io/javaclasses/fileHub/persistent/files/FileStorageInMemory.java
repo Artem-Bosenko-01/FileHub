@@ -2,11 +2,13 @@ package io.javaclasses.fileHub.persistent.files;
 
 import io.javaclasses.fileHub.persistent.AbstractInMemoryStorage;
 import io.javaclasses.fileHub.persistent.NotExistedItemException;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+@Component
 public class FileStorageInMemory extends AbstractInMemoryStorage<FileId, File>
         implements FileStorage {
 

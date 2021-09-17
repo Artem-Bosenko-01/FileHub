@@ -12,6 +12,8 @@ import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.SecuredUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -21,6 +23,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Service to create a new empty folder by authenticated user.
  */
+@Component
 public class CreateFolder extends SecuredUserProcess<CreateFolderCommand, FolderId> {
 
     private static final Logger logger = LoggerFactory.getLogger(CreateFolder.class);
@@ -29,6 +32,7 @@ public class CreateFolder extends SecuredUserProcess<CreateFolderCommand, Folder
 
     private final AuthorizationStorage authorizationStorage;
 
+    @Autowired
     public CreateFolder(FolderStorage userStorage, AuthorizationStorage authorizationStorage) {
 
         super(authorizationStorage);

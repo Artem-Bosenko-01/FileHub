@@ -3,6 +3,7 @@ package io.javaclasses.fileHub.webservices.user;
 import com.google.common.testing.NullPointerTester;
 import io.javaclasses.fileHub.services.users.RegisterUser;
 import io.javaclasses.fileHub.webservices.*;
+import io.javaclasses.fileHub.webservices.files.FolderStorageBaseStub;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -36,8 +37,10 @@ public class RegistrationRouteTest {
 
         UserStorageBaseStub userStorageStub = new UserStorageBaseStub();
 
+        FolderStorageBaseStub folderStorageBaseStub = new FolderStorageBaseStub();
+
         NullPointerTester tester = new NullPointerTester();
-        tester.setDefault(RegisterUser.class, new RegisterUser(userStorageStub));
+        tester.setDefault(RegisterUser.class, new RegisterUser(userStorageStub, folderStorageBaseStub));
 
         tester.testConstructor(RegistrationRoute.class.getConstructor(RegisterUser.class));
     }

@@ -17,6 +17,10 @@ dependencies {
     testImplementation 'com.google.guava:guava-testlib:30.1.1-jre'
     implementation 'com.google.guava:guava:11.0.2'
 
+    implementation 'org.springframework:spring-beans:5.3.9'
+    implementation 'org.springframework:spring-core:5.3.9'
+    implementation 'org.springframework:spring-context:5.3.9'
+
     implementation "com.google.errorprone:error_prone_core:2.7.1"
     errorproneJavac "com.google.errorprone:error_prone_core:2.7.1"
 }

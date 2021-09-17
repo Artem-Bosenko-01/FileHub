@@ -8,6 +8,8 @@ import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.View;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
@@ -16,12 +18,14 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Service to get file's content from existed {@link FileId file}.
  */
+@Component
 public class GetFileContent extends View<GetFileContentQuery, GetFileContentDTO> {
 
     private static final Logger logger = LoggerFactory.getLogger(GetFileContent.class);
 
     private final FIleContentStorage contentStorage;
 
+    @Autowired
     public GetFileContent(FIleContentStorage contentStorage, AuthorizationStorage authorizationStorage) {
 
         super(checkNotNull(authorizationStorage));

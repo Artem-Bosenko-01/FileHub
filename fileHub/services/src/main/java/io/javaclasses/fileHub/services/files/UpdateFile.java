@@ -10,6 +10,8 @@ import io.javaclasses.fileHub.persistent.users.tokens.UserAuthToken;
 import io.javaclasses.fileHub.services.SecuredUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
@@ -18,6 +20,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Updates information about existed file in authenticated user's folder by {@link FileId id}.
  */
+@Component
 public class UpdateFile extends SecuredUserProcess<UpdateFileCommand, FileId> {
 
     private static final Logger logger = LoggerFactory.getLogger(UpdateFile.class);
@@ -26,6 +29,7 @@ public class UpdateFile extends SecuredUserProcess<UpdateFileCommand, FileId> {
 
     private final AuthorizationStorage authorizationStorage;
 
+    @Autowired
     public UpdateFile(FileStorage fileStorage, AuthorizationStorage authorizationStorage) {
 
         super(checkNotNull(authorizationStorage));

@@ -10,6 +10,8 @@ import io.javaclasses.fileHub.services.View;
 import io.javaclasses.fileHub.services.files.UsersTokenNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
@@ -18,6 +20,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Service to get information about the authenticated user.
  */
+@Component
 public class GetUserInfo extends View<GetUserQuery, InfoAboutUserDto> {
 
     private static final Logger logger = LoggerFactory.getLogger(GetUserInfo.class);
@@ -25,6 +28,7 @@ public class GetUserInfo extends View<GetUserQuery, InfoAboutUserDto> {
     private final UserStorage userStorage;
     private final AuthorizationStorage authorizationStorage;
 
+    @Autowired
     public GetUserInfo(UserStorage userStorage, AuthorizationStorage authorizationStorage) {
 
         super(checkNotNull(authorizationStorage));

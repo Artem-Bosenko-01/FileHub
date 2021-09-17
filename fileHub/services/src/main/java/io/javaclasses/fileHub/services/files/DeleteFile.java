@@ -9,6 +9,8 @@ import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.services.SecuredUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -18,6 +20,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Service to delete an existed file from authenticated user's directory.
  */
+@Component
 public class DeleteFile extends SecuredUserProcess<DeleteFileCommand, String> {
 
     private static final Logger logger = LoggerFactory.getLogger(DeleteFile.class);
@@ -26,6 +29,7 @@ public class DeleteFile extends SecuredUserProcess<DeleteFileCommand, String> {
 
     private final FolderStorage folderStorage;
 
+    @Autowired
     public DeleteFile(FileStorage fileStorage, FolderStorage folderStorage, AuthorizationStorage authorizationStorage) {
 
         super(checkNotNull(authorizationStorage));

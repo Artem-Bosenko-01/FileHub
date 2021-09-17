@@ -1,11 +1,11 @@
 package io.javaclasses.fileHub.webservices;
 
-import io.javaclasses.fileHub.services.ServiceLocator;
 import io.javaclasses.fileHub.webservices.filesystem.*;
 import io.javaclasses.fileHub.webservices.user.AuthenticationRoute;
 import io.javaclasses.fileHub.webservices.user.GetUserInfoRoute;
 import io.javaclasses.fileHub.webservices.user.LogOutRoute;
 import io.javaclasses.fileHub.webservices.user.RegistrationRoute;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import spark.Spark;
 
 import static spark.Spark.*;
@@ -24,7 +24,9 @@ public final class WebApplication {
 
         staticFiles.externalLocation("js-app");
 
-        ServiceLocator service = new ServiceLocator();
+        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringConfig.class);
+
+        ServiceLocator service = applicationContext.getBean("serviceLocator", ServiceLocator.class);
 
         String APPLICATION_NAME = "/FileHub/server/api";
         String API_VERSION_1_0 = "/1.0";

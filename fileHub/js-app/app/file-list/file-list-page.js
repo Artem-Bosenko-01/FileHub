@@ -58,6 +58,7 @@ export class FileListPage extends StateBasedComponent {
     logOut.onClick(() => {
       this._stateManager.dispatch(new LogOutUser());
       this.deleteAllSubscribersOnChangedState();
+      this._stateManager.clearState();
     });
 
     const fileListBodyElement = this._getElement('file-list-body');

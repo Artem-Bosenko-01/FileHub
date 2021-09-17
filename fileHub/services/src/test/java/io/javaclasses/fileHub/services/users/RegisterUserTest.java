@@ -1,5 +1,7 @@
 package io.javaclasses.fileHub.services.users;
 
+import io.javaclasses.fileHub.persistent.files.FolderStorage;
+import io.javaclasses.fileHub.persistent.files.FolderStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
 import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
@@ -15,7 +17,9 @@ class RegisterUserTest {
 
         UserStorageInMemory userStorageInMemory = new UserStorageInMemory();
 
-        RegisterUser registerUser = new RegisterUser(userStorageInMemory);
+        FolderStorage folderStorage = new FolderStorageInMemory();
+
+        RegisterUser registerUser = new RegisterUser(userStorageInMemory, folderStorage);
 
         Assertions.assertNotNull(registerUser.handle(command));
 
@@ -32,7 +36,9 @@ class RegisterUserTest {
 
         UserStorageInMemory userStorageInMemory = new UserStorageInMemory();
 
-        RegisterUser registerUser = new RegisterUser(userStorageInMemory);
+        FolderStorage folderStorage = new FolderStorageInMemory();
+
+        RegisterUser registerUser = new RegisterUser(userStorageInMemory, folderStorage);
 
         registerUser.handle(command);
 

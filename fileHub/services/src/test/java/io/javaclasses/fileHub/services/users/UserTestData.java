@@ -1,5 +1,7 @@
 package io.javaclasses.fileHub.services.users;
 
+import io.javaclasses.fileHub.persistent.files.FolderStorage;
+import io.javaclasses.fileHub.persistent.files.FolderStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.persistent.users.UserStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
@@ -15,11 +17,12 @@ public final class UserTestData {
     private static final String JohnPassword = "564988";
 
 
-    public static UserId registerKevinUser(UserStorage userStorage) throws InvalidCommandHandlingException, InvalidValidationCommandDataException {
+    public static UserId registerKevinUser(UserStorage userStorage, FolderStorage folderStorage)
+            throws InvalidCommandHandlingException, InvalidValidationCommandDataException {
 
         RegistrationUserCommand registrationUserCommand = new RegistrationUserCommand(KevinLoginName, KevinPassword);
 
-        RegisterUser registerUser = new RegisterUser(userStorage);
+        RegisterUser registerUser = new RegisterUser(userStorage, folderStorage);
 
         registerUser.handle(registrationUserCommand);
         return new UserId(registrationUserCommand.loginName());
@@ -41,7 +44,9 @@ public final class UserTestData {
 
         RegistrationUserCommand registrationUserCommand = new RegistrationUserCommand(JohnLoginName, JohnPassword);
 
-        RegisterUser registerUser = new RegisterUser(userStorage);
+        FolderStorageInMemory folderStorage = new FolderStorageInMemory();
+
+        RegisterUser registerUser = new RegisterUser(userStorage, folderStorage);
 
         registerUser.handle(registrationUserCommand);
         return new UserId(registrationUserCommand.loginName());

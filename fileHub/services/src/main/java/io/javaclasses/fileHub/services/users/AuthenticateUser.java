@@ -10,6 +10,8 @@ import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.OpenUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -20,6 +22,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Service to authenticate user in the Filehub application if he exist at {@link UserStorage user storage}.
  */
+@Component
 public class AuthenticateUser implements OpenUserProcess<AuthenticationUserCommand, AuthToken> {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthenticateUser.class);
@@ -28,6 +31,7 @@ public class AuthenticateUser implements OpenUserProcess<AuthenticationUserComma
 
     private final AuthorizationStorage authorizationStorage;
 
+    @Autowired
     public AuthenticateUser(UserStorage userStorage, AuthorizationStorage authorizationStorage) {
 
         this.userStorage = checkNotNull(userStorage);

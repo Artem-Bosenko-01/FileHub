@@ -60,6 +60,10 @@ export class StateManager {
     this._eventBus.removeEventListener(`stateChanged-${fieldName}`, listener);
   }
 
+  clearState() {
+    this._state = {};
+  }
+
   /**
    * Changes application components states.
    * @param {string} mutatorName

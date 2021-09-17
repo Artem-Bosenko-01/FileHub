@@ -22,7 +22,7 @@ import static javax.servlet.http.HttpServletResponse.*;
  * Gets the {@link Request request} and parses request body to {@link CreateFolderCommand command}
  * and executes {@link CreateFolder creating new folder}.
  */
-public class CreateFolderRoute implements Route {
+public final class CreateFolderRoute implements Route {
 
     private final CreateFolder createFolder;
     private final int INVALID_ENTITY_VALIDATION = 422;

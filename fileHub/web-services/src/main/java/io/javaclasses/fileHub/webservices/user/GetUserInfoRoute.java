@@ -19,7 +19,7 @@ import static javax.servlet.http.HttpServletResponse.*;
 /**
  * Gets {@link Request request} from client side and executes getting user data by his token.
  */
-public class GetUserInfoRoute implements Route {
+public final class GetUserInfoRoute implements Route {
 
     private final GetUserInfo getUserInfo;
 

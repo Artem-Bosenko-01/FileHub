@@ -18,7 +18,7 @@ import static javax.servlet.http.HttpServletResponse.*;
 /**
  * Gets the {@link Request request} and fetches {@link GetFolderContentDTO folder content dto} by folderId.
  */
-public class GetFolderContentRoute implements Route {
+public final class GetFolderContentRoute implements Route {
 
     private final GetFolderContent getFolderContent;
 

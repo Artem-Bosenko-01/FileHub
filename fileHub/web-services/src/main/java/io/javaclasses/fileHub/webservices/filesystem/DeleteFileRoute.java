@@ -17,7 +17,7 @@ import static javax.servlet.http.HttpServletResponse.*;
 /**
  * Gets the {@link Request request} and executes {@link DeleteFile deleting existed file} by fileId.
  */
-public class DeleteFileRoute implements Route {
+public final class DeleteFileRoute implements Route {
 
     private final DeleteFile deleteFile;
 

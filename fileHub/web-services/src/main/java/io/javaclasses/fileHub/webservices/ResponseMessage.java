@@ -6,7 +6,7 @@ import com.google.common.base.Preconditions;
  * Message after executing {@link io.javaclasses.fileHub.services.UserProcess process}
  * that need to be transferred to client side.
  */
-public class ResponseMessage extends JsonResponse {
+public final class ResponseMessage extends JsonResponse {
 
     private final String message;
 

@@ -10,7 +10,7 @@ import com.google.gson.JsonParser;
  *     {"message":"This is example of JSON format string"}
  * </code>
  */
-public class ParserToJsonObject {
+public final class ParserToJsonObject {
 
     public static JsonObject parse(String requestBody) throws InvalidParsingToJsonObject {
 

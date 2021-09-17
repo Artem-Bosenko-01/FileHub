@@ -17,7 +17,7 @@ import static javax.servlet.http.HttpServletResponse.*;
 /**
  * Gets {@link Request request} from client side and executes completing user active session by deleting token from storage.
  */
-public class LogOutRoute implements Route {
+public final class LogOutRoute implements Route {
 
     private final LogOut logOut;
 

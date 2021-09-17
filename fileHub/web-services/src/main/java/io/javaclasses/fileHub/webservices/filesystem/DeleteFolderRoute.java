@@ -17,7 +17,7 @@ import static javax.servlet.http.HttpServletResponse.*;
 /**
  * Gets the {@link Request request} and executes {@link DeleteFolder deleting existed folder} by folderId.
  */
-public class DeleteFolderRoute implements Route {
+public final class DeleteFolderRoute implements Route {
 
     private final DeleteFolder deleteFolder;
 

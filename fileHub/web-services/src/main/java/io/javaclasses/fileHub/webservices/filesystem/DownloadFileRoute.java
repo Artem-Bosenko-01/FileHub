@@ -21,7 +21,7 @@ import static javax.servlet.http.HttpServletResponse.*;
  * Gets the {@link Request request} and fetches {@link GetFileContentDTO fileContent} by fileId.
  * After that it writes fileContent to {@link Response response} as binary data.
  */
-public class DownloadFileRoute implements Route {
+public final class DownloadFileRoute implements Route {
 
     private final GetFileContent downloadFile;
 

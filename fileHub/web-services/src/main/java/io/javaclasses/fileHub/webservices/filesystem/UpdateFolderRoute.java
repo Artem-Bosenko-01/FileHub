@@ -21,7 +21,7 @@ import static javax.servlet.http.HttpServletResponse.*;
  * Gets the {@link Request request}, parses the necessary data for the {@link UpdateFolderCommand command} and
  * executes {@link UpdateFolder updating existed folder} by folderId.
  */
-public class UpdateFolderRoute implements Route {
+public final class UpdateFolderRoute implements Route {
 
     private final UpdateFolder updateFolder;
     private final int INVALID_ENTITY_VALIDATION = 422;

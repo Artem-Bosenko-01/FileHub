@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * Set of processes that allows manages file's and user's systems of FileHub application.
  */
 @Component
-public class ServiceLocator {
+public final class ServiceLocator {
 
     @Autowired
     private AuthenticateUser authenticateUser;

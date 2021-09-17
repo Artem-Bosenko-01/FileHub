@@ -15,7 +15,7 @@ import static javax.servlet.http.HttpServletResponse.*;
 /**
  * Gets the {@link Request request} and fetches {@link FileSystemItemDto root folder data} for authenticated user.
  */
-public class GetRootFolderRoute implements Route {
+public final class GetRootFolderRoute implements Route {
 
     private final GetRootFolder getRootFolder;
 

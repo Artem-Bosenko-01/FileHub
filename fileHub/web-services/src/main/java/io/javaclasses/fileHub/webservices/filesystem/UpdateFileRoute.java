@@ -22,7 +22,7 @@ import static javax.servlet.http.HttpServletResponse.*;
  * Gets the {@link Request request}, parses the necessary data for the {@link UpdateFileCommand command} and
  * executes {@link UpdateFile updating existed file} by fileId.
  */
-public class UpdateFileRoute implements Route {
+public final class UpdateFileRoute implements Route {
 
     private final UpdateFile updateFile;
     private final int INVALID_ENTITY_VALIDATION = 422;

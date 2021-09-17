@@ -25,7 +25,7 @@ import static javax.servlet.http.HttpServletResponse.*;
  * Receives the {@link Request request} and gets file from form data.
  * As a result of handling {@link UploadFile uploading file process} saves file data and file content.
  */
-public class UploadFileRoute implements Route {
+public final class UploadFileRoute implements Route {
 
     private final UploadFile uploadFile;
     private final int INVALID_ENTITY_VALIDATION = 422;

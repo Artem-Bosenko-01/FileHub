@@ -79,7 +79,7 @@ public final class UpdateFileRoute implements Route {
         }
     }
 
-    private UpdateFileCommand convertToCommand(String token, JsonObject jsonObject)
+    private static UpdateFileCommand convertToCommand(String token, JsonObject jsonObject)
             throws InvalidValidationCommandDataException {
 
         String id = jsonObject.get("id").getAsString();

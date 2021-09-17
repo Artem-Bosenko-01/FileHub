@@ -13,12 +13,12 @@ final class ValidationErrorResponse extends JsonResponse {
 
     private final List<ValidationError> errors = new ArrayList<>();
 
-    public void addError(String fieldName, String errorMessage) {
+    void addError(String fieldName, String errorMessage) {
 
         errors.add(new ValidationError(fieldName, errorMessage));
     }
 
-    public void addErrors(Iterable<CommandValidationError> errors) {
+    void addErrors(Iterable<CommandValidationError> errors) {
 
         errors.forEach(exception -> this.errors.add(new ValidationError(exception.field(), exception.message())));
     }

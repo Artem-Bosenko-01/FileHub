@@ -12,6 +12,9 @@ import com.google.gson.JsonParser;
  */
 public final class ParserToJsonObject {
 
+    private ParserToJsonObject() {
+    }
+
     public static JsonObject parse(String requestBody) throws InvalidParsingToJsonObject {
 
         if (requestBody.isEmpty()) {

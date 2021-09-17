@@ -78,7 +78,8 @@ public final class UpdateFolderRoute implements Route {
         }
     }
 
-    private UpdateFolderCommand convertToCommand(String token, JsonObject jsonObject) throws InvalidValidationCommandDataException {
+    private static UpdateFolderCommand convertToCommand(String token, JsonObject jsonObject)
+            throws InvalidValidationCommandDataException {
 
         String id = jsonObject.get("id").getAsString();
         String name = jsonObject.get("name").getAsString();

@@ -9,7 +9,7 @@ final class ValidationError {
 
     private final String message;
 
-    public ValidationError(String fieldName, String errorMessage) {
+    ValidationError(String fieldName, String errorMessage) {
 
         this.field = fieldName;
 

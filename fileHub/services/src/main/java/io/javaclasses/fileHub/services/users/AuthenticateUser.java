@@ -41,7 +41,7 @@ public class AuthenticateUser implements OpenUserProcess<AuthenticationUserComma
 
     @Override
     public AuthToken handle(AuthenticationUserCommand inputCommand)
-            throws DuplicatedUserException, UserNotFoundException {
+            throws DuplicatedFieldValueException, UserNotFoundException {
 
         if (logger.isInfoEnabled()) {
             logger.info("Start authenticated process for user: " + inputCommand.loginName());
@@ -76,7 +76,7 @@ public class AuthenticateUser implements OpenUserProcess<AuthenticationUserComma
                     logger.error(e.getMessage());
                 }
 
-                throw new DuplicatedUserException("email", e.getMessage());
+                throw new DuplicatedFieldValueException("email", e.getMessage());
 
             }
 

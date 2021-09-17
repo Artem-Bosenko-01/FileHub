@@ -5,7 +5,7 @@ import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
 import io.javaclasses.fileHub.services.users.AuthenticateUser;
 import io.javaclasses.fileHub.services.users.AuthenticationUserCommand;
-import io.javaclasses.fileHub.services.users.DuplicatedUserException;
+import io.javaclasses.fileHub.services.users.DuplicatedFieldValueException;
 import io.javaclasses.fileHub.services.users.UserNotFoundException;
 import io.javaclasses.fileHub.webservices.InvalidParsingToJsonObject;
 import io.javaclasses.fileHub.webservices.ResponseMessage;
@@ -64,11 +64,11 @@ public final class AuthenticationRoute implements Route {
 
             return new ResponseMessage(userNotFoundException.getMessage()).serialize();
 
-        } catch (DuplicatedUserException duplicatedUserException) {
+        } catch (DuplicatedFieldValueException duplicatedFieldValueException) {
 
             response.status(SC_CONFLICT);
 
-            return new ResponseMessage(duplicatedUserException.message()).serialize();
+            return new ResponseMessage(duplicatedFieldValueException.message()).serialize();
 
         } catch (InvalidValidationCommandDataException invalidValidationCommandDataException) {
 

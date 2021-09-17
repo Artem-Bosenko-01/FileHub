@@ -4,7 +4,7 @@ import io.javaclasses.fileHub.persistent.users.UserStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.users.AuthenticationUserCommand;
-import io.javaclasses.fileHub.services.users.DuplicatedUserException;
+import io.javaclasses.fileHub.services.users.DuplicatedFieldValueException;
 import io.javaclasses.fileHub.services.users.UserNotFoundException;
 import io.javaclasses.fileHub.webservices.AuthenticationStorageBaseStub;
 import io.javaclasses.fileHub.webservices.UserStorageBaseStub;
@@ -93,9 +93,9 @@ public final class AuthenticateUserNegativeScenariosTestData implements Argument
 
         @Override
         public AuthToken handle(AuthenticationUserCommand inputCommand)
-                throws DuplicatedUserException {
+                throws DuplicatedFieldValueException {
 
-            throw new DuplicatedUserException("token", message);
+            throw new DuplicatedFieldValueException("token", message);
         }
     }
 

@@ -5,7 +5,7 @@ import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.users.AuthenticateUser;
 import io.javaclasses.fileHub.services.users.AuthenticationUserCommand;
-import io.javaclasses.fileHub.services.users.DuplicatedUserException;
+import io.javaclasses.fileHub.services.users.DuplicatedFieldValueException;
 import io.javaclasses.fileHub.services.users.UserNotFoundException;
 
 public class AuthenticateUserBaseStub extends AuthenticateUser {
@@ -16,7 +16,7 @@ public class AuthenticateUserBaseStub extends AuthenticateUser {
 
     @Override
     public AuthToken handle(AuthenticationUserCommand inputCommand)
-            throws DuplicatedUserException, UserNotFoundException {
+            throws DuplicatedFieldValueException, UserNotFoundException {
 
         return new AuthToken("token");
     }

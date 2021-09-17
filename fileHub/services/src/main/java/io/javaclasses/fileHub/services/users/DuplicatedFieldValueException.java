@@ -5,13 +5,13 @@ import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 /**
  * Throws when the value for a field already used in {@link io.javaclasses.fileHub.persistent.Storage storage}.
  */
-public class DuplicatedUserException extends InvalidCommandHandlingException {
+public class DuplicatedFieldValueException extends InvalidCommandHandlingException {
 
     private static final long serialVersionUID = 6950440625513627262L;
     private final String field;
     private final String message;
 
-    public DuplicatedUserException(String field, String message) {
+    public DuplicatedFieldValueException(String field, String message) {
 
         super(message);
 

@@ -2,7 +2,7 @@ package io.javaclasses.fileHub.webservices.user;
 
 import com.google.gson.JsonObject;
 import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
-import io.javaclasses.fileHub.services.users.DuplicatedUserException;
+import io.javaclasses.fileHub.services.users.DuplicatedFieldValueException;
 import io.javaclasses.fileHub.services.users.RegisterUser;
 import io.javaclasses.fileHub.services.users.RegistrationUserCommand;
 import io.javaclasses.fileHub.webservices.InvalidParsingToJsonObject;
@@ -55,13 +55,13 @@ public final class RegistrationRoute implements Route {
 
             return new ResponseMessage(invalidParsingToJsonObject.getMessage()).serialize();
 
-        } catch (DuplicatedUserException duplicatedUserException) {
+        } catch (DuplicatedFieldValueException duplicatedFieldValueException) {
 
             response.status(INVALID_ENTITY_VALIDATION);
 
             ValidationErrorResponse errorResponse = new ValidationErrorResponse();
 
-            errorResponse.addError(duplicatedUserException.field(), duplicatedUserException.message());
+            errorResponse.addError(duplicatedFieldValueException.field(), duplicatedFieldValueException.message());
 
             return errorResponse.serialize();
 

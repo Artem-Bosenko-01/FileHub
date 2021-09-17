@@ -1,7 +1,7 @@
 package io.javaclasses.fileHub.webservices.user;
 
 import io.javaclasses.fileHub.persistent.users.UserStorage;
-import io.javaclasses.fileHub.services.users.DuplicatedUserException;
+import io.javaclasses.fileHub.services.users.DuplicatedFieldValueException;
 import io.javaclasses.fileHub.services.users.RegistrationUserCommand;
 import io.javaclasses.fileHub.webservices.UserStorageBaseStub;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -62,9 +62,9 @@ public final class RegisterUserNegativeScenariosTestData implements ArgumentsPro
 
         @Override
         public Boolean handle(RegistrationUserCommand inputCommand)
-                throws DuplicatedUserException {
+                throws DuplicatedFieldValueException {
 
-            throw new DuplicatedUserException("email", message);
+            throw new DuplicatedFieldValueException("email", message);
         }
     }
 

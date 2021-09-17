@@ -33,7 +33,7 @@ public class RegisterUser implements OpenUserProcess<RegistrationUserCommand, Bo
     }
 
     @Override
-    public Boolean handle(RegistrationUserCommand inputCommand) throws DuplicatedUserException {
+    public Boolean handle(RegistrationUserCommand inputCommand) throws DuplicatedFieldValueException {
 
         if (logger.isInfoEnabled()) {
             logger.info("Start registration user process with id: " + inputCommand.loginName());
@@ -71,7 +71,7 @@ public class RegisterUser implements OpenUserProcess<RegistrationUserCommand, Bo
                 logger.error(e.getMessage());
             }
 
-            throw new DuplicatedUserException("email", e.getMessage());
+            throw new DuplicatedFieldValueException("email", e.getMessage());
         }
     }
 }

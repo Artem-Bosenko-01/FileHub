@@ -113,47 +113,4 @@ public class ServiceLocator {
     public GetFileContent getFileContent() {
         return getFileContent;
     }
-
-    /*@PostConstruct
-    public void initDataForDB() {
-
-        UserId id = new UserId("id");
-
-        User user = new User(id);
-        user.setLogin("artrms@kasc.com");
-        user.setPassword("41b0af881656217cc2fa99a55a07c61fc4c9d855bd837695b19c5bf2e4f46d38");
-
-        AuthorizationUsers authorizedUser = new AuthorizationUsers(new UserAuthToken("token"), id, ZonedDateTime.now(ZoneId.of("America/Los_Angeles")).plusHours(6));
-
-        Folder folder = new Folder("folder" + id);
-        folder.setName("folder");
-        folder.setItemsAmount(5L);
-        folder.setOwner(id);
-        folder.setParentFolder(null);
-
-        Folder folder2 = new Folder("dcsdcsdv" + id);
-        folder2.setName("dcsdcsdv");
-        folder2.setItemsAmount(666L);
-        folder2.setOwner(id);
-        folder2.setParentFolder(folder.id().toString());
-
-        File file = new File("test_file.txt" + id + folder.id());
-        file.setName("test_file.txt");
-        file.setFolder(folder.id().toString());
-        file.setMimeType(MediaType.GIF);
-        file.setSize(564651894L);
-        file.setUserID(id);
-
-        try {
-            authorizationStorage.create(authorizedUser);
-            userStorage.create(user);
-            folderStorage.create(folder);
-            folderStorage.create(folder2);
-            fileStorage.create(file);
-        } catch (DuplicatedIdException e) {
-            e.printStackTrace();
-        }
-
-
-    }*/
 }

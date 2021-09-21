@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import spark.Request;
 
 /**
- * Util that allows getting necessary data for {@link spark.Route routes} from {@link Request requests}.
+ * Utility that allows getting necessary data from {@link Request requests}.
  */
 public final class RequestParser {
 

@@ -6,7 +6,7 @@ import io.javaclasses.fileHub.services.AuthenticatedUserCommand;
 import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static io.javaclasses.fileHub.services.ValidationRules.validateItemName;
+import static io.javaclasses.fileHub.services.ValidationRules.validateFileSystemItemName;
 
 /**
  * Data that needs to update an existed file.
@@ -28,7 +28,7 @@ public final class UpdateFileCommand extends AuthenticatedUserCommand {
 
         super(checkNotNull(token));
 
-        validateItemName(name);
+        validateFileSystemItemName(name);
 
         this.id = checkNotNull(id);
 

@@ -3,9 +3,9 @@ package io.javaclasses.fileHub.services;
 import java.util.regex.Pattern;
 
 /**
- * Set of value limits for a necessary {@link io.javaclasses.fileHub.services.Command command}.
+ * A set of validation rules for a particular {@link io.javaclasses.fileHub.services.Command command}.
  */
-public class ValidationRules {
+public final class ValidationRules {
 
     private ValidationRules() {
     }
@@ -36,7 +36,7 @@ public class ValidationRules {
         }
     }
 
-    public static void validateItemName(String name)
+    public static void validateFileSystemItemName(String name)
             throws InvalidValidationCommandDataException {
 
         InvalidValidationCommandDataException exception = new InvalidValidationCommandDataException();

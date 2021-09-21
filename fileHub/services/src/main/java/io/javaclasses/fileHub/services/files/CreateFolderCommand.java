@@ -9,7 +9,7 @@ import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
 import javax.annotation.Nullable;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static io.javaclasses.fileHub.services.ValidationRules.validateItemName;
+import static io.javaclasses.fileHub.services.ValidationRules.validateFileSystemItemName;
 
 /**
  * Data that needs to create a new folder and put to {@link FolderStorage storage}
@@ -29,7 +29,7 @@ public final class CreateFolderCommand extends AuthenticatedUserCommand {
 
         super(checkNotNull(token));
 
-        validateItemName(name);
+        validateFileSystemItemName(name);
 
         this.name = checkNotNull(name);
 

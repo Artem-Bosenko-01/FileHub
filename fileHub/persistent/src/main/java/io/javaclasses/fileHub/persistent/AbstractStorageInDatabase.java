@@ -9,9 +9,10 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 /**
- * Abstract base for managing user and file systems stored in a database.
+ * Abstract base for any implementation of SQL database storage.
  * <p>
- * The connection to the required database will be obtained from the configuration.
+ * New: Uses given configuration to obtain a connection to the database
+ * Old: The connection to the required database will be obtained from the configuration.
  *
  * @param <I> - {@link RecordId entity identifier} type.
  * @param <E> - implementation of {@link DataRecord abstract entity}.

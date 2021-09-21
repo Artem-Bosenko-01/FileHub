@@ -6,7 +6,7 @@ import io.javaclasses.fileHub.services.AuthenticatedUserCommand;
 import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static io.javaclasses.fileHub.services.ValidationRules.validateItemName;
+import static io.javaclasses.fileHub.services.ValidationRules.validateFileSystemItemName;
 
 /**
  * Data that needs to upload new file to Filehub application by authenticated user.
@@ -26,7 +26,7 @@ public final class UploadFileCommand extends AuthenticatedUserCommand {
 
         super(checkNotNull(token));
 
-        validateItemName(name);
+        validateFileSystemItemName(name);
 
         this.name = checkNotNull(name);
 

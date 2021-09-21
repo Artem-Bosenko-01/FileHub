@@ -3,7 +3,6 @@ package io.javaclasses.fileHub.persistent;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PreDestroy;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -14,11 +13,11 @@ import java.util.Properties;
  *
  */
 @Component
-public class JDBCConfiguration {
+public class ConfigurationJDBC {
 
     private static final BasicDataSource connectionsPool = new BasicDataSource();
 
-    public JDBCConfiguration() throws InvalidReadingPropertyFileException {
+    public ConfigurationJDBC() throws InvalidReadingPropertyFileException {
 
         Properties properties = getPropertyFile();
 
@@ -31,17 +30,11 @@ public class JDBCConfiguration {
         return connectionsPool.getConnection();
     }
 
-    @PreDestroy
-    void closeConnectionPool() throws SQLException {
-
-        connectionsPool.close();
-    }
-
     private static Properties getPropertyFile() throws InvalidReadingPropertyFileException {
 
         Properties props = new Properties();
 
-        try (InputStream iStream = JDBCConfiguration.class.getClassLoader().getResourceAsStream("JDBCSettings.properties")) {
+        try (InputStream iStream = ConfigurationJDBC.class.getClassLoader().getResourceAsStream("JDBCSettings.properties")) {
 
             props.load(iStream);
 

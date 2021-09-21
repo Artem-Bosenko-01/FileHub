@@ -35,18 +35,8 @@ public class FolderStorageBaseStub implements FolderStorage {
     }
 
     @Override
-    public Optional<Folder> findFolderById(String id, UserId owner) {
-        return Optional.empty();
-    }
-
-    @Override
     public Optional<Folder> findRootFolderByUserId(UserId id) {
         return Optional.empty();
-    }
-
-    @Override
-    public int getSizeRecordsList() {
-        return 0;
     }
 
     @Override

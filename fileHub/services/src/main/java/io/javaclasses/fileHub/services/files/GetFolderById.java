@@ -13,6 +13,7 @@ import io.javaclasses.fileHub.services.View;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -30,7 +31,8 @@ public class GetFolderById extends View<GetFolderByIdQuery, FileSystemItemDto> {
     private final AuthorizationStorage authorizationStorage;
 
     @Autowired
-    public GetFolderById(FolderStorage userStorage, AuthorizationStorage authorizationStorage) {
+    public GetFolderById(@Qualifier("folderJDBCStorage") FolderStorage userStorage,
+                         @Qualifier("authorizationJDBCStorage") AuthorizationStorage authorizationStorage) {
 
         super(Preconditions.checkNotNull(authorizationStorage));
 
@@ -52,7 +54,7 @@ public class GetFolderById extends View<GetFolderByIdQuery, FileSystemItemDto> {
                 logger.info("Start get directory for user: " + userId + " and name: " + query.id());
             }
 
-            Optional<Folder> optionalFolder = folderStorageInMemory.findFolderById(query.id(), userId);
+            Optional<Folder> optionalFolder = folderStorageInMemory.findByID(new FolderId(query.id()));
 
             if (optionalFolder.isPresent()) {
 

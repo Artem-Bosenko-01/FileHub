@@ -14,6 +14,7 @@ import io.javaclasses.fileHub.services.SecuredUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -37,8 +38,10 @@ public class UploadFile extends SecuredUserProcess<UploadFileCommand, String> {
     private final FileStorage fileStorage;
 
     @Autowired
-    public UploadFile(FIleContentStorage contentStorage, FileStorage fileStorage, FolderStorage folderStorage,
-                      AuthorizationStorage authorizationStorage) {
+    public UploadFile(@Qualifier("fileContentJDBCStorage") FIleContentStorage contentStorage,
+                      @Qualifier("fileJDBCStorage") FileStorage fileStorage,
+                      @Qualifier("folderJDBCStorage") FolderStorage folderStorage,
+                      @Qualifier("authorizationJDBCStorage") AuthorizationStorage authorizationStorage) {
 
         super(checkNotNull(authorizationStorage));
 
@@ -68,7 +71,7 @@ public class UploadFile extends SecuredUserProcess<UploadFileCommand, String> {
                         + " directory: " + inputCommand.folder());
             }
 
-            String fileId = inputCommand.name() + userId + inputCommand.folder();
+            String fileId = inputCommand.name() + inputCommand.folder();
 
             File file = new File(fileId);
 

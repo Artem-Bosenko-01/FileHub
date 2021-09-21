@@ -9,6 +9,7 @@ import io.javaclasses.fileHub.services.View;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -26,7 +27,8 @@ public class GetRootFolder extends View<GetRootFolderQuery, FileSystemItemDto> {
     private final AuthorizationStorage authorizationStorage;
 
     @Autowired
-    public GetRootFolder(AuthorizationStorage authorizationStorage, FolderStorage folderStorage) {
+    public GetRootFolder(@Qualifier("authorizationJDBCStorage") AuthorizationStorage authorizationStorage,
+                         @Qualifier("folderJDBCStorage") FolderStorage folderStorage) {
 
         super(authorizationStorage);
 

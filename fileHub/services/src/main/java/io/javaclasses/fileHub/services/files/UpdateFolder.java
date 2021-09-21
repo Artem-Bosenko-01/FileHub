@@ -11,6 +11,7 @@ import io.javaclasses.fileHub.services.SecuredUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -30,7 +31,8 @@ public class UpdateFolder extends SecuredUserProcess<UpdateFolderCommand, Folder
     private final AuthorizationStorage authorizationStorage;
 
     @Autowired
-    public UpdateFolder(FolderStorage userStorage, AuthorizationStorage authorizationStorage) {
+    public UpdateFolder(@Qualifier("folderJDBCStorage") FolderStorage userStorage,
+                        @Qualifier("authorizationJDBCStorage") AuthorizationStorage authorizationStorage) {
 
         super(checkNotNull(authorizationStorage));
 
@@ -43,14 +45,14 @@ public class UpdateFolder extends SecuredUserProcess<UpdateFolderCommand, Folder
     protected FolderId doHandle(UpdateFolderCommand inputCommand)
             throws FolderNotFoundException, UsersTokenNotFoundException, FolderNameAlreadyUsedException {
 
-        if (folderStorage.isFolderNameAlreadyExist(inputCommand.name())) {
+        /*if (folderStorage.isFolderNameAlreadyExist(inputCommand.name())) {
 
             if (logger.isErrorEnabled()) {
                 logger.error("Folder name: " + inputCommand.name() + " already used.");
             }
 
             throw new FolderNameAlreadyUsedException(inputCommand.name());
-        }
+        }*/
 
         Optional<AuthorizationUsers> owner = authorizationStorage.
                 findByID(new UserAuthToken(inputCommand.token().value()));

@@ -10,6 +10,7 @@ import io.javaclasses.fileHub.services.SecuredUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
@@ -30,7 +31,9 @@ public class DeleteFile extends SecuredUserProcess<DeleteFileCommand, String> {
     private final FolderStorage folderStorage;
 
     @Autowired
-    public DeleteFile(FileStorage fileStorage, FolderStorage folderStorage, AuthorizationStorage authorizationStorage) {
+    public DeleteFile(@Qualifier("fileJDBCStorage") FileStorage fileStorage,
+                      @Qualifier("folderJDBCStorage") FolderStorage folderStorage,
+                      @Qualifier("authorizationJDBCStorage") AuthorizationStorage authorizationStorage) {
 
         super(checkNotNull(authorizationStorage));
 

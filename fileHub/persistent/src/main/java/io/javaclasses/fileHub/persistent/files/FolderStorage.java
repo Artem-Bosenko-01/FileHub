@@ -11,11 +11,7 @@ public interface FolderStorage extends Storage<FolderId, Folder> {
 
     List<Folder> findAllFoldersByParentFolderId(String parentId, String owner) throws NotExistedItemException;
 
-    Optional<Folder> findFolderById(String id, UserId owner);
-
     Optional<Folder> findRootFolderByUserId(UserId id);
-
-    int getSizeRecordsList();
 
     boolean isFolderNameAlreadyExist(String name);
 

@@ -13,6 +13,7 @@ import io.javaclasses.fileHub.services.SecuredUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
@@ -33,7 +34,8 @@ public class CreateFolder extends SecuredUserProcess<CreateFolderCommand, Folder
     private final AuthorizationStorage authorizationStorage;
 
     @Autowired
-    public CreateFolder(FolderStorage userStorage, AuthorizationStorage authorizationStorage) {
+    public CreateFolder(@Qualifier("folderJDBCStorage") FolderStorage userStorage,
+                        @Qualifier("authorizationJDBCStorage") AuthorizationStorage authorizationStorage) {
 
         super(authorizationStorage);
 
@@ -54,7 +56,7 @@ public class CreateFolder extends SecuredUserProcess<CreateFolderCommand, Folder
                 logger.info("Start create folder " + query.name());
             }
 
-            String folderId = query.name() + userId;
+            String folderId = query.name() + userId + query.parentFolder();
 
             Folder folder = new Folder(folderId);
             folder.setParentFolder(query.parentFolder());

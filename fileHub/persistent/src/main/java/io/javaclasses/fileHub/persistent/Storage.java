@@ -1,5 +1,6 @@
 package io.javaclasses.fileHub.persistent;
 
+import java.sql.SQLException;
 import java.util.Optional;
 
 /**

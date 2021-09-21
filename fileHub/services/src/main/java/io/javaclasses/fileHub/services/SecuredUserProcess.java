@@ -5,6 +5,7 @@ import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationUsers;
 import io.javaclasses.fileHub.persistent.users.tokens.UserAuthToken;
 
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Optional;
@@ -51,7 +52,7 @@ public abstract class SecuredUserProcess<C extends AuthenticatedUserCommand, E> 
 
     private static boolean isTokenNotExpire(AuthorizationUsers token) {
 
-        return token.expirationTime().isAfter(ZonedDateTime.now(ZoneId.of("America/Los_Angeles")));
+        return token.expirationTime().isAfter(LocalDateTime.now(ZoneId.of("America/Los_Angeles")));
 
     }
 }

@@ -11,6 +11,7 @@ import io.javaclasses.fileHub.services.OpenUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 /**
@@ -26,7 +27,8 @@ public class RegisterUser implements OpenUserProcess<RegistrationUserCommand, Bo
     private final FolderStorage folderStorage;
 
     @Autowired
-    public RegisterUser(UserStorage userStorage, FolderStorage folderStorage) {
+    public RegisterUser(@Qualifier("userJDBCStorage") UserStorage userStorage,
+                        @Qualifier("folderJDBCStorage") FolderStorage folderStorage) {
 
         this.userStorage = Preconditions.checkNotNull(userStorage);
         this.folderStorage = Preconditions.checkNotNull(folderStorage);

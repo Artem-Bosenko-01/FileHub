@@ -7,6 +7,7 @@ import io.javaclasses.fileHub.services.files.UsersTokenNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -22,7 +23,7 @@ public class LogOut extends SecuredUserProcess<LogOutCommand, String> {
     private final AuthorizationStorage authorizationStorage;
 
     @Autowired
-    public LogOut(AuthorizationStorage authorizationStorage) {
+    public LogOut(@Qualifier("authorizationJDBCStorage") AuthorizationStorage authorizationStorage) {
 
         super(checkNotNull(authorizationStorage));
 

@@ -11,8 +11,10 @@ import io.javaclasses.fileHub.services.OpenUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Optional;
@@ -32,7 +34,8 @@ public class AuthenticateUser implements OpenUserProcess<AuthenticationUserComma
     private final AuthorizationStorage authorizationStorage;
 
     @Autowired
-    public AuthenticateUser(UserStorage userStorage, AuthorizationStorage authorizationStorage) {
+    public AuthenticateUser(@Qualifier("userJDBCStorage") UserStorage userStorage,
+                            @Qualifier("authorizationJDBCStorage") AuthorizationStorage authorizationStorage) {
 
         this.userStorage = checkNotNull(userStorage);
 
@@ -62,7 +65,7 @@ public class AuthenticateUser implements OpenUserProcess<AuthenticationUserComma
             try {
 
                 authorizationStorage.create(new AuthorizationUsers(new UserAuthToken(token.value()),
-                        user.get().id(), ZonedDateTime.now(ZoneId.of("America/Los_Angeles")).plusHours(6)));
+                        user.get().id(), LocalDateTime.now(ZoneId.of("America/Los_Angeles")).plusHours(6)));
 
                 if (logger.isInfoEnabled()) {
                     logger.info("Token for user " + user.get().login() + " was created. Value = " + token.value());

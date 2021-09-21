@@ -11,6 +11,7 @@ import io.javaclasses.fileHub.services.files.UsersTokenNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -29,7 +30,8 @@ public class GetUserInfo extends View<GetUserQuery, InfoAboutUserDto> {
     private final AuthorizationStorage authorizationStorage;
 
     @Autowired
-    public GetUserInfo(UserStorage userStorage, AuthorizationStorage authorizationStorage) {
+    public GetUserInfo(@Qualifier("userJDBCStorage") UserStorage userStorage,
+                       @Qualifier("authorizationJDBCStorage") AuthorizationStorage authorizationStorage) {
 
         super(checkNotNull(authorizationStorage));
 

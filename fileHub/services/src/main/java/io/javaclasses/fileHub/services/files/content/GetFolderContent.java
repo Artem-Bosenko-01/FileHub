@@ -35,9 +35,9 @@ public class GetFolderContent extends View<GetFolderContentQuery, GetFolderConte
     private final AuthorizationStorage authorizationStorage;
 
     @Autowired
-    public GetFolderContent(@Qualifier("folderJDBCStorage") FolderStorage folderStorage,
-                            @Qualifier("fileJDBCStorage") FileStorage fileStorage,
-                            @Qualifier("authorizationJDBCStorage") AuthorizationStorage authorizationStorage) {
+    public GetFolderContent(@Qualifier("folderStorageInDatabase") FolderStorage folderStorage,
+                            @Qualifier("fileStorageInDatabase") FileStorage fileStorage,
+                            @Qualifier("authorizationStorageInDatabase") AuthorizationStorage authorizationStorage) {
 
         super(checkNotNull(authorizationStorage));
 

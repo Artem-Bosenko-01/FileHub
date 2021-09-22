@@ -27,8 +27,8 @@ public class GetFileContent extends View<GetFileContentQuery, GetFileContentDTO>
     private final FIleContentStorage contentStorage;
 
     @Autowired
-    public GetFileContent(@Qualifier("fileContentJDBCStorage") FIleContentStorage contentStorage,
-                          @Qualifier("authorizationJDBCStorage") AuthorizationStorage authorizationStorage) {
+    public GetFileContent(@Qualifier("fileContentStorageInDatabase") FIleContentStorage contentStorage,
+                          @Qualifier("authorizationStorageInDatabase") AuthorizationStorage authorizationStorage) {
 
         super(checkNotNull(authorizationStorage));
 

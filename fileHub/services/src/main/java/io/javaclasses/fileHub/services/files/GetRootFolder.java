@@ -27,8 +27,8 @@ public class GetRootFolder extends View<GetRootFolderQuery, FileSystemItemDto> {
     private final AuthorizationStorage authorizationStorage;
 
     @Autowired
-    public GetRootFolder(@Qualifier("authorizationJDBCStorage") AuthorizationStorage authorizationStorage,
-                         @Qualifier("folderJDBCStorage") FolderStorage folderStorage) {
+    public GetRootFolder(@Qualifier("authorizationStorageInDatabase") AuthorizationStorage authorizationStorage,
+                         @Qualifier("folderStorageInDatabase") FolderStorage folderStorage) {
 
         super(authorizationStorage);
 

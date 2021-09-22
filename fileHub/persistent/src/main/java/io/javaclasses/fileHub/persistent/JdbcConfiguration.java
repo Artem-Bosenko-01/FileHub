@@ -13,11 +13,11 @@ import java.util.Properties;
  *
  */
 @Component
-public class ConfigurationJDBC {
+public class JdbcConfiguration {
 
     private static final BasicDataSource connectionsPool = new BasicDataSource();
 
-    public ConfigurationJDBC() throws InvalidReadingPropertyFileException {
+    public JdbcConfiguration() throws InvalidReadingPropertyFileException {
 
         Properties properties = getPropertyFile();
 
@@ -34,7 +34,7 @@ public class ConfigurationJDBC {
 
         Properties props = new Properties();
 
-        try (InputStream iStream = ConfigurationJDBC.class.getClassLoader().getResourceAsStream("JDBCSettings.properties")) {
+        try (InputStream iStream = JdbcConfiguration.class.getClassLoader().getResourceAsStream("JDBCSettings.properties")) {
 
             props.load(iStream);
 

@@ -31,9 +31,9 @@ public class DeleteFile extends SecuredUserProcess<DeleteFileCommand, String> {
     private final FolderStorage folderStorage;
 
     @Autowired
-    public DeleteFile(@Qualifier("fileJDBCStorage") FileStorage fileStorage,
-                      @Qualifier("folderJDBCStorage") FolderStorage folderStorage,
-                      @Qualifier("authorizationJDBCStorage") AuthorizationStorage authorizationStorage) {
+    public DeleteFile(@Qualifier("fileStorageInDatabase") FileStorage fileStorage,
+                      @Qualifier("folderStorageInDatabase") FolderStorage folderStorage,
+                      @Qualifier("authorizationStorageInDatabase") AuthorizationStorage authorizationStorage) {
 
         super(checkNotNull(authorizationStorage));
 

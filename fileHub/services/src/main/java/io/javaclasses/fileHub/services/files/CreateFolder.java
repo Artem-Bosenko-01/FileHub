@@ -34,8 +34,8 @@ public class CreateFolder extends SecuredUserProcess<CreateFolderCommand, Folder
     private final AuthorizationStorage authorizationStorage;
 
     @Autowired
-    public CreateFolder(@Qualifier("folderJDBCStorage") FolderStorage userStorage,
-                        @Qualifier("authorizationJDBCStorage") AuthorizationStorage authorizationStorage) {
+    public CreateFolder(@Qualifier("folderStorageInDatabase") FolderStorage userStorage,
+                        @Qualifier("authorizationStorageInDatabase") AuthorizationStorage authorizationStorage) {
 
         super(authorizationStorage);
 

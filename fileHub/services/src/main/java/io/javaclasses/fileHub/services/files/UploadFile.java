@@ -38,10 +38,10 @@ public class UploadFile extends SecuredUserProcess<UploadFileCommand, String> {
     private final FileStorage fileStorage;
 
     @Autowired
-    public UploadFile(@Qualifier("fileContentJDBCStorage") FIleContentStorage contentStorage,
-                      @Qualifier("fileJDBCStorage") FileStorage fileStorage,
-                      @Qualifier("folderJDBCStorage") FolderStorage folderStorage,
-                      @Qualifier("authorizationJDBCStorage") AuthorizationStorage authorizationStorage) {
+    public UploadFile(@Qualifier("fileContentStorageInDatabase") FIleContentStorage contentStorage,
+                      @Qualifier("fileStorageInDatabase") FileStorage fileStorage,
+                      @Qualifier("folderStorageInDatabase") FolderStorage folderStorage,
+                      @Qualifier("authorizationStorageInDatabase") AuthorizationStorage authorizationStorage) {
 
         super(checkNotNull(authorizationStorage));
 

@@ -34,8 +34,8 @@ public class AuthenticateUser implements OpenUserProcess<AuthenticationUserComma
     private final AuthorizationStorage authorizationStorage;
 
     @Autowired
-    public AuthenticateUser(@Qualifier("userJDBCStorage") UserStorage userStorage,
-                            @Qualifier("authorizationJDBCStorage") AuthorizationStorage authorizationStorage) {
+    public AuthenticateUser(@Qualifier("userStorageInDatabase") UserStorage userStorage,
+                            @Qualifier("authorizationStorageInDatabase") AuthorizationStorage authorizationStorage) {
 
         this.userStorage = checkNotNull(userStorage);
 

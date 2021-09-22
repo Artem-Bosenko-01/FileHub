@@ -1,7 +1,7 @@
 package io.javaclasses.fileHub.persistent.files.content;
 
 import io.javaclasses.fileHub.persistent.AbstractStorageInDatabase;
-import io.javaclasses.fileHub.persistent.ConfigurationJDBC;
+import io.javaclasses.fileHub.persistent.JdbcConfiguration;
 import io.javaclasses.fileHub.persistent.files.FileId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,7 +18,7 @@ import java.sql.SQLException;
 public class FileContentStorageInDatabase extends AbstractStorageInDatabase<FileId, FileContent> implements FIleContentStorage {
 
     @Autowired
-    protected FileContentStorageInDatabase(ConfigurationJDBC configuration) {
+    protected FileContentStorageInDatabase(JdbcConfiguration configuration) {
         super(configuration);
     }
 
@@ -55,7 +55,7 @@ public class FileContentStorageInDatabase extends AbstractStorageInDatabase<File
     }
 
     @Override
-    protected String idName() {
+    protected String primaryKeyName() {
         return "file_id";
     }
 

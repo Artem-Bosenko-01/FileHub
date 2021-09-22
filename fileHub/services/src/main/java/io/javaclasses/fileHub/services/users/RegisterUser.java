@@ -27,8 +27,8 @@ public class RegisterUser implements OpenUserProcess<RegistrationUserCommand, Bo
     private final FolderStorage folderStorage;
 
     @Autowired
-    public RegisterUser(@Qualifier("userJDBCStorage") UserStorage userStorage,
-                        @Qualifier("folderJDBCStorage") FolderStorage folderStorage) {
+    public RegisterUser(@Qualifier("userStorageInDatabase") UserStorage userStorage,
+                        @Qualifier("folderStorageInDatabase") FolderStorage folderStorage) {
 
         this.userStorage = Preconditions.checkNotNull(userStorage);
         this.folderStorage = Preconditions.checkNotNull(folderStorage);

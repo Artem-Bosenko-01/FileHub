@@ -1,7 +1,7 @@
 package io.javaclasses.fileHub.persistent.users;
 
 import io.javaclasses.fileHub.persistent.AbstractStorageInDatabase;
-import io.javaclasses.fileHub.persistent.ConfigurationJDBC;
+import io.javaclasses.fileHub.persistent.JdbcConfiguration;
 import io.javaclasses.fileHub.persistent.InvalidExecutingSqlStatement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,7 +19,7 @@ import java.util.Optional;
 public class UserStorageInDatabase extends AbstractStorageInDatabase<UserId, User> implements UserStorage {
 
     @Autowired
-    public UserStorageInDatabase(ConfigurationJDBC configurationJDBC) {
+    public UserStorageInDatabase(JdbcConfiguration configurationJDBC) {
 
         super(configurationJDBC);
     }
@@ -66,7 +66,7 @@ public class UserStorageInDatabase extends AbstractStorageInDatabase<UserId, Use
     }
 
     @Override
-    protected String idName() {
+    protected String primaryKeyName() {
         return "id";
     }
 

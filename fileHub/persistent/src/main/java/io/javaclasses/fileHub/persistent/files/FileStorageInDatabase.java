@@ -2,8 +2,8 @@ package io.javaclasses.fileHub.persistent.files;
 
 import com.google.common.net.MediaType;
 import io.javaclasses.fileHub.persistent.AbstractStorageInDatabase;
-import io.javaclasses.fileHub.persistent.ConfigurationJDBC;
 import io.javaclasses.fileHub.persistent.InvalidExecutingSqlStatement;
+import io.javaclasses.fileHub.persistent.JdbcConfiguration;
 import io.javaclasses.fileHub.persistent.NotExistedItemException;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ import java.util.List;
 public class FileStorageInDatabase extends AbstractStorageInDatabase<FileId, File> implements FileStorage {
 
     @Autowired
-    protected FileStorageInDatabase(ConfigurationJDBC configuration) {
+    protected FileStorageInDatabase(JdbcConfiguration configuration) {
         super(configuration);
     }
 
@@ -83,7 +83,7 @@ public class FileStorageInDatabase extends AbstractStorageInDatabase<FileId, Fil
     }
 
     @Override
-    protected String idName() {
+    protected String primaryKeyName() {
         return "id";
     }
 
@@ -94,7 +94,7 @@ public class FileStorageInDatabase extends AbstractStorageInDatabase<FileId, Fil
 
         if (userID == null) {
 
-            throw new NotExistedItemException("User with doesn't be null ");
+            throw new NotExistedItemException(userID);
         }
 
 

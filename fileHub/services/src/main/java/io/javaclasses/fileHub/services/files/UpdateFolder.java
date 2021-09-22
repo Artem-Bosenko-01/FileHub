@@ -31,8 +31,8 @@ public class UpdateFolder extends SecuredUserProcess<UpdateFolderCommand, Folder
     private final AuthorizationStorage authorizationStorage;
 
     @Autowired
-    public UpdateFolder(@Qualifier("folderJDBCStorage") FolderStorage userStorage,
-                        @Qualifier("authorizationJDBCStorage") AuthorizationStorage authorizationStorage) {
+    public UpdateFolder(@Qualifier("folderStorageInDatabase") FolderStorage userStorage,
+                        @Qualifier("authorizationStorageInDatabase") AuthorizationStorage authorizationStorage) {
 
         super(checkNotNull(authorizationStorage));
 

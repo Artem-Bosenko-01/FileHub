@@ -17,7 +17,7 @@ public class FileStorageInMemory extends AbstractInMemoryStorage<FileId, File>
 
         if (userID == null) {
 
-            throw new NotExistedItemException("User with doesn't be null ");
+            throw new NotExistedItemException(userID);
 
         }
 

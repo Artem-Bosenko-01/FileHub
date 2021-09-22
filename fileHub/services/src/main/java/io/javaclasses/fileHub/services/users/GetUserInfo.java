@@ -30,8 +30,8 @@ public class GetUserInfo extends View<GetUserQuery, InfoAboutUserDto> {
     private final AuthorizationStorage authorizationStorage;
 
     @Autowired
-    public GetUserInfo(@Qualifier("userJDBCStorage") UserStorage userStorage,
-                       @Qualifier("authorizationJDBCStorage") AuthorizationStorage authorizationStorage) {
+    public GetUserInfo(@Qualifier("userStorageInDatabase") UserStorage userStorage,
+                       @Qualifier("authorizationStorageInDatabase") AuthorizationStorage authorizationStorage) {
 
         super(checkNotNull(authorizationStorage));
 

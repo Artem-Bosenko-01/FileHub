@@ -23,7 +23,7 @@ public class LogOut extends SecuredUserProcess<LogOutCommand, String> {
     private final AuthorizationStorage authorizationStorage;
 
     @Autowired
-    public LogOut(@Qualifier("authorizationJDBCStorage") AuthorizationStorage authorizationStorage) {
+    public LogOut(@Qualifier("authorizationStorageInDatabase") AuthorizationStorage authorizationStorage) {
 
         super(checkNotNull(authorizationStorage));
 

@@ -1,7 +1,7 @@
 package io.javaclasses.fileHub.persistent.users.tokens;
 
 import io.javaclasses.fileHub.persistent.AbstractStorageInDatabase;
-import io.javaclasses.fileHub.persistent.ConfigurationJDBC;
+import io.javaclasses.fileHub.persistent.JdbcConfiguration;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,7 +17,7 @@ public class AuthorizationStorageInDatabase extends AbstractStorageInDatabase<Us
         implements AuthorizationStorage {
 
     @Autowired
-    protected AuthorizationStorageInDatabase(ConfigurationJDBC configuration) {
+    protected AuthorizationStorageInDatabase(JdbcConfiguration configuration) {
         super(configuration);
     }
 
@@ -59,7 +59,7 @@ public class AuthorizationStorageInDatabase extends AbstractStorageInDatabase<Us
     }
 
     @Override
-    protected String idName() {
+    protected String primaryKeyName() {
 
         return "token";
     }

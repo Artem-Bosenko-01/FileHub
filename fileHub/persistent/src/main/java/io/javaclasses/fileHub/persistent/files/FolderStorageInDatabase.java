@@ -1,7 +1,7 @@
 package io.javaclasses.fileHub.persistent.files;
 
 import io.javaclasses.fileHub.persistent.AbstractStorageInDatabase;
-import io.javaclasses.fileHub.persistent.ConfigurationJDBC;
+import io.javaclasses.fileHub.persistent.JdbcConfiguration;
 import io.javaclasses.fileHub.persistent.InvalidExecutingSqlStatement;
 import io.javaclasses.fileHub.persistent.NotExistedItemException;
 import io.javaclasses.fileHub.persistent.users.UserId;
@@ -23,7 +23,7 @@ import java.util.Optional;
 public class FolderStorageInDatabase extends AbstractStorageInDatabase<FolderId, Folder> implements FolderStorage {
 
     @Autowired
-    protected FolderStorageInDatabase(ConfigurationJDBC configuration) {
+    protected FolderStorageInDatabase(JdbcConfiguration configuration) {
         super(configuration);
     }
 
@@ -79,7 +79,7 @@ public class FolderStorageInDatabase extends AbstractStorageInDatabase<FolderId,
     }
 
     @Override
-    protected String idName() {
+    protected String primaryKeyName() {
         return "id";
     }
 
@@ -89,7 +89,7 @@ public class FolderStorageInDatabase extends AbstractStorageInDatabase<FolderId,
 
         if (owner == null) {
 
-            throw new NotExistedItemException("User with doesn't be null ");
+            throw new NotExistedItemException(owner);
         }
 
         try (Connection connection = this.connection()) {

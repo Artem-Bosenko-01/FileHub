@@ -19,9 +19,9 @@ import java.util.Optional;
  */
 public abstract class AbstractStorageInDatabase<I extends RecordId, E extends DataRecord<I>> implements Storage<I, E> {
 
-    private final ConfigurationJDBC configuration;
+    private final JdbcConfiguration configuration;
 
-    protected AbstractStorageInDatabase(ConfigurationJDBC configuration) {
+    protected AbstractStorageInDatabase(JdbcConfiguration configuration) {
 
         this.configuration = Preconditions.checkNotNull(configuration);
     }
@@ -35,7 +35,7 @@ public abstract class AbstractStorageInDatabase<I extends RecordId, E extends Da
     public void create(E inputDataObject) throws DuplicatedIdException {
 
         if (findByID(inputDataObject.id()).isPresent()) {
-            throw new DuplicatedIdException("");
+            throw new DuplicatedIdException(inputDataObject.id().toString());
         }
 
         try (Connection connection = configuration.getConnection()) {
@@ -55,8 +55,8 @@ public abstract class AbstractStorageInDatabase<I extends RecordId, E extends Da
     @Override
     public void update(E inputDataObject) throws NotExistedItemException {
 
-        if (findByID(inputDataObject.id()).isEmpty()) {
-            throw new NotExistedItemException("");
+        if (!findByID(inputDataObject.id()).isPresent()) {
+            throw new NotExistedItemException(inputDataObject.id().toString());
         }
 
         try (Connection connection = configuration.getConnection()) {
@@ -79,7 +79,7 @@ public abstract class AbstractStorageInDatabase<I extends RecordId, E extends Da
 
         try (Connection connection = configuration.getConnection()) {
 
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM " + tableName() + "  WHERE " + idName() + "=?");
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM " + tableName() + "  WHERE " + primaryKeyName() + "=?");
 
             statement.setString(1, dataRecordID);
 
@@ -97,7 +97,7 @@ public abstract class AbstractStorageInDatabase<I extends RecordId, E extends Da
 
         try (Connection connection = configuration.getConnection()) {
 
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + tableName() + "  WHERE " + idName() + "=?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + tableName() + "  WHERE " + primaryKeyName() + "=?");
 
             statement.setString(1, dataRecordID.toString());
 
@@ -122,5 +122,5 @@ public abstract class AbstractStorageInDatabase<I extends RecordId, E extends Da
 
     protected abstract String tableName();
 
-    protected abstract String idName();
+    protected abstract String primaryKeyName();
 }

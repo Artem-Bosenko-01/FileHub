@@ -31,8 +31,8 @@ public class GetFolderById extends View<GetFolderByIdQuery, FileSystemItemDto> {
     private final AuthorizationStorage authorizationStorage;
 
     @Autowired
-    public GetFolderById(@Qualifier("folderJDBCStorage") FolderStorage userStorage,
-                         @Qualifier("authorizationJDBCStorage") AuthorizationStorage authorizationStorage) {
+    public GetFolderById(@Qualifier("folderStorageInDatabase") FolderStorage userStorage,
+                         @Qualifier("authorizationStorageInDatabase") AuthorizationStorage authorizationStorage) {
 
         super(Preconditions.checkNotNull(authorizationStorage));
 

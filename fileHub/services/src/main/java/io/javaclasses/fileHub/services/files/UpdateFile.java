@@ -31,8 +31,8 @@ public class UpdateFile extends SecuredUserProcess<UpdateFileCommand, FileId> {
     private final AuthorizationStorage authorizationStorage;
 
     @Autowired
-    public UpdateFile(@Qualifier("fileJDBCStorage") FileStorage fileStorage,
-                      @Qualifier("authorizationJDBCStorage") AuthorizationStorage authorizationStorage) {
+    public UpdateFile(@Qualifier("fileStorageInDatabase") FileStorage fileStorage,
+                      @Qualifier("authorizationStorageInDatabase") AuthorizationStorage authorizationStorage) {
 
         super(checkNotNull(authorizationStorage));
 

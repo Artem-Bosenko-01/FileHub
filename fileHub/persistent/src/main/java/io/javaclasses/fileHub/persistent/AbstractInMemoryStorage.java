@@ -18,7 +18,7 @@ public abstract class AbstractInMemoryStorage<I extends RecordId, E extends Data
     public void create(E inputDataObject) throws DuplicatedIdException {
 
         if (records.containsKey(inputDataObject.id())) {
-            throw new DuplicatedIdException("Duplicate id " + inputDataObject.id());
+            throw new DuplicatedIdException(inputDataObject.id().toString());
         }
 
         records.put(inputDataObject.id(), inputDataObject);
@@ -35,7 +35,7 @@ public abstract class AbstractInMemoryStorage<I extends RecordId, E extends Data
     public void update(E inputDataObject) throws NotExistedItemException {
 
         if (!records.containsKey(inputDataObject.id())) {
-            throw new NotExistedItemException("Id doesn't exist " + inputDataObject.id());
+            throw new NotExistedItemException(inputDataObject.id().toString());
         }
 
         records.put(inputDataObject.id(), inputDataObject);
@@ -52,7 +52,7 @@ public abstract class AbstractInMemoryStorage<I extends RecordId, E extends Data
 
         } else {
 
-            throw new NotExistedItemException("Id doesn't exist " + dataRecordID);
+            throw new NotExistedItemException(dataRecordID);
         }
     }
 

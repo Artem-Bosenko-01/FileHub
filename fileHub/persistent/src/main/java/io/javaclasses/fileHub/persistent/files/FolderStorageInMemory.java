@@ -15,7 +15,7 @@ public class FolderStorageInMemory extends AbstractInMemoryStorage<FolderId, Fol
     @Override
     public List<Folder> findAllFoldersByParentFolderId(String parentId, String owner) throws NotExistedItemException {
         if (records().values().stream().noneMatch(folder -> folder.id().toString().equals(parentId))) {
-            throw new NotExistedItemException("Parent folder doesn't exist: " + parentId);
+            throw new NotExistedItemException(parentId);
         }
 
         return records().values().stream().

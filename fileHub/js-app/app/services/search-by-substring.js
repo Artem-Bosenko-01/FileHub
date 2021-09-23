@@ -31,6 +31,6 @@ function _checkFileFields(item, searchLine) {
 
 function _checkFolderFields(item, searchLine) {
   return (item.name.toLowerCase().includes(searchLine) ||
-      item.itemsAmount.toString().toLowerCase().includes(searchLine) ||
+      item.size.toString().toLowerCase().includes(searchLine) ||
       item.type.toLowerCase().includes(searchLine));
 }

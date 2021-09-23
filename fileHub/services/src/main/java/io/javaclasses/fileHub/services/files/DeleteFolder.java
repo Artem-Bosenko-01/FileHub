@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -59,7 +58,7 @@ public class DeleteFolder extends SecuredUserProcess<DeleteFolderCommand, String
                 logger.info("Deleted folder" + inputCommand.folderID() + " was successful");
             }
 
-            folder.ifPresent(value -> folderStorage.decreaseItemsAmount(Objects.requireNonNull(value.parentFolder())));
+            folderStorage.decreaseItemsAmount(folder.get().parentFolder());
 
             return inputCommand.folderID();
 
@@ -86,7 +85,7 @@ public class DeleteFolder extends SecuredUserProcess<DeleteFolderCommand, String
 
             try {
 
-                removeFolderAndNestedItems(folder.id().toString());
+                removeFolderAndNestedItems(folder.id().value());
 
             } catch (NotExistedItemException notExistedItemException) {
 

@@ -6,6 +6,7 @@ import io.javaclasses.fileHub.persistent.RecordId;
 import java.util.Objects;
 
 public final class FileId implements RecordId {
+
     private final String id;
 
     public FileId(String id) {
@@ -30,7 +31,7 @@ public final class FileId implements RecordId {
     }
 
     @Override
-    public String toString() {
+    public String value() {
         return id;
     }
 }

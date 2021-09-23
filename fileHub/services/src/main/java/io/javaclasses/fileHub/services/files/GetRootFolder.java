@@ -47,7 +47,7 @@ public class GetRootFolder extends View<GetRootFolderQuery, FileSystemItemDto> {
 
             if (logger.isInfoEnabled()) {
 
-                logger.info("Start get root folder for user: " + owner.get().userID());
+                logger.info("Start get root folder for user: " + owner.get().userID().value());
             }
 
             Optional<Folder> rootFolder = folderStorage.findRootFolderByUserId(owner.get().userID());
@@ -58,10 +58,10 @@ public class GetRootFolder extends View<GetRootFolderQuery, FileSystemItemDto> {
 
                 if (logger.isInfoEnabled()) {
                     logger.info("Read root folder: " + folder.name() + ". For user: "
-                            + folder.owner().toString() + ". Was successful");
+                            + folder.owner().value() + ". Was successful");
                 }
 
-                return new FileSystemItemDto(folder.id().toString(),
+                return new FileSystemItemDto(folder.id().value(),
                         folder.name(),
                         folder.itemsAmount(),
                         ItemType.FOLDER,
@@ -71,7 +71,7 @@ public class GetRootFolder extends View<GetRootFolderQuery, FileSystemItemDto> {
 
                 if (logger.isErrorEnabled()) {
 
-                    logger.error("Root folder doesn't exist for user: " + owner.get().userID().toString());
+                    logger.error("Root folder doesn't exist for user: " + owner.get().userID().value());
                 }
 
                 throw new RootFolderNotFoundHandlingException(owner.get().userID());

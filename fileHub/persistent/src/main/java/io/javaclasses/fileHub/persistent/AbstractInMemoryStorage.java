@@ -18,7 +18,7 @@ public abstract class AbstractInMemoryStorage<I extends RecordId, E extends Data
     public void create(E inputDataObject) throws DuplicatedIdException {
 
         if (records.containsKey(inputDataObject.id())) {
-            throw new DuplicatedIdException(inputDataObject.id().toString());
+            throw new DuplicatedIdException(inputDataObject.id().value());
         }
 
         records.put(inputDataObject.id(), inputDataObject);
@@ -35,7 +35,7 @@ public abstract class AbstractInMemoryStorage<I extends RecordId, E extends Data
     public void update(E inputDataObject) throws NotExistedItemException {
 
         if (!records.containsKey(inputDataObject.id())) {
-            throw new NotExistedItemException(inputDataObject.id().toString());
+            throw new NotExistedItemException(inputDataObject.id().value());
         }
 
         records.put(inputDataObject.id(), inputDataObject);
@@ -44,7 +44,7 @@ public abstract class AbstractInMemoryStorage<I extends RecordId, E extends Data
     @Override
     public void delete(String dataRecordID) throws NotExistedItemException {
 
-        Optional<I> foundKey = records.keySet().stream().filter(key -> key.toString().equals(dataRecordID)).findFirst();
+        Optional<I> foundKey = records.keySet().stream().filter(key -> key.value().equals(dataRecordID)).findFirst();
 
         if (foundKey.isPresent()) {
 

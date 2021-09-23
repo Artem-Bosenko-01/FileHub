@@ -26,8 +26,8 @@ public class AuthorizationStorageInDatabase extends AbstractStorageInDatabase<Us
 
         PreparedStatement statement = connection.prepareStatement("INSERT INTO authorization_user VALUES (?,?,?)");
 
-        statement.setString(1, dataObject.id().toString());
-        statement.setString(2, dataObject.userID().toString());
+        statement.setString(1, dataObject.id().value());
+        statement.setString(2, dataObject.userID().value());
         statement.setObject(3, dataObject.expirationTime());
 
         return statement;

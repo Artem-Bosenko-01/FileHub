@@ -32,9 +32,9 @@ public class FileStorageInDatabase extends AbstractStorageInDatabase<FileId, Fil
 
         PreparedStatement statement = connection.prepareStatement("INSERT INTO file VALUES (?,?,?,?,?,?)");
 
-        statement.setString(1, dataObject.id().toString());
+        statement.setString(1, dataObject.id().value());
         statement.setString(2, dataObject.name());
-        statement.setString(3, dataObject.owner().toString());
+        statement.setString(3, dataObject.owner().value());
         statement.setLong(4, dataObject.size());
         statement.setString(5, dataObject.mimeType().toString());
         statement.setString(6, dataObject.folder());
@@ -50,11 +50,11 @@ public class FileStorageInDatabase extends AbstractStorageInDatabase<FileId, Fil
                 "WHERE id=?");
 
         statement.setString(1, dataObject.name());
-        statement.setString(2, dataObject.owner().toString());
+        statement.setString(2, dataObject.owner().value());
         statement.setLong(3, dataObject.size());
         statement.setString(4, dataObject.mimeType().toString());
         statement.setString(5, dataObject.folder());
-        statement.setString(6, dataObject.id().toString());
+        statement.setString(6, dataObject.id().value());
 
         return statement;
     }

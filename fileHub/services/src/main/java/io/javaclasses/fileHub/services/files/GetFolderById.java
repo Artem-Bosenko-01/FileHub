@@ -51,7 +51,7 @@ public class GetFolderById extends View<GetFolderByIdQuery, FileSystemItemDto> {
             UserId userId = owner.get().userID();
 
             if (logger.isInfoEnabled()) {
-                logger.info("Start get directory for user: " + userId + " and name: " + query.id());
+                logger.info("Start get directory for user: " + userId.value() + " and name: " + query.id());
             }
 
             Optional<Folder> optionalFolder = folderStorageInMemory.findByID(new FolderId(query.id()));
@@ -61,12 +61,12 @@ public class GetFolderById extends View<GetFolderByIdQuery, FileSystemItemDto> {
                 Folder folder = optionalFolder.get();
 
                 if (logger.isInfoEnabled()) {
-                    logger.info("Read folder by User: " + folder.owner() +
+                    logger.info("Read folder by User: " + folder.owner().value() +
                             ". And name: " + folder.name() + ". Was successful");
                 }
 
                 return new FileSystemItemDto(
-                        folder.id().toString(),
+                        folder.id().value(),
                         folder.name(),
                         folder.itemsAmount(),
                         ItemType.FOLDER,

@@ -53,7 +53,7 @@ public class RegisterUser implements OpenUserProcess<RegistrationUserCommand, Bo
 
             userStorage.create(user);
 
-            Folder folder = new Folder("Root" + user.id());
+            Folder folder = new Folder("Root" + user.id().value());
             folder.setItemsAmount(0L);
             folder.setName("Root");
             folder.setOwner(user.id());
@@ -62,7 +62,7 @@ public class RegisterUser implements OpenUserProcess<RegistrationUserCommand, Bo
             folderStorage.create(folder);
 
             if (logger.isInfoEnabled()) {
-                logger.info("Registration was successful :" + user.id());
+                logger.info("Registration was successful :" + user.id().value());
             }
 
             return true;

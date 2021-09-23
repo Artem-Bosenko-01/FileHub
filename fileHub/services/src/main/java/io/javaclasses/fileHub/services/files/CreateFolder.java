@@ -1,6 +1,7 @@
 package io.javaclasses.fileHub.services.files;
 
 import io.javaclasses.fileHub.persistent.DuplicatedIdException;
+import io.javaclasses.fileHub.persistent.NotExistedItemException;
 import io.javaclasses.fileHub.persistent.files.Folder;
 import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.files.FolderStorage;
@@ -56,7 +57,7 @@ public class CreateFolder extends SecuredUserProcess<CreateFolderCommand, Folder
                 logger.info("Start create folder " + query.name());
             }
 
-            String folderId = query.name() + userId + query.parentFolder();
+            String folderId = query.name() + userId.value() + query.parentFolder();
 
             Folder folder = new Folder(folderId);
             folder.setParentFolder(query.parentFolder());
@@ -69,14 +70,14 @@ public class CreateFolder extends SecuredUserProcess<CreateFolderCommand, Folder
                 folderStorage.create(folder);
 
                 if (logger.isInfoEnabled()) {
-                    logger.info("Created folder was successful. id: " + folder.id());
+                    logger.info("Created folder was successful. id: " + folder.id().value());
                 }
 
                 folderStorage.increaseItemsAmount(Objects.requireNonNull(folder.parentFolder()));
 
                 return folder.id();
 
-            } catch (DuplicatedIdException e) {
+            } catch (DuplicatedIdException | NotExistedItemException e) {
 
                 if (logger.isErrorEnabled()) {
                     logger.error(e.getMessage());

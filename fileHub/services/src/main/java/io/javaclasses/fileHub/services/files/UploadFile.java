@@ -1,6 +1,7 @@
 package io.javaclasses.fileHub.services.files;
 
 import io.javaclasses.fileHub.persistent.DuplicatedIdException;
+import io.javaclasses.fileHub.persistent.NotExistedItemException;
 import io.javaclasses.fileHub.persistent.files.File;
 import io.javaclasses.fileHub.persistent.files.FileStorage;
 import io.javaclasses.fileHub.persistent.files.FolderStorage;
@@ -57,7 +58,8 @@ public class UploadFile extends SecuredUserProcess<UploadFileCommand, String> {
 
 
     @Override
-    protected String doHandle(UploadFileCommand inputCommand) throws UsersTokenNotFoundException, DuplicatedFileNameException {
+    protected String doHandle(UploadFileCommand inputCommand)
+            throws UsersTokenNotFoundException, DuplicatedFileNameException, FolderNotFoundException {
 
         Optional<AuthorizationUsers> owner = authorizationStorage.
                 findByID(new UserAuthToken(inputCommand.token().value()));
@@ -67,7 +69,7 @@ public class UploadFile extends SecuredUserProcess<UploadFileCommand, String> {
             UserId userId = owner.get().userID();
 
             if (logger.isInfoEnabled()) {
-                logger.info("Start upload new file to user's " + userId
+                logger.info("Start upload new file to user's " + userId.value()
                         + " directory: " + inputCommand.folder());
             }
 
@@ -92,7 +94,7 @@ public class UploadFile extends SecuredUserProcess<UploadFileCommand, String> {
                 contentStorage.create(content);
 
                 if (logger.isInfoEnabled()) {
-                    logger.info("Uploading new file was successful: " + content.id());
+                    logger.info("Uploading new file was successful: " + content.id().value());
                 }
 
                 folderStorage.increaseItemsAmount(file.folder());
@@ -107,6 +109,9 @@ public class UploadFile extends SecuredUserProcess<UploadFileCommand, String> {
 
                 throw new DuplicatedFileNameException(inputCommand.name());
 
+            } catch (NotExistedItemException e) {
+
+                throw new FolderNotFoundException(file.folder());
             }
 
         } else {

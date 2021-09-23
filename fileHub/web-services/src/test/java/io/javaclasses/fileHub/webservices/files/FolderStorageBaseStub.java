@@ -40,7 +40,7 @@ public class FolderStorageBaseStub implements FolderStorage {
     }
 
     @Override
-    public boolean isFolderNameAlreadyExist(String name) {
+    public boolean isFolderNameAlreadyExist(String name, String parentFolder) {
         return false;
     }
 

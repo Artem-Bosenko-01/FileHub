@@ -56,7 +56,7 @@ public class GetFolderContent extends View<GetFolderContentQuery, GetFolderConte
 
         if (owner.isPresent()) {
 
-            String userID = owner.get().userID().toString();
+            String userID = owner.get().userID().value();
 
             if (logger.isInfoEnabled()) {
                 logger.info("Start get folder's content by id " + query.id());
@@ -99,13 +99,13 @@ public class GetFolderContent extends View<GetFolderContentQuery, GetFolderConte
 
         if (folders.size() > 0) {
 
-            folders.forEach(folder -> convertedContent.add(new FileSystemItemDto(folder.id().toString(),
+            folders.forEach(folder -> convertedContent.add(new FileSystemItemDto(folder.id().value(),
                     folder.name(), folder.itemsAmount(), ItemType.FOLDER, folder.parentFolder())));
         }
 
         if (files.size() > 0) {
 
-            files.forEach(file -> convertedContent.add(new FileSystemItemDto(file.id().toString(),
+            files.forEach(file -> convertedContent.add(new FileSystemItemDto(file.id().value(),
                     file.name(), file.size(), ItemType.FILE, file.folder()).setMimeType(file.mimeType())));
         }
 

@@ -28,7 +28,7 @@ public final class UserId implements RecordId {
     }
 
     @Override
-    public String toString() {
+    public String value() {
         return id;
     }
 }

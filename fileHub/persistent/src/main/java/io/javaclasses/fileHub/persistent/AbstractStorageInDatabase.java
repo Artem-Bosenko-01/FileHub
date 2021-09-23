@@ -99,7 +99,7 @@ public abstract class AbstractStorageInDatabase<I extends RecordId, E extends Da
 
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + tableName() + "  WHERE " + primaryKeyName() + "=?");
 
-            statement.setString(1, dataRecordID.toString());
+            statement.setString(1, dataRecordID.value());
 
             ResultSet resultSet = statement.executeQuery();
 

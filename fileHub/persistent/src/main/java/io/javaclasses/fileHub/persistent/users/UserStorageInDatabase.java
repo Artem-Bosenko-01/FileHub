@@ -29,7 +29,7 @@ public class UserStorageInDatabase extends AbstractStorageInDatabase<UserId, Use
 
         PreparedStatement statement = connection.prepareStatement("INSERT INTO users VALUES (?,?,?)");
 
-        statement.setString(1, dataObject.id().toString());
+        statement.setString(1, dataObject.id().value());
         statement.setString(2, dataObject.login());
         statement.setString(3, dataObject.password());
 
@@ -43,7 +43,7 @@ public class UserStorageInDatabase extends AbstractStorageInDatabase<UserId, Use
 
         statement.setString(1, dataObject.login());
         statement.setString(2, dataObject.password());
-        statement.setString(3, dataObject.id().toString());
+        statement.setString(3, dataObject.id().value());
 
         return statement;
     }

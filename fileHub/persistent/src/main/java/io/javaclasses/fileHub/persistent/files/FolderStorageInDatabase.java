@@ -1,8 +1,8 @@
 package io.javaclasses.fileHub.persistent.files;
 
 import io.javaclasses.fileHub.persistent.AbstractStorageInDatabase;
-import io.javaclasses.fileHub.persistent.JdbcConfiguration;
 import io.javaclasses.fileHub.persistent.InvalidExecutingSqlStatement;
+import io.javaclasses.fileHub.persistent.JdbcConfiguration;
 import io.javaclasses.fileHub.persistent.NotExistedItemException;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +32,9 @@ public class FolderStorageInDatabase extends AbstractStorageInDatabase<FolderId,
 
         PreparedStatement statement = connection.prepareStatement("INSERT INTO folder VALUES (?,?,?,?,?)");
 
-        statement.setString(1, dataObject.id().toString());
+        statement.setString(1, dataObject.id().value());
         statement.setString(2, dataObject.name());
-        statement.setString(3, dataObject.owner().toString());
+        statement.setString(3, dataObject.owner().value());
         statement.setLong(4, dataObject.itemsAmount());
         statement.setString(5, dataObject.parentFolder());
 
@@ -49,10 +49,10 @@ public class FolderStorageInDatabase extends AbstractStorageInDatabase<FolderId,
                 "WHERE id=?");
 
         statement.setString(1, dataObject.name());
-        statement.setString(2, dataObject.owner().toString());
+        statement.setString(2, dataObject.owner().value());
         statement.setLong(3, dataObject.itemsAmount());
         statement.setString(4, dataObject.parentFolder());
-        statement.setString(5, dataObject.id().toString());
+        statement.setString(5, dataObject.id().value());
 
         return statement;
     }
@@ -128,7 +128,7 @@ public class FolderStorageInDatabase extends AbstractStorageInDatabase<FolderId,
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM folder " +
                     "WHERE owner=? AND parent_folder IS NULL");
 
-            statement.setString(1, id.toString());
+            statement.setString(1, id.value());
 
             ResultSet resultSet = statement.executeQuery();
 
@@ -148,17 +148,57 @@ public class FolderStorageInDatabase extends AbstractStorageInDatabase<FolderId,
     }
 
     @Override
-    public boolean isFolderNameAlreadyExist(String name) {
+    public boolean isFolderNameAlreadyExist(String name, String parentFolder) {
+
+        try (Connection connection = this.connection()) {
+
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM folder " +
+                    "WHERE name=? AND parent_folder=?");
+
+            statement.setString(1, name);
+            statement.setString(2, parentFolder);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+
+                return true;
+            }
+
+        } catch (SQLException sqlException) {
+
+            throw new InvalidExecutingSqlStatement(sqlException.getMessage());
+        }
+
         return false;
     }
 
     @Override
-    public void decreaseItemsAmount(String id) {
+    public void decreaseItemsAmount(String id) throws NotExistedItemException {
 
+        Optional<Folder> optionalFolder = findByID(new FolderId(id));
+
+        if (optionalFolder.isPresent()) {
+
+            Folder folder = optionalFolder.get();
+            folder.setItemsAmount(folder.itemsAmount() - 1);
+
+            update(folder);
+        }
     }
 
     @Override
-    public void increaseItemsAmount(String id) {
+    public void increaseItemsAmount(String id) throws NotExistedItemException {
+
+        Optional<Folder> optionalFolder = findByID(new FolderId(id));
+
+        if (optionalFolder.isPresent()) {
+
+            Folder folder = optionalFolder.get();
+            folder.setItemsAmount(folder.itemsAmount() + 1);
+
+            update(folder);
+        }
     }
 
     @Override

@@ -45,14 +45,14 @@ public class UpdateFolder extends SecuredUserProcess<UpdateFolderCommand, Folder
     protected FolderId doHandle(UpdateFolderCommand inputCommand)
             throws FolderNotFoundException, UsersTokenNotFoundException, FolderNameAlreadyUsedException {
 
-        /*if (folderStorage.isFolderNameAlreadyExist(inputCommand.name())) {
+        if (folderStorage.isFolderNameAlreadyExist(inputCommand.name(), inputCommand.parentFolder())) {
 
             if (logger.isErrorEnabled()) {
                 logger.error("Folder name: " + inputCommand.name() + " already used.");
             }
 
             throw new FolderNameAlreadyUsedException(inputCommand.name());
-        }*/
+        }
 
         Optional<AuthorizationUsers> owner = authorizationStorage.
                 findByID(new UserAuthToken(inputCommand.token().value()));
@@ -73,7 +73,7 @@ public class UpdateFolder extends SecuredUserProcess<UpdateFolderCommand, Folder
                 folderStorage.update(folder);
 
                 if (logger.isInfoEnabled()) {
-                    logger.info("Updating folder was successful. id: " + folder.id());
+                    logger.info("Updating folder was successful. id: " + folder.id().value());
                 }
 
                 return folder.id();

@@ -48,7 +48,7 @@ public class GetFileContent extends View<GetFileContentQuery, GetFileContentDTO>
         if (content.isPresent()) {
 
             if (logger.isInfoEnabled()) {
-                logger.info("Getting file's content was successful by id " + content.get().id());
+                logger.info("Getting file's content was successful by id " + content.get().id().value());
             }
 
             return new GetFileContentDTO(content.get().content());

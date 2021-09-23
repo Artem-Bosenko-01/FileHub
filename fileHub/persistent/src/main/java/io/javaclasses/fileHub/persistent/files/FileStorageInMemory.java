@@ -22,7 +22,7 @@ public class FileStorageInMemory extends AbstractInMemoryStorage<FileId, File>
         }
 
         return records().values().stream()
-                .filter(file -> (file.folder() != null && file.folder().equals(folderID)) && file.owner().toString().equals(userID))
+                .filter(file -> (file.folder() != null && file.folder().equals(folderID)) && file.owner().value().equals(userID))
                 .collect(Collectors.toList());
 
     }

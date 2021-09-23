@@ -13,11 +13,11 @@ public interface FolderStorage extends Storage<FolderId, Folder> {
 
     Optional<Folder> findRootFolderByUserId(UserId id);
 
-    boolean isFolderNameAlreadyExist(String name);
+    boolean isFolderNameAlreadyExist(String name, String parentFolder);
 
-    void decreaseItemsAmount(String id);
+    void decreaseItemsAmount(String id) throws NotExistedItemException;
 
-    void increaseItemsAmount(String id);
+    void increaseItemsAmount(String id) throws NotExistedItemException;
 
     List<Folder> getNestedFolders(String parentFolderId);
 

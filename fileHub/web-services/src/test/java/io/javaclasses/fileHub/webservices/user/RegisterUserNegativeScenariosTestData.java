@@ -1,9 +1,11 @@
 package io.javaclasses.fileHub.webservices.user;
 
+import io.javaclasses.fileHub.persistent.files.FolderStorage;
 import io.javaclasses.fileHub.persistent.users.UserStorage;
 import io.javaclasses.fileHub.services.users.DuplicatedFieldValueException;
 import io.javaclasses.fileHub.services.users.RegistrationUserCommand;
 import io.javaclasses.fileHub.webservices.UserStorageBaseStub;
+import io.javaclasses.fileHub.webservices.files.FolderStorageBaseStub;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
@@ -16,6 +18,7 @@ public final class RegisterUserNegativeScenariosTestData implements ArgumentsPro
         String baseCredentials = "{\"loginName\":\"ascaacs\",\"password\":\"csdvsvds\"}";
 
         UserStorageBaseStub userStorageStub = new UserStorageBaseStub();
+        FolderStorageBaseStub folderStorageBaseStub = new FolderStorageBaseStub();
 
         return Stream.of(
 
@@ -23,28 +26,29 @@ public final class RegisterUserNegativeScenariosTestData implements ArgumentsPro
                         "{}",
                         "{\"message\":\"Request body cannot be empty\"}",
                         400,
-                        new RegisterUserBaseStub(userStorageStub)
+                        new RegisterUserBaseStub(userStorageStub, folderStorageBaseStub)
                 ),
 
                 Arguments.of(
                         baseCredentials,
                         "{\"errors\":[{\"field\":\"email\",\"message\":\"User already exist\"}]}",
                         422,
-                        new RegistrationProcessThrowDuplicateTokenStub(userStorageStub, "User already exist")
+                        new RegistrationProcessThrowDuplicateTokenStub(userStorageStub, folderStorageBaseStub,
+                                "User already exist")
                 ),
 
                 Arguments.of(
                         "{\"loginName\":\"ascaacs\",\"password\":\"cs\"}",
                         "{\"errors\":[{\"field\":\"password\",\"message\":\"Password length should be more than 6 symbols\"}]}",
                         422,
-                        new RegisterUserBaseStub(userStorageStub)
+                        new RegisterUserBaseStub(userStorageStub, folderStorageBaseStub)
                 ),
 
                 Arguments.of(
                         baseCredentials,
                         "{\"message\":\"Internal server error.\"}",
                         500,
-                        new RegistrationProcessThrowNullPointerStub(userStorageStub)
+                        new RegistrationProcessThrowNullPointerStub(userStorageStub, folderStorageBaseStub)
                 )
 
         );
@@ -54,8 +58,8 @@ public final class RegisterUserNegativeScenariosTestData implements ArgumentsPro
 
         private final String message;
 
-        public RegistrationProcessThrowDuplicateTokenStub(UserStorage userStorage, String message) {
-            super(userStorage);
+        public RegistrationProcessThrowDuplicateTokenStub(UserStorage userStorage, FolderStorage folderStorage, String message) {
+            super(userStorage, folderStorage);
 
             this.message = message;
         }
@@ -70,8 +74,8 @@ public final class RegisterUserNegativeScenariosTestData implements ArgumentsPro
 
     private static class RegistrationProcessThrowNullPointerStub extends RegisterUserBaseStub {
 
-        public RegistrationProcessThrowNullPointerStub(UserStorage userStorage) {
-            super(userStorage);
+        public RegistrationProcessThrowNullPointerStub(UserStorage userStorage, FolderStorage folderStorage) {
+            super(userStorage, folderStorage);
         }
 
         @Override

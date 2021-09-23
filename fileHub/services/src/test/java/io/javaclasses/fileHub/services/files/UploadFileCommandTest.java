@@ -14,7 +14,7 @@ class UploadFileCommandTest {
         NullPointerTester tester = new NullPointerTester();
 
         tester.setDefault(AuthToken.class, new AuthToken("")).
-                setDefault(String.class, "").
+                setDefault(String.class, "value").
                 setDefault(MediaType.class, MediaType.GIF).
                 setDefault(byte[].class, new byte[]{});
 
@@ -28,7 +28,7 @@ class UploadFileCommandTest {
 
         NullPointerTester tester = new NullPointerTester();
         tester.testAllPublicInstanceMethods(new UploadFileCommand(new AuthToken(""),
-                "", MediaType.PLAIN_TEXT_UTF_8, "", new byte[]{}));
+                "value", MediaType.PLAIN_TEXT_UTF_8, "", new byte[]{}));
 
     }
 

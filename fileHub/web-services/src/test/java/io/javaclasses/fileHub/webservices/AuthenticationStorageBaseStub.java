@@ -5,7 +5,7 @@ import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationUsers;
 import io.javaclasses.fileHub.persistent.users.tokens.UserAuthToken;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 public class AuthenticationStorageBaseStub implements AuthorizationStorage {
@@ -29,7 +29,7 @@ public class AuthenticationStorageBaseStub implements AuthorizationStorage {
                 new AuthorizationUsers(
                         new UserAuthToken("token"),
                         new UserId("id"),
-                        ZonedDateTime.now().plusHours(6)));
+                        LocalDateTime.now().plusHours(6)));
     }
 
     @Override

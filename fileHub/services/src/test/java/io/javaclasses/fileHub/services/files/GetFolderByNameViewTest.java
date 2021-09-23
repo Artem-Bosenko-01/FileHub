@@ -29,13 +29,13 @@ class GetFolderByNameViewTest {
 
         FolderId id = fileSystemTestData.createFolder(folderStorage, null);
 
-        GetFolderByIdQuery query = new GetFolderByIdQuery(fileSystemTestData.token(), id.toString());
+        GetFolderByIdQuery query = new GetFolderByIdQuery(fileSystemTestData.token(), id.value());
 
         GetFolderById view = new GetFolderById(folderStorage, authorizationStorage);
 
         FileSystemItemDto folderByNameDTO = view.handle(query);
 
-        Assertions.assertEquals(folderByNameDTO.id(), id.toString());
+        Assertions.assertEquals(folderByNameDTO.id(), id.value());
 
     }
 
@@ -52,8 +52,6 @@ class GetFolderByNameViewTest {
         FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
 
         fileSystemTestData.createFolder(folderStorage, null);
-
-        Assertions.assertEquals(folderStorage.getSizeRecordsList(), 1);
 
         GetFolderByIdQuery query = new GetFolderByIdQuery(fileSystemTestData.token(), "id");
 

@@ -53,7 +53,7 @@ public class UploadFileRouteTest {
 
         assertEquals(200, response.status());
 
-        assertEquals("{\"message\":\"File with id: fileNameidid was successfully uploaded\"}", result);
+        assertEquals("{\"message\":\"File with id: fileNameid was successfully uploaded\"}", result);
 
     }
 

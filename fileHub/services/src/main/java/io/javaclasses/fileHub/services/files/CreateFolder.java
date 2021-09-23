@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import java.util.Objects;
 import java.util.Optional;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -73,7 +72,10 @@ public class CreateFolder extends SecuredUserProcess<CreateFolderCommand, Folder
                     logger.info("Created folder was successful. id: " + folder.id().value());
                 }
 
-                folderStorage.increaseItemsAmount(Objects.requireNonNull(folder.parentFolder()));
+                if (folder.parentFolder() != null) {
+
+                    folderStorage.increaseItemsAmount(folder.parentFolder());
+                }
 
                 return folder.id();
 

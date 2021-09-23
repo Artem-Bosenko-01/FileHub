@@ -37,7 +37,7 @@ class DeleteFileTest {
 
         FileId id = new FileId(fileSystemTestData.uploadFile(fileStorageInMemory, fIleContentStorage, folderStorage));
 
-        DeleteFileCommand deleteFileCommand = new DeleteFileCommand(fileSystemTestData.token(), id.toString());
+        DeleteFileCommand deleteFileCommand = new DeleteFileCommand(fileSystemTestData.token(), id.value());
 
         DeleteFile deleteFile = new DeleteFile(fileStorageInMemory, folderStorage, authorizationStorage);
 

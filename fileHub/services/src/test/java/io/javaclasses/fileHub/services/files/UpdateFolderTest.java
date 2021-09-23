@@ -31,7 +31,7 @@ class UpdateFolderTest {
 
         FolderId id = fileSystemTestData.createFolder(folderStorage, null);
 
-        UpdateFolderCommand command = new UpdateFolderCommand(fileSystemTestData.token(), id.toString(),
+        UpdateFolderCommand command = new UpdateFolderCommand(fileSystemTestData.token(), id.value(),
                 "lkijij", 0L, null);
 
         UpdateFolder process = new UpdateFolder(folderStorage, authorizationStorage);
@@ -56,12 +56,12 @@ class UpdateFolderTest {
 
         fileSystemTestData.createFolder(folderStorage, null);
 
-        FolderId folderID = new FolderId("parent" + fileSystemTestData.id());
+        FolderId folderID = new FolderId("parent" + fileSystemTestData.id().value());
 
         AuthToken token = UserTestData.authenticateJohnUser(userStorage, authorizationStorage);
 
         UpdateFolderCommand command = new UpdateFolderCommand(token,
-                "newFolder", "lkijij", 0L, folderID.toString());
+                "newFolder", "lkijij", 0L, folderID.value());
 
         UpdateFolder process = new UpdateFolder(folderStorage, authorizationStorage);
 

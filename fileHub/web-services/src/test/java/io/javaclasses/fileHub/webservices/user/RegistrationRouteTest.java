@@ -86,11 +86,13 @@ public class RegistrationRouteTest {
 
         UserStorageBaseStub userStorageStub = new UserStorageBaseStub();
 
+        FolderStorageBaseStub folderStorageBaseStub = new FolderStorageBaseStub();
+
         RequestStub request = new RequestStub(requestBody);
 
         ResponseStub response = new ResponseStub();
 
-        RegisterUserBaseStub registerUser = new RegisterUserBaseStub(userStorageStub);
+        RegisterUserBaseStub registerUser = new RegisterUserBaseStub(userStorageStub, folderStorageBaseStub);
 
         RegistrationRoute route = new RegistrationRoute(registerUser);
 

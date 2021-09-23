@@ -12,7 +12,8 @@ class GetFileContentQueryTest {
 
         NullPointerTester tester = new NullPointerTester();
 
-        tester.setDefault(AuthToken.class, new AuthToken("")).setDefault(FileId.class, new FileId(""));
+        tester.setDefault(AuthToken.class, new AuthToken("")).
+                setDefault(String.class, "");
 
         tester.testAllPublicConstructors(GetFileContentQuery.class);
 

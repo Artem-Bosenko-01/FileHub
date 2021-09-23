@@ -47,7 +47,7 @@ public final class FileSystemTestData {
             throws InvalidCommandHandlingException, InvalidValidationCommandDataException {
 
         UploadFileCommand command = new UploadFileCommand(token, "folder", MediaType.PLAIN_TEXT_UTF_8,
-                "folder" + id, content);
+                "folder" + id.value(), content);
 
         UploadFile createFile = new UploadFile(fIleContentStorage, fileStorage, folderStorage, authorizationStorage);
 
@@ -58,7 +58,7 @@ public final class FileSystemTestData {
                              FolderId parent)
             throws InvalidCommandHandlingException, InvalidValidationCommandDataException {
 
-        UploadFileCommand command = new UploadFileCommand(token, "folder", MediaType.PLAIN_TEXT_UTF_8, parent.toString(),
+        UploadFileCommand command = new UploadFileCommand(token, "folder", MediaType.PLAIN_TEXT_UTF_8, parent.value(),
                 content);
 
         UploadFile createFile = new UploadFile(fIleContentStorage, fileStorage, folderStorage, authorizationStorage);
@@ -72,7 +72,7 @@ public final class FileSystemTestData {
 
         return new DeleteFileCommand(
                 new AuthToken("6956"),
-                name + userID);
+                name + userID.value());
     }
 
     public UploadFileCommand uploadFileCommand() throws InvalidValidationCommandDataException {
@@ -81,7 +81,7 @@ public final class FileSystemTestData {
                 token,
                 "file.txt",
                 MediaType.PLAIN_TEXT_UTF_8,
-                "folder" + id,
+                "folder" + id.value(),
                 content
         );
     }

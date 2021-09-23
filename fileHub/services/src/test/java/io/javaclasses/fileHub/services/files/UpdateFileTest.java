@@ -34,12 +34,12 @@ class UpdateFileTest {
 
         FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
 
-        FolderId folderID = new FolderId("folder" + fileSystemTestData.id());
+        FolderId folderID = new FolderId("folder" + fileSystemTestData.id().value());
 
         FileId creteFileId = new FileId(fileSystemTestData.uploadFile(fileStorageInMemory, fIleContentStorage, folderStorage));
 
-        UpdateFileCommand command = new UpdateFileCommand(fileSystemTestData.token(), creteFileId.toString(),
-                "lkijij", MediaType.GIF, 65L, folderID.toString());
+        UpdateFileCommand command = new UpdateFileCommand(fileSystemTestData.token(), creteFileId.value(),
+                "lkijij", MediaType.GIF, 65L, folderID.value());
 
         UpdateFile process = new UpdateFile(fileStorageInMemory, authorizationStorage);
 
@@ -71,10 +71,10 @@ class UpdateFileTest {
 
         fileSystemTestData.uploadFile(fileStorageInMemory, fIleContentStorage, folderStorage);
 
-        FolderId folderID = new FolderId("JHGF" + userID);
+        FolderId folderID = new FolderId("JHGF" + userID.value());
 
-        UpdateFileCommand command = new UpdateFileCommand(token, new FileId("csac").toString(),
-                "lkijij", MediaType.GIF, 65L, folderID.toString());
+        UpdateFileCommand command = new UpdateFileCommand(token, new FileId("csac").value(),
+                "lkijij", MediaType.GIF, 65L, folderID.value());
 
         UpdateFile process = new UpdateFile(fileStorageInMemory, authorizationStorage);
 

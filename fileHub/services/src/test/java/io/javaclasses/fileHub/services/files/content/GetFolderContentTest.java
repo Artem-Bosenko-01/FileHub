@@ -41,7 +41,7 @@ class GetFolderContentTest {
         fileSystemTestData.createFolder(folderStorage, "folder2", parent);
 
 
-        GetFolderContentQuery query = new GetFolderContentQuery(fileSystemTestData.token(), parent.toString());
+        GetFolderContentQuery query = new GetFolderContentQuery(fileSystemTestData.token(), parent.value());
 
         GetFolderContent view = new GetFolderContent(folderStorage, fileStorage, authorizationStorage);
 

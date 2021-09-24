@@ -180,14 +180,6 @@ body {
         margin: 5px 0;
     }
 
-    .error-label {
-        margin-top: -20px;
-    }
-
-    .invalid-input-value input {
-        margin: 5px 0;
-    }
-
     .submit-box {
         width: 65%;
         float: right;
@@ -222,8 +214,8 @@ body {
     }
 }
 
-
 /*********************************************Styles for user view pages*********************************************/
+
 .header {
     position: relative;
 }
@@ -285,8 +277,8 @@ body {
 
 .path {
     display: inline-block;
-    margin-bottom: 9px;
     margin-top: 0;
+    margin-bottom: 9px;
     background-color: #f5f5f5;
     color: #919191;
     border-radius: 4px;
@@ -345,10 +337,6 @@ body {
     float: none;
 }
 
-.get-user-data {
-    margin: 15px 0 0;
-}
-
 .search-button-box {
     margin-left: -4px;
     display: inline-block;
@@ -385,9 +373,6 @@ body {
     border-top-right-radius: 3px;
 }
 
-.invalid-input-value input {
-    margin-bottom: 5px;
-}
 
 .rename-element {
     margin-left: -10px;
@@ -409,7 +394,7 @@ body {
 }
 
 .table-box {
-    margin-top: 14px;
+    margin-top: 16px;
     height: 80%;
     overflow: auto;
 }
@@ -497,7 +482,24 @@ td {
     padding: 9px 10px;
 }
 
-.social-icons {
+.modal-window {
+    position: fixed;
+    top: 26px;
+    left: 3%;
+    z-index: 4849;
+}
+
+.fade {
+    position: fixed;
+    z-index: 55;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.social-icons{
     padding-left: 0;
     margin-bottom: 0;
 }
@@ -523,6 +525,10 @@ td {
         display: table-cell;
     }
 
+
+    .modal-window{
+        left: 37.4%;
+    }
 }
 
 @media screen and (min-width: 992px) and (max-width: 1199px) {
@@ -543,6 +549,9 @@ td {
         display: table-cell;
     }
 
+    .modal-window{
+        left: 28%;
+    }
 }
 
 @media screen and (min-width: 768px) and (max-width: 991px) {
@@ -559,6 +568,9 @@ td {
     }
 
 
+    .modal-window{
+        left: 24%;
+    }
 }
 
 @media screen and (min-width: 520px) and (max-width: 767px) {
@@ -573,4 +585,76 @@ td {
     .table .cell-name {
         width: 80%;
     }
+
+    .modal-window{
+        left: 14%;
+    }
+}
+
+
+/*********************************************Styles for modal windows*********************************************/
+
+.modal-raw {
+    max-width: 400px;
+    height: inherit;
+}
+
+.delete-data {
+    margin-top: 20px;
+}
+
+.delete-data span {
+    font-size: 16px;
+}
+
+.modal-header {
+    font-size: 24px;
+}
+
+.modal-get-user-data {
+    display: block;
+}
+
+.modal-input {
+    width: 100%;
+    margin-left: 0;
+}
+
+.button-cancel {
+    background-color: transparent;
+    color: black;
+    border: 1px solid #9a9797;
+    padding: 8px 12px;
+    margin-right: 2px;
+}
+
+.button-delete {
+    background-color: #cc5c53;
+}
+
+.button-delete:hover {
+    background-color: #9c2d21
+}
+
+.button-shut-down {
+    position: absolute;
+    background-color: transparent;
+    color: #9a9797;
+    right: 0;
+    top: 0;
+    padding: 0;
+}
+
+.button-cancel:hover,
+.button-shut-down:hover {
+    background-color: transparent;
+}
+
+.submit-modal-box {
+    margin-top: 25px;
+    width: 32.2%;
+}
+
+.submit-delete-modal-box {
+    margin-top: 15px;
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Create modal</title>
+    <title>Delete modal loading</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/icons.css">
@@ -27,28 +27,31 @@
             </ul>
         </div>
     </header>
-    <div class="page-raw">
+    <div class="raw page-raw">
         <ul class="path">
             <li class="folder">
-                <span>Home</span>
+                <span class="glyphicon glyphicon-repeat loading" aria-hidden="true"></span>
             </li>
         </ul>
         <hr class="user-view-page-separate-line">
         <nav class="navbar">
             <div class="search-panel">
-                <div class="input-value input-search-query">
+                <div class="input-value input-search-query input-search-query-loading">
                     <input title="Search something" type="text" placeholder="Enter entity name...">
                 </div>
                 <div class="search-button-box">
-                    <button title="search button" class="button button-search" type="button">Search</button>
+                    <button title="search button" class="button button-search button-disabled" type="button">
+                        <span class="glyphicon glyphicon-repeat loading" aria-hidden="true"></span>Search
+                    </button>
                 </div>
             </div>
             <div class="control-folder-buttons-box">
-                <button title="upload" type="button" class="button control-folder-button"><span
-                        class="glyphicon glyphicon-upload"></span>
+                <button title="upload" type="button" class="button control-folder-button button-disabled">
+                    <span class="glyphicon glyphicon-repeat loading" aria-hidden="true"></span>
                 </button>
 
-                <button title="Create new directory" type="button" class="button control-folder-button"><span
+                <button title="Create new directory" type="button" class="button control-folder-button"
+                        onclick="window.open('modal-create.html')"><span
                         class="glyphicon glyphicon-plus"></span>
                 </button>
             </div>
@@ -64,7 +67,7 @@
                     <td class="cell-file-size">—</td>
                     <td class="cell-file-action-buttons">
                         <button title="download" type="button" class="element-control-button upload-element-button">
-                            <span class="glyphicon glyphicon-upload"></span>
+                            <span class="glyphicon glyphicon-repeat loading" aria-hidden="true"></span>
                         </button>
                         <button title="delete" type="button" class="element-control-button delete-element-button"
                                 onclick="window.open('modal-delete.html')">
@@ -108,16 +111,15 @@
                     <td class="cell-folder-marker"><span class="glyphicon glyphicon-chevron-right"></span></td>
                     <td class="cell-icon"><span class="glyphicon glyphicon-folder-close"></span></td>
                     <td class="cell-name">
-                        <div class="input-value rename-element invalid-input-value">
-                            <input title="Input email" type="email" placeholder="Music">
-                            <p class="error-massage error-rename-massage"
-                               title="Error massage">No whitespaces allowed.</p>
+                        <div class="input-value rename-element">
+                            <input title="Input email" type="email" placeholder="Enter directory name...">
+                            <span class="glyphicon glyphicon-repeat loading" aria-hidden="true"></span>
                         </div>
                     </td>
-                    <td class="type">Folder</td>
-                    <td class="size">—</td>
-                    <td class="hiddenButtons">
-                        <button title="download" type="button" class="elementControlButton downloadElementButton">
+                    <td class="cell-type">Folder</td>
+                    <td class="cell-file-size">—</td>
+                    <td class="cell-file-action-buttons">
+                        <button title="download" type="button" class="element-control-button download-element-button">
                             <span class="glyphicon glyphicon-download"></span>
                         </button>
                         <button title="delete" type="button" class="element-control-button delete-element-button">
@@ -149,7 +151,7 @@
                     <td class="cell-file-size">100 KB</td>
                     <td class="cell-file-action-buttons">
                         <button title="download" type="button" class="element-control-button download-element-button">
-                            <span class="glyphicon glyphicon-download"></span>
+                            <span class="glyphicon glyphicon-repeat loading" aria-hidden="true"></span>
                         </button>
                         <button title="delete" type="button" class="element-control-button delete-element-button">
                             <span class="glyphicon glyphicon-remove-circle"></span>
@@ -270,22 +272,19 @@
     <div class="main">
         <div class="raw modal-raw">
             <header class="header">
-                <h2 class="modal-header">Create New Directory</h2>
+                <h2 class="modal-header">Delete File</h2>
                 <button title="Close" class="button button-shut-down" onclick="window.open('index.html')"><span
                         class="glyphicon glyphicon-remove"></span></button>
             </header>
-            <form class="data" action="index.html">
-                <div class="get-user-data modal-get-user-data">
-                    <div class="input-value invalid-input-value modal-input">
-                        <input title="Input email" type="email" id="emailUser" placeholder="Enter directory name...">
-                        <span class="error-massage" title="Error massage">No whitespaces allowed.</span>
-                    </div>
-                </div>
-                <div class="submit-box submit-modal-box">
+            <div class="data delete-data">
+                <p>Are you sure want to delete "name.txt" file?</p>
+                <div class="submit-box submit-modal-box submit-delete-modal-box submit-loading-modal-box">
                     <button title="Cancel" class="button button-cancel" name="cancel">Cancel</button>
-                    <button title="Create" class="button" name="create">Create</button>
+                    <button disabled title="Delete" class="button button-delete button-disabled" name="delete">
+                        <span class="glyphicon glyphicon-repeat loading" aria-hidden="true"></span> Delete
+                    </button>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 

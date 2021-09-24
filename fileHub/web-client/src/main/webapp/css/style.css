@@ -224,7 +224,11 @@ body {
     position: absolute;
     display: inline-block;
     right: 0;
-    top: 10px;
+    top: 11px;
+}
+
+.error-state-panel{
+    top: 25px;
 }
 
 .panel li {
@@ -233,12 +237,8 @@ body {
     padding: 2px 6px 2px 4px;
 }
 
-.panel li:first-child {
+.panel ul li:first-child {
     border-right: 1px solid #050505;
-}
-
-.logOut {
-    color: #2e86ce;
 }
 
 .page-raw {
@@ -337,6 +337,12 @@ body {
     float: none;
 }
 
+.input-search-query-loading input{
+    height: 100%;
+    padding: 9px 10px 8px;
+
+}
+
 .search-button-box {
     margin-left: -4px;
     display: inline-block;
@@ -382,6 +388,7 @@ body {
 
 .rename-element input {
     margin: 0;
+    float: none;
 }
 
 .error-rename-massage {
@@ -394,7 +401,7 @@ body {
 }
 
 .table-box {
-    margin-top: 16px;
+    margin-top: 15px;
     height: 80%;
     overflow: auto;
 }
@@ -484,7 +491,7 @@ td {
 
 .modal-window {
     position: fixed;
-    top: 26px;
+    top: 30px;
     left: 3%;
     z-index: 4849;
 }
@@ -524,7 +531,6 @@ td {
     .table .cell-file-size {
         display: table-cell;
     }
-
 
     .modal-window{
         left: 37.4%;
@@ -567,7 +573,6 @@ td {
         display: table-cell;
     }
 
-
     .modal-window{
         left: 24%;
     }
@@ -591,7 +596,51 @@ td {
     }
 }
 
+.empty-directory:hover{
+    background-color: transparent;
+}
 
+.empty-directory-massage{
+    text-align: center;
+    margin-top: 190px;
+    font-size: 14px;
+}
+
+.loading{
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 0.75s linear infinite;
+}
+
+
+.button-disabled{
+    background-color: #61a8f1;
+}
+
+.button-disabled:hover{
+    background-color: #61a8f1;
+}
+
+@keyframes spin {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
+
+.panel .loading,
+.rename-element .loading{
+    font-size: 14px;
+}
+
+.element-control-button .loading{
+    font-size: 20px;
+}
+
+.empty-directory-massage .loading{
+    font-size: 20px;
+}
+
+.submit-loading-modal-box .submit-delete-modal-box span{
+    font-size: 12px;
+}
 /*********************************************Styles for modal windows*********************************************/
 
 .modal-raw {
@@ -603,7 +652,7 @@ td {
     margin-top: 20px;
 }
 
-.delete-data span {
+.delete-data>span {
     font-size: 16px;
 }
 
@@ -653,6 +702,11 @@ td {
 .submit-modal-box {
     margin-top: 25px;
     width: 32.2%;
+}
+
+.submit-loading-modal-box{
+    margin-top: 35px;
+    width: 36%;
 }
 
 .submit-delete-modal-box {

@@ -55,10 +55,11 @@ public final class ValidationRules {
     }
 
     private static boolean validateString(String str) {
-        String[] array = str.split("");
 
-        for (String c : array) {
-            if (!Pattern.matches("[0-9a-zA-Z-_@.*,&]", c)) {
+        for (int i = 0; i < str.length(); i++) {
+
+            if (!Pattern.matches("[0-9a-zA-Z-_@.*,&]", String.valueOf(str.charAt(i)))) {
+
                 return false;
             }
         }

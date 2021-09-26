@@ -11930,3 +11930,1059 @@
 2021-09-26 17:34:26 ERROR RegisterUser:73 - Duplicate id badk@h.com
 2021-09-26 17:34:26 INFO  RegisterUser:41 - Start registration user process with id: badk@h.com
 2021-09-26 17:34:26 INFO  RegisterUser:65 - Registration was successful :badk@h.com
+2021-09-26 18:09:08 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:09:08 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 9056d3c4-5ff0-4af7-97f4-5e483d87948d
+2021-09-26 18:09:08 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 9056d3c4-5ff0-4af7-97f4-5e483d87948d
+2021-09-26 18:09:08 INFO  GetFileContent:43 - Start get file's content by id JHGF
+2021-09-26 18:09:08 ERROR GetFileContent:59 - File with id doesn't exist JHGF
+2021-09-26 18:09:08 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:09:08 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 2f954a2e-0b0b-4d33-81f9-f6808606b727
+2021-09-26 18:09:08 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 2f954a2e-0b0b-4d33-81f9-f6808606b727
+2021-09-26 18:09:08 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:09:08 INFO  UploadFile:97 - Uploading new file was successful: folderfolderjohn@gmail.com
+2021-09-26 18:09:08 INFO  GetFileContent:43 - Start get file's content by id folderfolderjohn@gmail.com
+2021-09-26 18:09:08 INFO  GetFileContent:51 - Getting file's content was successful by id folderfolderjohn@gmail.com
+2021-09-26 18:09:08 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:09:08 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 9541872b-bec0-4c3e-a34d-62571695ac6f
+2021-09-26 18:09:08 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 9541872b-bec0-4c3e-a34d-62571695ac6f
+2021-09-26 18:09:08 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:09:08 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:09:08 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.comnull
+2021-09-26 18:09:08 INFO  UploadFile:97 - Uploading new file was successful: folderfolderjohn@gmail.comnull
+2021-09-26 18:09:08 INFO  CreateFolder:56 - Start create folder folder1
+2021-09-26 18:09:08 INFO  CreateFolder:72 - Created folder was successful. id: folder1john@gmail.comnull
+2021-09-26 18:09:08 INFO  CreateFolder:56 - Start create folder folder2
+2021-09-26 18:09:08 INFO  CreateFolder:72 - Created folder was successful. id: folder2john@gmail.comnull
+2021-09-26 18:09:08 INFO  GetFolderContent:62 - Start get folder's content by id folderjohn@gmail.comnull
+2021-09-26 18:09:08 INFO  GetFolderContent:71 - Getting folder's content was successful by id folderjohn@gmail.comnull
+2021-09-26 18:09:08 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:09:08 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: d342d3e9-e9fb-4ecb-bb30-a6e9e08c8296
+2021-09-26 18:09:08 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = d342d3e9-e9fb-4ecb-bb30-a6e9e08c8296
+2021-09-26 18:09:08 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:09:08 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:09:08 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:09:08 ERROR CreateFolder:85 - Duplicate id folderjohn@gmail.comnull
+2021-09-26 18:09:08 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:09:08 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 1d3a1c79-7171-4554-bf02-6966c8377898
+2021-09-26 18:09:08 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 1d3a1c79-7171-4554-bf02-6966c8377898
+2021-09-26 18:09:08 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:09:08 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:09:08 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:09:08 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 5b65a4dc-a5cd-445d-9ebd-5222eb80d1b7
+2021-09-26 18:09:08 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 5b65a4dc-a5cd-445d-9ebd-5222eb80d1b7
+2021-09-26 18:09:08 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:09:08 INFO  UploadFile:97 - Uploading new file was successful: folderfolderjohn@gmail.com
+2021-09-26 18:09:08 INFO  DeleteFile:50 - Start delete file folderfolderjohn@gmail.com
+2021-09-26 18:09:08 INFO  DeleteFile:60 - Deleted folderfolderjohn@gmail.com was successful
+2021-09-26 18:09:08 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:09:08 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 2099b0dc-f48e-4b5a-beaa-140aae7d33e3
+2021-09-26 18:09:08 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 2099b0dc-f48e-4b5a-beaa-140aae7d33e3
+2021-09-26 18:09:08 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:09:08 INFO  UploadFile:97 - Uploading new file was successful: folderfolderjohn@gmail.com
+2021-09-26 18:09:08 INFO  DeleteFile:50 - Start delete file fileIdacacsa
+2021-09-26 18:09:08 ERROR DeleteFile:70 - Id doesn't exist fileIdacacsa
+2021-09-26 18:09:08 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:09:08 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 86204f71-e6ec-4f4b-a018-40c5786d8951
+2021-09-26 18:09:08 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 86204f71-e6ec-4f4b-a018-40c5786d8951
+2021-09-26 18:09:08 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:09:08 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:09:08 INFO  DeleteFolder:48 - Start delete folder foldId
+2021-09-26 18:09:08 ERROR DeleteFolder:68 - Id doesn't exist foldId
+2021-09-26 18:09:08 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:09:08 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 1d2a6983-16d8-47fa-a504-1a1823ce59f7
+2021-09-26 18:09:08 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 1d2a6983-16d8-47fa-a504-1a1823ce59f7
+2021-09-26 18:09:08 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:09:08 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:09:08 INFO  DeleteFolder:48 - Start delete folder folderjohn@gmail.comnull
+2021-09-26 18:09:08 INFO  DeleteFolder:58 - Deleted folderfolderjohn@gmail.comnull was successful
+2021-09-26 18:09:08 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:09:08 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 99000a63-9797-477e-bd44-ca48a768bf09
+2021-09-26 18:09:08 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 99000a63-9797-477e-bd44-ca48a768bf09
+2021-09-26 18:09:08 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:09:08 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:09:08 INFO  GetFolderById:54 - Start get directory for user: john@gmail.com and name: folderjohn@gmail.comnull
+2021-09-26 18:09:08 INFO  GetFolderById:64 - Read folder by User: john@gmail.com. And name: folder. Was successful
+2021-09-26 18:09:08 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:09:08 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: edb81461-b135-4bbe-ad04-9f0699da8619
+2021-09-26 18:09:08 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = edb81461-b135-4bbe-ad04-9f0699da8619
+2021-09-26 18:09:08 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:09:08 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:09:08 INFO  GetFolderById:54 - Start get directory for user: john@gmail.com and name: id
+2021-09-26 18:09:08 ERROR GetFolderById:79 - Cannot find folder by id: id
+2021-09-26 18:09:08 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:09:08 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 4f55f1c8-9e49-468e-8454-7d50f582db67
+2021-09-26 18:09:08 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 4f55f1c8-9e49-468e-8454-7d50f582db67
+2021-09-26 18:09:08 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: e7b0e461-4f40-4da3-aebf-4b42a9ce800b
+2021-09-26 18:09:08 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = e7b0e461-4f40-4da3-aebf-4b42a9ce800b
+2021-09-26 18:09:08 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:09:08 INFO  UploadFile:97 - Uploading new file was successful: folderfolderjohn@gmail.com
+2021-09-26 18:09:08 INFO  UpdateFile:63 - Start update information for file csac
+2021-09-26 18:09:08 ERROR UpdateFile:86 - Id doesn't exist csac
+2021-09-26 18:09:08 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:09:08 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 0c916eeb-36a4-4756-84f4-57a240546663
+2021-09-26 18:09:08 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 0c916eeb-36a4-4756-84f4-57a240546663
+2021-09-26 18:09:08 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:09:08 INFO  UploadFile:97 - Uploading new file was successful: folderfolderjohn@gmail.com
+2021-09-26 18:09:08 INFO  UpdateFile:63 - Start update information for file folderfolderjohn@gmail.com
+2021-09-26 18:09:08 INFO  UpdateFile:78 - Updating file was successful. id: folderfolderjohn@gmail.com
+2021-09-26 18:09:08 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:09:08 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 28827525-197b-4fae-a7d3-d631b020eb33
+2021-09-26 18:09:08 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 28827525-197b-4fae-a7d3-d631b020eb33
+2021-09-26 18:09:08 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:09:08 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:09:08 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 2778de37-01e4-4763-84bb-88008bfca4cf
+2021-09-26 18:09:08 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 2778de37-01e4-4763-84bb-88008bfca4cf
+2021-09-26 18:09:08 INFO  UpdateFolder:62 - Start update information for folder newFolder
+2021-09-26 18:09:08 ERROR UpdateFolder:84 - Id doesn't exist newFolder
+2021-09-26 18:09:08 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:09:08 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 0992cbaa-8c23-4b19-87e3-f6650d32d9c8
+2021-09-26 18:09:08 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 0992cbaa-8c23-4b19-87e3-f6650d32d9c8
+2021-09-26 18:09:08 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:09:08 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:09:08 INFO  UpdateFolder:62 - Start update information for folder folderjohn@gmail.comnull
+2021-09-26 18:09:08 INFO  UpdateFolder:76 - Updating folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:09:08 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:09:08 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 7c123375-696f-4fca-bcc2-5189f826aa35
+2021-09-26 18:09:08 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 7c123375-696f-4fca-bcc2-5189f826aa35
+2021-09-26 18:09:08 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:09:08 INFO  UploadFile:97 - Uploading new file was successful: file.txtfolderjohn@gmail.com
+2021-09-26 18:09:08 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:09:08 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: fc6184e5-c3f1-4672-9cd7-cc301e956940
+2021-09-26 18:09:08 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = fc6184e5-c3f1-4672-9cd7-cc301e956940
+2021-09-26 18:09:08 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:09:08 INFO  UploadFile:97 - Uploading new file was successful: file.txtfolderjohn@gmail.com
+2021-09-26 18:09:08 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:09:08 ERROR UploadFile:107 - Duplicate id file.txtfolderjohn@gmail.com
+2021-09-26 18:09:08 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:09:08 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 704ce7b5-055e-4cee-9fe8-2cf9b48fbfe6
+2021-09-26 18:09:08 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 704ce7b5-055e-4cee-9fe8-2cf9b48fbfe6
+2021-09-26 18:09:08 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:09:08 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:09:08 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:09:08 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:09:08 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 809704e9-5b3a-4aff-ad22-2df7955680fc
+2021-09-26 18:09:08 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 809704e9-5b3a-4aff-ad22-2df7955680fc
+2021-09-26 18:09:08 INFO  GetUserInfo:53 - Start read user process with id: john@gmail.com
+2021-09-26 18:09:08 INFO  GetUserInfo:62 - User john@gmail.com exist!
+2021-09-26 18:09:08 INFO  RegisterUser:41 - Start registration user process with id: badk@h.com
+2021-09-26 18:09:08 INFO  RegisterUser:65 - Registration was successful :badk@h.com
+2021-09-26 18:09:08 INFO  RegisterUser:41 - Start registration user process with id: badk@h.com
+2021-09-26 18:09:08 ERROR RegisterUser:73 - Duplicate id badk@h.com
+2021-09-26 18:09:08 INFO  RegisterUser:41 - Start registration user process with id: badk@h.com
+2021-09-26 18:09:08 INFO  RegisterUser:65 - Registration was successful :badk@h.com
+2021-09-26 18:11:32 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:11:32 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: db128348-f059-46b9-bb31-104acbd53283
+2021-09-26 18:11:32 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = db128348-f059-46b9-bb31-104acbd53283
+2021-09-26 18:11:32 INFO  GetFileContent:43 - Start get file's content by id JHGF
+2021-09-26 18:11:32 ERROR GetFileContent:59 - File with id doesn't exist JHGF
+2021-09-26 18:11:32 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:11:32 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: b1529233-6491-47f0-a5f1-fdf970d47e33
+2021-09-26 18:11:32 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = b1529233-6491-47f0-a5f1-fdf970d47e33
+2021-09-26 18:11:32 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:11:32 INFO  UploadFile:97 - Uploading new file was successful: folderfolderjohn@gmail.com
+2021-09-26 18:11:32 INFO  GetFileContent:43 - Start get file's content by id folderfolderjohn@gmail.com
+2021-09-26 18:11:32 INFO  GetFileContent:51 - Getting file's content was successful by id folderfolderjohn@gmail.com
+2021-09-26 18:11:32 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:11:32 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: ea949ac0-1096-4414-8b8b-313d14a80a2d
+2021-09-26 18:11:32 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = ea949ac0-1096-4414-8b8b-313d14a80a2d
+2021-09-26 18:11:32 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:11:32 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:11:32 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.comnull
+2021-09-26 18:11:32 INFO  UploadFile:97 - Uploading new file was successful: folderfolderjohn@gmail.comnull
+2021-09-26 18:11:32 INFO  CreateFolder:56 - Start create folder folder1
+2021-09-26 18:11:32 INFO  CreateFolder:72 - Created folder was successful. id: folder1john@gmail.comnull
+2021-09-26 18:11:32 INFO  CreateFolder:56 - Start create folder folder2
+2021-09-26 18:11:32 INFO  CreateFolder:72 - Created folder was successful. id: folder2john@gmail.comnull
+2021-09-26 18:11:32 INFO  GetFolderContent:62 - Start get folder's content by id folderjohn@gmail.comnull
+2021-09-26 18:11:32 INFO  GetFolderContent:71 - Getting folder's content was successful by id folderjohn@gmail.comnull
+2021-09-26 18:11:32 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:11:32 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 7cbe1931-d63c-4b4c-a0b6-1340852a4c8f
+2021-09-26 18:11:32 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 7cbe1931-d63c-4b4c-a0b6-1340852a4c8f
+2021-09-26 18:11:32 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:11:32 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:11:32 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:11:32 ERROR CreateFolder:85 - Duplicate id folderjohn@gmail.comnull
+2021-09-26 18:11:32 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:11:32 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 0c52e8fa-fe89-4435-b37b-4900cadb67c1
+2021-09-26 18:11:32 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 0c52e8fa-fe89-4435-b37b-4900cadb67c1
+2021-09-26 18:11:32 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:11:32 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:11:32 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:11:32 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: e7b508b4-d4b4-4cd5-bf0b-7e7ac6390c19
+2021-09-26 18:11:32 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = e7b508b4-d4b4-4cd5-bf0b-7e7ac6390c19
+2021-09-26 18:11:32 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:11:32 INFO  UploadFile:97 - Uploading new file was successful: folderfolderjohn@gmail.com
+2021-09-26 18:11:32 INFO  DeleteFile:50 - Start delete file folderfolderjohn@gmail.com
+2021-09-26 18:11:32 INFO  DeleteFile:60 - Deleted folderfolderjohn@gmail.com was successful
+2021-09-26 18:11:32 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:11:32 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 4dbf89e3-f183-4004-9e6f-492a086bb5e5
+2021-09-26 18:11:32 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 4dbf89e3-f183-4004-9e6f-492a086bb5e5
+2021-09-26 18:11:32 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:11:32 INFO  UploadFile:97 - Uploading new file was successful: folderfolderjohn@gmail.com
+2021-09-26 18:11:32 INFO  DeleteFile:50 - Start delete file fileIdacacsa
+2021-09-26 18:11:32 ERROR DeleteFile:70 - Id doesn't exist fileIdacacsa
+2021-09-26 18:11:32 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:11:32 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 69125fe6-727d-48b9-9109-128c5c588b01
+2021-09-26 18:11:32 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 69125fe6-727d-48b9-9109-128c5c588b01
+2021-09-26 18:11:32 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:11:32 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:11:32 INFO  DeleteFolder:48 - Start delete folder foldId
+2021-09-26 18:11:32 ERROR DeleteFolder:68 - Id doesn't exist foldId
+2021-09-26 18:11:32 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:11:32 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 213ff907-a94d-402f-87a9-64781fd0c157
+2021-09-26 18:11:32 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 213ff907-a94d-402f-87a9-64781fd0c157
+2021-09-26 18:11:32 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:11:32 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:11:32 INFO  DeleteFolder:48 - Start delete folder folderjohn@gmail.comnull
+2021-09-26 18:11:32 INFO  DeleteFolder:58 - Deleted folderfolderjohn@gmail.comnull was successful
+2021-09-26 18:11:32 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:11:32 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 33334106-6c75-40ab-8766-97a67102c098
+2021-09-26 18:11:32 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 33334106-6c75-40ab-8766-97a67102c098
+2021-09-26 18:11:32 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:11:32 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:11:32 INFO  GetFolderById:54 - Start get directory for user: john@gmail.com and name: folderjohn@gmail.comnull
+2021-09-26 18:11:32 INFO  GetFolderById:64 - Read folder by User: john@gmail.com. And name: folder. Was successful
+2021-09-26 18:11:32 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:11:32 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: f9413d29-035b-4ef5-935b-9daf0a78e433
+2021-09-26 18:11:32 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = f9413d29-035b-4ef5-935b-9daf0a78e433
+2021-09-26 18:11:32 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:11:32 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:11:32 INFO  GetFolderById:54 - Start get directory for user: john@gmail.com and name: id
+2021-09-26 18:11:32 ERROR GetFolderById:79 - Cannot find folder by id: id
+2021-09-26 18:11:32 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:11:32 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 4efb9f5f-4ec6-4348-8164-cd381d672cc0
+2021-09-26 18:11:32 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 4efb9f5f-4ec6-4348-8164-cd381d672cc0
+2021-09-26 18:11:32 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 71b22f16-ef6c-4ca2-8ad6-f6acee6f8a5a
+2021-09-26 18:11:32 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 71b22f16-ef6c-4ca2-8ad6-f6acee6f8a5a
+2021-09-26 18:11:32 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:11:32 INFO  UploadFile:97 - Uploading new file was successful: folderfolderjohn@gmail.com
+2021-09-26 18:11:32 INFO  UpdateFile:63 - Start update information for file csac
+2021-09-26 18:11:32 ERROR UpdateFile:86 - Id doesn't exist csac
+2021-09-26 18:11:32 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:11:32 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: c1b83ca8-e2ba-4b25-98e9-2d5fde087fe0
+2021-09-26 18:11:32 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = c1b83ca8-e2ba-4b25-98e9-2d5fde087fe0
+2021-09-26 18:11:32 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:11:32 INFO  UploadFile:97 - Uploading new file was successful: folderfolderjohn@gmail.com
+2021-09-26 18:11:32 INFO  UpdateFile:63 - Start update information for file folderfolderjohn@gmail.com
+2021-09-26 18:11:32 INFO  UpdateFile:78 - Updating file was successful. id: folderfolderjohn@gmail.com
+2021-09-26 18:11:32 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:11:32 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 552263a4-4c6a-43df-8c35-dfa006ee4199
+2021-09-26 18:11:32 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 552263a4-4c6a-43df-8c35-dfa006ee4199
+2021-09-26 18:11:32 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:11:32 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:11:32 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 670b6fb4-02a3-4cdc-896d-42d7b8f2ae10
+2021-09-26 18:11:32 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 670b6fb4-02a3-4cdc-896d-42d7b8f2ae10
+2021-09-26 18:11:32 INFO  UpdateFolder:62 - Start update information for folder newFolder
+2021-09-26 18:11:32 ERROR UpdateFolder:84 - Id doesn't exist newFolder
+2021-09-26 18:11:32 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:11:32 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: d07af035-3804-47eb-b739-fafc98216356
+2021-09-26 18:11:32 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = d07af035-3804-47eb-b739-fafc98216356
+2021-09-26 18:11:32 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:11:32 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:11:32 INFO  UpdateFolder:62 - Start update information for folder folderjohn@gmail.comnull
+2021-09-26 18:11:32 INFO  UpdateFolder:76 - Updating folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:11:32 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:11:32 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: f8be37c6-f67c-4caf-a5c0-620516156e01
+2021-09-26 18:11:32 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = f8be37c6-f67c-4caf-a5c0-620516156e01
+2021-09-26 18:11:32 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:11:32 INFO  UploadFile:97 - Uploading new file was successful: file.txtfolderjohn@gmail.com
+2021-09-26 18:11:32 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:11:32 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 961b86d9-9089-4045-8252-f1129aa71d0b
+2021-09-26 18:11:32 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 961b86d9-9089-4045-8252-f1129aa71d0b
+2021-09-26 18:11:32 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:11:32 INFO  UploadFile:97 - Uploading new file was successful: file.txtfolderjohn@gmail.com
+2021-09-26 18:11:32 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:11:32 ERROR UploadFile:107 - Duplicate id file.txtfolderjohn@gmail.com
+2021-09-26 18:11:32 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:11:32 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 911f80ff-5ba0-4bd5-a4d4-1de09902ba45
+2021-09-26 18:11:32 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 911f80ff-5ba0-4bd5-a4d4-1de09902ba45
+2021-09-26 18:11:32 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:11:32 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:11:32 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:11:32 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:11:32 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 45c4bcb0-3498-4815-863e-672dc6e9bd85
+2021-09-26 18:11:32 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 45c4bcb0-3498-4815-863e-672dc6e9bd85
+2021-09-26 18:11:32 INFO  GetUserInfo:53 - Start read user process with id: john@gmail.com
+2021-09-26 18:11:32 INFO  GetUserInfo:62 - User john@gmail.com exist!
+2021-09-26 18:11:32 INFO  RegisterUser:41 - Start registration user process with id: badk@h.com
+2021-09-26 18:11:32 INFO  RegisterUser:65 - Registration was successful :badk@h.com
+2021-09-26 18:11:32 INFO  RegisterUser:41 - Start registration user process with id: badk@h.com
+2021-09-26 18:11:32 ERROR RegisterUser:73 - Duplicate id badk@h.com
+2021-09-26 18:11:32 INFO  RegisterUser:41 - Start registration user process with id: badk@h.com
+2021-09-26 18:11:32 INFO  RegisterUser:65 - Registration was successful :badk@h.com
+2021-09-26 18:14:11 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:14:11 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 9b544c9b-1ae9-4d63-a75a-dbb7f66bfdce
+2021-09-26 18:14:11 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 9b544c9b-1ae9-4d63-a75a-dbb7f66bfdce
+2021-09-26 18:14:11 INFO  GetFileContent:43 - Start get file's content by id JHGF
+2021-09-26 18:14:11 ERROR GetFileContent:59 - File with id doesn't exist JHGF
+2021-09-26 18:14:11 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:14:11 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 84e1fb4c-f7c7-41ad-b1b4-25294b5852a1
+2021-09-26 18:14:11 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 84e1fb4c-f7c7-41ad-b1b4-25294b5852a1
+2021-09-26 18:14:11 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:14:11 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 96dcbcdf-7554-491e-ad64-182737d77b5a
+2021-09-26 18:14:11 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 96dcbcdf-7554-491e-ad64-182737d77b5a
+2021-09-26 18:14:11 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:14:11 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 91bfbb79-b3aa-4077-9aae-dedb16845651
+2021-09-26 18:14:11 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 91bfbb79-b3aa-4077-9aae-dedb16845651
+2021-09-26 18:14:11 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:14:11 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: d46eefc8-f985-4947-a347-0b09a87805ca
+2021-09-26 18:14:11 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = d46eefc8-f985-4947-a347-0b09a87805ca
+2021-09-26 18:14:11 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:14:11 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: d39cd742-60e2-45c8-ab1b-9c92634fac57
+2021-09-26 18:14:11 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = d39cd742-60e2-45c8-ab1b-9c92634fac57
+2021-09-26 18:14:11 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:14:11 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 1d8840c9-44df-4476-8b5d-55077bd915c6
+2021-09-26 18:14:11 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 1d8840c9-44df-4476-8b5d-55077bd915c6
+2021-09-26 18:14:11 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:14:11 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 9b611800-4271-40ec-842d-adcc02236f6a
+2021-09-26 18:14:11 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 9b611800-4271-40ec-842d-adcc02236f6a
+2021-09-26 18:14:11 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:14:11 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: fe9bd8c5-7272-4c57-a2b6-2e2fd0be58ec
+2021-09-26 18:14:11 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = fe9bd8c5-7272-4c57-a2b6-2e2fd0be58ec
+2021-09-26 18:14:11 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:14:11 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: d8cebfc5-251d-4b3b-a9cb-2f2d42ea7d17
+2021-09-26 18:14:11 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = d8cebfc5-251d-4b3b-a9cb-2f2d42ea7d17
+2021-09-26 18:14:11 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:14:11 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: f8919f12-f3ea-42ac-92db-9e54dfc33ce4
+2021-09-26 18:14:11 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = f8919f12-f3ea-42ac-92db-9e54dfc33ce4
+2021-09-26 18:14:11 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:14:11 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: da9cd8b7-1d09-46db-b0ed-44fd67e0261c
+2021-09-26 18:14:11 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = da9cd8b7-1d09-46db-b0ed-44fd67e0261c
+2021-09-26 18:14:11 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 7b8d1222-f983-462f-8227-a839db597ce6
+2021-09-26 18:14:11 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 7b8d1222-f983-462f-8227-a839db597ce6
+2021-09-26 18:14:11 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:14:11 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 967d7d54-73bc-4ef3-82d7-1f056c012f5b
+2021-09-26 18:14:11 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 967d7d54-73bc-4ef3-82d7-1f056c012f5b
+2021-09-26 18:14:11 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:14:11 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: d8ce1177-f15b-4987-a9ab-afd05e33dc7c
+2021-09-26 18:14:11 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = d8ce1177-f15b-4987-a9ab-afd05e33dc7c
+2021-09-26 18:14:11 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:14:11 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 35bf564e-d372-48a6-a86e-26ea2cdfe685
+2021-09-26 18:14:11 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 35bf564e-d372-48a6-a86e-26ea2cdfe685
+2021-09-26 18:14:11 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:14:11 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: ebdbdce5-fa12-40a8-aded-1795301fdb55
+2021-09-26 18:14:11 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = ebdbdce5-fa12-40a8-aded-1795301fdb55
+2021-09-26 18:14:11 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:14:11 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 8682d59d-7b53-4dac-a41c-daa88d2d949b
+2021-09-26 18:14:11 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 8682d59d-7b53-4dac-a41c-daa88d2d949b
+2021-09-26 18:14:11 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:14:11 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 4dadce77-45b7-401d-a705-ea43e2e1e83a
+2021-09-26 18:14:11 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 4dadce77-45b7-401d-a705-ea43e2e1e83a
+2021-09-26 18:14:11 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:14:11 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:14:11 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:14:11 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:14:11 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 0707d7d4-0193-469a-91d2-a42f1784fbcb
+2021-09-26 18:14:11 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 0707d7d4-0193-469a-91d2-a42f1784fbcb
+2021-09-26 18:14:11 INFO  GetUserInfo:53 - Start read user process with id: john@gmail.com
+2021-09-26 18:14:11 INFO  GetUserInfo:62 - User john@gmail.com exist!
+2021-09-26 18:14:11 INFO  RegisterUser:41 - Start registration user process with id: badk@h.com
+2021-09-26 18:14:11 INFO  RegisterUser:65 - Registration was successful :badk@h.com
+2021-09-26 18:14:11 INFO  RegisterUser:41 - Start registration user process with id: badk@h.com
+2021-09-26 18:14:11 ERROR RegisterUser:73 - Duplicate id badk@h.com
+2021-09-26 18:14:11 INFO  RegisterUser:41 - Start registration user process with id: badk@h.com
+2021-09-26 18:14:11 INFO  RegisterUser:65 - Registration was successful :badk@h.com
+2021-09-26 18:15:21 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:21 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: c382d467-1277-401c-979a-47e368625e54
+2021-09-26 18:15:21 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = c382d467-1277-401c-979a-47e368625e54
+2021-09-26 18:15:21 INFO  GetFileContent:43 - Start get file's content by id JHGF
+2021-09-26 18:15:21 ERROR GetFileContent:59 - File with id doesn't exist JHGF
+2021-09-26 18:15:21 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:21 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 56d32750-3f2c-4575-b782-e5188e5bd51c
+2021-09-26 18:15:21 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 56d32750-3f2c-4575-b782-e5188e5bd51c
+2021-09-26 18:15:21 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:21 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: cb1cd608-3377-4921-9c65-8017941b0543
+2021-09-26 18:15:21 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = cb1cd608-3377-4921-9c65-8017941b0543
+2021-09-26 18:15:21 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:21 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: b8c4567a-659c-4b09-878a-a78d3acb48d4
+2021-09-26 18:15:21 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = b8c4567a-659c-4b09-878a-a78d3acb48d4
+2021-09-26 18:15:21 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:21 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 67c2f481-3897-4988-a63a-5e1f3dbb643a
+2021-09-26 18:15:21 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 67c2f481-3897-4988-a63a-5e1f3dbb643a
+2021-09-26 18:15:21 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:21 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: d2b90d53-1466-4800-af6e-bae1531ec503
+2021-09-26 18:15:21 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = d2b90d53-1466-4800-af6e-bae1531ec503
+2021-09-26 18:15:21 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:21 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 9834af26-bbd8-4657-b484-9ae09d7530a6
+2021-09-26 18:15:21 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 9834af26-bbd8-4657-b484-9ae09d7530a6
+2021-09-26 18:15:21 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:21 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 0628f9d8-939e-452b-aca6-10b0b11ce41d
+2021-09-26 18:15:21 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 0628f9d8-939e-452b-aca6-10b0b11ce41d
+2021-09-26 18:15:21 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:21 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 767868b2-71a4-473c-86b0-147456b6e70d
+2021-09-26 18:15:21 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 767868b2-71a4-473c-86b0-147456b6e70d
+2021-09-26 18:15:21 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:21 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 9d17012f-870a-4c7f-8d47-00abc854134f
+2021-09-26 18:15:21 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 9d17012f-870a-4c7f-8d47-00abc854134f
+2021-09-26 18:15:21 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:21 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: b3704ce7-347d-4442-9913-985b0d73d141
+2021-09-26 18:15:21 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = b3704ce7-347d-4442-9913-985b0d73d141
+2021-09-26 18:15:21 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:21 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: bfed8a44-d725-4cb6-afc1-d2d6a7044ac3
+2021-09-26 18:15:21 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = bfed8a44-d725-4cb6-afc1-d2d6a7044ac3
+2021-09-26 18:15:21 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 2e25f0c8-9945-4f86-9abd-9021860d864d
+2021-09-26 18:15:21 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 2e25f0c8-9945-4f86-9abd-9021860d864d
+2021-09-26 18:15:21 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:21 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: ffc2c871-7d41-4819-b828-86e8041f3ae9
+2021-09-26 18:15:21 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = ffc2c871-7d41-4819-b828-86e8041f3ae9
+2021-09-26 18:15:21 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:21 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 62495ea6-1d62-4bfa-9aec-181a205e0e1e
+2021-09-26 18:15:21 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 62495ea6-1d62-4bfa-9aec-181a205e0e1e
+2021-09-26 18:15:21 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:21 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 047b49e3-6197-4257-8f7a-7f06342816d4
+2021-09-26 18:15:21 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 047b49e3-6197-4257-8f7a-7f06342816d4
+2021-09-26 18:15:21 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:21 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 6d75a2d8-916a-4a18-aa0e-72c3b6519cb7
+2021-09-26 18:15:21 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 6d75a2d8-916a-4a18-aa0e-72c3b6519cb7
+2021-09-26 18:15:21 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:21 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:21 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: b14c1f07-4efd-4c21-8e1b-7436064d7e9b
+2021-09-26 18:15:21 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = b14c1f07-4efd-4c21-8e1b-7436064d7e9b
+2021-09-26 18:15:22 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:22 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:22 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:22 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 0f4660fb-5ab8-43d0-88d2-d647af33c2fd
+2021-09-26 18:15:22 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 0f4660fb-5ab8-43d0-88d2-d647af33c2fd
+2021-09-26 18:15:22 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:22 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:22 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:22 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:22 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:22 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 260b4e45-05de-4976-b8ff-819e85cb286b
+2021-09-26 18:15:22 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 260b4e45-05de-4976-b8ff-819e85cb286b
+2021-09-26 18:15:22 INFO  GetUserInfo:53 - Start read user process with id: john@gmail.com
+2021-09-26 18:15:22 INFO  GetUserInfo:62 - User john@gmail.com exist!
+2021-09-26 18:15:22 INFO  RegisterUser:41 - Start registration user process with id: badk@h.com
+2021-09-26 18:15:22 INFO  RegisterUser:65 - Registration was successful :badk@h.com
+2021-09-26 18:15:22 INFO  RegisterUser:41 - Start registration user process with id: badk@h.com
+2021-09-26 18:15:22 ERROR RegisterUser:73 - Duplicate id badk@h.com
+2021-09-26 18:15:22 INFO  RegisterUser:41 - Start registration user process with id: badk@h.com
+2021-09-26 18:15:22 INFO  RegisterUser:65 - Registration was successful :badk@h.com
+2021-09-26 18:15:58 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:58 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:58 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:58 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: a8ea443a-7cc3-4211-a463-f47d1747adc9
+2021-09-26 18:15:58 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = a8ea443a-7cc3-4211-a463-f47d1747adc9
+2021-09-26 18:15:59 INFO  GetFileContent:43 - Start get file's content by id JHGF
+2021-09-26 18:15:59 ERROR GetFileContent:59 - File with id doesn't exist JHGF
+2021-09-26 18:15:59 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:59 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: aec3e9c2-9997-40f2-a036-6a4cc45bbccc
+2021-09-26 18:15:59 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = aec3e9c2-9997-40f2-a036-6a4cc45bbccc
+2021-09-26 18:15:59 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:59 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 8fc44318-6ff7-4c2f-9cb5-e21803a7a891
+2021-09-26 18:15:59 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 8fc44318-6ff7-4c2f-9cb5-e21803a7a891
+2021-09-26 18:15:59 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:59 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 64bb6351-6611-4bcb-99a9-33801f8e5b53
+2021-09-26 18:15:59 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 64bb6351-6611-4bcb-99a9-33801f8e5b53
+2021-09-26 18:15:59 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:59 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 438a3f98-47f0-459c-8d5d-0115eb7a99e5
+2021-09-26 18:15:59 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 438a3f98-47f0-459c-8d5d-0115eb7a99e5
+2021-09-26 18:15:59 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:59 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: f0368c49-f62c-42d2-867d-4d9cc12b0583
+2021-09-26 18:15:59 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = f0368c49-f62c-42d2-867d-4d9cc12b0583
+2021-09-26 18:15:59 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:59 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: ebe325fa-a2fe-4356-93e5-9b2669a0afe9
+2021-09-26 18:15:59 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = ebe325fa-a2fe-4356-93e5-9b2669a0afe9
+2021-09-26 18:15:59 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:59 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 11dc25d4-636d-484d-8869-5ad114be1607
+2021-09-26 18:15:59 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 11dc25d4-636d-484d-8869-5ad114be1607
+2021-09-26 18:15:59 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:59 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 632af512-815b-4f51-ac14-697e32260d0d
+2021-09-26 18:15:59 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 632af512-815b-4f51-ac14-697e32260d0d
+2021-09-26 18:15:59 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:59 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 4a91bed7-8ca0-4f35-a110-d57af3947012
+2021-09-26 18:15:59 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 4a91bed7-8ca0-4f35-a110-d57af3947012
+2021-09-26 18:15:59 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:59 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: b2d16609-bad0-4e75-9b2b-9affc87c1aa8
+2021-09-26 18:15:59 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = b2d16609-bad0-4e75-9b2b-9affc87c1aa8
+2021-09-26 18:15:59 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:59 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: f4665d3c-df4c-4da7-b2d7-949995a657e4
+2021-09-26 18:15:59 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = f4665d3c-df4c-4da7-b2d7-949995a657e4
+2021-09-26 18:15:59 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: a14cc11c-bb91-4103-ab3e-a358fe5baad6
+2021-09-26 18:15:59 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = a14cc11c-bb91-4103-ab3e-a358fe5baad6
+2021-09-26 18:15:59 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:59 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: a807cb2e-9b3e-49b3-beab-3fbceb74c998
+2021-09-26 18:15:59 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = a807cb2e-9b3e-49b3-beab-3fbceb74c998
+2021-09-26 18:15:59 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:59 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 13ffcde6-df87-49f4-b484-f3ffc8d288c6
+2021-09-26 18:15:59 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 13ffcde6-df87-49f4-b484-f3ffc8d288c6
+2021-09-26 18:15:59 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:59 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: bbeb8471-68a6-4f70-b692-b99bcfbf32af
+2021-09-26 18:15:59 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = bbeb8471-68a6-4f70-b692-b99bcfbf32af
+2021-09-26 18:15:59 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:59 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 45360109-b447-47b1-82a5-e69f65d95620
+2021-09-26 18:15:59 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 45360109-b447-47b1-82a5-e69f65d95620
+2021-09-26 18:15:59 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:59 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 3c9c6131-cba7-48d7-abb9-eb54713979d8
+2021-09-26 18:15:59 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 3c9c6131-cba7-48d7-abb9-eb54713979d8
+2021-09-26 18:15:59 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:59 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: c193b1cc-3846-4e66-bbea-04eff98abff6
+2021-09-26 18:15:59 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = c193b1cc-3846-4e66-bbea-04eff98abff6
+2021-09-26 18:15:59 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:59 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:59 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:15:59 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:15:59 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 433eb4fd-e131-40cc-8c59-93cf84db7c48
+2021-09-26 18:15:59 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 433eb4fd-e131-40cc-8c59-93cf84db7c48
+2021-09-26 18:15:59 INFO  GetUserInfo:53 - Start read user process with id: john@gmail.com
+2021-09-26 18:15:59 INFO  GetUserInfo:62 - User john@gmail.com exist!
+2021-09-26 18:15:59 INFO  RegisterUser:41 - Start registration user process with id: badk@h.com
+2021-09-26 18:15:59 INFO  RegisterUser:65 - Registration was successful :badk@h.com
+2021-09-26 18:15:59 INFO  RegisterUser:41 - Start registration user process with id: badk@h.com
+2021-09-26 18:15:59 ERROR RegisterUser:73 - Duplicate id badk@h.com
+2021-09-26 18:15:59 INFO  RegisterUser:41 - Start registration user process with id: badk@h.com
+2021-09-26 18:15:59 INFO  RegisterUser:65 - Registration was successful :badk@h.com
+2021-09-26 18:16:19 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:16:19 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:16:19 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:16:19 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: cd9b2143-d28f-454a-b9dc-fc6b82696524
+2021-09-26 18:16:19 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = cd9b2143-d28f-454a-b9dc-fc6b82696524
+2021-09-26 18:16:43 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:16:43 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:16:43 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:16:43 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: c1749bae-da6e-4acd-99e4-adfea033fdcc
+2021-09-26 18:16:43 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = c1749bae-da6e-4acd-99e4-adfea033fdcc
+2021-09-26 18:19:49 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:19:49 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: a521655d-a758-4213-bf50-8552697ada82
+2021-09-26 18:19:49 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = a521655d-a758-4213-bf50-8552697ada82
+2021-09-26 18:19:49 INFO  GetFileContent:43 - Start get file's content by id JHGF
+2021-09-26 18:19:49 ERROR GetFileContent:59 - File with id doesn't exist JHGF
+2021-09-26 18:19:49 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:19:49 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 8ce92144-42ca-4135-b0ee-234b1ad84ffa
+2021-09-26 18:19:49 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 8ce92144-42ca-4135-b0ee-234b1ad84ffa
+2021-09-26 18:19:49 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:19:49 INFO  UploadFile:97 - Uploading new file was successful: folderfolderjohn@gmail.com
+2021-09-26 18:19:49 INFO  GetFileContent:43 - Start get file's content by id folderfolderjohn@gmail.com
+2021-09-26 18:19:49 INFO  GetFileContent:51 - Getting file's content was successful by id folderfolderjohn@gmail.com
+2021-09-26 18:19:49 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:19:49 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: d91c38f5-d48b-4e32-a005-bd69eeb6a0f3
+2021-09-26 18:19:49 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = d91c38f5-d48b-4e32-a005-bd69eeb6a0f3
+2021-09-26 18:19:49 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:19:49 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:19:49 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.comnull
+2021-09-26 18:19:49 INFO  UploadFile:97 - Uploading new file was successful: folderfolderjohn@gmail.comnull
+2021-09-26 18:19:49 INFO  CreateFolder:56 - Start create folder folder1
+2021-09-26 18:19:49 INFO  CreateFolder:72 - Created folder was successful. id: folder1john@gmail.comnull
+2021-09-26 18:19:49 INFO  CreateFolder:56 - Start create folder folder2
+2021-09-26 18:19:49 INFO  CreateFolder:72 - Created folder was successful. id: folder2john@gmail.comnull
+2021-09-26 18:19:49 INFO  GetFolderContent:62 - Start get folder's content by id folderjohn@gmail.comnull
+2021-09-26 18:19:49 INFO  GetFolderContent:71 - Getting folder's content was successful by id folderjohn@gmail.comnull
+2021-09-26 18:19:49 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:19:49 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 19edea1a-1374-4efc-8507-3efbcb903d5a
+2021-09-26 18:19:49 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 19edea1a-1374-4efc-8507-3efbcb903d5a
+2021-09-26 18:19:49 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:19:49 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:19:49 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:19:49 ERROR CreateFolder:85 - Duplicate id folderjohn@gmail.comnull
+2021-09-26 18:19:49 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:19:49 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 9d595b30-0b03-44a7-b352-580f8436cfe5
+2021-09-26 18:19:49 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 9d595b30-0b03-44a7-b352-580f8436cfe5
+2021-09-26 18:19:49 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:19:49 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:19:49 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:19:49 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 04e854ec-0fc7-4a37-8113-25236b77afee
+2021-09-26 18:19:49 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 04e854ec-0fc7-4a37-8113-25236b77afee
+2021-09-26 18:19:49 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:19:49 INFO  UploadFile:97 - Uploading new file was successful: folderfolderjohn@gmail.com
+2021-09-26 18:19:49 INFO  DeleteFile:50 - Start delete file folderfolderjohn@gmail.com
+2021-09-26 18:19:49 INFO  DeleteFile:60 - Deleted folderfolderjohn@gmail.com was successful
+2021-09-26 18:19:49 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:19:49 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 07071ac1-0996-4147-add9-8322577051b1
+2021-09-26 18:19:49 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 07071ac1-0996-4147-add9-8322577051b1
+2021-09-26 18:19:49 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:19:49 INFO  UploadFile:97 - Uploading new file was successful: folderfolderjohn@gmail.com
+2021-09-26 18:19:49 INFO  DeleteFile:50 - Start delete file fileIdacacsa
+2021-09-26 18:19:49 ERROR DeleteFile:70 - Id doesn't exist fileIdacacsa
+2021-09-26 18:19:49 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:19:49 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 0ea47a94-942f-4952-b195-f2babd6a09ac
+2021-09-26 18:19:49 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 0ea47a94-942f-4952-b195-f2babd6a09ac
+2021-09-26 18:19:49 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:19:49 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:19:49 INFO  DeleteFolder:48 - Start delete folder foldId
+2021-09-26 18:19:49 ERROR DeleteFolder:68 - Id doesn't exist foldId
+2021-09-26 18:19:49 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:19:49 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 036892e8-d1ab-44aa-9783-9bc2fc6f9859
+2021-09-26 18:19:49 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 036892e8-d1ab-44aa-9783-9bc2fc6f9859
+2021-09-26 18:19:49 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:19:49 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:19:49 INFO  DeleteFolder:48 - Start delete folder folderjohn@gmail.comnull
+2021-09-26 18:19:49 INFO  DeleteFolder:58 - Deleted folderfolderjohn@gmail.comnull was successful
+2021-09-26 18:19:49 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:19:49 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 878bd75a-8538-4a48-9c79-f2322687830b
+2021-09-26 18:19:49 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 878bd75a-8538-4a48-9c79-f2322687830b
+2021-09-26 18:19:49 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:19:49 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:19:49 INFO  GetFolderById:54 - Start get directory for user: john@gmail.com and name: folderjohn@gmail.comnull
+2021-09-26 18:19:49 INFO  GetFolderById:64 - Read folder by User: john@gmail.com. And name: folder. Was successful
+2021-09-26 18:19:49 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:19:49 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 67b573e6-378d-4232-be09-13ec9c63b528
+2021-09-26 18:19:49 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 67b573e6-378d-4232-be09-13ec9c63b528
+2021-09-26 18:19:49 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:19:49 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:19:49 INFO  GetFolderById:54 - Start get directory for user: john@gmail.com and name: id
+2021-09-26 18:19:49 ERROR GetFolderById:79 - Cannot find folder by id: id
+2021-09-26 18:19:49 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:19:49 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: cef9bbc2-9369-4e7d-a962-0555ff43236a
+2021-09-26 18:19:49 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = cef9bbc2-9369-4e7d-a962-0555ff43236a
+2021-09-26 18:19:49 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 81955d21-b6ec-4fa4-9ff5-137c4a916dc7
+2021-09-26 18:19:49 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 81955d21-b6ec-4fa4-9ff5-137c4a916dc7
+2021-09-26 18:19:49 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:19:49 INFO  UploadFile:97 - Uploading new file was successful: folderfolderjohn@gmail.com
+2021-09-26 18:19:49 INFO  UpdateFile:63 - Start update information for file csac
+2021-09-26 18:19:49 ERROR UpdateFile:86 - Id doesn't exist csac
+2021-09-26 18:19:49 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:19:49 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 8cd67fd4-cd78-429d-b24b-106e081aae07
+2021-09-26 18:19:49 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 8cd67fd4-cd78-429d-b24b-106e081aae07
+2021-09-26 18:19:49 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:19:49 INFO  UploadFile:97 - Uploading new file was successful: folderfolderjohn@gmail.com
+2021-09-26 18:19:49 INFO  UpdateFile:63 - Start update information for file folderfolderjohn@gmail.com
+2021-09-26 18:19:49 INFO  UpdateFile:78 - Updating file was successful. id: folderfolderjohn@gmail.com
+2021-09-26 18:19:49 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:19:49 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: adc6da47-6653-4333-b5d8-5eff8eae895a
+2021-09-26 18:19:49 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = adc6da47-6653-4333-b5d8-5eff8eae895a
+2021-09-26 18:19:49 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:19:49 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:19:49 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: c1e96c43-0cbe-4f35-b8b9-19253c6f0a19
+2021-09-26 18:19:49 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = c1e96c43-0cbe-4f35-b8b9-19253c6f0a19
+2021-09-26 18:19:49 INFO  UpdateFolder:62 - Start update information for folder newFolder
+2021-09-26 18:19:49 ERROR UpdateFolder:84 - Id doesn't exist newFolder
+2021-09-26 18:19:49 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:19:49 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 78444f03-9f66-4539-bb55-33dfae820be9
+2021-09-26 18:19:49 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 78444f03-9f66-4539-bb55-33dfae820be9
+2021-09-26 18:19:49 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:19:49 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:19:49 INFO  UpdateFolder:62 - Start update information for folder folderjohn@gmail.comnull
+2021-09-26 18:19:49 INFO  UpdateFolder:76 - Updating folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:19:49 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:19:49 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 4430965b-ef09-4d36-ada6-5a3a05b8725b
+2021-09-26 18:19:49 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 4430965b-ef09-4d36-ada6-5a3a05b8725b
+2021-09-26 18:19:49 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:19:49 INFO  UploadFile:97 - Uploading new file was successful: file.txtfolderjohn@gmail.com
+2021-09-26 18:19:49 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:19:49 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 1597f975-3b36-49c2-a3f9-74521260c82a
+2021-09-26 18:19:49 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 1597f975-3b36-49c2-a3f9-74521260c82a
+2021-09-26 18:19:49 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:19:49 INFO  UploadFile:97 - Uploading new file was successful: file.txtfolderjohn@gmail.com
+2021-09-26 18:19:49 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:19:49 ERROR UploadFile:107 - Duplicate id file.txtfolderjohn@gmail.com
+2021-09-26 18:19:49 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:19:49 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 8253229c-23ef-4b60-a865-ba033810f6ec
+2021-09-26 18:19:49 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 8253229c-23ef-4b60-a865-ba033810f6ec
+2021-09-26 18:19:49 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:19:49 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:19:49 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:19:49 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:19:49 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 9b591d98-f01d-418b-b276-4d65f85f231d
+2021-09-26 18:19:49 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 9b591d98-f01d-418b-b276-4d65f85f231d
+2021-09-26 18:19:49 INFO  GetUserInfo:53 - Start read user process with id: john@gmail.com
+2021-09-26 18:19:49 INFO  GetUserInfo:62 - User john@gmail.com exist!
+2021-09-26 18:19:49 INFO  RegisterUser:41 - Start registration user process with id: badk@h.com
+2021-09-26 18:19:49 INFO  RegisterUser:65 - Registration was successful :badk@h.com
+2021-09-26 18:19:49 INFO  RegisterUser:41 - Start registration user process with id: badk@h.com
+2021-09-26 18:19:49 ERROR RegisterUser:73 - Duplicate id badk@h.com
+2021-09-26 18:19:49 INFO  RegisterUser:41 - Start registration user process with id: badk@h.com
+2021-09-26 18:19:49 INFO  RegisterUser:65 - Registration was successful :badk@h.com
+2021-09-26 18:20:28 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:20:28 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: b3740508-3e41-45cf-b3ff-fddd150bdc71
+2021-09-26 18:20:28 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = b3740508-3e41-45cf-b3ff-fddd150bdc71
+2021-09-26 18:20:28 INFO  GetFileContent:43 - Start get file's content by id JHGF
+2021-09-26 18:20:28 ERROR GetFileContent:59 - File with id doesn't exist JHGF
+2021-09-26 18:20:28 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:20:28 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 88b721fb-53e2-44a2-ae2a-49748e673c6c
+2021-09-26 18:20:28 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 88b721fb-53e2-44a2-ae2a-49748e673c6c
+2021-09-26 18:20:28 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:20:28 INFO  UploadFile:97 - Uploading new file was successful: folderfolderjohn@gmail.com
+2021-09-26 18:20:28 INFO  GetFileContent:43 - Start get file's content by id folderfolderjohn@gmail.com
+2021-09-26 18:20:28 INFO  GetFileContent:51 - Getting file's content was successful by id folderfolderjohn@gmail.com
+2021-09-26 18:20:28 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:20:28 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 1db2c293-3341-4734-8a86-503bb20aab26
+2021-09-26 18:20:28 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 1db2c293-3341-4734-8a86-503bb20aab26
+2021-09-26 18:20:28 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:20:28 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:20:28 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.comnull
+2021-09-26 18:20:28 INFO  UploadFile:97 - Uploading new file was successful: folderfolderjohn@gmail.comnull
+2021-09-26 18:20:28 INFO  CreateFolder:56 - Start create folder folder1
+2021-09-26 18:20:28 INFO  CreateFolder:72 - Created folder was successful. id: folder1john@gmail.comnull
+2021-09-26 18:20:28 INFO  CreateFolder:56 - Start create folder folder2
+2021-09-26 18:20:28 INFO  CreateFolder:72 - Created folder was successful. id: folder2john@gmail.comnull
+2021-09-26 18:20:28 INFO  GetFolderContent:62 - Start get folder's content by id folderjohn@gmail.comnull
+2021-09-26 18:20:28 INFO  GetFolderContent:71 - Getting folder's content was successful by id folderjohn@gmail.comnull
+2021-09-26 18:20:28 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:20:28 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 8a8bf744-9b85-4b74-a088-c60442266c59
+2021-09-26 18:20:28 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 8a8bf744-9b85-4b74-a088-c60442266c59
+2021-09-26 18:20:28 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:20:28 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:20:28 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:20:28 ERROR CreateFolder:85 - Duplicate id folderjohn@gmail.comnull
+2021-09-26 18:20:28 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:20:28 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 5de9a444-0e4c-491a-a3de-b640e7008f81
+2021-09-26 18:20:28 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 5de9a444-0e4c-491a-a3de-b640e7008f81
+2021-09-26 18:20:28 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:20:28 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:20:28 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:20:28 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 5711e0ce-ccc1-471a-ad43-851ccf0aca2a
+2021-09-26 18:20:28 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 5711e0ce-ccc1-471a-ad43-851ccf0aca2a
+2021-09-26 18:20:28 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:20:28 INFO  UploadFile:97 - Uploading new file was successful: folderfolderjohn@gmail.com
+2021-09-26 18:20:28 INFO  DeleteFile:50 - Start delete file folderfolderjohn@gmail.com
+2021-09-26 18:20:28 INFO  DeleteFile:60 - Deleted folderfolderjohn@gmail.com was successful
+2021-09-26 18:20:28 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:20:28 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 2c8946e0-8117-4457-adac-55927faded98
+2021-09-26 18:20:28 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 2c8946e0-8117-4457-adac-55927faded98
+2021-09-26 18:20:28 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:20:28 INFO  UploadFile:97 - Uploading new file was successful: folderfolderjohn@gmail.com
+2021-09-26 18:20:28 INFO  DeleteFile:50 - Start delete file fileIdacacsa
+2021-09-26 18:20:28 ERROR DeleteFile:70 - Id doesn't exist fileIdacacsa
+2021-09-26 18:20:28 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:20:28 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 208768b9-efc8-4248-a7eb-1ba3e81d7bcd
+2021-09-26 18:20:28 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 208768b9-efc8-4248-a7eb-1ba3e81d7bcd
+2021-09-26 18:20:28 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:20:28 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:20:28 INFO  DeleteFolder:48 - Start delete folder foldId
+2021-09-26 18:20:28 ERROR DeleteFolder:68 - Id doesn't exist foldId
+2021-09-26 18:20:28 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:20:28 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 2e302adf-20a4-4740-9220-ae7d58316a52
+2021-09-26 18:20:28 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 2e302adf-20a4-4740-9220-ae7d58316a52
+2021-09-26 18:20:28 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:20:28 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:20:28 INFO  DeleteFolder:48 - Start delete folder folderjohn@gmail.comnull
+2021-09-26 18:20:28 INFO  DeleteFolder:58 - Deleted folderfolderjohn@gmail.comnull was successful
+2021-09-26 18:20:28 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:20:28 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 67ee377d-3ca7-4fb6-9420-57a66f66fe8c
+2021-09-26 18:20:28 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 67ee377d-3ca7-4fb6-9420-57a66f66fe8c
+2021-09-26 18:20:28 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:20:28 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:20:28 INFO  GetFolderById:54 - Start get directory for user: john@gmail.com and name: folderjohn@gmail.comnull
+2021-09-26 18:20:28 INFO  GetFolderById:64 - Read folder by User: john@gmail.com. And name: folder. Was successful
+2021-09-26 18:20:28 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:20:28 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 496b2d8c-bbb2-4bc6-9862-0d1eb478cd47
+2021-09-26 18:20:28 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 496b2d8c-bbb2-4bc6-9862-0d1eb478cd47
+2021-09-26 18:20:28 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:20:28 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:20:28 INFO  GetFolderById:54 - Start get directory for user: john@gmail.com and name: id
+2021-09-26 18:20:28 ERROR GetFolderById:79 - Cannot find folder by id: id
+2021-09-26 18:20:28 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:20:28 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: d934e692-f260-4296-9701-15f49fb3a844
+2021-09-26 18:20:28 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = d934e692-f260-4296-9701-15f49fb3a844
+2021-09-26 18:20:28 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 9b8fb1b3-bbda-4fdd-9cc0-1b9afd9a7f4f
+2021-09-26 18:20:28 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 9b8fb1b3-bbda-4fdd-9cc0-1b9afd9a7f4f
+2021-09-26 18:20:28 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:20:28 INFO  UploadFile:97 - Uploading new file was successful: folderfolderjohn@gmail.com
+2021-09-26 18:20:28 INFO  UpdateFile:63 - Start update information for file csac
+2021-09-26 18:20:28 ERROR UpdateFile:86 - Id doesn't exist csac
+2021-09-26 18:20:28 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:20:28 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 8ebb044c-96cb-4215-8450-8124ea0579ef
+2021-09-26 18:20:28 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 8ebb044c-96cb-4215-8450-8124ea0579ef
+2021-09-26 18:20:28 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:20:28 INFO  UploadFile:97 - Uploading new file was successful: folderfolderjohn@gmail.com
+2021-09-26 18:20:28 INFO  UpdateFile:63 - Start update information for file folderfolderjohn@gmail.com
+2021-09-26 18:20:28 INFO  UpdateFile:78 - Updating file was successful. id: folderfolderjohn@gmail.com
+2021-09-26 18:20:28 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:20:28 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 3918c612-7349-4266-ba2c-3cb4a5ce580b
+2021-09-26 18:20:28 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 3918c612-7349-4266-ba2c-3cb4a5ce580b
+2021-09-26 18:20:28 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:20:28 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:20:28 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: c01adadd-f8c6-4f49-9101-7b20449a20a4
+2021-09-26 18:20:28 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = c01adadd-f8c6-4f49-9101-7b20449a20a4
+2021-09-26 18:20:28 INFO  UpdateFolder:62 - Start update information for folder newFolder
+2021-09-26 18:20:28 ERROR UpdateFolder:84 - Id doesn't exist newFolder
+2021-09-26 18:20:28 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:20:28 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 45a6edb2-0a60-4b07-a945-3734414b4f6a
+2021-09-26 18:20:28 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 45a6edb2-0a60-4b07-a945-3734414b4f6a
+2021-09-26 18:20:28 INFO  CreateFolder:56 - Start create folder folder
+2021-09-26 18:20:28 INFO  CreateFolder:72 - Created folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:20:28 INFO  UpdateFolder:62 - Start update information for folder folderjohn@gmail.comnull
+2021-09-26 18:20:28 INFO  UpdateFolder:76 - Updating folder was successful. id: folderjohn@gmail.comnull
+2021-09-26 18:20:28 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:20:28 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 2b8f6fa5-3179-4a3c-a7a5-ba238205ea24
+2021-09-26 18:20:28 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 2b8f6fa5-3179-4a3c-a7a5-ba238205ea24
+2021-09-26 18:20:28 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:20:28 INFO  UploadFile:97 - Uploading new file was successful: file.txtfolderjohn@gmail.com
+2021-09-26 18:20:28 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:20:28 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: ab2eb208-fa93-4e95-bede-82f6e0a15274
+2021-09-26 18:20:28 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = ab2eb208-fa93-4e95-bede-82f6e0a15274
+2021-09-26 18:20:28 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:20:28 INFO  UploadFile:97 - Uploading new file was successful: file.txtfolderjohn@gmail.com
+2021-09-26 18:20:28 INFO  UploadFile:72 - Start upload new file to user's john@gmail.com directory: folderjohn@gmail.com
+2021-09-26 18:20:28 ERROR UploadFile:107 - Duplicate id file.txtfolderjohn@gmail.com
+2021-09-26 18:20:28 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:20:28 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 54aa9c0e-11cf-4004-abde-46bbffd791f3
+2021-09-26 18:20:28 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 54aa9c0e-11cf-4004-abde-46bbffd791f3
+2021-09-26 18:20:28 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:20:28 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:20:28 INFO  RegisterUser:41 - Start registration user process with id: john@gmail.com
+2021-09-26 18:20:28 INFO  RegisterUser:65 - Registration was successful :john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:50 - Start authenticated process for user: john@gmail.com
+2021-09-26 18:20:28 INFO  AuthenticateUser:62 - Authenticate process was successful. User: john@gmail.com have token: 6357cf76-67cc-4931-b717-675fb379df08
+2021-09-26 18:20:28 INFO  AuthenticateUser:71 - Token for user john@gmail.com was created. Value = 6357cf76-67cc-4931-b717-675fb379df08
+2021-09-26 18:20:28 INFO  GetUserInfo:53 - Start read user process with id: john@gmail.com
+2021-09-26 18:20:28 INFO  GetUserInfo:62 - User john@gmail.com exist!
+2021-09-26 18:20:28 INFO  RegisterUser:41 - Start registration user process with id: badk@h.com
+2021-09-26 18:20:28 INFO  RegisterUser:65 - Registration was successful :badk@h.com
+2021-09-26 18:20:28 INFO  RegisterUser:41 - Start registration user process with id: badk@h.com
+2021-09-26 18:20:28 ERROR RegisterUser:73 - Duplicate id badk@h.com
+2021-09-26 18:20:28 INFO  RegisterUser:41 - Start registration user process with id: badk@h.com
+2021-09-26 18:20:28 INFO  RegisterUser:65 - Registration was successful :badk@h.com

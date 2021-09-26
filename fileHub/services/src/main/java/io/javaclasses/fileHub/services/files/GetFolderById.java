@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 /**
- * Service to get an existed folder in authenticated user's directory by {@link FolderId id}.
+ * Service for getting an existed folder in authenticated user's directory by {@link FolderId id}.
  */
 @Component
 public class GetFolderById extends View<GetFolderByIdQuery, FileSystemItemDto> {

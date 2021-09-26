@@ -22,7 +22,7 @@ import java.util.Optional;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Service to create a new empty folder by authenticated user.
+ * Service for creating a new empty folder by authenticated user.
  */
 @Component
 public class CreateFolder extends SecuredUserProcess<CreateFolderCommand, FolderId> {

@@ -5,11 +5,15 @@ import io.javaclasses.fileHub.persistent.RecordId;
 
 import java.util.Objects;
 
+/**
+ * Unique {@link RecordId identifier} for {@link File file} in the FileHub application.
+ */
 public final class FileId implements RecordId {
 
     private final String id;
 
     public FileId(String id) {
+
         this.id = Preconditions.checkNotNull(id);
     }
 
@@ -27,11 +31,13 @@ public final class FileId implements RecordId {
 
     @Override
     public int hashCode() {
+
         return Objects.hash(id);
     }
 
     @Override
     public String value() {
+
         return id;
     }
 }

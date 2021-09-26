@@ -8,6 +8,10 @@ import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+/**
+ * The implementation of base {@link DataRecord record} for managing data about folder with {@link FolderId id}
+ * in the FileHub file system.
+ */
 public final class Folder implements DataRecord<FolderId> {
 
     private final FolderId id;
@@ -18,44 +22,54 @@ public final class Folder implements DataRecord<FolderId> {
     private String parentFolder;
 
     public Folder(String id) {
+
         this.id = new FolderId(checkNotNull(id));
     }
 
     @Override
     public FolderId id() {
+
         return id;
     }
 
     public String name() {
+
         return name;
     }
 
     public void setName(String name) {
+
         this.name = checkNotNull(name);
     }
 
     public UserId owner() {
+
         return owner;
     }
 
     public void setOwner(UserId owner) {
+
         this.owner = checkNotNull(owner);
     }
 
     @Nullable
     public String parentFolder() {
+
         return parentFolder;
     }
 
     public void setParentFolder(@Nullable String parentFolder) {
+
         this.parentFolder = parentFolder;
     }
 
     public Long itemsAmount() {
+
         return itemsAmount;
     }
 
     public void setItemsAmount(Long itemsAmount) {
+
         this.itemsAmount = checkNotNull(itemsAmount);
     }
 
@@ -73,6 +87,7 @@ public final class Folder implements DataRecord<FolderId> {
 
     @Override
     public int hashCode() {
+
         return Objects.hash(id);
     }
 }

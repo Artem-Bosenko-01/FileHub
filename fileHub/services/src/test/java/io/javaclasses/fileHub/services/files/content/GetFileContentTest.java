@@ -61,7 +61,7 @@ class GetFileContentTest {
 
         FileId fileID = new FileId("JHGF");
 
-        GetFileContentQuery command = new GetFileContentQuery(fileSystemTestData.token(), fileID.toString());
+        GetFileContentQuery command = new GetFileContentQuery(fileSystemTestData.token(), fileID.value());
 
         GetFileContent viewByUser = new GetFileContent(contentStorageInMemory, authorizationStorage);
 

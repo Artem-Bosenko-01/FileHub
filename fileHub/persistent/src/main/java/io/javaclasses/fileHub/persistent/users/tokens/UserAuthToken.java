@@ -16,6 +16,7 @@ public final class UserAuthToken implements RecordId {
         this.value = Preconditions.checkNotNull(value);
     }
 
+    @Override
     public String value() {
         return value;
     }

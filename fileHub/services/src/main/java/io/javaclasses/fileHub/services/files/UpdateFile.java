@@ -75,7 +75,7 @@ public class UpdateFile extends SecuredUserProcess<UpdateFileCommand, FileId> {
                 fileStorage.update(file);
 
                 if (logger.isInfoEnabled()) {
-                    logger.info("Updating file was successful. id: " + file.id());
+                    logger.info("Updating file was successful. id: " + file.id().value());
                 }
 
                 return file.id();

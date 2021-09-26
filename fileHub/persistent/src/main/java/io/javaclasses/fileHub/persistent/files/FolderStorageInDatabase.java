@@ -24,6 +24,7 @@ public class FolderStorageInDatabase extends AbstractStorageInDatabase<FolderId,
 
     @Autowired
     protected FolderStorageInDatabase(JdbcConfiguration configuration) {
+
         super(configuration);
     }
 
@@ -75,11 +76,13 @@ public class FolderStorageInDatabase extends AbstractStorageInDatabase<FolderId,
 
     @Override
     protected String tableName() {
+
         return "folder";
     }
 
     @Override
     protected String primaryKeyName() {
+
         return "id";
     }
 

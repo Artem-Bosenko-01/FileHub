@@ -60,7 +60,4 @@ public abstract class AbstractInMemoryStorage<I extends RecordId, E extends Data
         return records;
     }
 
-    public int getRecordsSize() {
-        return records.size();
-    }
 }

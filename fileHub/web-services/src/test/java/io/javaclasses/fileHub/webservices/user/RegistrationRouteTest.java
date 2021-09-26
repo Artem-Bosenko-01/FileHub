@@ -12,25 +12,12 @@ import org.junit.jupiter.params.provider.ArgumentsSource;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class RegistrationRouteTest {
-
-    private static final WebApplication application = new WebApplication();
-
-    @BeforeAll
-    public static void beforeClass() {
-
-        application.start();
-    }
-
-    @AfterAll
-    public static void afterClass() {
-
-        application.stop();
-    }
 
     @Test
     public void shouldCheckNullPointerSafetyOnConstructor() throws NoSuchMethodException {
@@ -47,28 +34,50 @@ public class RegistrationRouteTest {
 
     @Test
     public void shouldGetMessageAfterSuccessfullyRegistrationUser() throws IOException {
+
+        WebApplication webApplication = new WebApplication();
+
+        webApplication.start();
+
         MockRequest request = new MockRequest();
-        String body = "{\"loginName\": \"artrms@kasc.com\",\"password\": \"sdvdds\"}";
+
+        String login = UUID.randomUUID().toString();
+
+        String body = "{\"loginName\": \"" + login + "\",\"password\": \"sdvdds\"}";
         TestResponse res = request.send("POST", "/FileHub/server/api/1.0/register", body);
         String responseBody = res.toString();
 
         assertEquals(200, res.status);
         assertNotNull(responseBody);
+
+        webApplication.stop();
     }
 
     @Test
     public void shouldGetErrorMessageAfterRegisterExistedUser() throws IOException {
+
+        WebApplication webApplication = new WebApplication();
+
+        webApplication.start();
+
         MockRequest request = new MockRequest();
-        String body = "{\"loginName\": \"artem\",\"password\": \"dcsdcs\"}";
+        String body = "{\"loginName\": \"artemsdsdv\",\"password\": \"dcsdcs\"}";
         TestResponse res = request.send("POST", "/FileHub/server/api/1.0/register", body);
         HashMap<String, String> responseBody = res.json();
 
-        assertEquals(404, res.status);
-        assertNotNull(responseBody.get("message"));
+        assertEquals(422, res.status);
+        assertNotNull(responseBody.get("errors"));
+
+        webApplication.stop();
     }
 
     @Test
     public void shouldGetErrorMessageAfterGettingEmptyRequestBody() throws IOException {
+
+        WebApplication webApplication = new WebApplication();
+
+        webApplication.start();
+
         MockRequest request = new MockRequest();
         String body = "{}";
         TestResponse res = request.send("POST", "/FileHub/server/api/1.0/register", body);
@@ -76,6 +85,8 @@ public class RegistrationRouteTest {
 
         assertEquals(400, res.status);
         assertNotNull(responseBody.get("message"));
+
+        webApplication.stop();
     }
 
 

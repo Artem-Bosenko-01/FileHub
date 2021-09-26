@@ -3,33 +3,18 @@ package io.javaclasses.fileHub.webservices.user;
 import com.google.common.testing.NullPointerTester;
 import io.javaclasses.fileHub.services.users.AuthenticateUser;
 import io.javaclasses.fileHub.webservices.*;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class AuthenticationRouteTest {
-
-    private static final WebApplication application = new WebApplication();
-
-    @BeforeAll
-    public static void beforeClass() {
-
-        application.start();
-    }
-
-    @AfterAll
-    public static void afterClass() {
-
-        application.stop();
-    }
 
     @Test
     public void shouldCheckNullPointerSafetyOnConstructor() throws NoSuchMethodException {
@@ -46,28 +31,50 @@ class AuthenticationRouteTest {
 
     @Test
     public void shouldGetTokenAfterSuccessfullyUserAuthentication() throws IOException {
+
+        WebApplication webApplication = new WebApplication();
+
+        webApplication.start();
+
         MockRequest request = new MockRequest();
-        String body = "{\"loginName\": \"artrms@kasc.com\",\"password\": \"sdvdds\"}";
+        String body = "{\"loginName\": \"artrms@kasc.com\",\"password\": \"123456\"}";
         TestResponse res = request.send("POST", "/FileHub/server/api/1.0/login", body);
         HashMap<String, String> responseBody = res.json();
 
         assertEquals(200, res.status);
         assertNotNull(responseBody.get("token"));
+
+        webApplication.stop();
     }
 
     @Test
     public void shouldGetErrorMessageAfterAuthenticationNonRegisterUser() throws IOException {
+
+        WebApplication webApplication = new WebApplication();
+
+        webApplication.start();
+
         MockRequest request = new MockRequest();
-        String body = "{\"loginName\": \"artem\",\"password\": \"dcsdcs\"}";
+
+        String login = UUID.randomUUID().toString();
+
+        String body = "{\"loginName\": \"" + login + "\",\"password\": \"sdvdds\"}";
         TestResponse res = request.send("POST", "/FileHub/server/api/1.0/login", body);
         HashMap<String, String> responseBody = res.json();
 
         assertEquals(404, res.status);
         assertNotNull(responseBody.get("message"));
+
+        webApplication.stop();
     }
 
     @Test
     public void shouldGetErrorMessageAfterGettingEmptyRequestBody() throws IOException {
+
+        WebApplication webApplication = new WebApplication();
+
+        webApplication.start();
+
         MockRequest request = new MockRequest();
         String body = "{}";
         TestResponse res = request.send("POST", "/FileHub/server/api/1.0/login", body);
@@ -75,6 +82,8 @@ class AuthenticationRouteTest {
 
         assertEquals(400, res.status);
         assertNotNull(responseBody.get("message"));
+
+        webApplication.stop();
     }
 
 

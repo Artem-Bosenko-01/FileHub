@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Service to delete an existed folder in Filehub application by authenticated user.
+ * Service for deleting an existed folder in Filehub application by authenticated user.
  */
 @Component
 public class DeleteFolder extends SecuredUserProcess<DeleteFolderCommand, String> {

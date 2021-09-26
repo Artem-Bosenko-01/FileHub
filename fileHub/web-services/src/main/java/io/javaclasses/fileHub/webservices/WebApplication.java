@@ -5,6 +5,7 @@ import io.javaclasses.fileHub.webservices.user.AuthenticationRoute;
 import io.javaclasses.fileHub.webservices.user.GetUserInfoRoute;
 import io.javaclasses.fileHub.webservices.user.LogOutRoute;
 import io.javaclasses.fileHub.webservices.user.RegistrationRoute;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import spark.Spark;
 
@@ -24,7 +25,7 @@ public final class WebApplication {
 
         staticFiles.externalLocation("js-app");
 
-        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringConfig.class);
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringConfig.class);
 
         ServiceLocator service = applicationContext.getBean("serviceLocator", ServiceLocator.class);
 

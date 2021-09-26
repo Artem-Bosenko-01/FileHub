@@ -2,12 +2,16 @@ package io.javaclasses.fileHub.persistent.files;
 
 import io.javaclasses.fileHub.persistent.AbstractInMemoryStorage;
 import io.javaclasses.fileHub.persistent.NotExistedItemException;
+import io.javaclasses.fileHub.persistent.users.User;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * Repository for saving and managing {@link File files data} in RAM in Filehub application.
+ */
 @Component
 public class FileStorageInMemory extends AbstractInMemoryStorage<FileId, File>
         implements FileStorage {
@@ -17,7 +21,7 @@ public class FileStorageInMemory extends AbstractInMemoryStorage<FileId, File>
 
         if (userID == null) {
 
-            throw new NotExistedItemException(userID);
+            throw new NotExistedItemException("null");
 
         }
 
@@ -29,6 +33,7 @@ public class FileStorageInMemory extends AbstractInMemoryStorage<FileId, File>
 
     @Override
     public boolean isFIleNameAlreadyExist(String name) {
+
         return records().values().stream().anyMatch(file -> file.name().equals(name));
     }
 

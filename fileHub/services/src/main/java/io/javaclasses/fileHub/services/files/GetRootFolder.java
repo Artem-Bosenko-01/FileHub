@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 /**
- * Service to get the authenticated user's root folder.
+ * Service for getting the authenticated user's root folder.
  */
 @Component
 public class GetRootFolder extends View<GetRootFolderQuery, FileSystemItemDto> {

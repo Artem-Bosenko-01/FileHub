@@ -4,7 +4,7 @@ import io.javaclasses.fileHub.persistent.AbstractInMemoryStorage;
 import org.springframework.stereotype.Component;
 
 /**
- * This is in memory storage for saving users authentication history in Filehub application.
+ * Repository for saving and managing users authentication history in RAM in Filehub application.
  */
 @Component
 public class AuthorizationStorageInMemory extends AbstractInMemoryStorage<UserAuthToken, AuthorizationUsers>

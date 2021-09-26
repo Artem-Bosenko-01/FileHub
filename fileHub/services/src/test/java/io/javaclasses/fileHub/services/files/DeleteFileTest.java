@@ -43,7 +43,7 @@ class DeleteFileTest {
 
         deleteFile.handle(deleteFileCommand);
 
-        Assertions.assertEquals(fileStorageInMemory.getRecordsSize(), 0);
+        Assertions.assertFalse(fileStorageInMemory.findByID(id).isPresent());
 
     }
 

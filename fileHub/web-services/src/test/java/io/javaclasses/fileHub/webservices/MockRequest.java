@@ -45,7 +45,7 @@ public final class MockRequest {
         }
 
         int responseStatus = connection.getResponseCode();
-        StringBuilder body = new StringBuilder();
+        StringBuilder body = new StringBuilder(10);
 
         if (responseStatus >= 400) {
             try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getErrorStream()))) {
@@ -62,6 +62,8 @@ public final class MockRequest {
                 }
             }
         }
+
+        connection.disconnect();
 
         return new TestResponse(responseStatus, body.toString());
 

@@ -10,7 +10,8 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 /**
- *
+ * Gets configuration parameters from resource file and configures the JDBC and {@link BasicDataSource basic connection pool source}
+ * for the FileHub application.
  */
 @Component
 public class JdbcConfiguration {

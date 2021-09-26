@@ -50,7 +50,7 @@ public class GetUserInfo extends View<GetUserQuery, InfoAboutUserDto> {
             UserId userId = authenticatedUser.get().userID();
 
             if (logger.isInfoEnabled()) {
-                logger.info("Start read user process with id: " + userId);
+                logger.info("Start read user process with id: " + userId.value());
             }
 
 
@@ -69,10 +69,10 @@ public class GetUserInfo extends View<GetUserQuery, InfoAboutUserDto> {
             } else {
 
                 if (logger.isErrorEnabled()) {
-                    logger.error("User with id doesn't exist " + userId);
+                    logger.error("User with id doesn't exist " + userId.value());
                 }
 
-                throw new UserNotFoundException(userId.toString());
+                throw new UserNotFoundException(userId.value());
             }
 
         } else {

@@ -6,5 +6,6 @@ package io.javaclasses.fileHub.persistent;
  * @param <I> type of {@link RecordId id}.
  */
 public interface DataRecord<I extends RecordId> {
+
     I id();
 }

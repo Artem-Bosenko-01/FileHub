@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  * This is entity for storing user authentication history.
  * <p>
- * Lines unique defines by {@link UserAuthToken user token}.
+ * Unique of ines is defined by {@link UserAuthToken user token}.
  */
 public final class AuthorizationUsers implements DataRecord<UserAuthToken> {
 

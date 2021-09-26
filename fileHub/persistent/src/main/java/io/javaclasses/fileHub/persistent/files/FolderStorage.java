@@ -7,6 +7,9 @@ import io.javaclasses.fileHub.persistent.users.UserId;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The {@link Storage storage} that contains instruments for managing {@link Folder folders} in the FileHub application.
+ */
 public interface FolderStorage extends Storage<FolderId, Folder> {
 
     List<Folder> findAllFoldersByParentFolderId(String parentId, String owner) throws NotExistedItemException;

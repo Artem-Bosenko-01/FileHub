@@ -11,8 +11,7 @@ import java.util.Optional;
 /**
  * Abstract base for any implementation of SQL database storage.
  * <p>
- * New: Uses given configuration to obtain a connection to the database
- * Old: The connection to the required database will be obtained from the configuration.
+ * Uses given configuration to obtain a connection to the database
  *
  * @param <I> - {@link RecordId entity identifier} type.
  * @param <E> - implementation of {@link DataRecord abstract entity}.

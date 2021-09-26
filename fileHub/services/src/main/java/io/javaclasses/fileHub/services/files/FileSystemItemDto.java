@@ -69,6 +69,11 @@ public final class FileSystemItemDto {
         return size;
     }
 
+    public String mimeType() {
+
+        return mimeType;
+    }
+
     @Nullable
     public String parentFolderId() {
 

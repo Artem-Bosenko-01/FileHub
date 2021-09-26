@@ -13,6 +13,6 @@ public final class RootFolderNotFoundHandlingException extends InvalidCommandHan
 
     RootFolderNotFoundHandlingException(UserId id) {
 
-        super("Root folder doesn't exist for user: " + id.toString());
+        super("Root folder doesn't exist for user: " + id.value());
     }
 }

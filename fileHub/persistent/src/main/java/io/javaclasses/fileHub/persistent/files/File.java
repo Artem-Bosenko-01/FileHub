@@ -8,6 +8,10 @@ import io.javaclasses.fileHub.persistent.users.UserId;
 import javax.annotation.Nullable;
 import java.util.Objects;
 
+/**
+ * The implementation of base {@link DataRecord record} for managing data about file with {@link FileId id}
+ * in the FileHub file system.
+ */
 public final class File implements DataRecord<FileId> {
 
     private final FileId fileID;
@@ -19,52 +23,64 @@ public final class File implements DataRecord<FileId> {
     private String folder;
 
     public File(String fileID) {
+
         this.fileID = new FileId(Preconditions.checkNotNull(fileID));
     }
 
     @Override
     public FileId id() {
+
         return fileID;
     }
 
     public String name() {
+
         return name;
     }
 
     public void setName(String name) {
+
         this.name = Preconditions.checkNotNull(name);
     }
 
     public Long size() {
+
         return size;
     }
 
     public void setSize(Long size) {
+
         this.size = Preconditions.checkNotNull(size);
     }
 
     public MediaType mimeType() {
+
         return mimeType;
     }
 
     public void setMimeType(MediaType mimeType) {
+
         this.mimeType = Preconditions.checkNotNull(mimeType);
     }
 
     @Nullable
     public String folder() {
+
         return folder;
     }
 
     public void setFolder(@Nullable String folder) {
+
         this.folder = folder;
     }
 
     public UserId owner() {
+
         return userID;
     }
 
     public void setUserID(UserId userID) {
+
         this.userID = Preconditions.checkNotNull(userID);
     }
 
@@ -83,6 +99,7 @@ public final class File implements DataRecord<FileId> {
 
     @Override
     public int hashCode() {
+
         return Objects.hash(fileID);
     }
 }

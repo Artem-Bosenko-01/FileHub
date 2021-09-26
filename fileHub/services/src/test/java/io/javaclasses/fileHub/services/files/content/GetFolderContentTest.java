@@ -32,7 +32,7 @@ class GetFolderContentTest {
 
         FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
 
-        FolderId parent = fileSystemTestData.createFolder(folderStorage, new FolderId("name" + fileSystemTestData.id()));
+        FolderId parent = fileSystemTestData.createFolder(folderStorage, new FolderId("name" + fileSystemTestData.id().value()));
 
         fileSystemTestData.uploadFile(fileStorage, fIleContentStorage, folderStorage, parent);
 

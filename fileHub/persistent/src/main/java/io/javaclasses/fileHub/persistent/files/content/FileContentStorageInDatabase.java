@@ -19,16 +19,18 @@ public class FileContentStorageInDatabase extends AbstractStorageInDatabase<File
 
     @Autowired
     protected FileContentStorageInDatabase(JdbcConfiguration configuration) {
+
         super(configuration);
     }
 
     @Override
-    protected PreparedStatement statementForCreatingObject(Connection connection, FileContent dataObject) throws SQLException {
+    protected PreparedStatement statementForCreatingObject(Connection connection, FileContent dataObject)
+            throws SQLException {
 
         PreparedStatement statement = connection.prepareStatement("INSERT INTO file_content VALUES (?,?)");
 
 
-        statement.setString(1, dataObject.id().toString());
+        statement.setString(1, dataObject.id().value());
         statement.setBytes(2, dataObject.content());
 
         return statement;

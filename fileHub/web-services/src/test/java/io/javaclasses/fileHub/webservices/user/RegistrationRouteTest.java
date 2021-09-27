@@ -19,6 +19,20 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class RegistrationRouteTest {
 
+    private static final WebApplication webApplication = new WebApplication();
+
+    @BeforeAll
+    public static void beforeTests(){
+
+        webApplication.start();
+    }
+
+    @AfterAll
+    public static void afterTests(){
+
+        webApplication.stop();
+    }
+
     @Test
     public void shouldCheckNullPointerSafetyOnConstructor() throws NoSuchMethodException {
 
@@ -35,10 +49,6 @@ public class RegistrationRouteTest {
     @Test
     public void shouldGetMessageAfterSuccessfullyRegistrationUser() throws IOException {
 
-        WebApplication webApplication = new WebApplication();
-
-        webApplication.start();
-
         MockRequest request = new MockRequest();
 
         String login = UUID.randomUUID().toString();
@@ -50,15 +60,10 @@ public class RegistrationRouteTest {
         assertEquals(200, res.status);
         assertNotNull(responseBody);
 
-        webApplication.stop();
     }
 
     @Test
     public void shouldGetErrorMessageAfterRegisterExistedUser() throws IOException {
-
-        WebApplication webApplication = new WebApplication();
-
-        webApplication.start();
 
         MockRequest request = new MockRequest();
         String body = "{\"loginName\": \"artemsdsdv\",\"password\": \"dcsdcs\"}";
@@ -68,15 +73,10 @@ public class RegistrationRouteTest {
         assertEquals(422, res.status);
         assertNotNull(responseBody.get("errors"));
 
-        webApplication.stop();
     }
 
     @Test
     public void shouldGetErrorMessageAfterGettingEmptyRequestBody() throws IOException {
-
-        WebApplication webApplication = new WebApplication();
-
-        webApplication.start();
 
         MockRequest request = new MockRequest();
         String body = "{}";
@@ -86,7 +86,6 @@ public class RegistrationRouteTest {
         assertEquals(400, res.status);
         assertNotNull(responseBody.get("message"));
 
-        webApplication.stop();
     }
 
 

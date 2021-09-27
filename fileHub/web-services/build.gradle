@@ -10,6 +10,12 @@ repositories {
     mavenCentral()
 }
 
+task run(type: JavaExec) {
+    main = "io.javaclasses.fileHub.webservices.WebApplication"
+    description = "Start server"
+    classpath = sourceSets.main.runtimeClasspath
+}
+
 dependencies {
     testImplementation 'junit:junit:4.11'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'

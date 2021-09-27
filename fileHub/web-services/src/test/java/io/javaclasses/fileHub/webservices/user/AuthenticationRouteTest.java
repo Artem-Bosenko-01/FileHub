@@ -3,6 +3,8 @@ package io.javaclasses.fileHub.webservices.user;
 import com.google.common.testing.NullPointerTester;
 import io.javaclasses.fileHub.services.users.AuthenticateUser;
 import io.javaclasses.fileHub.webservices.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;
@@ -15,6 +17,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class AuthenticationRouteTest {
+
+    private static final WebApplication webApplication = new WebApplication();
+
+    @BeforeAll
+    public static void beforeTests(){
+
+        webApplication.start();
+    }
+
+    @AfterAll
+    public static void afterTests(){
+
+        webApplication.stop();
+    }
 
     @Test
     public void shouldCheckNullPointerSafetyOnConstructor() throws NoSuchMethodException {
@@ -32,10 +48,6 @@ class AuthenticationRouteTest {
     @Test
     public void shouldGetTokenAfterSuccessfullyUserAuthentication() throws IOException {
 
-        WebApplication webApplication = new WebApplication();
-
-        webApplication.start();
-
         MockRequest request = new MockRequest();
         String body = "{\"loginName\": \"artrms@kasc.com\",\"password\": \"123456\"}";
         TestResponse res = request.send("POST", "/FileHub/server/api/1.0/login", body);
@@ -43,16 +55,10 @@ class AuthenticationRouteTest {
 
         assertEquals(200, res.status);
         assertNotNull(responseBody.get("token"));
-
-        webApplication.stop();
     }
 
     @Test
     public void shouldGetErrorMessageAfterAuthenticationNonRegisterUser() throws IOException {
-
-        WebApplication webApplication = new WebApplication();
-
-        webApplication.start();
 
         MockRequest request = new MockRequest();
 
@@ -65,15 +71,10 @@ class AuthenticationRouteTest {
         assertEquals(404, res.status);
         assertNotNull(responseBody.get("message"));
 
-        webApplication.stop();
     }
 
     @Test
     public void shouldGetErrorMessageAfterGettingEmptyRequestBody() throws IOException {
-
-        WebApplication webApplication = new WebApplication();
-
-        webApplication.start();
 
         MockRequest request = new MockRequest();
         String body = "{}";
@@ -82,8 +83,6 @@ class AuthenticationRouteTest {
 
         assertEquals(400, res.status);
         assertNotNull(responseBody.get("message"));
-
-        webApplication.stop();
     }
 
 

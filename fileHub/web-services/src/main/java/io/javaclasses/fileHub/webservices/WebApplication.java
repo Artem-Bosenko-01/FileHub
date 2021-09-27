@@ -7,8 +7,13 @@ import io.javaclasses.fileHub.webservices.user.LogOutRoute;
 import io.javaclasses.fileHub.webservices.user.RegistrationRoute;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import spark.Service;
 import spark.Spark;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import static spark.Service.ignite;
 import static spark.Spark.*;
 
 /**
@@ -16,14 +21,19 @@ import static spark.Spark.*;
  */
 public final class WebApplication {
 
+    static {
+
+        Path pathToJsDirectory = Paths.get("").toAbsolutePath().getParent().resolve("js-app");
+
+        staticFiles.externalLocation(pathToJsDirectory.toString());
+    }
+
     public static void main(String[] args) {
 
         new WebApplication().start();
     }
 
     public void start() {
-
-        staticFiles.externalLocation("js-app");
 
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringConfig.class);
 

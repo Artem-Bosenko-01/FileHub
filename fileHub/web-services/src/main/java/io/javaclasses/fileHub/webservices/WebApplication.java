@@ -59,7 +59,7 @@ public final class WebApplication {
         Spark.stop();
     }
 
-    private void initRoutesForUserSystem(ServiceLocator service) {
+    private static void initRoutesForUserSystem(ServiceLocator service) {
 
         post(APPLICATION_NAME + API_VERSION_1_0 + "/login", new AuthenticationRoute(service.authenticateUser()));
         post(APPLICATION_NAME + API_VERSION_1_0 + "/register", new RegistrationRoute(service.registerUser()));
@@ -68,7 +68,7 @@ public final class WebApplication {
 
     }
 
-    private void initRoutesForFilesSystem(ServiceLocator service) {
+    private static void initRoutesForFilesSystem(ServiceLocator service) {
 
         get(APPLICATION_NAME + API_VERSION_1_0 + "/root-folder", new GetRootFolderRoute(service.getRootFolder()));
         get(APPLICATION_NAME + API_VERSION_1_0 + "/folder/:id", new GetFolderByIdRoute(service.getFolderById()));

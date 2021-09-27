@@ -43,9 +43,9 @@ public class AuthorizationStorageInDatabase extends AbstractStorageInDatabase<Us
 
         UserAuthToken token = new UserAuthToken(resultSet.getString("token"));
 
-        UserId userId = new UserId(resultSet.getString("userId"));
+        UserId userId = new UserId(resultSet.getString("user_id"));
 
-        Timestamp expirationTime = resultSet.getTimestamp("expirationTime");
+        Timestamp expirationTime = resultSet.getTimestamp("expiration_time");
 
         AuthorizationUsers user = new AuthorizationUsers(token, userId, expirationTime.toLocalDateTime());
 

@@ -46,7 +46,7 @@ public class FileStorageInDatabase extends AbstractStorageInDatabase<FileId, Fil
     protected PreparedStatement statementForUpdatingObject(Connection connection, File dataObject) throws SQLException {
 
         PreparedStatement statement = connection.prepareStatement("UPDATE file " +
-                "SET name=?,owner=?,size=?,mimeType=?,folder=?" +
+                "SET name=?,owner=?,size=?,mime_type=?,folder=?" +
                 "WHERE id=?");
 
         statement.setString(1, dataObject.name());
@@ -70,7 +70,7 @@ public class FileStorageInDatabase extends AbstractStorageInDatabase<FileId, Fil
 
         file.setSize(resultSet.getLong("size"));
 
-        file.setMimeType(MediaType.parse(resultSet.getString("mimeType")));
+        file.setMimeType(MediaType.parse(resultSet.getString("mime_type")));
 
         file.setFolder(resultSet.getString("folder"));
 
@@ -94,7 +94,7 @@ public class FileStorageInDatabase extends AbstractStorageInDatabase<FileId, Fil
 
         if (userID == null) {
 
-            throw new NotExistedItemException(userID);
+            throw new NotExistedItemException("null");
         }
 
 

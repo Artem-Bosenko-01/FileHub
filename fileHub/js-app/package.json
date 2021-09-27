@@ -1,0 +1,27 @@
+{
+  "name": "js-app",
+  "version": "1.0.0",
+  "description": "This is module for FileHub application with javascript implementation.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "qunit",
+    "eslint": "eslint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "work"
+  },
+  "author": "Artem Bosenko",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.31.0",
+    "eslint-config-google": "^0.14.0",
+    "fetch-mock": "^9.11.0",
+    "qunit": "^2.16.0"
+  },
+  "dependencies": {}
+}

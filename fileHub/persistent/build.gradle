@@ -1,8 +1,10 @@
 plugins {
     id 'java'
+    id "net.ltgt.errorprone" version "2.0.1"
+
 }
 
-group 'io.intern.teamdev'
+group 'io.javaclasses.fileHub'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -12,6 +14,18 @@ repositories {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    testImplementation 'com.google.guava:guava-testlib:30.1.1-jre'
+    implementation 'com.google.guava:guava:11.0.2'
+
+    implementation 'org.apache.commons:commons-dbcp2:2.9.0'
+    implementation 'org.postgresql:postgresql:42.2.10'
+
+    implementation 'org.springframework:spring-beans:5.3.9'
+    implementation 'org.springframework:spring-core:5.3.9'
+    implementation 'org.springframework:spring-context:5.3.9'
+
+    implementation "com.google.errorprone:error_prone_core:2.7.1"
+    errorproneJavac "com.google.errorprone:error_prone_core:2.7.1"
 }
 
 test {

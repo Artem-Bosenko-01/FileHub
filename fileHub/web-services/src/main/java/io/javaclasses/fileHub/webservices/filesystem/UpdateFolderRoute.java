@@ -6,7 +6,7 @@ import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
 import io.javaclasses.fileHub.services.NotAuthorizedUserException;
 import io.javaclasses.fileHub.services.files.*;
-import io.javaclasses.fileHub.webservices.InvalidParsingToJsonObject;
+import io.javaclasses.fileHub.webservices.InvalidParsingToJsonObjectException;
 import io.javaclasses.fileHub.webservices.RequestParser;
 import io.javaclasses.fileHub.webservices.ResponseMessage;
 import spark.Request;
@@ -51,7 +51,7 @@ public final class UpdateFolderRoute implements Route {
 
             return new ResponseMessage("Folder with id: " + updatedFolderId + " was successfully updated").serialize();
 
-        } catch (FolderNameAlreadyUsedException | InvalidParsingToJsonObject invalidCommandHandlingException) {
+        } catch (FolderNameAlreadyUsedException | InvalidParsingToJsonObjectException invalidCommandHandlingException) {
 
             response.status(SC_BAD_REQUEST);
             return new ResponseMessage(invalidCommandHandlingException.getMessage()).serialize();

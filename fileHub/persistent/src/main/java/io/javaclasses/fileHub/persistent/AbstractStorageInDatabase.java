@@ -45,7 +45,7 @@ public abstract class AbstractStorageInDatabase<I extends RecordId, E extends Da
 
         } catch (SQLException sqlException) {
 
-            throw new InvalidExecutingSqlStatement(sqlException.getMessage());
+            throw new InvalidExecutingSqlStatementException(sqlException.getMessage());
         }
     }
 
@@ -66,7 +66,7 @@ public abstract class AbstractStorageInDatabase<I extends RecordId, E extends Da
 
         } catch (SQLException sqlException) {
 
-            throw new InvalidExecutingSqlStatement(sqlException.getMessage());
+            throw new InvalidExecutingSqlStatementException(sqlException.getMessage());
         }
 
     }
@@ -74,7 +74,7 @@ public abstract class AbstractStorageInDatabase<I extends RecordId, E extends Da
     protected abstract PreparedStatement statementForUpdatingObject(Connection connection, E dataObject) throws SQLException;
 
     @Override
-    public void delete(String dataRecordID) throws NotExistedItemException {
+    public void delete(String dataRecordID) {
 
         try (Connection connection = configuration.getConnection()) {
 
@@ -86,7 +86,7 @@ public abstract class AbstractStorageInDatabase<I extends RecordId, E extends Da
 
         } catch (SQLException sqlException) {
 
-            throw new InvalidExecutingSqlStatement(sqlException.getMessage());
+            throw new InvalidExecutingSqlStatementException(sqlException.getMessage());
         }
     }
 
@@ -111,7 +111,7 @@ public abstract class AbstractStorageInDatabase<I extends RecordId, E extends Da
 
         } catch (SQLException sqlException) {
 
-            throw new InvalidExecutingSqlStatement(sqlException.getMessage());
+            throw new InvalidExecutingSqlStatementException(sqlException.getMessage());
         }
 
         return Optional.empty();

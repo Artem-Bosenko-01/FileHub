@@ -45,7 +45,7 @@ public final class DownloadFileRoute implements Route {
 
             GetFileContentDTO fileContent = downloadFile.handle(getFileContentQuery);
 
-            try (ServletOutputStream outputStream = response.raw().getOutputStream();) {
+            try (ServletOutputStream outputStream = response.raw().getOutputStream()) {
                 outputStream.write(fileContent.content());
             }
 

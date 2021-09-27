@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -97,7 +98,7 @@ public class UploadFile extends SecuredUserProcess<UploadFileCommand, String> {
                     logger.info("Uploading new file was successful: " + content.id().value());
                 }
 
-                folderStorage.increaseItemsAmount(file.folder());
+                folderStorage.increaseItemsAmount(Objects.requireNonNull(file.folder()));
 
                 return fileId;
 

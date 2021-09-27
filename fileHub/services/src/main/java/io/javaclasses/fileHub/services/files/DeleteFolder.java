@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -58,7 +59,7 @@ public class DeleteFolder extends SecuredUserProcess<DeleteFolderCommand, String
                 logger.info("Deleted folder" + inputCommand.folderID() + " was successful");
             }
 
-            folderStorage.decreaseItemsAmount(folder.get().parentFolder());
+            folderStorage.decreaseItemsAmount(Objects.requireNonNull(folder.get().parentFolder()));
 
             return inputCommand.folderID();
 

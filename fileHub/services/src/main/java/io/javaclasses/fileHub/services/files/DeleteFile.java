@@ -60,7 +60,7 @@ public class DeleteFile extends SecuredUserProcess<DeleteFileCommand, String> {
                 logger.info("Deleted " + inputCommand.id() + " was successful");
             }
 
-            folderStorage.decreaseItemsAmount(file.get().folder());
+            folderStorage.decreaseItemsAmount(Objects.requireNonNull(file.get().folder()));
 
             return inputCommand.id();
 

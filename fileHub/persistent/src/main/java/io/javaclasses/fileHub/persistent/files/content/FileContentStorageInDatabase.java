@@ -38,7 +38,16 @@ public class FileContentStorageInDatabase extends AbstractStorageInDatabase<File
 
     @Override
     protected PreparedStatement statementForUpdatingObject(Connection connection, FileContent dataObject) throws SQLException {
-        return null;
+
+        PreparedStatement statement = connection.prepareStatement(
+                "UPDATE file_content " +
+                        "SET content=?" +
+                        "WHERE file_id=?");
+
+        statement.setBytes(1, dataObject.content());
+        statement.setString(2, dataObject.id().value());
+
+        return statement;
     }
 
     @Override

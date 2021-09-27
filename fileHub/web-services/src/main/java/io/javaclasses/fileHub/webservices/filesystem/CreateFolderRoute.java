@@ -7,7 +7,7 @@ import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
 import io.javaclasses.fileHub.services.NotAuthorizedUserException;
 import io.javaclasses.fileHub.services.files.CreateFolder;
 import io.javaclasses.fileHub.services.files.CreateFolderCommand;
-import io.javaclasses.fileHub.webservices.InvalidParsingToJsonObject;
+import io.javaclasses.fileHub.webservices.InvalidParsingToJsonObjectException;
 import io.javaclasses.fileHub.webservices.RequestParser;
 import io.javaclasses.fileHub.webservices.ResponseMessage;
 import spark.Request;
@@ -68,7 +68,7 @@ public final class CreateFolderRoute implements Route {
 
             return new ResponseMessage("Error: Invalid name of folder.").serialize();
 
-        } catch (InvalidCommandHandlingException | InvalidParsingToJsonObject exception) {
+        } catch (InvalidCommandHandlingException | InvalidParsingToJsonObjectException exception) {
 
             response.status(SC_BAD_REQUEST);
             return new ResponseMessage(exception.getMessage()).serialize();

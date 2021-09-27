@@ -2,7 +2,6 @@ package io.javaclasses.fileHub.persistent.files;
 
 import io.javaclasses.fileHub.persistent.AbstractInMemoryStorage;
 import io.javaclasses.fileHub.persistent.NotExistedItemException;
-import io.javaclasses.fileHub.persistent.users.User;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

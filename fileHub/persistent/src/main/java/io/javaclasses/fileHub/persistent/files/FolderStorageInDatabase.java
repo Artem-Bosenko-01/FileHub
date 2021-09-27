@@ -1,7 +1,7 @@
 package io.javaclasses.fileHub.persistent.files;
 
 import io.javaclasses.fileHub.persistent.AbstractStorageInDatabase;
-import io.javaclasses.fileHub.persistent.InvalidExecutingSqlStatement;
+import io.javaclasses.fileHub.persistent.InvalidExecutingSqlStatementException;
 import io.javaclasses.fileHub.persistent.JdbcConfiguration;
 import io.javaclasses.fileHub.persistent.NotExistedItemException;
 import io.javaclasses.fileHub.persistent.users.UserId;
@@ -92,7 +92,7 @@ public class FolderStorageInDatabase extends AbstractStorageInDatabase<FolderId,
 
         if (owner == null) {
 
-            throw new NotExistedItemException(owner);
+            throw new NotExistedItemException("null");
         }
 
         try (Connection connection = this.connection()) {
@@ -118,7 +118,7 @@ public class FolderStorageInDatabase extends AbstractStorageInDatabase<FolderId,
 
         } catch (SQLException sqlException) {
 
-            throw new InvalidExecutingSqlStatement(sqlException.getMessage());
+            throw new InvalidExecutingSqlStatementException(sqlException.getMessage());
         }
 
     }
@@ -144,7 +144,7 @@ public class FolderStorageInDatabase extends AbstractStorageInDatabase<FolderId,
 
         } catch (SQLException sqlException) {
 
-            throw new InvalidExecutingSqlStatement(sqlException.getMessage());
+            throw new InvalidExecutingSqlStatementException(sqlException.getMessage());
         }
 
         return Optional.empty();
@@ -170,7 +170,7 @@ public class FolderStorageInDatabase extends AbstractStorageInDatabase<FolderId,
 
         } catch (SQLException sqlException) {
 
-            throw new InvalidExecutingSqlStatement(sqlException.getMessage());
+            throw new InvalidExecutingSqlStatementException(sqlException.getMessage());
         }
 
         return false;
@@ -230,7 +230,7 @@ public class FolderStorageInDatabase extends AbstractStorageInDatabase<FolderId,
 
         } catch (SQLException sqlException) {
 
-            throw new InvalidExecutingSqlStatement(sqlException.getMessage());
+            throw new InvalidExecutingSqlStatementException(sqlException.getMessage());
         }
 
     }

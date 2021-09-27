@@ -2,7 +2,7 @@ package io.javaclasses.fileHub.persistent.files;
 
 import com.google.common.net.MediaType;
 import io.javaclasses.fileHub.persistent.AbstractStorageInDatabase;
-import io.javaclasses.fileHub.persistent.InvalidExecutingSqlStatement;
+import io.javaclasses.fileHub.persistent.InvalidExecutingSqlStatementException;
 import io.javaclasses.fileHub.persistent.JdbcConfiguration;
 import io.javaclasses.fileHub.persistent.NotExistedItemException;
 import io.javaclasses.fileHub.persistent.users.UserId;
@@ -120,7 +120,7 @@ public class FileStorageInDatabase extends AbstractStorageInDatabase<FileId, Fil
 
         } catch (SQLException sqlException) {
 
-            throw new InvalidExecutingSqlStatement(sqlException.getMessage());
+            throw new InvalidExecutingSqlStatementException(sqlException.getMessage());
         }
 
     }
@@ -143,7 +143,7 @@ public class FileStorageInDatabase extends AbstractStorageInDatabase<FileId, Fil
 
         } catch (SQLException sqlException) {
 
-            throw new InvalidExecutingSqlStatement(sqlException.getMessage());
+            throw new InvalidExecutingSqlStatementException(sqlException.getMessage());
         }
 
         return false;
@@ -162,7 +162,7 @@ public class FileStorageInDatabase extends AbstractStorageInDatabase<FileId, Fil
 
         } catch (SQLException sqlException) {
 
-            throw new InvalidExecutingSqlStatement(sqlException.getMessage());
+            throw new InvalidExecutingSqlStatementException(sqlException.getMessage());
         }
 
     }

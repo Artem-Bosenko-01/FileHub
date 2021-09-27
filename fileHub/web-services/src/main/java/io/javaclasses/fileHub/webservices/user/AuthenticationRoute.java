@@ -7,7 +7,7 @@ import io.javaclasses.fileHub.services.users.AuthenticateUser;
 import io.javaclasses.fileHub.services.users.AuthenticationUserCommand;
 import io.javaclasses.fileHub.services.users.DuplicatedFieldValueException;
 import io.javaclasses.fileHub.services.users.UserNotFoundException;
-import io.javaclasses.fileHub.webservices.InvalidParsingToJsonObject;
+import io.javaclasses.fileHub.webservices.InvalidParsingToJsonObjectException;
 import io.javaclasses.fileHub.webservices.ResponseMessage;
 import spark.Request;
 import spark.Response;
@@ -52,11 +52,11 @@ public final class AuthenticationRoute implements Route {
 
             return successfulResponse.serialize();
 
-        } catch (InvalidParsingToJsonObject invalidParsingToJsonObject) {
+        } catch (InvalidParsingToJsonObjectException invalidParsingToJsonObjectException) {
 
             response.status(SC_BAD_REQUEST);
 
-            return new ResponseMessage(invalidParsingToJsonObject.getMessage()).serialize();
+            return new ResponseMessage(invalidParsingToJsonObjectException.getMessage()).serialize();
 
         } catch (UserNotFoundException userNotFoundException) {
 

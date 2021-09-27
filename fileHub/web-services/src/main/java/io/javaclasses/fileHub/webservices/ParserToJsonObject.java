@@ -15,15 +15,15 @@ public final class ParserToJsonObject {
     private ParserToJsonObject() {
     }
 
-    public static JsonObject parse(String requestBody) throws InvalidParsingToJsonObject {
+    public static JsonObject parse(String requestBody) throws InvalidParsingToJsonObjectException {
 
         if (requestBody.isEmpty()) {
-            throw new InvalidParsingToJsonObject("Request body cannot be null");
+            throw new InvalidParsingToJsonObjectException("Request body cannot be null");
         }
 
 
         if (isJsonBodyEmpty(requestBody)) {
-            throw new InvalidParsingToJsonObject("Request body cannot be empty");
+            throw new InvalidParsingToJsonObjectException("Request body cannot be empty");
         }
 
         return new JsonParser().parse(requestBody).getAsJsonObject();

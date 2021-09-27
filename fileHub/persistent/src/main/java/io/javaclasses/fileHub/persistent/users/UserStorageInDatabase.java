@@ -2,7 +2,7 @@ package io.javaclasses.fileHub.persistent.users;
 
 import io.javaclasses.fileHub.persistent.AbstractStorageInDatabase;
 import io.javaclasses.fileHub.persistent.JdbcConfiguration;
-import io.javaclasses.fileHub.persistent.InvalidExecutingSqlStatement;
+import io.javaclasses.fileHub.persistent.InvalidExecutingSqlStatementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -93,7 +93,7 @@ public class UserStorageInDatabase extends AbstractStorageInDatabase<UserId, Use
 
         } catch (SQLException sqlException) {
 
-            throw new InvalidExecutingSqlStatement(sqlException.getMessage());
+            throw new InvalidExecutingSqlStatementException(sqlException.getMessage());
         }
 
         return Optional.empty();

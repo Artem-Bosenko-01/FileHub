@@ -5,7 +5,7 @@ import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
 import io.javaclasses.fileHub.services.users.DuplicatedFieldValueException;
 import io.javaclasses.fileHub.services.users.RegisterUser;
 import io.javaclasses.fileHub.services.users.RegistrationUserCommand;
-import io.javaclasses.fileHub.webservices.InvalidParsingToJsonObject;
+import io.javaclasses.fileHub.webservices.InvalidParsingToJsonObjectException;
 import io.javaclasses.fileHub.webservices.ResponseMessage;
 import spark.Request;
 import spark.Response;
@@ -49,11 +49,11 @@ public final class RegistrationRoute implements Route {
 
             return "User was successfully registered";
 
-        } catch (InvalidParsingToJsonObject invalidParsingToJsonObject) {
+        } catch (InvalidParsingToJsonObjectException invalidParsingToJsonObjectException) {
 
             response.status(SC_BAD_REQUEST);
 
-            return new ResponseMessage(invalidParsingToJsonObject.getMessage()).serialize();
+            return new ResponseMessage(invalidParsingToJsonObjectException.getMessage()).serialize();
 
         } catch (DuplicatedFieldValueException duplicatedFieldValueException) {
 

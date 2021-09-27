@@ -16,7 +16,7 @@ public final class AuthorizationUsers implements DataRecord<UserAuthToken> {
 
     private final UserAuthToken token;
     private final UserId userID;
-    private LocalDateTime expirationTime;
+    private final LocalDateTime expirationTime;
 
     public AuthorizationUsers(UserAuthToken token, UserId userID, LocalDateTime expirationTime) {
         this.token = Preconditions.checkNotNull(token);

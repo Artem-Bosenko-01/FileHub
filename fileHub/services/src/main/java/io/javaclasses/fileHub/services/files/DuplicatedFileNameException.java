@@ -7,6 +7,8 @@ import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
  */
 public class DuplicatedFileNameException extends InvalidCommandHandlingException {
 
+    private static final long serialVersionUID = 5817280306334089702L;
+
     public DuplicatedFileNameException(String id) {
         super("Uploaded file name already exist: " + id);
     }

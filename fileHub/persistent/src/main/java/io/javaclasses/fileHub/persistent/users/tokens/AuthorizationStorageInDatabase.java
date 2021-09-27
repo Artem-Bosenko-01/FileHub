@@ -34,8 +34,19 @@ public class AuthorizationStorageInDatabase extends AbstractStorageInDatabase<Us
     }
 
     @Override
-    protected PreparedStatement statementForUpdatingObject(Connection connection, AuthorizationUsers dataObject) {
-        return null;
+    protected PreparedStatement statementForUpdatingObject(Connection connection, AuthorizationUsers dataObject)
+            throws SQLException {
+
+        PreparedStatement statement = connection.prepareStatement(
+                "UPDATE authorization_user " +
+                        "SET user_id=?,expiration_time=?" +
+                        "WHERE token=?");
+
+        statement.setString(1, dataObject.userID().value());
+        statement.setObject(2, dataObject.expirationTime());
+        statement.setString(3, dataObject.id().value());
+
+        return statement;
     }
 
     @Override

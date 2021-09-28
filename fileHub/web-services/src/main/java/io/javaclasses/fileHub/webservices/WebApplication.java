@@ -62,8 +62,11 @@ public final class WebApplication {
     private static void initRoutesForUserSystem(ServiceLocator service) {
 
         post(APPLICATION_NAME + API_VERSION_1_0 + "/login", new AuthenticationRoute(service.authenticateUser()));
+
         post(APPLICATION_NAME + API_VERSION_1_0 + "/register", new RegistrationRoute(service.registerUser()));
+
         get(APPLICATION_NAME + API_VERSION_1_0 + "/user", new GetUserInfoRoute(service.getUser()));
+
         post(APPLICATION_NAME + API_VERSION_1_0 + "/logOut", new LogOutRoute(service.logOut()));
 
     }
@@ -71,14 +74,23 @@ public final class WebApplication {
     private static void initRoutesForFilesSystem(ServiceLocator service) {
 
         get(APPLICATION_NAME + API_VERSION_1_0 + "/root-folder", new GetRootFolderRoute(service.getRootFolder()));
+
         get(APPLICATION_NAME + API_VERSION_1_0 + "/folder/:id", new GetFolderByIdRoute(service.getFolderById()));
+
         get(APPLICATION_NAME + API_VERSION_1_0 + "/folder/:id/content", new GetFolderContentRoute(service.getFolderContent()));
+
         delete(APPLICATION_NAME + API_VERSION_1_0 + "/folder/:id", new DeleteFolderRoute(service.deleteFolder()));
+
         delete(APPLICATION_NAME + API_VERSION_1_0 + "/file/:id", new DeleteFileRoute(service.deleteFile()));
+
         post(APPLICATION_NAME + API_VERSION_1_0 + "/folder/:id/folder", new CreateFolderRoute(service.createFolder()));
+
         put(APPLICATION_NAME + API_VERSION_1_0 + "/folder/:id", new UpdateFolderRoute(service.updateFolder()));
+
         put(APPLICATION_NAME + API_VERSION_1_0 + "/file/:id", new UpdateFileRoute(service.updateFile()));
+
         post(APPLICATION_NAME + API_VERSION_1_0 + "/folder/:id/file", new UploadFileRoute(service.uploadFile()));
+
         get(APPLICATION_NAME + API_VERSION_1_0 + "/file/:id", new DownloadFileRoute(service.getFileContent()));
 
     }

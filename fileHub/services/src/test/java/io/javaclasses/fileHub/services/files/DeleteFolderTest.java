@@ -28,7 +28,7 @@ class DeleteFolderTest {
 
         FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
 
-        FolderId id = fileSystemTestData.createFolder(folderStorage, null);
+        FolderId id = fileSystemTestData.createFolder(folderStorage, new FolderId("folder"));
 
         Assertions.assertTrue(folderStorage.findByID(id).isPresent());
 
@@ -57,7 +57,7 @@ class DeleteFolderTest {
 
         FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
 
-        fileSystemTestData.createFolder(folderStorage, null);
+        fileSystemTestData.createFolder(folderStorage, new FolderId("folder"));
 
         DeleteFolderCommand deleteFolderCommand = new DeleteFolderCommand(fileSystemTestData.token(), "foldId");
 

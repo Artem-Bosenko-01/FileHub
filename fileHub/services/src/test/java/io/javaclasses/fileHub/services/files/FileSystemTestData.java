@@ -89,7 +89,7 @@ public final class FileSystemTestData {
     public FolderId createFolder(FolderStorage folderStorage, @Nullable FolderId parent)
             throws InvalidCommandHandlingException, InvalidValidationCommandDataException {
 
-        CreateFolderCommand createFolderCommand = new CreateFolderCommand(token, "folder", 8, null);
+        CreateFolderCommand createFolderCommand = new CreateFolderCommand(token, "folder", 8, parent.value());
 
         CreateFolder creatingFile = new CreateFolder(folderStorage, authorizationStorage);
 
@@ -99,7 +99,7 @@ public final class FileSystemTestData {
     public FolderId createFolder(FolderStorage folderStorage, String name, @Nullable FolderId parent)
             throws InvalidCommandHandlingException, InvalidValidationCommandDataException {
 
-        CreateFolderCommand createFolderCommand = new CreateFolderCommand(token, name, 8, null);
+        CreateFolderCommand createFolderCommand = new CreateFolderCommand(token, name, 8, parent.value());
 
         CreateFolder creatingFile = new CreateFolder(folderStorage, authorizationStorage);
 

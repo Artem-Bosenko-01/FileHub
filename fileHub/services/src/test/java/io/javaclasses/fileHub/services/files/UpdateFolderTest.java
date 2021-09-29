@@ -29,7 +29,7 @@ class UpdateFolderTest {
 
         FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
 
-        FolderId id = fileSystemTestData.createFolder(folderStorage, null);
+        FolderId id = fileSystemTestData.createFolder(folderStorage, new FolderId("folder"));
 
         UpdateFolderCommand command = new UpdateFolderCommand(fileSystemTestData.token(), id.value(),
                 "lkijij", 0L, null);
@@ -54,7 +54,7 @@ class UpdateFolderTest {
 
         FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
 
-        fileSystemTestData.createFolder(folderStorage, null);
+        fileSystemTestData.createFolder(folderStorage, new FolderId("folder"));
 
         FolderId folderID = new FolderId("parent" + fileSystemTestData.id().value());
 

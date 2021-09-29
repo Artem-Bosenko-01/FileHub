@@ -27,7 +27,7 @@ class GetFolderByNameViewTest {
 
         FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
 
-        FolderId id = fileSystemTestData.createFolder(folderStorage, null);
+        FolderId id = fileSystemTestData.createFolder(folderStorage, new FolderId("folder"));
 
         GetFolderByIdQuery query = new GetFolderByIdQuery(fileSystemTestData.token(), id.value());
 
@@ -51,7 +51,7 @@ class GetFolderByNameViewTest {
 
         FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
 
-        fileSystemTestData.createFolder(folderStorage, null);
+        fileSystemTestData.createFolder(folderStorage, new FolderId("folder"));
 
         GetFolderByIdQuery query = new GetFolderByIdQuery(fileSystemTestData.token(), "id");
 

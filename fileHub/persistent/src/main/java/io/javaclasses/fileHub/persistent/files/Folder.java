@@ -1,60 +1,76 @@
 package io.javaclasses.fileHub.persistent.files;
 
-import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.DataRecord;
 import io.javaclasses.fileHub.persistent.users.UserId;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
+/**
+ * The implementation of base {@link DataRecord record} for managing data about folder with {@link FolderId id}
+ * in the FileHub file system.
+ */
 public final class Folder implements DataRecord<FolderId> {
 
     private final FolderId id;
     private String name;
     private UserId owner;
-    private Integer itemsAmount;
+    private Long itemsAmount;
     @Nullable
-    private FolderId parentFolder;
+    private String parentFolder;
 
-    public Folder(FolderId id) {
-        this.id = Preconditions.checkNotNull(id);
+    public Folder(String id) {
+
+        this.id = new FolderId(checkNotNull(id));
     }
 
     @Override
     public FolderId id() {
+
         return id;
     }
 
     public String name() {
+
         return name;
     }
 
     public void setName(String name) {
-        this.name = Preconditions.checkNotNull(name);
+
+        this.name = checkNotNull(name);
     }
 
     public UserId owner() {
+
         return owner;
     }
 
     public void setOwner(UserId owner) {
-        this.owner = Preconditions.checkNotNull(owner);
+
+        this.owner = checkNotNull(owner);
     }
 
-    public FolderId parentFolder() {
+    @Nullable
+    public String parentFolder() {
+
         return parentFolder;
     }
 
-    public void setParentFolder(@Nullable FolderId parentFolder) {
+    public void setParentFolder(@Nullable String parentFolder) {
+
         this.parentFolder = parentFolder;
     }
 
-    public Integer itemsAmount() {
+    public Long itemsAmount() {
+
         return itemsAmount;
     }
 
-    public void setItemsAmount(Integer itemsAmount) {
-        this.itemsAmount = Preconditions.checkNotNull(itemsAmount);
+    public void setItemsAmount(Long itemsAmount) {
+
+        this.itemsAmount = checkNotNull(itemsAmount);
     }
 
     @Override
@@ -71,6 +87,7 @@ public final class Folder implements DataRecord<FolderId> {
 
     @Override
     public int hashCode() {
+
         return Objects.hash(id);
     }
 }

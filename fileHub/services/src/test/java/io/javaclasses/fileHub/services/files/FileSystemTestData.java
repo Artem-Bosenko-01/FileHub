@@ -1,13 +1,16 @@
 package io.javaclasses.fileHub.services.files;
 
-import io.javaclasses.fileHub.persistent.files.*;
+import com.google.common.net.MediaType;
+import io.javaclasses.fileHub.persistent.files.FileStorage;
+import io.javaclasses.fileHub.persistent.files.FolderId;
+import io.javaclasses.fileHub.persistent.files.FolderStorage;
 import io.javaclasses.fileHub.persistent.files.content.FIleContentStorage;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.persistent.users.UserStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
-import io.javaclasses.fileHub.services.ValidationCommandDataException;
+import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
 import io.javaclasses.fileHub.services.users.UserTestData;
 
 import javax.annotation.Nullable;
@@ -20,7 +23,7 @@ public final class FileSystemTestData {
     private final byte[] content = new byte[]{5, 6, 8, 4, 5};
 
     public FileSystemTestData(UserStorage userStorage, AuthorizationStorage authorizationStorage)
-            throws InvalidCommandHandlingException, ValidationCommandDataException {
+            throws InvalidCommandHandlingException, InvalidValidationCommandDataException {
 
         this.authorizationStorage = authorizationStorage;
 
@@ -40,24 +43,25 @@ public final class FileSystemTestData {
         return content;
     }
 
-    public FileId uploadFile(FileStorage fileStorage, FIleContentStorage fIleContentStorage)
-            throws InvalidCommandHandlingException {
+    public String uploadFile(FileStorage fileStorage, FIleContentStorage fIleContentStorage, FolderStorage folderStorage)
+            throws InvalidCommandHandlingException, InvalidValidationCommandDataException {
 
-        UploadFileCommand command = new UploadFileCommand(token, "folder", MimeType.TEXT, id,
-                new FolderId("folder", id), content);
+        UploadFileCommand command = new UploadFileCommand(token, "folder", MediaType.PLAIN_TEXT_UTF_8,
+                "folder" + id.value(), content);
 
-        UploadFile createFile = new UploadFile(fIleContentStorage, fileStorage, authorizationStorage);
+        UploadFile createFile = new UploadFile(fIleContentStorage, fileStorage, folderStorage, authorizationStorage);
 
         return createFile.doHandle(command);
     }
 
-    public FileId uploadFile(FileStorage fileStorage, FIleContentStorage fIleContentStorage, FolderId parent)
-            throws InvalidCommandHandlingException {
+    public String uploadFile(FileStorage fileStorage, FIleContentStorage fIleContentStorage, FolderStorage folderStorage,
+                             FolderId parent)
+            throws InvalidCommandHandlingException, InvalidValidationCommandDataException {
 
-        UploadFileCommand command = new UploadFileCommand(token, "folder", MimeType.TEXT, id, parent,
+        UploadFileCommand command = new UploadFileCommand(token, "folder", MediaType.PLAIN_TEXT_UTF_8, parent.value(),
                 content);
 
-        UploadFile createFile = new UploadFile(fIleContentStorage, fileStorage, authorizationStorage);
+        UploadFile createFile = new UploadFile(fIleContentStorage, fileStorage, folderStorage, authorizationStorage);
 
         return createFile.doHandle(command);
     }
@@ -68,27 +72,24 @@ public final class FileSystemTestData {
 
         return new DeleteFileCommand(
                 new AuthToken("6956"),
-                new FileId(name, userID, new FolderId("folder", userID))
-
-        );
+                name + userID.value());
     }
 
-    public UploadFileCommand uploadFileCommand() {
+    public UploadFileCommand uploadFileCommand() throws InvalidValidationCommandDataException {
 
         return new UploadFileCommand(
                 token,
                 "file.txt",
-                MimeType.TEXT,
-                id,
-                new FolderId("folder", id),
+                MediaType.PLAIN_TEXT_UTF_8,
+                "folder" + id.value(),
                 content
         );
     }
 
     public FolderId createFolder(FolderStorage folderStorage, @Nullable FolderId parent)
-            throws InvalidCommandHandlingException {
+            throws InvalidCommandHandlingException, InvalidValidationCommandDataException {
 
-        CreateFolderCommand createFolderCommand = new CreateFolderCommand(token, "folder", id, 8, null);
+        CreateFolderCommand createFolderCommand = new CreateFolderCommand(token, "folder", 8, parent.value());
 
         CreateFolder creatingFile = new CreateFolder(folderStorage, authorizationStorage);
 
@@ -96,9 +97,9 @@ public final class FileSystemTestData {
     }
 
     public FolderId createFolder(FolderStorage folderStorage, String name, @Nullable FolderId parent)
-            throws InvalidCommandHandlingException {
+            throws InvalidCommandHandlingException, InvalidValidationCommandDataException {
 
-        CreateFolderCommand createFolderCommand = new CreateFolderCommand(token, name, id, 8, null);
+        CreateFolderCommand createFolderCommand = new CreateFolderCommand(token, name, 8, parent.value());
 
         CreateFolder creatingFile = new CreateFolder(folderStorage, authorizationStorage);
 

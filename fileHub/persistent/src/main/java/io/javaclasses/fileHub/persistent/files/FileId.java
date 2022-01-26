@@ -2,16 +2,19 @@ package io.javaclasses.fileHub.persistent.files;
 
 import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.RecordId;
-import io.javaclasses.fileHub.persistent.users.UserId;
 
-import javax.annotation.Nullable;
 import java.util.Objects;
 
+/**
+ * Unique {@link RecordId identifier} for {@link File file} in the FileHub application.
+ */
 public final class FileId implements RecordId {
+
     private final String id;
 
-    public FileId(String name, UserId userID, @Nullable FolderId folderID) {
-        this.id = Preconditions.checkNotNull(name) + Preconditions.checkNotNull(userID) + folderID;
+    public FileId(String id) {
+
+        this.id = Preconditions.checkNotNull(id);
     }
 
     @Override
@@ -28,11 +31,13 @@ public final class FileId implements RecordId {
 
     @Override
     public int hashCode() {
+
         return Objects.hash(id);
     }
 
     @Override
-    public String toString() {
+    public String value() {
+
         return id;
     }
 }

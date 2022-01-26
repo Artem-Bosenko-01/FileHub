@@ -7,7 +7,7 @@ import io.javaclasses.fileHub.services.Query;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Data that needs to get information for an existed folder by id in the Filehub application
+ * Data that needs to get information about an existed folder by id in the Filehub application
  * by {@link UserId authenticated user}.
  */
 public final class GetFolderByIdQuery extends Query {

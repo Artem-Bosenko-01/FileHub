@@ -1,7 +1,8 @@
 package io.javaclasses.fileHub.services.files;
 
-import io.javaclasses.fileHub.persistent.files.FileId;
 import io.javaclasses.fileHub.persistent.files.FileStorageInMemory;
+import io.javaclasses.fileHub.persistent.files.FolderStorage;
+import io.javaclasses.fileHub.persistent.files.FolderStorageInMemory;
 import io.javaclasses.fileHub.persistent.files.content.FIleContentStorage;
 import io.javaclasses.fileHub.persistent.files.content.FileContentStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.UserStorage;
@@ -9,7 +10,8 @@ import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
-import io.javaclasses.fileHub.services.ValidationCommandDataException;
+import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
+import io.javaclasses.fileHub.services.NotAuthorizedUserException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +19,7 @@ import org.junit.jupiter.api.Test;
 class UploadFileTest {
 
     @Test
-    public void uploadFileTest() throws InvalidCommandHandlingException, ValidationCommandDataException {
+    public void uploadFileTest() throws InvalidCommandHandlingException, InvalidValidationCommandDataException, NotAuthorizedUserException {
 
         AuthorizationStorage authorizationStorage = new AuthorizationStorageInMemory();
 
@@ -31,16 +33,19 @@ class UploadFileTest {
 
         FileContentStorageInMemory contentStorageInMemory = new FileContentStorageInMemory();
 
-        UploadFile uploadFile = new UploadFile(contentStorageInMemory, fileStorageInMemory, authorizationStorage);
+        FolderStorage folderStorage = new FolderStorageInMemory();
 
-        FileId id = uploadFile.handle(uploadFileCommand);
+        UploadFile uploadFile = new UploadFile(contentStorageInMemory, fileStorageInMemory, folderStorage,
+                authorizationStorage);
+
+        String id = uploadFile.handle(uploadFileCommand);
 
         Assertions.assertNotNull(id);
 
     }
 
     @Test
-    public void uploadFileWithExistIdTest() throws InvalidCommandHandlingException, ValidationCommandDataException {
+    public void uploadFileWithExistIdTest() throws InvalidCommandHandlingException, InvalidValidationCommandDataException, NotAuthorizedUserException {
 
         AuthorizationStorage authorizationStorage = new AuthorizationStorageInMemory();
 
@@ -54,10 +59,12 @@ class UploadFileTest {
 
         FileStorageInMemory fileStorageInMemory = new FileStorageInMemory();
 
+        FolderStorage folderStorage = new FolderStorageInMemory();
+
         FIleContentStorage contentStorageInMemory = new FileContentStorageInMemory();
 
         UploadFile createFileManagementProcess = new UploadFile(contentStorageInMemory, fileStorageInMemory,
-                authorizationStorage);
+                folderStorage, authorizationStorage);
 
         createFileManagementProcess.handle(createFileCommand);
 

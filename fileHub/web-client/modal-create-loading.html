@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Create modal loading</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/icons.css">
+</head>
+<body>
+<div class="main">
+    <header class="header">
+        <h1 title="TeamDev">
+            <a class="logo" href="index.html">
+                TeamDev
+            </a>
+        </h1>
+        <div class="panel">
+            <ul>
+                <li title="User full name"><span class="glyphicon glyphicon-user"></span> John Doe</li>
+                <li>
+                    <a title="log out" class="highlight" href="authenticatePage.html">
+                        Log out <span class="glyphicon glyphicon-log-out"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div class="raw page-raw">
+        <ul class="path">
+            <li class="folder">
+                <span class="glyphicon glyphicon-repeat loading" aria-hidden="true"></span>
+            </li>
+        </ul>
+        <hr class="user-view-page-separate-line">
+        <nav class="navbar">
+            <div class="search-panel">
+                <div class="input-value input-search-query input-search-query-loading">
+                    <input title="Search something" type="text" placeholder="Enter entity name...">
+                </div>
+                <div class="search-button-box">
+                    <button title="search button" class="button button-search button-disabled" type="button">
+                        <span class="glyphicon glyphicon-repeat loading" aria-hidden="true"></span>Search
+                    </button>
+                </div>
+            </div>
+            <div class="control-folder-buttons-box">
+                <button title="upload" type="button" class="button control-folder-button button-disabled">
+                    <span class="glyphicon glyphicon-repeat loading" aria-hidden="true"></span>
+                </button>
+
+                <button title="Create new directory" type="button" class="button control-folder-button"
+                        onclick="window.open('modal-create-lo.html')"><span
+                        class="glyphicon glyphicon-plus"></span>
+                </button>
+            </div>
+        </nav>
+        <div class="table-box">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <td class="cell-folder-marker"><span class="glyphicon glyphicon-chevron-right"></span></td>
+                    <td class="cell-icon"><span class="glyphicon glyphicon-folder-close"></span></td>
+                    <td class="cell-name"><a class="highlight" href="inner.html">Documents</a></td>
+                    <td class="cell-type">Folder</td>
+                    <td class="cell-file-size">—</td>
+                    <td class="cell-file-action-buttons">
+                        <button title="download" type="button" class="element-control-button upload-element-button">
+                            <span class="glyphicon glyphicon-repeat loading" aria-hidden="true"></span>
+                        </button>
+                        <button title="delete" type="button" class="element-control-button delete-element-button"
+                                onclick="window.open('modal-delete.html')">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cell-folder-marker"><span class="glyphicon glyphicon-chevron-right"></span></td>
+                    <td class="cell-icon"><span class="glyphicon glyphicon-folder-close"></span></td>
+                    <td class="cell-name"><a class="highlight" href="inner.html">Images</a></td>
+                    <td class="cell-type">Folder</td>
+                    <td class="cell-file-size">—</td>
+                    <td class="cell-file-action-buttons">
+                        <button title="download" type="button" class="element-control-button download-element-button">
+                            <span class="glyphicon glyphicon-download"></span>
+                        </button>
+                        <button title="delete" type="button" class="element-control-button delete-element-button"
+                                onclick="window.open('modal-delete.html')">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cell-folder-marker"><span class="glyphicon glyphicon-chevron-right"></span></td>
+                    <td class="cell-icon"><span class="glyphicon glyphicon-folder-close"></span></td>
+                    <td class="cell-name"><a class="highlight" href="inner.html">Videos</a></td>
+                    <td class="cell-type">Folder</td>
+                    <td class="cell-file-size">—</td>
+                    <td class="cell-file-action-buttons">
+                        <button title="download" type="button" class="element-control-button download-element-button">
+                            <span class="glyphicon glyphicon-download"></span>
+                        </button>
+                        <button title="delete" type="button" class="element-control-button delete-element-button"
+                                onclick="window.open('modal-delete.html')">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cell-folder-marker"><span class="glyphicon glyphicon-chevron-right"></span></td>
+                    <td class="cell-icon"><span class="glyphicon glyphicon-folder-close"></span></td>
+                    <td class="cell-name">
+                        <div class="input-value rename-element">
+                            <input title="Input email" type="email" placeholder="Enter directory name...">
+                            <span class="glyphicon glyphicon-repeat loading" aria-hidden="true"></span>
+                        </div>
+                    </td>
+                    <td class="cell-type">Folder</td>
+                    <td class="cell-file-size">—</td>
+                    <td class="cell-file-action-buttons">
+                        <button title="download" type="button" class="element-control-button download-element-button">
+                            <span class="glyphicon glyphicon-download"></span>
+                        </button>
+                        <button title="delete" type="button" class="element-control-button delete-element-button">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cell-folder-marker"><span class="glyphicon glyphicon-chevron-right"></span></td>
+                    <td class="cell-icon"><span class="glyphicon glyphicon-folder-close"></span></td>
+                    <td class="cell-name"><a class="highlight" href="">Other</a></td>
+                    <td class="cell-type">Folder</td>
+                    <td class="cell-file-size">—</td>
+                    <td class="cell-file-action-buttons">
+                        <button title="download" type="button" class="element-control-button download-element-button">
+                            <span class="glyphicon glyphicon-download"></span>
+                        </button>
+                        <button title="delete" type="button" class="element-control-button delete-element-button">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                        </button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="cell-folder-marker"></td>
+                    <td class="cell-icon"><span class="glyphicon glyphicon-book"></span></td>
+                    <td class="cell-name">Html_guidelines.pdf</td>
+                    <td class="cell-type">Pdf Document</td>
+                    <td class="cell-file-size">100 KB</td>
+                    <td class="cell-file-action-buttons">
+                        <button title="download" type="button" class="element-control-button download-element-button">
+                            <span class="glyphicon glyphicon-repeat loading" aria-hidden="true"></span>
+                        </button>
+                        <button title="delete" type="button" class="element-control-button delete-element-button">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cell-folder-marker"></td>
+                    <td class="cell-icon"><span class="glyphicon glyphicon-list-alt"></span></td>
+                    <td class="cell-name">vacation_schedule.xlsx</td>
+                    <td class="cell-type">Excel Workbook</td>
+                    <td class="cell-file-size">5 KB</td>
+                    <td class="cell-file-action-buttons">
+                        <button title="download" type="button" class="element-control-button download-element-button">
+                            <span class="glyphicon glyphicon-download"></span>
+                        </button>
+                        <button title="delete" type="button" class="element-control-button delete-element-button">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cell-folder-marker"></td>
+                    <td class="cell-icon"><span class="glyphicon glyphicon-picture"></span></td>
+                    <td class="cell-name">selfie.jpg</td>
+                    <td class="cell-type">JPEG Image</td>
+                    <td class="cell-file-size">4.1 MB</td>
+                    <td class="cell-file-action-buttons">
+                        <button title="download" type="button" class="element-control-button download-element-button">
+                            <span class="glyphicon glyphicon-download"></span>
+                        </button>
+                        <button title="delete" type="button" class="element-control-button delete-element-button">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cell-folder-marker"></td>
+                    <td class="cell-icon"><span class="glyphicon glyphicon-film"></span></td>
+                    <td class="cell-name">summer_party.avi</td>
+                    <td class="cell-type">AVI movie</td>
+                    <td class="cell-file-size">1.2 GB</td>
+                    <td class="cell-file-action-buttons">
+                        <button title="download" type="button" class="element-control-button download-element-button">
+                            <span class="glyphicon glyphicon-download"></span>
+                        </button>
+                        <button title="delete" type="button" class="element-control-button delete-element-button">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cell-folder-marker"></td>
+                    <td class="cell-icon"><span class="glyphicon glyphicon-folder-close"></span></td>
+                    <td class="cell-name"><a href="">Other</a></td>
+                    <td class="cell-type">Folder</td>
+                    <td class="cell-file-size">—</td>
+                    <td class="cell-file-action-buttons">
+                        <button title="download" type="button" class="element-control-button download-element-button">
+                            <span class="glyphicon glyphicon-download"></span>
+                        </button>
+                        <button title="delete" type="button" class="element-control-button delete-element-button">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cell-folder-marker"></td>
+                    <td class="cell-icon"><span class="glyphicon glyphicon-folder-close"></span></td>
+                    <td class="cell-name">
+                        <a href="">Other</a></td>
+                    <td class="cell-type">Folder</td>
+                    <td class="cell-file-size">—</td>
+                    <td class="cell-file-action-buttons">
+                        <button title="download" type="button" class="element-control-button download-element-button">
+                            <span class="glyphicon glyphicon-download"></span>
+                        </button>
+                        <button title="delete" type="button" class="element-control-button delete-element-button">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                        </button>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <footer class="footer">
+        <ul class="social-icons">
+            <li>
+                <a title="linkedin" class="icon" href="https://www.linkedin.com/company/teamdev-ltd-/mycompany/"
+                   target="_blank">
+                    <img src="images/icon-linkedin.png" alt="linkedin">
+                </a>
+            </li>
+            <li>
+                <a title="facebook" class="icon" href="https://www.facebook.com/TeamDev" target="_blank">
+                    <img src="images/icon-facebook.png" alt="facebook">
+                </a>
+            </li>
+            <li>
+                <a title="instagram" class="icon" href="https://www.instagram.com/teamdev_ltd/?hl=ru"
+                   target="_blank">
+                    <img src="images/icon-instagram.png" alt="instagram">
+                </a>
+            </li>
+        </ul>
+        <p class="copyright">Copyright &copy; 2021 <a title="TeamDev" class="highlight"
+                                                     href="https://www.teamdev.com/"
+                                                     target="_blank">TeamDev</a>. All
+            rights reserved.</p>
+    </footer>
+</div>
+
+<div class="fade"></div>
+
+<div class="modal-window">
+    <div class="main">
+        <div class="raw modal-raw">
+            <header class="header">
+                <h2 class="modal-header">Create New Directory</h2>
+                <button title="Close" class="button button-shut-down" onclick="window.open('index.html')"><span
+                        class="glyphicon glyphicon-remove"></span></button>
+            </header>
+            <form class="data" action="index.html">
+                <div class="get-user-data modal-get-user-data">
+                    <div class="input-value modal-input">
+                        <input title="Input email" type="email" id="emailUser" placeholder="Enter directory name...">
+                    </div>
+                </div>
+                <div class="submit-box submit-modal-box submit-loading-modal-box">
+                    <button title="Cancel" class="button button-cancel" name="cancel">Cancel</button>
+                    <button disabled title="Create" class="button button-disabled" name="create">
+                        <span class="glyphicon glyphicon-repeat loading" aria-hidden="true"></span> Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

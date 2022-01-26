@@ -1,8 +1,6 @@
 package io.javaclasses.fileHub.services.files;
 
 import com.google.common.testing.NullPointerTester;
-import io.javaclasses.fileHub.persistent.files.FolderId;
-import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.services.AuthToken;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +12,7 @@ class DeleteFolderCommandTest {
         NullPointerTester tester = new NullPointerTester();
 
         tester.setDefault(AuthToken.class, new AuthToken("")).
-                setDefault(FolderId.class, new FolderId("", new UserId("sfvs")));
+                setDefault(String.class, "");
 
         tester.testAllPublicConstructors(DeleteFolderCommand.class);
 
@@ -24,8 +22,7 @@ class DeleteFolderCommandTest {
     public void checkForNullPointerInSetters() {
 
         NullPointerTester tester = new NullPointerTester();
-        tester.testAllPublicInstanceMethods(new DeleteFolderCommand(new AuthToken(""), new FolderId("",
-                new UserId(""))));
+        tester.testAllPublicInstanceMethods(new DeleteFolderCommand(new AuthToken(""), ""));
 
     }
 }

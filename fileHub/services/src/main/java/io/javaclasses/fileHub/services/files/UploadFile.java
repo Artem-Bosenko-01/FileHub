@@ -1,83 +1,128 @@
 package io.javaclasses.fileHub.services.files;
 
-import com.google.common.base.Preconditions;
-import io.javaclasses.fileHub.persistent.DuplicatedUserIdException;
+import io.javaclasses.fileHub.persistent.DuplicatedIdException;
+import io.javaclasses.fileHub.persistent.NotExistedItemException;
 import io.javaclasses.fileHub.persistent.files.File;
-import io.javaclasses.fileHub.persistent.files.FileId;
 import io.javaclasses.fileHub.persistent.files.FileStorage;
+import io.javaclasses.fileHub.persistent.files.FolderStorage;
 import io.javaclasses.fileHub.persistent.files.content.FIleContentStorage;
 import io.javaclasses.fileHub.persistent.files.content.FileContent;
+import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
-import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
+import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationUsers;
+import io.javaclasses.fileHub.persistent.users.tokens.UserAuthToken;
 import io.javaclasses.fileHub.services.SecuredUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+import java.util.Objects;
+import java.util.Optional;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Service to uploading new file in authenticated user's directory.
+ * Service for uploading new file in authenticated user's directory.
  */
-public class UploadFile extends SecuredUserProcess<UploadFileCommand, FileId> {
+@Component
+public class UploadFile extends SecuredUserProcess<UploadFileCommand, String> {
 
     private static final Logger logger = LoggerFactory.getLogger(UploadFile.class);
+
+    private final AuthorizationStorage authorizationStorage;
+
+    private final FolderStorage folderStorage;
 
     private final FIleContentStorage contentStorage;
 
     private final FileStorage fileStorage;
 
-    public UploadFile(FIleContentStorage contentStorage, FileStorage fileStorage,
-                      AuthorizationStorage authorizationStorage) {
+    @Autowired
+    public UploadFile(@Qualifier("fileContentStorageInDatabase") FIleContentStorage contentStorage,
+                      @Qualifier("fileStorageInDatabase") FileStorage fileStorage,
+                      @Qualifier("folderStorageInDatabase") FolderStorage folderStorage,
+                      @Qualifier("authorizationStorageInDatabase") AuthorizationStorage authorizationStorage) {
 
-        super(authorizationStorage);
+        super(checkNotNull(authorizationStorage));
 
-        this.contentStorage = Preconditions.checkNotNull(contentStorage);
+        this.contentStorage = checkNotNull(contentStorage);
 
-        this.fileStorage = Preconditions.checkNotNull(fileStorage);
+        this.fileStorage = checkNotNull(fileStorage);
+
+        this.authorizationStorage = authorizationStorage;
+
+        this.folderStorage = checkNotNull(folderStorage);
 
     }
 
 
     @Override
-    protected FileId doHandle(UploadFileCommand inputCommand) throws InvalidCommandHandlingException {
+    protected String doHandle(UploadFileCommand inputCommand)
+            throws UsersTokenNotFoundException, DuplicatedFileNameException, FolderNotFoundException {
 
-        if (logger.isInfoEnabled()) {
-            logger.info("Start upload new file to user's " + inputCommand.owner()
-                    + " directory: " + inputCommand.folder());
-        }
+        Optional<AuthorizationUsers> owner = authorizationStorage.
+                findByID(new UserAuthToken(inputCommand.token().value()));
 
-        FileId fileId = new FileId(inputCommand.name(), inputCommand.owner(), inputCommand.folder());
+        if (owner.isPresent()) {
 
-        File file = new File(fileId);
-
-        file.setUserID(inputCommand.owner());
-        file.setMimeType(inputCommand.mimeType());
-        file.setName(inputCommand.name());
-        file.setFolder(inputCommand.folder());
-        file.setSize(0);
-
-        FileContent content = new FileContent(fileId);
-
-        content.setContent(inputCommand.content());
-
-        try {
-
-            fileStorage.create(file);
-
-            contentStorage.create(content);
+            UserId userId = owner.get().userID();
 
             if (logger.isInfoEnabled()) {
-                logger.info("Uploading new file was successful: " + content.id());
+                logger.info("Start upload new file to user's " + userId.value()
+                        + " directory: " + inputCommand.folder());
             }
 
-            return fileId;
+            String fileId = inputCommand.name() + inputCommand.folder();
 
-        } catch (DuplicatedUserIdException e) {
+            File file = new File(fileId);
+
+            file.setUserID(userId);
+            file.setMimeType(inputCommand.mimeType());
+            file.setName(inputCommand.name());
+            file.setFolder(inputCommand.folder());
+            file.setSize(inputCommand.size());
+
+            FileContent content = new FileContent(fileId);
+
+            content.setContent(inputCommand.content());
+
+            try {
+
+                fileStorage.create(file);
+
+                contentStorage.create(content);
+
+                if (logger.isInfoEnabled()) {
+                    logger.info("Uploading new file was successful: " + content.id().value());
+                }
+
+                folderStorage.increaseItemsAmount(Objects.requireNonNull(file.folder()));
+
+                return fileId;
+
+            } catch (DuplicatedIdException e) {
+
+                if (logger.isErrorEnabled()) {
+                    logger.error(e.getMessage());
+                }
+
+                throw new DuplicatedFileNameException(inputCommand.name());
+
+            } catch (NotExistedItemException e) {
+
+                throw new FolderNotFoundException(file.folder());
+            }
+
+        } else {
 
             if (logger.isErrorEnabled()) {
-                logger.error(e.getMessage());
+
+                logger.error("Cannot find user by token: " + inputCommand.token());
             }
 
-            throw new InvalidCommandHandlingException(e.getMessage());
-
+            throw new UsersTokenNotFoundException(inputCommand.token());
         }
 
 

@@ -14,5 +14,6 @@ public final class GetUserQuery extends Query {
     public GetUserQuery(AuthToken token) {
 
         super(checkNotNull(token));
+
     }
 }

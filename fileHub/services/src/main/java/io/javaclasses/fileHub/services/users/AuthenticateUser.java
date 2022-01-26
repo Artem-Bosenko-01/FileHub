@@ -1,6 +1,6 @@
 package io.javaclasses.fileHub.services.users;
 
-import io.javaclasses.fileHub.persistent.DuplicatedUserIdException;
+import io.javaclasses.fileHub.persistent.DuplicatedIdException;
 import io.javaclasses.fileHub.persistent.users.User;
 import io.javaclasses.fileHub.persistent.users.UserStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
@@ -10,9 +10,12 @@ import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.OpenUserProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.Optional;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -20,6 +23,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Service to authenticate user in the Filehub application if he exist at {@link UserStorage user storage}.
  */
+@Component
 public class AuthenticateUser implements OpenUserProcess<AuthenticationUserCommand, AuthToken> {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthenticateUser.class);
@@ -28,7 +32,9 @@ public class AuthenticateUser implements OpenUserProcess<AuthenticationUserComma
 
     private final AuthorizationStorage authorizationStorage;
 
-    public AuthenticateUser(UserStorage userStorage, AuthorizationStorage authorizationStorage) {
+    @Autowired
+    public AuthenticateUser(@Qualifier("userStorageInDatabase") UserStorage userStorage,
+                            @Qualifier("authorizationStorageInDatabase") AuthorizationStorage authorizationStorage) {
 
         this.userStorage = checkNotNull(userStorage);
 
@@ -37,7 +43,7 @@ public class AuthenticateUser implements OpenUserProcess<AuthenticationUserComma
 
     @Override
     public AuthToken handle(AuthenticationUserCommand inputCommand)
-            throws DuplicatedUserException, UserNotFoundException {
+            throws DuplicatedFieldValueException, UserNotFoundException {
 
         if (logger.isInfoEnabled()) {
             logger.info("Start authenticated process for user: " + inputCommand.loginName());
@@ -58,7 +64,7 @@ public class AuthenticateUser implements OpenUserProcess<AuthenticationUserComma
             try {
 
                 authorizationStorage.create(new AuthorizationUsers(new UserAuthToken(token.value()),
-                        user.get().id(), ZonedDateTime.now(ZoneId.of("America/Los_Angeles")).plusHours(6)));
+                        user.get().id(), LocalDateTime.now(ZoneId.of("America/Los_Angeles")).plusHours(6)));
 
                 if (logger.isInfoEnabled()) {
                     logger.info("Token for user " + user.get().login() + " was created. Value = " + token.value());
@@ -66,13 +72,13 @@ public class AuthenticateUser implements OpenUserProcess<AuthenticationUserComma
 
                 return token;
 
-            } catch (DuplicatedUserIdException e) {
+            } catch (DuplicatedIdException e) {
 
                 if (logger.isErrorEnabled()) {
                     logger.error(e.getMessage());
                 }
 
-                throw new DuplicatedUserException("email", e.getMessage());
+                throw new DuplicatedFieldValueException("email", e.getMessage());
 
             }
 

@@ -1,14 +1,15 @@
 package io.javaclasses.fileHub.services.files;
 
-import io.javaclasses.fileHub.persistent.files.FolderId;
 import io.javaclasses.fileHub.persistent.files.FolderStorage;
 import io.javaclasses.fileHub.persistent.users.UserId;
 import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.AuthenticatedUserCommand;
+import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
 
 import javax.annotation.Nullable;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static io.javaclasses.fileHub.services.ValidationRules.validateFileSystemItemName;
 
 /**
  * Data that needs to create a new folder and put to {@link FolderStorage storage}
@@ -18,22 +19,21 @@ public final class CreateFolderCommand extends AuthenticatedUserCommand {
 
     private final String name;
 
-    private final UserId owner;
+    private final Long itemsAmount;
 
-    private final Integer itemsAmount;
+    @Nullable
+    private final String parentFolder;
 
-    private final FolderId parentFolder;
-
-    public CreateFolderCommand(AuthToken token, String name, UserId owner, Integer itemsAmount,
-                               @Nullable FolderId parentFolder) {
+    public CreateFolderCommand(AuthToken token, String name, Integer itemsAmount, @Nullable String parentFolder)
+            throws InvalidValidationCommandDataException {
 
         super(checkNotNull(token));
 
+        validateFileSystemItemName(name);
+
         this.name = checkNotNull(name);
 
-        this.owner = checkNotNull(owner);
-
-        this.itemsAmount = checkNotNull(itemsAmount);
+        this.itemsAmount = Long.valueOf(checkNotNull(itemsAmount));
 
         this.parentFolder = parentFolder;
 
@@ -44,17 +44,13 @@ public final class CreateFolderCommand extends AuthenticatedUserCommand {
         return name;
     }
 
-    public UserId owner() {
-
-        return owner;
-    }
-
-    public Integer itemsAmount() {
+    public Long itemsAmount() {
 
         return itemsAmount;
     }
 
-    public FolderId parentFolder() {
+    @Nullable
+    String parentFolder() {
 
         return parentFolder;
     }

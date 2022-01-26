@@ -1,68 +1,86 @@
 package io.javaclasses.fileHub.persistent.files;
 
 import com.google.common.base.Preconditions;
+import com.google.common.net.MediaType;
 import io.javaclasses.fileHub.persistent.DataRecord;
 import io.javaclasses.fileHub.persistent.users.UserId;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
 
+/**
+ * The implementation of base {@link DataRecord record} for managing data about file with {@link FileId id}
+ * in the FileHub file system.
+ */
 public final class File implements DataRecord<FileId> {
 
     private final FileId fileID;
     private String name;
     private UserId userID;
-    private Integer size;
-    private MimeType mimeType;
+    private Long size;
+    private MediaType mimeType;
     @Nullable
-    private FolderId folder;
+    private String folder;
 
-    public File(FileId fileID) {
-        this.fileID = Preconditions.checkNotNull(fileID);
+    public File(String fileID) {
+
+        this.fileID = new FileId(Preconditions.checkNotNull(fileID));
     }
 
     @Override
     public FileId id() {
+
         return fileID;
     }
 
     public String name() {
+
         return name;
     }
 
     public void setName(String name) {
+
         this.name = Preconditions.checkNotNull(name);
     }
 
-    public Integer size() {
+    public Long size() {
+
         return size;
     }
 
-    public void setSize(Integer size) {
+    public void setSize(Long size) {
+
         this.size = Preconditions.checkNotNull(size);
     }
 
-    public MimeType mimeType() {
+    public MediaType mimeType() {
+
         return mimeType;
     }
 
-    public void setMimeType(MimeType mimeType) {
+    public void setMimeType(MediaType mimeType) {
+
         this.mimeType = Preconditions.checkNotNull(mimeType);
     }
 
-    public FolderId folder() {
+    @Nullable
+    public String folder() {
+
         return folder;
     }
 
-    public void setFolder(@Nullable FolderId folder) {
+    public void setFolder(@Nullable String folder) {
+
         this.folder = folder;
     }
 
     public UserId owner() {
+
         return userID;
     }
 
     public void setUserID(UserId userID) {
+
         this.userID = Preconditions.checkNotNull(userID);
     }
 
@@ -81,6 +99,7 @@ public final class File implements DataRecord<FileId> {
 
     @Override
     public int hashCode() {
+
         return Objects.hash(fileID);
     }
 }

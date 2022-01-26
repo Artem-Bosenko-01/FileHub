@@ -1,19 +1,25 @@
 package io.javaclasses.fileHub.persistent.files;
 
 import io.javaclasses.fileHub.persistent.AbstractInMemoryStorage;
-import io.javaclasses.fileHub.persistent.NotExistUserIdException;
+import io.javaclasses.fileHub.persistent.NotExistedItemException;
 import io.javaclasses.fileHub.persistent.users.UserId;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Repository for saving and managing {@link Folder folders data} in RAM in Filehub application.
+ */
+@Component
 public class FolderStorageInMemory extends AbstractInMemoryStorage<FolderId, Folder> implements FolderStorage {
 
     @Override
-    public List<Folder> findAllFoldersByParentFolderId(FolderId parentId) throws NotExistUserIdException {
-        if (records().values().stream().noneMatch(folder -> folder.id().equals(parentId))) {
-            throw new NotExistUserIdException("Parent folder doesn't exist: " + parentId);
+    public List<Folder> findAllFoldersByParentFolderId(String parentId, String owner) throws NotExistedItemException {
+
+        if (records().values().stream().noneMatch(folder -> folder.id().value().equals(parentId))) {
+            throw new NotExistedItemException(parentId);
         }
 
         return records().values().stream().
@@ -22,37 +28,46 @@ public class FolderStorageInMemory extends AbstractInMemoryStorage<FolderId, Fol
 
     }
 
-    @Override
-    public Optional<FolderId> findParentFolderByChildId(FolderId childId) throws NotExistUserIdException {
-
-        Optional<Folder> findFolder = records().values().stream().
-                filter(folder -> folder.id().equals(childId)).
-                findFirst();
-
-        if (findFolder.isPresent()) {
-            if (findFolder.get().parentFolder() != null) {
-                return Optional.of(findFolder.get().parentFolder());
-            } else return Optional.empty();
-        } else throw new NotExistUserIdException("Folder id: " + childId + " doesn't exist");
-    }
-
-    @Override
-    public Optional<Folder> findFolderById(String id, UserId owner) {
-
-        return records().values().stream().
-                filter(folder -> folder.id().toString().equals(id) && folder.owner().equals(owner)).
-                findFirst();
-    }
 
     @Override
     public Optional<Folder> findRootFolderByUserId(UserId id) {
+
         return records().values().stream().
                 filter(folder -> folder.parentFolder() == null && folder.owner().equals(id)).
                 findFirst();
     }
 
     @Override
-    public int getSizeRecordsList() {
-        return records().size();
+    public boolean isFolderNameAlreadyExist(String name, String parentFolder) {
+
+        return records().values().stream().anyMatch(file ->
+                file.name().equals(name) &&
+                        file.parentFolder() != null && file.parentFolder().equals(parentFolder));
+    }
+
+    @Override
+    public void decreaseItemsAmount(String id) {
+
+        Optional<Folder> folder = records().values().stream().
+                filter(fold -> fold.id().value().equals(id)).findFirst();
+
+        folder.ifPresent(value -> value.setItemsAmount(value.itemsAmount() - 1));
+    }
+
+    @Override
+    public void increaseItemsAmount(String id) {
+
+        Optional<Folder> folder = records().values().stream().
+                filter(fold -> fold.id().value().equals(id)).findFirst();
+
+        folder.ifPresent(value -> value.setItemsAmount(value.itemsAmount() + 1));
+    }
+
+    @Override
+    public List<Folder> getNestedFolders(String parentFolderId) {
+
+        return records().values().stream().
+                filter(folder -> folder.parentFolder() != null && folder.parentFolder().equals(parentFolderId)).
+                collect(Collectors.toList());
     }
 }

@@ -1,6 +1,9 @@
 package io.javaclasses.fileHub.persistent;
 
 /**
- * This is abstract base for identifier unique lines in entity.
+ * Identifier for persistent object in the FileHub application.
  */
-public interface RecordId { }
+public interface RecordId {
+
+    String value();
+}

@@ -3,19 +3,38 @@ plugins {
     id 'war'
 }
 
-group 'io.javaclasses.fileHub'
+group 'io.javaclasses.fileHub.webservices'
 version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
 
+task run(type: JavaExec) {
+    main = "io.javaclasses.fileHub.webservices.WebApplication"
+    description = "Start server"
+    classpath = sourceSets.main.runtimeClasspath
+}
+
 dependencies {
     testImplementation 'junit:junit:4.11'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 
+    implementation 'org.springframework:spring-beans:5.3.9'
+    implementation 'org.springframework:spring-core:5.3.9'
+    implementation 'org.springframework:spring-context:5.3.9'
+
+    implementation group: 'com.google.guava', name: 'guava-testlib', version: '12.0-rc2'
+    implementation group: 'com.google.guava', name: 'guava', version: '11.0.2'
+
+    compile "com.sparkjava:spark-core:2.9.3"
+
+    implementation "org.slf4j:slf4j-log4j12:1.7.5"
+    implementation 'com.google.code.gson:gson:2.8.5'
     implementation project(':services')
+    implementation project(':persistent')
 }
 
 test {

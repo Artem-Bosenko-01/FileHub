@@ -8,13 +8,17 @@ import io.javaclasses.fileHub.persistent.users.tokens.UserAuthToken;
 import io.javaclasses.fileHub.services.View;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 /**
- * Service to get the root folder for authenticated user.
+ * Service for getting the authenticated user's root folder.
  */
-public class GetRootFolder extends View<GetRootFolderQuery, GetFolderDto> {
+@Component
+public class GetRootFolder extends View<GetRootFolderQuery, FileSystemItemDto> {
 
     private static final Logger logger = LoggerFactory.getLogger(GetFolderById.class);
 
@@ -22,7 +26,9 @@ public class GetRootFolder extends View<GetRootFolderQuery, GetFolderDto> {
 
     private final AuthorizationStorage authorizationStorage;
 
-    public GetRootFolder(AuthorizationStorage authorizationStorage, FolderStorage folderStorage) {
+    @Autowired
+    public GetRootFolder(@Qualifier("authorizationStorageInDatabase") AuthorizationStorage authorizationStorage,
+                         @Qualifier("folderStorageInDatabase") FolderStorage folderStorage) {
 
         super(authorizationStorage);
 
@@ -32,7 +38,7 @@ public class GetRootFolder extends View<GetRootFolderQuery, GetFolderDto> {
     }
 
     @Override
-    protected GetFolderDto doHandle(GetRootFolderQuery query)
+    protected FileSystemItemDto doHandle(GetRootFolderQuery query)
             throws RootFolderNotFoundHandlingException, UsersTokenNotFoundException {
 
         Optional<AuthorizationUsers> owner = authorizationStorage.findByID(new UserAuthToken(query.token().value()));
@@ -41,28 +47,31 @@ public class GetRootFolder extends View<GetRootFolderQuery, GetFolderDto> {
 
             if (logger.isInfoEnabled()) {
 
-                logger.info("Start get root folder for user: " + owner.get().userID());
+                logger.info("Start get root folder for user: " + owner.get().userID().value());
             }
 
             Optional<Folder> rootFolder = folderStorage.findRootFolderByUserId(owner.get().userID());
 
             if (rootFolder.isPresent()) {
 
+                Folder folder = rootFolder.get();
+
                 if (logger.isInfoEnabled()) {
-                    logger.info("Read root folder: " + rootFolder.get().name() + ". For user: "
-                            + rootFolder.get().owner().toString() + ". Was successful");
+                    logger.info("Read root folder: " + folder.name() + ". For user: "
+                            + folder.owner().value() + ". Was successful");
                 }
 
-                return new GetFolderDto(rootFolder.get().id().toString(),
-                        rootFolder.get().name(),
-                        rootFolder.get().itemsAmount(),
-                        rootFolder.get().parentFolder());
+                return new FileSystemItemDto(folder.id().value(),
+                        folder.name(),
+                        folder.itemsAmount(),
+                        ItemType.FOLDER,
+                        folder.parentFolder());
 
             } else {
 
                 if (logger.isErrorEnabled()) {
 
-                    logger.error("Root folder doesn't exist for user: " + owner.get().userID().toString());
+                    logger.error("Root folder doesn't exist for user: " + owner.get().userID().value());
                 }
 
                 throw new RootFolderNotFoundHandlingException(owner.get().userID());

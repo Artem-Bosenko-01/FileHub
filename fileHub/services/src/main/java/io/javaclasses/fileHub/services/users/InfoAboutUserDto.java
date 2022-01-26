@@ -13,7 +13,7 @@ public final class InfoAboutUserDto {
 
     private final String loginName;
 
-    public InfoAboutUserDto(UserId id, String loginName) {
+    InfoAboutUserDto(UserId id, String loginName) {
 
         this.id = checkNotNull(id);
 

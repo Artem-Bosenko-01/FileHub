@@ -1,9 +1,9 @@
 package io.javaclasses.fileHub.services;
 
 /**
- * This is abstract base, for communication some of services with user information.
+ * This is abstract base for communication some of services with user information.
  * */
-public interface Command {
+interface Command {
 
     AuthToken token();
 }

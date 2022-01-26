@@ -9,8 +9,10 @@ import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
  */
 public final class RootFolderNotFoundHandlingException extends InvalidCommandHandlingException {
 
-    public RootFolderNotFoundHandlingException(UserId id) {
+    private static final long serialVersionUID = -2109606422488737660L;
 
-        super("Root folder doesn't exist for user: " + id.toString());
+    RootFolderNotFoundHandlingException(UserId id) {
+
+        super("Root folder doesn't exist for user: " + id.value());
     }
 }

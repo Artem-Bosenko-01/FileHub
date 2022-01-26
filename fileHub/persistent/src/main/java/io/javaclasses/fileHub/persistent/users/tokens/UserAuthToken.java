@@ -6,9 +6,8 @@ import io.javaclasses.fileHub.persistent.RecordId;
 import java.util.Objects;
 
 /**
- * This is value object, that define user session and gives some permission for user by value.
- *
- * */
+ * Key that gives some permission for authenticated user in the FileHub application.
+ */
 public final class UserAuthToken implements RecordId {
 
     private final String value;
@@ -17,6 +16,7 @@ public final class UserAuthToken implements RecordId {
         this.value = Preconditions.checkNotNull(value);
     }
 
+    @Override
     public String value() {
         return value;
     }
@@ -32,5 +32,10 @@ public final class UserAuthToken implements RecordId {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return value;
     }
 }

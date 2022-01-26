@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * This is abstract storage, that saved some records in runtime memory.
+ * Abstract storage, that saved {@link DataRecord records} in random-access memory.
  *
  * @param <E> type of {@link DataRecord record}.
  * @param <I> identifier {@link RecordId id} for record.
@@ -15,47 +15,49 @@ public abstract class AbstractInMemoryStorage<I extends RecordId, E extends Data
     private final Map<I, E> records = new HashMap<>();
 
     @Override
-    public void create(E inputDataObject) throws DuplicatedUserIdException {
+    public void create(E inputDataObject) throws DuplicatedIdException {
 
-        if (records.containsKey(inputDataObject.id())){
-            throw new DuplicatedUserIdException("Duplicate id " + inputDataObject.id());
+        if (records.containsKey(inputDataObject.id())) {
+            throw new DuplicatedIdException(inputDataObject.id().value());
         }
 
         records.put(inputDataObject.id(), inputDataObject);
     }
 
     @Override
-    public Optional<E> findByID(I dataRecordID){
+    public Optional<E> findByID(I dataRecordID) {
 
         return records.values().stream().filter(e -> e.id().equals(dataRecordID)).findFirst();
 
     }
 
     @Override
-    public void update(E inputDataObject) throws NotExistUserIdException {
+    public void update(E inputDataObject) throws NotExistedItemException {
 
         if (!records.containsKey(inputDataObject.id())) {
-            throw new NotExistUserIdException("Id doesn't exist " + inputDataObject.id());
+            throw new NotExistedItemException(inputDataObject.id().value());
         }
 
         records.put(inputDataObject.id(), inputDataObject);
     }
 
     @Override
-    public void delete(I dataRecordID) throws NotExistUserIdException {
+    public void delete(String dataRecordID) throws NotExistedItemException {
 
-        if (!records.containsKey(dataRecordID)) {
-            throw new NotExistUserIdException("Id doesn't exist " + dataRecordID);
+        Optional<I> foundKey = records.keySet().stream().filter(key -> key.value().equals(dataRecordID)).findFirst();
+
+        if (foundKey.isPresent()) {
+
+            records.remove(foundKey.get());
+
+        } else {
+
+            throw new NotExistedItemException(dataRecordID);
         }
-
-        records.remove(dataRecordID);
     }
 
     protected Map<I, E> records() {
         return records;
     }
 
-    public int getRecordsSize() {
-        return records.size();
-    }
 }

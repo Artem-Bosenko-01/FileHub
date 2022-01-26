@@ -8,7 +8,8 @@ import io.javaclasses.fileHub.persistent.users.UserStorageInMemory;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
-import io.javaclasses.fileHub.services.ValidationCommandDataException;
+import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
+import io.javaclasses.fileHub.services.NotAuthorizedUserException;
 import io.javaclasses.fileHub.services.files.FileSystemTestData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,7 @@ import org.junit.jupiter.api.Test;
 class GetFolderContentTest {
 
     @Test
-    public void readFolderContentByIdTest() throws InvalidCommandHandlingException, ValidationCommandDataException {
+    public void readFolderContentByIdTest() throws InvalidCommandHandlingException, InvalidValidationCommandDataException, NotAuthorizedUserException {
 
         FolderStorage folderStorage = new FolderStorageInMemory();
 
@@ -31,17 +32,16 @@ class GetFolderContentTest {
 
         FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
 
-        FolderId parent = fileSystemTestData.createFolder(folderStorage, null);
+        FolderId parent = fileSystemTestData.createFolder(folderStorage, new FolderId("name" + fileSystemTestData.id().value()));
 
-        fileSystemTestData.uploadFile(fileStorage, fIleContentStorage, parent);
+        fileSystemTestData.uploadFile(fileStorage, fIleContentStorage, folderStorage, parent);
 
         fileSystemTestData.createFolder(folderStorage, "folder1", parent);
 
         fileSystemTestData.createFolder(folderStorage, "folder2", parent);
 
 
-        GetFolderContentQuery query = new GetFolderContentQuery(fileSystemTestData.token(), parent,
-                fileSystemTestData.id());
+        GetFolderContentQuery query = new GetFolderContentQuery(fileSystemTestData.token(), parent.value());
 
         GetFolderContent view = new GetFolderContent(folderStorage, fileStorage, authorizationStorage);
 

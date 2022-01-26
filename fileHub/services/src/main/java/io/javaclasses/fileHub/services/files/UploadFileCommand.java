@@ -1,12 +1,12 @@
 package io.javaclasses.fileHub.services.files;
 
-import io.javaclasses.fileHub.persistent.files.FolderId;
-import io.javaclasses.fileHub.persistent.files.MimeType;
-import io.javaclasses.fileHub.persistent.users.UserId;
+import com.google.common.net.MediaType;
 import io.javaclasses.fileHub.services.AuthToken;
 import io.javaclasses.fileHub.services.AuthenticatedUserCommand;
+import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static io.javaclasses.fileHub.services.ValidationRules.validateFileSystemItemName;
 
 /**
  * Data that needs to upload new file to Filehub application by authenticated user.
@@ -15,24 +15,22 @@ public final class UploadFileCommand extends AuthenticatedUserCommand {
 
     private final String name;
 
-    private final MimeType mimeType;
+    private final MediaType mimeType;
 
-    private final UserId owner;
-
-    private final FolderId folder;
+    private final String folder;
 
     private final byte[] content;
 
-    public UploadFileCommand(AuthToken token, String name, MimeType mimeType, UserId owner, FolderId folder,
-                             byte[] content) {
+    public UploadFileCommand(AuthToken token, String name, MediaType mimeType, String folder, byte[] content)
+            throws InvalidValidationCommandDataException {
 
         super(checkNotNull(token));
+
+        validateFileSystemItemName(name);
 
         this.name = checkNotNull(name);
 
         this.mimeType = checkNotNull(mimeType);
-
-        this.owner = checkNotNull(owner);
 
         this.folder = checkNotNull(folder);
 
@@ -45,17 +43,12 @@ public final class UploadFileCommand extends AuthenticatedUserCommand {
         return name;
     }
 
-    public MimeType mimeType() {
+    public MediaType mimeType() {
 
         return mimeType;
     }
 
-    public UserId owner() {
-
-        return owner;
-    }
-
-    public FolderId folder() {
+    public String folder() {
 
         return folder;
     }
@@ -63,5 +56,9 @@ public final class UploadFileCommand extends AuthenticatedUserCommand {
     public byte[] content() {
 
         return content.clone();
+    }
+
+    public Long size() {
+        return (long) content.length;
     }
 }

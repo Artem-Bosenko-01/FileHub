@@ -8,17 +8,22 @@ import java.util.UUID;
 /**
  * Service to generate a unique authentication user token.
  */
-public final class GenerateUniqueUserToken {
+final class GenerateUniqueUserToken {
 
-    public static AuthToken generateToken(AuthorizationStorage storage) {
+    private GenerateUniqueUserToken() {
+    }
 
-        AuthToken token = new AuthToken(UUID.randomUUID().toString());
+    static AuthToken generateToken(AuthorizationStorage storage) {
+        while (true) {
 
-        if (storage.isTokenExist(token.value())) {
+            AuthToken token = new AuthToken(UUID.randomUUID().toString());
 
-            return generateToken(storage);
+            if (storage.isTokenExist(token.value())) {
+
+                continue;
+            }
+
+            return token;
         }
-
-        return token;
     }
 }

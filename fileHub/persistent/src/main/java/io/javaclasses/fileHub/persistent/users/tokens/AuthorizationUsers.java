@@ -4,28 +4,23 @@ import com.google.common.base.Preconditions;
 import io.javaclasses.fileHub.persistent.DataRecord;
 import io.javaclasses.fileHub.persistent.users.UserId;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
  * This is entity for storing user authentication history.
- *
- * Lines unique defines by {@link UserAuthToken user token}.
- *
- * */
+ * <p>
+ * Unique of ines is defined by {@link UserAuthToken user token}.
+ */
 public final class AuthorizationUsers implements DataRecord<UserAuthToken> {
 
     private final UserAuthToken token;
     private final UserId userID;
-    private ZonedDateTime expirationTime;
+    private final LocalDateTime expirationTime;
 
-    public AuthorizationUsers(UserAuthToken token, UserId userID, ZonedDateTime expirationTime) {
+    public AuthorizationUsers(UserAuthToken token, UserId userID, LocalDateTime expirationTime) {
         this.token = Preconditions.checkNotNull(token);
         this.userID = Preconditions.checkNotNull(userID);
-        this.expirationTime = Preconditions.checkNotNull(expirationTime);
-    }
-
-    public void setDate(ZonedDateTime expirationTime) {
         this.expirationTime = Preconditions.checkNotNull(expirationTime);
     }
 
@@ -33,7 +28,7 @@ public final class AuthorizationUsers implements DataRecord<UserAuthToken> {
         return userID;
     }
 
-    public ZonedDateTime expirationTime() {
+    public LocalDateTime expirationTime() {
         return expirationTime;
     }
 

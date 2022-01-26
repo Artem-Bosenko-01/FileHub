@@ -2,5 +2,4 @@ rootProject.name = 'fileHub'
 include 'persistent'
 include 'services'
 include 'web-services'
-include 'web-client'
 

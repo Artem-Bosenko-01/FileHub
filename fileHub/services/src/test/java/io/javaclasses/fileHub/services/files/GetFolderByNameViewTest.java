@@ -9,7 +9,7 @@ import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorage;
 import io.javaclasses.fileHub.persistent.users.tokens.AuthorizationStorageInMemory;
 import io.javaclasses.fileHub.services.InvalidCommandHandlingException;
 import io.javaclasses.fileHub.services.NotAuthorizedUserException;
-import io.javaclasses.fileHub.services.ValidationCommandDataException;
+import io.javaclasses.fileHub.services.InvalidValidationCommandDataException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 class GetFolderByNameViewTest {
 
     @Test
-    public void readInfoAboutFolderByIdTest() throws InvalidCommandHandlingException, ValidationCommandDataException, NotAuthorizedUserException {
+    public void readInfoAboutFolderByIdTest() throws InvalidCommandHandlingException, InvalidValidationCommandDataException, NotAuthorizedUserException {
 
         FolderStorage folderStorage = new FolderStorageInMemory();
 
@@ -27,21 +27,21 @@ class GetFolderByNameViewTest {
 
         FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
 
-        FolderId id = fileSystemTestData.createFolder(folderStorage, null);
+        FolderId id = fileSystemTestData.createFolder(folderStorage, new FolderId("folder"));
 
-        GetFolderByIdQuery query = new GetFolderByIdQuery(fileSystemTestData.token(), id.toString());
+        GetFolderByIdQuery query = new GetFolderByIdQuery(fileSystemTestData.token(), id.value());
 
         GetFolderById view = new GetFolderById(folderStorage, authorizationStorage);
 
-        GetFolderDto folderByNameDTO = view.handle(query);
+        FileSystemItemDto folderByNameDTO = view.handle(query);
 
-        Assertions.assertEquals(folderByNameDTO.id(), id.toString());
+        Assertions.assertEquals(folderByNameDTO.id(), id.value());
 
     }
 
 
     @Test
-    public void failedReadFolderInfoByNotExistIdTest() throws InvalidCommandHandlingException, ValidationCommandDataException {
+    public void failedReadFolderInfoByNotExistIdTest() throws InvalidCommandHandlingException, InvalidValidationCommandDataException {
 
         FolderStorage folderStorage = new FolderStorageInMemory();
 
@@ -51,9 +51,7 @@ class GetFolderByNameViewTest {
 
         FileSystemTestData fileSystemTestData = new FileSystemTestData(userStorage, authorizationStorage);
 
-        fileSystemTestData.createFolder(folderStorage, null);
-
-        Assertions.assertEquals(folderStorage.getSizeRecordsList(), 1);
+        fileSystemTestData.createFolder(folderStorage, new FolderId("folder"));
 
         GetFolderByIdQuery query = new GetFolderByIdQuery(fileSystemTestData.token(), "id");
 

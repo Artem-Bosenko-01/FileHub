@@ -10,6 +10,9 @@ import io.javaclasses.fileHub.services.View;
 import io.javaclasses.fileHub.services.files.UsersTokenNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
@@ -18,6 +21,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Service to get information about the authenticated user.
  */
+@Component
 public class GetUserInfo extends View<GetUserQuery, InfoAboutUserDto> {
 
     private static final Logger logger = LoggerFactory.getLogger(GetUserInfo.class);
@@ -25,7 +29,9 @@ public class GetUserInfo extends View<GetUserQuery, InfoAboutUserDto> {
     private final UserStorage userStorage;
     private final AuthorizationStorage authorizationStorage;
 
-    public GetUserInfo(UserStorage userStorage, AuthorizationStorage authorizationStorage) {
+    @Autowired
+    public GetUserInfo(@Qualifier("userStorageInDatabase") UserStorage userStorage,
+                       @Qualifier("authorizationStorageInDatabase") AuthorizationStorage authorizationStorage) {
 
         super(checkNotNull(authorizationStorage));
 
@@ -44,7 +50,7 @@ public class GetUserInfo extends View<GetUserQuery, InfoAboutUserDto> {
             UserId userId = authenticatedUser.get().userID();
 
             if (logger.isInfoEnabled()) {
-                logger.info("Start read user process with id: " + userId);
+                logger.info("Start read user process with id: " + userId.value());
             }
 
 
@@ -63,10 +69,10 @@ public class GetUserInfo extends View<GetUserQuery, InfoAboutUserDto> {
             } else {
 
                 if (logger.isErrorEnabled()) {
-                    logger.error("User with id doesn't exist " + userId);
+                    logger.error("User with id doesn't exist " + userId.value());
                 }
 
-                throw new UserNotFoundException(userId.toString());
+                throw new UserNotFoundException(userId.value());
             }
 
         } else {

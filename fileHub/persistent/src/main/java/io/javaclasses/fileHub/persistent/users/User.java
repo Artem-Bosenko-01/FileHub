@@ -5,6 +5,10 @@ import io.javaclasses.fileHub.persistent.DataRecord;
 
 import java.util.Objects;
 
+/**
+ * The implementation of base {@link DataRecord record} for managing data about user with {@link UserId id}
+ * in the FileHub user system.
+ */
 public final class User implements DataRecord<UserId> {
 
     private final UserId userID;
@@ -12,27 +16,33 @@ public final class User implements DataRecord<UserId> {
     private String password;
 
     public User(UserId userID) {
+
         this.userID = Preconditions.checkNotNull(userID);
     }
 
     @Override
     public UserId id() {
+
         return userID;
     }
 
     public String login() {
+
         return login;
     }
 
     public void setLogin(String login) {
+
         this.login = Preconditions.checkNotNull(login);
     }
 
     public String password() {
+
         return password;
     }
 
     public void setPassword(String password) {
+
         this.password = Preconditions.checkNotNull(password);
     }
 
@@ -52,6 +62,7 @@ public final class User implements DataRecord<UserId> {
 
     @Override
     public int hashCode() {
+
         return Objects.hash(userID);
     }
 }
